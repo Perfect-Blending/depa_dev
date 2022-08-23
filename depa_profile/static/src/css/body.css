@@ -1,0 +1,8 @@
+#depa_employee_container {
+    display: flex;
+    width: 100%;
+}
+
+#depa_employee_main {
+    flex: 1 1 60%;
+}

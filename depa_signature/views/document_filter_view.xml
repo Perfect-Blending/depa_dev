@@ -1,0 +1,110 @@
+<odoo>
+    <data>
+        <!-- <record model="ir.ui.view" id="saraban_document_filter_list">
+            <field name="name">saraban document filter list</field>
+            <field name="model">document.internal.main</field>
+            <field name="arch" type="xml">
+                <tree create="0" default_order="name desc">
+                    <field name="name" string="เลขที่อ้างอิง"/>
+                    <field name="date_document" string="วันที่"/>
+                    <field name="name_real" string="เลขที่หนังสือ"/>
+                    <field name="date_document_real" string="ลงวันที่(หนังสือภายใน)"/>
+                    <field name="document_type" string="ประเภทเอกสาร"/>
+                    <field name="department_name" string="ส่วนงาน"/>
+                    <field name="subject" string="เรื่อง"/>
+                    <field name="speed" string="ชั้นความเร็ว"/>
+                    <field name="secret" string="ชั้นความลับ"/>
+                    <field name="state" string="สถานะ"/>
+                    <field name="send_with_original_document" string="ส่งพร้อมต้นฉบับ"/>
+                    <field name="tag_ids" string="ป้ายกำกับ"/>
+                </tree>
+            </field>
+        </record> -->
+
+        <record model="ir.actions.act_window" id="saraban_document_filter_action_window_1">
+            <field name="name">หนังสือส่งออก</field>
+            <field name="res_model">document.internal.main</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('pfb_saraban.document_internal_main_all_tree_view')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('pfb_saraban.document_internal_all_form_view')}),
+                        ]"/>
+            <field name="domain">[('document_type', '=', 'หนังสือภายนอก+หนังสือรับรอง')]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="saraban_document_filter_action_window_2">
+            <field name="name">คำสั่ง</field>
+            <field name="res_model">document.internal.main</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('pfb_saraban.document_internal_main_all_tree_view')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('pfb_saraban.document_internal_all_form_view')}),
+                        ]"/>
+            <field name="domain">[('document_type', 'in', ['คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ'])]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="saraban_document_filter_action_window_3">
+            <field name="name">ประกาศ</field>
+            <field name="res_model">document.internal.main</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('pfb_saraban.document_internal_main_all_tree_view')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('pfb_saraban.document_internal_all_form_view')}),
+                        ]"/>
+            <field name="domain">[('document_type', '=', 'ประกาศ')]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="saraban_document_filter_action_window_4">
+            <field name="name">ระเบียบ</field>
+            <field name="res_model">document.internal.main</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('pfb_saraban.document_internal_main_all_tree_view')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('pfb_saraban.document_internal_all_form_view')}),
+                        ]"/>
+            <field name="domain">[('document_type', '=', 'ระเบียบ')]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="saraban_document_filter_action_window_5">
+            <field name="name">ข้อบังคับ</field>
+            <field name="res_model">document.internal.main</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('pfb_saraban.document_internal_main_all_tree_view')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('pfb_saraban.document_internal_all_form_view')}),
+                        ]"/>
+            <field name="domain">[('document_type', '=', 'ข้อบังคับ')]</field>
+        </record>
+
+        <menuitem   name="แสดงหนังสือลงนาม"
+                    id="saraban_document_filter_menu"
+                    parent="pfb_saraban.main_document_menu"
+                    groups="group_user_document_filter"/>
+
+        <menuitem   name="หนังสือส่งออก"
+                    id="saraban_document_filter_sub_menu_1"
+                    parent="saraban_document_filter_menu"
+                    action="saraban_document_filter_action_window_1"/>
+
+        <menuitem   name="คำสั่ง"
+                    id="saraban_document_filter_sub_menu_2"
+                    parent="saraban_document_filter_menu"
+                    action="saraban_document_filter_action_window_2"/>
+
+        <menuitem   name="ประกาศ"
+                    id="saraban_document_filter_sub_menu_3"
+                    parent="saraban_document_filter_menu"
+                    action="saraban_document_filter_action_window_3"/>
+
+        <menuitem   name="ระเบียบ"
+                    id="saraban_document_filter_sub_menu_4"
+                    parent="saraban_document_filter_menu"
+                    action="saraban_document_filter_action_window_4"/>
+
+        <menuitem   name="ข้อบังคับ"
+                    id="saraban_document_filter_sub_menu_5"
+                    parent="saraban_document_filter_menu"
+                    action="saraban_document_filter_action_window_5"/>
+
+    </data>
+</odoo>

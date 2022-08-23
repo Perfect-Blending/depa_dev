@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="depa_welfare_draft_fin100_wizard_form" model="ir.ui.view">
+      <field name="name">welfare draft fin100 wizard form</field>
+      <field name="model">depa_welfare_draft_fin100_wizard</field>
+      <field name="arch" type="xml">
+<!--          <form>-->
+<!--                  <group>-->
+<!--                    <group>-->
+<!--                      <field name="welfare_id" invisible="1"/>-->
+<!--                      <field name="amount_total" />-->
+<!--                      <field name="welfare_hr_id" />-->
+<!--                      <field name="is_welfare" groups="depa_welfare.fw_pfb_fin_can_create_welfare"  />-->
+<!--                      <field name="fiscal_year" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" />-->
+<!--                      <field name="welfare_round" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}"/>-->
+<!--                      <field name="fin_type"/>-->
+<!--                      <field name="priority"/>-->
+<!--                    </group>-->
+<!--                      <group>-->
+<!--                      <notebook>-->
+<!--                    <page string='Request lines'>-->
+<!--                        <field name='fin_lines' />-->
+<!--                    </page>-->
+<!--                 </notebook>-->
+<!--                      </group>-->
+
+<!--                  </group>-->
+<!--                </form>-->
+        <form string="Draft fin100 Wizard">
+             <sheet>
+                 <group>
+                     <field name="welfare_id" invisible="1"/>
+                     <field name="amount_total" invisible="1"/>
+                     <field name="welfare_hr_id" invisible="1"/>
+                     <field name="is_welfare" groups="depa_welfare.fw_pfb_fin_can_create_welfare" invisible="1"/>
+                     <field name="fiscal_year" string="ปีงบประมาณ" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" />
+                     <field name="welfare_round" string="รอบสวัสดิการ" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}"/>
+                     <field name="welfare_round_start" string="วันที่เริ่มต้น" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" force_save="1"/>
+                     <field name="welfare_round_end" string="วันที่สิ้นสุด" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" force_save="1"/>
+                     <field name="priority" string="ความเร่งด่วน" />
+                     <field name="fin_type" string="ประเภท FIN" />
+<!--                     <field name="projects_and_plan" />-->
+<!--                     <field name="product_id" />-->
+<!--                     <field name="product_uom_qty" />-->
+<!--                     <field name="product_uom" />-->
+<!--                     <field name="price_unit" />-->
+<!--                     <field name="price_subtotal" />-->
+                 </group>
+                 <notebook>
+                    <page string='depa'>
+                        <group>
+                            <field name="depa_amount_total" invisible="1"/>
+                            <field name="depa_projects_and_plan" required="1" string="โครงการและแผนงาน"/>
+                            <field name="depa_product_id" string="รายการค่าใช้จ่าย"/>
+                            <field name="depa_price_unit" string="ราคาต่อหน่วย"/>
+                            <field name="depa_product_uom_qty" string="จำนวน"/>
+                            <field name="depa_product_uom" string="หน่วยวัด"/>
+                            <field name="depa_price_subtotal" string="รวม"/>
+                        </group>
+                    </page>
+                     <page string='GBDI'>
+                         <group>
+                            <field name="gbdi_amount_total" invisible="1"/>
+                            <field name="gbdi_projects_and_plan" required="1" string="โครงการและแผนงาน"/>
+                            <field name="gbdi_product_id" string="รายการค่าใช้จ่าย"/>
+                            <field name="gbdi_price_unit" string="ราคาต่อหน่วย"/>
+                            <field name="gbdi_product_uom_qty" string="จำนวน"/>
+                            <field name="gbdi_product_uom" string="หน่วยวัด"/>
+                            <field name="gbdi_price_subtotal" string="รวม"/>
+                         </group>
+                    </page>
+                 </notebook>
+             </sheet>
+            <footer>
+                <div style="text-align:center">
+                    <button string="Draft" class="btn-success pull-left" icon="fa-check" type="object" name="action_draft"/>
+                </div>
+            </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="depa_welfare_draft_fin100_wizard_action_window" model="ir.actions.act_window" >
+        <field name="name">welfare draft fin100 wizard window</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">depa_welfare_draft_fin100_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="depa_welfare_draft_fin100_wizard_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

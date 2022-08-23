@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="depa_group_form">
+            <field name="name">depa_group_form</field>
+            <field name="model">depa_group</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group colspan="4" col="12">
+                            <group colspan="4">
+                                <field name="name" string="ชื่อกลุ่มงาน"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="depa_group_list">
+            <field name="name">depa_group_list</field>
+            <field name="model">depa_group</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <tree string="รายชื่อกลุ่มงาน">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="depa_view_department_inherit_form" model="ir.ui.view">
+            <field name="name">Add group to a department</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <field name="department_level" position="after">
+                    <field name="department_group_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="depa_group_window">
+            <field name="name">กลุ่มงาน</field>
+            <field name="res_model">depa_group</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="depa_group_action_window_list">
+            <field name="view_mode">tree</field>
+            <field name="sequence">1</field>
+            <field name="view_id" ref="depa_group_list"/>
+            <field name="act_window_id" ref="depa_group_window"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="depa_group_action_window_form">
+            <field name="view_mode">form</field>
+            <field name="sequence">2</field>
+            <field name="view_id" ref="depa_group_form"/>
+            <field name="act_window_id" ref="depa_group_window"/>
+        </record>
+
+        <menuitem name="กลุ่มงาน" sequence="6" id="depa_group_menu" parent="hr.menu_hr_root" action="depa_group_window" />
+
+    </data>
+</odoo>

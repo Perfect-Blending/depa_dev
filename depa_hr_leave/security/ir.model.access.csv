@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_leave_request,leave_request,model_leave_request,,1,1,1,1
+access_leave_request_types,leave_request_types,model_leave_request_types,,1,1,1,1
+access_leave_request_public_holidays,leave_request_public_holidays,model_leave_request_public_holidays,,1,1,1,1
+access_leave_request_public_holidays_lines,leave_request_public_holidays_lines,model_leave_request_public_holidays_lines,,1,1,1,1
+access_leave_setting_employee,leave_setting_employee,model_leave_setting_employee,,1,1,1,1
+access_leave_setting_employee_lines,leave_setting_employee_lines,model_leave_setting_employee_lines,,1,1,1,1
+access_leave_request_state,leave_request_state,model_leave_request_state,,1,1,1,1

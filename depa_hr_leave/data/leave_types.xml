@@ -1,0 +1,59 @@
+<odoo>
+    <data noupdate="1">
+        <record id="leave_type_1" model="leave_request_types">
+            <field name="name">ลาป่วย</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">sick</field>
+        </record>
+        <record id="leave_type_2" model="leave_request_types">
+            <field name="name">ลากิจส่วนตัว</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">personal</field>
+        </record>
+        <record id="leave_type_3" model="leave_request_types">
+            <field name="name">ลาพักผ่อน</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">vacation</field>
+        </record>
+        <record id="leave_type_4" model="leave_request_types">
+            <field name="name">ปฏิบัติงานนอกสถานที่</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">site</field>
+        </record>
+        <record id="leave_type_5" model="leave_request_types">
+            <field name="name">ลืมลงเวลาเข้า</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">checkin</field>
+        </record>
+        <record id="leave_type_6" model="leave_request_types">
+            <field name="name">อบรม/สัมมนา</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">seminar</field>
+        </record>
+        <record id="leave_type_7" model="leave_request_types">
+            <field name="name">ลาเพื่อประโยชน์ในการพัฒนาพนักงาน</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">training</field>
+        </record>
+        <record id="leave_type_8" model="leave_request_types">
+            <field name="name">ลาอุปสมบท/ลาไปประกอบพิธีฮัจญ์</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">ordain</field>
+        </record>
+        <record id="leave_type_9" model="leave_request_types">
+            <field name="name">ลาตามที่มติคณะรัฐมนตรีกำหนด</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">government</field>
+        </record>
+        <record id="leave_type_10" model="leave_request_types">
+            <field name="name">ลาคลอดบุตร</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">birth</field>
+        </record>
+        <record id="leave_type_11" model="leave_request_types">
+            <field name="name">ลาเพื่อเลี้ยงดูบุตร</field>
+            <field name="is_primary_approval">True</field>
+            <field name="en_name">raising</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- ตั้งค่าขั้นตอนการไหลหนังสือภายใน -->
+    <record model="ir.ui.view" id="kpi_evaluate_setting_form">
+        <field name="name">kpi_evaluate_setting_form</field>
+        <field name="model">kpi_evaluate_setting</field>
+        <field name="arch" type="xml">
+            <form string="ตั้งค่าลำดับการประเมิน">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="is_active"/>
+                        <!-- <button name="reset_order" type="object" string="regeneration" class="oe_highlight"/> -->
+                        <!-- <field name="test"/> -->
+                        <!-- <field name="responsible_id"/> -->
+                    </group>
+<!--                    <group>-->
+<!--                        <button name="make_order_setting_line" type="object" class="oe_highlight" string="Order"/>-->
+<!--                    </group>-->
+                    <notebook>
+                        <page string="Evaluate Order">
+                            <field name="user_id">
+                                <tree editable='bottom'>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="step" required='1'/>
+                                    <field name="status"/>
+                                    <field name="evaluate_setting_id" invisible='1'/>
+                                    <field name="job_id_name" readonly="1" force_save="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="employee_id"
+                                           required='1'
+                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="evaluate_ratio" required='1'/>
+<!--                                    <field name="is_active"/>-->
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                  <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="evaluate_ratio_total" string="รวมสัดส่วนการประเมิน"/>
+                                  </div>
+                                  <field name="evaluate_ratio_total" nolabel="1" class="oe_subtotal_footer_separator" style="color:#000 ! important;" widget="monetary"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="kpi_evaluate_setting_tree">
+        <field name="name">kpi_evaluate_setting_tree</field>
+        <field name="model">kpi_evaluate_setting</field>
+        <field name="arch" type="xml">
+            <tree string="document Tree">
+                <field name="name"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Contacts action -->
+    <record model="ir.actions.act_window" id="kpi_evaluate_setting_list_action">
+        <field name="name">ตั้งค่าลำดับการประเมิน</field>
+        <field name="res_model">kpi_evaluate_setting</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem name="ตั้งค่าลำดับผู้ประเมิน KPI" id="kpi_evaluate_setting_menu" parent="depa_hr_setting_menu"
+              action="kpi_evaluate_setting_list_action" sequence="4"/>
+</odoo>

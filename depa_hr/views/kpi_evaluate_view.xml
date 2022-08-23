@@ -1,0 +1,1018 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="kpi_evaluate_list">
+            <field name="name">KPI Evaluate list</field>
+            <field name="model">kpi_main</field>
+            <field name="arch" type="xml">
+                <tree default_order="kpi_no desc" create="0" delete="0">
+                    <field name="kpi_no" string="เลขที่"/>
+                    <field name="emp_code" string="รหัสพนักงาน"/>
+                    <field name="emp_name" string="ชื่อ-นามสกุล"/>
+                    <field name="emp_dept_name" string="สังกัด"/>
+                    <field name="sent_evaluate_at" string="วันที่ส่งประเมิน"/>
+                    <field name="state" string="สถานะ"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="kpi_evaluate_form">
+            <field name="name">KPI Evaluate form</field>
+            <field name="model">kpi_main</field>
+            <field name="arch" type="xml">
+                <form string="KPI Form" duplicate="0" copy="0" create="0" delete="0">
+                    <field name="no_ce" invisible="1"/>
+                    <field name="is_create" invisible="1"/>
+                    <field name="evaluate_count" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                    <field name="is_current_evaluator" invisible="1"/>
+                    <header>
+                        <button string="ส่งกลับเพื่อแก้ไข"
+                                name="make_evaluate_adjust_action"
+                                type="object"
+                                icon="fa-undo"
+                                class="btn-secondary"
+                                attrs="{'invisible': ['|', ('state', 'not in', ['evaluating']), ('evaluate_count', '=', 1)]}"/>
+                        <button string="ยืนยันผลการประเมิน"
+                                name="make_evaluate_confirm_action"
+                                icon="fa-check"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible': [('state', 'not in', ['evaluating'])]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="kpi_no" string="KPI NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="kpi_no" placeholder="KPI NO." attrs="{'readonly': True}"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group colspan="4" col="12">
+                                <group colspan="3">
+                                    <field name="emp_code" attrs="{'readonly': True}" string="รหัสพนักงาน"/>
+                                </group>
+                                <group colspan="5">
+                                    <field name="emp_name" attrs="{'readonly': True}" string="ชื่อ-นามสกุล"/>
+                                </group>
+                                <group colspan="4">
+                                    <field name="emp_dept_name" attrs="{'readonly': True}" string="สังกัด"/>
+                                </group>
+                            </group>
+                        </group>
+                        <group>
+                            <group colspan="4" col="12">
+                                <group colspan="3">
+                                    <field name="kpi_round" attrs="{'readonly': True}" string="รอบการประเมิน"/>
+                                </group>
+                                <group colspan="5">
+                                    <field name="kpi_fiscal_year" attrs="{'readonly': True}" options="{'no_open': True}" string="ปีงบประมาณ"/>
+                                </group>
+                                <group colspan="4">
+                                    <field name="emp_type" attrs="{'readonly': True}" string="ระดับ"/>
+                                </group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Corporate'>
+                                <field name="corporate_lines_ids" context="{'default_kpi_year': kpi_fiscal_year}">
+                                    <tree create="0" delete="0">
+                                        <field name="kpi_corporate_setting_lines_id" string="หัวข้อประเมิน"/>
+                                        <field name="kpi_weight" widget="monetary"/>
+                                        <field name="kpi_point" widget="monetary"/>
+                                        <field name="kpi_earn" string="ประเมินตนเอง" widget="monetary"/>
+                                        <field name="kpi_show_score_inline" string="คะแนน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+                                        <field name="kpi_show_earn_inline" string="จากผู้ประเมิน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group colspan="12">
+                                                <field name="kpi_year" invisible="1"/>
+                                                <field name="kpi_show_score_inline" invisible="1" widget="monetary"/>
+                                                <field name="kpi_show_earn_inline" invisible="1" widget="monetary"/>
+                                                <field name="kpi_corporate_setting_lines_id"
+                                                       string="หัวข้อประเมิน"
+                                                       domain="[('active', '=', True ), ('kpi_setting_lines_id.kpi_year', '=', kpi_year)]"
+                                                       context="{'tree_view_ref' : 'kpi_evaluate_setting_lines_tree_sub'}"
+                                                       options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                                                       readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="kpi_corporate_defination_lines_ids" required="1"
+                                                       readonly="1">
+                                                    <tree editable='bottom'>
+                                                        <field name="level"/>
+                                                        <field name="name"/>
+                                                    </tree>
+                                                    <form>
+                                                        <group>
+                                                            <group>
+                                                                <field name="level" readonly="1"/>
+                                                                <field name="name" readonly="1"/>
+                                                            </group>
+                                                        </group>
+                                                    </form>
+                                                </field>
+                                            </group>
+                                            <group>
+                                                <field name="kpi_weight" required="1" readonly="1" widget="monetary"/>
+                                                <field name="kpi_point" required="1" readonly="1" widget="monetary"/>
+                                                <field name="kpi_earn" widget="monetary"/>
+                                            </group>
+                                            <group colspan="12">
+                                                <field name="kpi_detail" widget="html" readonly="1"/>
+                                            </group>
+                                            <group colspan="12">
+                                                <field name="corporate_attachment_ids" widget="many2many_binary" readonly="1"/>
+                                            </group>
+                                        </group>
+                                        <div>
+                                            <separator string="สำหรับผู้ประเมิน" style="font-size:18px;"/>
+                                            <field name="kpi_corporate_evaluation_lines_ids">
+                                                <tree create="0" delete="0" editable="bottom"
+                                                      decoration-info="is_latest_evaluator == True">
+                                                    <field name="evaluate_ratio" invisible="1"/>
+                                                    <field name="is_latest_evaluator" invisible="1"/>
+                                                    <field name="employee_id" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                    <field name="status" readonly="1"/>
+                                                    <field name="job_id_name" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                    <field name="draft_score" readonly="1" widget="monetary"/>
+                                                    <field name="score"
+                                                           attrs="{'readonly': [('is_latest_evaluator', '!=', True)]}" widget="monetary"/>
+                                                    <field name="earn" readonly="1" widget="monetary"/>
+                                                </tree>
+<!--                                                <form>-->
+<!--                                                    <group>-->
+<!--                                                        <group colspan="4" col="12">-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="step" readonly="1" />-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="employee_id"-->
+<!--                                                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                       readonly="1" />-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="job_id_name"-->
+<!--                                                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                       readonly="1"/>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                        <group colspan="4" col="12">-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="status" readonly="1"/>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="score" readonly="1" widget="monetary"/>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="earn" readonly="1" widget="monetary"/>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                    </group>-->
+<!--                                                </form>-->
+                                            </field>
+                                            <group class="oe_subtotal_footer oe_right">
+<!--                                                <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                                        <label for="kpi_score_total" string="Score Total"/>-->
+<!--                                                    </div>-->
+<!--                                                <field name="kpi_score_total" nolabel="1"-->
+<!--                                                           class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" />-->
+                                                <div class="oe_subtotal_footer_separator oe_inline">
+                                                    <label for="kpi_earn_total" string="จากผู้ประเมิน" />
+                                                </div>
+                                                <field name="kpi_earn_total" nolabel="1"
+                                                       class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>
+                                            </group>
+                                        </div>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                     <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="total_weight_corporate" string="น้ำหนักรวม"/>
+                                      </div>
+                                      <field name="total_weight_corporate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#000 ! important;" widget="monetary"/>
+<!--                                      <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                            <label for="total_score_corporate_evaluate" string="Total Score"/>-->
+<!--                                      </div>-->
+<!--                                      <field name="total_score_corporate_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>-->
+                                      <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="total_earn_corporate_evaluate" string="จากผู้ประเมินรวม"/>
+                                      </div>
+                                      <field name="total_earn_corporate_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>
+                                </group>
+                            </page>
+                            <page string='Common'>
+                                <field name="common_lines_ids" context="{'default_kpi_year': kpi_fiscal_year}">
+                                    <tree create="0" delete="0">
+                                        <field name="kpi_common_setting_lines_id" string="หัวข้อประเมิน"/>
+                                        <field name="kpi_weight" widget="monetary"/>
+                                        <field name="kpi_point" widget="monetary"/>
+                                        <field name="kpi_earn" string="ประเมินตนเอง" widget="monetary"/>
+                                        <field name="kpi_show_score_inline" string="คะแนน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+                                        <field name="kpi_show_earn_inline" string="จากผู้ประเมิน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group colspan="12">
+                                                <field name="kpi_year" invisible="1"/>
+                                                <field name="kpi_show_score_inline" invisible="1" widget="monetary"/>
+                                                <field name="kpi_show_earn_inline" invisible="1" widget="monetary"/>
+                                                <field name="kpi_common_setting_lines_id"
+                                                       string="หัวข้อประเมิน"
+                                                       domain="[('active', '=', True ), ('kpi_setting_lines_id.kpi_year', '=', kpi_year)]"
+                                                       context="{'tree_view_ref' : 'kpi_evaluate_setting_lines_tree_sub'}"
+                                                       options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                                                       readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="kpi_common_defination_lines_ids" required="1" readonly="1">
+                                                    <tree editable='bottom'>
+                                                        <field name="level"/>
+                                                        <field name="name"/>
+                                                    </tree>
+                                                    <form>
+                                                        <group>
+                                                            <group>
+                                                                <field name="level" readonly="1"/>
+                                                                <field name="name" readonly="1"/>
+                                                            </group>
+                                                        </group>
+                                                    </form>
+                                                </field>
+                                            </group>
+                                            <group>
+                                                <field name="kpi_weight" required="1" readonly="1" widget="monetary"/>
+                                                <field name="kpi_point" required="1" readonly="1" widget="monetary"/>
+                                                <field name="kpi_earn" widget="monetary"/>
+                                            </group>
+                                            <group colspan="12">
+                                                <field name="kpi_detail" widget="html" readonly="1"/>
+                                            </group>
+                                            <group colspan="12">
+                                                <field name="common_attachment_ids" widget="many2many_binary" readonly="1"/>
+                                            </group>
+                                        </group>
+                                        <div>
+                                            <separator string="สำหรับผู้ประเมิน" style="font-size:18px;"/>
+                                            <field name="kpi_common_evaluation_lines_ids">
+                                                <tree create="0" delete="0" editable="bottom"
+                                                      decoration-info="is_latest_evaluator == True">
+                                                    <field name="evaluate_ratio" invisible="1"/>
+                                                    <field name="is_latest_evaluator" invisible="1"/>
+                                                    <field name="employee_id" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                    <field name="status" readonly="1"/>
+                                                    <field name="job_id_name" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                    <field name="draft_score" readonly="1" widget="monetary"/>
+                                                    <field name="score"
+                                                           attrs="{'readonly': [('is_latest_evaluator', '!=', True)]}" widget="monetary"/>
+                                                    <field name="earn" readonly="1" widget="monetary"/>
+                                                </tree>
+<!--                                                <form>-->
+<!--                                                    <group>-->
+<!--                                                        <group colspan="4" col="12">-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="step" readonly="1" />-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="employee_id"-->
+<!--                                                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                       readonly="1" />-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="job_id_name"-->
+<!--                                                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                       readonly="1"/>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                        <group colspan="4" col="12">-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="status" readonly="1"/>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="score" readonly="1" widget="monetary"/>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="earn" readonly="1" widget="monetary"/>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                    </group>-->
+<!--                                                </form>-->
+                                            </field>
+                                            <group class="oe_subtotal_footer oe_right">
+<!--                                                <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                                        <label for="kpi_score_total" string="Score Total"/>-->
+<!--                                                    </div>-->
+<!--                                                <field name="kpi_score_total" nolabel="1"-->
+<!--                                                           class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;"  />-->
+                                                <div class="oe_subtotal_footer_separator oe_inline">
+                                                    <label for="kpi_earn_total" string="จากผู้ประเมิน"/>
+                                                </div>
+                                                <field name="kpi_earn_total" nolabel="1"
+                                                       class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary" />
+                                            </group>
+                                        </div>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                      <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="total_weight_common" string="น้ำหนักรวม"/>
+                                      </div>
+                                      <field name="total_weight_common" nolabel="1" class="oe_subtotal_footer_separator" style="color:#000 ! important;" widget="monetary"/>
+<!--                                      <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                            <label for="total_score_common_evaluate" string="Total Score"/>-->
+<!--                                      </div>-->
+<!--                                      <field name="total_score_common_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>-->
+                                      <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="total_earn_common_evaluate" string="จากผู้ประเมินรวม"/>
+                                      </div>
+                                      <field name="total_earn_common_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>
+                                </group>
+                            </page>
+                            <page string='Function'>
+                                <field name="function_lines_ids" context="{'default_kpi_year': kpi_fiscal_year}">
+                                    <tree create="0" delete="0">
+                                        <field name="kpi_function_setting_lines_id" string="หัวข้อประเมิน"/>
+                                        <field name="kpi_weight" widget="monetary"/>
+                                        <field name="kpi_point" widget="monetary"/>
+                                        <field name="kpi_earn" string="ประเมินตนเอง" widget="monetary"/>
+                                        <field name="kpi_show_score_inline" string="คะแนน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+                                        <field name="kpi_show_earn_inline" string="จากผู้ประเมิน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group colspan="12">
+                                                <field name="kpi_year" invisible="1"/>
+                                                <field name="kpi_show_score_inline" invisible="1" widget="monetary"/>
+                                                <field name="kpi_show_earn_inline" invisible="1" widget="monetary"/>
+                                                <field name="kpi_function_setting_lines_id"
+                                                       string="หัวข้อประเมิน"
+                                                       domain="[('active', '=', True ), ('kpi_setting_lines_id.kpi_year', '=', kpi_year)]"
+                                                       context="{'tree_view_ref' : 'kpi_evaluate_setting_lines_tree_sub'}"
+                                                       options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                                                       readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="kpi_function_defination_lines_ids" required="1"
+                                                       readonly="1">
+                                                    <tree editable='bottom'>
+                                                        <field name="level"/>
+                                                        <field name="name"/>
+                                                    </tree>
+                                                    <form>
+                                                        <group>
+                                                            <group>
+                                                                <field name="level" readonly="1"/>
+                                                                <field name="name" readonly="1"/>
+                                                            </group>
+                                                        </group>
+                                                    </form>
+                                                </field>
+                                            </group>
+                                            <group>
+                                                <field name="kpi_weight" required="1" readonly="1" widget="monetary"/>
+                                                <field name="kpi_point" required="1" readonly="1" widget="monetary"/>
+                                                <field name="kpi_earn" widget="monetary"/>
+                                            </group>
+                                            <group colspan="12">
+                                                <field name="kpi_detail" widget="html" readonly="1"/>
+                                            </group>
+                                            <group colspan="12">
+                                                <field name="function_attachment_ids" widget="many2many_binary" readonly="1"/>
+                                            </group>
+                                        </group>
+                                        <div>
+                                            <separator string="สำหรับผู้ประเมิน" style="font-size:18px;"/>
+                                            <field name="kpi_function_evaluation_lines_ids">
+                                                <tree create="0" delete="0" editable="bottom"
+                                                      decoration-info="is_latest_evaluator == True">
+                                                    <field name="evaluate_ratio" invisible="1"/>
+                                                    <field name="is_latest_evaluator" invisible="1"/>
+                                                    <field name="employee_id" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                    <field name="status" readonly="1"/>
+                                                    <field name="job_id_name" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                    <field name="draft_score" readonly="1" widget="monetary"/>
+                                                    <field name="score"
+                                                           attrs="{'readonly': [('is_latest_evaluator', '!=', True)]}" widget="monetary"/>
+                                                    <field name="earn" readonly="1" widget="monetary"/>
+                                                </tree>
+<!--                                                <form>-->
+<!--                                                    <group>-->
+<!--                                                        <group colspan="4" col="12">-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="step" readonly="1" />-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="employee_id"-->
+<!--                                                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                       readonly="1" />-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="job_id_name"-->
+<!--                                                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                       readonly="1"/>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                        <group colspan="4" col="12">-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="status" readonly="1"/>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="score" readonly="1" widget="monetary"/>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4">-->
+<!--                                                                <field name="earn" readonly="1" widget="monetary"/>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                    </group>-->
+<!--                                                </form>-->
+                                            </field>
+                                            <group class="oe_subtotal_footer oe_right">
+<!--                                                <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                                        <label for="kpi_score_total" string="Score Total"/>-->
+<!--                                                    </div>-->
+<!--                                                <field name="kpi_score_total" nolabel="1"-->
+<!--                                                           class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;"  />-->
+                                                <div class="oe_subtotal_footer_separator oe_inline">
+                                                    <label for="kpi_earn_total" string="จากผู้ประเมิน"/>
+                                                </div>
+                                                <field name="kpi_earn_total" nolabel="1"
+                                                       class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary" />
+                                            </group>
+                                        </div>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                      <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="total_weight_function" string="น้ำหนักรวม"/>
+                                      </div>
+                                      <field name="total_weight_function" nolabel="1" class="oe_subtotal_footer_separator" style="color:#000 ! important;" widget="monetary"/>
+<!--                                      <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                            <label for="total_score_function_evaluate" string="Total Score"/>-->
+<!--                                      </div>-->
+<!--                                      <field name="total_score_function_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>-->
+                                      <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="total_earn_function_evaluate" string="จากผู้ประเมินรวม"/>
+                                      </div>
+                                      <field name="total_earn_function_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>
+                                </group>
+                            </page>
+                            <page string='Behaviour'>
+                                <div attrs="{'invisible': [('emp_type', 'in', 'management')]}">
+<!--                                    <separator string="แบบปฏิบัติการ" style="font-size:18px;"/>-->
+                                    <field name="operate_behaviour_lines_ids" context="{'default_kpi_year': kpi_fiscal_year}">
+                                        <tree create="0" delete="0">
+                                            <field name="operate_behaviour_setting_lines_id" string="หัวข้อประเมิน"/>
+                                            <field name="kpi_weight" widget="monetary"/>
+                                            <field name="kpi_point" widget="monetary"/>
+                                            <field name="kpi_earn" string="ประเมินตนเอง" widget="monetary"/>
+                                            <field name="kpi_show_score_inline" string="คะแนน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+                                            <field name="kpi_show_earn_inline" string="จากผู้ประเมิน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+<!--                                            <field name="kpi_detail"/>-->
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group colspan="12">
+                                                    <field name="kpi_year" invisible="1"/>
+                                                    <field name="operate_behaviour_setting_lines_id"
+                                                           string="หัวข้อประเมิน"
+                                                           domain="[('active', '=', True ), ('operate_behaviour_setting_lines_id.kpi_year', '=', kpi_year)]"
+                                                           context="{'tree_view_ref' : 'kpi_evaluate_setting_lines_tree_sub'}"
+                                                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                                                           readonly="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="kpi_operate_behaviour_definition_lines_ids" required="1"
+                                                           readonly="1">
+                                                        <tree editable='bottom'>
+                                                            <field name="level"/>
+                                                            <field name="name"/>
+                                                        </tree>
+                                                        <form>
+                                                            <group>
+                                                                <group>
+                                                                    <field name="level" readonly="1"/>
+                                                                    <field name="name" readonly="1"/>
+                                                                </group>
+                                                            </group>
+                                                        </form>
+                                                    </field>
+                                                </group>
+                                                <group>
+                                                    <field name="kpi_weight" required="1" readonly="1" widget="monetary"/>
+                                                    <field name="kpi_point" required="1" readonly="1" widget="monetary"/>
+                                                    <field name="kpi_earn" string="ประเมินตนเอง" widget="monetary"/>
+                                                </group>
+                                                <group colspan="12">
+                                                    <field name="kpi_detail" widget="html" readonly="1"/>
+                                                </group>
+                                                <group colspan="12">
+                                                    <field name="operate_behaviour_attachment_ids" widget="many2many_binary" readonly="1"/>
+                                                </group>
+                                            </group>
+                                            <div>
+                                                <separator string="สำหรับผู้ประเมิน" style="font-size:18px;"/>
+                                                <field name="operate_behaviour_evaluation_lines_ids">
+                                                    <tree create="0" delete="0" editable="bottom"
+                                                      decoration-info="is_latest_evaluator == True">
+                                                        <field name="evaluate_ratio" invisible="1"/>
+                                                        <field name="is_latest_evaluator" invisible="1"/>
+                                                        <field name="employee_id" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                        <field name="status" readonly="1"/>
+                                                        <field name="job_id_name" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                        <field name="score"
+                                                               attrs="{'readonly': [('is_latest_evaluator', '!=', True)]}" widget="monetary"/>
+                                                        <field name="earn" readonly="1" widget="monetary"/>
+                                                    </tree>
+<!--                                                    <form>-->
+<!--                                                        <group>-->
+<!--                                                            <group colspan="4" col="12">-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="step" readonly="1" />-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="employee_id"-->
+<!--                                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                           readonly="1" />-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="job_id_name"-->
+<!--                                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                           readonly="1"/>-->
+<!--                                                                </group>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4" col="12">-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="status" readonly="1"/>-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="score" readonly="1" widget="monetary"/>-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="earn" readonly="1" widget="monetary"/>-->
+<!--                                                                </group>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                    </form>-->
+                                                </field>
+                                                <group class="oe_subtotal_footer oe_right">
+<!--                                                    <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                                        <label for="kpi_score_total" string="Score Total"/>-->
+<!--                                                    </div>-->
+<!--                                                    <field name="kpi_score_total" nolabel="1"-->
+<!--                                                           class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;"  />-->
+                                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                                        <label for="kpi_earn_total" string="จากผู้ประเมิน" />
+                                                    </div>
+                                                    <field name="kpi_earn_total" nolabel="1"
+                                                           class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary" />
+                                                </group>
+                                            </div>
+                                        </form>
+                                    </field>
+                                    <group class="oe_subtotal_footer oe_right">
+                                          <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="total_weight_operate_behaviour" string="น้ำหนักรวม"/>
+                                          </div>
+                                          <field name="total_weight_operate_behaviour" nolabel="1" class="oe_subtotal_footer_separator" style="color:#000 ! important;" widget="monetary"/>
+<!--                                          <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                                <label for="total_score_operate_behaviour_evaluate" string="Total Score"/>-->
+<!--                                          </div>-->
+<!--                                          <field name="total_score_operate_behaviour_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>-->
+                                          <div class="oe_subtotal_footer_separator oe_inline">
+                                                <label for="total_earn_operate_behaviour_evaluate" string="จากผู้ประเมินรวม"/>
+                                          </div>
+                                          <field name="total_earn_operate_behaviour_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>
+                                    </group>
+                                </div>
+                                <div attrs="{'invisible': [('emp_type', 'in', ['operation', 'academic'])]}">
+<!--                                  <separator string="แบบบริหาร" style="font-size:18px;"/>-->
+                                    <field name="manage_behaviour_lines_ids" context="{'default_kpi_year': kpi_fiscal_year}">
+                                        <tree create="0" delete="0">
+                                            <field name="manage_behaviour_setting_lines_id" string="หัวข้อประเมิน"/>
+                                            <field name="kpi_weight" widget="monetary"/>
+                                            <field name="kpi_point" widget="monetary"/>
+                                            <field name="kpi_earn" string="ประเมินตนเอง" widget="monetary"/>
+                                            <field name="kpi_show_score_inline" string="คะแนน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+                                            <field name="kpi_show_earn_inline" string="จากผู้ประเมิน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+<!--                                            <field name="kpi_detail"/>-->
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group colspan="12">
+                                                    <field name="kpi_year" invisible="1"/>
+                                                    <field name="manage_behaviour_setting_lines_id"
+                                                           string="หัวข้อประเมิน"
+                                                           domain="[('active', '=', True ), ('manage_behaviour_setting_lines_id.kpi_year', '=', kpi_year)]"
+                                                           context="{'tree_view_ref' : 'kpi_evaluate_setting_lines_tree_sub'}"
+                                                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                                                           readonly="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="kpi_manage_behaviour_definition_lines_ids" required="1"
+                                                           readonly="1">
+                                                        <tree editable='bottom'>
+                                                            <field name="level"/>
+                                                            <field name="name"/>
+                                                        </tree>
+                                                        <form>
+                                                            <group>
+                                                                <group>
+                                                                    <field name="level" readonly="1"/>
+                                                                    <field name="name" readonly="1"/>
+                                                                </group>
+                                                            </group>
+                                                        </form>
+                                                    </field>
+                                                </group>
+                                                <group>
+                                                    <field name="kpi_weight" required="1" readonly="1" widget="monetary"/>
+                                                    <field name="kpi_point" required="1" readonly="1" widget="monetary"/>
+                                                    <field name="kpi_earn" string="ประเมินตนเอง" widget="monetary"/>
+                                                </group>
+                                                <group colspan="12">
+                                                    <field name="kpi_detail" widget="html" readonly="1"/>
+                                                </group>
+                                                <group colspan="12">
+                                                    <field name="manage_behaviour_attachment_ids" widget="many2many_binary" readonly="1"/>
+                                                </group>
+                                            </group>
+                                            <div>
+                                                <separator string="สำหรับผู้ประเมิน" style="font-size:18px;"/>
+                                                <field name="manage_behaviour_evaluation_lines_ids">
+                                                    <tree create="0" delete="0" editable="bottom"
+                                                      decoration-info="is_latest_evaluator == True">
+                                                        <field name="evaluate_ratio" invisible="1"/>
+                                                        <field name="is_latest_evaluator" invisible="1"/>
+                                                        <field name="employee_id" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                        <field name="status" readonly="1"/>
+                                                        <field name="job_id_name" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                        <field name="score"
+                                                               attrs="{'readonly': [('is_latest_evaluator', '!=', True)]}" widget="monetary"/>
+                                                        <field name="earn" readonly="1" widget="monetary"/>
+                                                    </tree>
+<!--                                                    <form>-->
+<!--                                                        <group>-->
+<!--                                                            <group colspan="4" col="12">-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="step" readonly="1" />-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="employee_id"-->
+<!--                                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                           readonly="1" />-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="job_id_name"-->
+<!--                                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                           readonly="1"/>-->
+<!--                                                                </group>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4" col="12">-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="status" readonly="1"/>-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="score" readonly="1" widget="monetary"/>-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="4">-->
+<!--                                                                    <field name="earn" readonly="1" widget="monetary"/>-->
+<!--                                                                </group>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                    </form>-->
+                                                </field>
+                                                <group class="oe_subtotal_footer oe_right">
+<!--                                                    <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                                        <label for="kpi_score_total" string="Score Total"/>-->
+<!--                                                    </div>-->
+<!--                                                    <field name="kpi_score_total" nolabel="1"-->
+<!--                                                           class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;"  />-->
+                                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                                        <label for="kpi_earn_total" string="จากผู้ประเมิน"/>
+                                                    </div>
+                                                    <field name="kpi_earn_total" nolabel="1"
+                                                           class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"  />
+                                                </group>
+                                            </div>
+                                        </form>
+                                    </field>
+                                    <group class="oe_subtotal_footer oe_right">
+                                          <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="total_weight_manage_behaviour" string="น้ำหนักรวม"/>
+                                          </div>
+                                          <field name="total_weight_manage_behaviour" nolabel="1" class="oe_subtotal_footer_separator" style="color:#000 ! important;" widget="monetary"/>
+<!--                                          <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                                <label for="total_score_manage_behaviour_evaluate" string="Total Score"/>-->
+<!--                                          </div>-->
+<!--                                          <field name="total_score_manage_behaviour_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>-->
+                                          <div class="oe_subtotal_footer_separator oe_inline">
+                                                <label for="total_earn_manage_behaviour_evaluate" string="จากผู้ประเมินรวม"/>
+                                          </div>
+                                          <field name="total_earn_manage_behaviour_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>
+                                    </group>
+                                </div>
+                            </page>
+                            <page string='Contribution'>
+                                <div>
+                                    <separator string="องค์กร" style="font-size:18px;"/>
+                                    <field name="org_contribute_lines_ids" readonly="1">
+                                        <tree create="0" delete="0">
+                                            <field name="contribution_lines_id"
+                                                   string="หัวข้อประเมิน"
+                                                   style="width:70% !important;"
+                                                   options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                            <field name="contribution_date"/>
+                                            <field name="contribution_score" widget="monetary"/>
+                                            <field name="kpi_show_score_inline" string="จากผู้ประเมิน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+<!--                                            <field name="contribution_detail"/>-->
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group colspan="12">
+                                                    <field name="kpi_year" invisible="1"/>
+                                                    <field name="contribution_lines_id"
+                                                           string="หัวข้อประเมิน"
+                                                           readonly="1"
+                                                           domain="[('active', '=', True), ('contribution_setting_lines_id.contribution_year', '=', kpi_year)]"
+                                                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                </group>
+                                                <group colspan="4" col="12">
+                                                    <group colspan="6">
+                                                        <field name="contribution_date" readonly="1"/>
+                                                    </group>
+                                                    <group colspan="6">
+                                                        <field name="contribution_score" readonly="1" widget="monetary"/>
+                                                    </group>
+                                                </group>
+                                                <group colspan="12">
+                                                    <field name="contribution_detail" widget="html" readonly="1"/>
+                                                </group>
+                                                <group colspan="12">
+                                                    <field name="org_contribute_attachment_ids" widget="many2many_binary" readonly="1"/>
+                                                </group>
+                                            </group>
+                                            <div>
+                                                <separator string="สำหรับผู้ประเมิน" style="font-size:18px;"/>
+                                                <field name="kpi_org_contribute_evaluation_lines_ids">
+                                                    <tree create="0" delete="0" editable="bottom"
+                                                          decoration-info="is_latest_evaluator == True">
+                                                        <field name="is_latest_evaluator" invisible="1"/>
+                                                        <field name="employee_id" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                        <field name="status"/>
+                                                        <field name="job_id_name" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                        <field name="score"
+                                                               attrs="{'readonly': [('is_latest_evaluator', '!=', True)]}" widget="monetary"/>
+                                                    </tree>
+<!--                                                    <form>-->
+<!--                                                        <group>-->
+<!--                                                            <group colspan="4" col="12">-->
+<!--                                                                <group colspan="6">-->
+<!--                                                                    <field name="employee_id"-->
+<!--                                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                           readonly="1" />-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="6">-->
+<!--                                                                    <field name="job_id_name"-->
+<!--                                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                           readonly="1"/>-->
+<!--                                                                </group>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4" col="12">-->
+<!--                                                                <group colspan="6">-->
+<!--                                                                    <field name="status" readonly="1"/>-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="6">-->
+<!--                                                                    <field name="score" readonly="1" widget="monetary"/>-->
+<!--                                                                </group>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                    </form>-->
+                                                </field>
+                                                <group class="oe_subtotal_footer oe_right">
+                                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                                        <label for="kpi_score_total" string="จากผู้ประเมิน"/>
+                                                    </div>
+                                                    <field name="kpi_score_total" nolabel="1"
+                                                           class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"  />
+                                                </group>
+                                            </div>
+                                        </form>
+                                    </field>
+                                    <group class="oe_subtotal_footer oe_right">
+                                          <div class="oe_subtotal_footer_separator oe_inline">
+                                                <label for="total_score_org_contribute_evaluate" string="จากผู้ประเมินรวม"/>
+                                          </div>
+                                          <field name="total_score_org_contribute_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>
+                                    </group>
+                                </div>
+                                <div>
+                                    <separator string="กลุ่มงาน" style="font-size:18px;"/>
+                                    <field name="group_contribute_lines_ids" readonly="1">
+                                        <tree create="0" delete="0">
+                                            <field name="contribution_lines_id"
+                                                   string="หัวข้อประเมิน"
+                                                   style="width:70% !important;"
+                                                   options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                            <field name="contribution_date"/>
+                                            <field name="contribution_score" widget="monetary"/>
+                                            <field name="kpi_show_score_inline" string="จากผู้ประเมิน" style="color: #0a8ea4 !important;font-weight: bold;" widget="monetary"/>
+<!--                                            <field name="contribution_detail"/>-->
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group colspan="12">
+                                                    <field name="kpi_year" invisible="1"/>
+                                                    <field name="contribution_lines_id"
+                                                           string="หัวข้อประเมิน"
+                                                           readonly="1"
+                                                           domain="[('active', '=', True), ('contribution_setting_lines_id.contribution_year', '=', kpi_year)]"
+                                                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                </group>
+                                                <group colspan="4" col="12">
+                                                    <group colspan="6">
+                                                        <field name="contribution_date" readonly="1"/>
+                                                    </group>
+                                                    <group colspan="6">
+                                                        <field name="contribution_score" readonly="1" widget="monetary"/>
+                                                    </group>
+                                                </group>
+                                                <group colspan="12">
+                                                    <field name="contribution_detail" widget="html" readonly="1"/>
+                                                </group>
+                                                <group colspan="12">
+                                                    <field name="group_contribute_attachment_ids" widget="many2many_binary" readonly="1"/>
+                                                </group>
+                                            </group>
+                                            <div>
+                                                <separator string="สำหรับผู้ประเมิน" style="font-size:18px;"/>
+                                                <field name="kpi_group_contribute_evaluation_lines_ids">
+                                                    <tree create="0" delete="0" editable="bottom"
+                                                          decoration-info="is_latest_evaluator == True">
+                                                        <field name="is_latest_evaluator" invisible="1"/>
+                                                        <field name="employee_id" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                        <field name="status"/>
+                                                        <field name="job_id_name" readonly="1" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                        <field name="score"
+                                                               attrs="{'readonly': [('is_latest_evaluator', '!=', True)]}" widget="monetary"/>
+                                                    </tree>
+<!--                                                    <form>-->
+<!--                                                        <group>-->
+<!--                                                            <group colspan="4" col="12">-->
+<!--                                                                <group colspan="6">-->
+<!--                                                                    <field name="employee_id"-->
+<!--                                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                           readonly="1" />-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="6">-->
+<!--                                                                    <field name="job_id_name"-->
+<!--                                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"-->
+<!--                                                                           readonly="1"/>-->
+<!--                                                                </group>-->
+<!--                                                            </group>-->
+<!--                                                            <group colspan="4" col="12">-->
+<!--                                                                <group colspan="6">-->
+<!--                                                                    <field name="status" readonly="1"/>-->
+<!--                                                                </group>-->
+<!--                                                                <group colspan="6">-->
+<!--                                                                    <field name="score" readonly="1" widget="monetary"/>-->
+<!--                                                                </group>-->
+<!--                                                            </group>-->
+<!--                                                        </group>-->
+<!--                                                    </form>-->
+                                                </field>
+                                                <group class="oe_subtotal_footer oe_right">
+                                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                                        <label for="kpi_score_total" string="จากผู้ประเมิน"/>
+                                                    </div>
+                                                    <field name="kpi_score_total" nolabel="1"
+                                                           class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary" />
+                                                </group>
+                                            </div>
+                                        </form>
+                                    </field>
+                                    <group class="oe_subtotal_footer oe_right">
+                                          <div class="oe_subtotal_footer_separator oe_inline">
+                                                <label for="total_score_group_contribute_evaluate" string="จากผู้ประเมินรวม"/>
+                                          </div>
+                                          <field name="total_score_group_contribute_evaluate" nolabel="1" class="oe_subtotal_footer_separator" style="color:#0a8ea4 ! important;" widget="monetary"/>
+                                    </group>
+                                </div>
+                            </page>
+                            <page string='ลำดับการประเมิน'>
+                                <group>
+                                    <group>
+                                        <field name="routing_evaluate_id"
+                                               required="1"
+                                               attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                               options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    </group>
+                                </group>
+                                <field name="evaluate_line_ids" required='1'
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                    <tree edit="true" required='1' editable='bottom'>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="is_active" invisible="1"/>
+                                        <field name="step" required='1' string="ลำดับ"/>
+                                        <field name="status" force_save="1" string="สถานะผู้ประเมิน"/>
+                                        <field name="evaluate_setting_id" invisible='1'/>
+                                        <field name="job_id_name" required='1'
+                                               string="ตำแหน่ง"
+                                               options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="employee_id" required='1'
+                                               string="ชื่อ-นามสกุล"
+                                               options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="evaluate_time" string="วันที่ประเมิน" readonly='1'/>
+                                        <field name="comment" string="ความคิดเห็น" readonly='1'/>
+                                        <field name="evaluate_status" string="สถานะการประเมิน" readonly='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group colspan="4" col="12">
+                                                <group colspan="4">
+                                                    <field name="step" readonly="1" string="ลำดับ"/>
+                                                </group>
+                                                <group colspan="4">
+                                                    <field name="employee_id"
+                                                           string="ชื่อ-นามสกุล"
+                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"
+                                                           readonly="1" />
+                                                </group>
+                                                <group colspan="4">
+                                                    <field name="job_id_name"
+                                                           string="ตำแหน่ง"
+                                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"
+                                                           readonly="1"/>
+                                                </group>
+                                            </group>
+                                            <group colspan="4" col="12">
+                                                <group colspan="4">
+                                                    <field name="status" string="สถานะผู้ประเมิน" readonly="1"/>
+                                                </group>
+                                                <group colspan="4">
+                                                    <field name="evaluate_time" string="วันที่ประเมิน" readonly="1"/>
+                                                </group>
+                                                <group colspan="4">
+                                                    <field name="evaluate_status" string="สถานะการประเมิน" readonly="1"/>
+                                                </group>
+                                            </group>
+                                            <group colspan="4" col="12">
+                                                <group colspan="12">
+                                                    <field name="comment" string="ความคิดเห็น" readonly="1"/>
+                                                </group>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="kpi_evaluate_setting_lines_tree_sub" model="ir.ui.view">
+            <field name="name">kpi_setting_lines_tree</field>
+            <field name="model">kpi_setting_lines</field>
+            <field name="arch" type="xml">
+                <tree string="KPI Lines" create="true">
+                    <field name="kpi_id"/>
+                    <field name="kpi_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="kpi_evaluate_action_window">
+            <field name="name">รอดำเนินการ</field>
+            <field name="res_model">kpi_main</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('kpi_evaluating_user', '=', uid), ('state', 'in', ['evaluating'])]</field>
+        </record>
+
+        <record id="kpi_evaluate_action_window_tree" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="kpi_evaluate_list"/>
+            <field name="act_window_id" ref="kpi_evaluate_action_window"/>
+        </record>
+
+        <record id="kpi_evaluate_action_window_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="kpi_evaluate_form"/>
+            <field name="act_window_id" ref="kpi_evaluate_action_window"/>
+        </record>
+
+        <menuitem name="รอดำเนินการ"
+                  id="kpi_evaluate_menu"
+                  parent="depa_hr_evaluation_menu"
+                  action="kpi_evaluate_action_window"
+                  sequence="2"/>
+
+    </data>
+</odoo>

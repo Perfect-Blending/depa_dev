@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="document_main_internal_need_form_inherit" model="ir.ui.view">
+        <field name="name">document_main_internal_need_form_inherit</field>
+        <field name="model">document.internal.main</field>
+        <!-- For Production -->
+        <field name="inherit_id" ref="pfb_saraban_addons_fix.document_internal_need_form_view_fix"/>
+<!--        <field name="inherit_id" ref="pfb_saraban.document_main_internal_need_form_view"/>-->
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page[1]/group[2]/group[1]/group[2]" position="after">
+                <group col="2" colspan="4">
+                    <field name="file_for_signature" filename="file_name_for_signature" attrs="{'readonly':[('state','in', ('done'))]}"/>
+                    <field name="file_name_for_signature" invisible="1"/>
+                    <field name="template" widget="html" class="oe_edit_only" readonly="1" attrs="{'invisible':[('state','not in', ('draft'))]}" force_save="1"/>
+                </group>
+                <group col="2" colspan="4">
+                    <button string="ดูตัวอย่างเอกสาร (PDF)"
+                                name="download_preview_pdf"
+                                icon="fa-file-pdf-o"
+                                type="object"
+                                class="btn btn-warning btn-sm oe_read_only"
+                    />
+                </group>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="รายชื่อแจ้งท้าย">
+                    <field name="invitation_lines_ids" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('circular_letter_check', '=', True)]}">
+                        <tree string="รายชื่อ" editable="bottom">
+                            <field name="invitation_name" />
+                            <field name="document_pdf_id" invisible="1"/>
+                            <button name="buttonDownload" string="ดาวน์โหลดเอกสารเวียน" type="object" class="fa fa-hand-o-right"/>
+                            <!-- <field name="file"  filename="file_name" readonly="1" force_save="1"/>
+                            <field name="file_name" invisible="1"/> -->
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='document_note']" position="after">
+                <field name="circular_letter_check" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <h2>
+                    <b>
+                        <field name="speed" class="text-danger" readonly="1" />
+                    </b>
+                </h2>
+                <field name="specific_document_no" groups="depa_signature.group_user_digital_signature_setting"/><br/>
+                <field name="specific_date" groups="depa_signature.group_user_digital_signature_setting"/>
+            </xpath>
+
+
+<!--            <xpath expr="//page[1]/group[2]/group[2]/group[8]" position="after">-->
+<!--                <div>-->
+<!--                    <button string="แสดงตัวอย่างเอกสาร"-->
+<!--                            name="action_preview_document"-->
+<!--                            icon="fa-download"-->
+<!--                            type="object"-->
+<!--                            class="btn btn-primary btn-sm"-->
+<!--                            attrs="{'invisible':['|', ('state','in', ('draft')), ('document_type_select', '!=', 'หนังสือภายนอก+หนังสือรับรอง')]}"-->
+<!--                            groups=""/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+    <record id="document_internal_all_form_inherit" model="ir.ui.view">
+        <field name="name">document_main_internal_need_form_inherit</field>
+        <field name="model">document.internal.main</field>
+        <field name="inherit_id" ref="pfb_saraban.document_internal_all_form_view"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//notebook/page[1]/group[2]/group[1]/group[2]" position="after">
+                <group col="2" colspan="4">
+                    <field name="file_for_signature" filename="file_name_for_signature" attrs="{'readonly':[('state','in', ('done'))]}"/>
+                    <field name="file_name_for_signature" invisible="1"/>
+                    <field name="template" widget="html" class="oe_edit_only" readonly="1" attrs="{'invisible':[('state','not in', ('draft'))]}" force_save="1"/>
+                </group>
+                <group col="2" colspan="4">
+                    <button string="ดูตัวอย่างเอกสาร (PDF)"
+                                name="download_preview_pdf"
+                                icon="fa-file-pdf-o"
+                                type="object"
+                                class="btn btn-warning btn-sm oe_read_only"
+                    />
+                </group>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="รายชื่อแจ้งท้าย">
+                    <field name="invitation_lines_ids" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('circular_letter_check', '=', True)]}">
+                        <tree string="รายชื่อ" editable="bottom">
+                            <field name="invitation_name" />
+                            <field name="document_pdf_id" invisible="1"/>
+                            <button name="buttonDownload" string="ดาวน์โหลดเอกสารเวียน" type="object" class="fa fa-hand-o-right"/>
+                            <!-- <field name="file"  filename="file_name" readonly="1" force_save="1"/>
+                            <field name="file_name" invisible="1"/> -->
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='document_note']" position="after">
+                <field name="circular_letter_check" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <h2>
+                    <b>
+                        <field name="speed" class="text-danger" readonly="1" />
+                    </b>
+                </h2>
+                <field name="specific_document_no" groups="depa_signature.group_user_digital_signature_setting"/><br/>
+                <field name="specific_date" groups="depa_signature.group_user_digital_signature_setting"/>
+            </xpath>
+             <xpath expr="//notebook/page[1]/group[2]/group[2]/group[8]" position="after">
+                <div>
+                    <div>
+                        <field name="head_officer_digital_signed" invisible="1"/>
+                        <button string="ดาวน์โหลดเอกสารลงนาม"
+                                name="action_download_signed_document"
+                                confirm="ยืนยันการดาวน์โหลดเอกสารที่ลงนามแล้วใช่หรือไม่"
+                                icon="fa-file-pdf-o"
+                                type="object"
+                                class="btn btn-info btn-sm"
+                                attrs="{'invisible':['|', '|', ('state','not in', ('done')), ('document_type_select', 'not in', ['หนังสือภายนอก+หนังสือรับรอง', 'ประกาศ', 'ระเบียบ', 'ข้อบังคับ', 'คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ', 'หนังสือรับรอง']), ('head_officer_digital_signed', '!=', True)]}"
+                                groups="" />
+                    </div>
+                </div>
+            </xpath>
+<!--            <xpath expr="//page[1]/group[2]/group[2]/group[8]" position="after">-->
+<!--                <div>-->
+<!--                    <button string="แสดงตัวอย่างเอกสาร"-->
+<!--                            name="action_preview_document"-->
+<!--                            icon="fa-download"-->
+<!--                            type="object"-->
+<!--                            class="btn btn-primary btn-sm"-->
+<!--                            attrs="{'invisible':[('document_type_select', '!=', 'หนังสือภายนอก+หนังสือรับรอง')]}"-->
+<!--                            groups=""/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+    <record id="document_internal_main_form_inherit" model="ir.ui.view">
+        <field name="name">document_internal_main_form_inherit</field>
+        <field name="model">document.internal.main</field>
+        <field name="inherit_id" ref="pfb_saraban.document_internal_announce_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page[1]/group[2]/group[1]/group[2]" position="after">
+                <group col="2" colspan="4">
+                    <field name="file_for_signature"
+                           filename="file_name_for_signature" required="1"
+                           attrs="{'readonly':[('state','in', ('done'))]}"/>
+                    <field name="file_name_for_signature" invisible="1"/>
+                    <field name="template" widget="html" class="oe_edit_only" readonly="1" attrs="{'invisible':[('state','not in', ('draft'))]}" force_save="1"/>
+                </group>
+                <group col="2" colspan="4">
+                    <button string="ดูตัวอย่างเอกสาร (PDF)"
+                                name="download_preview_pdf"
+                                icon="fa-file-pdf-o"
+                                type="object"
+                                class="btn btn-warning btn-sm oe_read_only"
+                    />
+                </group>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="รายชื่อแจ้งท้าย">
+                    <field name="invitation_lines_ids" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('circular_letter_check', '=', True)]}">
+                        <tree string="รายชื่อ" editable="bottom">
+                            <field name="invitation_name" />
+                            <field name="document_pdf_id" invisible="1"/>
+                            <button name="buttonDownload" string="ดาวน์โหลดเอกสารเวียน" type="object" class="fa fa-hand-o-right"/>
+                            <!-- <field name="file"  filename="file_name" readonly="1" force_save="1"/>
+                            <field name="file_name" invisible="1"/> -->
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='document_note']" position="after">
+               <field name="circular_letter_check" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <h2>
+                    <b>
+                        <field name="speed" class="text-danger" readonly="1"/>
+                    </b>
+                </h2>
+                <field name="specific_document_no" groups="depa_signature.group_user_digital_signature_setting"/><br/>
+                <field name="specific_date" groups="depa_signature.group_user_digital_signature_setting"/>
+            </xpath>
+            <xpath expr="//notebook/page[1]/group[2]/group[2]/group[8]" position="after">
+                <div>
+<!--                    <div>-->
+<!--                        <button string="แสดงตัวอย่างเอกสาร"-->
+<!--                                name="action_preview_document"-->
+<!--                                icon="fa-download"-->
+<!--                                type="object"-->
+<!--                                class="btn btn-primary btn-sm"-->
+<!--                                attrs="{'invisible':[('document_type_select', '!=', 'หนังสือภายนอก+หนังสือรับรอง')]}"-->
+<!--                                groups="" />-->
+<!--                    </div><br/>-->
+                    <div>
+                        <field name="head_officer_digital_signed" invisible="1"/>
+                        <button string="ดาวน์โหลดเอกสารลงนาม"
+                                name="action_download_signed_document"
+                                confirm="ยืนยันการดาวน์โหลดเอกสารที่ลงนามแล้วใช่หรือไม่"
+                                icon="fa-file-pdf-o"
+                                type="object"
+                                class="btn btn-info btn-sm"
+                                attrs="{'invisible':['|', '|', ('state','not in', ('done')), ('document_type_select', 'not in', ['หนังสือภายนอก+หนังสือรับรอง', 'ประกาศ', 'ระเบียบ', 'ข้อบังคับ', 'คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ', 'หนังสือรับรอง']), ('head_officer_digital_signed', '!=', True)]}"
+                                groups="" />
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+     <record model="ir.ui.view" id="document_internal_main_all_tree_inherit">
+        <field name="name">document_internal_main_all_tree_inherit</field>
+        <field name="model">document.internal.main</field>
+        <field name="inherit_id" ref="pfb_saraban.document_internal_main_all_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">speed=='4'</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="pfb_saraban.document_internal_main_all_action_list">
+        <field name="name">หนังสือภายใน/ทั้งหมด</field>
+        <field name="res_model">document.internal.main</field>
+        <!-- <field name="domain">[('setting_line_ids.status_approve', '=', '0'),('setting_line_ids.employee_id.user_id', '=', uid)]</field> -->
+        <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('pfb_saraban.document_internal_main_all_tree_view')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('pfb_saraban.document_internal_all_form_view')}),
+                        ]"/>
+        <field name="view_mode">tree,form,calendar,kanban,pivot,graph</field>
+        <field name="domain">[('secret', 'in', ['normal'])]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="pfb_saraban_addons_fix.document_internal_main_all_list_action_reset">
+        <field name="name">หนังสือภายใน/ทั้งหมด</field>
+        <field name="res_model">document.internal.main</field>
+        <!-- <field name="domain">[('setting_line_ids.status_approve', '=', '0'),('setting_line_ids.employee_id.user_id', '=', uid)]</field> -->
+        <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('pfb_saraban_addons_fix.document_internal_main_all2_tree_view_reset')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('pfb_saraban_addons_fix.document_internal_all_form_view_reset')}),
+                        ]"/>
+        <field name="view_mode">tree,form,calendar,kanban,pivot,graph</field>
+        <field name="domain">[('secret', 'in', ['normal'])]</field>
+    </record>
+
+    <record model="ir.ui.view" id="document_main_internal_need_tree_inherit">
+        <field name="name">document_main_internal_need_tree_inherit</field>
+        <field name="model">document.internal.main</field>
+        <field name="inherit_id" ref="pfb_saraban.document_main_internal_need_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">speed=='4'</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="document_internal_main_all2_tree_inherit">
+        <field name="name">document_internal_main_all2_tree_inherit</field>
+        <field name="model">document.internal.main</field>
+        <field name="inherit_id" ref="pfb_saraban.document_internal_main_all2_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">speed=='4'</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="document_internal_main_tree_inherit">
+        <field name="name">document_internal_main_tree_inherit</field>
+        <field name="model">document.internal.main</field>
+        <field name="inherit_id" ref="pfb_saraban.document_internal_main_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">speed=='4'</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="receive_document_main_tree_inherit">
+        <field name="name">receive_document_main_tree_inherit</field>
+        <field name="model">receive.document.main</field>
+        <field name="inherit_id" ref="pfb_saraban.receive_document_main_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">speed=='4'</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="receive_document_main_tree_all_sent_inherit">
+        <field name="name">receive_document_main_tree_all_sent_inherit</field>
+        <field name="model">receive.document.main</field>
+        <field name="inherit_id" ref="pfb_saraban_addons_fix.receive_document_main_tree_all_view_sent"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">speed=='4'</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="receive_document_main_need_tree_inherit">
+        <field name="name">receive_document_main_need_tree_inherit</field>
+        <field name="model">receive.document.main</field>
+        <field name="inherit_id" ref="pfb_saraban.receive_document_main_need_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">speed=='4'</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="receive_document_main_tree_all_inherit">
+        <field name="name">receive_document_main_need_tree_inherit</field>
+        <field name="model">receive.document.main</field>
+        <field name="inherit_id" ref="pfb_saraban.receive_document_main_tree_all_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">speed=='4'</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

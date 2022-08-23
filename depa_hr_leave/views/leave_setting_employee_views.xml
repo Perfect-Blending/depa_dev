@@ -1,0 +1,69 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="leave_setting_employee_list">
+      <field name="name">leave_setting_employee list</field>
+      <field name="model">leave_setting_employee</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="year"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="leave_setting_employee_form">
+      <field name="name">leave_setting_employeeForm</field>
+      <field name="model">leave_setting_employee</field>
+      <field name="arch" type="xml">
+        <form>
+            <group>
+              <field name="year" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+              <field name="is_create" invisible="1"/>
+            </group>
+            <notebook>
+              <page string='พนักงาน'>
+                <field name="employee_ids">
+                  <tree editable='bottom' limit="500">
+                      <field name="employee_id"
+                           string="ชื่อพนักงาน"
+                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                           required='1'/>
+                      <field name="sick" />
+                      <field name="personal" />
+                      <field name="vacation" />
+                      <field name="vacation_remaining" />
+                      <field name="site" />
+                      <field name="checkin" />
+                      <field name="seminar" />
+                  </tree>
+                </field>
+
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="leave_setting_employee_action_window">
+        <field name="name">กำหนดวันลาพนักงาน</field>
+        <field name="res_model">leave_setting_employee</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="leave_setting_employee_action_window_tree" model="ir.actions.act_window.view">
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="leave_setting_employee_list"/>
+        <field name="act_window_id" ref="leave_setting_employee_action_window"/>
+    </record>
+
+    <record id="leave_setting_employee_action_window_form" model="ir.actions.act_window.view">
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="leave_setting_employee_form"/>
+        <field name="act_window_id" ref="leave_setting_employee_action_window"/>
+    </record>
+
+    <!-- actions -->
+    <menuitem name="กำหนดวันลาพนักงาน"
+              id="depa_hr_leave.menu_leave_setting_employee"
+              parent="depa_hr_leave.menu_config_leave"
+              groups="group_user_depa_leave_setting"
+              action="depa_hr_leave.leave_setting_employee_action_window" />
+  </data>
+</odoo>

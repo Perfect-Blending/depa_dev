@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <record id="leave_overview_calendar" model="ir.ui.view">
+            <field name="name">leave overview calendar</field>
+            <field name="model">leave_request</field>
+            <field name="arch" type="xml">
+                <calendar string="Leave Request"
+                          date_start="date_from"
+                          date_stop="date_to"
+                          mode="month"
+                          color="requester_id"
+                          quick_add="False"
+                >
+                    <field name="requester_id"/>
+                    <field name="request_type_id"/>
+                    <field name="half_day_selection" string="กรณีลาครึ่งวัน"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="leave_request_overview_action_window">
+            <field name="name">ปฏิทินการลา</field>
+            <field name="res_model">leave_request</field>
+            <field name="view_mode">calendar,form</field>
+            <field name="domain">[('show_in_overview_calendar', '=', True), ('state', '=', 'done')]</field>
+        </record>
+
+        <record id="leave_request_overview_action_window_calendar" model="ir.actions.act_window.view">
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="leave_overview_calendar"/>
+            <field name="act_window_id" ref="leave_request_overview_action_window"/>
+        </record>
+
+        <record id="leave_request_overview_action_window_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="depa_hr_leave.leave_request_form"/>
+            <field name="act_window_id" ref="leave_request_overview_action_window"/>
+        </record>
+
+        <!-- <menuitem name="ปฏิทินการลา"
+                  sequence="1" id="depa_hr_leave.menu_leave_overview"
+                  action="depa_hr_leave.leave_request_overview_action_window"
+                  parent="depa_hr_leave.menu_depa_leave_root"/> -->
+
+    </data>
+</odoo>

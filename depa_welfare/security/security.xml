@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+
+    <record id="fw_pfb_fin_can_create_welfare" model="res.groups">
+        <field name="name">Show Menu Can Create Welfare</field>
+        <field name="comment">Allow user can create FIN100 in welfare type</field>
+        <field name="category_id" ref="fin_system.fw_pfb_fin_system_setting"/>
+    </record>
+
+</data>
+</openerp>    
+

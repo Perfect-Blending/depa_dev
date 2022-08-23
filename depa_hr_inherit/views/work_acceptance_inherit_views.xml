@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="purchase_requisition_name_form_inherit">
+            <field name="name">puchase requisition name form inherit</field>
+            <field name="model">purchase.requisition</field>
+            <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vendor_id']" position="after">
+                    <field name="requisition_work_name" string="ชื่องาน"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="work_acceptance_name_form_inherit">
+            <field name="name">work acceptance name form inherit</field>
+            <field name="model">work.acceptance</field>
+            <field name="inherit_id" ref="purchase_work_acceptance.view_work_acceptance_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='responsible_id']" position="after">
+                    <field name="employee_receive_name" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_ref']" position="after">
+                    <field name="requisition_number" readonly="1"/>
+                    <field name="requisition_work_name" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='date_receive']" position="after">
+                    <field name="date_receive_work"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_invoice_installment_inherit_filter">
+            <field name="name">account invoice installment inherit filter</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='number']" position="after">
+                    <field name="invoice_installment"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

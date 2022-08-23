@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_depa_leave_group">
+            <field name="name">depa Leave</field>
+            <field name="description">depa Leave</field>
+        </record>
+
+        <record id="group_user_depa_leave_setting" model="res.groups">
+            <field name="name">สามารถปรับตั้งค่าข้อมูลในระบบ</field>
+            <field name="comment">สามารถปรับตั้งค่าข้อมูลในระบบ</field>
+            <field name="category_id" ref="module_category_depa_leave_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="for_group_approval_depa_leave_setting" model="res.groups">
+            <field name="name">สามารถอนุมัติการลา</field>
+            <field name="comment">สามารถอนุมัติการลา</field>
+            <field name="category_id" ref="module_category_depa_leave_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="delete_leave_request_depa_leave_setting" model="res.groups">
+            <field name="name">สามารถลบคำขออนุมัติการลาได้</field>
+            <field name="comment">สามารถลบคำขออนุมัติการลา (ทุกสถานะ) ได้</field>
+            <field name="category_id" ref="module_category_depa_leave_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+
+
+    </data>
+</odoo>

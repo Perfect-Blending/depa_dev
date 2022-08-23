@@ -1,0 +1,29 @@
+<odoo>
+    <data noupdate="1">
+        <record id="leave_state_1" model="leave_request_state">
+            <field name="name">แบบร่าง</field>
+            <field name="state">draft</field>
+            <field name="active">True</field>
+        </record>
+        <record id="leave_state_2" model="leave_request_state">
+            <field name="name">รออนุมัติ</field>
+            <field name="state">sent</field>
+            <field name="active">True</field>
+        </record>
+        <record id="leave_state_3" model="leave_request_state">
+            <field name="name">อนุมัติ</field>
+            <field name="state">done</field>
+            <field name="active">True</field>
+        </record>
+        <record id="leave_state_4" model="leave_request_state">
+            <field name="name">ปฏิเสธ</field>
+            <field name="state">reject</field>
+            <field name="active">True</field>
+        </record>
+        <record id="leave_state_5" model="leave_request_state">
+            <field name="name">ยกเลิก</field>
+            <field name="state">cancel</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

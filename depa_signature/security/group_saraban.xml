@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>    
+<odoo>
+    <data noupdate="0">
+<!--        <record model="ir.module.category" id="module_category_saraban">-->
+<!--            <field name="name">ระบบสารบรรณ</field>-->
+<!--            <field name="description">ระบบสารบรรณ</field>-->
+<!--            <field name="sequence">103</field>-->
+<!--        </record>-->
+
+        <record id="group_user_digital_signature" model="res.groups">
+            <field name="name">ลงนามหนังสือภายในด้วย Digital Signature</field>
+            <field name="comment">ลงนามหนังสือภายในด้วย Digital Signature</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_digital_signature_setting" model="res.groups">
+            <field name="name">Digital Signature Setting</field>
+            <field name="comment">Digital Signature Setting</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_depa_book_document" model="res.groups">
+            <field name="name">Booking Document Number</field>
+            <field name="comment">Booking Document Number</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="group_user_document_filter" model="res.groups">
+            <field name="name">Show Document Filter</field>
+            <field name="comment">Show Document Filter</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+<!--        <record id="group_user_show_document_preview" model="res.groups">-->
+<!--            <field name="name">แสดงตัวอย่างเอกสารหนังสือลงนาม</field>-->
+<!--            <field name="comment">แสดงตัวอย่างเอกสารหนังสือลงนาม</field>-->
+<!--            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>-->
+<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        </record>-->
+    </data>
+</odoo>

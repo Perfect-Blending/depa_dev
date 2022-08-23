@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record model="ir.ui.view" id="fin_system_100_request_form_view_inherit">
+            <field name="name">fin.system.100.request.form.view.inherit</field>
+            <field name="model">fw_pfb_fin_system_100</field>
+            <field name="inherit_id" ref="fin_system.fin_system_100_request_form_view" />
+            <field name="arch" type="xml">
+                <field name="template_id" position="after">
+                    <field name="is_welfare" groups="depa_welfare.fw_pfb_fin_can_create_welfare" />
+                    <field name="fiscal_year" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" />
+                    <field name="welfare_round" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" />
+                    <field name="welfare_round_start" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" force_save="1"/>
+                    <field name="welfare_round_end" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" force_save="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_100_completed_form_view_inherit">
+            <field name="name">fin.system.100.request.form.view.inherit</field>
+            <field name="model">fw_pfb_fin_system_100</field>
+            <field name="inherit_id" ref="fin_system.fin_system_100_completed_form_view" />
+            <field name="arch" type="xml">
+                <field name="template_id" position="after">
+                    <field name="is_welfare" groups="depa_welfare.fw_pfb_fin_can_create_welfare" />
+                    <field name="fiscal_year" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" />
+                    <field name="welfare_round" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" />
+                    <field name="welfare_round_start" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" force_save="1"/>
+                    <field name="welfare_round_end" groups="depa_welfare.fw_pfb_fin_can_create_welfare" attrs="{'invisible': [('is_welfare', '=', False)]}" force_save="1"/>
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

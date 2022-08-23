@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+            <record model="ir.ui.view" id="hr_signature_setting_list">
+                <field name="name">hr signature setting list</field>
+                <field name="model">hr_employee_signature_setting</field>
+                <field name="arch" type="xml">
+                    <tree string="ตั้งค่าลายเซ็น" editable="top">
+                        <field name="employee_id"/>
+                        <field name="hash_signature"/>
+                        <field name="active"/>
+                    </tree>
+                </field>
+            </record>
+
+            <record model="ir.ui.view" id="hr_signature_setting_form">
+                <field name="name">hr signature setting form</field>
+                <field name="model">hr_employee_signature_setting</field>
+                <field name="arch"  type="xml">
+                    <form string="ตั้งค่าลายเซ็น">
+                        <field name="employee_id"/>
+                        <field name="hash_signature"/>
+                        <field name="active"/>
+                    </form>
+                </field>
+            </record>
+
+            <record model="ir.actions.act_window" id="hr_signature_setting_action_window">
+                <field name="name">ตั้งค่าลายเซ็น</field>
+                <field name="res_model">hr_employee_signature_setting</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_type">form</field>
+            </record>
+
+            <record model="ir.actions.act_window.view" id="hr_signature_setting_action_window_tree">
+                <field name="view_mode">tree</field>
+                <field name="view_id" ref="hr_signature_setting_list"/>
+                <field name="act_window_id" ref="hr_signature_setting_action_window"/>
+            </record>
+
+            <record model="ir.actions.act_window.view" id="hr_signature_setting_action_window_form">
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="hr_signature_setting_form"/>
+                <field name="act_window_id" ref="hr_signature_setting_action_window"/>
+            </record>
+
+            <menuitem name="ตั้งค่าลายเซ็น" id="menu_signature_setting" parent="hr.menu_human_resources_configuration"
+                      action="hr_signature_setting_action_window" />
+    </data>
+</odoo>

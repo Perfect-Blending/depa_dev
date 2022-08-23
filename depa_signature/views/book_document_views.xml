@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+         <record model="ir.ui.view" id="book_document_list">
+            <field name="name">Book document List</field>
+            <field name="model">book_document</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="book_document_type"/>
+                    <field name="book_name_real"/>
+                    <field name="book_date_document_real"/>
+                    <field name="employee_id"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="book_document_form">
+            <field name="name">Book document Form</field>
+            <field name="model">book_document</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_sent_book"
+                                type="object"
+                                class="oe_highlight"
+                                string="ขอจองเลข" attrs="{'invisible': [('book_name_real', '!=' , False )]}" />
+                    </header>
+                    <group>
+                        <group colspan="4" col="12">
+                            <group colspan="6">
+                                <field name="book_document_type"  force_save="1" attrs="{'readonly': [('book_name_real', '!=' , False )]}"/>
+                            </group>
+                            <group colspan="6">
+                                <field name="book_name_real" readonly="1" force_save="1" />
+                            </group>
+                            <group colspan="6">
+                                <field name="book_date_document_real" readonly="1" force_save="1" />
+                            </group>
+                            <group colspan="6">
+                                <field name="employee_id" readonly="1" force_save="1" />
+                            </group>
+
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="book_document_action_window">
+            <field name="name">จองเลขหนังสือ</field>
+            <field name="res_model">book_document</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="จองเลขหนังสือ"
+                  id="book_document_menu"
+                  parent="pfb_saraban.internal_document_menu"
+                  groups="group_user_depa_book_document"
+                  action="book_document_action_window"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,105 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="depa_welfare_round_list">
+      <field name="name">depa_welfare_rounds list</field>
+      <field name="model">depa_welfare_rounds</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="welfare_year"/>
+          <field name="welfare_year_start"/>
+          <field name="welfare_year_end"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="depa_welfare_round_form">
+      <field name="name">wdepa_welfare_rounds form</field>
+      <field name="model">depa_welfare_rounds</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <group colspan="4" col="12">
+              <field name="welfare_year" invisible="1"/>
+              <group colspan="4">
+                <field name="fiscal_year_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+              </group>
+              <group colspan="4">
+                <field name="welfare_year_start" />
+              </group>
+              <group colspan="4">
+                <field name="welfare_year_end" />
+              </group>
+            </group>
+          </group>
+          <notebook>
+            <page string='รอบการเบิกจ่าย'>
+              <field name="depa_welfare_round_lines_ids">
+                <tree editable="bottom">
+                  <field name="welfare_round"/>
+                  <field name="welfare_start"/>
+                  <field name="welfare_end"/>
+                </tree>
+              </field>
+<!--              <group class="oe_subtotal_footer oe_right">-->
+<!--                <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                  <label for="amount_total" string="Amount Total"/>-->
+<!--                </div>-->
+<!--                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>-->
+<!--                <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                  <label for="point_total" string="Point Total"/>-->
+<!--                </div>-->
+<!--                <field name="point_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>-->
+<!--              </group>-->
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="depa_welfare_round_action_window">
+      <field name="name">รอบสวัสดิการเลือกอิสระ</field>
+      <field name="res_model">depa_welfare_rounds</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="depa_welfare.action_server">
+      <field name="name">depa_welfare server</field>
+      <field name="model_id" ref="model_depa_welfare_depa_welfare"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+
+<!--    <menuitem name="depa Welfare" id="depa_welfare_menu_root"/>-->
+
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="depa_welfare.menu_1" parent="depa_welfare.menu_root"/>
+    -->
+<!--    <menuitem name="Welfare" id="depa_welfare_menu" parent="depa_welfare_menu_root"/>-->
+<!--    <menuitem name="Setting" id="depa_welfare_menu_setting" parent="depa_welfare_menu_root"/>-->
+
+    <!-- actions -->
+    <menuitem name="รอบสวัสดิการเลือกอิสระ" id="depa_welfare_round_menu" parent="depa_welfare_menu_setting"
+              action="depa_welfare_round_action_window"/>
+    <!--
+    <menuitem name="Server to list" id="depa_welfare" parent="depa_welfare.menu_2"
+              action="depa_welfare.action_server"/>
+    -->
+  </data>
+</odoo>

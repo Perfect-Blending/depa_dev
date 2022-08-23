@@ -1,0 +1,108 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="kpi_round_list">
+      <field name="name">kpi round list</field>
+      <field name="model">kpi_round_setting</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="kpi_year"/>
+          <field name="kpi_year_start"/>
+          <field name="kpi_year_end"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="kpi_round_form">
+      <field name="name">kpi round form</field>
+      <field name="model">kpi_round_setting</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <group colspan="4" col="12">
+              <field name="kpi_year" invisible="1"/>
+              <group colspan="4">
+                <field name="fiscal_year_id" string="ปีงบประมาณ" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+              </group>
+              <group colspan="4">
+                <field name="kpi_year_start" string="เริ่มต้น"/>
+              </group>
+              <group colspan="4">
+                <field name="kpi_year_end" string="สิ้นสุด"/>
+              </group>
+            </group>
+            <group>
+              <field name="show_sent_button" string="เปิดให้ส่งประเมิน"/>
+            </group>
+          </group>
+          <notebook>
+            <page string='รอบการประเมินผล'>
+              <field name="kpi_round_setting_lines_ids">
+                <tree editable="bottom">
+                  <field name="kpi_round" type="char" style="width: 200px" string="รอบการประเมิน"/>
+                  <field name="kpi_start" string="เริ่มต้น"/>
+                  <field name="kpi_end" string="สิ้นสุด"/>
+                </tree>
+              </field>
+<!--              <group class="oe_subtotal_footer oe_right">-->
+<!--                <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                  <label for="amount_total" string="Amount Total"/>-->
+<!--                </div>-->
+<!--                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>-->
+<!--                <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                  <label for="point_total" string="Point Total"/>-->
+<!--                </div>-->
+<!--                <field name="point_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>-->
+<!--              </group>-->
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="kpi_round_setting_action_window">
+      <field name="name">รอบการประเมินผล KPI</field>
+      <field name="res_model">kpi_round_setting</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="depa_welfare.action_server">
+      <field name="name">depa_welfare server</field>
+      <field name="model_id" ref="model_depa_welfare_depa_welfare"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+
+<!--    <menuitem name="depa Welfare" id="depa_welfare_menu_root"/>-->
+
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="depa_welfare.menu_1" parent="depa_welfare.menu_root"/>
+    -->
+<!--    <menuitem name="Welfare" id="depa_welfare_menu" parent="depa_welfare_menu_root"/>-->
+<!--    <menuitem name="Setting" id="depa_welfare_menu_setting" parent="depa_welfare_menu_root"/>-->
+
+    <!-- actions -->
+    <menuitem name="ตั้งค่ารอบการประเมิน KPI" id="kpi_round_setting_menu" parent="depa_hr_setting_menu"
+              action="kpi_round_setting_action_window" sequence="5"/>
+    <!--
+    <menuitem name="Server to list" id="depa_welfare" parent="depa_welfare.menu_2"
+              action="depa_welfare.action_server"/>
+    -->
+  </data>
+</odoo>

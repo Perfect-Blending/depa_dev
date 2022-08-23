@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="depa_tmi.list">
+      <field name="name">depa TMI list</field>
+      <field name="model">depa_tmi.depa_tmi</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="depa_tmi.action_window">
+      <field name="name">depa TMI window</field>
+      <field name="res_model">depa_tmi.depa_tmi</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem name="depa TMI" id="depa_tmi.menu_root" web_icon="depa_tmi,static/description/icon.png"/>
+
+    <!-- menu categories -->
+    <menuitem name="KPI Cascade" id="depa_tmi.menu_1" parent="depa_tmi.menu_root"/>
+
+    <!-- actions -->
+<!--    <menuitem name="ขออนุมัติ KPI (ติดตาม)" id="depa_tmi.menu_1_list" parent="depa_tmi.menu_1"-->
+<!--              action="depa_tmi.kpi_setting_dsm_action_window"/>-->
+<!--    <menuitem name="ขออนุมัติ KPI (ฝ่าย)" id="depa_tmi.menu_3_list" parent="depa_tmi.menu_1"-->
+<!--              action="depa_tmi.action_window"/>-->
+<!--    <menuitem name="ขออนุมัติ KPI (PM)" id="depa_tmi.menu_4_list" parent="depa_tmi.menu_1"-->
+<!--              action="depa_tmi.action_window"/>-->
+<!--    <menuitem name="รอดำเนินการ" id="depa_tmi.menu_5_list" parent="depa_tmi.menu_1"-->
+<!--              action="depa_tmi.action_window"/>-->
+
+  </data>
+</odoo>

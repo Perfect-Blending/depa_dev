@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="show_group_wizard_form" model="ir.ui.view">
+      <field name="name">Show Group Wizard</field>
+      <field name="model">show_group_wizard</field>
+      <field name="arch" type="xml">
+        <form string="แสดงผลการจัดกลุ่มของฉัน">
+             <sheet>
+                 <group>
+                     <field name="group_ids" readonly="1" nolabel="1">
+                         <tree>
+                             <field name="kpi_round_setting_id" string="ปีงบประมาณ"/>
+                             <field name="kpi_round_setting_lines_id" string="รอบการจัดกลุ่ม"/>
+                             <field name="group_name" string="กลุ่ม"/>
+                             <field name="remark" string="หมายเหตุ"/>
+                         </tree>
+                         <form>
+                             <group>
+                                 <group>
+                                    <field name="kpi_round_setting_id" string="ปีงบประมาณ" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="kpi_round_setting_lines_id" string="รอบการจัดกลุ่ม" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                 </group>
+                                 <group>
+                                    <field name="group_name" string="กลุ่ม"/>
+                                    <field name="remark" string="หมายเหตุ"/>
+                                 </group>
+                             </group>
+                         </form>
+                     </field>
+                 </group>
+             </sheet>
+            <footer>
+                <div style="text-align:center">
+                    <button string="ปิดหน้าต่าง" class="btn-secondary pull-right" special="cancel"/>
+                </div>
+            </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="show_group_wizard_action_window" model="ir.actions.act_window" >
+        <field name="name">ผลการจัดกลุ่มของฉัน</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">show_group_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="show_group_wizard_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

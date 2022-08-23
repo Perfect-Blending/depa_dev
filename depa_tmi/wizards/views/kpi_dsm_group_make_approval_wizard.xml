@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="kpi_dsm_group_make_approval_wizard_form" model="ir.ui.view">
+        <field name="name">kpi dsm approval wizard form</field>
+        <field name="model">kpi_dsm_group_make_approval_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Make Approval Wizard">
+                <sheet>
+                    <group>
+                        <field name="kpi_setting_dsm_group_id" invisible="1"/>
+                        <field name="current_state" invisible="1"/>
+                        <field name="remark"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <div style="text-align:center">
+                        <button string="อนุมัติ"
+                                class="btn-success pull-left"
+                                icon="fa-check"
+                                type="object"
+                                name="action_approve"/>
+                        <button string="ปรับแก้ไข"
+                                class="btn-default center-block"
+                                icon="fa-edit"
+                                style='text-align: center'
+                                type="object"
+                                name="action_adjustment"
+                                confirm="คุณต้องการให้มีการปรับแก้ไข KPI Cascade นี้ใช่หรือไม่"/>
+                        <button string="ปฏิเสธ"
+                                class="btn-danger pull-right"
+                                icon="fa-times"
+                                type="object"
+                                name="action_reject"
+                                confirm="คุณต้องการปฎิเสธ KPI Cascade นี้ใช่หรือไม่"/>
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="depa_tmi_dsm_group_make_approval_wizard_action_window" model="ir.actions.act_window">
+        <field name="name">kpi dsm group approval wizard window</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kpi_dsm_group_make_approval_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="kpi_dsm_group_make_approval_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

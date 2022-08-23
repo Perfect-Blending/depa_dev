@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_welfare">
+            <field name="name">ระบบเบิกสวัสดิการ</field>
+            <field name="description">ระบบเบิกสวัสดิการ</field>
+            <field name="sequence">160</field>
+        </record>
+
+        <record id="group_user_show_welfare_adjust" model="res.groups">
+            <field name="name">Show welfare adjustment</field>
+            <field name="comment">Show welfare adjustment</field>
+            <field name="category_id" ref="module_category_welfare"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_show_menu_to_approve" model="res.groups">
+            <field name="name">Show menu to approve request</field>
+            <field name="comment">Show menu to approve request</field>
+            <field name="category_id" ref="module_category_welfare"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_welfare_setting" model="res.groups">
+            <field name="name">Setting</field>
+            <field name="comment">Setting</field>
+            <field name="category_id" ref="module_category_welfare"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_welfare_flow_setting" model="res.groups">
+            <field name="name">Manage approval flow setting</field>
+            <field name="comment">Manage approval flow setting</field>
+            <field name="category_id" ref="module_category_welfare"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_welfare_point_management" model="res.groups">
+            <field name="name">สามารถจัดการ point ของผู้ใช้งาน</field>
+            <field name="comment">สามารถจัดการ point ของผู้ใช้งาน</field>
+            <field name="category_id" ref="module_category_welfare"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_welfare_types_management" model="res.groups">
+            <field name="name">สามารถจัดการข้อมูลรายการสวัสดิอิสระ</field>
+            <field name="comment">สามารถจัดการข้อมูลรายการสวัสดิอิสระ</field>
+            <field name="category_id" ref="module_category_welfare"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_welfare_request_show_all" model="res.groups">
+            <field name="name">แสดงรายการสวัสดิอิสระ (ทั้งหมด)</field>
+            <field name="comment">แสดงรายการสวัสดิอิสระ (ทั้งหมด)</field>
+            <field name="category_id" ref="module_category_welfare"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_welfare_basic_show_all" model="res.groups">
+            <field name="name">แสดงรายการสวัสดิการพื้นฐาน (ทั้งหมด)</field>
+            <field name="comment">แสดงรายการสวัสดิการพื้นฐาน (ทั้งหมด)</field>
+            <field name="category_id" ref="module_category_welfare"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_welfare_basic_can_cancel" model="res.groups">
+            <field name="name">สามารถยกเลิกสวัสดิการพื้นฐานของผู้ใช้งาน</field>
+            <field name="comment">สามารถยกเลิกสวัสดิการพื้นฐานของผู้ใช้งาน</field>
+            <field name="category_id" ref="module_category_welfare"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,88 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="depa_welfare_hr_list">
+      <field name="name">depa_welfare_hr list</field>
+      <field name="model">depa_welfare_hr</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="year"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="depa_welfare_hr_form">
+      <field name="name">depa_welfare_hr Form</field>
+      <field name="model">depa_welfare_hr</field>
+      <field name="arch" type="xml">
+        <form>
+            <header>
+             <button string="Draft Fin100" name="action_draft_fin100_wizard"  type="object" class="oe_highlight" groups="depa_welfare.group_user_welfare_point_management"/>
+          </header>
+
+            <group>
+              <field name="year" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+
+              <field name="is_create" invisible="1"/>
+<!--            <field name="gbdi"/>-->
+            </group>
+            <notebook>
+              <page string='Employee point'>
+                <field name="employee_ids">
+                  <tree editable='bottom' limit="500">
+                    <field name="employee_id"
+                           string="ชื่อพนักงาน"
+                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                           required='1'/>
+                    <field name="employee_type" string="ประเภท" readonly="1" force_save="1"/>
+                    <field name="employee_department_name" string="สังกัด" readonly="1" force_save="1"/>
+<!--                    <field name="employee_department_id" string="สังกัด"-->
+<!--                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"-->
+<!--                           readonly="1" force_save="1"/>-->
+                    <field name="point" string="คะแนน" />
+                    <field name="amount" string="จำนวนเงิน"/>
+                  </tree>
+                </field>
+                <group class="oe_subtotal_footer oe_right">
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="depa_amount_total" string="ยอดเงินรวม (depa)"/>
+                  </div>
+                  <field name="depa_amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="gbdi_amount_total" string="ยอดเงินรวม (GBDI)"/>
+                  </div>
+                  <field name="gbdi_amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_total" string="ยอดเงินรวม (ทั้งหมด)"/>
+                  </div>
+                  <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+              </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="depa_welfare_hr_action_window">
+      <field name="name">depa welfare</field>
+      <field name="res_model">depa_welfare_hr</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="กำหนด point"
+              id="depa_welfare_setting"
+              parent="depa_welfare_menu_setting"
+              action="depa_welfare_hr_action_window"
+              groups="group_user_welfare_point_management"/>
+
+<!--    <menuitem name="depa Welfare" id="depa_welfare_menu_root"/>-->
+
+<!--    <menuitem name="Setting" id="depa_welfare_menu_2" parent="depa_welfare_menu_root"/>-->
+
+<!--    <menuitem name="กำหนดค่า" id="depa_welfare_setting" parent="depa_welfare_menu_2"-->
+<!--              action="depa_welfare_hr_action_window"/>-->
+
+  </data>
+</odoo>

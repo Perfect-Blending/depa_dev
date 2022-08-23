@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+        <record id="leave_summary_list" model="ir.ui.view">
+            <field name="name">leave summary list</field>
+            <field name="model">leave_request</field>
+            <field name="arch" type="xml">
+                <tree default_order="date_from desc" string="สรุปยอดการลา" create="0" delete="0">
+                    <field name="state" invisible="1"/>
+                    <field name="requester_id"/>
+                    <field name="request_type_id"/>
+                    <field name="request_date_from"/>
+                    <field name="request_date_to"/>
+                    <field name="request_days"/>
+                    <field name="half_day_selection" string="กรณีลาครึ่งวัน"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="leave_summary_graph" model="ir.ui.view">
+            <field name="name">leave summary graph</field>
+            <field name="model">leave_request</field>
+            <field name="arch" type="xml">
+                <graph string="Leaves Summary">
+                    <field name="requester_id"/>
+                    <field name="request_days" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="leave_summary_action_window">
+            <field name="name">สรุปยอดการลา</field>
+            <field name="res_model">leave_request</field>
+            <field name="view_mode">tree,graph,form</field>
+            <field name="domain">[('state', '=', 'done')]</field>
+        </record>
+
+        <record id="leave_summary_action_window_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="leave_summary_list"/>
+            <field name="act_window_id" ref="leave_summary_action_window"/>
+        </record>
+
+        <record id="leave_summary_action_window_graph" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="leave_summary_graph"/>
+            <field name="act_window_id" ref="leave_summary_action_window"/>
+        </record>
+
+        <menuitem name="สรุปยอดการลา"
+                  sequence="5"
+                  id="depa_hr_leave.menu_leave_summary"
+                  parent="depa_hr_leave.menu_depa_leave_root"
+                  groups="group_user_depa_leave_setting"
+                  action="leave_summary_action_window"
+        />
+    </data>
+</odoo>

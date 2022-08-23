@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="fw_pfb_fin_system_fiscal_year_form_view_inherit" model="ir.ui.view">
+        <field name="name">fw.pfb.fin.system.fiscal.year.form.inherit</field>
+        <field name="model">fw_pfb_fin_system_fiscal_year</field>
+        <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_fiscal_year_form_view" />
+        <field name="arch" type="xml">
+            <field name="fiscal_year" position="after">
+                <field name="date_start" />
+                <field name="date_end" />
+            </field>
+        </field>
+    </record>
+
+
+</odoo>
+

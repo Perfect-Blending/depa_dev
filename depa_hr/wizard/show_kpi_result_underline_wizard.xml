@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="show_kpi_result_underline_wizard_form" model="ir.ui.view">
+        <field name="name">Show KPI Result Underline Wizard</field>
+        <field name="model">show_kpi_result_underline_wizard</field>
+        <field name="arch" type="xml">
+            <form string="แสดงผลการประเมินของผู้ใต้บังคับบัญชา">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="kpi_round_setting_id"
+                                   string="ปีงบประมาณ"
+                                   options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="kpi_round_setting_lines_id"
+                                   string="รอบที่"
+                                   options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="kpi_result_underline_ids" readonly="1" nolabel="1">
+                            <tree>
+                                <field name="employee_kpi_result_id" string="พนักงาน"/>
+                                <field name="department_name" string="สังกัด"/>
+                                <field name="kpi_round_setting_id" string="ปีงบประมาณ"/>
+                                <field name="kpi_round_setting_lines_id" string="รอบการประเมิน"/>
+                                <field name="kpi_main_id" string="เลขที่อ้างอิง"/>
+                                <field name="kpi_grade" string="ผลการประเมิน"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="employee_kpi_result_id" string="พนักงาน"
+                                               options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="department_name" string="สังกัด"/>
+                                    </group>
+                                    <group>
+                                        <field name="kpi_round_setting_id" string="ปีงบประมาณ"
+                                               options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="kpi_round_setting_lines_id" string="รอบการประเมิน"
+                                               options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    </group>
+                                    <group>
+                                        <field name="kpi_main_id" string="เลขที่อ้างอิง"/>
+                                        <field name="kpi_grade" string="ผลการประเมิน"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </field>
+                    </group>
+                </sheet>
+                <footer>
+                    <div style="text-align:center">
+                        <button string="ปิดหน้าต่าง" class="btn-secondary pull-right" special="cancel"/>
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="show_kpi_result_underline_wizard_action_window" model="ir.actions.act_window">
+        <field name="name">ผลการประเมินของผู้ใต้บังคับบัญชา</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">show_kpi_result_underline_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="show_kpi_result_underline_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

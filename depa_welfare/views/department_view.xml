@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pfb_view_department_form" model="ir.ui.view">
+        <field name="name">Add Custom Department on Department </field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+<!--                <field name="depa_department"/>-->
+<!--                <field name="depa_phone"/>-->
+<!--                <field name="depa_fax"/>-->
+<!--                <field name="depa_email"/>-->
+<!--                <field name="depa_document_sequence"/>-->
+                <field name="is_gbdi"/>
+            </field>
+
+        </field>
+    </record>
+
+
+</odoo>

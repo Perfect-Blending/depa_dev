@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="make_kpi_evaluate_wizard_form" model="ir.ui.view">
+      <field name="name">Evaluate confirmation wizard</field>
+      <field name="model">make_kpi_evaluate_wizard</field>
+      <field name="arch" type="xml">
+        <form string="Evaluate confirmation wizard">
+             <sheet>
+                 <group>
+                     <field name="kpi_main_id" invisible="1"/>
+                     <field name="evaluate_count" invisible="1"/>
+                     <field name="action_status" invisible="1"/>
+                     <field name="remark" required="1"/>
+                 </group>
+             </sheet>
+            <footer>
+                <div style="text-align:center">
+                    <button string="ยืนยันผลการประเมิน" class="btn-success pull-left" attrs="{'invisible': [('action_status', '=', 'adjust')]}" icon="fa-check" type="object" name="action_confirm_evaluation"/>
+                    <button string="ส่งกลับเพื่อแก้ไข" class="btn-primary pull-left" attrs="{'invisible': [('action_status', '=', 'confirm')]}" icon="fa-undo" type="object" name="action_adjust_evaluation"/>
+                    <button string="ยกเลิก" class="btn-secondary pull-right" special="cancel"/>
+                </div>
+            </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="make_kpi_evaluate_wizard_action_window" model="ir.actions.act_window" >
+        <field name="name">Evaluate confirmation wizard window</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">make_kpi_evaluate_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="make_kpi_evaluate_wizard_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

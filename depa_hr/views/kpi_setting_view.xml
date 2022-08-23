@@ -1,0 +1,120 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="kpi_setting_list">
+            <field name="name">KPI Setting list</field>
+            <field name="model">kpi_setting</field>
+            <field name="arch" type="xml">
+                <tree string="KPI Setting List">
+                    <field name="kpi_year"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="kpi_setting_form">
+            <field name="name">KPI Setting form</field>
+            <field name="model">kpi_setting</field>
+            <field name="arch" type="xml">
+                <form string="KPI Setting Form">
+                    <sheet>
+                        <group>
+                            <field name="kpi_year"
+                                   options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        </group>
+                        <notebook>
+                            <page string="KPI Lines">
+                                <field name="kpi_setting_lines_ids">
+                                    <tree>
+                                        <field name="kpi_id"/>
+                                        <field name="kpi_name"/>
+                                        <field name="kpi_target"/>
+                                        <field name="kpi_unit"/>
+                                        <field style="text-align:center" name="active"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="kpi_id" required="1"/>
+                                            <field name="kpi_name" required="1"/>
+                                        </group>
+                                        <group>
+                                            <group colspan="6" col="12">
+                                                <group colspan="6">
+                                                    <field name="kpi_target"/>
+                                                </group>
+                                                <group colspan="6">
+                                                    <field name="kpi_unit"/>
+                                                </group>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <group colspan="6" col="12">
+                                                <group colspan="6">
+                                                    <field name="kpi_type"/>
+                                                </group>
+                                                <group colspan="6">
+                                                    <field name="kpi_source"/>
+                                                </group>
+                                            </group>
+                                            <group>
+                                                <field name="active"/>
+                                            </group>
+                                        </group>
+                                        <notebook>
+                                            <page string="Group">
+                                                <field name="kpi_setting_group_lines_ids">
+                                                    <tree>
+                                                        <field name="kpi_group"/>
+                                                        <field name="kpi_weight"/>
+                                                        <field name="level"/>
+                                                    </tree>
+                                                    <form>
+                                                        <group>
+                                                            <group>
+                                                                <field name="kpi_group"/>
+                                                            </group>
+                                                            <group>
+                                                                <field name="kpi_weight"/>
+                                                            </group>
+                                                        </group>
+                                                        <group>
+                                                            <group>
+                                                                <field name="level"/>
+                                                            </group>
+                                                            <group>
+                                                                <field name="kpi_unit"/>
+                                                            </group>
+                                                        </group>
+                                                    </form>
+                                                </field>
+                                            </page>
+                                        </notebook>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="kpi_setting_action_window">
+            <field name="name">KPI Setting window</field>
+            <field name="res_model">kpi_setting</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="child_kpi_setting_action_window_tree" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="kpi_setting_list"/>
+            <field name="act_window_id" ref="kpi_setting_action_window"/>
+        </record>
+
+        <record id="child_kpi_setting_action_window_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="kpi_setting_form"/>
+            <field name="act_window_id" ref="kpi_setting_action_window"/>
+        </record>
+
+        <menuitem name="ตั้งค่าข้อมูล KPI Master" id="kpi_setting_menu" parent="depa_hr_setting_menu"
+                  action="kpi_setting_action_window" sequence="1"/>
+    </data>
+</odoo>

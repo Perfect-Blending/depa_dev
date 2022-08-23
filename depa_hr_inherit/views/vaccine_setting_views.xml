@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="vaccine_setting_list">
+            <field name="name">Vaccine Setting list</field>
+            <field name="model">vaccine_setting</field>
+            <field name="arch" type="xml">
+                <tree string="Vaccine Setting list">
+                    <field name="vaccine_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="vaccine_setting_form">
+            <field name="name">Vaccine Setting form</field>
+            <field name="model">vaccine_setting</field>
+            <field name="arch" type="xml">
+                <form string="Vaccine Setting Form">
+                    <sheet>
+                        <group>
+                            <field name="vaccine_name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="vaccine_setting_action_window">
+            <field name="name">Vaccine Setting window</field>
+            <field name="res_model">vaccine_setting</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem name="กำหนด Vaccine" id="menu_vaccine_setting" parent="hr.menu_human_resources_configuration"
+                      action="vaccine_setting_action_window" />
+
+    </data>
+</odoo>

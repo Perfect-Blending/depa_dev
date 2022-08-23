@@ -1,0 +1,43 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="welfare_state_list">
+      <field name="name">welfare state list</field>
+      <field name="model">depa_welfare_state_setting</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="code"/>
+          <field name="name"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="welfare_state_form">
+      <field name="name">welfare state form</field>
+      <field name="model">depa_welfare_state_setting</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="code"/>
+            <field name="name"/>
+            <field name="active"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="welfare_state_action_window">
+      <field name="name">welfare state window</field>
+      <field name="res_model">depa_welfare_state_setting</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">['|', ('active', '=', True), ('active', '!=', True)]</field>
+    </record>
+
+    <menuitem name="State Setting" id="welfare_state_manage" parent="depa_welfare_menu_setting"
+              action="welfare_state_action_window" groups="group_user_welfare_flow_setting"/>
+
+  </data>
+</odoo>

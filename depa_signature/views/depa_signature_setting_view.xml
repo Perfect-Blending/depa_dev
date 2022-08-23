@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="depa_signature_settings_form">
+            <field name="name">depa_signature_settings_form</field>
+            <field name="model">depa_signature_setting</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Apply" name="apply" type="object" class="oe_highlight" groups="depa_signature.group_user_digital_signature_setting"/>
+                        <button string="Cancel" type="object" special="cancel" class="oe_link" groups="depa_signature.group_user_digital_signature_setting"/>
+                    </header>
+                    <sheet>
+                        <separator string="ตั้งค่าสำหรับ Digital Signature"/>
+                        <group groups="depa_signature.group_user_digital_signature_setting">
+                            <group>
+                                <field name="url_endpoint"/>
+                            </group>
+                            <group>
+                                <field name="cert_path_file"/>
+                            </group>
+                        </group>
+                        <group colspan="4" col="12" groups="depa_signature.group_user_digital_signature_setting">
+                            <group colspan="4">
+                                <field name="email_to_draft"/>
+                            </group>
+                            <group colspan="4">
+                                <field name="email_credential" password="True"/>
+                            </group>
+                            <group colspan="4">
+                                <field name="cert_passphrase" password="True"/>
+                            </group>
+                        </group>
+                        <div>
+                            <separator string="Digital Signature Employee" groups="depa_signature.group_user_digital_signature_setting"/>
+                            <field name="depa_signature_setting_ids" groups="depa_signature.group_user_digital_signature_setting">
+                                <tree editable="bottom" delete="0">
+                                    <field name="otp_default"/>
+                                    <field name="employee_id"
+                                           options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="cad_password" style="width: 200px;" password="True"/>
+                                    <field name="disable"/>
+                                    <field name="destroy"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="depa_signature_setting_action">
+            <field name="name">Digital Signature Settings</field>
+            <field name="res_model">depa_signature_setting</field>
+            <field name="view_id" ref="depa_signature_settings_form"/>
+            <field name="view_type">form</field>
+            <field name="target">inline</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem name="Signature Settings"
+                  id="depa_signature_setting_menu"
+                  parent="pfb_saraban.configuration_menu"
+                  sequence="35"
+                  action="depa_signature_setting_action"
+                  groups="depa_signature.group_user_digital_signature_setting"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,171 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="welfare_basic_list">
+            <field name="name">Welfare Basic list</field>
+            <field name="model">depa_welfare_basic_setting</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="year"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="welfare_basic_form">
+            <field name="name">Welfare Basic form</field>
+            <field name="model">depa_welfare_basic_setting</field>
+            <field name="arch" type="xml">
+                <form string="สวัสดิการพื้นฐาน">
+                    <sheet>
+                        <group colspan="4" col="12">
+                            <group colspan="4">
+                                <field name="year"
+                                       options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            </group>
+                            <group colspan="4">
+                                <field name="start_date"/>
+                            </group>
+                            <group colspan="4">
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="show_sent_basic_button" />
+                        </group>
+                        <notebook>
+                            <page string='แผนประกันชีวิต A'>
+                                <div>
+                                    <separator string="รายการ" style="font-size:18px;"/>
+                                    <field name="life_insurance_lines_ids">
+                                        <tree>
+                                            <field name="sequence" widget="handle"/>
+                                            <field name="life_insurance_name"/>
+                                            <field name="life_insurance_amount"/>
+                                            <field name="life_insurance_point"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group colspan="6">
+                                                    <field name="life_insurance_name"/>
+                                                </group>
+                                                <group>
+                                                    <field name="life_insurance_amount"/>
+                                                </group>
+                                                <group>
+                                                    <field name="life_insurance_point"/>
+                                                </group>
+                                                <group>
+                                                    <field name="life_from_ages"/>
+                                                </group>
+                                                <group>
+                                                    <field name="life_to_ages"/>
+                                                </group>
+                                            </group>
+
+                                            <page string='ความคุ้มครอง'>
+                                                <div>
+                                                    <separator string="ความคุ้มครอง" style="font-size:18px;"/>
+                                                    <field name="life_insurance_desc_lines_ids">
+                                                        <tree editable='bottom'>
+                                                            <field name="life_insurance_desc"/>
+                                                            <field name="life_insurance_package"/>
+                                                        </tree>
+                                                    </field>
+                                                </div>
+                                            </page>
+                                        </form>
+                                    </field>
+                                </div>
+                            </page>
+                            <page string='แผนประกันสุขภาพ B'>
+                                <div>
+                                    <separator string="รายการ" style="font-size:18px;"/>
+                                    <field name="health_insurance_lines_ids">
+                                        <tree>
+                                            <field name="sequence" widget="handle"/>
+                                            <field name="health_insurance_name"/>
+                                            <field name="health_insurance_amount"/>
+                                            <field name="health_insurance_point"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group colspan="6">
+                                                    <field name="health_insurance_name"/>
+
+                                                </group>
+
+                                                <group>
+                                                    <field name="health_insurance_amount"/>
+
+                                                </group>
+
+                                                <group>
+                                                    <field name="health_insurance_point"/>
+                                                </group>
+                                                <group>
+                                                    <field name="health_from_ages"/>
+                                                </group>
+                                                <group>
+                                                    <field name="health_to_ages"/>
+                                                </group>
+                                                <group>
+                                                    <field name="disable_employee"/>
+                                                </group>
+
+                                            </group>
+                                            <page string='ความคุ้มครอง'>
+                                                <div>
+                                                    <separator string="ความคุ้มครอง" style="font-size:18px;"/>
+                                                    <field name="health_insurance_desc_lines_ids">
+                                                        <tree editable='bottom'>
+                                                            <field name="health_insurance_desc"/>
+                                                            <field name="health_insurance_package"/>
+                                                        </tree>
+                                                    </field>
+                                                </div>
+                                            </page>
+                                        </form>
+                                    </field>
+                                </div>
+                            </page>
+                            <page string='เอกสารผู้รับผลประโยชน์'>
+                                <div>
+                                    <separator string="เอกสารแนบ" style="font-size:18px;"/>
+                                    <field name="basic_welfare_attachment_lines_ids">
+                                        <tree>
+                                            <field name="name"/>
+                                            <field name="basic_attachment_ids" widget="many2many_binary"/>
+                                            <field name="active"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="basic_attachment_ids" widget="many2many_binary"/>
+                                                <field name="active"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="welfare_basic_action_window">
+            <field name="name">Welfare Basic window</field>
+            <field name="res_model">depa_welfare_basic_setting</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="สวัสดิการพื้นฐาน"
+                  id="welfare_ิbasic_setting"
+                  parent="depa_welfare_menu_setting"
+                  action="welfare_basic_action_window"
+                  sequence="1"/>
+
+
+    </data>
+</odoo>

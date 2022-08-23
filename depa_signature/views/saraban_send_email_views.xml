@@ -1,0 +1,91 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="saraban_send_email_list">
+            <field name="name">Saraban Email List</field>
+            <field name="model">saraban_send_email</field>
+            <field name="arch" type="xml">
+                <tree create="0" default_order="sequence_name desc">
+                    <field name="sequence_name" string="เลขที่อ้างอิง"/>
+                    <field name="real_name" string="เลขที่หนังสือ"/>
+                    <field name="name"/>
+                    <field name="destination_email"/>
+                    <field name="sent_time"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="saraban_send_email_form">
+            <field name="name">Saraban Email Form</field>
+            <field name="model">saraban_send_email</field>
+            <field name="arch" type="xml">
+                <form create="0">
+                    <header>
+                        <button string="ส่งอีเมล"
+                                name="send_email_action"
+                                icon="fa-paper-plane"
+                                states="draft"
+                                type="object"
+                                confirm="ต้องการส่ง Email หนังสือภายในของคุณไปยังปลายทางใช่หรือไม่"
+                                class="oe_highlight"/>
+                        <button string="ปรับเป็นฉบับร่าง"
+                                name="reset_to_draft"
+                                icon="fa-repeat"
+                                states="sent"
+                                type="object"
+                                confirm="ต้องการเปลี่ยนเอกสารนี้ให้เป็นฉบับร่างใช่หรือไม่"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group colspan="4" col="12">
+                                <group colspan="12">
+                                    <field name="source_email" readonly="1" force_save="1"/>
+                                </group>
+                                <group colspan="12">
+                                    <field name="destination_email" required="1" attrs="{'readonly': [('state', 'in', ['sent'])]}"/>
+                                </group>
+                                <group colspan="12">
+                                    <field name="cc_email" required="0" attrs="{'readonly': [('state', 'in', ['sent'])]}"/>
+                                </group>
+                                <group colspan="12">
+                                    <field name="name" required="1" attrs="{'readonly': [('state', 'in', ['sent'])]}"/>
+                                </group>
+                                <group colspan="12">
+                                    <field name="body" widget="html" required="1" attrs="{'readonly': [('state', 'in', ['sent'])]}"/>
+                                </group>
+                                <group colspan="12">
+                                    <field name="attachment_ids" widget="many2many_binary" required="1" attrs="{'readonly': [('state', 'in', ['sent'])]}"/>
+                                </group>
+                                <group colspan="12">
+                                    <field name="sent_time" readonly="1" force_save="1"/>
+                                </group>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="saraban_send_email_action_window">
+            <field name="name">Email หนังสือภายใน</field>
+            <field name="res_model">saraban_send_email</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('email_owner_id', '=', uid)]</field>
+        </record>
+
+        <menuitem name="ส่ง Email หนังสือภายใน"
+                  id="saraban_send_email_menu"
+                  parent="pfb_saraban.internal_document_menu"
+                  groups=""
+                  action="saraban_send_email_action_window"/>
+
+    </data>
+</odoo>

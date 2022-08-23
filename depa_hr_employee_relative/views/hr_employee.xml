@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--
+      Copyright (C) 2018 Brainbean Apps (https://brainbeanapps.com)
+      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+    -->
+
+    <record id="hr_employee_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.relatives</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']" position="inside">
+                <label for="emp_code" class="oe_edit_only"/>
+                <h1>
+                    <field name="emp_code" placeholder="Employee's Code" required="True"/>
+                </h1>
+            </xpath>
+            <xpath expr="//page[@name='public']//field[@name='work_phone']" position="after">
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="pass_probation_date" />
+            </xpath>
+            <xpath expr="//page[@name='personal_information']//field[@name='country_id']" position="before">
+                <field name="emp_title_name"/>
+            </xpath>
+            <field name="spouse_complete_name" position="replace"/>
+            <field name="spouse_birthdate" position="replace"/>
+            <field name="children" position="replace"/>
+            <xpath expr="//notebook" position="inside">
+                <page string="Relatives" groups="hr.group_hr_user">
+                    <field name="relative_ids" nolabel="1"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

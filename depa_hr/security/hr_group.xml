@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_depa_hr">
+            <field name="name">depa HR</field>
+            <field name="description">depa HR</field>
+            <field name="sequence">180</field>
+        </record>
+
+        <record id="group_user_depa_hr_setting" model="res.groups">
+            <field name="name">สามารถปรับตั้งค่าข้อมูลในระบบ</field>
+            <field name="comment">สามารถปรับตั้งค่าข้อมูลในระบบ</field>
+            <field name="category_id" ref="module_category_depa_hr"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_depa_hr_show_kpi_all" model="res.groups">
+            <field name="name">แสดงรายการผลการประเมิน KPI (ทั้งหมด)</field>
+            <field name="comment">แสดงรายการผลการประเมิน KPI (ทั้งหมด)</field>
+            <field name="category_id" ref="module_category_depa_hr"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_depa_hr_reset_to_evaluating" model="res.groups">
+            <field name="name">สามารถส่งเอกสารกลับไปให้ผู้ประเมินลำดับสุดท้าย</field>
+            <field name="comment">สามารถส่งเอกสารกลับไปให้ผู้ประเมินลำดับสุดท้าย</field>
+            <field name="category_id" ref="module_category_depa_hr"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_user_depa_hr_show_result_underline" model="res.groups">
+            <field name="name">แสดงผลการประเมินของผู้ใต้บังคับบัญชา</field>
+            <field name="comment">แสดงผลการประเมินของผู้ใต้บังคับบัญชา</field>
+            <field name="category_id" ref="module_category_depa_hr"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

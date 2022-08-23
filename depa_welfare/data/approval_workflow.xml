@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="welfare_workflow" model="depa_welfare_flow_setting">
+            <field name="name">Approval Workflow (Default)</field>
+            <field name="is_used">False</field>
+            <field name="active">True</field>
+        </record>
+        <record id="workflow_process_setting_1" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">1</field>
+            <field name="state">1</field>
+        </record>
+        <record id="workflow_process_setting_2" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">2</field>
+            <field name="state">13</field>
+        </record>
+        <record id="workflow_process_setting_3" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">3</field>
+            <field name="state">3</field>
+        </record>
+        <record id="workflow_process_setting_4" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">4</field>
+            <field name="state">4</field>
+        </record>
+        <record id="workflow_process_setting_5" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">5</field>
+            <field name="state">5</field>
+        </record>
+        <record id="workflow_process_setting_6" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">6</field>
+            <field name="state">6</field>
+        </record>
+        <record id="workflow_process_setting_7" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">7</field>
+            <field name="state">7</field>
+        </record>
+        <record id="workflow_process_setting_8" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">8</field>
+            <field name="state">9</field>
+        </record>
+        <record id="workflow_process_setting_9" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">9</field>
+            <field name="state">10</field>
+        </record>
+        <record id="workflow_process_setting_10" model="workflow_process_setting">
+            <field name="workflow_process_id" ref="welfare_workflow" />
+            <field name="step">10</field>
+            <field name="state">12</field>
+        </record>
+    </data>
+</odoo>

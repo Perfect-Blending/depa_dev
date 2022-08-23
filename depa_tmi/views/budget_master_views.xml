@@ -1,0 +1,116 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="tmi_budget_master_list">
+            <field name="name">Budget Master List</field>
+            <field name="model">budget_master</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="fiscal_year"/>
+                    <field name="note"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="tmi_budget_master_form">
+            <field name="name">Budget Master Form</field>
+            <field name="model">budget_master</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group colspan="4" col="12">
+                                <group colspan="6">
+                                    <field name="fiscal_year"
+                                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                </group>
+                                <group colspan="6">
+                                    <field name="note"/>
+                                </group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='รายการงบประมาณ'>
+                                <field name="budget_master_lines_ids">
+                                    <tree>
+                                        <field name="budget_master_fiscal_year"/>
+                                        <field name="projects_and_plan"/>
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                        <field name="budget"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group colspan="4" col="12">
+                                                <field name="budget_master_fiscal_year" invisible="1"/>
+                                                <group colspan="6">
+                                                    <field name="projects_and_plan"
+                                                           required="1"
+                                                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                                </group>
+                                                <group colspan="6">
+                                                    <field name="code" readonly="1" force_save="1"/>
+                                                </group>
+                                            </group>
+                                            <group colspan="4" col="12">
+                                                <group colspan="6">
+                                                    <field name="name" readonly="1" force_save="1"/>
+                                                </group>
+                                                <group colspan="6">
+                                                    <field name="project_type" readonly="1" force_save="1"/>
+                                                </group>
+                                            </group>
+                                            <group colspan="4" col="12">
+                                                <group colspan="6">
+                                                    <field name="budget" required="1"/>
+                                                </group>
+                                                <group colspan="6">
+                                                    <field name="host_department_id"
+                                                           required="1"
+                                                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+<!--                                                    <field name="budget_manager"-->
+<!--                                                           readonly="1"-->
+<!--                                                           force_save="1"-->
+<!--                                                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>-->
+                                                </group>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="depa_tmi.budget_master_action_window">
+            <field name="name">ข้อมูลงบประมาณ</field>
+            <field name="res_model">budget_master</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="tmi_budget_master_action_window_tree" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="tmi_budget_master_list"/>
+            <field name="act_window_id" ref="depa_tmi.budget_master_action_window"/>
+        </record>
+
+        <record id="tmi_budget_master_action_window_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tmi_budget_master_form"/>
+            <field name="act_window_id" ref="depa_tmi.budget_master_action_window"/>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="Budget Master"
+                  id="depa_tmi.menu_budget_master"
+                  parent="depa_tmi.menu_config"
+                  groups="group_user_depa_tmi_setting"
+                  action="depa_tmi.budget_master_action_window"/>
+
+    </data>
+</odoo>

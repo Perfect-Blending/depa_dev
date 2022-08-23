@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record model="ir.ui.view" id="fin_system_201_request_form_view_inherit">
+            <field name="name">fin.system.201.request.form.view.inherit</field>
+            <field name="model">fw_pfb_fin_system_201</field>
+            <field name="inherit_id" ref="fin_system.fin_system_201_request_form_view" />
+            <field name="arch" type="xml">
+                <field name="reference" position="after">
+                    <field name="is_welfare" groups="" invisible="1"/>
+                    <field name="depa_welfare_id" groups="" attrs="{'invisible': [('is_welfare', '=', False)]}" readonly="1" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_201_completed_form_view_inherit">
+            <field name="name">fin.system.201.completed.form.view.inherit</field>
+            <field name="model">fw_pfb_fin_system_201</field>
+            <field name="inherit_id" ref="fin_system.fin_system_201_completed_form_view" />
+            <field name="arch" type="xml">
+                <field name="reference" position="after">
+                    <field name="is_welfare" groups="" invisible="1"/>
+                    <field name="depa_welfare_id" groups="" attrs="{'invisible': [('is_welfare', '=', False)]}" readonly="1" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_201_all_fin_form_view_inherit">
+            <field name="name">fin.system.201.all.form.view.inherit</field>
+            <field name="model">fw_pfb_fin_system_201</field>
+            <field name="inherit_id" ref="fin_system.fin_system_201_all_fin_form_view" />
+            <field name="arch" type="xml">
+                <field name="reference" position="after">
+                    <field name="is_welfare" groups="" invisible="1"/>
+                    <field name="depa_welfare_id" groups="" attrs="{'invisible': [('is_welfare', '=', False)]}" readonly="1" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

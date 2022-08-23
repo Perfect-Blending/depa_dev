@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="source_master_list">
+            <field name="name">Source Master List</field>
+            <field name="model">source_master</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="source_master_form">
+            <field name="name">Source Master Form</field>
+            <field name="model">source_master</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group colspan="4" col="12">
+                                <group colspan="12">
+                                    <field name="name"/>
+                                </group>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="depa_tmi.source_master_action_window">
+            <field name="name">ที่มางบประมาณ</field>
+            <field name="res_model">source_master</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="source_master_action_window_tree" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="source_master_list"/>
+            <field name="act_window_id" ref="depa_tmi.source_master_action_window"/>
+        </record>
+
+        <record id="source_master_action_window_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="source_master_form"/>
+            <field name="act_window_id" ref="depa_tmi.source_master_action_window"/>
+        </record>
+
+        <!-- actions -->
+        <menuitem name="Source Master"
+                  id="depa_tmi.menu_source_master"
+                  parent="depa_tmi.menu_config"
+                  groups="group_user_depa_tmi_setting"
+                  action="depa_tmi.source_master_action_window"/>
+
+    </data>
+</odoo>

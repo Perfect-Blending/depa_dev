@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="make_approval_signature_wizard_view_form_inherit" model="ir.ui.view">
+        <field name="name">make.approval.signature.wizard.form.inherit</field>
+        <field name="model">make.approval.wizard</field>
+        <field name="inherit_id" ref="pfb_saraban.make_approval_wizard_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//footer" position="before">
+                <field name="doc_type" invisible="1"/>
+                <group string="Signature" col="1" colspan="3" attrs="{'invisible': [('is_add_or_change', '=', True)]}" groups="depa_signature.group_user_digital_signature">
+                        <group>
+                            <field name="is_approver_change" invisible="1"/>
+                            <field name="sign_method" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="sign" widget="signature" attrs="{'invisible': [('sign_method', '=', 'img')]}"/>
+                        </group>
+                        <group>
+                            <field name="img" widget="image" width="200px" attrs="{'invisible': [('sign_method', '=', 'sign')]}"/>
+                        </group>
+                        <group col="2">
+                            <field name="sign_otp_temp" invisible="1"/>
+                            <field name="sign_auth" invisible="1"/>
+<!--                            <group>-->
+<!--                                <field name="cert_passphrase" password="True" attrs="{'invisible': [('sign_auth', '=', True)], 'required': [('sign_auth', '!=', True)]}" groups="depa_signature.group_user_digital_signature"/>-->
+<!--                            </group>-->
+                            <group>
+                                <label for="sign_otp" attrs="{'invisible': [('sign_auth', '=', True)]}"/>
+                                <div class="o_row" attrs="{'invisible': [('sign_auth', '=', True)]}">
+                                    <field name="sign_otp"
+                                           attrs="{'invisible': [('sign_auth', '=', True)], 'required': [('sign_auth', '!=', True)]}"
+                                           groups="depa_signature.group_user_digital_signature"/>
+                                    <label for="action_request_otp_button" class="btn btn-primary btn-sm" />
+                                    <field name="action_request_otp_button" invisible="1"/>
+                                </div>
+                            </group>
+                        </group>
+                </group>
+            </xpath>
+            <xpath expr="//footer" position="replace">
+                <footer attrs="{'invisible': [('is_add_or_change', '=', True)]}">
+                    <div style="display:flex; justify-content: space-between;" class="approver_button">
+                        <button string="Approve" name="action_approve_signature" type="object" class="btn-success"/>
+                        <button string="Discard" class="btn-secondary" special="cancel"/>
+                        <button string="Reject " class="btn-danger" type="object" name="action_reject" confirm="Are you sure you want to do this?"
+                            attrs="{'invisible': [('approve_type', '!=', 'require')]}"/>
+                    </div>
+                    <script>
+                        $(function(){
+                            var invisible_button_count = 0;
+                            $('.approver_button button').each(function(){
+                                if($(this).hasClass('o_invisible_modifier')) {
+                                    invisible_button_count += 1;
+                                }
+                            });
+                            if(invisible_button_count == 1){
+                                $('.approver_button').css('width', '50%');
+                            }
+                        })
+                    </script>
+                </footer>
+            </xpath>
+        </field>
+    </record>
+</odoo>

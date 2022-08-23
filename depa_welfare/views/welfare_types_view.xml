@@ -1,0 +1,71 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="welfare_types_list">
+      <field name="name">welfare types list</field>
+      <field name="model">depa_welfare_types</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="limit_point"/>
+          <field name="is_half_full"/>
+          <field name="full_multiply"/>
+<!--          <field name="half_multiply"/>-->
+          <field name="for_family"/>
+          <field name="is_depa_only"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="welfare_types_form">
+      <field name="name">welfare types form</field>
+      <field name="model">depa_welfare_types</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name"/>
+            <field name="limit_point"/>
+            <field name="limit_amount"/>
+            <field name="more_one_items"/>
+  <!--          <field name="half_multiply"/>-->
+            <field name="is_half_full"/>
+            <field name="full_multiply" attrs="{'invisible': [('is_half_full','!=', True)], 'required':[('is_half_full','=', True)]}" />
+            <field name="is_depa_only"/>
+            <field name="for_family"/>
+            <field name="family_relation" attrs="{'invisible': [('for_family','!=', True)], 'required':[('for_family','=', True)]}"/>
+            <field name="family_age" attrs="{'invisible': [('for_family','!=', True)], 'required':[('for_family','=', True)]}"/>
+            <field name="family_age_from" attrs="{'invisible': [('family_age','!=', True)], 'required':[('family_age','=', True)]}"/>
+            <field name="family_age_to" attrs="{'invisible': [('family_age','!=', True)], 'required':[('family_age','=', True)]}"/>
+            <field name="active"/>
+          </group>
+          <notebook>
+              <page string='Things in types'>
+                <field name="depa_welfare_type_lines_ids">
+                  <tree editable='bottom'>
+                    <field name="name" required='1'/>
+                    <field name="active" required='1' />
+                  </tree>
+                </field>
+              </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="welfare_types_action_window">
+      <field name="name">welfare types window</field>
+      <field name="res_model">depa_welfare_types</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">['|', ('active', '=', True), ('active', '!=', True)]</field>
+    </record>
+
+    <menuitem name="สวัสดิการเลือกอิสระ" id="welfare_types_manage"
+              parent="depa_welfare_menu_setting"
+              groups="depa_welfare.group_user_welfare_types_management"
+              action="welfare_types_action_window"/>
+
+  </data>
+</odoo>

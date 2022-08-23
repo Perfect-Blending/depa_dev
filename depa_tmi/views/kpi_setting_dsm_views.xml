@@ -1,0 +1,689 @@
+<odoo>
+    <data>
+        <!-- for user request -->
+        <record model="ir.ui.view" id="tmi_kpi_setting_dsm_list">
+            <field name="name">KPI Setting dsm List</field>
+            <field name="model">kpi_setting_dsm</field>
+            <field name="arch" type="xml">
+                <tree string="แบบขออนุมัติ KPI Cascade">
+                    <field name="fiscal_year"/>
+                    <field name="kpi_weight_total"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="tmi_kpi_setting_dsm_form">
+            <field name="name">KPI Setting dsm Form</field>
+            <field name="model">kpi_setting_dsm</field>
+            <field name="arch" type="xml">
+                <form string="แบบขออนุมัติ KPI Cascade">
+                    <header>
+                        <button name="action_sent_kpi_to_approve"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible': [('state', 'not in', ('draft', 'adjust'))]}"
+                                string="ส่งขออนุมัติ KPI Cascade"/>
+                        <field name="approve_count" invisible="1"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <group colspan="4" col="12">
+                            <group colspan="12">
+                                <field name="fiscal_year"
+                                       readonly="1"
+                                       force_save="1"
+                                       options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            </group>
+                        </group>
+                    </group>
+                    <group colspan="4" col="12">
+                        <group colspan="6">
+                            <div t-if="pages" class="table-responsive" style="padding-right: 50px">
+
+                                <field name="department_ids">
+                                     <tree editable='bottom' create="0" delete="0">
+                                          <field name="department_id"
+                                               string="ชื่อกลุ่มงาน"
+                                               options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                                               required='1' readonly="1"/>
+                                         <field name="group_weight_total"/>
+                                     </tree>
+
+
+                                </field>
+<!--                                <table class="table table-hover">-->
+<!--                                    <thead>-->
+<!--                                        <tr>-->
+<!--                                            <th></th>-->
+<!--                                            <th>ค่าน้ำหนัก</th>-->
+<!--                                        </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานเศรษฐกิจดิจิทัล</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="DE"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานสังคมและกำลังคนดิจิทัล</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="SM"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานโครงการพิเศษ</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="DI"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานยุทธศาสตร์และบริหาร</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="VP"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานบริหารสำนักงาน</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="EP"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานกิจการสาขา</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="DB"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>GBDi</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="GBDi"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>-->
+<!--                                                <h4 class="text-info">ค่าน้ำหนักรวม</h4>-->
+<!--                                            </td>-->
+<!--                                            <td>-->
+<!--                                                <field name="group_weight_total" class="text-info"-->
+<!--                                                       style="font-size:13pt ! important;"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+
+<!--                                </table>-->
+                            </div>
+
+                        </group>
+                        <group colspan="6">
+                            <div t-if="pages" class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>ค่าน้ำหนัก</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Financial (F)</td>
+                                            <td>
+                                                <field name="financial"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customer (C)</td>
+                                            <td>
+                                                <field name="customer"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Internal (I)</td>
+                                            <td>
+                                                <field name="internal"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Learning (L)</td>
+                                            <td>
+                                                <field name="learning"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string='Cascade KPI'>
+                            <field name="kpi_setting_dsm_lines_ids"
+                                   attrs="{'readonly': [('state', 'not in', ('draft', 'adjust'))]}">
+                                <tree create="false" delete="false">
+                                    <field name="kpi_bsc"/>
+                                    <field name="kpi_code"/>
+                                    <field name="kpi_name"/>
+                                    <field name="kpi_weight"/>
+                                    <field name="weight_total" invisible="1"/>
+                                    <field name="kpi_status"/>
+                                    <field name="is_validated"
+                                           attrs="{'column_invisible': [('parent.state', 'in', ('draft'))]}"/>
+                                    <field name="kpi_definition" invisible="1"/>
+                                    <field name="kpi_calculate" invisible="1"/>
+                                </tree>
+                                <form create="false" edit="false" delete="false">
+                                    <group>
+                                        <group colspan="4" col="12">
+                                            <group colspan="6">
+                                                <field name="kpi_name" readonly="1" force_save="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="kpi_weight" readonly="1" force_save="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="kpi_budget" readonly="1" force_save="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="kpi_calculate"
+                                                       widget="radio"
+                                                       attrs="{'readonly': [('is_validated', '=', True)]}"
+                                                       required="1"/>
+                                            </group>
+                                            <group colspan="12">
+                                                <field name="kpi_definition"
+                                                       attrs="{'readonly': [('is_validated', '=', True)]}"
+                                                       required="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="kpi_status" invisible="1"/>
+                                                <field name="is_done"
+                                                       attrs="{'readonly': [('is_validated', '=', True)]}"
+                                                       force_save="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="is_validated"
+                                                       attrs="{'invisible': [('parent.state', 'in', ('draft'))]}"
+                                                       readonly="1" force_save="1"/>
+                                            </group>
+                                        </group>
+                                    </group>
+                                    <field name="kpi_master_target_lines_ids" readonly="1" force_save="1">
+                                        <tree create="0" delete="0" edit="0">
+                                            <field name="kpi_target_target" readonly="1" force_save="1"/>
+                                            <field name="kpi_target_unit" readonly="1" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                    <field name="kpi_master_definition_lines_ids" readonly="1" force_save="1">
+                                        <tree create="0" delete="0" edit="0">
+                                            <field name="kpi_definition_level"
+                                                   style="width:100px"
+                                                   readonly="1"
+                                                   force_save="1"/>
+                                            <field name="kpi_definition_name" readonly="1" force_save="1"/>
+                                            <field name="kpi_definition_target" readonly="1" force_save="1"/>
+                                            <field name="kpi_definition_unit" readonly="1" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                    <field name="kpi_group_lines_ids"
+                                           attrs="{'readonly': [('is_validated', '=', True)]}">
+                                        <tree>
+                                            <field name="kpi_group_department_id"/>
+                                            <field name="kpi_group_weight"/>
+                                            <field name="kpi_group_target"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group colspan="4" col="12">
+                                                    <group colspan="5">
+                                                        <field name="kpi_group_department_id"
+                                                               options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                                                               required="1"/>
+                                                    </group>
+                                                    <group colspan="4">
+                                                        <field name="kpi_group_weight" required="1"/>
+                                                    </group>
+                                                    <group colspan="3">
+                                                        <field name="kpi_has_assistant"/>
+                                                    </group>
+                                                    <group colspan="6">
+                                                        <field name="kpi_assistant_employee_id"
+                                                               attrs="{'invisible': [('kpi_has_assistant', '!=', True)], 'required': [('kpi_has_assistant', '=', True)]}"/>
+                                                    </group>
+                                                    <group colspan="12">
+                                                        <field name="kpi_group_target" required="1"/>
+                                                    </group>
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="คำจำกัดความ">
+                                                    <field name="kpi_group_definition_line_ids">
+                                                        <tree editable="bottom">
+                                                            <field name="kpi_group_def_level"/>
+                                                            <field name="kpi_group_def_name"/>
+                                                            <field name="kpi_group_def_target"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </form>
+                                    </field>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="weight_total" string="น้ำหนักรวม"/>
+                                        </div>
+                                        <field name="weight_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                               widget="monetary"/>
+                                    </group>
+
+                                </form>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="kpi_weight_total" string="น้ำหนักรวม"/>
+                                </div>
+                                <field name="kpi_weight_total"
+                                       nolabel="1"
+                                       class="oe_subtotal_footer_separator"
+                                       style="color:#0a8ea4 ! important;"
+                                       widget="monetary"/>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="weight_total" string="น้ำหนักกลุ่มงานรวม"/>
+                                </div>
+                                <field name="group_weight"
+                                       nolabel="1"
+                                       class="oe_subtotal_footer_separator"
+                                       style="color:#0a8ea4 ! important;"
+                                       widget="monetary"/>
+                            </group>
+                        </page>
+                        <page string='ลำดับการอนุมัติ'>
+                            <field name="kpi_setting_dsm_approval_lines_ids"
+                                   attrs="{'readonly': [('state', 'not in', ('draft'))]}">
+                                <tree editable="bottom" create="0" delete="0">
+                                    <field name="employee_id"
+                                           options="{'no_open': True, 'no_create_edit': True, 'no_create': True}"/>
+                                    <field name="job_id"/>
+                                    <field name="approve_datetime" readonly="1" force_save="1"/>
+                                    <field name="remark" readonly="1" force_save="1"/>
+                                    <field name="status" readonly="1" force_save="1"/>
+                                </tree>
+                                <form>
+                                    <group colspan="4" col="12">
+                                        <group colspan="6">
+                                            <field name="employee_id"/>
+                                            <field name="approve_datetime" readonly="1" force_save="1"/>
+                                        </group>
+                                        <group colspan="6">
+                                            <field name="job_id"/>
+                                            <field name="status" readonly="1" force_save="1"/>
+                                        </group>
+                                        <group colspan="12">
+                                            <field name="remark" readonly="1" force_save="1"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <!-- for user approval -->
+        <record model="ir.ui.view" id="tmi_kpi_setting_dsm_pending_list">
+            <field name="name">KPI Setting dsm List</field>
+            <field name="model">kpi_setting_dsm</field>
+            <field name="arch" type="xml">
+                <tree string="แบบขออนุมัติ KPI Cascade" create="0" delete="0">
+                    <field name="fiscal_year"/>
+                    <field name="kpi_weight_total"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="tmi_kpi_setting_dsm_pending_form">
+            <field name="name">KPI Setting dsm Form</field>
+            <field name="model">kpi_setting_dsm</field>
+            <field name="arch" type="xml">
+                <form string="แบบขออนุมัติ KPI Cascade" create="0" delete="0">
+                    <header>
+                        <button name="action_kpi_dsm_make_approval" type="object" class="oe_highlight"
+                                string="อนุมัติ KPI Cascade" states="pending"/>
+                        <field name="approve_count" invisible="1"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <group colspan="4" col="12">
+                            <group colspan="12">
+                                <field name="fiscal_year"
+                                       readonly="1"
+                                       force_save="1"
+                                       options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            </group>
+                        </group>
+                    </group>
+                    <group colspan="4" col="12">
+                        <group colspan="6">
+                            <div t-if="pages" class="table-responsive" style="padding-right: 50px">
+<!--                                <table class="table table-hover">-->
+<!--                                    <thead>-->
+<!--                                        <tr>-->
+<!--                                            <th></th>-->
+<!--                                            <th>ค่าน้ำหนัก</th>-->
+<!--                                        </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานเศรษฐกิจดิจิทัล</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="DE"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานสังคมและกำลังคนดิจิทัล</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="SM"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานโครงการพิเศษ</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="DI"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานยุทธศาสตร์และบริหาร</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="VP"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานบริหารสำนักงาน</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="EP"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>กลุ่มงานกิจการสาขา</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="DB"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>GBDi</td>-->
+<!--                                            <td>-->
+<!--                                                <field name="GBDi"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>-->
+<!--                                                <h4 class="text-info">ค่าน้ำหนักรวม</h4>-->
+<!--                                            </td>-->
+<!--                                            <td>-->
+<!--                                                <field name="group_weight_total" class="text-info"-->
+<!--                                                       style="font-size:13pt ! important;"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+
+<!--                                </table>-->
+                            </div>
+
+                        </group>
+                        <group colspan="6">
+                            <div t-if="pages" class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>ค่าน้ำหนัก</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Financial (F)</td>
+                                            <td>
+                                                <field name="financial"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customer (C)</td>
+                                            <td>
+                                                <field name="customer"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Internal (I)</td>
+                                            <td>
+                                                <field name="internal"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Learning (L)</td>
+                                            <td>
+                                                <field name="learning"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string='Cascade KPI'>
+                            <field name="kpi_setting_dsm_lines_ids">
+                                <tree create="false" delete="false">
+                                    <field name="kpi_bsc"/>
+                                    <field name="kpi_code"/>
+                                    <field name="kpi_name"/>
+                                    <field name="kpi_weight"/>
+                                    <field name="kpi_status"/>
+                                    <field name="is_validated"
+                                           attrs="{'column_invisible': [('parent.state', 'in', ('draft'))]}"/>
+                                    <field name="kpi_definition" invisible="1"/>
+                                    <field name="kpi_calculate" invisible="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group colspan="4" col="12">
+                                            <group colspan="6">
+                                                <field name="kpi_name" readonly="1" force_save="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="kpi_weight" readonly="1" force_save="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="kpi_budget" readonly="1" force_save="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="kpi_calculate" widget="radio" readonly="1" force_save="1"/>
+                                            </group>
+                                            <group colspan="12">
+                                                <field name="kpi_definition" readonly="1" force_save="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="kpi_status" invisible="1"/>
+                                                <field name="is_done" readonly="1" force_save="1"/>
+                                            </group>
+                                            <group colspan="6">
+                                                <field name="is_validated" attrs="{'readonly': [('parent.state', 'not in', ('pending'))]}"/>
+                                            </group>
+                                        </group>
+                                    </group>
+                                     <field name="kpi_master_target_lines_ids" readonly="1">
+                                        <tree create="0" delete="0">
+
+                                            <field name="kpi_target_target" readonly="1" force_save="1"/>
+                                            <field name="kpi_target_unit" readonly="1" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                    <field name="kpi_master_definition_lines_ids" readonly="1">
+                                        <tree create="0" delete="0">
+                                            <field name="kpi_definition_level"
+                                                   style="width:100px"
+                                                   readonly="1"
+                                                   force_save="1"/>
+                                            <field name="kpi_definition_name" readonly="1" force_save="1"/>
+                                            <field name="kpi_definition_target" readonly="1" force_save="1"/>
+                                            <field name="kpi_definition_unit" readonly="1" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                    <field name="kpi_group_lines_ids" readonly="1">
+                                        <tree>
+                                            <field name="kpi_group_department_id"/>
+                                            <field name="kpi_group_weight"/>
+                                            <field name="kpi_group_target"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group colspan="4" col="12">
+                                                    <group colspan="5">
+                                                        <field name="kpi_group_department_id"
+                                                               options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
+                                                               required="1"/>
+                                                    </group>
+                                                    <group colspan="4">
+                                                        <field name="kpi_group_weight" required="1"/>
+                                                    </group>
+                                                    <group colspan="3">
+                                                        <field name="kpi_has_assistant"/>
+                                                    </group>
+                                                    <group colspan="6">
+                                                        <field name="kpi_assistant_employee_id"
+                                                               attrs="{'invisible': [('kpi_has_assistant', '!=', True)], 'required': [('kpi_has_assistant', '=', True)]}"/>
+                                                    </group>
+                                                    <group colspan="12">
+                                                        <field name="kpi_group_target" required="1"/>
+                                                    </group>
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="คำจำกัดความ">
+                                                    <field name="kpi_group_definition_line_ids" readonly="1">
+                                                        <tree editable="bottom">
+                                                            <field name="kpi_group_def_level"/>
+                                                            <field name="kpi_group_def_name"/>
+                                                            <field name="kpi_group_def_target"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </form>
+                                    </field>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="weight_total" string="น้ำหนักรวม"/>
+                                        </div>
+                                        <field name="weight_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                               widget="monetary"/>
+                                    </group>
+
+                                </form>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="kpi_weight_total" string="น้ำหนักรวม"/>
+                                </div>
+                                <field name="kpi_weight_total"
+                                       nolabel="1"
+                                       class="oe_subtotal_footer_separator"
+                                       style="color:#0a8ea4 ! important;"
+                                       widget="monetary"/>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="weight_total" string="น้ำหนักกลุ่มงานรวม"/>
+                                </div>
+                                <field name="group_weight"
+                                       nolabel="1"
+                                       class="oe_subtotal_footer_separator"
+                                       style="color:#0a8ea4 ! important;"
+                                       widget="monetary"/>
+                            </group>
+                        </page>
+                        <page string='ลำดับการอนุมัติ'>
+                            <field name="kpi_setting_dsm_approval_lines_ids" readonly="1">
+                                <tree editable="bottom">
+                                    <field name="employee_id"/>
+                                    <field name="job_id"/>
+                                    <field name="approve_datetime" readonly="1" force_save="1"/>
+                                    <field name="remark" readonly="1" force_save="1"/>
+                                    <field name="status" readonly="1" force_save="1"/>
+                                </tree>
+                                <form>
+                                    <group colspan="4" col="12">
+                                        <group colspan="6">
+                                            <field name="employee_id"/>
+                                            <field name="approve_datetime" readonly="1" force_save="1"/>
+                                        </group>
+                                        <group colspan="6">
+                                            <field name="job_id"/>
+                                            <field name="status" readonly="1" force_save="1"/>
+                                        </group>
+                                        <group colspan="12">
+                                            <field name="remark" readonly="1" force_save="1"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models for user -->
+        <record model="ir.actions.act_window" id="depa_tmi.kpi_setting_dsm_action_window">
+            <field name="name">ขออนุมัติ KPI (ติดตาม)</field>
+            <field name="res_model">kpi_setting_dsm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('create_uid', '=', uid)]</field>
+        </record>
+
+        <record id="tmi_kpi_setting_dsm_action_window_tree" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="tmi_kpi_setting_dsm_list"/>
+            <field name="act_window_id" ref="depa_tmi.kpi_setting_dsm_action_window"/>
+        </record>
+
+        <record id="tmi_kpi_setting_dsm_action_window_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tmi_kpi_setting_dsm_form"/>
+            <field name="act_window_id" ref="depa_tmi.kpi_setting_dsm_action_window"/>
+        </record>
+
+        <!-- actions opening views on models for approval -->
+        <record model="ir.actions.act_window" id="depa_tmi.kpi_setting_dsm_pending_action_window">
+            <field name="name">รอดำเนินการ (ติดตาม)</field>
+            <field name="res_model">kpi_setting_dsm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('current_approval_id', '=', uid)]</field>
+        </record>
+
+        <record id="tmi_kpi_setting_dsm_pending_action_window_tree" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="tmi_kpi_setting_dsm_pending_list"/>
+            <field name="act_window_id" ref="depa_tmi.kpi_setting_dsm_pending_action_window"/>
+        </record>
+
+        <record id="tmi_kpi_setting_dsm_pending_action_window_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tmi_kpi_setting_dsm_pending_form"/>
+            <field name="act_window_id" ref="depa_tmi.kpi_setting_dsm_pending_action_window"/>
+        </record>
+
+        <menuitem name="ขออนุมัติ KPI (ติดตาม)"
+                  id="depa_tmi.menu_1_list"
+                  groups="group_user_depa_tmi_setting"
+                  parent="depa_tmi.menu_1"
+                  sequence="1"
+                  action="depa_tmi.kpi_setting_dsm_action_window"/>
+        <menuitem name="รอดำเนินการ (ติดตาม)"
+                  id="depa_tmi.menu_1_list_pending"
+                  groups="for_dsm_approval_depa_tmi_setting"
+                  parent="depa_tmi.menu_1"
+                  sequence="2"
+                  action="depa_tmi.kpi_setting_dsm_pending_action_window"/>
+
+    </data>
+</odoo>

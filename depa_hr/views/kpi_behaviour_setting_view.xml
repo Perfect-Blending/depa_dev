@@ -1,0 +1,79 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="kpi_behaviour_setting_list">
+            <field name="name">Behaviour Setting list</field>
+            <field name="model">kpi_behaviour_setting</field>
+            <field name="arch" type="xml">
+                <tree string="Behaviour Setting List">
+                    <field name="behaviour_year"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="kpi_behaviour_setting_form">
+            <field name="name">Behaviour Setting form</field>
+            <field name="model">kpi_behaviour_setting</field>
+            <field name="arch" type="xml">
+                <form string="Behaviour Setting Form">
+                    <sheet>
+                        <group>
+                            <field name="behaviour_year" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        </group>
+                        <notebook>
+                            <page string='Behaviour Lines'>
+                                <field name="behaviour_setting_lines_ids">
+                                    <tree>
+                                        <field name="behaviour_type"/>
+                                        <field name="behaviour_desc"/>
+                                        <field name="behaviour_weight"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group colspan="12">
+                                                <field name="behaviour_desc" required="1"/>
+                                            </group>
+                                            <group colspan="4" col="12">
+                                                <group colspan="6">
+                                                    <field name="behaviour_type" required="1"/>
+                                                </group>
+                                                <group colspan="6">
+                                                    <field name="behaviour_weight" required="1"/>
+                                                </group>
+                                            </group>
+                                            <group colspan="12">
+                                                <field name="behaviour_definition_setting_lines_ids" required="1">
+                                                    <tree editable='bottom'>
+                                                        <field name="level"/>
+                                                        <field name="name"/>
+                                                    </tree>
+                                                    <form>
+                                                        <group>
+                                                            <group>
+                                                                <field name="level" readonly="1"/>
+                                                                <field name="name" readonly="1"/>
+                                                            </group>
+                                                        </group>
+                                                    </form>
+                                                </field>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="kpi_behaviour_setting_action_window">
+            <field name="name">Behaviour Setting window</field>
+            <field name="res_model">kpi_behaviour_setting</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="ตั้งค่าข้อมูล KPI Behaviour" id="kpi_behaviour_setting_menu" parent="depa_hr_setting_menu"
+                  action="kpi_behaviour_setting_action_window" sequence="2"/>
+    </data>
+</odoo>

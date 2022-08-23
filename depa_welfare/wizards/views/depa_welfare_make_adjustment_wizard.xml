@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="depa_welfare_make_adjustment_wizard_form" model="ir.ui.view">
+      <field name="name">welfare make adjustment wizard form</field>
+      <field name="model">depa_welfare_make_adjustment_wizard</field>
+      <field name="arch" type="xml">
+        <form string="Make adjustment Wizard">
+             <sheet>
+                 <group>
+                     <field name="welfare_line_id" invisible="1"/>
+                     <field name="current_state" invisible="1"/>
+                     <field name="remark"/>
+                 </group>
+             </sheet>
+            <footer>
+                <button string="Save" class="btn-primary" icon="fa-save" type="object" name="action_save_adjustment"/>
+                <button string="Discard" class="btn-secondary" icon="fa-times" special="cancel"/>
+            </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="depa_welfare_make_adjustment_wizard_action_window" model="ir.actions.act_window" >
+        <field name="name">welfare make adjustment wizard window</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">depa_welfare_make_adjustment_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="depa_welfare_make_adjustment_wizard_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

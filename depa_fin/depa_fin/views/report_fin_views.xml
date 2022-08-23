@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--     <record model="ir.ui.view" id="report_fin_list">-->
+<!--        <field name="name">Report Fin List</field>-->
+<!--        <field name="model">report_fin</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree create="0" delete="0">-->
+<!--                <field name="fiscal_year"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+    <record id="view_account_analytic_account_list_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.account.list.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_order">fiscal_year ASC</attribute>
+            </xpath>
+            <field name="budget_spend" position="replace">
+                <field name="sum_reserve_fin_100" />
+            </field>
+            <field name="budget_balance" position="replace">
+                <field name="payment_201" />
+            </field>
+            <field name="payment_201" position="after">
+                <field name="sum_balance" />
+            </field>
+            <field name="sum_balance" position="after">
+                <field name="total_budget" />
+            </field>
+        </field>
+    </record>
+<!--    <record id="account_analytic_account_inherit" model="ir.ui.view">-->
+<!--        <field name="name">account.analytic.account.inherit</field>-->
+<!--        <field name="model">account.analytic.account</field>-->
+<!--        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='partner_id']" position="after">-->
+<!--                <h2>-->
+<!--                    <b>-->
+<!--                        <field name="sum_fin_100" class="text-danger" readonly="1"/>-->
+<!--                    </b>-->
+<!--                </h2>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record model="ir.actions.act_window" id="depa_fin.report_fin_action_window">
+        <field name="name">รายงานงบประมาณ</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+<!--    <record id="report_fin_action_window_tree" model="ir.actions.act_window.view">-->
+<!--        <field name="view_mode">tree</field>-->
+<!--        <field name="view_id" ref="report_fin_list"/>-->
+<!--        <field name="act_window_id" ref="depa_fin.report_fin_action_window"/>-->
+<!--    </record>-->
+
+    <!-- actions -->
+    <menuitem name="depa Fin" id="depa_fin.menu_root" web_icon="depa_fin,static/description/icon.png"/>
+    <menuitem name="Report Fin"
+              id="depa_fin.menu_report_fin"
+              parent="depa_fin.menu_root"
+              action="depa_fin.report_fin_action_window"/>
+</odoo>

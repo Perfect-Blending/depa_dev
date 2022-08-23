@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="leave_request_state_list">
+            <field name="name">leave request state list</field>
+            <field name="model">leave_request_state</field>
+            <field name="arch" type="xml">
+                <tree string="สถานะการลา">
+                    <field name="state"/>
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="leave_request_state_form">
+            <field name="name">leave request state form</field>
+            <field name="model">leave_request_state</field>
+            <field name="arch" type="xml">
+                <form string="สถานะการลา">
+                    <sheet>
+                        <group>
+                            <group colspan="4" col="12">
+                                <group colspan="4">
+                                    <field name="state"/>
+                                </group>
+                                <group colspan="4">
+                                    <field name="name"/>
+                                </group>
+                                <group colspan="4">
+                                    <field name="active"/>
+                                </group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="leave_request_state_action_window">
+            <field name="name">สถานะการลา</field>
+            <field name="res_model">leave_request_state</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="leave_request_state_action_window_tree" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="leave_request_state_list"/>
+            <field name="act_window_id" ref="leave_request_state_action_window"/>
+        </record>
+
+        <record id="leave_request_state_action_window_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="leave_request_state_form"/>
+            <field name="act_window_id" ref="leave_request_state_action_window"/>
+        </record>
+
+        <menuitem name="ตั้งค่าสถานะการลา"
+                  id="depa_hr_leave.menu_leave_state"
+                  parent="depa_hr_leave.menu_config_leave"
+                  action="leave_request_state_action_window"/>
+    </data>
+</odoo>

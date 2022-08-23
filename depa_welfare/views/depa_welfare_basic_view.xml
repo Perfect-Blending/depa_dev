@@ -1,0 +1,849 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <!-- view for users -->
+
+    <record model="ir.ui.view" id="depa_welfare_basic_list">
+      <field name="name">depa_welfare_basic list</field>
+      <field name="model">depa_welfare_basic</field>
+      <field name="arch" type="xml">
+        <tree string="Welfare Basic List" default_order="wel_basic_no desc">
+          <field name="wel_basic_no" string="เลขที่เอกสาร"/>
+          <field name="emp_name" string="ชื่อ-นามสกุล"/>
+          <field name="welfare_year" string="ปีงบประมาณ"/>
+          <field name="point_basic_total" string="คะแนนที่ใช้งาน"/>
+          <field name="state" string="สถานะ"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="depa_welfare_basic_form">
+      <field name="name">depa welfare Basic form</field>
+      <field name="model">depa_welfare_basic</field>
+      <field name="arch" type="xml">
+
+        <form string="Welfare Basic Form" duplicate="0" copy="0">
+          <field name="is_create" invisible="1"/>
+          <field name="state" invisible="1" />
+          <field name="welfare_year" invisible="1" />
+          <field name="no_ce" invisible="1" />
+          <field name="welfare_owner" invisible="1" />
+          <field name="show_button_resend_to_inspector" invisible="1"/>
+          <field name="is_open_selection" invisible="1" />
+          <field name="show_sent_basic_button" invisible="1"/>
+          <header>
+            <button string="ยืนยันการเลือกแผนประกัน"
+                    name="sent_welfare_basic"
+                    confirm="คุณได้ทำการตรวจสอบข้อมูลและยืนยันการเลือกแผนประกันแล้วใช่หรือไม่"
+                    attrs="{'invisible': ['|', '|', ('state', 'not in', ('draft')), ('is_open_selection', '!=', True), ('show_sent_basic_button', '!=', True)]}"
+                    type="object"
+                    class="oe_highlight"/>
+            <field name="state" widget="statusbar"/>
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <label for="wel_basic_no" string="WELFARE BASIC NO." class="oe_edit_only"/>
+              <h1>
+                <field name="wel_basic_no" placeholder="WELFARE BASIC NO." attrs="{'readonly': True}"/>
+              </h1>
+            </div>
+            <div class="oe_right">
+              <p style="color:red">
+                * ดำเนินการได้ตั้งแต่วันที่
+                <field name="welfare_basic_start_date"
+                       readonly="1"
+                       force_save="1"
+                       nolabel="1"/> ถึง
+                <field name="welfare_basic_end_date"
+                       readonly="1"
+                       force_save="1"
+                       nolabel="1"/>
+              </p>
+            </div>
+            <group>
+              <group colspan="4" col="12">
+                <group colspan="3">
+                  <field name="emp_code"
+                         string="รหัสพนักงาน"
+                         attrs="{'readonly': True}"/>
+                </group>
+                <group colspan="5">
+                  <field name="emp_name"
+                         string="ชื่อ-นามสกุล"
+                         attrs="{'readonly': True}"/>
+                </group>
+                <group colspan="4">
+                  <field name="emp_dept_name"
+                         string="สังกัด"
+                         attrs="{'readonly': True}"/>
+                </group>
+              </group>
+              <group colspan="4" col="12">
+                <group colspan="3">
+                  <field name="point_balance"
+                         string="คะแนนคงเหลือ"
+                         attrs="{'readonly': True}"/>
+                </group>
+                <group colspan="5">
+                  <field name="welfare_basic_fiscal_year"
+                         string="ปีงบประมาณ"
+                         options='{"no_open": True}'
+                         readonly="1"
+                         force_save="1"/>
+                </group>
+                <group colspan="4">
+                  <field name="welfare_basic_document_date"
+                         string="วันที่สร้างเอกสาร"
+                         readonly="1"
+                         force_save="1" />
+                </group>
+
+              </group>
+              <group colspan="4" col="12">
+                <group colspan="6">
+                  <field name="sequence_A" invisible="1"/>
+                  <field name="plan_A"
+                         string="แผนประกันชีวิต"
+                         required="1"
+                         domain="[('life_insurance_lines_id.year', '=', welfare_basic_fiscal_year)]"
+                         options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                  <field name="point_A"
+                         string="คะแนนที่ใช้"
+                         readonly="1"
+                         force_save="1"/>
+                  <field name="amount_A"
+                         readonly="1"
+                         force_save="1"/>
+                </group>
+                <group colspan="6">
+                  <field name="plan_B"
+                         string="แผนประกันสุขภาพ"
+                         required="1"
+                         domain="[('health_insurance_lines_id.year', '=', welfare_basic_fiscal_year), ('disable_employee', '=', False)]"
+                         options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                  <field name="point_B"
+                         string="คะแนนที่ใช้"
+                         readonly="1"
+                         force_save="1"/>
+                  <field name="amount_B"
+                         readonly="1"
+                         force_save="1"/>
+                </group>
+              </group>
+            </group>
+
+            <notebook>
+              <page string='เลือกแผนสำหรับครอบครัว'>
+                <field name="relative_ids">
+                  <tree create="0" editable='bottom'>
+                    <field name="date_of_birth" invisible='1'/>
+                    <field name="age_compute"  invisible="1"/>
+                    <field name="sequenceA" invisible="1"/>
+                    <field name="welfare_basic_year" invisible="1"/>
+                    <field name="relative_id" invisible="1"/>
+                    <field name="relative_title"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="relative_name"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="relation"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="age"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="planA"
+                           required="1"
+                           domain="[('life_from_ages', '&lt;', age_compute), ('life_to_ages', '&gt;=', age_compute),('sequence','&lt;=', sequenceA),('life_insurance_lines_id.year', '=', welfare_basic_year)]"
+                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                    <field name="PointA"
+                           readonly="1"
+                           force_save="1"
+                           string="คะแนนที่ใช้"/>
+                    <field name="amountA"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="planB"
+                           required="1"
+                           domain="[('health_from_ages', '&lt;', age_compute), ('health_to_ages', '&gt;=', age_compute),('health_insurance_lines_id.year', '=', welfare_basic_year)]"
+                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                    <field name="PointB"
+                           readonly="1"
+                           force_save="1"
+                           string="คะแนนที่ใช้"/>
+                    <field name="amountB"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="PointTotal"
+                           readonly="1"
+                           force_save="1"
+                           style="color:#5f5e97 ! important;"/>
+                    <field name="AmountTotal"
+                           readonly="1"
+                           force_save="1"
+                           style="color:#5f5e97 ! important;"/>
+                    <!-- <field name="addition_cost"
+                           readonly="1"
+                           force_save="1"
+                           style="color:#FF0000 ! important;"/> -->
+                  </tree>
+                  <form create="0" write="0" delete="0">
+                    <group>
+                      <group>
+                        <field name="user_relative_id" invisible='1'/>
+                        <field name="date_of_birth" invisible='1'/>
+                        <field name="age_compute"  invisible="1"/>
+                        <field name="sequenceA" invisible="1"/>
+                        <field name="welfare_basic_year" invisible="1"/>
+                        <field name="relative_id" invisible="1"/>
+                        <field name="relative_title"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="relative_name"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="relation"
+                           readonly="1"
+                           force_save="1"/>
+                        <field name="age"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="planA"
+                               domain="[('life_from_ages', '&lt;', age_compute), ('life_to_ages', '&gt;=', age_compute),('sequence','&lt;=', sequenceA),('life_insurance_lines_id.year', '=', welfare_basic_year)]"
+                               options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        <field name="PointA"
+                               readonly="1"
+                               force_save="1"
+                               string="คะแนนที่ใช้"/>
+                        <field name="amountA"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="planB"
+                               domain="[('health_from_ages', '&lt;', age_compute), ('health_to_ages', '&gt;=', age_compute),('health_insurance_lines_id.year', '=', welfare_basic_year)]"
+                               options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        <field name="PointB"
+                               readonly="1"
+                               force_save="1"
+                               string="คะแนนที่ใช้"/>
+                        <field name="amountB"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="PointTotal"
+                               readonly="1"
+                               force_save="1"
+                               style="color:#5f5e97 ! important;"/>
+                        <field name="AmountTotal"
+                               readonly="1"
+                               force_save="1"
+                               style="color:#5f5e97 ! important;"/>
+                      </group>
+                    </group>
+<!--                    <footer>-->
+<!--                      <button name="write" type="object" string="Save" class="oe_highlight"/>-->
+<!--                      <button name="cancel" string="Cancel" special="cancel" />-->
+<!--                    </footer>-->
+                  </form>
+                </field>
+                <group class="oe_subtotal_footer oe_right">
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="point_basic_total" string="คะแนนที่ใช้รวม"/>
+                  </div>
+                  <field name="point_basic_total" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_basic_total" string="คิดเป็นเงิน"/>
+                  </div>
+                  <field name="amount_basic_total" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary" force_save="1"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="point_basic_remain" string="คะแนนคงเหลือ"/>
+                  </div>
+                  <field name="point_basic_remain" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_basic_remain" string="คิดเป็นเงินคงเหลือ"/>
+                  </div>
+                  <field name="amount_basic_remain" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_basic_over" string="เงินที่ต้องจ่ายเพิ่ม"/>
+                  </div>
+                  <field name="amount_basic_over" nolabel="1" class="oe_subtotal_footer_separator" style="color:#ff0000 ! important;" widget="monetary"/>
+                </group>
+              </page>
+              <page string='แผนประกัน'>
+                <div>
+                  <separator string="แผนประกันชีวิต A" style="font-size:16px;"/>
+                  <field name="life_lines_ids" widget="many2many" readonly="1">
+                    <tree create="0" delete="0">
+                      <field name="life_insurance_name" />
+                      <field name="life_insurance_point" />
+                    </tree>
+                    <form create="0" delete="0">
+                      <group>
+                        <group colspan="12">
+                          <field name="life_insurance_name" readonly="1"/>
+                          <field name="life_insurance_point" readonly="1"/>
+                        </group>
+                        <group colspan="12">
+                           <div>
+                               <separator string="ความคุ้มครอง" style="font-size:18px;"/>
+                               <field name="life_insurance_desc_lines_ids">
+                                    <tree create="0" delete="0" editable="bottom" >
+                                        <field name="life_insurance_desc" readonly="1"/>
+                                        <field name="life_insurance_package" readonly="1"/>
+                                    </tree>
+                                    <form create="0" delete="0">
+                                     <group>
+                                        <group colspan="12">
+                                          <field name="life_insurance_desc" readonly="1"/>
+                                          <field name="life_insurance_package" readonly="1"/>
+                                        </group>
+                                     </group>
+                                    </form>
+                               </field>
+                           </div>
+                        </group>
+                      </group>
+                    </form>
+                  </field>
+                </div>
+                <div>
+                  <separator string="แผนประกันสุขภาพ B" style="font-size:16px;"/>
+                  <field name="health_lines_ids" widget="many2many" readonly="1">
+                    <tree create="0" delete="0">
+                      <field name="health_insurance_name" />
+                      <field name="health_insurance_point" />
+                    </tree>
+                    <form create="0" delete="0">
+                      <group>
+                        <group colspan="12">
+                          <field name="health_insurance_name" readonly="1"/>
+                          <field name="health_insurance_point" readonly="1"/>
+                        </group>
+                        <group colspan="12">
+                           <div>
+                               <separator string="ความคุ้มครอง" style="font-size:18px;"/>
+                               <field name="health_insurance_desc_lines_ids">
+                                    <tree create="0" delete="0" editable="bottom" >
+                                        <field name="health_insurance_desc" readonly="1"/>
+                                        <field name="health_insurance_package" readonly="1"/>
+                                    </tree>
+                                    <form create="0" delete="0">
+                                       <group>
+                                          <group colspan="12">
+                                            <field name="health_insurance_desc" readonly="1"/>
+                                            <field name="health_insurance_package" readonly="1"/>
+                                          </group>
+                                       </group>
+                                    </form>
+                               </field>
+                           </div>
+                        </group>
+                      </group>
+                    </form>
+                  </field>
+                </div>
+              </page>
+              <page string='เอกสารผู้รับผลประโยชน์'>
+                <field name="attachment_lines_ids" readonly="1">
+                  <tree create="0" delete="0" editable="bottom">
+                    <field name="name" readonly="1"/>
+                    <field name="basic_attachment_ids" widget="many2many_binary" readonly="1"/>
+                  </tree>
+                  <form create="0" delete="0">
+                     <group>
+                        <group colspan="12">
+                          <field name="name" readonly="1"/>
+                          <field name="basic_attachment_ids" readonly="1"/>
+                        </group>
+                     </group>
+                  </form>
+                </field>
+              </page>
+<!--              <page string='แผนประกันชีวิต A'>-->
+<!--                <field name="basic_life_insurance_lines_ids">-->
+<!--                  <tree editable="bottom" create="0" delete="0" >-->
+<!--                    <field name="name" readonly="1" force_save="1"/>-->
+<!--                    <field name="point" readonly="1" force_save="1"/>-->
+<!--                  </tree>-->
+<!--                  <form>-->
+<!--                    <group>-->
+<!--                         <group colspan="6">-->
+<!--                            <field name="name" readonly="1" force_save="1"/>-->
+<!--                           <field name="point" readonly="1" force_save="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--&lt;!&ndash;                    <page string='ความคุ้มครอง'>&ndash;&gt;-->
+<!--&lt;!&ndash;                         <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                             <separator string="ความคุ้มครอง" style="font-size:18px;"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                             <field name="basic_life_insurance_desc_lines_ids">&ndash;&gt;-->
+<!--&lt;!&ndash;                                  <tree editable="bottom" create="0" delete="0">&ndash;&gt;-->
+<!--&lt;!&ndash;                                      <field name="life_insurance_desc" readonly="1" force_save="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                      <field name="life_insurance_package" readonly="1" force_save="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  </tree>&ndash;&gt;-->
+<!--&lt;!&ndash;                             </field>&ndash;&gt;-->
+<!--&lt;!&ndash;                         </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </page>&ndash;&gt;-->
+<!--                  </form>-->
+<!--                </field>-->
+<!--              </page>-->
+<!--              <page string='แผนประกันสุขภาพ B'>-->
+<!--                <field name="basic_health_insurance_lines_ids">-->
+<!--                  <tree editable="bottom" create="0" delete="0" >-->
+<!--                    <field name="name" readonly="1" force_save="1"/>-->
+<!--                    <field name="point" readonly="1" force_save="1"/>-->
+<!--                  </tree>-->
+<!--                  <form>-->
+<!--                    <group>-->
+<!--                         <group colspan="6">-->
+<!--                            <field name="name" readonly="1" force_save="1"/>-->
+<!--                           <field name="point" readonly="1" force_save="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--&lt;!&ndash;                    <page string='ความคุ้มครอง'>&ndash;&gt;-->
+<!--&lt;!&ndash;                         <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                             <separator string="ความคุ้มครอง" style="font-size:18px;"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                             <field name="basic_health_insurance_desc_lines_ids">&ndash;&gt;-->
+<!--&lt;!&ndash;                                  <tree editable="bottom" create="0" delete="0">&ndash;&gt;-->
+<!--&lt;!&ndash;                                      <field name="health_insurance_desc" readonly="1" force_save="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                      <field name="health_insurance_package" readonly="1" force_save="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  </tree>&ndash;&gt;-->
+<!--&lt;!&ndash;                             </field>&ndash;&gt;-->
+<!--&lt;!&ndash;                         </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </page>&ndash;&gt;-->
+<!--                  </form>-->
+<!--                </field>-->
+<!--              </page>-->
+
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="activity_ids" widget="mail_activity"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <!-- end view for users -->
+
+    <!-- view for HR -->
+    <record model="ir.ui.view" id="depa_welfare_basic_hr_list">
+      <field name="name">depa_welfare_basic_hr_list</field>
+      <field name="model">depa_welfare_basic</field>
+      <field name="arch" type="xml">
+        <tree string="Welfare Basic List" default_order="wel_basic_no desc" create="0" delete="0">
+          <field name="wel_basic_no" string="เลขที่เอกสาร"/>
+          <field name="confirm_timestamp" string="วันเวลาที่ส่งเอกสาร"/>
+          <field name="emp_name" string="ชื่อ-นามสกุล"/>
+          <field name="welfare_year" string="ปีงบประมาณ"/>
+          <field name="point_basic_total" string="คะแนนที่ใช้งาน"/>
+          <field name="state" string="สถานะ"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="depa_welfare_basic_hr_form">
+      <field name="name">depa welfare Basic HR form</field>
+      <field name="model">depa_welfare_basic</field>
+      <field name="arch" type="xml">
+
+        <form string="Welfare Basic Form" duplicate="0" copy="0" delete="0">
+          <field name="is_create" invisible="1"/>
+          <field name="state" invisible="1" />
+          <field name="welfare_year" invisible="1" />
+          <field name="no_ce" invisible="1" />
+          <field name="welfare_owner" invisible="1" />
+          <field name="show_button_resend_to_inspector" invisible="1"/>
+          <header>
+            <button string="ยกเลิกเอกสาร"
+                    name="action_to_cancel"
+                    confirm="คุณต้องการยกเลิกเอกสารและคืนคะแนนกลับไปยังผู้ใช้งานใช่หรือไม่"
+                    attrs="{'invisible': [('state', 'in', ('draft', 'cancelled'))]}"
+                    type="object"
+                    class="oe_highlight"
+                    groups="depa_welfare.group_user_welfare_basic_can_cancel"/>
+            <field name="state" widget="statusbar"/>
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <label for="wel_basic_no" string="WELFARE BASIC NO." class="oe_edit_only"/>
+              <h1>
+                <field name="wel_basic_no" placeholder="WELFARE BASIC NO." attrs="{'readonly': True}"/>
+              </h1>
+            </div>
+            <div class="oe_right">
+              <p style="color:red">
+                * ดำเนินการได้ตั้งแต่วันที่
+                <field name="welfare_basic_start_date"
+                       readonly="1"
+                       force_save="1"
+                       nolabel="1"/> ถึง
+                <field name="welfare_basic_end_date"
+                       readonly="1"
+                       force_save="1"
+                       nolabel="1"/>
+              </p>
+            </div>
+            <group>
+              <group colspan="4" col="12">
+                <group colspan="3">
+                  <field name="emp_code"
+                         string="รหัสพนักงาน"
+                         attrs="{'readonly': True}"/>
+                </group>
+                <group colspan="5">
+                  <field name="emp_name"
+                         string="ชื่อ-นามสกุล"
+                         attrs="{'readonly': True}"/>
+                </group>
+                <group colspan="4">
+                  <field name="emp_dept_name"
+                         string="สังกัด"
+                         attrs="{'readonly': True}"/>
+                </group>
+              </group>
+              <group colspan="4" col="12">
+                <group colspan="3">
+                  <field name="point_balance"
+                         string="คะแนนคงเหลือ"
+                         attrs="{'readonly': True}"/>
+                </group>
+                <group colspan="5">
+                  <field name="welfare_basic_fiscal_year"
+                         string="ปีงบประมาณ"
+                         options='{"no_open": True}'
+                         readonly="1"
+                         force_save="1"/>
+                </group>
+                <group colspan="4">
+                  <field name="welfare_basic_document_date"
+                         string="วันที่สร้างเอกสาร"
+                         readonly="1"
+                         force_save="1" />
+                </group>
+
+              </group>
+              <group colspan="4" col="12">
+                <group colspan="6">
+                  <field name="sequence_A" invisible="1"/>
+                  <field name="plan_A"
+                         string="แผนประกันชีวิต"
+                         required="1"
+                         domain="[('life_insurance_lines_id.year', '=', welfare_basic_fiscal_year)]"
+                         options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                  <field name="point_A"
+                         string="คะแนนที่ใช้"
+                         readonly="1"
+                         force_save="1"/>
+                  <field name="amount_A"
+                         readonly="1"
+                         force_save="1"/>
+                </group>
+                <group colspan="6">
+                  <field name="plan_B"
+                         string="แผนประกันสุขภาพ"
+                         required="1"
+                         domain="[('health_insurance_lines_id.year', '=', welfare_basic_fiscal_year)]"
+                         options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                  <field name="point_B"
+                         string="คะแนนที่ใช้"
+                         readonly="1"
+                         force_save="1"/>
+                  <field name="amount_B"
+                         readonly="1"
+                         force_save="1"/>
+                </group>
+              </group>
+            </group>
+
+
+          <notebook>
+              <page string='เลือกแผนสำหรับครอบครัว'>
+                <field name="relative_ids">
+                  <tree create="0" editable='bottom'>
+                    <field name="date_of_birth" invisible='1'/>
+                    <field name="age_compute"  invisible="1"/>
+                    <field name="sequenceA" invisible="1"/>
+                    <field name="welfare_basic_year" invisible="1"/>
+                    <field name="relative_title"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="relative_name"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="relation"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="age"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="planA"
+                           domain="[('life_from_ages', '&lt;', age_compute), ('life_to_ages', '&gt;=', age_compute),('sequence','&lt;=', sequenceA),('life_insurance_lines_id.year', '=', welfare_basic_year)]"
+                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                    <field name="PointA"
+                           readonly="1"
+                           force_save="1"
+                           string="คะแนนที่ใช้"/>
+                    <field name="amountA"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="planB"
+                           domain="[('health_from_ages', '&lt;', age_compute), ('health_to_ages', '&gt;=', age_compute),('health_insurance_lines_id.year', '=', welfare_basic_year)]"
+                           options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                    <field name="PointB"
+                           readonly="1"
+                           force_save="1"
+                           string="คะแนนที่ใช้"/>
+                    <field name="amountB"
+                           readonly="1"
+                           force_save="1"/>
+                    <field name="PointTotal"
+                           readonly="1"
+                           force_save="1"
+                           style="color:#5f5e97 ! important;"/>
+                    <field name="AmountTotal"
+                           readonly="1"
+                           force_save="1"
+                           style="color:#5f5e97 ! important;"/>
+                  </tree>
+                  <form create="0" write="0" delete="0">
+                    <group>
+                      <group>
+                        <field name="user_relative_id" invisible='1'/>
+                        <field name="date_of_birth" invisible='1'/>
+                        <field name="age_compute"  invisible="1"/>
+                        <field name="sequenceA" invisible="1"/>
+                        <field name="welfare_basic_year" invisible="1"/>
+                        <field name="relative_title"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="relative_name"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="relation"
+                           readonly="1"
+                           force_save="1"/>
+                        <field name="age"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="planA"
+                               domain="[('life_from_ages', '&lt;', age_compute), ('life_to_ages', '&gt;=', age_compute),('sequence','&lt;=', sequenceA),('life_insurance_lines_id.year', '=', welfare_basic_year)]"
+                               options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        <field name="PointA"
+                               readonly="1"
+                               force_save="1"
+                               string="คะแนนที่ใช้"/>
+                        <field name="amountA"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="planB"
+                               domain="[('health_from_ages', '&lt;', age_compute), ('health_to_ages', '&gt;=', age_compute),('health_insurance_lines_id.year', '=', welfare_basic_year)]"
+                               options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        <field name="PointB"
+                               readonly="1"
+                               force_save="1"
+                               string="คะแนนที่ใช้"/>
+                        <field name="amountB"
+                               readonly="1"
+                               force_save="1"/>
+                        <field name="PointTotal"
+                               readonly="1"
+                               force_save="1"
+                               style="color:#5f5e97 ! important;"/>
+                        <field name="AmountTotal"
+                               readonly="1"
+                               force_save="1"
+                               style="color:#5f5e97 ! important;"/>
+                      </group>
+                    </group>
+<!--                    <footer>-->
+<!--                      <button name="write" type="object" string="Save" class="oe_highlight"/>-->
+<!--                      <button name="cancel" string="Cancel" special="cancel" />-->
+<!--                    </footer>-->
+                  </form>
+                </field>
+                <group class="oe_subtotal_footer oe_right">
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="point_basic_total" string="คะแนนที่ใช้รวม"/>
+                  </div>
+                  <field name="point_basic_total" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_basic_total" string="คิดเป็นเงิน"/>
+                  </div>
+                  <field name="amount_basic_total" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="point_basic_remain" string="คะแนนคงเหลือ"/>
+                  </div>
+                  <field name="point_basic_remain" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_basic_remain" string="คิดเป็นเงินคงเหลือ"/>
+                  </div>
+                  <field name="amount_basic_remain" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_basic_over" string="เงินที่ต้องจ่ายเพิ่ม"/>
+                  </div>
+                  <field name="amount_basic_over" nolabel="1" class="oe_subtotal_footer_separator" style="color:#ff0000 ! important;" widget="monetary"/>
+                </group>
+              </page>
+              <page string='แผนประกัน'>
+                <div>
+                  <separator string="แผนประกันชีวิต A" style="font-size:16px;"/>
+                  <field name="life_lines_ids" widget="many2many" readonly="1">
+                    <tree create="0" delete="0">
+                      <field name="life_insurance_name" />
+                      <field name="life_insurance_point" />
+                    </tree>
+                    <form create="0" delete="0">
+                      <group>
+                        <group colspan="12">
+                          <field name="life_insurance_name" readonly="1"/>
+                          <field name="life_insurance_point" readonly="1"/>
+                        </group>
+                        <group colspan="12">
+                           <div>
+                               <separator string="ความคุ้มครอง" style="font-size:18px;"/>
+                               <field name="life_insurance_desc_lines_ids">
+                                    <tree create="0" delete="0" editable="bottom" >
+                                        <field name="life_insurance_desc" readonly="1"/>
+                                        <field name="life_insurance_package" readonly="1"/>
+                                    </tree>
+                                    <form create="0" delete="0">
+                                     <group>
+                                        <group colspan="12">
+                                          <field name="life_insurance_desc" readonly="1"/>
+                                          <field name="life_insurance_package" readonly="1"/>
+                                        </group>
+                                     </group>
+                                    </form>
+                               </field>
+                           </div>
+                        </group>
+                      </group>
+                    </form>
+                  </field>
+                </div>
+                <div>
+                  <separator string="แผนประกันสุขภาพ B" style="font-size:16px;"/>
+                  <field name="health_lines_ids" widget="many2many" readonly="1">
+                    <tree create="0" delete="0">
+                      <field name="health_insurance_name" />
+                      <field name="health_insurance_point" />
+                    </tree>
+                    <form create="0" delete="0">
+                      <group>
+                        <group colspan="12">
+                          <field name="health_insurance_name" readonly="1"/>
+                          <field name="health_insurance_point" readonly="1"/>
+                        </group>
+                        <group colspan="12">
+                           <div>
+                               <separator string="ความคุ้มครอง" style="font-size:18px;"/>
+                               <field name="health_insurance_desc_lines_ids">
+                                    <tree create="0" delete="0" editable="bottom" >
+                                        <field name="health_insurance_desc" readonly="1"/>
+                                        <field name="health_insurance_package" readonly="1"/>
+                                    </tree>
+                                    <form create="0" delete="0">
+                                       <group>
+                                          <group colspan="12">
+                                            <field name="health_insurance_desc" readonly="1"/>
+                                            <field name="health_insurance_package" readonly="1"/>
+                                          </group>
+                                       </group>
+                                    </form>
+                               </field>
+                           </div>
+                        </group>
+                      </group>
+                    </form>
+                  </field>
+                </div>
+              </page>
+              <page string='เอกสารผู้รับผลประโยชน์'>
+                <field name="attachment_lines_ids" readonly="1">
+                  <tree create="0" delete="0" editable="bottom">
+                    <field name="name" readonly="1"/>
+                    <field name="basic_attachment_ids" widget="many2many_binary" readonly="1"/>
+                  </tree>
+                  <form create="0" delete="0">
+                     <group>
+                        <group colspan="12">
+                          <field name="name" readonly="1"/>
+                          <field name="basic_attachment_ids" readonly="1"/>
+                        </group>
+                     </group>
+                  </form>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="activity_ids" widget="mail_activity"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+    </record>
+    <!-- end view for HR -->
+
+
+    <!-- actions section -->
+
+    <!-- actions for users -->
+    <record model="ir.actions.act_window" id="depa_welfare_basic_action_window">
+      <field name="name">เลือกสวัสดิการพื้นฐาน</field>
+      <field name="res_model">depa_welfare_basic</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('welfare_basic_owner', '=', uid)]</field>
+    </record>
+
+    <record id="child_depa_welfare_basic_action_window_tree" model="ir.actions.act_window.view">
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="depa_welfare_basic_list" />
+      <field name="act_window_id" ref="depa_welfare_basic_action_window" />
+    </record>
+
+    <record id="child_depa_welfare_basic_action_window_form" model="ir.actions.act_window.view">
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="depa_welfare_basic_form" />
+      <field name="act_window_id" ref="depa_welfare_basic_action_window" />
+    </record>
+    <!-- end actions for users -->
+
+    <!-- actions for HR -->
+    <record model="ir.actions.act_window" id="depa_welfare_basic_hr_action_window">
+      <field name="name">สวัสดิการพื้นฐาน (ทั้งหมด)</field>
+      <field name="res_model">depa_welfare_basic</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('state', 'in', ['completed'])]</field>
+    </record>
+
+    <record id="child_depa_welfare_basic_hr_action_window_tree" model="ir.actions.act_window.view">
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="depa_welfare_basic_hr_list" />
+      <field name="act_window_id" ref="depa_welfare_basic_hr_action_window" />
+    </record>
+
+    <record id="child_depa_welfare_basic_hr_action_window_form" model="ir.actions.act_window.view">
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="depa_welfare_basic_hr_form" />
+      <field name="act_window_id" ref="depa_welfare_basic_hr_action_window" />
+    </record>
+    <!-- end actions for HR -->
+
+    <menuitem name="เลือกสวัสดิการพื้นฐาน"
+              sequence="2"
+              id="depa_welfare_basic"
+              parent="depa_welfare_menu"
+              action="depa_welfare_basic_action_window"/>
+    <menuitem name="สวัสดิการพื้นฐาน (ทั้งหมด)"
+              sequence="3"
+              id="depa_welfare_basic_hr"
+              parent="depa_welfare_menu"
+              action="depa_welfare_basic_hr_action_window"
+              groups="depa_welfare.group_user_welfare_basic_show_all"/>
+
+  </data>
+</odoo>

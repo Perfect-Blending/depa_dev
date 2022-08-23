@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="kpi_contribution_setting_list">
+            <field name="name">Contribution Setting list</field>
+            <field name="model">kpi_contribution_setting</field>
+            <field name="arch" type="xml">
+                <tree string="Contribution Setting List">
+                    <field name="contribution_year"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="kpi_contribution_setting_form">
+            <field name="name">Contribution Setting form</field>
+            <field name="model">kpi_contribution_setting</field>
+            <field name="arch" type="xml">
+                <form string="Contribution Setting Form">
+                    <sheet>
+                        <group>
+                            <field name="contribution_year" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        </group>
+                        <notebook>
+                            <page string='Contribution Lines'>
+                                <field name="contribution_setting_lines_ids">
+                                    <tree editable="bottom">
+                                        <field name="contribution_code"/>
+                                        <field name="contribution_desc"/>
+                                        <field name="contribution_unit"/>
+                                        <field name="contribution_score"/>
+                                        <field style="text-align:center" name="active"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="kpi_contribution_setting_action_window">
+            <field name="name">Contribution Setting window</field>
+            <field name="res_model">kpi_contribution_setting</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="ตั้งค่าข้อมูล KPI Contribution" id="kpi_contribution_setting_menu" parent="depa_hr_setting_menu"
+                  action="kpi_contribution_setting_action_window" sequence="3"/>
+    </data>
+</odoo>
