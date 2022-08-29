@@ -76,6 +76,9 @@
 <!--                                            </group>-->
                                             <group colspan="4" col="12">
                                                 <group colspan="6">
+                                                    <field name="kpi_master_def" required="1"/>
+                                                </group>
+                                                <group colspan="6">
                                                     <field name="source_id" required="1"/>
                                                 </group>
 
@@ -97,7 +100,6 @@
                                                     <tree>
                                                         <field name="kpi_definition_level" style="width:100px"/>
                                                         <field name="kpi_definition_name"/>
-                                                        <field name="kpi_definition_target" invisible="1"/>
                                                         <field name="kpi_definition_unit" invisible="1"/>
                                                     </tree>
                                                     <form>
@@ -112,7 +114,8 @@
                                                             <page string="เป้าหมาย">
                                                                 <field name="kpi_definition_target_line_ids">
                                                                     <tree editable="bottom" edit="1" create="1">
-                                                                        <field name="kpi_definition_target_target" force_save="1" readonly="0"/>
+                                                                        <field name="kpi_definition_target_target_start" force_save="1" readonly="0"/>
+                                                                        <field name="kpi_definition_target_target_end" force_save="1" readonly="0"/>
                                                                         <field name="kpi_definition_target_unit" force_save="1" readonly="0"/>
                                                                     </tree>
                                                                 </field>

@@ -76,7 +76,7 @@ class kpi_dsm_make_approval_wizard(models.TransientModel):
                         elif rec.kpi_bsc == 'C':
                             cus += rec.kpi_weight
                             self.customer = cus
-                        elif rec.kpi_bsckpi_bsc == 'I':
+                        elif rec.kpi_bsc == 'I':
                             inter += rec.kpi_weight
                             self.internal = inter
                         else:
@@ -91,7 +91,7 @@ class kpi_dsm_make_approval_wizard(models.TransientModel):
                                 'kpi_code': rec.kpi_code,
                                 'kpi_name': rec.kpi_name,
                                 'kpi_weight': group_line.kpi_group_weight,
-                                'kpi_target': rec.kpi_target,
+                                # 'kpi_target': rec.kpi_target,
                                 # 'kpi_unit': rec.kpi_unit.id,
                                 'kpi_bsc': rec.kpi_bsc,
                                 'kpi_budget': rec.kpi_budget,
@@ -104,18 +104,18 @@ class kpi_dsm_make_approval_wizard(models.TransientModel):
                             }
                         ))
 
-                self.env['kpi_setting_dsm_group'].create({
-                    'department_id': group.id,
-                    'financial': fin,
-                    'customer': cus,
-                    'internal': inter,
-                    'learning': learn,
-                    'kpi_setting_group_lines_ids' : group_setting_lines,
-                    'kpi_setting_group_approval_lines_ids': [(0, 0, {
-                        'employee_id': manager_id,
-                        'status': 'pending'
-                    })],
-                })
+                    self.env['kpi_setting_dsm_group'].create({
+                        'department_id': group.id,
+                        'financial': fin,
+                        'customer': cus,
+                        'internal': inter,
+                        'learning': learn,
+                        'kpi_setting_group_lines_ids' : group_setting_lines,
+                        'kpi_setting_group_approval_lines_ids': [(0, 0, {
+                            'employee_id': manager_id,
+                            'status': 'pending'
+                        })],
+                    })
 
 
     def action_adjustment(self):

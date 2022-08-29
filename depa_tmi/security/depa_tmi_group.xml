@@ -25,6 +25,25 @@
             <field name="category_id" ref="module_category_depa_tmi_group"/>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
+        <record id="for_department_approval_depa_tmi_setting" model="res.groups">
+            <field name="name">สามารถอนุมัติ KPI ระบบฝ่ายฯ</field>
+            <field name="comment">สามารถอนุมัติ KPI ระบบฝ่ายฯ</field>
+            <field name="category_id" ref="module_category_depa_tmi_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="for_pm_approval_depa_tmi_setting" model="res.groups">
+            <field name="name">สามารถอนุมัติ KPI ระบบ PM</field>
+            <field name="comment">สามารถอนุมัติ KPI ระบบ PM </field>
+            <field name="category_id" ref="module_category_depa_tmi_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="for_activity_approval_depa_tmi_setting" model="res.groups">
+            <field name="name">สามารถอนุมัติ KPI ระบบ กิจกรรม</field>
+            <field name="comment">สามารถอนุมัติ KPI ระบบ กิจกรรม </field>
+            <field name="category_id" ref="module_category_depa_tmi_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
 
 <!--        <record id="group_user_depa_hr_show_kpi_all" model="res.groups">-->
 <!--            <field name="name">แสดงรายการผลการประเมิน KPI (ทั้งหมด)</field>-->

@@ -11,8 +11,8 @@ STATES = [
     ('completed', 'เสร็จสิ้น'),
     ('rejected', 'ปฏิเสธ')
 ]
-class kpi_setting_dsm_group_models(models.Model):
-    _name = 'kpi_setting_dsm_group'
+class kpi_setting_dsm_department_models(models.Model):
+    _name = 'kpi_setting_dsm_department'
 
     def _default_fiscal_year(self):
         fiscal_year_obj = self.env['fw_pfb_fin_system_fiscal_year'].search([
@@ -33,7 +33,7 @@ class kpi_setting_dsm_group_models(models.Model):
         "hr.department"
     )
     department_name = fields.Char(
-        string="กลุ่มงาน",
+        string="ฝ่าย",
         compute="_depends_department_id",
         store=True
     )
@@ -79,15 +79,15 @@ class kpi_setting_dsm_group_models(models.Model):
         string="สถานะ",
         default="draft"
     )
-    kpi_setting_group_lines_ids = fields.One2many(
-        "kpi_setting_dsm_group_lines",
-        "kpi_setting_group_lines_id",
+    kpi_setting_department_lines_ids = fields.One2many(
+        "kpi_setting_dsm_department_lines",
+        "kpi_setting_department_lines_id",
         string="KPI",
         copy=True
     )
-    kpi_setting_group_approval_lines_ids = fields.One2many(
-        "kpi_setting_group_approval_lines",
-        "kpi_setting_group_approval_lines_id",
+    kpi_setting_department_approval_lines_ids = fields.One2many(
+        "kpi_setting_department_approval_lines",
+        "kpi_setting_department_approval_lines_id",
         string="ลำดับการอนุมัติ",
         copy=True
     )
@@ -98,24 +98,24 @@ class kpi_setting_dsm_group_models(models.Model):
         default=0
     )
 
-    @api.depends('kpi_setting_group_lines_ids')
+    @api.depends('kpi_setting_department_lines_ids')
     def _sum_kpi_count_total(self):
         for line in self:
-            line.kpi_count_total = len(line.kpi_setting_group_lines_ids)
+            line.kpi_count_total = len(line.kpi_setting_department_lines_ids)
 
-    @api.depends('kpi_setting_group_lines_ids')
+    @api.depends('kpi_setting_department_lines_ids')
     def _sum_kpi_weight_total(self):
         for line in self:
             sum = 0
-            for rec in line.kpi_setting_group_lines_ids:
+            for rec in line.kpi_setting_department_lines_ids:
                 sum += rec.kpi_weight
             line.kpi_weight_total = sum
 
-    @api.depends('kpi_setting_group_lines_ids')
+    @api.depends('kpi_setting_department_lines_ids')
     def _sum_kpi_budget_total(self):
         sum = 0
         for line in self:
-            for rec in line.kpi_setting_group_lines_ids:
+            for rec in line.kpi_setting_department_lines_ids:
                 sum += rec.kpi_budget
             line.kpi_budget_total = sum
 
@@ -125,18 +125,18 @@ class kpi_setting_dsm_group_models(models.Model):
             line.department_name = line.department_id.name
 
     def checkApproval(self):
-        if len(self.kpi_setting_group_approval_lines_ids) <= 0:
+        if len(self.kpi_setting_department_approval_lines_ids) <= 0:
             raise ValidationError(_('กรุณาระบุผู้อนุมัติรายการ KPI ก่อนส่งอนุมัติ'))
 
-        for line in self.kpi_setting_group_approval_lines_ids:
+        for line in self.kpi_setting_department_approval_lines_ids:
             if line.employee_id.is_kpi_dummy:
                 raise ValidationError(_('กรุณาผู้อนุมัติของคุณ ซึ่งจะต้องไม่ใช่ข้อมูล Dummy'))
 
     def checkLineStatus(self):
-        if len(self.kpi_setting_group_lines_ids) <= 0:
+        if len(self.kpi_setting_department_lines_ids) <= 0:
             raise ValidationError(_('กรุณาสร้างข้อมูล Master KPI ก่อนส่งอนุมัติ'))
 
-        for line in self.kpi_setting_group_lines_ids:
+        for line in self.kpi_setting_department_lines_ids:
             if line.kpi_status == 'pending':
                 raise ValidationError(_('คุณต้องอัพเดทข้อมูล KPI ให้เป็นข้อมูลที่ ดำเนินการแล้ว ทั้งหมด ก่อนส่งอนุมัติ'))
 
@@ -145,26 +145,26 @@ class kpi_setting_dsm_group_models(models.Model):
         self.checkLineStatus()
 
         if self.state == 'draft' or self.state == 'adjust':
-            self.kpi_setting_group_approval_lines_ids[0].update({
+            self.kpi_setting_department_approval_lines_ids[0].update({
                 # 'approve_datetime': datetime.today(),
                 'status': 'pending'
             })
             self.update({
-                'current_approval_id': self.kpi_setting_group_approval_lines_ids[0].employee_id.user_id.id,
+                'current_approval_id': self.kpi_setting_department_approval_lines_ids[0].employee_id.user_id.id,
                 'state': 'pending',
             })
             self.approve_count = 1
 
-    def action_kpi_dsm_group_make_approval(self):
+    def action_kpi_dsm_department_make_approval(self):
         return {
             'name': "Group Make Approval Wizard",
             'view_mode': 'form',
             'view_type': 'form',
-            'res_model': 'kpi_dsm_group_make_approval_wizard',
+            'res_model': 'kpi_dsm_department_make_approval_wizard',
             'type': 'ir.actions.act_window',
             'target': 'new',
             'context': {
-                'default_kpi_setting_dsm_group_id': self.id,
+                'default_kpi_setting_dsm_department_id': self.id,
                 'default_current_state': self.state,
                 # 'default_employee_id': employee_id.id,
                 # 'default_setting_line': setting_line,
@@ -174,16 +174,16 @@ class kpi_setting_dsm_group_models(models.Model):
             }
         }
 
-class kpi_setting_dsm_group_lines_models(models.Model):
-    _name = 'kpi_setting_dsm_group_lines'
+class kpi_setting_dsm_department_lines_models(models.Model):
+    _name = 'kpi_setting_dsm_department_lines'
 
-    kpi_setting_group_lines_id = fields.Many2one(
-        "kpi_setting_dsm_group",
+    kpi_setting_department_lines_id = fields.Many2one(
+        "kpi_setting_dsm_department",
         required = True,
         ondelete='cascade'
     )
-    kpi_setting_dsm_lines_id = fields.Many2one(
-        "kpi_setting_dsm_lines"
+    kpi_setting_dsm_group_lines_id = fields.Many2one(
+        "kpi_setting_dsm_group_lines"
     )
     kpi_code = fields.Char(
         string="รหัสตัวชี้วัด"
@@ -199,10 +199,10 @@ class kpi_setting_dsm_group_lines_models(models.Model):
         string="มิติ"
     )
     kpi_target = fields.Text(string='เป้าหมาย')
-    # kpi_unit = fields.Many2one(
-    #     'uom.uom',
-    #     'หน่วย'
-    # )
+    kpi_unit = fields.Many2one(
+        'uom.uom',
+        'หน่วย'
+    )
     kpi_status = fields.Selection(
         [
             ("pending", "รอดำเนินการ"),
@@ -235,16 +235,16 @@ class kpi_setting_dsm_group_lines_models(models.Model):
         "hr.employee",
         string="ระบุ ชสศด."
     )
-    kpi_group_definition_lines_ids = fields.Many2many(
-        "kpi_group_definition_lines",
-        "kpi_setting_dsm_group_definition_lines_rel",
-        "kpi_setting_dsm_group_lines_id",
-        "kpi_group_definition_lines_id",
+    kpi_department_definition_lines_ids = fields.Many2many(
+        "kpi_department_definition_lines",
+        "kpi_setting_dsm_group_department_definition_lines_rel",
+        "kpi_setting_dsm_department_lines_id",
+        "kpi_department_definition_lines_id",
         string='KPI Definition',
     )
-    kpi_department_lines_ids = fields.One2many(
-        'kpi_department_lines',
-        'kpi_department_lines_id',
+    kpi_pm_lines_ids = fields.One2many(
+        'kpi_pm_lines',
+        'kpi_pm_lines_id',
         required=True,
         copy=True
     )
@@ -270,77 +270,100 @@ class kpi_setting_dsm_group_lines_models(models.Model):
             else:
                 rec.kpi_status = "pending"
 
-    @api.depends('kpi_department_lines_ids')
+    @api.depends('kpi_pm_lines_ids')
     def _kpi_weight_total(self):
         for rec in self:
             sum = 0
-            for line in rec.kpi_department_lines_ids:
-                sum += line.kpi_department_weight
+            for line in rec.kpi_pm_lines_ids:
+                sum += line.kpi_pm_weight
             rec.weight_total = sum
 
+class kpi_master_pm_lines(models.Model):
+    _name = 'kpi_pm_lines'
 
-class kpi_master_department_lines(models.Model):
-    _name = 'kpi_department_lines'
-
-    kpi_department_lines_id = fields.Many2one(
-        "kpi_setting_dsm_group_lines",
+    kpi_pm_lines_id = fields.Many2one(
+        "kpi_setting_dsm_department_lines",
         required=True,
         ondelete='cascade'
     )
-    kpi_hr_department_id = fields.Many2one(
-        "hr.department",
-        string="ฝ่าย",
-        domain="[('department_level', '=', 'DL2')]"
+    kpi_project_id = fields.Char(
+        string="โครงการ",
+        required=True,
     )
-    kpi_department_weight = fields.Float(
+    kpi_budget_code = fields.Many2one(
+        "account.analytic.account",
+        string="รหัสงบประมาณ",
+        required=True,
+    )
+    kpi_budget_amount = fields.Float(
+        string="งบประมาณ",
+        required=True,
+        digits=(10, 2),
+    )
+    kpi_start_date = fields.Date(
+        string="เริ่มต้น",
+        default=lambda self: date.today(),
+        required=True,
+    )
+    kpi_end_date = fields.Date(
+        string="สิ้นสุด",
+        default=lambda self: date.today(),
+        required=True,
+    )
+    kpi_hr_pm_id = fields.Many2one(
+        "hr.department",
+        string="PM (ส่วนงาน)",
+        domain="['|',('department_level', '=', 'DL1'),('child_ids', '=', False)]"
+    )
+    kpi_pm_weight = fields.Float(
         string="น้ำหนัก",
         digits=(10, 2),
     )
-    kpi_department_target = fields.Text(
+    kpi_pm_target = fields.Text(
         string="เป้าหมาย"
     )
-    kpi_department_definition_lines_ids = fields.One2many(
-        "kpi_department_definition_lines",
-        "kpi_department_definition_lines_id",
+    kpi_pm_definition_line_ids = fields.One2many(
+        "kpi_pm_definition_lines",
+        "kpi_pm_definition_lines_id",
         string="KPI",
         copy=True
     )
-    kpi_department_has_assign = fields.Boolean(
-        string='มอบหมาย'
-    )
-    kpi_department_assign_employee_id = fields.Many2one(
-        'hr.employee',
-        string='ผู้รับมอบหมาย'
-    )
 
-class kpi_department_definition_lines(models.Model):
-    _name = 'kpi_department_definition_lines'
+    @api.onchange('kpi_budget_code')
+    def _budget_amount(self):
+        acc_budget = self.env['account.analytic.account'].search([
+            ('id', '=', self.kpi_budget_code.id)
+        ])
+        self.kpi_budget_amount = acc_budget.budget
 
-    kpi_department_definition_lines_id = fields.Many2one(
-        "kpi_department_lines",
+class kpi_pm_definition_lines(models.Model):
+    _name = 'kpi_pm_definition_lines'
+
+    kpi_pm_definition_lines_id = fields.Many2one(
+        "kpi_pm_lines",
         required=True,
         ondelete='cascade'
     )
-    kpi_department_def_level = fields.Integer(
+    kpi_pm_def_level = fields.Integer(
         string="ระดับ"
     )
-    kpi_department_def_name = fields.Text(
+    kpi_pm_def_name = fields.Text(
         string="คำจำกัดความ"
     )
-    kpi_department_def_target = fields.Float(
+    kpi_pm_def_target = fields.Float(
         string="เป้าหมาย",
         digits=(10, 2)
     )
-    kpi_department_def_unit = fields.Many2one(
+    kpi_pm_def_unit = fields.Many2one(
         'uom.uom',
         'หน่วย'
     )
 
-class kpi_setting_group_approval_lines_models(models.Model):
-    _name = 'kpi_setting_group_approval_lines'
+class kpi_setting_department_approval_lines_models(models.Model):
+    _name = 'kpi_setting_department_approval_lines'
 
-    kpi_setting_group_approval_lines_id = fields.Many2one(
-        'kpi_setting_dsm_group',
+    kpi_setting_department_approval_lines_id = fields.Many2one(
+        'kpi_setting_dsm_department',
         required=True,
         ondelete='cascade'
     )

@@ -77,9 +77,9 @@ class kpi_master_lines_models(models.Model):
     #     string="เป้าหมาย",
     #     digits=(10, 2)
     # )
-    # kpi_master_target = fields.Text(
-    #     string="เป้าหมาย"
-    # )
+    kpi_master_def = fields.Text(
+        string="คำจำกัดความ"
+    )
     # kpi_master_unit = fields.Many2one(
     #     'uom.uom',
     #     'หน่วย'
@@ -140,8 +140,8 @@ class kpi_master_lines_models(models.Model):
     @api.multi
     @api.depends('kpi_budget_code_id')
     def _compute_kpi_budget_amount(self):
-        sum = 0
         for rec in self:
+            sum = 0
             for budget in rec.kpi_budget_code_id:
                 sum += budget.budget
             rec.kpi_budget_amount = sum
@@ -201,9 +201,12 @@ class kpi_definition_lines(models.Model):
     #     string="เป้าหมาย",
     #     digits=(10, 2)
     # )
-    kpi_definition_target = fields.Text(
-        string="เป้าหมาย"
-    )
+    # kpi_definition_target_target_start = fields.Float(
+    #     string="เป้าหมายเริ่มต้น"
+    # )
+    # kpi_definition_target_target_end = fields.Float(
+    #     string="เป้าหมายสิ้นสุด"
+    # )
     kpi_definition_unit = fields.Many2one(
         'uom.uom',
         'หน่วย'
@@ -225,8 +228,12 @@ class kpi_definition_target_lines(models.Model):
         required=True
     )
 
-    kpi_definition_target_target = fields.Float(
-        string="เป้าหมาย",
+    kpi_definition_target_target_end = fields.Float(
+        string="เป้าหมายสิ้นสุด",
+        digits=(10, 2)
+    )
+    kpi_definition_target_target_start = fields.Float(
+        string="เป้าหมายเริ่มต้น",
         digits=(10, 2)
     )
 
