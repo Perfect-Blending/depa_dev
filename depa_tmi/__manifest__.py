@@ -16,7 +16,7 @@
     # Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Uncategorized',
-    'version': '1.0.3',
+    'version': '1.0.5',
 
     # any module necessary for this one to work correctly
     'depends': [
@@ -34,10 +34,15 @@
         'views/kpi_setting_dsm_views.xml',
         'views/kpi_setting_group_views.xml',
         'views/kpi_setting_department_views.xml',
+        'views/kpi_setting_pm_views.xml',
+        'views/kpi_setting_activity_views.xml',
         'wizards/views/kpi_dsm_make_approval_wizard.xml',
         'wizards/views/kpi_dsm_group_make_approval_wizard.xml',
+        'wizards/views/kpi_dsm_department_make_approval_wizard.xml',
+        'wizards/views/kpi_dsm_pm_make_approval_wizard.xml',
         'views/hr_department_view.xml',
         'views/source_master_views.xml',
+        'views/activity_board_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

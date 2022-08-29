@@ -142,6 +142,8 @@ class kpi_setting_dsm_models(models.Model):
         kpi_master_lines = self.env['kpi_master_lines'].search([
             ('kpi_master_lines_id', '=', kpi_master.id),
         ])
+
+
         kpi_lines = []
         approval_ids = []
         group_id = self.env['res.groups'].search([('name', 'like', 'สามารถอนุมัติ KPI ระบบส่วนติดตามฯ')], limit=1)
@@ -155,7 +157,7 @@ class kpi_setting_dsm_models(models.Model):
             cus = 0.0
             inter = 0.0
             learn = 0.0
-            for i, rec in enumerate(kpi_master_lines):
+            for rec in kpi_master_lines:
                 # kpi_def = self.env['kpi_definition_lines'].search([
                 #     ('kpi_definition_lines_id', '=', rec.id),
                 # ])
@@ -172,43 +174,50 @@ class kpi_setting_dsm_models(models.Model):
                     learn += rec.kpi_master_weight
                     self.learning = learn
 
+                kpi_setting_dsm_lines = self.env['kpi_setting_dsm_lines'].search([
+                    ('kpi_master_lines_id', '=', rec.id),
+                ])
+                
+                if(kpi_setting_dsm_lines.is_done != True):
+                    #print(kpi_setting_dsm_lines.is_done)
+                    # def_lines = []
+                    # for line in rec.kpi_definition_lines_ids:
+                    #
+                    #     def_lines.append(
+                    #         (
+                    #             0,
+                    #             0,
+                    #             {
+                    #                 'kpi_group_def_level': line.kpi_definition_level,
+                    #                 'kpi_group_def_name': line.kpi_definition_name,
+                    #             }
+                    #         )
+                    #     )
 
-                # def_lines = []
-                # for line in rec.kpi_definition_lines_ids:
-                #
-                #     def_lines.append(
-                #         (
-                #             0,
-                #             0,
-                #             {
-                #                 'kpi_group_def_level': line.kpi_definition_level,
-                #                 'kpi_group_def_name': line.kpi_definition_name,
-                #             }
-                #         )
-                #     )
 
-                kpi_lines.append(
-                    (
-                        0,
-                        0,
-                        {
-                            # 'kpi_setting_dsm_lines_id': rec.id,
-                            'kpi_master_lines_id': rec.id,
-                            'kpi_code': rec.kpi_master_code,
-                            'kpi_name': rec.kpi_master_name,
-                            'kpi_weight': rec.kpi_master_weight,
-                            'kpi_target': [(6, 0, rec.kpi_target_lines_ids.ids)],
-                            # 'kpi_unit': rec.kpi_master_unit.id,
-                            'kpi_bsc': rec.kpi_master_bsc,
-                            'kpi_budget': rec.kpi_budget_amount,
-                            'kpi_calculate': 'sum',
-                            'kpi_master_definition_lines_ids': [(6, 0, rec.kpi_definition_lines_ids.ids)],
-                            'kpi_status': 'pending',
-                            'is_done': False
-                            # 'kpi_group_definition_line_ids': def_lines,
-                        }
+                    kpi_lines.append(
+                        (
+                            0,
+                            0,
+                            {
+                                # 'kpi_setting_dsm_lines_id': rec.id,
+                                'kpi_master_lines_id': rec.id,
+                                'kpi_code': rec.kpi_master_code,
+                                'kpi_name': rec.kpi_master_name,
+                                'kpi_weight': rec.kpi_master_weight,
+                                'kpi_target': [(6, 0, rec.kpi_target_lines_ids.ids)],
+                                # 'kpi_unit': rec.kpi_master_unit.id,
+                                'kpi_bsc': rec.kpi_master_bsc,
+                                'kpi_budget': rec.kpi_budget_amount,
+                                'kpi_calculate': 'sum',
+                                'kpi_master_definition_lines_ids': [(6, 0, rec.kpi_definition_lines_ids.ids)],
+                                'kpi_master_target_lines_ids': [(6, 0, rec.kpi_target_lines_ids.ids)],
+                                'kpi_status': 'pending',
+                                'is_done': False
+                                # 'kpi_group_definition_line_ids': def_lines,
+                            }
+                        )
                     )
-                )
         # self.update({'kpi_setting_dsm_lines_ids': [(5,)]})
         # print(kpi_lines)
         employee_dummy = self.env['hr.employee'].search([
@@ -330,9 +339,7 @@ class kpi_setting_dsm_lines_models(models.Model):
         required = True,
         ondelete='cascade'
     )
-    kpi_master_lines_id = fields.Many2one(
-        "kpi_master_lines"
-    )
+    kpi_master_lines_id = fields.Integer()
     kpi_code = fields.Char(
         string="รหัสตัวชี้วัด"
     )
@@ -463,7 +470,7 @@ class kpi_master_group_lines(models.Model):
     # )
     kpi_group_weight = fields.Float(
         string="น้ำหนัก",
-        digits=(10, 2),
+        digits=(10, 4),
     )
     kpi_group_target = fields.Text(
         string="เป้าหมาย"
@@ -497,7 +504,7 @@ class kpi_group_definition_lines(models.Model):
     kpi_group_def_name = fields.Text(
         string="คำจำกัดความ"
     )
-    kpi_group_def_target = fields.Text(
+    kpi_group_def_target = fields.Float(
         string="เป้าหมาย"
     )
     kpi_group_def_unit = fields.Many2one(
