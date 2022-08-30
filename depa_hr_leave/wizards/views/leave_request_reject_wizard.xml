@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="leave_request_reject_wizard_form" model="ir.ui.view">
+        <field name="name">leave request reject wizard form</field>
+        <field name="model">leave_request</field>
+        <field name="priority" eval="60"/>
+        <field name="arch" type="xml">
+            <form string="ปฏิเสธคำขออนุมัติการลา">
+                <sheet>
+                    <group>
+                        <field name="reject_remark" string="ความคิดเห็น"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <div style="text-align:center">
+                        <button string="ปฏิเสธ"
+                                class="btn-danger pull-right"
+                                icon="fa-times"
+                                type="object"
+                                name="action_reject_leave_request"
+                                confirm="คุณต้องการปฏิเสธคำขออนุมัติการลาใช่หรือไม่" />
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="leave_request_reject_wizard_action_window" model="ir.actions.act_window">
+        <field name="name">leave request reject wizard window</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">leave_request</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="leave_request_reject_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

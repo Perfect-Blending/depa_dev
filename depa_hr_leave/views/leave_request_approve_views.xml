@@ -42,7 +42,7 @@
                                 name="reject_leave_request"
                                 type="object"
                                 icon="fa-times-circle"
-                                class="oe_stat_button" confirm="ปฏิเสธคำขอใช่หรือไม่"/>
+                                class="oe_stat_button"/>
                         <button string="ส่งคำขออนุมัติการลา"
                                 attrs="{'invisible': [('state', 'not in', ['draft'])]}"
                                 name="send_leave_request"
@@ -53,8 +53,7 @@
                                 attrs="{'invisible': [('state', 'not in', ['done'])]}"
                                 name="cancel_approved_leave_request"
                                 type="object"
-                                groups="depa_hr_leave.group_user_depa_leave_setting"
-                                class="oe_stat_button" confirm="ยกเลิกคำขออนุมัติการลาที่ผ่านการอนุมัติแล้วใช่หรือไม่"/>
+                                class="oe_stat_button"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -225,10 +224,17 @@
         </record>
 
         <record model="ir.actions.act_window" id="leave_request_approve_hr_action_window">
-            <field name="name">การลาทั้งหมด</field>
+            <field name="name">คำขออนุมัติทั้งหมด</field>
             <field name="res_model">leave_request</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('state', 'in', ['sent'])]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="leave_request_approver_approved_action_window">
+            <field name="name">คำขอที่อนุมัติแล้ว</field>
+            <field name="res_model">leave_request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('request_approval_id.user_id.id', '=', uid), ('state', '=', 'done')]</field>
         </record>
 
         <record id="leave_request_approve_action_window_tree" model="ir.actions.act_window.view">
@@ -259,6 +265,20 @@
             <field name="act_window_id" ref="leave_request_approve_hr_action_window"/>
         </record>
 
+        <record id="leave_request_approve_approved_action_window_tree" model="ir.actions.act_window.view">
+            <!-- <field name="sequence" eval="3"/> -->
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="leave_request_approve_list"/>
+            <field name="act_window_id" ref="leave_request_approver_approved_action_window"/>
+        </record>
+
+        <record id="leave_request_approve_approved_action_window_form" model="ir.actions.act_window.view">
+            <!-- <field name="sequence" eval="4"/> -->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="leave_request_approve_form"/>
+            <field name="act_window_id" ref="leave_request_approver_approved_action_window"/>
+        </record>
+
         <menuitem name="อนุมัติการลา"
                   sequence="3"
                   id="depa_hr_leave.menu_leave_request_approve"
@@ -274,12 +294,21 @@
                   action="leave_request_approve_action_window"
         />
 
-        <menuitem name="การลาทั้งหมด"
+        <menuitem name="คำขออนุมัติทั้งหมด"
                   sequence="2"
                   id="depa_hr_leave.leave_request_approve_hr_button"
                   parent="depa_hr_leave.menu_leave_request_approve"
                   groups="group_user_depa_leave_setting"
                   action="leave_request_approve_hr_action_window"
+        />
+
+        <menuitem name="คำขอที่อนุมัติแล้ว"
+                  sequence="3"
+                  id="depa_hr_leave.leave_request_approve_approved_button"
+                  parent="depa_hr_leave.menu_leave_request_approve"
+                  groups="for_group_approval_depa_leave_setting"
+                  action="leave_request_approver_approved_action_window"  
+        
         />
 
 

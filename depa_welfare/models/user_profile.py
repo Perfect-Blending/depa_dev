@@ -72,13 +72,7 @@ class user_profile(models.Model):
         attachment=True
     )
     name = fields.Char(
-
         default=lambda self: self._default_employee_id().name,
-        readonly=True
-    )
-    name_en = fields.Char(
-        'ขื่อภาษาอังกฤษ',
-        default=lambda self: self._default_employee_id().name_en,
         readonly=True
     )
     emp_code = fields.Char(

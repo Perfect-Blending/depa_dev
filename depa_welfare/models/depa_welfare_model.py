@@ -152,14 +152,12 @@ class depa_welfare(models.Model):
         compute="_amount_total",
         store=True,
         readonly=True,
-        digits=(10, 2)
     )
     point_total = fields.Float(
         string='คะแนนที่ใช้',
         compute="_point_total",
         store=True,
         readonly=True,
-        digits=(10, 2)
     )
     welfare_year = fields.Char(
         string='ปีงบประมาณ',
@@ -246,10 +244,10 @@ class depa_welfare(models.Model):
         for rec in self:
             rec.point_remain = rec.point_balance - round(rec.point_total, 2)
 
-    @api.depends('point_remain')
+    @api.depends('amount_total')
     def _amount_remain(self):
         for rec in self:
-            rec.amount_remain = rec.point_remain * 105
+            rec.amount_remain = rec.amount_balance - rec.amount_total
 
     @api.multi
     def name_get(self):
