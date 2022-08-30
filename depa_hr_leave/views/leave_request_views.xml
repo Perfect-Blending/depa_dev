@@ -25,7 +25,7 @@
             <field name="name">leave request list</field>
             <field name="model">leave_request</field>
             <field name="arch" type="xml">
-                <tree string="ขออนุมัติการลา" create="0"
+                <tree string="ขออนุมัติการลา"
                       default_order="date_from desc"
                       decoration-success="state == 'done'"
                       decoration-danger="state == 'reject'"
@@ -85,11 +85,13 @@
                                 <group colspan="4">
                                     <field name="request_date_from"
                                            attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                           autocomplete = "off"
                                     />
                                 </group>
                                 <group colspan="4">
                                     <field name="request_date_to"
                                            attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                           autocomplete = "off"
                                     />
                                 </group>
                             </group>
@@ -124,7 +126,7 @@
                             </group>
                             <group colspan="4" col="12">
                                 <group colspan="4">
-                                    <field name="request_days"/>
+                                    <field name="request_days" force_save="1"/>
                                 </group>
                                 <group colspan="4">
                                     <field name="request_attachment_ids" attrs="{'readonly': [('state', 'not in', ['draft'])]}" widget="many2many_binary"/>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="leave_request_cancel_approved_wizard_form" model="ir.ui.view">
+        <field name="name">leave request cancel approved wizard form</field>
+        <field name="model">leave_request</field>
+        <field name="priority" eval="60"/>
+        <field name="arch" type="xml">
+            <form string="ยกเลิกคำขอที่อนุมัติแล้ว">
+                <sheet>
+                    <group>
+                        <field name="cancel_remark" string="ความคิดเห็น"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <div style="text-align:center">
+                        <button string="ยืนยันการยกเลิก"
+                                class="btn-danger pull-right"
+                                icon="fa-times"
+                                type="object"
+                                name="action_cancel_approved_leave_request"
+                                confirm="คุณต้องการยกเลิกคำขออนุมัติการลาใช่หรือไม่" />
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="leave_request_cancel_approved_wizard_action_window" model="ir.actions.act_window">
+        <field name="name">leave request cancel approved wizard window</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">leave_request</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="leave_request_cancel_approved_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
