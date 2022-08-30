@@ -244,7 +244,8 @@ class leave_request(models.Model):
     )
     request_days = fields.Float(
         string="ระยะเวลา (วัน)",
-        compute='_compute_request_days',
+        # compute='_compute_request_days',
+        readonly=True,
         store=True
     )
     request_approval_id = fields.Many2one(
@@ -309,6 +310,7 @@ class leave_request(models.Model):
         default=False,
         store=True
     )
+    
     show_half_day_selection = fields.Boolean(
         string='แสดงตัวเลือกครึ่งวัน',
         default=False,
@@ -320,6 +322,18 @@ class leave_request(models.Model):
         "hr_employee_id",
         default= lambda self: self._get_employee_quota(),
         store=False
+    )
+
+    reject_remark = fields.Text(
+        default=False,
+        String="ความคิดเห็น (ปฏิเสธ)",
+        track_visibility="onchange"
+    )
+
+    cancel_remark = fields.Text(
+        default=False,
+        String="ความคิดเห็น (ยกเลิก)",
+        track_visibility="onchange"
     )
 
     @api.onchange('request_type_id', 'request_approval_id')
@@ -361,7 +375,7 @@ class leave_request(models.Model):
                 return 0.5
             else:
                 holidays = self._get_public_holidays()
-                if (date_from.date() == date_to.date() and date_from.date().weekday() in [5,6])\
+                if (date_from.date() == date_to.date() and date_from.date().weekday() in [5,6]) \
                 or (relativedelta(date_to.date(), date_from.date()) == 1 and date_from.date().weekday() in [5,6] and date_to.date().weekday() in [5,6]):
                     if holidays:
                         if date_from.date() in holidays:
@@ -370,6 +384,8 @@ class leave_request(models.Model):
                 elif relativedelta(date_to.date(), date_from.date()).days <= 0:
                     rec.request_date_to = rec.request_date_from
                     rec.date_to = rec.date_from = datetime.combine(rec.request_date_from, datetime.min.time())
+                    if (date_from.date().weekday() in [5,6]):
+                        return 0
                     return 1
                 employee = self.env['hr.employee'].browse(self._get_employee_id())
                 # date_from_calculate = datetime.combine(date_from, datetime.min.time())
@@ -392,16 +408,20 @@ class leave_request(models.Model):
             else:
                 rec.show_half_day_selection = False
                 rec.half_day_selection = False
-            rec.date_from = datetime.combine(rec.request_date_from, datetime.min.time())
-            rec.date_to = datetime.combine(rec.request_date_to, datetime.min.time())
+            if rec.request_date_from:
+                rec.date_from = datetime.combine(rec.request_date_from, datetime.min.time())
+            if rec.request_date_to:
+                rec.date_to = datetime.combine(rec.request_date_to, datetime.min.time())
+            self._compute_request_days()
 
-    @api.depends('date_from','date_to')
+    # @api.depends('date_from','date_to')
     def _compute_request_days(self):
         for rec in self:
-            rec.request_date_from = rec.date_from.date()
-            rec.request_date_to = rec.date_to.date()
-            # self.request_days = self._calculate_leave_days(date_from=self.request_date_from, date_to=self.request_date_to)
-            rec.request_days = self._calculate_leave_days(date_from=rec.date_from, date_to=rec.date_to)
+            if rec.date_from and rec.date_to:
+                rec.request_date_from = rec.date_from.date()
+                rec.request_date_to = rec.date_to.date()
+                # self.request_days = self._calculate_leave_days(date_from=self.request_date_from, date_to=self.request_date_to)
+                rec.request_days = self._calculate_leave_days(date_from=rec.date_from, date_to=rec.date_to)
 
     @api.multi
     def unlink(self):
@@ -437,12 +457,23 @@ class leave_request(models.Model):
         elif action == "reject":
             email_to = self.requester_id.user_id.partner_id.email
             message_body =  '<p> เรียน ' + self.requester_id.name + '</p>' + \
-                            '<p> คำขอการลาของคุณถูกปฏิเสธ </p><br/><br/>' + \
+                            '<p> คำขอการลาของคุณถูกปฏิเสธ โดย '+ self.request_approval_id.name + '</p><br/><br/>' + \
+                            '<p> ความคิดเห็น : ' + self.reject_remark + '</p><br/>' + \
                             '<p> ประเภทการลา : ' + self.request_type_id.name + '</p>' + \
                             '<p> จากวันที่ : ' + str(self.request_date_from) + '</p>' + \
                             '<p> ถึงวันที่  : ' + str(self.request_date_to) + '</p>' + \
                             '<p> ตรวจสอบได้ที่ <a href='+ web_base +'web#id='+ str(id)+'&model=leave_request&action='+ action_id +'&view_type=form>คำขออนุมัติ</a> </p>'
             subject = 'คำขอการลาถูกปฏิเสธ'
+        elif action == "cancel":
+            email_to = self.requester_id.user_id.partner_id.email
+            message_body =  '<p> เรียน ' + self.requester_id.name + '</p>' + \
+                            '<p> คำขอการลาของคุณที่อนุมัติแล้ว ถูกยกเลิก โดย '+ self.request_approval_id.name +'</p><br/><br/>' + \
+                            '<p> ความคิดเห็น : ' + self.cancel_remark + '</p><br/>' + \
+                            '<p> ประเภทการลา : ' + self.request_type_id.name + '</p>' + \
+                            '<p> จากวันที่ : ' + str(self.request_date_from) + '</p>' + \
+                            '<p> ถึงวันที่  : ' + str(self.request_date_to) + '</p>' + \
+                            '<p> ตรวจสอบได้ที่ <a href='+ web_base +'web#id='+ str(id)+'&model=leave_request&action='+ action_id +'&view_type=form>คำขออนุมัติ</a> </p>'
+            subject = 'คำขอการลาที่อนุมัติแล้ว ถูกยกเลิก'
         template_obj = request.env['mail.mail']
         template_data = {
             'subject': subject,
@@ -488,6 +519,29 @@ class leave_request(models.Model):
             raise ValidationError(_("ต้องเป็นผู้อนุมัติเท่านั้น"))
 
     def reject_leave_request(self):
+        # if self.request_approval_id.id == self._get_employee_id():
+        #     self.update({
+        #         'state': 'reject',
+        #         'state_id': self._get_state_id(state='reject')
+        #     })
+        #     self.send_email(id=self.id, action="reject")
+        #     self.message_post(
+        #         body="ปฏิเสธคำขอโดย " + self.request_approval_id.name
+        #     )
+        # else:
+        #     raise ValidationError(_("ต้องเป็นผู้อนุมัติเท่านั้น"))
+        return {
+            'name': "ปฏิเสธคำขออนุมัติการลา",
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'leave_request',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': self.id,
+            'view_id': self.env.ref('depa_hr_leave.leave_request_reject_wizard_form').id,
+        }
+
+    def action_reject_leave_request(self):
         if self.request_approval_id.id == self._get_employee_id():
             self.update({
                 'state': 'reject',
@@ -495,7 +549,8 @@ class leave_request(models.Model):
             })
             self.send_email(id=self.id, action="reject")
             self.message_post(
-                body="ปฏิเสธคำขอโดย " + self.request_approval_id.name
+                body="ปฏิเสธคำขอโดย " + self.request_approval_id.name + "<br/>" + \
+                     "ความคิดเห็น : " + self.reject_remark
             )
         else:
             raise ValidationError(_("ต้องเป็นผู้อนุมัติเท่านั้น"))
@@ -514,17 +569,51 @@ class leave_request(models.Model):
             raise ValidationError(_("ต้องมีสิทธิ์ในการตั้งค่าการลาเท่านั้น หรือเป็นผู้ขออนุมัติเท่านั้น"))
 
     def cancel_approved_leave_request(self):
-        if self.env.user.has_group('depa_hr_leave.group_user_depa_leave_setting'):
+        # if self.request_approval_id.id == self._get_employee_id():
+        #     self.update({
+        #         'state': 'reject',
+        #         'state_id': self._get_state_id(state='reject')
+        #     })
+        #     self.send_email(id=self.id, action="reject")
+        #     self.message_post(
+        #         body="ปฏิเสธคำขอโดย " + self.request_approval_id.name
+        #     )
+        # else:
+        #     raise ValidationError(_("ต้องเป็นผู้อนุมัติเท่านั้น"))
+        return {
+            'name': "ยกเลิกคำขอที่อนุมัติแล้ว",
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'leave_request',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': self.id,
+            'view_id': self.env.ref('depa_hr_leave.leave_request_cancel_approved_wizard_form').id,
+        }
+
+    def action_cancel_approved_leave_request(self):
+        if self.env.user.has_group('depa_hr_leave.group_user_depa_leave_setting') or self.requester_id.user_id.id == self._uid:
             quota = self._get_employee_quota_for_approver()
             request_days = self.request_days
             type_en_name = self.request_type_id.en_name
+
             quota_days = quota[type_en_name]
             return_days = int(quota_days)+int(request_days)
 
-            quota.update({
-                type_en_name: return_days
-            })
-
+            if type_en_name in ['vacation'] and return_days > 12:
+                vacation_remaining = quota['vacation_remaining']
+                delta_days = return_days - 12
+                vacation_days = 12
+                vacation_remaining_days = vacation_remaining + delta_days
+                quota.update({
+                    'vacation': vacation_days,
+                    'vacation_remaining': vacation_remaining_days
+                })
+            else:
+                quota.update({
+                    type_en_name: return_days
+                })
+            self.send_email(id=self.id, action="cancel")
             self.update({
                 'state': 'cancel',
                 'state_id': self._get_state_id(state='cancel')

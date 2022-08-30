@@ -149,14 +149,14 @@
                     <label for="amount_total" string="จำนวนเงินขอเบิกรวม"/>
                   </div>
                   <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" style="color:#5f5e97 ! important;"/>
-                  <div class="oe_subtotal_footer_separator oe_inline">
-                    <label for="point_total" string="คะแนนที่ใช้รวม"/>
-                  </div>
-                  <field name="point_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" style="color:#5f5e97 ! important;"/>
-                  <div class="oe_subtotal_footer_separator oe_inline">
-                    <label for="point_remain" string="คะแนนคงเหลือ"/>
-                  </div>
-                  <field name="point_remain" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>
+<!--                  <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                    <label for="point_total" string="คะแนนที่ใช้รวม"/>-->
+<!--                  </div>-->
+<!--                  <field name="point_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" style="color:#5f5e97 ! important;"/>-->
+<!--                  <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                    <label for="point_remain" string="คะแนนคงเหลือ"/>-->
+<!--                  </div>-->
+<!--                  <field name="point_remain" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>-->
                   <div class="oe_subtotal_footer_separator oe_inline">
                     <label for="amount_remain" string="จำนวนเงิน"/>
                   </div>

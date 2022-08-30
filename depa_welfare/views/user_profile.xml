@@ -36,7 +36,6 @@
                                                 <field name="birthday" readonly="1"/>
                                                 <field name="age" readonly="1"/>
                                                 <field name="identification_id" readonly="1"/>
-                                                <field name="name_en" readonly="1"/>
                                             </group>
                                             <group string="ข้อมูลการติดต่อ" colspan="4">
                                                 <field name="email" widget="email" readonly="1"/>

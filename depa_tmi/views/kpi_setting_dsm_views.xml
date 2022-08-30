@@ -45,8 +45,10 @@
                                           <field name="department_id"
                                                string="ชื่อกลุ่มงาน"
                                                options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"
-                                               required='1' readonly="1"/>
-                                         <field name="group_weight_total"/>
+                                               required='1' readonly="1"
+                                               force_save="1"
+                                            />
+                                         <field name="group_weight_total" force_save="1"/>
                                      </tree>
 
 
@@ -129,25 +131,25 @@
                                         <tr>
                                             <td>Financial (F)</td>
                                             <td>
-                                                <field name="financial"/>
+                                                <field name="financial" force_save="1"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Customer (C)</td>
                                             <td>
-                                                <field name="customer"/>
+                                                <field name="customer" force_save="1"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Internal (I)</td>
                                             <td>
-                                                <field name="internal"/>
+                                                <field name="internal" force_save="1"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Learning (L)</td>
                                             <td>
-                                                <field name="learning"/>
+                                                <field name="learning" force_save="1"/>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -160,7 +162,8 @@
                         <page string='Cascade KPI'>
                             <field name="kpi_setting_dsm_lines_ids"
                                    attrs="{'readonly': [('state', 'not in', ('draft', 'adjust'))]}">
-                                <tree create="false" delete="false">
+                                <tree create="false" delete="false" default_order="kpi_code asc">
+                                    <field name="kpi_master_lines_id" invisible="1"/>
                                     <field name="kpi_bsc"/>
                                     <field name="kpi_code"/>
                                     <field name="kpi_name"/>
@@ -211,7 +214,7 @@
                                     <field name="kpi_master_target_lines_ids" readonly="1" force_save="1">
                                         <tree create="0" delete="0" edit="0">
                                             <field name="kpi_target_target" readonly="1" force_save="1"/>
-                                            <field name="kpi_target_unit" readonly="1" invisible="1"/>
+                                            <field name="kpi_target_unit" readonly="1" force_save="1"/>
                                         </tree>
                                     </field>
                                     <field name="kpi_master_definition_lines_ids" readonly="1" force_save="1">
@@ -221,8 +224,9 @@
                                                    readonly="1"
                                                    force_save="1"/>
                                             <field name="kpi_definition_name" readonly="1" force_save="1"/>
-                                            <field name="kpi_definition_target" readonly="1" force_save="1"/>
-                                            <field name="kpi_definition_unit" readonly="1" invisible="1"/>
+<!--                                            <field name="kpi_definition_target_target_start" readonly="1" force_save="1"/>-->
+<!--                                            <field name="kpi_definition_target_target_end" readonly="1" force_save="1"/>-->
+<!--                                            <field name="kpi_definition_unit" readonly="1" invisible="1"/>-->
                                         </tree>
                                     </field>
                                     <field name="kpi_group_lines_ids"
@@ -262,6 +266,7 @@
                                                             <field name="kpi_group_def_level"/>
                                                             <field name="kpi_group_def_name"/>
                                                             <field name="kpi_group_def_target"/>
+                                                            <field name="kpi_group_def_unit" />
                                                         </tree>
                                                     </field>
                                                 </page>
@@ -444,25 +449,25 @@
                                         <tr>
                                             <td>Financial (F)</td>
                                             <td>
-                                                <field name="financial"/>
+                                                <field name="financial" force_save="1"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Customer (C)</td>
                                             <td>
-                                                <field name="customer"/>
+                                                <field name="customer" force_save="1"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Internal (I)</td>
                                             <td>
-                                                <field name="internal"/>
+                                                <field name="internal" force_save="1"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Learning (L)</td>
                                             <td>
-                                                <field name="learning"/>
+                                                <field name="learning" force_save="1"/>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -475,6 +480,7 @@
                         <page string='Cascade KPI'>
                             <field name="kpi_setting_dsm_lines_ids">
                                 <tree create="false" delete="false">
+                                    <field name="kpi_master_lines_id" invisible="1"/>
                                     <field name="kpi_bsc"/>
                                     <field name="kpi_code"/>
                                     <field name="kpi_name"/>
@@ -516,7 +522,7 @@
                                         <tree create="0" delete="0">
 
                                             <field name="kpi_target_target" readonly="1" force_save="1"/>
-                                            <field name="kpi_target_unit" readonly="1" invisible="1"/>
+                                            <field name="kpi_target_unit" readonly="1" force_save="1"/>
                                         </tree>
                                     </field>
                                     <field name="kpi_master_definition_lines_ids" readonly="1">
@@ -526,8 +532,9 @@
                                                    readonly="1"
                                                    force_save="1"/>
                                             <field name="kpi_definition_name" readonly="1" force_save="1"/>
-                                            <field name="kpi_definition_target" readonly="1" force_save="1"/>
-                                            <field name="kpi_definition_unit" readonly="1" invisible="1"/>
+<!--                                            <field name="kpi_definition_target_target_start" readonly="1" force_save="1"/>-->
+<!--                                            <field name="kpi_definition_target_target_end" readonly="1" force_save="1"/>-->
+<!--                                            <field name="kpi_definition_unit" readonly="1" invisible="1"/>-->
                                         </tree>
                                     </field>
                                     <field name="kpi_group_lines_ids" readonly="1">
@@ -566,6 +573,7 @@
                                                             <field name="kpi_group_def_level"/>
                                                             <field name="kpi_group_def_name"/>
                                                             <field name="kpi_group_def_target"/>
+                                                            <field name="kpi_group_def_unit" />
                                                         </tree>
                                                     </field>
                                                 </page>
