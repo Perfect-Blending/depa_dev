@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        <record id="depa_device_list" model="ir.ui.view">
+            <field name="name">depa device list</field>
+            <field name="model">depa_device</field>
+            <field name="arch" type="xml">
+                <tree string="ยี่ห้ออุปกรณ์">
+                    <field name="name"></field>
+                </tree>
+            </field>
+        </record>
+
+        <record id="depa_device_form" model="ir.ui.view">
+            <field name="name">depa device form</field>
+            <field name="model">depa_device</field>
+            <field name="arch" type="xml">
+                <form string="อุปกรณ์">
+                    <sheet>
+                        <group colspan="4" col="12">
+                            <group colspan="4">
+                                <field name="name"/>
+                            </group>
+                        </group>
+                        <field name="device_line_ids">
+                            <tree editable='bottom'>
+                                <field name="serial"/>
+                                <field name="employee_id" string="พนักงานที่ใช้งาน" autocomplete="off"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="depa_device_action_window" model="ir.actions.act_window">
+            <field name="name">ตั้งค่าอุปกรณ์</field>
+            <field name="res_model">depa_device</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <record id="depa_device_action_window_tree" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="depa_device_list"/>
+            <field name="act_window_id" ref="depa_device_action_window"/>
+        </record>
+
+        <record id="depa_device_action_window_form" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="depa_device_form"/>
+            <field name="act_window_id" ref="depa_device_action_window"/>
+        </record>
+
+        <menuitem name="ตั้งค่าอุปกรณ์" id="depa_device.menu_depa_device" 
+        parent="hr.menu_human_resources_configuration" action="depa_device_action_window"/>
+        
+    </data>
+</odoo>
