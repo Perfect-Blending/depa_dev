@@ -419,12 +419,11 @@ class leave_request(models.Model):
                 rec.half_day_selection = False
 
             if self._get_fiscal_year(rec.request_date_from) == self._get_fiscal_year(rec.request_date_to):
+                if rec.request_date_from:
+                    rec.date_from = datetime.combine(rec.request_date_from, datetime.min.time())
+                if rec.request_date_to:
+                    rec.date_to = datetime.combine(rec.request_date_to, datetime.min.time())
                 self._compute_request_days()
-
-            if rec.request_date_from:
-                rec.date_from = datetime.combine(rec.request_date_from, datetime.min.time())
-            if rec.request_date_to:
-                rec.date_to = datetime.combine(rec.request_date_to, datetime.min.time())
 
             else:
                 raise ValidationError("วันเริ่มต้นและวันสิ้นสุด ต้องอยู่ในปีงบประมาณเดียวกัน")
