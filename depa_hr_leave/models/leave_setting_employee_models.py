@@ -37,10 +37,10 @@ class leave_setting_employee(models.Model):
                 self.employee_ids = [(0, 0, {
                     'employee_id': emp.id,
                     'hr_employee_id': self.id,
-                    'sick': 365.0,
-                    'site': 365.0,
-                    'checkin': 365.0,
-                    'seminar': 365.0
+                    'sick': 30.0,
+                    'site': 30.0,
+                    'checkin': 30.0,
+                    'seminar': 30.0
                 })]
 
 class leave_setting_employee_lines(models.Model):

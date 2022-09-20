@@ -132,21 +132,32 @@
                                     <field name="request_attachment_ids" attrs="{'readonly': [('state', 'not in', ['draft'])]}" widget="many2many_binary"/>
                                 </group>
                             </group>
-                            <notebook class="oe_edit_only" attrs="{'invisible': [('state', 'not in', ['draft'])]}" >
-                                <page string="โควต้าการลาปัจจุบัน">
-                                    <field name="employee_quota" readonly="1" class="oe_edit_only">
-                                        <tree>
-                                            <field name="sick"/>
-                                            <field name="personal"/>
-                                            <field name="vacation"/>
-                                            <field name="vacation_remaining"/>
-                                            <field name="site"/>
-                                            <field name="checkin"/>
-                                            <field name="seminar"/>
-                                        </tree>
-                                    </field>
-                                </page>
-                            </notebook>
+                            <group colspan="12" col="12">
+                                <notebook class="oe_edit_only" attrs="{'invisible': [('state', 'not in', ['draft'])]}" >
+                                    <page string="โควต้าการลาปัจจุบัน">
+                                        <field name="employee_quota" 
+                                            readonly="1" class="oe_edit_only"
+                                        >
+                                            <tree editable="bottom">
+                                                <field name="sick" readonly="1"/>
+                                                <field name="personal" readonly="1"/>
+                                                <field name="vacation" readonly="1"/>
+                                                <field name="vacation_remaining" readonly="1"/>
+                                                <field name="site" readonly="1"/>
+                                                <field name="checkin" readonly="1"/>
+                                                <field name="seminar" string="อบรม" readonly="1"/>
+                                                <field name="birth" string="คลอดบุตร" readonly="1"/>
+                                                <field name="raising" string="เลี้ยงดูบุตร" readonly="1"/>
+                                                <field name="ordain" string="อุปสมบท" readonly="1"/>
+                                                <field name="training" string="พัฒนาพนักงาน" readonly="1"/>
+                                                <field name="government" string="มติรัฐมนตรี" readonly="1"/>
+                                            </tree>
+                                            <form>
+                                            </form>
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </group>
                         </group>
                     </sheet>
                     <div class="oe_chatter">

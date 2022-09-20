@@ -32,7 +32,12 @@
                       <field name="vacation_remaining" />
                       <field name="site" />
                       <field name="checkin" />
-                      <field name="seminar" />
+                      <field name="seminar" string="อบรม"/>
+                      <field name="birth" string="คลอดบุตร"/>
+                      <field name="raising" string="เลี้ยงดูบุตร"/>
+                      <field name="ordain" string="อุปสมบท"/>
+                      <field name="training" string="พัฒนาพนักงาน"/>
+                      <field name="government" string="มติรัฐมนตรี"/>
                   </tree>
                 </field>
 
