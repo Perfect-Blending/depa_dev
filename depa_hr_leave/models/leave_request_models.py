@@ -76,6 +76,15 @@ class leave_request(models.Model):
         if fiscal_year_obj:
             return fiscal_year_obj.id
 
+    def _get_fiscal_year(self, date):
+        fiscal_year_obj = self.env['fw_pfb_fin_system_fiscal_year'].search([
+            ('date_start', '<=', date),
+            ('date_end', '>=', date),
+        ], limit=1)
+
+        if fiscal_year_obj:
+            return fiscal_year_obj.id
+
 
     def _get_public_holidays(self):
         this_year_holidays = self.env['leave_request_public_holidays'].search([
@@ -408,11 +417,17 @@ class leave_request(models.Model):
             else:
                 rec.show_half_day_selection = False
                 rec.half_day_selection = False
+
+            if self._get_fiscal_year(rec.request_date_from) == self._get_fiscal_year(rec.request_date_to):
+                self._compute_request_days()
+
             if rec.request_date_from:
                 rec.date_from = datetime.combine(rec.request_date_from, datetime.min.time())
             if rec.request_date_to:
                 rec.date_to = datetime.combine(rec.request_date_to, datetime.min.time())
-            self._compute_request_days()
+
+            else:
+                raise ValidationError("วันเริ่มต้นและวันสิ้นสุด ต้องอยู่ในปีงบประมาณเดียวกัน")
 
     # @api.depends('date_from','date_to')
     def _compute_request_days(self):
