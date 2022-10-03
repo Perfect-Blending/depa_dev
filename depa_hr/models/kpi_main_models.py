@@ -923,7 +923,8 @@ class kpi_main(models.Model):
     @api.depends('state')
     def _compute_show_kpi_sent_button(self):
         kpi_round_setting = self.env['kpi_round_setting'].search([
-            ('fiscal_year_id', '=', self._default_fiscal_year()),
+            # ('fiscal_year_id', '=', self._default_fiscal_year()),
+            ('fiscal_year_id', '=', self.kpi_fiscal_year.id),
             ('active', '=', True)
         ], limit=1)
         if kpi_round_setting:
