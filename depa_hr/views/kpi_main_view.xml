@@ -743,9 +743,7 @@
         <!-- menu categories -->
         <menuitem name="การประเมินผล" sequence="1" id="depa_hr_evaluation_menu" parent="depa_hr_menu_root"/>
         <menuitem name="ผลการประเมิน" sequence="2" id="kpi_result_menu" parent="depa_hr_menu_root" action="show_kpi_result_wizard_action_window"/>
-
-        <menuitem name="ผลการจัดกลุ่ม" sequence="2" id="kpi_group_menu" parent="depa_hr_menu_root" action="show_group_wizard_action_window"/>
-
+        <menuitem name="ผลการจัดกลุ่ม" sequence="3" id="kpi_result_menu" parent="depa_hr_menu_root" action="show_group_wizard_action_window"/>
         <menuitem name="ผลการประเมินผู้ใต้บังคับบัญชา" sequence="2" id="kpi_result_underline_menu" parent="depa_hr_menu_root"
                   action="show_kpi_result_underline_wizard_action_window"
                   groups="group_user_depa_hr_show_result_underline"/>
