@@ -259,7 +259,8 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
         can = canvas.Canvas(packet, pagesize=letter)
         # can.setFillColorRGB(1, 0, 0)
         can.setFont('THSarabunNew', 16)
-        if doc.document_type_select in ["หนังสือภายนอก+หนังสือรับรอง"]:
+
+        if doc.document_type_select in ["หนังสือภายนอก+หนังสือรับรอง", "หนังสือรับรอง"]:
             if doc.name_real:
                 # can.drawString(100, 700, doc.name_real)
                 name_real = "ที่ " + str(self.arabic_to_thai_number(doc.name_real))
@@ -340,7 +341,6 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                         adj_x = 73
                     adj_y = 4
                     date_can.drawString(coordinate_x + adj_x, coordinate_y + adj_y, str(date_thai))
-                    # raise ValidationError(invitation_name)
                     date_can.save()
                     date_packet.seek(0)
                     date_pdf = PdfFileReader(date_packet)
@@ -623,21 +623,21 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                         left_pos = obj.bbox[0]
                         bottom_pos = obj.bbox[1]
                         text_line = obj.get_text().replace('\n', '_')
-                        # break
                 elif document_type in ['ประกาศ', 'ระเบียบ', 'ข้อบังคับ']:
-                    if 'ประกาศ ณ วันที' in obj.get_text():
+                    if ('ประกาศ' in obj.get_text() and 'ณ' in obj.get_text() and 'วันที' in obj.get_text()):
+                    # if 'ประกาศ ณ วันที' in obj.get_text():
                         left_pos = obj.bbox[0]
                         bottom_pos = obj.bbox[1]
                         text_line = obj.get_text().replace('\n', '_')
-                        # break
                 elif "คำสั่ง" in document_type:
-                    if 'ณ วันที' in obj.get_text():
+                    if ('ณ' in obj.get_text() and 'วันที' in obj.get_text()):
+                    # if 'ณ วันที' in obj.get_text():
                         left_pos = obj.bbox[0]
                         bottom_pos = obj.bbox[1]
                         text_line = obj.get_text().replace('\n', '_')
-                        # break
                 elif document_type == 'หนังสือรับรอง':
-                    if 'ณ วันที' in obj.get_text():
+                    if ('ณ' in obj.get_text() and 'วันที' in obj.get_text()):
+                    # if 'ณ วันที' in obj.get_text():
                         left_pos = obj.bbox[0]
                         bottom_pos = obj.bbox[1]
                         text_line = obj.get_text().replace('\n', '_')

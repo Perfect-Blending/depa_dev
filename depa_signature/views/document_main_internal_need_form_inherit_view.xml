@@ -107,6 +107,7 @@
                         <field name="speed" class="text-danger" readonly="1" />
                     </b>
                 </h2>
+                <button name="buttonClearNameReal" string="ลบเลขหนังสือ" type="object" class="btn-info" groups="depa_signature.group_user_digital_signature_setting"/>
                 <field name="specific_document_no" groups="depa_signature.group_user_digital_signature_setting"/><br/>
                 <field name="specific_date" groups="depa_signature.group_user_digital_signature_setting"/>
             </xpath>
