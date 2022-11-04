@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
+from odoo.exceptions import UserError, ValidationError
 from datetime import date, datetime
 
 class depa_welfare_hr(models.Model):
@@ -19,10 +20,14 @@ class depa_welfare_hr(models.Model):
         default=_default_fiscal_year,
         required=True
     )
-    depa = fields.Boolean(
-        string="depa",
-        default=False,
-    )
+    # depa = fields.Boolean(
+    #     string="depa",
+    #     default=False,
+    # )
+    # gbdi = fields.Boolean(
+    #     string="GBDi",
+    #     default=False,
+    # )
     depa_amount_total = fields.Float(
         compute="_depends_depa_amount_total",
         store=True,
@@ -37,10 +42,6 @@ class depa_welfare_hr(models.Model):
         compute="_depends_amount_total",
         store=True,
         readonly=True
-    )
-    gbdi = fields.Boolean(
-        string="GBDi",
-        default=False,
     )
     employee_ids = fields.One2many(
         'depa_welfare_hr_lines',
@@ -90,6 +91,7 @@ class depa_welfare_hr(models.Model):
                     'hr_employee_id': self.id,
                 })]
 
+    @api.multi
     @api.depends('employee_ids.point')
     def _depends_amount_total(self):
         for welfare in self:
@@ -103,7 +105,10 @@ class depa_welfare_hr(models.Model):
         for welfare in self:
             depa_amount_sum = 0
             for line in welfare.employee_ids:
-                if not line.employee_department_id.is_gbdi:
+                department = welfare.env["hr.department"].search([
+                    ('id', '=', line.employee_id.department_id.id)
+                ])
+                if not department.is_gbdi:
                     depa_amount_sum += line.amount
             welfare.depa_amount_total = depa_amount_sum
 
@@ -112,7 +117,12 @@ class depa_welfare_hr(models.Model):
         for welfare in self:
             gbdi_amount_sum = 0
             for line in welfare.employee_ids:
-                if line.employee_department_id.is_gbdi:
+                # if line.employee_department_id.is_gbdi:
+                    # gbdi_amount_sum += line.amount
+                department = welfare.env["hr.department"].search([
+                    ('id', '=', line.employee_id.department_id.id)
+                ])
+                if department.is_gbdi:
                     gbdi_amount_sum += line.amount
             welfare.gbdi_amount_total = gbdi_amount_sum
 
@@ -125,6 +135,13 @@ class depa_welfare_hr(models.Model):
     def write(self, vals):
         res = super(depa_welfare_hr, self).write(vals)
         return res
+
+    @api.multi
+    def unlink(self):
+        for employee in self.employee_ids:
+            employee_line = self.env["depa_welfare_hr_lines"].browse(employee.id)
+            employee_line.unlink()
+        return super(depa_welfare_hr, self).unlink()
 
     def action_draft_fin100_wizard(self):
         # print(self)
