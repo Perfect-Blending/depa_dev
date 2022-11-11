@@ -170,6 +170,12 @@ class internalDocumentInherit(models.Model):
             raise ValidationError("ไม่สามารถลบบันทึกข้อความ/หนังสือลงนามนี้ได้")
         return models.Model.unlink(self)
 
+    def buttonClearNameReal(self):
+        if self.name_real != "":
+            self.update({
+                'name_real': False,
+            })
+
 class DownloadDocumentSignedLogging(models.Model):
     _name = 'download_document_signed_logging'
 
