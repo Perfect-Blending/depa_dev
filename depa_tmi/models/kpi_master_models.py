@@ -22,6 +22,9 @@ class kpi_master_models(models.Model):
         copy=True,
         default=_default_fiscal_year
     )
+    is_used = fields.Boolean(
+        default=False
+    )
 
     kpi_master_lines_ids = fields.One2many(
         "kpi_master_lines",

@@ -19,19 +19,19 @@
                                 icon="fa-check"
                                 type="object"
                                 name="action_approve"/>
-                        <button string="ปรับแก้ไข"
-                                class="btn-default center-block"
-                                icon="fa-edit"
-                                style='text-align: center'
-                                type="object"
-                                name="action_adjustment"
-                                confirm="คุณต้องการให้มีการปรับแก้ไข KPI Cascade นี้ใช่หรือไม่"/>
-                        <button string="ปฏิเสธ"
-                                class="btn-danger pull-right"
-                                icon="fa-times"
-                                type="object"
-                                name="action_reject"
-                                confirm="คุณต้องการปฎิเสธ KPI Cascade นี้ใช่หรือไม่"/>
+<!--                        <button string="ปรับแก้ไข"-->
+<!--                                class="btn-default center-block"-->
+<!--                                icon="fa-edit"-->
+<!--                                style='text-align: center'-->
+<!--                                type="object"-->
+<!--                                name="action_adjustment"-->
+<!--                                confirm="คุณต้องการให้มีการปรับแก้ไข KPI Cascade นี้ใช่หรือไม่"/>-->
+<!--                        <button string="ปฏิเสธ"-->
+<!--                                class="btn-danger pull-right"-->
+<!--                                icon="fa-times"-->
+<!--                                type="object"-->
+<!--                                name="action_reject"-->
+<!--                                confirm="คุณต้องการปฎิเสธ KPI Cascade นี้ใช่หรือไม่"/>-->
                     </div>
                 </footer>
             </form>

@@ -7,7 +7,7 @@ from odoo.exceptions import UserError, ValidationError
 STATES = [
     ('draft', 'ฉบับร่าง'),
     ('adjust', 'ปรับแก้ไข'),
-    ('pending', 'รออนุมัติ (ผอ.กลุ่มงานฯ)'),
+    ('pending', 'รออนุมัติ (ผอ.ฝ่าย)'),
     ('completed', 'เสร็จสิ้น'),
     ('rejected', 'ปฏิเสธ')
 ]

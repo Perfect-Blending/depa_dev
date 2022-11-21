@@ -6,10 +6,10 @@ from odoo.exceptions import UserError, ValidationError
 
 STATES = [
     ('draft', 'ฉบับร่าง'),
-    ('adjust', 'ปรับแก้ไข'),
-    ('pending', 'รออนุมัติ (ผอ.กลุ่มงานฯ)'),
+    # ('adjust', 'ปรับแก้ไข'),
+    # ('pending', 'รออนุมัติ (ผอ.กลุ่มงานฯ)'),
     ('completed', 'เสร็จสิ้น'),
-    ('rejected', 'ปฏิเสธ')
+    # ('rejected', 'ปฏิเสธ')
 ]
 class kpi_setting_dsm_department_models(models.Model):
     _name = 'kpi_setting_dsm_department'

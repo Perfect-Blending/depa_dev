@@ -20,11 +20,11 @@
             <field name="arch" type="xml">
                 <form string="KPI Cascade PM" create="0">
                     <header>
-                        <button name="action_sent_kpi_to_approve"
+                        <button name="action_kpi_dsm_pm_make_approval"
                                 type="object"
                                 class="oe_highlight"
                                 attrs="{'invisible': [('state', 'not in', ('draft', 'adjust'))]}"
-                                string="ขออนุมัติ KPI Cascade" />
+                                string="อนุมัติ KPI Cascade" />
                         <field name="approve_count" invisible="1"/>
                         <field name="state" widget="statusbar"/>
                     </header>
@@ -139,7 +139,7 @@
                                     <field name="project_unit"/>
                                     <field name="project_status"/>
                                     <field name="is_validated"
-                                           attrs="{'column_invisible': [('parent.state', 'in', ('draft'))]}"/>
+                                           attrs="{'column_invisible': [('parent.state', 'in', ('draft','completed'))]}"/>
                                 </tree>
                                 <form>
                                     <group>
@@ -162,7 +162,7 @@
                                             </group>
                                             <group colspan="6">
                                                 <field name="is_validated"
-                                                       attrs="{'invisible': [('parent.state', 'in', ('draft'))]}"
+                                                       attrs="{'invisible': [('parent.state', 'in', ('draft','completed'))]}"
                                                        readonly="1" force_save="1"/>
                                             </group>
                                         </group>
@@ -604,11 +604,11 @@
                   parent="depa_tmi.menu_1"
                   action="depa_tmi.kpi_setting_pm_action_window"/>
 
-        <menuitem name="รอดำเนินการ KPI (PM)"
-                  id="depa_tmi.menu_pm_approval"
-                  groups="for_pm_approval_depa_tmi_setting"
-                  parent="depa_tmi.menu_1"
-                  action="depa_tmi.kpi_setting_pm_pending_action_window"/>
+<!--        <menuitem name="รอดำเนินการ KPI (PM)"-->
+<!--                  id="depa_tmi.menu_pm_approval"-->
+<!--                  groups="for_pm_approval_depa_tmi_setting"-->
+<!--                  parent="depa_tmi.menu_1"-->
+<!--                  action="depa_tmi.kpi_setting_pm_pending_action_window"/>-->
 
     </data>
 </odoo>

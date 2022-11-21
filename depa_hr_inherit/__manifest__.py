@@ -17,7 +17,7 @@
     # Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Inherit',
-    'version': '1.1.1',
+    'version': '1.1.0',
 
     # any module necessary for this one to work correctly
     'depends': [
@@ -36,6 +36,7 @@
         'views/hr_job_inherit_views.xml',
         'views/vaccine_setting_views.xml',
         'views/work_acceptance_inherit_views.xml',
+        'views/account_approver_sign_views.xml',
         # 'security/ir.model.access.csv',
         # 'views/templates.xml',
     ],

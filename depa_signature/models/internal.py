@@ -162,6 +162,8 @@ class internalDocumentInherit(models.Model):
         res = super(internalDocumentInherit, self).action_sent_to_supervisor()
         if len(self.invitation_lines_ids) > 0 and not self.circular_letter_check:
             raise ValidationError("ในกรณีที่มีรายชื่อแจ้งท้ายตั้งแต่ 1 รายชื่อขึ้นไป\nกรุณาเลือก หนังสือเวียน ก่อนส่งหนังสือ")
+        if self.circular_letter_check and len(self.invitation_lines_ids) == 0:
+            raise ValidationError("ในกรณีที่เลือกหนังสือเวียน\nกรุณาใส่รายชื่อแนบท้าย")
         return res
 
     @api.multi

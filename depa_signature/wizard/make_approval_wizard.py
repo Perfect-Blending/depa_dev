@@ -605,6 +605,25 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
 
         return response
 
+    def get_account_approver_sign(self, position):
+        approver_data = self.env['account_approver_sign'].search([
+            ('position', '=', position),
+            ('is_used', '=', True)
+        ], limit=1)
+        if approver_data:
+            sign_img = approver_data['employee_id'].sign_img
+            cad_pass = self.env['depa_signature_setting_lines'].search([
+                ('employee_id', '=', approver_data['employee_id'].id),
+                ('disable', '=', False),
+                ('active', '=', True)
+            ], limit=1).cad_password
+            if not cad_pass:
+                raise ValidationError(f"ไม่พบ CAD PASSWORD ของ {approver_data.name}")
+            # sign_img = self.env['hr.employee'].search([('id', "=", emp_id)], limit=1).sign_img
+            return sign_img, cad_pass
+        return False
+
+
     def parse_pdf_obj(self, lt_objs, document_type):
         left_pos = 0
         bottom_pos = 0
@@ -756,7 +775,7 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
 
         return coordinate_x, coordinate_y, coordinate_page
 
-    def sign_document(self, doc_id, signature_file=None, cad_password=None, invitation_name=None, converted_document=None):
+    def sign_document(self, doc_id, signature_file=None, cad_password=None, invitation_name=None, converted_document=None, specific_x=None, specific_y=None, pdf_file=None):
 
         internal_doc = self.env['document.internal.main'].browse(int(doc_id))
 
@@ -766,20 +785,24 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
         )
         self.generate_certificate(cert_file)
 
-        convert_status, data_encoded = self.convert_document(
-            # self.from_data(doc_id)
-            # self.env['saraban_form'].from_data(doc_id) #Convert Custom Format
-            internal_doc.id,
-            base64.b64decode(internal_doc.file_for_signature),  # Convert From File
-            invitation_name=invitation_name,
-            converted_document=converted_document
-        )
+        if pdf_file is None:
+            convert_status, data_encoded = self.convert_document(
+                # self.from_data(doc_id)
+                # self.env['saraban_form'].from_data(doc_id) #Convert Custom Format
+                internal_doc.id,
+                base64.b64decode(internal_doc.file_for_signature),  # Convert From File
+                invitation_name=invitation_name,
+                converted_document=converted_document
+            )
 
-        if not convert_status:
-            if invitation_name is not None:
-                raise ValidationError(_('เกิดข้อผิดพลาดในการสร้างและประมวลผลเอกสาร กรุณาลองใหม่อีกครั้ง'+str(invitation_name)))
-            else:
-                raise ValidationError(_('เกิดข้อผิดพลาดในการสร้างและประมวลผลเอกสาร กรุณาลองใหม่อีกครั้ง'))
+            if not convert_status:
+                if invitation_name is not None:
+                    raise ValidationError(_('เกิดข้อผิดพลาดในการสร้างและประมวลผลเอกสาร กรุณาลองใหม่อีกครั้ง'+str(invitation_name)))
+                else:
+                    raise ValidationError(_('เกิดข้อผิดพลาดในการสร้างและประมวลผลเอกสาร กรุณาลองใหม่อีกครั้ง'))
+        else:
+            convert_status = True
+            data_encoded = pdf_file
         
 
         pdf_data = ""
@@ -789,8 +812,13 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                 raise ValidationError(
                     _('กรุณาระบุภาพลายเซ็นต์ของคุณให้ถูกต้อง'))
 
-            x, y, page_number = self.get_coordinate_signature(data_encoded=data_encoded,
-                                                              document_type=internal_doc.document_type)
+            if specific_x is None or specific_y is None:
+                x, y, page_number = self.get_coordinate_signature(data_encoded=data_encoded,
+                                                                document_type=internal_doc.document_type)
+            else:
+                x = specific_x / 1000
+                y = specific_y / 1000
+                page_number = 1
 
             if x > 0 and y > 0:
                 # cad_path = os.path.dirname(os.path.abspath(__file__)) + '/dSign/cad-data.txt'
@@ -806,27 +834,34 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                 #     cad = f.read().strip()
 
                 sign_image = signature_file
+            
+                if specific_x is None or specific_y is None:
+                    if internal_doc['document_type_select'] == 'หนังสือภายนอก+หนังสือรับรอง':
+                        adj_x = 180
+                    elif internal_doc['document_type_select'] in ['ประกาศ', 'ระเบียบ', 'ข้อบังคับ']:
+                        adj_x = 340
+                    elif 'คำสั่ง' in internal_doc['document_type_select'] or internal_doc['document_type_select'] == 'หนังสือรับรอง':
+                        adj_x = 300
 
-                if internal_doc['document_type_select'] == 'หนังสือภายนอก+หนังสือรับรอง':
-                    adj_x = 180
-                elif internal_doc['document_type_select'] in ['ประกาศ', 'ระเบียบ', 'ข้อบังคับ']:
-                    adj_x = 340
-                elif 'คำสั่ง' in internal_doc['document_type_select'] or internal_doc['document_type_select'] == 'หนังสือรับรอง':
-                    adj_x = 300
+                    if (internal_doc['document_type_select'] in ['ประกาศ', 'ระเบียบ', 'ข้อบังคับ']) or 'คำสั่ง' in internal_doc['document_type_select']:
+                        adj_y = 0
+                    elif internal_doc['document_type_select'] == 'หนังสือรับรอง':
+                        adj_y = -10
+                    else:
+                        adj_y = 10
 
-                if (internal_doc['document_type_select'] in ['ประกาศ', 'ระเบียบ', 'ข้อบังคับ']) or 'คำสั่ง' in internal_doc['document_type_select']:
-                    adj_y = 0
-                elif internal_doc['document_type_select'] == 'หนังสือรับรอง':
-                    adj_y = -10
-                else:
-                    adj_y = 10
-                delta_y = (y - 500) / 5
-                x = int("%6d" % ((x + adj_x))) / 1000
-                y = int("%6d" % ((y + adj_y + delta_y))) / 1000
-                # print(f"coodinate_adjusted: {x}, {y}")
+                    delta_y = (y - 500) / 5
+                    x = int("%6d" % ((x + adj_x))) / 1000
+                    y = int("%6d" % ((y + adj_y + delta_y))) / 1000
+
+                try:
+                    data_encoded = data_encoded.decode('utf-8')
+                except:
+                    pass
 
                 sign_payloads = {
-                    "pdfData": data_encoded.decode('utf-8'),
+                    # "pdfData": data_encoded.decode('utf-8'),
+                    "pdfData": data_encoded,
                     "cadData": str(cad_password),
                     "reason": "ลงนามเอกสาร",
                     "location": "TH",
@@ -1254,20 +1289,13 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                     names = []
                     doc_ids = []
 
-                    # internal_doc.id :setting_id
-                    # base64.b64decode(internal_doc.file_for_signature) : setting_id.file_for_signature
-                    # invitation_name=invitation_name
-
                     converted_document = self.convert_plain_document(base64.b64decode(setting_id.file_for_signature))
-
                     for invitation in lists:
                         sign_status, data_pdf = self.sign_document(int(setting_id.id), sign_data, cad_pass,
                                                                    invitation_name=invitation.invitation_name,
                                                                    converted_document=converted_document)
-
                         if sign_status:
                             invitation_line = self.env['invitation_lines'].browse(int(invitation.id))
-
                             attach_vals = {
                                 'name': '%s.pdf' % ('DocumentSinged_' + datetime.now(timezone('Asia/Bangkok')).strftime(
                                     "%Y%m%d %H%M%S")),
@@ -1275,26 +1303,53 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                                 'datas_fname': '%s.pdf' % (
                                             'หนังสือเวียน_' + setting_id.name_real + '_' + invitation.invitation_name)
                             }
-
                             doc_id = self.env['ir.attachment'].create(attach_vals)
-
                             if doc_id:
                                 doc_ids.append(doc_id.id)
-                                # raise ValidationError(invitation_line.invitation_name)
                                 invitation_line.update({
                                     'document_pdf_id': int(doc_id.id)
                                 })
-
                     if doc_ids:
                         setting_id.update({
                             'doc_pdf_signed': [(6, 0, doc_ids)],
                             'head_officer_digital_signed': True
                         })
-
                     self.set_default_email(int(setting_id.id))
-                    # raise ValidationError(names)
-
-                else:  # กรณีที่ไม่ใช่หนังสือเวียน จะสร้างหนังสือใหม่แค่รอบเดียว
+                
+                # กรณีเป็นคำสั่งประกาศ จะต้องมีการเซ็น 2 ครั้ง
+                # elif setting_id.document_type == "คำสั่ง ข":
+                # # elif setting_id.document_type == "ประกาศพัสดุ":
+                #     signatures = [
+                #         {'x': 520, 'y': 50, 'position': 'P3'},  # ผู้ตรวจสอบ
+                #         {'x': 745, 'y': 50, 'position': 'P4'}   # ผู้อนุมัติ
+                #     ]
+                #     pdf_file = setting_id.file_for_signature
+                #     for signature in signatures:
+                #         employee_signature, employee_cad_pass = self.get_account_approver_sign(position=signature['position'])
+                #         sign_status, data_pdf = self.sign_document(int(setting_id.id), employee_signature, employee_cad_pass,
+                #                                 specific_x=signature['x'], specific_y=signature['y'],
+                #                                 pdf_file=pdf_file
+                #         )
+                #         pdf_file = data_pdf
+                #     if sign_status:
+                #         attach_vals = {
+                #             'name': '%s.pdf' % ('DocumentSinged_' + datetime.now(timezone('Asia/Bangkok')).strftime(
+                #                 "%Y%m%d %H%M%S")),
+                #             'datas': data_pdf,
+                #             'datas_fname': '%s.pdf' % (
+                #                         'DocumentSinged_' + datetime.now(timezone('Asia/Bangkok')).strftime(
+                #                     "%Y%m%d %H%M%S"))
+                #         }
+                #         doc_id = self.env['ir.attachment'].create(attach_vals)
+                #         if doc_id:
+                #             setting_id.update({
+                #                 'doc_pdf_signed': [(6, 0, [doc_id.id])],
+                #                 'head_officer_digital_signed': True
+                #             })
+                #         self.set_default_email(int(setting_id.id), doc_id)
+                
+                # กรณีอื่นๆ จะสร้างหนังสือใหม่แค่รอบเดียว
+                else:  
                     sign_status, data_pdf = self.sign_document(int(setting_id.id), sign_data, cad_pass)
                     # print("Sign: ",sign_status)
 

@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="fiscal_year"/>
+                    <field name="is_used"/>
                 </tree>
             </field>
         </record>
@@ -20,11 +21,14 @@
                     <sheet>
                         <group>
                             <group colspan="4" col="12">
-                                <group colspan="12">
+                                <group colspan="6">
                                     <field name="fiscal_year"
                                            readonly="1"
                                            force_save="1"
                                            options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                </group>
+                                <group colspan="6">
+                                    <field name="is_used" />
                                 </group>
                             </group>
                         </group>
