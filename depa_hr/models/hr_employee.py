@@ -144,20 +144,21 @@ class HrEmployeeKpiResult(models.Model):
 
 class hr_employee_group(models.Model):
     _name = 'hr_employee_group'
-    _order = "employee_group_id asc, kpi_round_setting_id desc, kpi_round_setting_lines_id asc"
+    _order = "employee_group_id asc"
 
     employee_group_id = fields.Many2one(
         "hr.employee"
     )
     kpi_round_setting_id = fields.Many2one(
         "kpi_round_setting",
-        required=True
+        # required=True
     )
     kpi_round_setting_lines_id = fields.Many2one(
         'kpi_round_setting_lines',
         domain="[('kpi_round_setting_lines_id', '=', kpi_round_setting_id)]",
-        required=True
+        # required=True
     )
+
     group_name = fields.Selection(
         [
             ('ก', 'ก'),
@@ -174,6 +175,7 @@ class hr_employee_group(models.Model):
         compute="_get_department_name_compute",
         store=True
     )
+    group_date = fields.Date()
 
     @api.depends('employee_group_id', 'employee_id')
     def _get_department_name_compute(self):
