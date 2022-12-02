@@ -1233,11 +1233,54 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                     'message': f'ส่งรหัส OTP ไปยัง email ของคุณแล้ว \n กรุณาตรวจสอบที่ {email_to}'}
             }
 
+    def _get_current_time(self):
+        now = datetime.now(timezone('Asia/Bangkok')).strftime("%H%M")
+        return now
+
+    def _get_weekday(self):
+        today = datetime.now(timezone('Asia/Bangkok')).date().weekday()
+        return today
+
+    def _default_fiscal_year(self):
+        fiscal_year_obj = self.env['fw_pfb_fin_system_fiscal_year'].search([
+            ('date_start', '<=', date.today()),
+            ('date_end', '>=', date.today()),
+        ], limit=1)
+
+        if fiscal_year_obj:
+            return fiscal_year_obj.id
+
+    def _check_in_holiday(self):
+        this_year_holidays = self.env['leave_request_public_holidays'].search([
+            ('fiscal_year_id', '=', self._default_fiscal_year())
+        ], limit=1)
+
+        if this_year_holidays:
+            public_holidays = self.env['leave_request_public_holidays_lines'].search([
+                ('leave_request_public_holidays_lines_id', '=', this_year_holidays.id)
+            ])
+            if public_holidays:
+                data = []
+                for holiday in public_holidays:
+                    holiday_detail = self.env['leave_request_public_holidays_lines'].search([
+                        ('id', '=', holiday['id'])
+                    ])
+                    if holiday_detail:
+                        if date.today() == holiday_detail['date']:
+                            return True
+        return False
+
     @api.multi
     def action_approve_signature(self):
         super(MakeApprovalSignatureWizardInherit, self).action_approve()
         setting_id = self.env['document.internal.main'].browse(int(self.setting_id))
         is_sign_group = self.env.user.has_group('depa_signature.group_user_digital_signature')
+
+        if setting_id.document_type in ['ประกาศพัสดุ']:
+            string = "เนื่องจากการอนุมัติงานพัสดุมีผลกับระบบ eGP\nทั้งนี้ได้เลยระยะเวลาทำการ\nจึงขอให้อนุมัติงานอีกครั้งในวันทำการถัดไป เวลา 08.00-17.00 น."
+            
+            if (not 800 <= int(self._get_current_time()) <= 1700) or (self._get_weekday() in [5,6]) or (self._check_in_holiday()):
+                raise ValidationError(string)
 
         if setting_id.document_type in ['หนังสือภายนอก+หนังสือรับรอง', 'ประกาศ', 'ระเบียบ', 'ข้อบังคับ', 'หนังสือรับรอง'] or 'คำสั่ง' in setting_id.document_type:
             if (setting_id.circular_letter_check == True) and setting_id.document_type == 'หนังสือภายนอก+หนังสือรับรอง':
@@ -1283,7 +1326,7 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                 cad_pass = hasSettingsLines.cad_password
                 # print("CAD: ", cad_pass)
 
-                # กรณีเลือกหนังสือเวียน
+                # ! กรณีเลือกหนังสือเวียน
                 if setting_id.circular_letter_check and setting_id.document_type == 'หนังสือภายนอก+หนังสือรับรอง':
                     lists = setting_id.invitation_lines_ids
                     names = []
@@ -1316,7 +1359,7 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                         })
                     self.set_default_email(int(setting_id.id))
                 
-                # กรณีเป็นคำสั่งประกาศ จะต้องมีการเซ็น 2 ครั้ง
+                # ! กรณีเป็นคำสั่งประกาศ จะต้องมีการเซ็น 2 ครั้ง
                 # elif setting_id.document_type == "คำสั่ง ข":
                 # # elif setting_id.document_type == "ประกาศพัสดุ":
                 #     signatures = [
@@ -1348,7 +1391,7 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                 #             })
                 #         self.set_default_email(int(setting_id.id), doc_id)
                 
-                # กรณีอื่นๆ จะสร้างหนังสือใหม่แค่รอบเดียว
+                # ! กรณีอื่นๆ จะสร้างหนังสือใหม่แค่รอบเดียว
                 else:  
                     sign_status, data_pdf = self.sign_document(int(setting_id.id), sign_data, cad_pass)
                     # print("Sign: ",sign_status)
