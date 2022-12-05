@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_employee_hold,hr_employee_hold,model_hr_employee_hold,,1,1,1,1
-access_hr_employee_certificate,hr_employee_certificate,model_hr_employee_certificate,,1,1,1,1
-access_hr_employee_signature_setting,hr_employee_signature_setting,model_hr_employee_signature_setting,,1,1,1,1
-access_vaccine_setting,vaccine_setting,model_vaccine_setting,,1,1,1,1
-access_hr_employee_vaccine,hr_employee_vaccine,model_hr_employee_vaccine,,1,1,1,1
