@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record id="ins_advances_wizard" model="ir.ui.view">
+            <field name="name">ins.advances.view</field>
+            <field name="model">ins.advances</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group col="2">
+                        <field name="company_id"/>
+                    </group>
+                    <group col="4">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group col="2">
+                        <field name="employee_id"/>
+                        <field name="number"/>
+                    </group>
+                    <footer>
+                        <button name="action_pdf" type="object" string="PDF" class="oe_highlight"/>
+                        <button name="action_xlsx" type="object" string="XLSX" class="oe_highlight"/>
+                        <button name="action_view" type="object" string="VIEW" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_dynamic_advances_report" model="ir.actions.client">
+            <field name="name">Advances Report</field>
+            <field name="tag">dynamic.advances</field>
+        </record>
+    </data>
+</odoo>

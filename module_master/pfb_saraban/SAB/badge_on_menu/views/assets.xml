@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="assets_backend" name="Open Mobile Assets" inherit_id="web.assets_backend">    
+        <xpath expr="script[last()]" position="after">
+            <script type="application/javascript" src="/badge_on_menu/static/src/js/menu.js"/>
+            <link href="/badge_on_menu/static/src/scss/menu.scss" rel="stylesheet" />
+        </xpath>
+    </template>
+
+    <template id="qunit_suite" inherit_id="web.qunit_suite">
+        <xpath expr="//t[@t-set='head']" position="inside">
+            <script type="application/javascript" src="/badge_on_menu/static/tests/js/menu.js" />
+        </xpath>
+    </template>
+</odoo>

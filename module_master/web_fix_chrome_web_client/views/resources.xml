@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="assets_common" name="static_resources_web_fix_chrome_web_client"
+              inherit_id="web.assets_common">
+        <xpath expr="//script[@src='/web/static/lib/jquery/jquery.js']"
+                   position="after">
+            <script type="text/javascript" src="/web_fix_chrome_web_client/static/src/js/jquery_ext.js"></script>
+        </xpath>
+    </template>
+</odoo>

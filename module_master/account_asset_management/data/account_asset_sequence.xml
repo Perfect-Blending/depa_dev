@@ -1,0 +1,12 @@
+  <odoo noupdate="1">
+   <record id="seq_account_asset_voucher" model="ir.sequence">
+        <field name="name">Asset  voucher sequence</field>
+        <field name="code">account.voucher.asset</field>
+        <field name="prefix">Asset</field>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+        <field eval="True" name="use_date_range"/>
+        <field eval="False" name="company_id"/>
+        <field name="padding">5</field>
+    </record>
+  </odoo>

@@ -1,0 +1,19 @@
+<odoo>
+        <report id="expense_report"
+            model="expense.report.wizard.test"
+            string="ทะเบียนจ่ายเงินสดย่อย"
+            report_type="qweb-pdf"
+            name="expense_report.expense_report_view"
+            file="expense_report.expense_report_view"
+            paperformat="expense_report.paperformat_expensr_report"
+            menu="False"/>
+
+         <report id="expense_report2"
+            model="expense.report.wizard.test2"
+            string="ทะเบียนคุมเงินยืมทดรอง"
+            report_type="qweb-pdf"
+            name="expense_report.expense_report_view2"
+            file="expense_report.expense_report_view2"
+            paperformat="expense_report.paperformat_expensr_report"
+            menu="False"/>
+</odoo>

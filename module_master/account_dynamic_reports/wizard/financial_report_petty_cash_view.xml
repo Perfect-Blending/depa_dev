@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+    
+        <!--    Action for Cash Flow    -->
+        <record id="action_petty_cash_report" model="ir.actions.act_window">
+            <field name="name">Petty Cash Report</field>
+            <field name="res_model">ins.petty.cash</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ins_petty_cash_wizard"/>
+            <field name="target">new</field>
+<!--            <field name="context"-->
+<!--                   eval="{'default_account_report_id':ref('account_dynamic_reports.ins_account_financial_report_cash_flow0')}"/>-->
+        </record>
+
+          <!--    Action for Advances  -->
+        <record id="action_advances_report" model="ir.actions.act_window">
+            <field name="name">Advances Report</field>
+            <field name="res_model">ins.advances</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ins_advances_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="account_reports_advances_petty_cash" sequence="10"
+                  name="8.รายงานเงินสดย่อย &amp; เงินทดลองจ่าย"
+                  parent="bione_thai_account.menu_account_thai_report_all"/>
+
+        <menuitem id="account_report_petty_cash" sequence="70"
+                  action="action_petty_cash_report"
+                  name="รายงานเงินสดย่อย" parent="account_reports_advances_petty_cash"
+                  groups="account.group_account_user"/>
+
+         <menuitem id="account_report_advances" sequence="70"
+                  action="action_advances_report"
+                  name="รายงานเงินทดลองจ่าย" parent="account_reports_advances_petty_cash"
+                  groups="account.group_account_user"/>
+
+
+    </data>
+</odoo>

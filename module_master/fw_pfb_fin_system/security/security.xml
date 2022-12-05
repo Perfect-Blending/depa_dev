@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+
+    <record id="fw_pfb_fin_system_setting" model="ir.module.category">
+        <field name="name">FIN System</field>
+        <field name="sequence">150</field>
+    </record>
+
+    <record id="fw_pfb_fin_system_user" model="res.groups">
+        <field name="name">Show FIN system</field>
+        <field name="comment">Can see menu FIN system</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_approver" model="res.groups">
+        <field name="name">Authorization to approve FIN system</field>
+        <field name="comment">Able to approve FIN system</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_show_all_fin_100" model="res.groups">
+        <field name="name">Show all expense request</field>
+        <field name="comment">Show all expense request</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_show_all_fin_401" model="res.groups">
+        <field name="name">Show all FIN 401</field>
+        <field name="comment">See all FIN 401</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_show_all_fin_201" model="res.groups">
+        <field name="name">Show all FIN 201</field>
+        <field name="comment">See all FIN 201</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_show_menu_fin_purchase" model="res.groups">
+        <field name="name">Show menu FIN purchase</field>
+        <field name="comment">See menu FIN purchase</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_show_all_fin_purchase" model="res.groups">
+        <field name="name">Show all FIN purchase</field>
+        <field name="comment">See all FIN purchase</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_show_financial_staff" model="res.groups">
+        <field name="name">Show Financial Staff Verification</field>
+        <field name="comment">Show Financial Staff Verification</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_can_edit_financial_staff" model="res.groups">
+        <field name="name">Can Edit Financial Staff Verification</field>
+        <field name="comment">Can Edit Financial Staff Verification</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_show_menu_settings" model="res.groups">
+        <field name="name">Show Menu Setting</field>
+        <field name="comment">Show Menu Setting</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_can_swap_data_FIN401" model="res.groups">
+        <field name="name">Can swap data FIN401</field>
+        <field name="comment">Can swap data FIN401</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_can_update_fin201_to_fin100" model="res.groups">
+        <field name="name">Can update FIN201 to FIN100</field>
+        <field name="comment">Can update FIN201 to FIN100</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_can_change_fin100_to_complete" model="res.groups">
+        <field name="name">Can change fin100 to complete</field>
+        <field name="comment">Can change fin100 to complete</field>
+        <field name="category_id" ref="fw_pfb_fin_system_setting"/>
+    </record>
+    
+
+</data>
+</openerp>    

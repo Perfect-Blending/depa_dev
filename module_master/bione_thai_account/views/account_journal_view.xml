@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="bione_account_bank_form" model="ir.ui.view">
+            <field name="name">bione.account.bank.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_bank_journal_form"/>
+            <field name="arch" type="xml">
+                <field name="bank_acc_number" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+                <field name="company_id" position="before">
+                    <field name="default_debit_account_id" required="1"/>
+                    <field name="default_credit_account_id" required="1" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+

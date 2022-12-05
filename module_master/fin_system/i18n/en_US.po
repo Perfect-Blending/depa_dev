@@ -1,0 +1,671 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* fw_pfb_fin_system
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c-20180607\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-25 20:01+0000\n"
+"PO-Revision-Date: 2019-05-25 20:01+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/models.py:328
+#, python-format
+msgid "%s (copy)"
+msgstr "%s (copy)"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,comment:fw_pfb_fin_system.fw_pfb_fin_system_approver
+#: model:res.groups,comment:fw_pfb_fin_system.fw_pfb_fin_system_show_all_fin
+msgid "Able to approve FIN system"
+msgstr "Able to approve FIN system"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Acknowledge"
+msgstr "Acknowledge"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fw_pfb_fin_system_100_approver_tree_view
+msgid "Action"
+msgstr "Action"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_action_date
+msgid "Action Date"
+msgstr "Action Date"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_100_all_fin_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_100_all_fin
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_tree_view
+msgid "All FIN100"
+msgstr "All FIN100"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,state:0
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Approve"
+msgstr "Approve"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Approver"
+msgstr "Approver"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.wizard_approver_action
+msgid "Approver Memo"
+msgstr "Approver Memo"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_rights
+msgid "Approver Rights"
+msgstr "Approver Rights"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,name:fw_pfb_fin_system.fw_pfb_fin_system_approver
+msgid "Authorization to approve FIN system"
+msgstr "Authorization to approve FIN system"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Budget Details"
+msgstr "Budget Details"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_code
+msgid "Budget code"
+msgstr "Budget code"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_department
+msgid "Budget department"
+msgstr "Budget department"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_request
+msgid "Budget request"
+msgstr "Budget request"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_source
+msgid "Budget source"
+msgstr "Budget source"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_system
+msgid "Budget system"
+msgstr "Budget system"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_product_template_fin_ok
+msgid "Can be use as office expenses"
+msgstr "Can be use as office expenses"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_can_cancel
+msgid "Can cancel"
+msgstr "Can cancel"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,comment:fw_pfb_fin_system.fw_pfb_fin_system_user
+msgid "Can see menu FIN system"
+msgstr "Can see menu FIN system"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_check_reject
+msgid "Check Reject"
+msgstr "Check Reject"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Complete"
+msgstr "Complete"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_100_completed_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_100_completed
+msgid "Completed"
+msgstr "Completed"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_create_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_create_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_create_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_create_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_create_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_create_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_create_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_create_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_system_report.py:24
+#, python-format
+msgid "Date from must before date to"
+msgstr "Date from must before date to"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_department
+msgid "Department"
+msgstr "Department"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+msgid "Deputy Director"
+msgstr "Deputy Director"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+msgid "Director"
+msgstr "Director"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_display_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_display_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_display_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_display_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_display_name
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_hr_employee
+msgid "Employee"
+msgstr "Employee"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_employee_id
+msgid "Employee id"
+msgstr "Employee id"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/models.py:262
+#: code:addons/fw_pfb_fin_system/models/models.py:387
+#, python-format
+msgid "Error ! You cannot create recursive categories."
+msgstr "Error ! You cannot create recursive categories."
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_common_report.py:91
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_menu_main
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.view_employee_form_inherit
+msgid "FIN 100"
+msgstr "FIN 100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "FIN NO."
+msgstr "FIN NO."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_fin_position
+msgid "FIN Position"
+msgstr "FIN Position"
+
+#. module: fw_pfb_fin_system
+#: model:ir.module.category,name:fw_pfb_fin_system.fw_pfb_fin_system_setting
+msgid "FIN System"
+msgstr "FIN System"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_hr_employee_fin_can_approve
+msgid "FIN approver"
+msgstr "FIN approver"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.report.xml,name:fw_pfb_fin_system.action_report_fin_system
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_menu_root
+msgid "FIN system"
+msgstr "FIN system"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_fin_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_fin_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_fin_id
+msgid "Fin id"
+msgstr "Fin id"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_lines
+msgid "Fin lines"
+msgstr "Fin lines"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_projects
+msgid "Fin projects"
+msgstr "Fin projects"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fiscal_year
+msgid "Fiscal year"
+msgstr "Fiscal year"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_id
+msgid "ID"
+msgstr "ID"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_is_requester
+msgid "Is requester"
+msgstr "Is requester"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100___last_update
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver___last_update
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line___last_update
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects___last_update
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver___last_update
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_write_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_write_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_write_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_write_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_write_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_write_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_write_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_write_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_is_fin_lock
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Lock"
+msgstr "Lock"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_memo
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Memo"
+msgstr "Memo"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_common_report.py:91
+#, python-format
+msgid "Not implemented."
+msgstr "Not implemented."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_objective
+msgid "Objective"
+msgstr "Objective"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Participant"
+msgstr "Participant"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_participants
+msgid "Participants"
+msgstr "Participants"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,state:0
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_100_pending_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_100_pending
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_pending_tree_view
+msgid "Pending"
+msgstr "Pending"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/account_voucher.py:61
+#, python-format
+msgid "Please activate the sequence of selected journal !"
+msgstr "Please activate the sequence of selected journal !"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/account_invoice.py:75
+#, python-format
+msgid "Please create some invoice lines."
+msgstr "Please create some invoice lines."
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/account_voucher.py:64
+#, python-format
+msgid "Please define a sequence on the journal."
+msgstr "Please define a sequence on the journal."
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/sale_order.py:54
+#, python-format
+msgid "Please define an accounting sale journal for this company."
+msgstr "Please define an accounting sale journal for this company."
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/account_invoice.py:73
+#, python-format
+msgid "Please define sequence on the journal related to this invoice."
+msgstr "Please define sequence on the journal related to this invoice."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_product_template
+msgid "Product Template"
+msgstr "Product Template"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_product_id
+msgid "Product id"
+msgstr "Product id"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+msgid "Project head/Preliminary Supervisor"
+msgstr "Project head/Preliminary Supervisor"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_projects_and_plan
+msgid "Projects and plan"
+msgstr "Projects and plan"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_system_report.py:27
+#, python-format
+msgid "Purchase Analysis"
+msgstr "Purchase Analysis"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_system_report.py:30
+#, python-format
+msgid "Purchase Analysis allows you to easily check and analyse your company purchase history and performance. From this menu you can track your negotiation performance, the delivery performance of your vendors, etc."
+msgstr "Purchase Analysis allows you to easily check and analyse your company purchase history and performance. From this menu you can track your negotiation performance, the delivery performance of your vendors, etc."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_product_uom_qty
+msgid "Quantity"
+msgstr "Quantity"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_ref
+msgid "Reference"
+msgstr "Reference"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,state:0
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Reject"
+msgstr "Reject"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+msgid "Related Group"
+msgstr "Related Group"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,help:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_employee_user_id
+msgid "Related user name for the resource to manage its access."
+msgstr "Related user name for the resource to manage its access."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_remark
+msgid "Remark"
+msgstr "Remark"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_100_request_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_100_request
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_tree_view
+msgid "Request"
+msgstr "Request"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Request lines"
+msgstr "Request lines"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_requester
+msgid "Requester"
+msgstr "Requester"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_projects_reserve
+msgid "Reserve"
+msgstr "Reserve"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_projects_residual
+msgid "Residual"
+msgstr "Residual"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_projects_residual_amount
+msgid "Residual amount"
+msgstr "Residual amount"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_sale_quote_template
+msgid "Sale Quotation Template"
+msgstr "Sale Quotation Template"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_search
+msgid "Search state"
+msgstr "Search state"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+msgid "Sent"
+msgstr "Sent"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Sent to supervisor"
+msgstr "Sent to supervisor"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Set to draft"
+msgstr "Set to draft"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_is_not_related_department
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_is_related_department
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_show_fin
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_show_fin
+msgid "Show FIN"
+msgstr "Show FIN"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,name:fw_pfb_fin_system.fw_pfb_fin_system_user
+msgid "Show FIN system"
+msgstr "Show FIN system"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,name:fw_pfb_fin_system.fw_pfb_fin_system_show_all_fin
+msgid "Show all FIN"
+msgstr "Show all FIN"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_state
+msgid "State"
+msgstr "State"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_state
+msgid "State approve"
+msgstr "State approve"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_subject
+msgid "Subject"
+msgstr "Subject"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_subject_to
+msgid "Subject To."
+msgstr "Subject To."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_price_subtotal
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_template_id
+msgid "Template id"
+msgstr "Template id"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_price_total
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Total"
+msgstr "Total"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_price_unit
+msgid "Unit Price"
+msgstr "Unit Price"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_product_uom
+msgid "Unit of Measure"
+msgstr "Unit of Measure"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Unlock"
+msgstr "Unlock"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_sale_quote_template_fin_ok
+msgid "Use in FIN 100"
+msgstr "Use in FIN 100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_employee_user_id
+msgid "User"
+msgstr "User"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/fin_100.py:410
+#: code:addons/fw_pfb_fin_system/models/fin_100.py:451
+#, python-format
+msgid "You can not do Approve"
+msgstr "You can not do Approve"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/fin_100.py:485
+#, python-format
+msgid "You can not do Reject"
+msgstr "You can not do Reject"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/purchase.py:44
+#, python-format
+msgid "You must set a Vendor Location for this partner %s"
+msgstr "You must set a Vendor Location for this partner %s"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_description
+msgid "description"
+msgstr "description"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_date
+msgid "fin Date"
+msgstr "fin Date"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_no
+msgid "fin NO."
+msgstr "fin NO."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_fw_pfb_fin_system_100
+msgid "fw_pfb_fin_system_100"
+msgstr "fw_pfb_fin_system_100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_fw_pfb_fin_system_100_approver
+msgid "fw_pfb_fin_system_100_approver"
+msgstr "fw_pfb_fin_system_100_approver"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_fw_pfb_fin_system_100_line
+msgid "fw_pfb_fin_system_100_line"
+msgstr "fw_pfb_fin_system_100_line"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_fw_pfb_fin_system_100_projects
+msgid "fw_pfb_fin_system_100_projects"
+msgstr "fw_pfb_fin_system_100_projects"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "or"
+msgstr "or"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_wizard_fw_pfb_fin_system_100_approver
+msgid "wizard.fw_pfb_fin_system_100_approver"
+msgstr "wizard.fw_pfb_fin_system_100_approver"
+

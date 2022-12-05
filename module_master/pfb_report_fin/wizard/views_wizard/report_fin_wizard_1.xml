@@ -1,0 +1,41 @@
+<odoo>
+    <record model="ir.ui.view" id="pfb_report_fin_wizard_views">
+        <field name="name">pfb.report.fin.wizard.view</field>
+        <field name="model">pfb.report.fin.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="New Fin Report">
+                 <group>
+                    <group>
+                        <field name="fiscal_year"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="button_export_html" string="View" type="object" class="oe_highlight"/>
+                     <button name="button_export_xlsx" string="Export Excel" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+     <act_window id="action_pfb_report_fin_wizard"
+                name="รายงานงบประมาณสรุปยอดคงเหลือ"
+                res_model="pfb.report.fin.wizard"
+                view_mode="form"
+                target="new"/>
+
+     <!-- menu categories -->
+    <menuitem name="Reporting"
+              id="pfb_report_fin.menu_1"
+              parent="fin_system.fin_system_menu_root"
+              sequence="8"
+              groups="pfb_fin_system_reporting"/>
+<!--    &lt;!&ndash; actions &ndash;&gt;-->
+<!--    <menuitem name="รายงานงบประมาณสรุปยอดคงเหลือ"-->
+<!--              id="pfb_report_fin.menu_1_list"-->
+<!--              parent="pfb_report_fin.menu_1"-->
+<!--              action="pfb_report_fin.action_pfb_report_fin_wizard"/>-->
+
+
+</odoo>

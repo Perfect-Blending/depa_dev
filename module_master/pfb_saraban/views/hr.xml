@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="res_users_document">
+        <field name="name">res.users.groups.document</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.user_groups_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[2]" position="after">
+                <!-- <group>
+                    <separator string="ระบบสารบรรณ" colspan="4"/>
+                    <group>
+                        <field name="setting"/>
+                        <field name="document_rec"/>
+                    </group>
+                    <group>
+                        <field name="document_internal"/>
+                        <field name="document_rec_all"/>
+                    </group>
+                </group> -->
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="res_hr_document">
+        <field name="name">res.hr.document</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']/group[1]/group[@name='active_group']" position="inside">
+                    <field  name="dummy"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

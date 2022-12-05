@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="account_analytic_account_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.account.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <field name="budget" position="after">
+                <field name="budget_reserve" />
+                <field name="budget_return" />
+            </field>
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="FIN100">
+                    <group string="FIN100: Expense All">
+                        <group colspan="12">
+                            <group>
+                                <button name="button_force_compute_fin100_lines" string="Compute" type="object"/>
+                                <button name="button_force_reset_fin100_lines" string="Clear" type="object"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+
+                        <field name="fin100_project_ids" nolabel="1" colspan="12" readonly="1">
+                            <tree colors="red:fin100_state == 'cancelled'" default_order="fin_id desc" limit="10">
+								<field name='fin100_date' string="FIN100 Date"/>
+								<field name='fin_id' string="FIN100"/>
+								<field name="projects_residual"/>
+								<field name="projects_reserve" sum="Total"/>
+                                <field name="projects_return" sum="Total"/>
+								<field name="projects_residual_amount"/>
+								<field name="fin100_state" string="FIN100 Status"/>
+                                <button name="get_current_project_balance" string="Get" type="object" invisible="1"/>
+                            </tree>
+
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name='fin_id' string="FIN100"/>
+                                        <field name="projects_residual"/>
+                                        <field name="projects_reserve" sum="Total"/>
+                                        <field name="projects_return" sum="Total"/>
+                                        <field name="projects_residual_amount"/>
+                                    </group>
+                                    <group>
+                                        <field name="projects_and_plan" />
+                                        <field name='fin100_date' string="FIN100 Date"/>
+                                        <field name="fin100_state" string="FIN100 Status"/>
+                                    </group>
+                                </group>
+                            </form>
+
+                        </field>
+                    </group>
+                    <group string="FIN100: Expense Ready">
+                        <field name="fin100_project_ids_ready" nolabel="1">
+                            <tree colors="red:fin100_state == 'cancelled'" default_order="fin_id desc" limit="10">
+								<field name='fin100_date' string="FIN100 Date"/>
+								<field name='fin_id' string="FIN100"/>
+								<field name="projects_residual"/>
+								<field name="projects_reserve" sum="Total"/>
+                                <field name="projects_return" sum="Total"/>
+								<field name="projects_residual_amount"/>
+								<field name="fin100_state" string="FIN100 Status"/>
+                            </tree>
+
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name='fin_id' string="FIN100"/>
+                                        <field name="projects_residual"/>
+                                        <field name="projects_reserve" sum="Total"/>
+                                        <field name="projects_return" sum="Total"/>
+                                        <field name="projects_residual_amount"/>
+                                    </group>
+                                    <group>
+                                        <field name="projects_and_plan" />
+                                        <field name='fin100_date' string="FIN100 Date"/>
+                                        <field name="fin100_state" string="FIN100 Status"/>
+                                    </group>
+                                </group>
+                            </form>
+
+                        </field>
+                    </group>
+                    <group string="FIN100">
+                        <field name="fin100_ids" nolabel="1" context="{'analytic_fin_ids_form': True}">
+                            <tree string="All FIN100" create="0" delete="0" default_order="fin_no desc"
+                                  decoration-muted="is_fin_open == False"
+                                  decoration-success="is_fin_open == True and state == 'completed'"
+                                  decoration-warning="is_fin_open == True and state == 'cancelled'"
+                                  decoration-danger="is_fin_open == True and state == 'reject'" limit="10">
+                                <field name='fin_date'/>
+                                <field name="fin_no"/>
+                                <field name="fin_type"/>
+                                <field name="fin_objective"/>
+                                <field name="fin_ref"/>
+                                <field name="fin_remark"/>
+                                <field name="price_total" sum="Total"/>
+                                <field name='state'/>
+                                <field name="requester"/>
+                                <field name="actual_department_name" />
+                                <field name="is_fin_lock"/>
+                                <field name="show_fin" invisible="1"/>
+                                <field name="is_fin_open" invisible="1" />
+                            </tree>
+
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

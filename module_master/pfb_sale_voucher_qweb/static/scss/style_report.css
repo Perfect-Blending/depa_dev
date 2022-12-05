@@ -1,0 +1,62 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('/pfb_sale_voucher_qweb/static/fonts/THSarabunNew.ttf') format('truetype');
+}
+
+    .o_sale_voucher_from {
+        font-family: 'THSarabunNew';
+        font-size: 20px;
+    }
+
+    .o_sale_voucher_from .date_print {
+        font-size: 20px;
+        position: fixed;
+        top: 45px;
+        right: 105px;
+    }
+
+    .o_sale_voucher_from .company_name {
+        width: 100%;
+        font-size: 20px;
+        position: fixed;
+        top: 123px;
+        left: 80px;
+    }
+
+    .o_sale_voucher_from .note_name {
+        width: 58%;
+        font-size: 20px;
+        position: fixed;
+        top: 160px;
+        left: 110px;
+    }
+
+    .o_sale_voucher_from .journal_number_h1 {
+        font-size: 20px;
+        position: fixed;
+        top: 125px;
+        left: 750px;
+    }
+
+    .o_sale_voucher_from .journal_date {
+        font-size: 20px;
+        position: fixed;
+        top: 152px;
+        left: 750px;
+    }
+
+    .o_sale_voucher_from .journal_number {
+        font-size: 20px;
+        position: fixed;
+        top: 182px;
+        left: 750px;
+    }
+
+    .o_sale_voucher_from .journal_note {
+        width: 100%;
+        font-size: 20px;
+        position: fixed;
+        top: 1350px;
+        left: 130px;
+    }

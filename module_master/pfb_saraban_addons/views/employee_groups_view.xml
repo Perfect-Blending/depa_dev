@@ -1,0 +1,48 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="employee_groups_list">
+      <field name="name">Employee Group list</field>
+      <field name="model">document.employee.groups</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="group_name"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="employee_groups_form">
+      <field name="name">Employee Group Form</field>
+      <field name="model">document.employee.groups</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="group_name"/>
+            <field name="hr_employee_ids"/>
+            <field name="active"/>
+            <field name="flag"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="employee_groups_action_window">
+      <field name="name">Employee Groups Window</field>
+      <field name="res_model">document.employee.groups</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">['|', ('active', '=', True), ('active', '!=', True)]</field>
+    </record>
+
+    <!-- menu categories -->
+<!--    <menuitem name="Category" id="category_menu" parent="test_module.menu_root"/>-->
+<!--    <menuitem name="Menu test_relation 2" id="test_relation.menu_2" parent="test_module.menu_root"/>-->
+
+    <!-- actions -->
+      <menuitem id="setting_employee_groups" name="ตั้งค่ากลุ่มผู้ใช้งาน" sequence="34" parent="pfb_saraban.configuration_menu"
+                action="employee_groups_action_window"/>
+<!--    <menuitem name="Server to list test_relation" id="test_relation" parent="test_relation.menu_2"-->
+<!--              action="test_relation.action_server"/>-->
+  </data>
+</odoo>

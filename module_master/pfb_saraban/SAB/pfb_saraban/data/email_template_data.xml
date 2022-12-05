@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+	<!--Email template -->
+	<record id="email_template_document_internal_main" model="mail.template">
+		<field name="name">Document Internal main</field>
+		<field name="model_id" ref="pfb_saraban.model_document_internal_main" />
+		<field name="auto_delete" eval="False" />
+		<field name="email_from">kirubakid95@gmail.com</field>
+		<field name="email_to">janakirgcet@gmail.com</field>
+		<field name="subject">Re: ${object.name}</field>
+		<field name="body_html">
+            <![CDATA[
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>
+                        <span style="font-family: arial, sans-serif; font-size: 12.8px;">Dear&nbsp;</span>${object.name or 'User'},
+                    </p>
+                    <p style="font-family: arial, sans-serif; font-size: 12.8px;">We hope that the you have completed the task.
+                        <br>If you have any more questions or comments, don't hesitate to reply to this e-mail. &nbsp;
+                     </p>
+                </div>]]>
+		</field>
+	</record>
+</odoo>

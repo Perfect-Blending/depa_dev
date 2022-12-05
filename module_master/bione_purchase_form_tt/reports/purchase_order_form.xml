@@ -1,0 +1,286 @@
+<odoo>
+    <template id="bione_purchase_order_form_tt">
+        <div class="header">
+            <div class="row">
+                <div class="col-5">
+                    <div>
+                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="max-height: 75px;"/>
+                    </div>
+                    <table class="mt16">
+                        <tr>
+                            <td colspan="2">
+                                <span t-field="o.company_id.street"/><br/>
+                                <span t-field="o.company_id.street2"/>
+                                <span t-field="o.company_id.city"/>
+                                <span t-field="o.company_id.state_id.name"/>
+                                <span t-field="o.company_id.country_id.name"/>
+                                <span t-field="o.company_id.zip"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>T. <span t-field="o.company_id.phone"/></td>
+                            <td>F. <span t-field="o.company_id.fax"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">TAX ID NO.: <span t-field="o.company_id.vat"/> / Branch: Head Office</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-7">
+                    <h2 class="text-right">PURCHASE ORDER</h2><br/>
+                    <div class="row">
+                        <div class="col-9 text-right">
+                            <p>
+                                Document No. :<br/>
+                                Date :<br/>
+                                Page :
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <span t-field="o.name"/><br/>
+                            <span t-esc="context_timestamp(o.date_order).strftime('%d/%m/%Y')"/><br/>
+                            <span class="page"/> / <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="article purchase_order_form">
+            <div class="table_company">
+                <div class="row mt4">
+                    <div class="col-6">
+                        <div class="row table" style="margin-left: 0px;">
+                            <div class="col-6 topic">
+                                <b>DELIVERY METHOD</b>
+                            </div>
+                            <div class="col-6 content">
+                                Please see in remarks
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row table" style="margin-left: 0px;">
+                            <div class="col-4 topic">
+                                <b>INCOTERM</b>
+                            </div>
+                            <div class="col-2 content"/>
+                            <div class="col-4 topic">
+                                <b>CURRENCY</b>
+                            </div>
+                            <div class="col-2 content">
+                                <span t-field="o.currency_id"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt8 mb4">
+                    <div class="col-6">
+                        <table class="table table-sm table-borderless table_company_data">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">VENDOR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td><span t-field="o.partner_id"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Address:</td>
+                                    <td>
+                                        <span t-field="o.partner_id.street"/>
+                                        <span t-field="o.partner_id.street2"/>
+                                        <span t-field="o.partner_id.city"/>
+                                        <span t-field="o.partner_id.state_id.name"/>
+                                        <span t-field="o.partner_id.country_id.name"/>
+                                        <span t-field="o.partner_id.zip"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tel:</td>
+                                    <td><span t-field="o.partner_id.phone"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Fax:</td>
+                                    <td><span t-field="o.partner_id.fax"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Attn:</td>
+                                    <td><span t-field="o.attention_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail:</td>
+                                    <td><span t-field="o.attention_id.email"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-sm table-borderless table_company_data">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">SHIP TO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td><span t-field="o.company_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Address:</td>
+                                    <td>
+                                        <span t-field="o.company_id.street"/>
+                                        <span t-field="o.company_id.street2"/>
+                                        <span t-field="o.company_id.city"/>
+                                        <span t-field="o.company_id.state_id.name"/>
+                                        <span t-field="o.company_id.country_id.name"/>
+                                        <span t-field="o.company_id.zip"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tel:</td>
+                                    <td><span t-field="o.company_id.phone"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Fax:</td>
+                                    <td><span t-field="o.company_id.fax"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Attn:</td>
+                                    <td>Mr.xxxxx xxxxx</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail:</td>
+                                    <td>info@mycompany.co.th</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <table class="table table_data mt8">
+                    <thead>
+                        <tr class="text-center">
+                            <th>MODEL NUMBER - DESCRIPTION</th>
+                            <th>QUANTITY</th>
+                            <th>UOM</th>
+                            <th>Unit Price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="o.order_line" t-as="line">
+                            <td>
+                                <span t-field="line.name"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-field="line.product_qty"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-field="line.product_uom"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.price_unit"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="row">
+                    <div class="col-6">
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-sm table-borderless">
+                            <tr>
+                                <td class="text-right">
+                                    <strong>TOTAL BEFORE VAT</strong>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="'{0:,.2f}'.format(o.amount_untaxed)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">
+                                    <strong>VAT 7%</strong>
+                                </td>
+                                <td class="text-right horizontal_line">
+                                    <span t-esc="'{0:,.2f}'.format(o.amount_tax)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">
+                                    <strong>Grand Total</strong>
+                                </td>
+                                <td class="text-right horizontal_double_line">
+                                    <span t-esc="'{0:,.2f}'.format(o.amount_total)"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer table">
+            <div class="row mb8">
+                <div class="col-6">
+                    <table class="table table-sm table_note">
+                        <thead>
+                            <th>*** Note / Instruction ***</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <t t-if="o.notes">
+                                    <td><span t-field="o.notes"/></td>
+                                </t>
+                                <t t-if="not o.notes">
+                                    <td><br/><br/><br/></td>
+                                </t>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-3">
+                    <table class="table table-sm table_approve">
+                        <thead>
+                            <th>APPROVED BY VENDOR</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><br/><br/><br/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-3">
+                    <table class="table table-sm table_approve">
+                        <thead>
+                            <th>APPROVED BY</th>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td><br/><br/><span t-field="o.approver_id"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="bione_purchase_order_form_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="bione_purchase_form_tt.bione_purchase_order_form_tt"/>
+            </t>
+        </t>
+    </template>
+</odoo>

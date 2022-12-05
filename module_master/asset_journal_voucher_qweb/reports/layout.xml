@@ -1,0 +1,327 @@
+<odoo>
+    <template id="journal_voucher_form_assets_common" name="Journal Voucher Form common assets"
+              inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/asset_journal_voucher_qweb/static/scss/style_report.css"/>
+        </xpath>
+    </template>
+
+    <template id="asset_voucher_layout">
+        <div class="article o_journal_voucher_from">
+            <t t-if="count_loop &gt; 18">
+                <img src="/asset_journal_voucher_qweb/static/src/img/journal_voucher1.png"
+                     style="position:absolute; z-index: -9999; width: 100%;"/>
+            </t>
+            <t t-else="">
+                <img src="/asset_journal_voucher_qweb/static/src/img/journal_voucher2.png"
+                     style="position:absolute; z-index: -9999; width: 100%;"/>
+            </t>
+            <div style="text-align: right !important;z-index: 100;">
+                <section align='left' style="width:20%; float: left; font-family:'THSarabunNew';">
+                    <img src="/pfb_custom_qweb_report/static/img/DEPA.png" width="150px" height="120px"/>
+                </section>
+                <section align='left' style="width:52%; float: left; font-family:'THSarabunNew'; padding-top: 30px;">
+                    <strong style="font-size: 34px;">
+                        <t t-esc="o_value['header']"/>
+                    </strong>
+                    <strong style="padding-left: 250px;font-size: 28px; ">
+                        <t t-esc="o_value['header2']"/>
+                    </strong>
+                </section>
+                <section align='left'
+                         style="width:28%; float: left; font-family:'THSarabunNew'; font-size: 23px; padding-top: 32px">
+                    <strong>พิมพ์วันที่ :</strong>
+                    <t t-esc="o_value['current_date']"/>
+                    <br/>
+                    <strong style="padding-left: 100px">Page :
+                        <t t-esc="o_value['page']"/>
+                        /
+                        <t t-esc="len_doc"/>
+                    </strong>
+                </section>
+            </div>
+
+            <!--Box 1-->
+            <div class="journal_note_name">
+                <span t-esc="o_value['narration']"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div class="journal_number_h1">
+                <span t-esc="o_value['name']"/>
+            </div>
+            <div class="journal_date">
+                <t t-esc="o_value['date']"/>
+
+            </div>
+            <div class="journal_number">
+                <span t-esc="o_value['name']"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p><!--.--></p>
+                <table width="100%" height="80%">
+                    <thead align="center">
+                        <tr>
+                            <td width="15%"/>
+                            <td width="30%"/>
+                            <td width="20%"/>
+                            <td width="20%"/>
+                            <td/>
+                        </tr>
+                    </thead>
+                    <br/>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <t t-foreach="o_value['line_ids']" t-as="line">
+                            <t t-if="count &lt; 20">
+                                <tr style=" vertical-align: top; font-size:18px;">
+                                    <t t-set="count" t-value="count +1 "/>
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="left">
+                                                    <span t-esc="line_value['account_code']"/>
+<!--                                                    <t t-esc="count"/>-->
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="left">
+                                                    <span t-esc="line_value['name']"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="left">
+<!--                                                    <span t-esc="line_value['analytic_account']"/>-->
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="right">
+                                                    <span t-esc="'{0:,.2f}'.format(line_value['debit'])"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="right">
+                                                    <span t-esc="'{0:,.2f}'.format(line_value['credit'])"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                        <t t-if="count_loop &lt; 20">
+                            <table width="100%">
+                            <tr>
+                                <td width="70%" align="right" style="padding-right:5px;"></td>
+                                <td width="14.5%" align="right"
+                                    style=" border-bottom: double;border-top: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(o_value['sum_debit'])"/>
+                                </td>
+                                <td width="15.5%" align="right"
+                                    style=" border-bottom: double;border-top: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(o_value['sum_credit'])"/>
+                                </td>
+                            </tr>
+                        </table>
+                        </t>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <div class="journal_note">
+                <span t-esc="o_value['narration']"/>
+            </div>
+        </div>
+    </template>
+    <template id="asset_voucher_layout2">
+        <div class="article o_journal_voucher_from">
+            <img src="/asset_journal_voucher_qweb/static/src/img/journal_voucher2.png"
+                 style="position:absolute; z-index: -9999; width: 100%;"/>
+            <div style="text-align: right !important;z-index: 100;">
+                <section align='left' style="width:20%; float: left; font-family:'THSarabunNew';">
+                    <img src="/pfb_custom_qweb_report/static/img/DEPA.png" width="150px" height="120px"/>
+                </section>
+                <section align='left' style="width:52%; float: left; font-family:'THSarabunNew'; padding-top: 30px;">
+                    <strong style="font-size: 34px;">
+                        <t t-esc="o_value['header']"/>
+                    </strong>
+                    <strong style="padding-left: 250px;font-size: 28px; ">
+                        <t t-esc="o_value['header2']"/>
+                    </strong>
+                </section>
+                <section align='left'
+                         style="width:28%; float: left; font-family:'THSarabunNew'; font-size: 23px; padding-top: 32px">
+                    <strong>พิมพ์วันที่ :</strong>
+                    <t t-esc="o_value['current_date']"/>
+                    <br/>
+                    <strong style="padding-left: 100px">Page :
+                        <t t-esc="o_value['page']"/>
+                        -2/
+                        <t t-esc="len_doc"/>
+                    </strong>
+                </section>
+            </div>
+
+            <!--Box 1-->
+            <div class="journal_note_name">
+                <span t-esc="o_value['narration']"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div class="journal_number_h1">
+                <span t-esc="o_value['name']"/>
+            </div>
+            <div class="journal_date">
+                <t t-esc="o_value['date']"/>
+
+            </div>
+            <div class="journal_number">
+                <span t-esc="o_value['name']"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p><!--.--></p>
+                <table width="100%" height="80%">
+                    <thead align="center">
+                        <tr>
+                            <td width="15%"/>
+                            <td width="30%"/>
+                            <td width="20%"/>
+                            <td width="20%"/>
+                            <td/>
+                        </tr>
+                    </thead>
+                    <br/>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <t t-foreach="o_value['line_ids']" t-as="line">
+                            <t t-set="count" t-value="count +1 "/>
+                            <t t-if="count &gt; 20">
+                                <tr style=" vertical-align: top; font-size:18px;">
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="left">
+                                                    <span t-esc="line_value['account_code']"/>
+<!--                                                    <t t-esc="count"/>-->
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="left">
+                                                    <span t-esc="line_value['name']"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="left">
+<!--                                                    <span t-esc="line_value['analytic_account']"/>-->
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="right">
+                                                    <span t-esc="'{0:,.2f}'.format(line_value['debit'])"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td align="center">
+                                        <table width="100%">
+                                            <tr width="100%" height="10" valign="top">
+                                                <td align="right">
+                                                    <span t-esc="'{0:,.2f}'.format(line_value['credit'])"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                        <table width="100%">
+                            <tr>
+                                <td width="70%" align="right" style="padding-right:5px;"></td>
+                                <td width="14.5%" align="right"
+                                    style=" border-bottom: double;border-top: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(o_value['sum_debit'])"/>
+                                </td>
+                                <td width="15.5%" align="right"
+                                    style=" border-bottom: double;border-top: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(o_value['sum_credit'])"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <div class="journal_note">
+                <span t-esc="o_value['narration']"/>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="asset_voucher_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="count_loop" t-value="0"/>
+                <t t-foreach="o_value['line_ids']" t-as="line">
+                    <t t-set="count_loop" t-value="count_loop + 1"/>
+                </t>
+                <t t-call="asset_journal_voucher_qweb.asset_voucher_layout"/>
+                <t t-if="count_loop &gt; 18">
+                    <t t-call="asset_journal_voucher_qweb.asset_voucher_layout2"/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

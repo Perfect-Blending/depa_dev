@@ -1,0 +1,14 @@
+<odoo>
+    <report
+        string="ใบขอจัดซื้อจัดจ้าง"
+        id="pr_hire_pdf_report"
+        model="purchase.request"
+        name="pr_hire_qweb.pr_hire_pdf_report_pdf"
+        file="pr_hire_qweb.pr_hire_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="pr_hire_qweb.paperformat_pr_hire"
+    />
+
+
+</odoo>

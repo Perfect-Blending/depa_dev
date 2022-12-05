@@ -1,0 +1,345 @@
+<!--<odoo>-->
+
+<!--    <template id="assets_backend"-->
+<!--              name="budget_usage_report assets" inherit_id="web.assets_backend">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <link href="/pfb_fin_report/static/src/css/report2.css" rel="stylesheet"/>-->
+<!--            <script type="text/javascript"-->
+<!--                    src="/pfb_fin_report/static/src/js/budget_usage_report_backend.js"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+<!--    <template id="pfb_fin_report.internal_layout">-->
+<!--        <div class="article">-->
+<!--            <link href="/pfb_fin_report/static/src/css/report2.css" rel="stylesheet"/>-->
+<!--            <t t-raw="0"/>-->
+<!--        </div>-->
+<!--        <div class="footer">-->
+<!--            <div class="row">-->
+<!--                <div class="col-6 custom_footer">-->
+<!--                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>-->
+<!--                </div>-->
+<!--                <div class="col-6 text-right custom_footer">-->
+<!--                    <span class="page"/>/-->
+<!--                    <span class="topage"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </template>-->
+
+<!--    <template id="report_budget_usage_buttons">-->
+<!--        <div class="button_row">-->
+<!--            &lt;!&ndash;            <button class="o_detailed_budget_reports_print btn btn-sm oe_button"><span class="fa fa-print"/>Print&ndash;&gt;-->
+<!--            &lt;!&ndash;            </button>&ndash;&gt;-->
+<!--            <button class="o_budget_usage_reports_export btn btn-sm oe_button"><span class="fa fa-download"/>Export-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </template>-->
+
+<!--    <template id="report_budget_usage_report_html">-->
+<!--        <div class="o_detailed_budget_reports_page">-->
+<!--            <t t-call="pfb_fin_report.report_budget_usage_buttons"/>-->
+<!--            <t t-call="pfb_fin_report.report_budget_usage_report_base"/>-->
+<!--        </div>-->
+<!--    </template>-->
+
+
+<!--    <template id="pfb_fin_report.report_budget_usage_lines_header">-->
+<!--        <div class="act_as_thead">-->
+<!--            <div class="act_as_row labels">-->
+<!--                <div class="act_as_cell">No</div>-->
+<!--                <div class="act_as_cell">FIN type</div>-->
+<!--                <div class="act_as_cell">สินค้า</div>-->
+<!--                <div class="act_as_cell">งบประมาณ</div>-->
+<!--                <div class="act_as_cell">Unit price</div>-->
+<!--                <div class="act_as_cell">Quantity</div>-->
+<!--                <div class="act_as_cell">Subtotal</div>-->
+<!--                <div class="act_as_cell">Fin100 line residual</div>-->
+
+<!--                <div class="act_as_cell">FIN401 current amount</div>-->
+<!--                <div class="act_as_cell">Lend total</div>-->
+<!--                <div class="act_as_cell">Fin100 line residual</div>-->
+<!--                <div class="act_as_cell">State</div>-->
+
+<!--                <div class="act_as_cell">FIN201 current amount</div>-->
+<!--                <div class="act_as_cell">Payment amount</div>-->
+<!--                <div class="act_as_cell">Fin100 line residual</div>-->
+<!--                <div class="act_as_cell">State</div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </template>-->
+
+<!--    <template id="pfb_fin_report.report_budget_usage_report_base">-->
+<!--        <div class="container">-->
+<!--            <div class="act_as_table data_table mt4" style="width: 200%; !important;">-->
+<!--                &lt;!&ndash; Display header line&ndash;&gt;-->
+<!--                <t t-call="pfb_fin_report.report_budget_usage_lines_header"/>-->
+<!--                &lt;!&ndash; Display initial lines &ndash;&gt;-->
+
+<!--                <t t-foreach="o.results" t-as="fin_line">-->
+<!--                    <t t-foreach="fin_line.fin_lines_to_edit" t-as="line">-->
+<!--                        <t t-if="len(line.fin201_line_ids) &gt; 0 and len(line.fin401_line_ids) == 0 ">-->
+<!--&lt;!&ndash;                            <p>มีแต่ 201</p>&ndash;&gt;-->
+<!--                             <t t-set="line_num" t-value="0"/>-->
+<!--                            <t t-set="group_201" t-value="[]"/>-->
+<!--                            <t t-foreach="line.fin201_line_ids" t-as="line_201">-->
+<!--                                <t t-esc="group_201.append(line_201)"/>-->
+<!--                            </t>-->
+<!--&lt;!&ndash;                            <t t-foreach="line.fin401_line_ids" t-as="line_401">&ndash;&gt;-->
+<!--                                <div class="act_as_row lines">-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <t t-esc="line.fin_id.fin_no"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.fin_id.fin_type"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.product_id"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.projects_and_plan"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.price_unit)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.product_uom_qty)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.balance)"/>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="act_as_cell right">-->
+<!--&lt;!&ndash;                                        <t t-esc="'{0:,.2f}'.format(line_401.fin401_current_amount)"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--&lt;!&ndash;                                        <t t-esc="'{0:,.2f}'.format(line_401.lend)"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--&lt;!&ndash;                                        <t t-esc="'{0:,.2f}'.format(line_401.fin100_line_residual_amount)"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--&lt;!&ndash;                                        <t t-esc="line_401.fin401_state"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <t t-foreach="group_201[line_num]" t-as="line_201">-->
+<!--                                        <div class="act_as_cell right">-->
+<!--                                            <t t-esc="'{0:,.2f}'.format(line_201.fin201_current_amount)"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="act_as_cell right">-->
+<!--                                            <t t-esc="'{0:,.2f}'.format(line_201.payment_amount)"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="act_as_cell right">-->
+<!--                                            <t t-esc="'{0:,.2f}'.format(line_201.fin100_line_residual_amount)"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="act_as_cell right">-->
+<!--                                            <t t-esc="line_201.fin201_state"/>-->
+<!--                                        </div>-->
+<!--                                    </t>-->
+<!--                                    <t t-set="line_num" t-value="line_num + 1"/>-->
+<!--                                </div>-->
+<!--&lt;!&ndash;                            </t>&ndash;&gt;-->
+<!--                        </t>-->
+<!--                        <t t-if="len(line.fin401_line_ids) &gt; 0 and len(line.fin201_line_ids) == 0 ">-->
+<!--&lt;!&ndash;                            <p>มีแต่ 401</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                           <t t-set="line_num" t-value="0"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <t t-set="group_201" t-value="[]"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <t t-foreach="line.fin201_line_ids" t-as="line_201">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-esc="group_201.append(line_201)"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </t>&ndash;&gt;-->
+<!--                            <t t-foreach="line.fin401_line_ids" t-as="line_401">-->
+<!--                                <div class="act_as_row lines">-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <t t-esc="line.fin_id.fin_no"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.fin_id.fin_type"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.product_id"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.projects_and_plan"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.price_unit)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.product_uom_qty)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.balance)"/>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line_401.fin401_current_amount)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line_401.lend)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line_401.fin100_line_residual_amount)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="line_401.fin401_state"/>-->
+<!--                                    </div>-->
+<!--&lt;!&ndash;                                    <t t-foreach="group_201[line_num]" t-as="line_201">&ndash;&gt;-->
+<!--                                        <div class="act_as_cell right">-->
+<!--&lt;!&ndash;                                            <t t-esc="'{0:,.2f}'.format(line_201.fin201_current_amount)"/>&ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        <div class="act_as_cell right">-->
+<!--&lt;!&ndash;                                            <t t-esc="'{0:,.2f}'.format(line_201.payment_amount)"/>&ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        <div class="act_as_cell right">-->
+<!--&lt;!&ndash;                                            <t t-esc="'{0:,.2f}'.format(line_201.fin100_line_residual_amount)"/>&ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        <div class="act_as_cell right">-->
+<!--&lt;!&ndash;                                            <t t-esc="line_201.fin201_state"/>&ndash;&gt;-->
+<!--                                        </div>-->
+<!--&lt;!&ndash;                                    </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-set="line_num" t-value="line_num + 1"/>&ndash;&gt;-->
+<!--                                </div>-->
+<!--                            </t>-->
+<!--                        </t>-->
+<!--                        <t t-if="len(line.fin401_line_ids) &gt; 0 and len(line.fin201_line_ids) &gt; 0">-->
+<!--                            <t t-set="line_num" t-value="0"/>-->
+<!--                            <t t-set="group_201" t-value="[]"/>-->
+<!--                            <t t-foreach="line.fin201_line_ids" t-as="line_201">-->
+<!--                                <t t-esc="group_201.append(line_201)"/>-->
+<!--                            </t>-->
+<!--                            <t t-foreach="line.fin401_line_ids" t-as="line_401">-->
+<!--                                <div class="act_as_row lines">-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <t t-esc="line.fin_id.fin_no"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.fin_id.fin_type"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.product_id"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.projects_and_plan"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.price_unit)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.product_uom_qty)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.balance)"/>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line_401.fin401_current_amount)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line_401.lend)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line_401.fin100_line_residual_amount)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="line_401.fin401_state"/>-->
+<!--                                    </div>-->
+<!--                                    <t t-foreach="group_201[line_num]" t-as="line_201">-->
+<!--                                        <div class="act_as_cell right">-->
+<!--                                            <t t-esc="'{0:,.2f}'.format(line_201.fin201_current_amount)"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="act_as_cell right">-->
+<!--                                            <t t-esc="'{0:,.2f}'.format(line_201.payment_amount)"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="act_as_cell right">-->
+<!--                                            <t t-esc="'{0:,.2f}'.format(line_201.fin100_line_residual_amount)"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="act_as_cell right">-->
+<!--                                            <t t-esc="line_201.fin201_state"/>-->
+<!--                                        </div>-->
+<!--                                    </t>-->
+<!--                                    <t t-set="line_num" t-value="line_num + 1"/>-->
+<!--                                </div>-->
+<!--                            </t>-->
+<!--                        </t>-->
+<!--                        <t t-if="len(line.fin401_line_ids) == 0 and len(line.fin201_line_ids) == 0">-->
+<!--                            &lt;!&ndash;                            <p>ไม่มี</p>&ndash;&gt;-->
+<!--                            <t t-set="line_num" t-value="0"/>-->
+<!--                            <t t-set="group_201" t-value="[]"/>-->
+<!--                            &lt;!&ndash;                            <t t-foreach="line.fin201_line_ids" t-as="line_201">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <t t-esc="group_201.append(line_201)"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <t t-foreach="line.fin401_line_ids" t-as="line_401">&ndash;&gt;-->
+<!--                                <div class="act_as_row lines">-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <t t-esc="line.fin_id.fin_no"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.fin_id.fin_type"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.product_id"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell left">-->
+<!--                                        <span t-field="line.projects_and_plan"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.price_unit)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.product_uom_qty)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        <t t-esc="'{0:,.2f}'.format(line.balance)"/>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        &lt;!&ndash;                                        <t t-esc="'{0:,.2f}'.format(line_401.fin401_current_amount)"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        &lt;!&ndash;                                        <t t-esc="'{0:,.2f}'.format(line_401.lend)"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        &lt;!&ndash;                                        <t t-esc="'{0:,.2f}'.format(line_401.fin100_line_residual_amount)"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        &lt;!&ndash;                                        <t t-esc="line_401.fin401_state"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash;                                    <t t-foreach="group_201[line_num]" t-as="line_201">&ndash;&gt;-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        &lt;!&ndash;                                            <t t-esc="'{0:,.2f}'.format(line_201.fin201_current_amount)"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        &lt;!&ndash;                                            <t t-esc="'{0:,.2f}'.format(line_201.payment_amount)"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        &lt;!&ndash;                                            <t t-esc="'{0:,.2f}'.format(line_201.fin100_line_residual_amount)"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="act_as_cell right">-->
+<!--                                        &lt;!&ndash;                                            <t t-esc="line_201.fin201_state"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash;                                    </t>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                    <t t-set="line_num" t-value="line_num + 1"/>&ndash;&gt;-->
+<!--                                </div>-->
+<!--&lt;!&ndash;                            </t>&ndash;&gt;-->
+<!--                        </t>-->
+
+<!--                    </t>-->
+<!--                </t>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </template>-->
+
+
+<!--</odoo>-->

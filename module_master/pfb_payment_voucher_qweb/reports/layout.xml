@@ -1,0 +1,350 @@
+<odoo>
+    <template id="report_assets_common" name="Payment Voucher  common assets" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/pfb_payment_voucher_qweb/static/scss/style_report.css"/>
+        </xpath>
+    </template>
+
+
+    <template id="payment_voucher_pdf_report_pdf">
+        <t t-call="web.html_container">
+            <div class="article o_payment_vou_from" t-attf-style="background-image:url('/pfb_payment_voucher_qweb/static/src/img/payment_voucher.png');background-size:300mm 424mm; width:300mm; height:424mm;">
+            <t t-foreach="docs" t-as="o">
+            <!--Box 1-->
+                        <div class="company_re_vo">
+                            <t t-foreach="o.line_ids[0]" t-as="line">
+                              <t t-esc="line.payment_id.partner_id.name"/>
+                            </t>
+                        </div>
+                    <div class="note_re_vo"><span t-field="o.ref"/></div>
+            <!--End Box 1-->
+            <!--Box 2-->
+                        <div class="receipt_number">
+                            <span t-field="o.doc_seq_number"/>
+                        </div>
+                        <div class="receipt_date_header">
+                            <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                            <t t-set="date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                                <t t-esc="date"/>
+
+                        </div>
+                        <div class="receipt_number_herder">
+                            <span t-field="o.doc_seq_number"/>
+                        </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container">
+                  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <table width="100%" height="80%">
+                    <thead align="center">
+                        <tr>
+                            <td width="15%"/>
+                            <td width="14%"/>
+                            <td width="23%"/>
+                            <td width="15%"/>
+                            <td width="15%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <tr style=" vertical-align: top; font-size:18pt;">
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="date_inv" t-as="line_inv">
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <t t-set="year" t-value="(int((line_inv).strftime('%Y')))+543"/>
+                                                <t t-set="payment_date" t-value="'%s/%s' %((line_inv).strftime('%d/%m'),year)"/>
+                                                <t t-esc="payment_date"/><br/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+                            <td align="center" >
+                                <table width="100%">
+                                    <t t-foreach="partner_tax" t-as="line_inv">
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <t t-esc="line_inv"/><br/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+                            <td align="center" >
+                                <table width="100%">
+                                    <t t-foreach="number_inv" t-as="line_inv">
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-esc="line_inv"/><br/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+                            <td align="center" >
+                                <table width="100%">
+                                     <t t-foreach="name_inv" t-as="inv_name">
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left" >
+                                                 <span t-esc="inv_name"/><br/>
+                                            </td>
+                                        </tr>
+                                     </t>
+                                </table>
+                            </td>
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="o.line_ids" t-as="line">
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+                            <td align="center">
+                                <table width="100%">
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right" style="padding-right:5px;">
+                                                <t t-foreach="amount_inv" t-as="line_inv">
+                                                <t t-esc="'{:,.2f}'.format(line_inv)"/><br/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <table width="100%">
+                            <tr>
+                                <td width="80%" align="right" style="padding-right:5px;">รวม</td>
+                                <td width="15%" align="right" style=" border-bottom: 1px solid black;border-top: 1px solid black;padding-right:5px;">
+                                    <t t-esc="'{:,.2f}'.format(sum_inv)"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <div class="container">
+                <br/>
+                <strong>รายการเช็คธนาคาร</strong>
+                <table width="100%">
+                    <thead align="left">
+                        <tr>
+                            <td width="31%" style=" border-bottom: 2px solid black;">เลขที่เช็ค</td>
+                            <td width="22%" style=" border-bottom: 2px solid black;">ลงวันที่</td>
+                            <td width="30%" style=" border-bottom: 2px solid black;">ธนาคาร</td>
+                            <td align="right" style=" border-bottom: 2px solid black;">จำนวนเงิน</td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <tr style=" vertical-align: top; font-size:18pt;">
+
+                            <td align="left">
+                                <t t-esc="cheque_no_payment"/>
+                            </td>
+                            <td align="left">
+                                <t t-esc="cheque_date"/>
+                            </td>
+                            <td align="left">
+                                <t t-esc="cheque_bank"/>
+                            </td>
+                            <td align="right">
+                                <t t-if="cheque_amount > 0 ">
+                                    <span t-esc="'{0:,.2f}'.format(cheque_amount)"/>
+                                </t>
+                                <t t-else="">
+                                </t>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 4-->
+            <!--Box 5-->
+            <div class="container">
+                   <br/>
+                <strong>ภาษีหัก ณ ที่จ่าย</strong>
+                <table width="100%">
+                    <thead align="left">
+                        <tr>
+                            <td width="28%" style=" border-bottom: 2px solid black;">วันที่ใบกำกับภาษี</td>
+                            <td width="25%" style=" border-bottom: 2px solid black;padding-left:20px;">เลขที่ใบกำกับ</td>
+                            <td width="22%" style=" border-bottom: 2px solid black;padding-left:10px;">รายละเอียด</td>
+                            <td width="22%" style=" border-bottom: 2px solid black;padding-left:10px;">ฐานภาษี</td>
+                            <td align="right" style=" border-bottom: 2px solid black;">ภาษี</td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <tr style=" vertical-align: top; font-size:18pt;">
+
+                            <td align="left">
+                                <t t-foreach="date_wt" t-as="wt">
+                                    <t t-set="year" t-value="(int((wt_value).strftime('%Y')))+543"/>
+                                    <t t-set="date_wt" t-value="'%s/%s' %((wt_value).strftime('%d/%m'),year)"/>
+                                    <t t-esc="date_wt"/><br/>
+                                </t>
+                            </td>
+
+                            <td align="left">
+                                <t t-foreach="number_wt" t-as="wt">
+                                    <t t-esc="wt_value"/><br/>
+                                </t>
+                            </td>
+
+                             <td align="left">
+                                <t t-foreach="name_wt" t-as="wt">
+                                    <t t-esc="wt_value"/><br/>
+                                </t>
+                            </td>
+
+                            <td align="left">
+                                <t t-foreach="base_wt" t-as="wt">
+                                     <span t-esc="'{0:,.2f}'.format(wt_value)"/><br/>
+                                </t>
+                            </td>
+
+                            <td align="left">
+                                <t t-foreach="amount_wt" t-as="wt">
+                                    <span t-esc="'{0:,.2f}'.format(wt_value)"/><br/>
+                                </t>
+                            </td>
+
+                        </tr>
+                        <table width="100%">
+                            <tr>
+                                 <t t-if="sum_amount_wt > 0 ">
+                                     <td width="80%" align="right" style="padding-right:5px;">รวม</td>
+                                     <td width="15%" align="right" style=" border-bottom: 1px solid black;border-top: 1px solid black;">
+                                        <span t-esc="'{0:,.2f}'.format(sum_amount_wt)"/>
+                                    </td>
+                                 </t>
+                                <t t-else="">
+                                    <br/> <td width="80%" align="right" style="padding-right:5px;">รวม</td>
+                                     <td width="15%" align="right" style=" border-bottom: 1px solid black;border-top: 1px solid black;">
+                                    </td>
+                                </t>
+                            </tr>
+                        </table>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 5-->
+            </t>
+            <t t-foreach="doc_data" t-as="o">
+                <div class="header" style="text-align: right !important;">
+           <section align='left' style="width:20%; float: left; font-family:'THSarabunNew';">
+                <img src="/custom_qweb_report/static/img/DEPA.png" width="150px" height="120px" />
+           </section>
+            <section align='left' style="width:52%; float: left; font-family:'THSarabunNew'; padding-top: 32px;">
+                <strong style="font-size: 34px;">สำนักงานส่งเสริมเศรษฐกิจดิจิทัล</strong>
+                <strong style="padding-left: 250px;font-size: 28px; ">ใบสำคัญจ่าย</strong>
+            </section>
+          <section align='left' style="width:28%; float: left; font-family:'THSarabunNew'; font-size: 23px; padding-top: 32px">
+               <strong>พิมพ์วันที่ :</strong>  <t t-esc="o_value['current_date']"/><br/>
+               <strong style="padding-left: 100px">Page :<span class="page"/> / <span class="topage"/></strong>
+           </section>
+       </div>
+                 <div class="container">
+                     <br/>
+                <strong>รายการบันทึกบัญชี</strong>
+                <table  width="100%" height="80%">
+                    <thead align="center">
+                        <tr>
+                            <td width="15%" align="left" style=" border-bottom: 2px solid black">รหัส</td>
+                            <td width="35%" align="left" style=" border-bottom: 2px solid black;padding-left:5px;">ชื่อบัญชี</td>
+                            <td width="14.8%" style=" border-bottom: 2px solid black">งบโครงการ</td>
+                            <td align="right" width="20%" style=" border-bottom: 2px solid black">เดบิต</td>
+                            <td align="right" style=" border-bottom: 2px solid black">เครดิต</td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top" >
+                        <t t-set="count" t-value="0"/>
+                        <t t-foreach="o_value['line_ids']" t-as="line">
+                        <tr style=" vertical-align: top; font-size:18pt;">
+                            <td align="center">
+                                <table width="100%">
+
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-esc="line_value['account_code']"/>
+                                            </td>
+                                        </tr>
+
+                                </table>
+                            </td>
+                            <td align="center" >
+                                <table width="100%">
+
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                               <span t-esc="line_value['name']"/>
+                                            </td>
+                                        </tr>
+
+                                </table>
+                            </td>
+                            <td align="center" >
+                                <table width="100%">
+
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-esc="line_value['analytic_account']"/>
+                                            </td>
+                                        </tr>
+
+                                </table>
+                            </td>
+                            <td align="center" >
+                                <table width="100%">
+
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                                <span t-esc="'{0:,.2f}'.format(line_value['debit'])"/>
+                                            </td>
+                                        </tr>
+
+                                </table>
+                            </td>
+                            <td align="center" >
+                                <table width="100%">
+
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                                 <span t-esc="'{0:,.2f}'.format(line_value['credit'])"/>
+                                            </td>
+                                        </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                    </t>
+                         <table width="100%">
+                            <tr>
+                                <td width="70%" align="right" style="padding-right:5px;"></td>
+                                <td width="14.5%" align="right" style=" border-bottom: double;border-top: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(o_value['sum_debit'])"/>
+                                </td>
+                                <td width="15.5%" align="right" style=" border-bottom: double;border-top: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(o_value['sum_credit'])"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </tbody>
+                </table>
+                     <br/><br/>
+                <p>หมายเหตุ : <span t-esc="o_value['narration']"/></p>
+            </div>
+            </t>
+            </div>
+        </t>
+    </template>
+</odoo>

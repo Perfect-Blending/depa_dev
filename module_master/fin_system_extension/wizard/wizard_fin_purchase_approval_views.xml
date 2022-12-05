@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="wizard_fin_purchase_approval_view" model="ir.ui.view">
+            <field name="name">view.wizard.fin.purchase.approval.form</field>
+            <field name="model">wizard.fin.purchase.approval</field>
+            <field name="arch" type="xml">
+                <form string="FIN-PURCHASE Approval">
+                    <group>
+                        <group attrs="{'invisible':[('next_approval_id','=',False)]}">
+                            <field name="next_approval_id" readonly="1"/>
+                            <field name="employee_user_id" string="Approver User" readonly="1"/>
+                            <field name="approval_type" string="Approve Type" readonly="1"/>
+                        </group>
+                        <group attrs="{'invisible':[('next_approval_id','!=',False)]}">
+                            <field name="next_comment_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="next_comment_user_ids" widget="many2many_tags" readonly="1" default_order="id"/>
+                        </group>
+                    </group>
+                    <group string="Memo" colspan="12"/>
+                    <field name="note" colspan="12"/>
+                    <footer>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button string="Approve" name="action_approve" type="object" class="btn-success" attrs="{'invisible':[('next_approval_id','=',False)]}"/>
+                            </div>
+                            <div class="col-sm-3">
+                                <button string="Comment" name="action_comment" type="object" class="btn-info" attrs="{'invisible':[('next_approval_id','!=',False)]}"/>
+                            </div>
+                            <div class="col-sm-3">
+                                <button string="Discard" class="btn-secondary" special="cancel"/>
+                            </div>
+                            <div class="col-sm-3">
+                                <button string="Reject" name="action_reject" type="object" class="btn-danger" attrs="{'invisible':[('next_approval_id','=',False)]}" confirm="Are you sure you want to Reject?"/>
+                            </div>
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_wizard_fin_purchase_approval"
+            name="FIN-PURCHASE Approval"
+            res_model="wizard.fin.purchase.approval"
+            view_mode="form" target="new" view_type="form"/>
+
+    </data>
+</odoo>

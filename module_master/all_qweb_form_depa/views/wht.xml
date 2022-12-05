@@ -1,0 +1,418 @@
+<odoo>
+    <template id="cash2_receipt_depa_common" name="Cash Receipt Depa" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/all_qweb_form_depa/static/css/cash_receipt.css"/>
+        </xpath>
+    </template>
+
+    <template id="withholding2_tax_report_assets_backend"
+              name="withholding_tax_report assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href="/l10n_th_withholding_tax_report/static/src/css/report.css" rel="stylesheet"/>
+        </xpath>
+    </template>
+
+    <template id="wht_report_assets_common" name="withholding tax cert common assets"
+              inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss"
+                  href="/l10n_th_withholding_tax_cert_form/static/scss/style_report.scss"/>
+        </xpath>
+    </template>
+
+    <template id="wht_pdf_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_withholding_tax_cert"
+                     t-attf-style="background-image:url('/all_qweb_form_depa/static/src/img/WithholdingCert.jpg'); background-size:300mm 424mm; width:300mm; height:424mm;">
+                    <p style="position: fixed;top: 100px;right: 60px;">เลขที่
+                        <span t-field="o.name"/>
+                    </p>
+                    <div class="company_vat">
+                        <t t-if="o.company_id.vat">
+                            <div class="row">
+                                <p class="box-vat">
+                                    <t t-esc="o.company_id.vat[:1]"/>
+                                </p>
+                                <p class="box-vat vat_tab">
+                                    <t t-esc="o.company_id.vat[1:2]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.company_id.vat[2:3]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.company_id.vat[3:4]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.company_id.vat[4:5]"/>
+                                </p>
+                                <p class="box-vat vat_tab">
+                                    <t t-esc="o.company_id.vat[5:6]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.company_id.vat[6:7]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.company_id.vat[7:8]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.company_id.vat[8:9]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.company_id.vat[9:10]"/>
+                                </p>
+                                <p class="box-vat vat_tab">
+                                    <t t-esc="o.company_id.vat[10:11]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.company_id.vat[11:12]"/>
+                                </p>
+                                <p class="box-vat vat_tab">
+                                    <t t-esc="o.company_id.vat[12:13]"/>
+                                </p>
+                            </div>
+                        </t>
+                    </div>
+                    <div class="company_name">
+                        <p>
+                            <span t-field="o.company_id.name"/>
+                        </p>
+                    </div>
+                    <div width="100%" class="company_address">
+                        <t t-if="o.company_id.street">
+                            <span t-field="o.company_id.street"/>
+                        </t>
+                        <!--                <t t-if="o.company_id.street2"><span>,</span><span t-field="o.company_id.street2"/></t>-->
+                        <!--                <t t-if="o.company_id.city"><span>,</span><span t-field="o.company_id.city"/></t>-->
+                        <!--                <t t-if="o.company_id.state_id"><span>,</span><span t-field="o.company_id.state_id"/></t>-->
+                        <!--                <t t-if="o.company_id.zip"><span t-field="o.company_id.zip"/></t>-->
+                        <!--                <t t-if="o.company_id.country_id"><span>,</span><span t-field="o.company_id.country_id"/></t>-->
+                    </div>
+                    <div class="supplier_vat">
+                        <t t-if="o.partner_id.vat">
+                            <div class="row">
+                                <p class="box-vat">
+                                    <t t-esc="o.partner_id.vat[:1]"/>
+                                </p>
+                                <p class="box-vat vat_tab">
+                                    <t t-esc="o.partner_id.vat[1:2]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.partner_id.vat[2:3]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.partner_id.vat[3:4]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.partner_id.vat[4:5]"/>
+                                </p>
+                                <p class="box-vat vat_tab">
+                                    <t t-esc="o.partner_id.vat[5:6]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.partner_id.vat[6:7]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.partner_id.vat[7:8]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.partner_id.vat[8:9]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.partner_id.vat[9:10]"/>
+                                </p>
+                                <p class="box-vat vat_tab">
+                                    <t t-esc="o.partner_id.vat[10:11]"/>
+                                </p>
+                                <p class="box-vat">
+                                    <t t-esc="o.partner_id.vat[11:12]"/>
+                                </p>
+                                <p class="box-vat vat_tab">
+                                    <t t-esc="o.partner_id.vat[12:13]"/>
+                                </p>
+                            </div>
+                        </t>
+                    </div>
+                    <div class="supplier_name">
+                        <p>
+                            <span t-field="o.partner_id.name"/>
+                        </p>
+                    </div>
+                    <div class="supplier_address">
+                        <t t-if="o.partner_id.street">
+                            <span t-field="o.partner_id.street"/>
+                        </t>
+                        <t t-if="o.partner_id.street2">
+                            <span></span>
+                            <span t-field="o.partner_id.street2"/>
+                        </t>
+                        <t t-if="o.partner_id.city">
+                            <span></span>
+                            <span t-field="o.partner_id.city"/>
+                        </t>
+                        <t t-if="o.partner_id.state_id">
+                            <span></span>
+                            <span t-field="o.partner_id.state_id"/>
+                        </t>
+                        <t t-if="o.partner_id.zip">
+                            <span t-field="o.partner_id.zip"/>
+                        </t>
+                        <t t-if="o.partner_id.country_id">
+                            <span></span>
+                            <span t-field="o.partner_id.country_id"/>
+                        </t>
+                    </div>
+                    <t t-if="o.wht_kind == 'pp1'">
+                        <p class="choice_pnd1a">X</p>
+                        <p style="position: fixed;top: 428px;left: 210px;font-size: 28px;">1</p>
+                    </t>
+                    <t t-if="o.wht_kind == 'pp3'">
+                        <p class="choice_pnd3">X</p>
+                        <p style="position: fixed;top: 428px;left: 210px;font-size: 28px;">3</p>
+                    </t>
+                    <t t-if="o.wht_kind == 'pp4'">
+                        <p class="choice_pnd3">X</p>
+                        <p style="position: fixed;top: 428px;left: 210px;font-size: 28px;">4</p>
+                    </t>
+                    <t t-if="o.wht_kind == 'pp7'">
+                        <p class="choice_pnd53">X</p>
+                        <p style="position: fixed;top: 428px;left: 210px;font-size: 28px;">7</p>
+                    </t>
+
+                    <!-- change A.D. to B.E. year-->
+                    <t t-set="year" t-value="(int((o.date_doc).strftime('%Y')))+543"/>
+                    <t t-set="date" t-value="'%s/%s' %((o.date_doc).strftime('%d/%m'),year)"/>
+                    <div class="date_wt">
+                        <t t-if="o.date_doc">
+                            <div class="row">
+                                <t t-set="year" t-value="(int((o.date_doc).strftime('%Y')))+543"/>
+                                <t t-set="date_issue" t-value="'%s %s' %((o.date_doc).strftime('%d %m'),year)"/>
+                                <p>
+                                    <t t-esc="date_issue[:1]"/>
+                                </p>
+                                <p>
+                                    <t t-esc="date_issue[1:2]"/>
+                                </p>
+                                <p class="box-vat vat_tab" style="padding-left:30px;">
+                                    <t t-esc="date_issue[2:4]"/>
+                                </p>
+                                <p>
+                                    <t t-esc="date_issue[4:5]"/>
+                                </p>
+                                <p style="padding-left:70px;">
+                                    <t t-esc="date_issue[5:7]"/>
+                                </p>
+                                <p>
+                                    <t t-esc="date_issue[7:8]"/>
+                                </p>
+                                <p>
+                                    <t t-esc="date_issue[8:9]"/>
+                                </p>
+                                <p>
+                                    <t t-esc="date_issue[9:10]"/>
+                                </p>
+                            </div>
+                        </t>
+                    </div>
+                    <t t-foreach="o.line_ids" t-as="line_id">
+<!--                        <t t-esc="line_id.wht_type_id.id"/>-->
+                        <t t-if="line_id.wht_type_id.id == 1">
+                            <p class="type_1_date">
+                                <t t-esc="date"/>
+                            </p>
+                            <p class="type_1_base">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p class="type_1_tax">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 2">
+                            <p class="type_2_date">
+                                <t t-esc="date"/>
+                            </p>
+                            <p class="type_2_base">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p class="type_2_tax">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 3">
+                            <p class="type_3_date">
+                                <t t-esc="date"/>
+                            </p>
+                            <p class="type_3_base">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p class="type_3_tax">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 4">
+                            <p style="position: fixed;top: 642px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 642px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 642px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 5">
+                            <p style="position: fixed;top: 750px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 750px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 750px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 6">
+                            <p style="position: fixed;top: 777px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 777px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 777px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 7">
+                            <p style="position: fixed;top: 804px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 804px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 804px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 8">
+                             <p style="position: fixed;top: 838px;left: 340px;">
+                                <t t-esc="line_id.note"/>
+                            </p>
+                            <p style="position: fixed;top: 838px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 838px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 838px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 9">
+                            <p style="position: fixed;top: 889px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 889px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 889px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 10">
+                            <p style="position: fixed;top: 943px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 943px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 943px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 11">
+                            <p style="position: fixed;top: 998px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 998px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 998px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 12">
+                            <p style="position: fixed;top: 1029px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 1029px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 1029px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 13">
+                            <p style="position: fixed;top: 1058px;left: 310px;">
+                                <t t-esc="line_id.note"/>
+                            </p>
+                            <p style="position: fixed;top: 1058px;right: 400px;">
+                                <t t-esc="date"/>
+                            </p>
+                            <p style="position: fixed;top: 1058px;right: 209px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p style="position: fixed;top: 1058px;right: 73px;">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                        <t t-if="line_id.wht_type_id.id == 14">
+                            <p class="type_5_date">
+                                <t t-esc="date"/>
+                            </p>
+                            <p class="type_5_base">
+                                <t t-esc="'{0:,.2f}'.format(line_id.base_amount)"/>
+                            </p>
+                            <p class="type_5_tax">
+                                <t t-esc="'{0:,.2f}'.format(line_id.tax)"/>
+                            </p>
+                        </t>
+                    </t>
+                    <!-- check in line type other (6, 7, 8) -->
+                    <t t-if="o._compute_sum_type_other(o.line_ids, 'base_amount')">
+                        <p class="type_6_description">
+                            <t t-esc="o._compute_desc_type_other(o.line_ids, 'note')"/>
+                        </p>
+                        <p class="type_6_date">
+                            <t t-esc="date"/>
+                        </p>
+                        <p class="type_6_base">
+                            <t t-esc="'{0:,.2f}'.format(o._compute_sum_type_other(o.line_ids, 'base_amount'))"/>
+                        </p>
+                        <p class="type_6_tax">
+                            <t t-esc="'{0:,.2f}'.format(o._compute_sum_type_other(o.line_ids, 'tax'))"/>
+                        </p>
+                    </t>
+
+                    <t t-set="total_amount_base" t-value="sum(o.line_ids.mapped('base_amount'))"/>
+                    <t t-set="total_amount_tax" t-value="sum(o.line_ids.mapped('tax'))"/>
+                    <p class="total_amount">
+                        <t t-esc="'{0:,.2f}'.format(total_amount_base)"/>
+                    </p>
+                    <p class="total_tax">
+                        <t t-esc="'{0:,.2f}'.format(total_amount_tax)"/>
+                    </p>
+                    <p class="text_amount">
+                        <t t-esc="o.amount_text(total_amount_tax)"/>
+                    </p>
+                    <!--            <t t-if="o.tax_payer == 'withholding'">-->
+                    <p class="choich_withholding_tax">X</p>
+                    <!--            </t>-->
+                    <!--            <t t-if="o.tax_payer == 'paid_one_time'">-->
+                    <!--                <p class="choich_paid_one_time">X</p>-->
+                    <!--            </t>-->
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

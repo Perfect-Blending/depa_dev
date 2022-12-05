@@ -1,0 +1,602 @@
+<odoo>
+
+    <template id="assets_backend"
+              name="detailed_budget_report assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href="/pfb_report_fin/static/src/css/report.css" rel="stylesheet"/>
+            <script type="text/javascript"
+                    src="/pfb_report_fin/static/src/js/detailed_budget_report_backend.js"/>
+        </xpath>
+    </template>
+
+    <template id="pfb_report_fin.internal_layout">
+        <div class="article">
+            <link href="/pfb_report_fin/static/src/css/report.css" rel="stylesheet"/>
+            <t t-raw="0"/>
+        </div>
+        <div class="footer">
+            <div class="row">
+                <div class="col-6 custom_footer">
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                </div>
+                <div class="col-6 text-right custom_footer">
+                    <span class="page"/>/
+                    <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_buttons">
+        <div class="button_row">
+            <button class="o_detailed_budget_reports_print btn btn-sm oe_button"><span class="fa fa-print"/>Print
+            </button>
+            <button class="o_detailed_budget_reports_export btn btn-sm oe_button"><span class="fa fa-download"/>Export
+            </button>
+        </div>
+    </template>
+
+    <template id="report_detailed_budget_report_html">
+        <div class="o_detailed_budget_reports_page">
+            <t t-call="pfb_report_fin.report_buttons"/>
+            <t t-call="pfb_report_fin.report_detailed_budget_report_base"/>
+        </div>
+    </template>
+
+    <template id="pfb_report_fin.report_detailed_budget_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="pfb_report_fin.internal_layout">
+                    <t t-call="pfb_report_fin.report_detailed_budget_report_base_pdf"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="pfb_report_fin.report_detailed_budget_lines_header">
+        <div class="act_as_thead">
+            <div class="act_as_row labels">
+                <div class="act_as_cell">Fin100 Date</div>
+                <div class="act_as_cell">Fin100</div>
+                <div class="act_as_cell">Residual</div>
+                <div class="act_as_cell">Reserve</div>
+                <div class="act_as_cell">Return</div>
+                <div class="act_as_cell">Residual Amount</div>
+                <div class="act_as_cell">Fin100 Status</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="pfb_report_fin.report_detailed_budget_report_base">
+        <t t-set="name" t-value="[]"/>
+        <t t-set="name2" t-value="[]"/>
+        <t t-set="name_id" t-value="[]"/>
+        <t t-set="count_row" t-value="0"/>
+        <t t-set="count_row2" t-value="0"/>
+        <t t-if="o.analytic_id">
+            <t t-foreach="o.results" t-as="result">
+                <div class="page">
+                    <div class="row">
+                        <t t-set="title">
+                            <t t-esc="result.name"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title" style="text-align: center;padding-left: 1cm;"/>
+                    </div>
+                    <!-- Display stock card table -->
+                    <div class="act_as_table data_table mt4" style="width: 100%;">
+                        <!-- Display header line-->
+                        <t t-call="pfb_report_fin.report_detailed_budget_lines_header"/>
+                        <!-- Display initial lines -->
+                        <t t-set="sum_residual" t-value="0"/>
+                        <t t-set="sum_reserve" t-value="0"/>
+                        <t t-set="sum_return" t-value="0"/>
+                        <t t-set="sum_residual_amount" t-value="0"/>
+                        <t t-foreach="result.fin100_project_ids.sorted(key=lambda r: r.fin_id.fin_no)"
+                           t-as="fin100_project"><!--, reverse=True-->
+
+                            <div class="act_as_row lines">
+                                <div class="act_as_cell">
+                                    <t t-esc="fin100_project.fin100_date"/>
+                                </div>
+                                <div class="act_as_cell">
+                                    <t t-esc="fin100_project.fin_id.fin_no"/>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual)"/>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-set="sum_reserve" t-value="sum_reserve + fin100_project.projects_reserve"/>
+                                    <t t-esc="'{0:,.2f}'.format(fin100_project.projects_reserve)"/>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-set="sum_return" t-value="sum_return + fin100_project.projects_return"/>
+                                    <t t-esc="'{0:,.2f}'.format(fin100_project.projects_return)"/>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-set="sum_residual_amount" t-value="fin100_project.projects_residual_amount"/>
+                                    <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual_amount)"/>
+                                </div>
+                                <div class="act_as_cell ">
+                                    <t t-esc="fin100_project.fin100_state"/>
+                                </div>
+                            </div>
+                        </t>
+                        <div class="act_as_cell "></div>
+                        <div class="act_as_cell "></div>
+                        <div class="act_as_cell right">Total</div>
+                        <div class="act_as_cell right">
+                            <t t-esc="'{0:,.2f}'.format(sum_reserve)"/>
+                        </div>
+                        <div class="act_as_cell right">
+                            <t t-esc="'{0:,.2f}'.format(sum_return)"/>
+                        </div>
+                        <div class="act_as_cell right">
+                            <t t-esc="'{0:,.2f}'.format(sum_residual_amount)"/>
+                        </div>
+                        <div class="act_as_cell "></div>
+                    </div>
+                    <p style="page-break-before:always;"></p>
+                </div>
+            </t>
+        </t>
+        <t t-else="">
+            <div class="container">
+                <t t-foreach="o.analytic_group.children_ids" t-as="agc">
+                    <t t-esc="name2.append(agc.name)"/>
+                    <t t-esc="name_id.append(agc)"/>
+                    <t t-foreach="agc.children_ids" t-as="agc2">
+                        <t t-esc="name2.append(agc2.name)"/>
+                        <t t-esc="name_id.append(agc2)"/>
+                        <t t-foreach="agc2.children_ids" t-as="agc3">
+                            <t t-esc="name2.append(agc3.name)"/>
+                            <t t-esc="name_id.append(agc3)"/>
+                        </t>
+                    </t>
+                </t>
+                <t t-foreach="o.analytic_group" t-as="ag">
+                    <t t-esc="name.append(ag.name)"/>
+                    <t t-foreach="ag.parent_id" t-as="ag1">
+                        <t t-esc="name.append(ag1.name)"/>
+                        <t t-foreach="ag1.parent_id" t-as="ag2">
+                            <t t-esc="name.append(ag2.name)"/>
+                            <t t-foreach="ag2.parent_id" t-as="ag3">
+                                <t t-esc="name.append(ag3.name)"/>
+                                <t t-foreach="ag3.parent_id" t-as="ag4">
+                                    <t t-esc="name.append(ag4.name)"/>
+                                </t>
+                            </t>
+                        </t>
+                    </t>
+                </t>
+            </div>
+            <t t-foreach="name" t-as="ag_name">
+                <t t-set="count_row" t-value="count_row+1"/>
+                <div class="row">
+                    <t t-if="count_row == 1">
+                        <t t-set="title2">
+                            <t t-esc="name[-1]"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;"/>
+                    </t>
+                    <t t-if="count_row == 2">
+                        <t t-set="title2">
+                            <t t-esc="name[-2]"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;padding-left: 20px;"/>
+                    </t>
+                    <t t-if="count_row == 3">
+                        <t t-set="title2">
+                            <t t-esc="name[-3]"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;padding-left: 40px;"/>
+                    </t>
+                    <t t-if="count_row == 4">
+                        <t t-set="title2">
+                            <t t-esc="name[-4]"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;padding-left: 60px;"/>
+                    </t>
+                    <t t-if="count_row == 5">
+                        <t t-set="title2">
+                            <t t-esc="name[-5]"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;padding-left: 80px;"/>
+                    </t>
+                </div>
+            </t>
+            <t t-foreach="name2" t-as="ag_name2">
+                <div class="row">
+                    <t t-if="count_row == 1">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 10px;"/>
+                    </t>
+                    <t t-if="count_row == 2">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 30px;"/>
+                    </t>
+                    <t t-if="count_row == 3">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 50px;"/>
+                    </t>
+                    <t t-if="count_row == 4">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 70px;"/>
+                    </t>
+                    <t t-if="count_row == 5">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 90px;"/>
+                    </t>
+                </div>
+                <t t-foreach="o.results" t-as="result">
+                    <t t-foreach="name_id" t-as="name_test">
+                        <t t-if="result.group_id == name_test and ag_name2 ==  name_test.name">
+                            <div class="page">
+                                <div class="row">
+                                    <t t-set="title">
+                                        <t t-esc="result.name"/>
+                                    </t>
+                                    <h4 class="mt0" t-esc="title" style="text-align: center;padding-left: 1cm;"/>
+                                </div>
+                                <!-- Display stock card table -->
+                                <div class="act_as_table data_table mt4" style="width: 100%;">
+                                    <!-- Display header line-->
+                                    <t t-call="pfb_report_fin.report_detailed_budget_lines_header"/>
+                                    <!-- Display initial lines -->
+                                    <t t-set="sum_residual" t-value="0"/>
+                                    <t t-set="sum_reserve" t-value="0"/>
+                                    <t t-set="sum_return" t-value="0"/>
+                                    <t t-set="sum_residual_amount" t-value="0"/>
+                                    <t t-foreach="result.fin100_project_ids.sorted(key=lambda r: r.fin_id.fin_no)"
+                                       t-as="fin100_project"><!--, reverse=True-->
+
+                                        <div class="act_as_row lines">
+                                            <div class="act_as_cell">
+                                                <t t-esc="fin100_project.fin100_date"/>
+                                            </div>
+                                            <div class="act_as_cell">
+                                                <t t-esc="fin100_project.fin_id.fin_no"/>
+                                            </div>
+                                            <div class="act_as_cell right">
+                                                <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual)"/>
+                                            </div>
+                                            <div class="act_as_cell right">
+                                                <t t-set="sum_reserve"
+                                                   t-value="sum_reserve + fin100_project.projects_reserve"/>
+                                                <t t-esc="'{0:,.2f}'.format(fin100_project.projects_reserve)"/>
+                                            </div>
+                                            <div class="act_as_cell right">
+                                                <t t-set="sum_return"
+                                                   t-value="sum_return + fin100_project.projects_return"/>
+                                                <t t-esc="'{0:,.2f}'.format(fin100_project.projects_return)"/>
+                                            </div>
+                                            <div class="act_as_cell right">
+                                                <t t-set="sum_residual_amount"
+                                                   t-value="fin100_project.projects_residual_amount"/>
+                                                <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual_amount)"/>
+                                            </div>
+                                            <div class="act_as_cell ">
+                                                <t t-esc="fin100_project.fin100_state"/>
+                                            </div>
+                                        </div>
+                                    </t>
+                                    <div class="act_as_cell "></div>
+                                    <div class="act_as_cell "></div>
+                                    <div class="act_as_cell right">Total</div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(sum_reserve)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(sum_return)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(sum_residual_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell "></div>
+                                </div>
+                                <p style="page-break-before:always;"></p>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+     <template id="pfb_report_fin.report_detailed_budget_report_base_pdf">
+        <t t-set="name" t-value="[]"/>
+        <t t-set="name2" t-value="[]"/>
+        <t t-set="name_id" t-value="[]"/>
+        <t t-set="count_row" t-value="0"/>
+        <t t-set="count_row2" t-value="0"/>
+        <t t-if="o.analytic_id">
+            <t t-foreach="o.results" t-as="result">
+                <div class="page">
+                    <div class="row">
+                        <t t-set="title">
+                            <t t-esc="result.name"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title" style="text-align: center;padding-left: 1cm;"/>
+                    </div>
+                    <!-- Display stock card table -->
+                    <div class="act_as_table data_table mt4" style="width: 100%;">
+                        <!-- Display header line-->
+                        <t t-call="pfb_report_fin.report_detailed_budget_lines_header"/>
+                        <!-- Display initial lines -->
+                        <t t-set="sum_residual" t-value="0"/>
+                        <t t-set="sum_reserve" t-value="0"/>
+                        <t t-set="sum_return" t-value="0"/>
+                        <t t-set="sum_residual_amount" t-value="0"/>
+                        <t t-foreach="result.fin100_project_ids.sorted(key=lambda r: r.fin_id.fin_no)"
+                           t-as="fin100_project"><!--, reverse=True-->
+
+                            <div class="act_as_row lines">
+                                <div class="act_as_cell">
+                                    <t t-esc="fin100_project.fin100_date"/>
+                                </div>
+                                <div class="act_as_cell">
+                                    <t t-esc="fin100_project.fin_id.fin_no"/>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual)"/>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-set="sum_reserve" t-value="sum_reserve + fin100_project.projects_reserve"/>
+                                    <t t-esc="'{0:,.2f}'.format(fin100_project.projects_reserve)"/>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-set="sum_return" t-value="sum_return + fin100_project.projects_return"/>
+                                    <t t-esc="'{0:,.2f}'.format(fin100_project.projects_return)"/>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-set="sum_residual_amount" t-value="fin100_project.projects_residual_amount"/>
+                                    <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual_amount)"/>
+                                </div>
+                                <div class="act_as_cell ">
+                                    <t t-esc="fin100_project.fin100_state"/>
+                                </div>
+                            </div>
+                        </t>
+                        <div class="act_as_cell "></div>
+                        <div class="act_as_cell "></div>
+                        <div class="act_as_cell right">Total</div>
+                        <div class="act_as_cell right">
+                            <t t-esc="'{0:,.2f}'.format(sum_reserve)"/>
+                        </div>
+                        <div class="act_as_cell right">
+                            <t t-esc="'{0:,.2f}'.format(sum_return)"/>
+                        </div>
+                        <div class="act_as_cell right">
+                            <t t-esc="'{0:,.2f}'.format(sum_residual_amount)"/>
+                        </div>
+                        <div class="act_as_cell "></div>
+                    </div>
+                </div>
+            </t>
+        </t>
+        <t t-else="">
+            <div class="container">
+                <t t-foreach="o.analytic_group.children_ids" t-as="agc">
+                    <t t-esc="name2.append(agc.name)"/>
+                    <t t-esc="name_id.append(agc)"/>
+                    <t t-foreach="agc.children_ids" t-as="agc2">
+                        <t t-esc="name2.append(agc2.name)"/>
+                        <t t-esc="name_id.append(agc2)"/>
+                        <t t-foreach="agc2.children_ids" t-as="agc3">
+                            <t t-esc="name2.append(agc3.name)"/>
+                            <t t-esc="name_id.append(agc3)"/>
+                        </t>
+                    </t>
+                </t>
+                <t t-foreach="o.analytic_group" t-as="ag">
+                    <t t-esc="name.append(ag.name)"/>
+                    <t t-foreach="ag.parent_id" t-as="ag1">
+                        <t t-esc="name.append(ag1.name)"/>
+                        <t t-foreach="ag1.parent_id" t-as="ag2">
+                            <t t-esc="name.append(ag2.name)"/>
+                            <t t-foreach="ag2.parent_id" t-as="ag3">
+                                <t t-esc="name.append(ag3.name)"/>
+                                <t t-foreach="ag3.parent_id" t-as="ag4">
+                                    <t t-esc="name.append(ag4.name)"/>
+                                </t>
+                            </t>
+                        </t>
+                    </t>
+                </t>
+            </div>
+            <t t-foreach="sorted(name)" t-as="ag_name">
+                <t t-set="count_row" t-value="count_row+1"/>
+                <div class="row">
+                    <t t-if="count_row == 1">
+                        <t t-set="title2">
+                            <t t-esc="ag_name"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;"/>
+                    </t>
+                    <t t-if="count_row == 2">
+                        <t t-set="title2">
+                            <t t-esc="ag_name"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;padding-left: 20px;"/>
+                    </t>
+                    <t t-if="count_row == 3">
+                        <t t-set="title2">
+                            <t t-esc="ag_name"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;padding-left: 40px;"/>
+                    </t>
+                    <t t-if="count_row == 4">
+                        <t t-set="title2">
+                            <t t-esc="ag_name"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;padding-left: 60px;"/>
+                    </t>
+                    <t t-if="count_row == 5">
+                        <t t-set="title2">
+                            <t t-esc="ag_name"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title2" style="text-align: center;padding-left: 80px;"/>
+                    </t>
+                </div>
+            </t>
+            <t t-foreach="name2" t-as="ag_name2">
+                <div class="row">
+                    <t t-if="count_row == 1">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 10px;"/>
+                    </t>
+                    <t t-if="count_row == 2">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 30px;"/>
+                    </t>
+                    <t t-if="count_row == 3">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 50px;"/>
+                    </t>
+                    <t t-if="count_row == 4">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 70px;"/>
+                    </t>
+                    <t t-if="count_row == 5">
+                        <t t-set="title3">
+                            <t t-esc="ag_name2"/>
+                        </t>
+                        <h4 class="mt0" t-esc="title3" style="text-align: center;padding-left: 90px;"/>
+                    </t>
+                </div>
+                <t t-foreach="o.results" t-as="result">
+                    <t t-foreach="name_id" t-as="name_test">
+                        <t t-if="result.group_id == name_test and ag_name2 ==  name_test.name">
+                            <div class="page">
+                                <div class="row">
+                                    <t t-set="title">
+                                        <t t-esc="result.name"/>
+                                    </t>
+                                    <h4 class="mt0" t-esc="title" style="text-align: center;padding-left: 1cm;"/>
+                                </div>
+                                <!-- Display stock card table -->
+                                <div class="act_as_table data_table mt4" style="width: 100%;">
+                                    <!-- Display header line-->
+                                    <t t-call="pfb_report_fin.report_detailed_budget_lines_header"/>
+                                    <!-- Display initial lines -->
+                                    <t t-set="sum_residual" t-value="0"/>
+                                    <t t-set="sum_reserve" t-value="0"/>
+                                    <t t-set="sum_return" t-value="0"/>
+                                    <t t-set="sum_residual_amount" t-value="0"/>
+                                    <t t-foreach="result.fin100_project_ids.sorted(key=lambda r: r.fin_id.fin_no)"
+                                       t-as="fin100_project"><!--, reverse=True-->
+
+                                        <div class="act_as_row lines">
+                                            <div class="act_as_cell">
+                                                <t t-esc="fin100_project.fin100_date"/>
+                                            </div>
+                                            <div class="act_as_cell">
+                                                <t t-esc="fin100_project.fin_id.fin_no"/>
+                                            </div>
+                                            <div class="act_as_cell right">
+                                                <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual)"/>
+                                            </div>
+                                            <div class="act_as_cell right">
+                                                <t t-set="sum_reserve"
+                                                   t-value="sum_reserve + fin100_project.projects_reserve"/>
+                                                <t t-esc="'{0:,.2f}'.format(fin100_project.projects_reserve)"/>
+                                            </div>
+                                            <div class="act_as_cell right">
+                                                <t t-set="sum_return"
+                                                   t-value="sum_return + fin100_project.projects_return"/>
+                                                <t t-esc="'{0:,.2f}'.format(fin100_project.projects_return)"/>
+                                            </div>
+                                            <div class="act_as_cell right">
+                                                <t t-set="sum_residual_amount"
+                                                   t-value="fin100_project.projects_residual_amount"/>
+                                                <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual_amount)"/>
+                                            </div>
+                                            <div class="act_as_cell ">
+                                                <t t-esc="fin100_project.fin100_state"/>
+                                            </div>
+                                        </div>
+                                    </t>
+                                    <div class="act_as_cell "></div>
+                                    <div class="act_as_cell "></div>
+                                    <div class="act_as_cell right">Total</div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(sum_reserve)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(sum_return)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(sum_residual_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell "></div>
+                                </div>
+                            </div>
+
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </t>
+
+
+    </template>
+
+    <template id="pfb_report_fin.report_detailed_budget_report_filters">
+        <div class="act_as_table data_table" style="width: 100%;">
+            <div class="act_as_row labels">
+                <div class="act_as_cell">Date From</div>
+                <div class="act_as_cell">Date To</div>
+                <div class="act_as_cell">Location</div>
+            </div>
+            <div class="act_as_row">
+                <div class="act_as_cell">
+                    1
+                </div>
+                <div class="act_as_cell">
+                    2
+                </div>
+                <div class="act_as_cell">
+                    3
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="pfb_report_fin.report_detailed_budget_lines">
+        <div class="act_as_row lines">
+            <div class="act_as_cell left">
+                4
+            </div>
+            <div class="act_as_cell left">
+                5
+            </div>
+            <div class="act_as_cell right">
+                6
+            </div>
+            <div class="act_as_cell right">
+                7
+            </div>
+            <div class="act_as_cell right">
+                8
+            </div>
+        </div>
+    </template>
+
+</odoo>

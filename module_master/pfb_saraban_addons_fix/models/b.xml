@@ -1,0 +1,495 @@
+
+<div class="1">
+    <!--เมนู reset-->
+    <record model="ir.ui.view" id="document_internal_all_form_view_reset">
+        <field name="name">document.internal.main.form</field>
+        <field name="model">document.internal.main</field>
+        <field name="arch" type="xml">
+            <form string="หนังสือภายใน" create='0' edit='1' delete='0'>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,1,2,3,4,5,6,done"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                    <notebook>
+                        <page name="infomation" string="ข้อมูล">
+                            <group col="6" colspan="4" attrs="{'invisible':[('document_type','!=','บันทึกข้อความ')]}">
+                              <group col="2" colspan="3">
+                                <group col="2" colspan="4">
+                                    <field name="document_type" invisible="1"/>
+                                    <field name="employee_id" invisible="1"/>
+                                    <field name="department_id" invisible="1"/>
+                                    <field name="check_group_user" invisible="1"/>
+<!--                                    <field name="send_with_original_document" />-->
+                                    <field name="date_document" invisible="1"/>
+                                    <field name="department_name" readonly="1"/>
+                                </group>
+                                <group col="2" colspan="4">
+                                    <field name="name_real" readonly="1" force_save="1"/>
+                                    <field name="date_document_real" readonly="1" force_save="1"/>
+                                    <field name="speed" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('document_type','==','บันทึกข้อความ')]}"/>
+                                    <field name="secret" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('document_type','==','บันทึกข้อความ')]}"/>
+                                </group>
+                                <group col="2" colspan="4">
+                                    <field name="subject" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('document_type','==','บันทึกข้อความ')]}"/>
+                                    <field name="setting_line_ids_related" readonly="1">
+                                        <tree edit="false">
+                                            <field name="is_active"/>
+                                            <field name="step" required="1"/>
+                                            <field name="job_id_name" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                            <field name="employee_id" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group col="2" colspan="4">
+                                    <field name="attachment_ids" widget="many2many_binary" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="note" colspan="4" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                            </group>
+                            <group col="2" colspan="3">
+                                <field name="is_participant" invisible="1"/>
+                                <field name="selected_material" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('document_type', '=',document_type)]" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                <field name="material" attrs="{'readonly': ['|', ('is_participant', '=', False), ('state', '=', 'done')], 'required': [('document_type','==','บันทึกข้อความ')]}"/>
+<!--                                    <field name="sign" required='1' attrs="{'required':[('circular_letter', '=', True)],'readonly': [('state', '!=', 'draft')]}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
+                                <field name="for_document" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('document_type','==','บันทึกข้อความ')]}"/>
+                                <field name="for_document_other" attrs="{'required':[('for_document', '=', 'other')],'invisible':[('for_document', '!=', 'other')],'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="sign" invisible="1" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            </group>
+                          </group>
+
+
+                            <group col="6" colspan="4" attrs="{'invisible':[('document_type','==','บันทึกข้อความ')]}">
+                                  <group col="2" colspan="3">
+                                    <group col="2" colspan="4">
+                                        <field name="document_type" invisible="1"/>
+                                        <field name="document_type_select" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+<!--                                        <field name="send_with_original_document" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+                                        <field name="employee_id" invisible="1"/>
+                                        <field name="department_id" invisible="1"/>
+                                        <field name="department_name" readonly="1"/>
+                                        <field name="prefix" force_save="1" readonly="1" attrs="{'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')],'required':[('document_type','==','หนังสือภายนอก+หนังสือรับรอง')]}"/>
+                                        <field name="check_group_user" invisible="1"/>
+
+                                    </group>
+                                    <group col="2" colspan="4">
+                                        <field name="date_document" readonly="1" force_save="1"/>
+                                        <field name="speed" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('document_type','!=','บันทึกข้อความ')]}"/>
+                                        <field name="secret" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('document_type','!=','บันทึกข้อความ')]}"/>
+                                    </group>
+                                    <group col="2" colspan="4">
+                                        <field name="subject" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('document_type','!=','บันทึกข้อความ')]}"/>
+                                        <field name="document_note" attrs="{'readonly': [('state', '!=', 'draft')], 'required':[('document_type','!=','บันทึกข้อความ')]}"/>
+                                        <field name="setting_line_ids_related" readonly="1">
+                                            <tree edit="false">
+                                                <field name="is_active"/>
+                                                <field name="step" required="1"/>
+                                                <field name="job_id_name" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                                <field name="employee_id" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <group col="2" colspan="4">
+                                        <field name="attachment_ids" widget="many2many_binary" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="note" colspan="4" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    </group>
+                                </group>
+                                <group col="2" colspan="3">
+                                    <group colspan="3">
+                                        <field name="name_real" readonly="1" attrs="{'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')]}"/>
+                                        <field name="date_document_real" string="หนังสือภายนอก+หนังสือรับรอง date document real" readonly="1" force_save="1" attrs="{'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')]}"/>
+                                        <field name="selected_material" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('document_type', '=',document_type)]" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    </group>
+                                    <!-- ประกาศ Section -->
+                                    <group col="2" colspan="3" string="ประกาศสำนักงานส่งเสริมเศรษฐกิจดิจิทัล" attrs="{'invisible':[('document_type','!=','ประกาศ')]}">
+                                        <field name="name_real" readonly="1" attrs="{'invisible':[('document_type','!=','ประกาศ')]}"/>
+                                        <field name="internal_title" string="ประกาศ Title" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('document_type','!=','ประกาศ')],'required':[('document_type','==','ประกาศ')]}"/>
+                                        <field name="material" attrs="{'readonly': ['|', ('is_participant', '=', False), ('state', '=', 'done')], 'invisible':[('document_type','!=','ประกาศ')],'required':[('document_type','==','ประกาศ')]}"/>
+                                        <field name="date_document_real" string="ประกาศ date document real" readonly="1" force_save="1" attrs="{'invisible':[('document_type','!=','ประกาศ')]}"/>
+                                    </group>
+                                    <!-- END ประกาศ Section -->
+                                    <!-- คำสั่ง Section -->
+                                    <group col="2" colspan="3" string="คำสั่งสำนักงานส่งเสริมเศรษฐกิจดิจิทัล" attrs="{'invisible':[('document_type','not in',['คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ'])]}">
+                                        <field name="name_real" readonly="1" attrs="{'invisible':[('document_type','not in',['คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ'])]}"/>
+                                        <field name="internal_title" string="คำสั่ง Title" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('document_type','not in',['คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ'])],'required':[('document_type','in',['คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ'])]}"/>
+                                        <field name="material" attrs="{'readonly': ['|', ('is_participant', '=', False), ('state', '=', 'done')],'invisible':[('document_type','not in',['คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ'])],'required':[('document_type','in',['คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ'])]}"/>
+                                        <field name="date_document_real" string="คำสั่ง date document real" readonly="1" force_save="1" attrs="{'invisible':[('document_type','not in',['คำสั่ง ก', 'คำสั่ง ข', 'คำสั่ง ค', 'คำสั่ง พ'])]}"/>
+                                    </group>
+                                    <!-- END คำสั่ง Section -->
+                                    <!-- ระเบียบ Section -->
+                                    <group col="2" colspan="3" string="ระเบียบสำนักงานส่งเสริมเศรษฐกิจดิจิทัล" attrs="{'invisible':[('document_type','!=','ระเบียบ')]}">
+                                        <field name="name_real" readonly="1" attrs="{'invisible':[('document_type','!=','ระเบียบ')]}"/>
+                                        <field name="internal_title" string="ระเบียบ Title" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('document_type','!=','ระเบียบ')],'required':[('document_type','==','ระเบียบ')]}"/>
+                                        <field name="material" attrs="{'readonly': ['|', ('is_participant', '=', False), ('state', '=', 'done')], 'invisible':[('document_type','!=','ระเบียบ')],'required':[('document_type','==','ระเบียบ')]}"/>
+                                        <field name="date_document_real" string="ระเบียบ date document real" readonly="1" force_save="1" attrs="{'invisible':[('document_type','!=','ระเบียบ')]}"/>
+                                    </group>
+                                    <!-- END ระเบียบ Section -->
+                                    <!-- ข้อบังคับ Section -->
+                                    <group col="2" colspan="3" css="text-align:center;" string="ข้อบังคับสำนักงานส่งเสริมเศรษฐกิจดิจิทัล" attrs="{'invisible':[('document_type','!=','ข้อบังคับ')]}">
+                                        <field name="name_real" readonly="1" attrs="{'invisible':[('document_type','!=','ข้อบังคับ')]}"/>
+                                        <field name="internal_title" string="ข้อบังคับ Title" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('document_type','!=','ข้อบังคับ')],'required':[('document_type','==','ข้อบังคับ')]}"/>
+                                        <field name="material" attrs="{'readonly': ['|', ('is_participant', '=', False), ('state', '=', 'done')], 'invisible':[('document_type','!=','ข้อบังคับ')],'required':[('document_type','==','ข้อบังคับ')]}"/>
+                                        <field name="date_document_real" string="ข้อบังคับ date document real" readonly="1" force_save="1" attrs="{'invisible':[('document_type','!=','ข้อบังคับ')]}"/>
+                                    </group>
+                                    <!-- END ข้อบังคับ Section -->
+
+                                    <!-- หนังสือภายนอก+หนังสือรับรอง Section -->
+                                    <group col="2" colspan="3" attrs="{'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')]}">
+                                        <field name="internal_title" string="หนังสือภายนอก+หนังสือรับรอง Title" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')],'required':[('document_type','==','หนังสือภายนอก+หนังสือรับรอง')]}"/>
+
+                                        <field name="dear_select" attrs="{'readonly': [('state', '!=', 'draft')],'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')],'required':[('document_type','==','หนังสือภายนอก+หนังสือรับรอง')]}"/>
+
+                                        <field name="reference_receive_document_related" readonly="1" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')],'required':[('document_type','==','หนังสือภายนอก+หนังสือรับรอง')]}">
+                                        <field name="view_type">tree</field>
+                                            <tree options="{'no_create': True, 'no_create_edit':True,'no_open':True}">
+                                                <field name="name"/>
+                                                <field name="date_document"/>
+                                                <field name="name_real"/>
+                                                <field name="date_document_real"/>
+                                                <field name="refer"/>
+                                                <field name="from_document"/>
+        <!--                                        <field name="employee_id"/>-->
+                                                <field name="subject"/>
+                                                <field name="state" invisible="1"/>
+                                            </tree>
+                                        </field>
+                                        <field name="attached_file_in" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')],'required':[('document_type','==','หนังสือภายนอก+หนังสือรับรอง')]}">
+                                            <tree>
+                                                <field name="name"/>
+                                                <field name="datas_fname"/>
+                                                <field name="datas" widget="binary" filename="datas_fname"/>
+                                            </tree>
+                                        </field>
+                                        <field name="material" attrs="{'readonly': ['|', ('is_participant', '=', False), ('state', '=', 'done')], 'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')],'required':[('document_type','==','หนังสือภายนอก+หนังสือรับรอง')]}"/>
+                                        <field name="for_document" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')],'required':[('document_type','==','หนังสือภายนอก+หนังสือรับรอง')]}"/>
+                                        <field name="for_document_other" attrs="{'required':[('for_document', '=', 'other')],'invisible':[('for_document', '!=', 'other')],'readonly': [('state', '!=', 'draft')]}"/>
+                                    </group>
+                                    <!-- End หนังสือภายนอก+หนังสือรับรอง Section -->
+
+                                    <group css="text-align:center;" colspan="3" attrs="{'invisible':[('document_type','==','หนังสือภายนอก+หนังสือรับรอง')]}">
+                                        <field name="sign_employee" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('document_type','!=','บันทึกข้อความ')]}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="sign_department" readonly="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    </group>
+                                    <group string="ขอแสดงความนับถือ" css="text-align:center;" colspan="3" attrs="{'invisible':[('document_type','!=','หนังสือภายนอก+หนังสือรับรอง')]}">
+                                        <field name="sign_employee" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('document_type','!=','บันทึกข้อความ')]}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="sign_department" readonly="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    </group>
+
+                                </group>
+                              </group>
+                        </page>
+                        <page name="infomation" string="อ้างอิง">
+                            <group>
+                                <field name="reference_line_ids_multi" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}">
+                                    <field name="view_type">form</field>
+                                    <field name="view_ids" eval="[(5, 0, 0),                                     (0, 0, {'view_mode': 'form', 'view_id': ref('pfb_saraban.document_internal_all_form_view')}),                                     ]"/>
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="date_document"/>
+                                        <field name="name_real"/>
+                                        <field name="date_document_real"/>
+                                        <field name="document_type"/>
+                                        <field name="department_name"/>
+                                        <field name="subject"/>
+<!--                                        <field name="speed"/>-->
+<!--                                        <field name="secret"/>-->
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="reference_receive_document" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}">
+                                    <field name="view_type">form</field>
+                                    <field name="view_ids" eval="[(5, 0, 0),                                     (0, 0, {'view_mode': 'form', 'view_id': ref('pfb_saraban.document_internal_all_form_view')}),                                     ]"/>
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="date_document"/>
+                                        <field name="name_real"/>
+                                        <field name="date_document_real"/>
+                                        <field name="refer"/>
+                                        <field name="date_receive"/>
+                                        <field name="from_document"/>
+<!--                                        <field name="employee_id"/>-->
+                                        <field name="subject"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="infomation" string="ลำดับอุนมัติ">
+                            <group>
+                                <group>
+                                    <field name="routings_internal_id" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="approval_count" invisible="1"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                     <field name="next_approval_ids" />
+                                    <field name="next_approval_user_ids" widget="many2many_tags"/>
+<!--                                    <field name="can_approve"/>-->
+                                </group>
+                                <group>
+                                    <field name="next_comment_ids" />
+                                    <field name="next_comment_user_ids"  widget="many2many_tags"/>
+<!--                                    <field name="can_comment"/>-->
+                                </group>
+                            </group>
+                            <field name="setting_line_ids" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree edit="true" required="1" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="is_active"/>
+                                    <field name="step" required="1"/>
+                                    <field name="status"/>
+                                    <field name="document_id" invisible="1"/>
+                                    <field name="job_id_name" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="employee_id" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="approve_type" required="1"/>
+                                    <field name="approve_time" readonly="1"/>
+                                    <field name="comment" readonly="1"/>
+                                    <field name="status_approve" readonly="1"/>
+                                    <button name="action_reset_approval" string="RESET" type="object" confirm="Are you sure?"
+                                        attrs="{'invisible':[('is_active','!=',True)]}"
+                                    />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                <script>
+                    $(function(){
+                        $('textarea[name="material"]').css("font-size", '14px');
+                        $('span[name="material"]').css("font-size", '14px');
+                        $('.o_horizontal_separator').css('text-align', 'center');
+                    })
+                </script>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="document_internal_main_all2_tree_view_reset">
+        <field name="name">document.internal.main.tree</field>
+        <field name="model">document.internal.main</field>
+        <field name="arch" type="xml">
+            <tree string="document Tree" default_order='name desc' >
+                <field name="name"/>
+                <field name="date_document"/>
+                <field name="name_real"/>
+                <field name="date_document_real"/>
+                <field name="document_type"/>
+                <field name="department_name"/>
+                <field name="subject"/>
+                <field name="speed"/>
+                <field name="secret"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="document_internal_main_all_list_action_reset">
+        <field name="name">หนังสือภายใน/ทั้งหมด</field>
+        <field name="res_model">document.internal.main</field>
+        <!-- <field name="domain">[('setting_line_ids.status_approve', '=', '0'),('setting_line_ids.employee_id.user_id', '=', uid)]</field> -->
+        <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('document_internal_main_all2_tree_view_reset')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('document_internal_all_form_view_reset')}),
+                        ]"/>
+        <field name="view_mode">tree,form,calendar,kanban,pivot,graph</field>
+    </record>
+    <menuitem id="pfb_saraban.reset_status_menu"
+               name="แสดงหนังสือภายในทั้งหมด [Reset]"
+               parent="pfb_saraban.internal_document_menu"
+               action="document_internal_main_all_list_action_reset"
+               groups="group_reset_status_saraban" />
+</div>
+<div class="2">
+<!--เมนู Reset-->
+    <record model="ir.ui.view" id="receive_document_main_form_all_view_reset">
+        <field name="name">receive.document.main.form</field>
+        <field name="model">receive.document.main</field>
+        <field name="arch" type="xml">
+            <form string="หนังสือรับ" create='0' edit='1' delete='0'>
+                 <header>
+                    <!-- <field name="state" widget="statusbar"/> -->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,1,2,done"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                        </group>
+<!--                        <group>-->
+<!--                            <field name="material" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('state', 'not in', ['draft', 'sent', '1'])]}"/>-->
+<!--                        </group>-->
+                    </group>
+                    <notebook>
+                        <page name="infomation" string="ข้อมูล">
+                            <field name="check_group_user" invisible="1"/>
+                            <group string="ข้อมูลหนังสือรับ" col="4">
+                              <group colspan="2">
+                                <group colspan="4">
+<!--                                  <field name="send_with_original_document" />-->
+                                  <field name="from_document" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="refer" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="date_receive" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+
+                                  <field name="subject" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                  <field name="speed" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                  <field name="secret" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                                <group col="2" colspan="2">
+                                    <field name="dear" required="1" widget="radio" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="job_name" widget="many2many_tags" attrs="{'required':[('dear', '==', 'job_name')],'invisible':[('dear', '==', 'empolyee_name')],'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="empolyee_name" widget="many2many_tags" attrs="{'required':[('dear', '==', 'empolyee_name')],'invisible':[('dear', '==', 'job_name')],'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                              </group>
+                              <group col="8" colspan="2">
+                                <group colspan="8">
+                                  <field name="attachment_ids" widget="many2many_binary" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                  <field name="reference_internal" readonly="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}">
+                                      <tree>
+                                          <field name="date_document"/>
+                                          <field name="name" string="name"/>
+                                          <field name="name_real"/>
+                                          <field name="date_document_real"/>
+                                          <!-- <field name="document_type"/> -->
+                                          <field name="department_name"/>
+                                          <field name="subject"/>
+                                          <field name="state" invisible="1"/>
+                                      </tree>
+                                  </field>
+                                </group>
+                              </group>
+                            </group>
+                            <group string="DEPA" col="4" colspan="4">
+                              <group col="3" colspan="3">
+                                  <field name="date_document" invisible="1"/>
+                                  <field name="name_real" readonly="1"/>
+                                <button name="real_name_gen" type="object" class="oe_highlight" string="run" attrs="{'invisible':['|', ('state', '!=', 'draft'), ('check_group_user', '!=', True)]}"/>
+                                <field name="date_document_real" readonly="1"/>
+                                <field name="employee_id" invisible="1"/>
+                                <field name="department_id" invisible="1"/>
+                                <field name="department_name" readonly="1"/>
+                                <field name="note" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                              </group>
+                            </group>
+                        </page>
+                        <page name="infomation" string="ลำดับอุนมัติ">
+                            <group>
+                                <group>
+                                    <field name="routings_internal_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="approval_count" invisible="1"/>
+                                </group>
+                            </group>
+                             <group>
+                                <group>
+                                     <field name="next_approval_ids" />
+                                    <field name="next_approval_user_ids" widget="many2many_tags"/>
+<!--                                    <field name="can_approve"/>-->
+                                </group>
+                                <group>
+                                    <field name="next_comment_ids" />
+                                    <field name="next_comment_user_ids"  widget="many2many_tags"/>
+<!--                                    <field name="can_comment"/>-->
+                                </group>
+                            </group>
+
+                            <field name="setting_line_ids" readonly="1">
+                                <tree edit="true" editable="bottom" default_order="step,sequence">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="is_active"/>
+                                    <field name="step" required="1" attrs="{'readonly': [('status_approve', '!=', False)]}"/>
+                                    <field name="status"/>
+                                    <field name="document_id" invisible="1"/>
+                                    <field name="job_id_name" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="to_or_cc" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="employee_id" required="1" context="{'job_title_searchable': True}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+<!--                                    <field name="order_choice" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
+                                    <field name="approve_type" required="1" attrs="{'readonly': [('status_approve', '!=',False)]}" options="{'no_create_edit': True}"/>
+                                    <field name="approve_time" readonly="1"/>
+                                    <field name="comment" readonly="1"/>
+                                    <field name="status_approve" readonly="1"/>
+                                    <button name="action_reset_approval" string="RESET" type="object" confirm="Are you sure?"
+                                        attrs="{'invisible':[('is_active','!=',True)]}"
+                                    />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="receive_document_main_tree_all_view_reset">
+        <field name="name">receive.document.main.tree</field>
+        <field name="model">receive.document.main</field>
+        <field name="arch" type="xml">
+            <tree string="document Tree" default_order="name desc" create="false" edit="false" delete="false" duplicate="false">
+                <field name="name"/>
+                <field name="date_document" invisible="1"/>
+                <field name="name_real"/>
+                <field name="date_document_real"/>
+                <field name="refer"/>
+                <field name="date_receive"/>
+                <field name="department_name"/>
+                <field name="from_document"/>
+                <field name="subject"/>
+                <field name="speed"/>
+                <field name="secret"/>
+                <field name="state"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="receive_document_main_all_list_action_reset">
+        <field name="name">แสดงหนังสือรับทั้งหมด</field>
+        <field name="res_model">receive.document.main</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain"></field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('receive_document_main_tree_all_view_reset')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('receive_document_main_form_all_view_reset')}),
+                        ]"/>
+    </record>
+    <menuitem id="pfb_saraban.receive_show_reset_menu"
+              name="แสดงหนังสือรับทั้งหมด [Reset]"
+              parent="pfb_saraban.receive_document_menu"
+              action="receive_document_main_all_list_action_reset"
+              groups="group_reset_status_saraban" />
+</div>
+
+
+<!--backup-->
+    <record model="ir.ui.view" id="document_main_internal_need_form_view_fix">
+        <field name="name">document.main.internal.need.form.view.fix</field>
+        <field name="model">document.internal.main</field>
+        <field name="inherit_id" ref="pfb_saraban.document_main_internal_need_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='infomation']//field[@name='attachment_ids']" position="after">
+                <field name="is_attachment_approval" invisible="1"/>
+<!--               <field name="attachment_ids" widget="many2many_binary" attrs="{'readonly': ['|', ('state', '=', 'done'), ('is_attachment_approval', '=', False)]}"/>-->
+            </xpath>
+            <xpath expr="//page[@name='infomation']//field[@name='attachment_ids']" position="attributes">
+                <attribute name="attrs">
+                    {'readonly': ['|', ('state', '=', 'done'), ('is_attachment_approval', '=', False)]}
+                </attribute>
+                 <attribute name="options">
+                     {"always_reload": True}
+                 </attribute>
+            </xpath>
+        </field>
+    </record>
+

@@ -1,0 +1,76 @@
+<odoo>
+    <record model="ir.ui.view" id="view_expenses_report_wizard_test">
+        <field name="name">expenses.report.wizard.test.view</field>
+        <field name="model">expenses.report.wizard.test</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="New Student Statistics Report">
+                <group>
+                    <group>
+                        <field name="date_range_id"/>
+                    </group>
+                    <group>
+                        <field name="date_from" />
+                        <field name="date_to" />
+                    </group>
+                </group>
+                <footer>
+                    <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_expenses_report_wizard_test2">
+        <field name="name">expenses.report.wizard.test2.view</field>
+        <field name="model">expenses.report.wizard.test2</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="New Student Statistics Report">
+                <group>
+                    <group>
+                        <field name="date_range_id"/>
+                    </group>
+                    <group>
+                        <field name="date_from" />
+                        <field name="date_to" />
+                    </group>
+                </group>
+                <footer>
+                    <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+     <act_window id="action_expenses_report_test_wizard"
+                name="ทะเบียนจ่ายเงินสดย่อย"
+                res_model="expenses.report.wizard.test"
+                view_mode="form"
+                target="new"/>
+
+    <act_window id="action_expenses_report_test_wizard2"
+                name="ทะเบียนคุมเงินยืมทดรอง"
+                res_model="expenses.report.wizard.test2"
+                view_mode="form"
+                target="new"/>
+
+     <menuitem id="menu_expense_report_wizard1"
+            name="PDF REPORT"
+            parent="hr_expense.menu_hr_expense_reports"
+            sequence="8"/>
+
+    <menuitem id="menu_expense_report_wizard2"
+            name="ทะเบียนจ่ายเงินสดย่อย"
+            parent="menu_expense_report_wizard1"
+            action="action_expenses_report_test_wizard"
+            sequence="9"/>
+
+    <menuitem id="menu_expense_report_wizard3"
+            name="ทะเบียนคุมเงินยืมทดรอง"
+            parent="menu_expense_report_wizard1"
+            action="action_expenses_report_test_wizard2"
+            sequence="10"/>
+</odoo>

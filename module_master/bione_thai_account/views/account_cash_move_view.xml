@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <record id="view_default_cash_move_tree" model="ir.ui.view">
+        <field name="name">view.default.cash.move.tree</field>
+        <field name="model">account.cash.move</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Cash" editable="bottom">
+                <field name="type"/>
+                <field name="fund_id"/>
+                <field name="amount"/>
+                <!--<field name="account_id" options="{'no_create': True}" domain="[('type','!=','view'),('company_id', '=', company_id),('deprecated', '=', False)]"/>-->
+                <field name="account_id" options="{'no_create': True}" domain="[('company_id', '=', company_id),('deprecated', '=', False)]"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_default_cash_move_form" model="ir.ui.view">
+        <field name="name">view.default.cash.move.form</field>
+        <field name="model">account.cash.move</field>
+        <field name="type">form</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form string="Cash">
+                <field name="type"/>
+                <field name="fund_id"/>
+                <field name="amount" sum="Amount"/>
+                <!--<field name="account_id" options="{'no_create': True}" domain="[('type','!=','view'),('company_id', '=', company_id),('deprecated', '=', False)]"/>-->
+                <field name="account_id" options="{'no_create': True}" domain="[('company_id', '=', company_id),('deprecated', '=', False)]"/>
+                <field name="company_id" invisible="1"/>
+            </form>
+        </field>
+    </record>
+
+    </data>
+</odoo>

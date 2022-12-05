@@ -1,0 +1,21 @@
+<odoo>
+  <data>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="pfb_module_agreement.action_requisition_window">
+      <field name="name">กฎหมาย</field>
+      <field name="res_model">purchase.requisition</field>
+      <field name="view_id" ref="purchase_requisition.view_purchase_requisition_tree"/>
+      <field name="context">{}</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="กฎหมาย" id="pfb_module_agreement.menu_root" web_icon="pfb_module_agreement,static/description/icon.png"/>
+    <!-- menu categories -->
+    <menuitem name="กฎหมาย" id="pfb_module_agreement.menu_1" parent="pfb_module_agreement.menu_root"/>
+    <!-- actions -->
+    <menuitem name="สัญญา" id="pfb_module_agreement.menu_1_list" parent="pfb_module_agreement.menu_1"
+              action="pfb_module_agreement.action_requisition_window"/>
+  </data>
+</odoo>

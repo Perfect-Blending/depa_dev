@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--  Stock Scrap Form -->
+        <record id="stock_scrap_form_inherit" model="ir.ui.view">
+                <field name="name">stock.scrap.form.inherit</field>
+                <field name="model">stock.scrap</field>
+                <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//form/sheet/group/group[1]" position="inside">
+                        <label for="secondary_quantity"/>
+                        <div class="o_row">
+                            <field name="secondary_quantity" readonly="1" groups="secondary_uom_app.group_secondary_uom"/>
+                            <field name="secondary_uom_id" readonly="1" groups="secondary_uom_app.group_secondary_uom"/>
+                        </div>
+                    </xpath>
+                </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+<!-- STOCK CARD SUMMARY REPORT -->
+	<report id="report_stockcard_summary" string="Print Stock-Card Summary"
+		model="stock.card" report_type="qweb-pdf" file="rt_stock_card.report_stockcard_summary_report"
+		name="rt_stock_card.report_stockcard_summary_report" />
+
+	<record id="report_stockcard_summary" model="ir.actions.report">
+		<field name="paperformat_id" ref="rt_stock_card.paperformat_landscape_custom"/>
+	</record>
+
+<template id="report_stockcard_summary_report">
+	<t t-call="web.html_container">
+	<t t-call="web.external_layout">
+		<t t-foreach="docs" t-as="o" ><!-- style="page-break-after:always;" -->
+			<div class="page">
+				<div class="oe_structure" />
+				<br></br>
+				<br></br>
+
+				<h4 class="text-center">
+					<span >Stock Card Summary Report </span>
+					<t t-if="o.date_from and o.date_to">
+						(<span t-esc="o.date_from"/> - To <span t-esc="o.date_to"/>)
+					</t>
+					<t t-if="o.date_from and not o.date_to">
+						(<span t-esc="o.date_from"/> - Till Date)
+					</t>
+				</h4>
+
+				<table class="table table-condensed">
+					<thead>
+						<tr style="border-top: 3px solid black;border-bottom: double;">
+							<th>Product</th>
+							<!-- <th>Location</th> -->
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_only">Begin-Qty</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_values">Begin-Value</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_only">In-Qty</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_values">In-Value</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_only">Out-Qty</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_values">Out-Value</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_only">End-Qty</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_values">End-Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr t-foreach="o.with_context(data['form']).generate_stock_card_summary()" t-as="line">
+							<td>
+								<span t-esc="line['product_name']" />
+							</td>
+							<!-- <td>
+								<span t-esc="line['location']" />
+							</td> -->
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_only">
+								<span t-esc="line['beginqty']"/>
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_values">
+								<span t-esc="line['beginvalue']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_only">
+								<span t-esc="line['inqty']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_values">
+								<span t-esc="line['invalue']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_only">
+								<span t-esc="line['outqty']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_values">
+								<span t-esc="line['outvalue']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_only">
+								<span t-esc="line['endqty']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_values">
+								<span t-esc="line['endvalue']" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="oe_structure" />
+			</div>
+		</t>
+	</t>
+	</t>
+</template>
+
+	</data>
+</odoo>

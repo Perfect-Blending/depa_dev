@@ -1,0 +1,34 @@
+.o_main_navbar .dropdown-menu.show {
+    width: 150px;
+}
+
+.menu_badge {
+    display: inline-block;
+    min-width: 2em;
+    /* em unit */
+    padding: .3em;
+    /* em unit */
+    border-radius: 50%;
+    font-size: 10px;
+    text-align: center;
+    background: #7c7bad;
+    color: #fefefe;
+}
+
+.dd {
+//     display: inline-block;
+    min-width: 2em;
+    /* em unit */
+    padding: .3em;
+    /* em unit */
+    border-radius: 10%;
+    font-size: 14px;
+    text-align: center;
+    background: #E1B12B;
+    color: #fefefe;
+//     border-radius: 50%;
+//     font-size: 10px;
+//     text-align: center;
+//     background: #E1B12B;
+//     color: #fefefe;
+}

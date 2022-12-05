@@ -1,0 +1,556 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <menuitem name="ภงด." parent="account.menu_finance_entries"
+                  id="menu_bione_account_tax" sequence="11"/>
+
+        <menuitem name="ภาษีหัก ณ ที่จ่าย" parent="menu_bione_account_tax"
+                  id="menu_bione_wht" sequence="20"/>
+
+        <!-- WHT Type -->
+        <record model="ir.ui.view" id="bione_wht_type_form">
+            <field name="name">bione.wht.type.form</field>
+            <field name="model">bione.wht.type</field>
+            <field name="arch" type="xml">
+                <form string="WHT Type">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="sequence" invisible="1"/>
+                            <field name="name"/>
+                            <field name="printed"/>
+                        </group>
+                    </sheet>
+                    <!--
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+                    </div>
+                     -->
+                </form>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bione_wht_type_tree">
+            <field name="name">bione.wht.type.tree</field>
+            <field name="model">bione.wht.type</field>
+            <field name="arch" type="xml">
+                <tree string="WHT Type">
+                    <field name="sequence" invisible="1"/>
+                    <field name="name"/>
+                    <field name="printed"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bione_wht_type_filter">
+            <field name="name">bione.wht.type.search</field>
+            <field name="model">bione.wht.type</field>
+            <field name="arch" type="xml">
+                <search string="WHT Type">
+                    <!--<field name="sequence"/>-->
+                    <field name="name"/>
+                    <field name="printed"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="bione_wht_type_action">
+            <field name="name">หัวข้อภาษีหัก ณ ที่จ่าย</field>
+            <field name="res_model">bione.wht.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="หัวข้อภาษีหัก ณ ที่จ่าย"
+                  parent="menu_bione_account_tax"
+                  id="menu_bione_wht_type"
+                  sequence="100"
+                  action="bione_wht_type_action"/>
+
+        <!-- WHT -->
+        <record model="ir.ui.view" id="bione_wht_form">
+            <field name="name">bione.wht.form</field>
+            <field name="model">bione.wht</field>
+            <field name="arch" type="xml">
+                <form string="With holding tax" version="7.0">
+                    <header>
+                        <!--
+                        <button name="action_done" string="Done" type="object" states="draft" class="oe_highlight"/>
+                        <button name="action_cancel" string="Cancel" type="object" states="draft,done"/>
+                        <button name="action_draft" string="Set Draft" type="object" states="cancel,done"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,sent,invoiced,done"
+                               statusbar_colors='{"invoice_except":"red","waiting_date":"blue"}'/>
+                               -->
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label string="No." for="name"/>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="partner_id" class="oe_inline" on_change="on_change_partner(partner_id)"/>
+                                <field name="date_doc"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="voucher_id" invisible="1"/>
+                                <field name="move_line_id" invisible="1"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="wht_type" required="1"/>
+                                <field name="wht_kind" required="1"/>
+                                <field name="wht_payment" required="1"/>
+                                <field name="account_id" invisible="1" domain="[('wht_sale_ok','=',1)]"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail">
+                                <field name="line_ids" context="{'default_date_doc':date_doc,'default_wht_type_id':15}">
+                                    <tree string="WHT Lines">
+                                        <field name="date_doc"/>
+                                        <field name="wht_type_id"/>
+                                        <field name="percent"/>
+                                        <field name="base_amount"/>
+                                        <field name="tax"/>
+                                        <field name="note"/>
+                                    </tree>
+                                    <form string="WHT Lines" version="7.0">
+                                        <group>
+                                            <group>
+                                                <field name="date_doc"/>
+                                                <field name="wht_type_id"/>
+                                                <field name="note"/>
+                                            </group>
+                                            <group>
+                                                <field name="percent"
+                                                       on_change="on_change_value(percent, base_amount)"/>
+                                                <field name="base_amount"
+                                                       on_change="on_change_value(percent, base_amount)"/>
+                                                <field name="tax"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group>
+                                    <group>
+                                        <field name="base_amount"/>
+                                    </group>
+                                    <group>
+                                        <field name="tax"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Note">
+                                <field name="note" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+                    </div>
+                </form>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bione_wht_purchase_form">
+            <field name="name">bione.wht.purchase.form</field>
+            <field name="model">bione.wht</field>
+            <field name="arch" type="xml">
+                <form string="With holding tax" version="7.0">
+                    <header>
+                        <!--<button name="action_done" string="Done" type="object" states="draft" class="oe_highlight"/>
+                        <button name="action_cancel" string="Cancel" type="object" states="draft,done"/>
+                        <button name="action_draft" string="Set Draft" type="object" states="cancel,done"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,sent,invoiced,done"
+                               statusbar_colors='{"invoice_except":"red","waiting_date":"blue"}'/>
+                               -->
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label string="No." for="name"/>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="partner_id" class="oe_inline" on_change="on_change_partner(partner_id)"/>
+                                <field name="date_doc"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="voucher_id" invisible="1"/>
+                                <field name="move_line_id" invisible="1"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="wht_type" required="1"/>
+                                <field name="wht_kind" required="1"/>
+                                <field name="wht_payment" required="1"/>
+                                <field name="account_id" invisible="1" domain="[('wht_purchase_ok','=',1)]"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail">
+                                <field name="line_ids" context="{'default_date_doc':date_doc,'default_wht_type_id':15}">
+                                    <tree string="WHT Lines">
+                                        <field name="date_doc"/>
+                                        <field name="wht_type_id"/>
+                                        <field name="percent"/>
+                                        <field name="base_amount"/>
+                                        <field name="tax"/>
+                                        <field name="note"/>
+                                    </tree>
+                                    <form string="WHT Lines" version="7.0">
+                                        <group>
+                                            <group>
+                                                <field name="date_doc"/>
+                                                <field name="wht_type_id"/>
+                                                <field name="note"/>
+                                            </group>
+                                            <group>
+                                                <field name="percent"
+                                                       on_change="on_change_value(percent, base_amount)"/>
+                                                <field name="base_amount"
+                                                       on_change="on_change_value(percent, base_amount)"/>
+                                                <field name="tax"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group>
+                                    <group>
+                                        <field name="base_amount"/>
+                                    </group>
+                                    <group>
+                                        <field name="tax"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Note">
+                                <field name="note" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+                    </div>
+                </form>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bione_wht_tree">
+            <field name="name">bione.wht.tree</field>
+            <field name="model">bione.wht</field>
+            <field name="arch" type="xml">
+                <tree string="With holding tax">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="date_doc"/>
+                    <field name="partner_id"/>
+                    <field name="wht_type"/>
+                    <field name="wht_kind"/>
+                    <!-- 		        	<field name="wht_payment" /> -->
+                    <field name="base_amount" sum="Total"/>
+                    <field name="tax"/>
+                </tree>
+            </field>
+        </record>
+
+<!--        <record model="ir.ui.view" id="bione_wht_search">-->
+<!--            <field name="name">bione.wht.search</field>-->
+<!--            <field name="model">bione.wht</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="With holding tax">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="date_doc"/>-->
+<!--                    <field name="partner_id"/>-->
+<!--                    <field name="wht_type"/>-->
+<!--                    <field name="wht_kind"/>-->
+<!--                    <field name="base_amount"/>-->
+<!--                    <field name="tax"/>-->
+<!--                    <filter string="PP3" icon="terp-personal" domain="[('wht_kind','=','pp4')]" context=""/>-->
+<!--                    <filter string="PP53" icon="terp-personal" domain="[('wht_kind','=','pp7')]" context=""/>-->
+<!--                    <group string="Group By...">-->
+<!--                        <filter string="Partner" icon="terp-personal" domain="" context="{'group_by': 'partner_id'}"/>-->
+<!--                        <filter string="Date" icon="terp-personal" domain="" context="{'group_by':'date_doc'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record model="ir.actions.act_window" id="bione_wht_action_customer">
+            <field name="name">ภาษีถูกหัก ณ ที่จ่าย</field>
+            <field name="res_model">bione.wht</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('wht_type','=','sale')]</field>
+            <field name="context">{'default_wht_type':'sale'}</field>
+        </record>
+
+        <record id="bione_wht_action_customer_tree" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="bione_wht_tree"/>
+            <field name="act_window_id" ref="bione_wht_action_customer"/>
+        </record>
+
+        <record id="bione_wht_action_customer_form" model="ir.actions.act_window.view">
+            <field eval="3" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="bione_wht_form"/>
+            <field name="act_window_id" ref="bione_wht_action_customer"/>
+        </record>
+
+        <menuitem name="ภาษีถูกหัก ณ ที่จ่าย"
+                  id="menu_bione_wht_customer"
+                  parent="menu_bione_wht"
+                  sequence="10"
+                  action="bione_wht_action_customer"/>
+
+        <record model="ir.actions.act_window" id="bione_wht_action_supplier">
+            <field name="name">ภาษีหัก ณ ที่จ่าย</field>
+            <field name="res_model">bione.wht</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('wht_type','=','purchase')]</field>
+            <field name="context">{'default_wht_type':'purchase'}</field>
+        </record>
+
+        <record id="bione_wht_action_customer_tree" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="bione_wht_tree"/>
+            <field name="act_window_id" ref="bione_wht_action_supplier"/>
+        </record>
+
+        <record id="bione_wht_action_customer_form" model="ir.actions.act_window.view">
+            <field eval="3" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="bione_wht_purchase_form"/>
+            <field name="act_window_id" ref="bione_wht_action_supplier"/>
+        </record>
+
+        <menuitem name="ภาษีหัก ณ ที่จ่าย"
+                  id="menu_bione_wht_supplier"
+                  parent="menu_bione_wht"
+                  sequence="20"
+                  action="bione_wht_action_supplier"/>
+
+        <record model="ir.ui.view" id="bione_wht_pnd_form">
+            <field name="name">bione.wht.pnd.form</field>
+            <field name="model">bione.wht.pnd</field>
+            <field name="arch" type="xml">
+                <form string="WHT PND" version="7.0">
+                    <header>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label string="No." for="name"/>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <!--<field name="period_tax_id" required="1"/>-->
+                                <field name="date_pnd"/>
+                                <field name="type_normal"/>
+                                <field name="type_special"/>
+                                <field name="type_no"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group>
+                                <field name="section_3"/>
+                                <field name="section_48" attrs="{'invisible': [('pnd_type', '!=', 'pp4')]}"/>
+                                <field name="section_50" attrs="{'invisible': [('pnd_type', '!=', 'pp4')]}"/>
+                                <field name="section_65" attrs="{'invisible': [('pnd_type', '!=', 'pp7')]}"/>
+                                <field name="section_69" attrs="{'invisible': [('pnd_type', '!=', 'pp7')]}"/>
+                                <field name="pnd_type" invisible="1"/>
+                                <field name="attach_pnd"/>
+                                <field name="attach_count"/>
+                                <field name="attach_no"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail">
+                                <field name="wht_ids" domain="[('wht_type','=','purchase'),('wht_kind','=','pp4')]">
+                                    <tree string="WHT PND3 Lines">
+                                        <field name="name"/>
+                                        <field name="date_doc"/>
+                                        <field name="partner_id"/>
+                                        <field name="base_amount"/>
+                                        <field name="tax"/>
+                                    </tree>
+                                </field>
+                                <group>
+                                    <group>
+                                    </group>
+                                    <group>
+                                        <field name="total_amount"/>
+                                        <field name="total_tax"/>
+                                        <field name="add_amount"/>
+                                        <field name="total_tax_send" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Note">
+                                <field name="note" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bione_wht_pnd_tree">
+            <field name="name">bione.wht.pnd.tree</field>
+            <field name="model">bione.wht.pnd</field>
+            <field name="arch" type="xml">
+                <tree string="With holding tax PND">
+                    <field name="name"/>
+                    <!--<field name="period_tax_id" />-->
+                    <field name="date_pnd"/>
+                    <field name="total_amount"/>
+                    <field name="total_tax"/>
+                    <field name="add_amount"/>
+                    <field name="total_tax_send"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bione_wht_pnd53_tree">
+            <field name="name">bione.wht.pnd53.tree</field>
+            <field name="model">bione.wht.pnd</field>
+            <field name="arch" type="xml">
+                <tree string="With holding tax PND">
+                    <field name="name"/>
+                    <!--<field name="period_tax_id" />-->
+                    <field name="date_pnd"/>
+                    <field name="total_amount"/>
+                    <field name="total_tax"/>
+                    <field name="add_amount"/>
+                    <field name="total_tax_send"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bione_wht_pnd53_form">
+            <field name="name">bione.wht.pnd53.form</field>
+            <field name="model">bione.wht.pnd</field>
+            <field name="arch" type="xml">
+                <form string="WHT PND" version="7.0">
+                    <header>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label string="No." for="name"/>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <!--<field name="period_tax_id" required="1"/>-->
+                                <field name="date_pnd"/>
+                                <field name="type_normal"/>
+                                <field name="type_special"/>
+                                <field name="type_no"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group>
+                                <field name="section_3"/>
+                                <field name="section_48" attrs="{'invisible': [('pnd_type', '!=', 'pp4')]}"/>
+                                <field name="section_50" attrs="{'invisible': [('pnd_type', '!=', 'pp4')]}"/>
+                                <field name="section_65" attrs="{'invisible': [('pnd_type', '!=', 'pp7')]}"/>
+                                <field name="section_69" attrs="{'invisible': [('pnd_type', '!=', 'pp7')]}"/>
+                                <field name="pnd_type" invisible="1"/>
+                                <field name="attach_pnd"/>
+                                <field name="attach_count"/>
+                                <field name="attach_no"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail">
+                                <field name="wht_ids" domain="[('wht_type','=','purchase'),('wht_kind','=','pp7')]">
+                                    <tree string="WHT PND53 Lines">
+                                        <field name="name"/>
+                                        <field name="date_doc"/>
+                                        <field name="partner_id"/>
+                                        <field name="base_amount"/>
+                                        <field name="tax"/>
+                                    </tree>
+                                </field>
+                                <group>
+                                    <group>
+                                    </group>
+                                    <group>
+                                        <field name="total_amount"/>
+                                        <field name="total_tax"/>
+                                        <field name="add_amount"/>
+                                        <field name="total_tax_send" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Note">
+                                <field name="note" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="bione_wht_pnd_action">
+            <field name="name">ภงด.3</field>
+            <field name="res_model">bione.wht.pnd</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('pnd_type','=','pp4')]</field>
+            <field name="context">{'default_pnd_type': 'pp4','pnd_type': 'pp4'}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="bione_wht_pnd_action_tree">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="bione_wht_pnd_tree"/>
+            <field name="act_window_id" ref="bione_wht_pnd_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="bione_wht_pnd_action_from">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="bione_wht_pnd_form"/>
+            <field name="act_window_id" ref="bione_wht_pnd_action"/>
+        </record>
+
+        <menuitem name="ภงด.3"
+                  id="menu_bione_wht_pnd"
+                  parent="menu_bione_account_tax"
+                  sequence="10"
+                  action="bione_wht_pnd_action"/>
+
+        <record model="ir.actions.act_window" id="bione_wht_pnd_action53">
+            <field name="name">ภงด.53</field>
+            <field name="res_model">bione.wht.pnd</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="bione_wht_pnd_tree"/>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('pnd_type','=','pp7')]</field>
+            <field name="context">{'default_pnd_type': 'pp7','pnd_type': 'pp7'}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="bione_wht_pnd_action53_tree">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="bione_wht_pnd53_tree"/>
+            <field name="act_window_id" ref="bione_wht_pnd_action53"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="bione_wht_pnd_action53_from">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="bione_wht_pnd53_form"/>
+            <field name="act_window_id" ref="bione_wht_pnd_action53"/>
+        </record>
+
+        <menuitem name="ภวด.53"
+                  id="menu_bione_wht_pnd53"
+                  parent="menu_bione_account_tax"
+                  sequence="11"
+                  action="bione_wht_pnd_action53"/>
+
+    </data>
+</odoo>

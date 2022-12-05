@@ -1,0 +1,106 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="pfb_withholding_tree_list">
+      <field name="name">pfb_withholding_tree.list</field>
+      <field name="model">pfb.withholding.tax.tree</field>
+      <field name="arch" type="xml">
+        <tree edit="0" create="0" delete="0">
+            <field name="date" />
+            <field name="number_wt" />
+            <field name="supplier" />
+            <field name="vat" />
+            <field name="wt_cert_income_desc" />
+            <field name="wt_percent" />
+            <field name="base" sum="Sum Base" />
+            <field name="amount" sum="Sum Amount" />
+            <field name="pnd"/>
+        </tree>
+      </field>
+    </record>
+
+      <record id="pfb_withholding_tree_form" model="ir.ui.view">
+        <field name="name">pfb_withholding_tree_form</field>
+        <field name="model">pfb.withholding.tax.tree</field>
+        <field name="arch" type="xml">
+            <form string="Withholding">
+                <sheet>
+                   <group>
+                       <field name="date" readonly="1"/>
+                        <field name="number_wt" readonly="1"/>
+                        <field name="supplier" readonly="1"/>
+                        <field name="vat" readonly="1"/>
+                        <field name="wt_cert_income_desc" readonly="1"/>
+                        <field name="wt_percent" readonly="1"/>
+                        <field name="base"  readonly="1"/>
+                        <field name="amount" readonly="1"/>
+                        <field name="pnd" readonly="1"/>
+                   </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+      <record model="ir.actions.act_window" id="bione_wht_action_pp53">
+            <field name="name">ภ.ง.ด. 53</field>
+            <field name="res_model">bione.wht</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('wht_type','=','purchase'),('wht_kind','=','pp7')]</field>
+            <field name="context">{'default_wht_type':'purchase'}</field>
+        </record>
+        <record model="ir.actions.act_window" id="bione_wht_action_pp4">
+            <field name="name">ภ.ง.ด. 3</field>
+            <field name="res_model">bione.wht</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('wht_type','=','purchase'),('wht_kind','=','pp4')]</field>
+            <field name="context">{'default_wht_type':'purchase'}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="bione_wht_action_pp1">
+            <field name="name">ภ.ง.ด. 1</field>
+            <field name="res_model">bione.wht</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('wht_type','=','purchase'),('wht_kind','=','pp1')]</field>
+            <field name="context">{'default_wht_type':'purchase'}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="bione_wht_action_pp3">
+            <field name="name">ภ.ง.ด. 1ก.</field>
+            <field name="res_model">bione.wht</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('wht_type','=','purchase'),('wht_kind','=','pp1')]</field>
+            <field name="context">{'default_wht_type':'purchase'}</field>
+        </record>
+
+        <menuitem name="ภงด.53"
+                  id="bione_thai_account.menu_bione_wht_pnd53"
+                  parent="bione_thai_account.menu_bione_account_tax"
+                  sequence="11"
+                  action="bione_wht_action_pp53"/>
+
+        <menuitem name="ภงด.3"
+                  id="bione_thai_account.menu_bione_wht_pnd"
+                  parent="bione_thai_account.menu_bione_account_tax"
+                  sequence="12"
+                  action="bione_wht_action_pp4"/>
+
+        <menuitem name="ภงด.1"
+                  id="menu_bione_wht_pp1"
+                  parent="bione_thai_account.menu_bione_account_tax"
+                  sequence="13"
+                  action="bione_wht_action_pp1"/>
+
+        <menuitem name="ภงด.1ก"
+                  id="menu_bione_wht_pp3"
+                  parent="bione_thai_account.menu_bione_account_tax"
+                  sequence="14"
+                  action="bione_wht_action_pp3"/>
+
+        <menuitem name="รายงาน ภงด.1,3,53"
+                  id="bione_thai_account.menu_account_report_status_of_pnd"
+                  action="l10n_th_withholding_tax_report.action_withholding_tax_report_wizard"
+                  sequence="20"
+                  parent="bione_thai_account.report_account_pnd"/>
+
+  </data>
+</odoo>

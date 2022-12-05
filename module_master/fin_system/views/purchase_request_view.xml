@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+
+<!--    <record model="ir.ui.view" id="tap_purchase_request_inherit_inherit">-->
+<!--        <field name="name">tap.purchase.request.form.inherit.inherit</field>-->
+<!--        <field name="model">purchase.request</field>-->
+<!--        <field name="inherit_id" ref="pfb_tap_information_pr.tap_purchase_request_inherit"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="method_of_recruitment" position="replace">-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+</odoo>

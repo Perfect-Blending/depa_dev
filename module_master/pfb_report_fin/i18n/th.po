@@ -1,0 +1,387 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pfb_report_fin
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20201109\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-24 07:00+0000\n"
+"PO-Revision-Date: 2020-11-24 14:04+0700\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: th\n"
+"X-Generator: Poedit 2.3.1\n"
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_buttons
+msgid "<span class=\"fa fa-download\"/>Export"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_buttons
+msgid "<span class=\"fa fa-print\"/>Print"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard__analytic_id
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__name
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__analytic_id
+msgid "Analytic Account"
+msgstr "รหัสงบประมาณ"
+
+#. module: pfb_report_fin
+#: model:ir.model,name:pfb_report_fin.model_account_analytic_group
+msgid "Analytic Categories"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard__analytic_group
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__analytic_group
+msgid "Analytic Group"
+msgstr "กลุ่มงบประมาณ"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__budget_balance
+msgid "Balance"
+msgstr "ยอดเงิน"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__budget_balance_percent
+msgid "Balance In Percent"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__budget
+msgid "Budget"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__budget_spend
+msgid "Budget Spend"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.pfb_report_fin_wizard_views
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard__create_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__create_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__create_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin_wizard__create_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__create_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_fin_report__create_uid
+msgid "Created by"
+msgstr "สร้างโดย"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard__create_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__create_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__create_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin_wizard__create_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__create_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_fin_report__create_date
+msgid "Created on"
+msgstr "สร้างเมื่อ"
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_report_filters
+msgid "Date From"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_report_filters
+msgid "Date To"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.actions.report,name:pfb_report_fin.action_detailed_budget_report_pdf
+msgid "Detailed Budget PDF"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.actions.client,name:pfb_report_fin.action_report_detailed_budget_report_html
+#: model:ir.model,name:pfb_report_fin.model_report_detailed_budget_report
+msgid "Detailed Budget Report"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model,name:pfb_report_fin.model_detailed_budget_view
+msgid "Detailed Budget View"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.actions.report,name:pfb_report_fin.action_detailed_budget_report_xlsx
+msgid "Detailed Budget XLSX"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard__display_name
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__display_name
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__display_name
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin_wizard__display_name
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__display_name
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_fin_report__display_name
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_report_fin_report_detailed_budget_report_xlsx__display_name
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_report_fin_report_fin_report_xlsx__display_name
+msgid "Display Name"
+msgstr "ชื่อที่ใช้แสดง"
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.pfb_report_fin_wizard_views
+msgid "Export PDF"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.pfb_report_fin_wizard_views
+msgid "Export XLSX"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__fin_id
+msgid "Fin"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__fin_name
+msgid "Fin Name"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.actions.report,name:pfb_report_fin.action_finn_report_xlsx
+msgid "Fin Report XLSX"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_lines_header
+msgid "Fin100"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__fin100_date
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_lines_header
+msgid "Fin100 Date"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__fin100_state
+msgid "Fin100 State"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_lines_header
+msgid "Fin100 Status"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard__fiscal_year
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__fiscal_year
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__fiscal_year
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin_wizard__fiscal_year
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__fiscal_year
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_fin_report__fiscal_year
+msgid "Fiscal Year"
+msgstr "ปีงบประมาณ"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__group_id
+msgid "Group"
+msgstr "กลุ่ม"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard__id
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__id
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__id
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin_wizard__id
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__id
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_fin_report__id
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_report_fin_report_detailed_budget_report_xlsx__id
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_report_fin_report_fin_report_xlsx__id
+msgid "ID"
+msgstr "รหัส"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard____last_update
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view____last_update
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin____last_update
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin_wizard____last_update
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report____last_update
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_fin_report____last_update
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_report_fin_report_detailed_budget_report_xlsx____last_update
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_report_fin_report_fin_report_xlsx____last_update
+msgid "Last Modified on"
+msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard__write_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__write_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__write_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin_wizard__write_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__write_uid
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_fin_report__write_uid
+msgid "Last Updated by"
+msgstr "อัพเดทครั้งสุดท้ายโดย"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_report_wizard__write_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__write_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__write_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin_wizard__write_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__write_date
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_pfb_fin_report__write_date
+msgid "Last Updated on"
+msgstr "อัพเดทครั้งสุดท้ายเมื่อ"
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_report_filters
+msgid "Location"
+msgstr "ตำแหน่ง"
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.pfb_report_fin_wizard_views
+msgid "New Fin Report"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model,name:pfb_report_fin.model_report_pfb_fin_report
+msgid "PFB Fin Report"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__projects_reserve
+msgid "Projects Reserve"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__projects_residual
+msgid "Projects Residual"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__projects_residual_amount
+msgid "Projects Residual Amount"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_detailed_budget_view__projects_return
+msgid "Projects Return"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__code
+msgid "Reference"
+msgstr "อ้างอิง"
+
+#. module: pfb_report_fin
+#: model:ir.ui.menu,name:pfb_report_fin.menu_1
+msgid "Reporting"
+msgstr "รายงาน"
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_lines_header
+msgid "Reserve"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_lines_header
+msgid "Residual"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_lines_header
+msgid "Residual Amount"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_report_detailed_budget_report__results
+msgid "Results"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_lines_header
+msgid "Return"
+msgstr "ส่งคืน"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__session
+msgid "Session"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:res.groups,comment:pfb_report_fin.pfb_fin_system_reporting
+#: model:res.groups,name:pfb_report_fin.pfb_fin_system_reporting
+msgid "Show Menu Report Fin"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_report_base
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.report_detailed_budget_report_base_pdf
+msgid "Total"
+msgstr "รวม"
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,help:pfb_report_fin.field_report_detailed_budget_report__results
+msgid "Use compute fields, so there is nothing store in database"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.pfb_report_fin_wizard_views
+msgid "View"
+msgstr "มุมมอง"
+
+#. module: pfb_report_fin
+#: model_terms:ir.ui.view,arch_db:pfb_report_fin.pfb_report_fin_form
+msgid "Withholding"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model,name:pfb_report_fin.model_detailed_budget_report_wizard
+msgid "detailed.budget.report.wizard"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model,name:pfb_report_fin.model_pfb_report_fin
+msgid "pfb.report.fin"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model,name:pfb_report_fin.model_pfb_report_fin_wizard
+msgid "pfb.report.fin.wizard"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model,name:pfb_report_fin.model_report_pfb_report_fin_report_detailed_budget_report_xlsx
+msgid "report.pfb_report_fin.report_detailed_budget_report_xlsx"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model,name:pfb_report_fin.model_report_pfb_report_fin_report_fin_report_xlsx
+msgid "report.pfb_report_fin.report_fin_report_xlsx"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__budget_reserve
+msgid "reserve"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.model.fields,field_description:pfb_report_fin.field_pfb_report_fin__budget_return
+msgid "return"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.actions.act_window,name:pfb_report_fin.action_pfb_report_fin_wizard
+msgid "รายงานงบประมาณสรุปยอดคงเหลือ"
+msgstr ""
+
+#. module: pfb_report_fin
+#: model:ir.actions.act_window,name:pfb_report_fin.action_detailed_budget_report_wizard
+#: model:ir.ui.menu,name:pfb_report_fin.menu_2_list
+msgid "รายงานงบประมาณโดยละเอียด"
+msgstr ""

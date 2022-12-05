@@ -1,0 +1,74 @@
+<odoo>
+    <report string="Billing Note"
+            id="bione_billing_form_pdf_report"
+            model="account.billing"
+            name="bione_account_form.bione_billing_form_pdf"
+            file="bione_account_form.bione_billing_form_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Billing Note - [%s]' % object.display_name"
+            paperformat="bione_account_form.paperformat_bione"/>
+
+    <report string="Credit Note / Tax Invoice"
+            id="bione_credit_note_tax_invoice_form_pdf_report"
+            model="account.invoice"
+            name="bione_account_form.bione_credit_note_tax_invoice_form_pdf"
+            file="bione_account_form.bione_credit_note_tax_invoice_form_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Credit Note_Tax Invoice - [%s]' % object.display_name"
+            paperformat="bione_account_form.paperformat_bione"/>
+
+    <report string="Debit Note / Tax Invoice"
+            id="bione_debit_note_tax_invoice_form_pdf_report"
+            model="account.invoice"
+            name="bione_account_form.bione_debit_note_tax_invoice_form_pdf"
+            file="bione_account_form.bione_debit_note_tax_invoice_form_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Debit Note_Tax Invoice - [%s]' % object.display_name"
+            paperformat="bione_account_form.paperformat_bione"/>
+
+    <report string="Delivery Order"
+            id="bione_delivery_order_form_pdf_report"
+            model="account.invoice"
+            name="bione_account_form.bione_delivery_order_form_pdf"
+            file="bione_account_form.bione_delivery_order_form_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Delivery Order - [%s]' % object.display_name"
+            paperformat="bione_account_form.paperformat_bione"/>
+
+    <report string="Delivery Order / Tax Invoice A"
+            id="bione_delivery_order_tax_invoice_A_form_pdf_report"
+            model="account.invoice"
+            name="bione_account_form.bione_delivery_order_tax_invoice_A_form_pdf"
+            file="bione_account_form.bione_delivery_order_tax_invoice_A_form_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Delivery Order_Tax Invoice - [%s]' % object.display_name"
+            paperformat="bione_account_form.paperformat_bione"/>
+
+    <report string="Delivery Order / Tax Invoice B"
+            id="bione_delivery_order_tax_invoice_B_form_pdf_report"
+            model="account.invoice"
+            name="bione_account_form.bione_delivery_order_tax_invoice_B_form_pdf"
+            file="bione_account_form.bione_delivery_order_tax_invoice_B_form_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Delivery Order_Tax Invoice - [%s]' % object.display_name"
+            paperformat="bione_account_form.paperformat_bione_delivery_order_tax_invoice_B"/>
+
+    <report string="Payment Request"
+            id="bione_payment_request_form_pdf_report"
+            model="account.billing"
+            name="bione_account_form.bione_payment_request_form_pdf"
+            file="bione_account_form.bione_payment_request_form_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Payment Request - [%s]' % object.display_name"
+            paperformat="bione_account_form.paperformat_bione"/>
+
+    <report string="Receipt"
+            id="bione_receipt_form_pdf_report"
+            model="account.payment"
+            name="bione_account_form.bione_receipt_form_pdf"
+            file="bione_account_form.bione_receipt_form_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Receipt - [%s]' % object.display_name"
+            paperformat="bione_account_form.paperformat_bione"/>
+
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="pos_config_inherited_form_view" model="ir.ui.view">
+            <field name="name">pos.config.inherit.form.view</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <h2>Order and Product Note</h2>
+                    <group col="4">
+                        <field name="pos_enable_order_note" />
+                        <field name="pos_enable_product_note" />
+                    </group>
+                    <group col="4">
+                        <field name="is_pos_order_note_receipt"/>
+                        <field name="is_pos_product_note_receipt"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="pos_order_inherited_form_view" model="ir.ui.view">
+            <field name="name">pos.order.inherited.view</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <field name="price_unit" position="before">
+                    <field name="line_note"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

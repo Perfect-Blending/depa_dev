@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_config_settings" model="ir.ui.view">
+        <field name="name">view.account.config.settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//div[@id='recommended_apps']" position="inside">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="group_journal">
+                        <div class="o_setting_left_pane">
+                            <field name="group_journal_id"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_journal_id"/>
+                            <div class="text-muted">
+                                Use automate  group journal entries
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="auto_post_journal">
+                        <div class="o_setting_left_pane">
+                            <field name="auto_post_journal_id"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="auto_post_journal_id"/>
+                            <div class="text-muted">
+                                Use automate posted journal entries
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+
+                <xpath expr="//div[@id='recommended_apps']" position="after">
+                    <h3 style='padding-left:32px;background-color:#F9F9F9;
+                                font-size: 15px;
+                                font-weight: bold;
+                                padding-top: 5px;
+                                padding-right: 16px;
+                                padding-bottom: 5px;' groups="account.group_account_user">
+                                Thai Accounting : configuration</h3>
+                    <div class="row mt16 o_settings_container" groups="account.group_account_user" id ="config_account">
+                        <div class="col-xs-12 col-md-12 o_setting_box" title="These taxes are set in any new product created.">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row">
+                                       <label for="cheque_postdate_in_account_id" class="col-md-4 o_light_label" />
+                                       <field name="cheque_postdate_in_account_id" class="col-md-4"  options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                       <label for="cheque_postdate_out_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="cheque_postdate_out_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 o_setting_box" title="These taxes are set in any new product created.">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row">
+                                       <label for="advance_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="advance_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 o_setting_box" title="These taxes are set in any new product created.">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row">
+                                       <label for="credit_card_postdate_in_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="credit_card_postdate_in_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                       <label for="credit_card_postdate_out_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="credit_card_postdate_out_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 o_setting_box" title="These taxes are set in any new product created.">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row">
+                                       <label for="cash_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="cash_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                       <label for="bank_charge_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="bank_charge_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                       <label for="bank_income_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="bank_income_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                       <label for="bank_write_off_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="bank_write_off_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 o_setting_box" title="These taxes are set in any new product created.">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row">
+                                       <label for="wht_company_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="wht_company_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                       <label for="wht_personal_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="wht_personal_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                       <label for="pp30_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="pp30_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                       <label for="pp40_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="pp40_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                       <label for="pnd2_account_id" class="col-md-4 o_light_label"/>
+                                       <field name="pnd2_account_id" class="col-md-4" options="{'no_create': True}" domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 style='padding-left:32px;background-color:#F9F9F9;
+                                font-size: 15px;
+                                font-weight: bold;
+                                padding-top: 5px;
+                                padding-right: 16px;
+                                padding-bottom: 5px;' groups="account.group_account_user">
+                                Journal</h3>
+                    <div class="col-xs-12 col-md-12 o_setting_box" title="These taxes are set in any new product created." groups="account.group_account_user"  id ="config_่่่journal">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="vendor_bill_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="vendor_bill_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="vendor_credit_note_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="vendor_credit_note_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="vendor_debit_note_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="vendor_debit_note_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="vendor_deposit_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="vendor_deposit_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="vendor_cash_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="vendor_cash_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="customer_invoice_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="customer_invoice_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="customer_credit_note_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="customer_credit_note_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="customer_debit_note_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="customer_debit_note_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="customer_deposit_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="customer_deposit_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="customer_cash_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="customer_cash_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="receipt_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="receipt_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="payment_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="payment_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="out_cheque_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="out_cheque_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="in_cheque_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="in_cheque_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="out_credit_card_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="out_credit_card_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="in_credit_card_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="in_credit_card_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="bank_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="bank_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="advance_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="advance_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="petty_cash_receipt_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="petty_cash_receipt_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="petty_cash_payment_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="petty_cash_payment_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="depr_asset_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="depr_asset_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="cash_deposit_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="cash_deposit_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="cash_withdraw_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="cash_withdraw_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="bank_transfer_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="bank_transfer_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="bank_charge_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="bank_charge_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row">
+                                   <label for="bank_income_journal_id" class="col-md-4 o_light_label"/>
+                                   <field name="bank_income_journal_id" class="col-md-4" domain="[('company_id', '=', company_id)]"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

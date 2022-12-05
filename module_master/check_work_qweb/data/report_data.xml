@@ -1,0 +1,14 @@
+<odoo>
+    <report
+        string="ใบตรวจรับงาน"
+        id="check_work_pdf_report"
+        model="work.acceptance"
+        name="check_work_qweb.check_work_pdf_report_pdf"
+        file="check_work_qweb.check_work_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="check_work_qweb.paperformat_check_work"
+    />
+
+
+</odoo>

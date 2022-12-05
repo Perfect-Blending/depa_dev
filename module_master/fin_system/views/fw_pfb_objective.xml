@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="fin_system_fw_pfb_objective_tree_view">
+            <field name="name">fin_system_fw_pfb_objective_tree_view</field>
+            <field name="model">fw_pfb_objective</field>
+            <field name="arch" type="xml">
+                <tree string="Objective">
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+         <record model="ir.ui.view" id="fin_system_fw_pfb_objective_form_view">
+            <field name="name">fin_system_flow_template_form_view</field>
+            <field name="model">fw_pfb_objective</field>
+            <field name="arch" type="xml">
+            <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                                <field name="active"/>
+                                <field name="description"/>
+                            </group>
+                        </group>
+                    </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="fin_system_fw_pfb_objective_action">
+            <field name="name">Objective</field>
+            <field name="res_model">fw_pfb_objective</field>
+            <field name="view_id" ref="fin_system_fw_pfb_objective_tree_view"/>
+            <field name="domain">['|', ('active', '=', True), ('active', '=', False)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_fw_pfb_objective_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_fw_pfb_objective_tree_view"/>
+            <field name="act_window_id" ref="fin_system_fw_pfb_objective_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_fw_pfb_objective_form_view_action">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_fw_pfb_objective_form_view"/>
+            <field name="act_window_id" ref="fin_system_fw_pfb_objective_action"/>
+        </record>
+
+
+        <menuitem name="Objective"
+                    id="fin_system_fw_pfb_objective"
+                    parent="fin_system.fin_system_menu_settings"
+                    sequence="14"
+                    action="fin_system_fw_pfb_objective_action"
+                    groups="fw_pfb_fin_system_show_menu_settings"/>
+
+    </data>
+</odoo>

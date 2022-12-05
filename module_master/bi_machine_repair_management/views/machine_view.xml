@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+    
+        <!-- Sale Order -->
+        <record id="machine_sale_order_inherit_form_view" model="ir.ui.view">
+            <field name="name">machine.sale.order.inherit.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_button_box']/button[@name='action_view_invoice']" position="after">
+                    <button type="object" name="machine_repair_button" class="oe_stat_button" icon="fa-cogs" attrs="{'invisible': [('machine_repair_count', '=', 0)]}">
+                        <field name="machine_repair_count" widget="statinfo" string="Repair Order" />
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="custom_product_product_form_view" model="ir.ui.view">
+            <field name="name">product.product.form.view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title']/div[@name='options']" position="inside">
+                    <div>
+                        <field name="is_machine"/>  
+                        <label for="is_machine"/> 
+                    </div>
+                    <div>
+                        <field name="is_machine_parts"/>  
+                        <label for="is_machine_parts"/> 
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="product_normal_action_machine" model="ir.actions.act_window">
+            <field name="name">Machines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('is_machine', '=', 1)]</field>
+            <field name="search_view_id" ref="product.product_search_form_view"/>
+            <field name="view_id" eval="False"/> <!-- Force empty -->
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new Machine Product.
+              </p><p>
+                You must define a product for everything you sell, whether it's
+                a physical product, a consumable or a service you offer to
+                customers.
+              </p><p>
+                The product form contains information to simplify the sale
+                process: price, notes in the quotation, accounting data,
+                procurement methods, etc.
+              </p>
+            </field>
+        </record>
+        
+        <record id="product_normal_action_machine_parts" model="ir.actions.act_window">
+            <field name="name">Machines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('is_machine_parts', '=', 1)]</field>
+            <field name="search_view_id" ref="product.product_search_form_view"/>
+            <field name="view_id" eval="False"/> <!-- Force empty -->
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new product.
+              </p><p>
+                You must define a product for everything you sell, whether it's
+                a physical product, a consumable or a service you offer to
+                customers.
+              </p><p>
+                The product form contains information to simplify the sale
+                process: price, notes in the quotation, accounting data,
+                procurement methods, etc.
+              </p>
+            </field>
+        </record>
+        
+		<menuitem id="main_menu_machines" parent="main_menu_machine_repair" name="Machines" sequence="2"/>
+		
+		<menuitem id="menu_machine" parent="main_menu_machines" name="Machines" action="product_normal_action_machine" sequence="1"/>
+		<menuitem id="menu_machine_parts" parent="main_menu_machines" name="Machine Parts" action="product_normal_action_machine_parts" sequence="2"/>
+
+	</data>
+</odoo>
+ 

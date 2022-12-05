@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+
+		<template id="machine_repair_label_template_view">
+			<!-- <t t-call="web.external_layout"> -->
+				<div class="page">
+					<t t-foreach="docs" t-as="o">
+					<div class="row">
+                            <div class="col-xs-12">
+                                <table style="font-size:20; margin-bottom: 3px; width: 100%;line-height: 200%;" class="col-xs-12">
+                                    <tr>
+                                        <td style="font-weight: bold;text-align: left;">
+                                            <span t-field="o.name" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" style="margin-left: 15px;padding: 8px;font-size:20;width: 100%; text-align: left; margin-bottom: 3px;line-height: 200%;">
+                                    <tr>
+                                        <td width="20%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;">Client</span>
+                                        </td>
+                                        <td width="80%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;" t-field="o.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;">Machine</span>
+                                        </td>
+                                        <td width="80%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;" t-field="o.product_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;">Year</span>
+                                        </td>
+                                        <td width="80%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;" t-field="o.year"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                             <span style="margin-left: 5px;">Brand</span>
+                                        </td>
+                                        <td width="80%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;" t-field="o.brand"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;">Model</span>
+                                        </td>
+                                        <td width="80%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;" t-field="o.model"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;">Date</span>
+                                        </td>
+                                        <td width="80%" style="border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <p style="margin-left: 5px;"><span t-field="o.repair_request_date"/></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" style="text-align: left; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <span style="margin-left: 5px;">Description</span>
+                                        </td>
+                                        <td width="80%" style="border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+                                            <p style="margin-left: 5px;"><span t-field="o.accompanying_item"/></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+					</t>
+				</div>
+			<!-- </t> -->
+		</template>
+
+		<template id="machine_repair_label_temp_id">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<t t-call="bi_machine_repair_management.machine_repair_label_template_view" /><!-- 
+						t-lang="doc.partner_id.lang" -->
+				</t>
+			</t>
+		</template>
+
+	</data>
+</odoo>

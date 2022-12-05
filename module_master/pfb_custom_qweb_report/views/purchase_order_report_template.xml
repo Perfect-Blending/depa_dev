@@ -1,0 +1,735 @@
+<odoo>
+
+    <record id="paperformat_purchase_order_report" model="report.paperformat">
+        <field name="name">paperformat.purchase.order.report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30</field>
+        <field name="margin_right">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report
+            id="purchase_order_report"
+            model="purchase.order"
+            string="ใบสั่งซื้อ (ไม่รวม Vat)"
+            report_type="qweb-pdf"
+            name="pfb_custom_qweb_report.purchase_order_report_view"
+            paperformat="paperformat_purchase_order_report"
+    />
+
+    <report
+            id="purchase_order_report2"
+            model="purchase.order"
+            string="ใบสั่งซื้อ (รวม Vat)"
+            report_type="qweb-pdf"
+            name="pfb_custom_qweb_report.purchase_order_report_view2"
+            paperformat="paperformat_purchase_order_report"
+    />
+
+    <template id="purchase_order_report_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.html_container">
+                    <div class='header'>
+                        <br/>
+                        <br/>
+                        <section align='left' style="width:20%; float: left; font-family:'kinnari';"  >
+                            <img src="/pfb_custom_qweb_report/static/img/DEPA.png" width="150px" height="130px" />
+                        </section>
+                        <section align='center' style="width:50%; float: left; font-family:'kinnari';"  >
+
+               สำนักงานส่งเสริมเศรษฐกิจดิจิทัล
+
+                            <br/>
+
+               เลขที่ 80 อาคารลาดพร้าวฮิลล์ ซ.ลาดพร้าว 4 ถ.ลาดพร้าว
+
+                            <br/>
+
+               แขวงจอมพล เขตจตุจักร กรุงเทพฯ 10900
+
+                            <br/>
+
+               โทรศัพท์ : 02-0262333
+
+                            <br/>
+
+               เลขประจำตัวผู้เสียภาษีอากร 099 4 0000 8751 9
+
+
+                        </section>
+                        <section align='right' style="width:30%; float: left; font-family:'kinnari';"  >
+                            <br/>
+                            <br/>
+                            ใบสั่งซื้อ/จ้าง
+                            <br/><t t-set="year" t-value="(int((o.date_order).strftime('%Y')))+543"/>
+                            เลขที่ <span t-field="o.name"/>/<t t-esc="year"/><br/>
+                            เลขที่สัญญา <span t-field="o.requisition_id" style="padding-left:10px"/>
+                        </section>
+
+                    </div>
+                    <br/>
+                    <br/>
+                    <table  width="100%" style="border: 1px solid black;border-collapse: collapse;font-family:'kinnari';border: 1px solid black;">
+                        <thead align="left"  >
+                            <tr  >
+                                <td style="border: 1px solid black;padding-left:5px;" width="50%" >
+                                          ชื่อผู้ขาย/ผู้รับจ้าง
+                                    <span t-field="o.partner_id"/>
+                                    <br/>
+                                          ที่อยู่
+                                    <span t-field="o.partner_id.street"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.street2" style="padding-left:35px;"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.city" style="padding-left:35px;"/>
+                                    <span t-field="o.partner_id.zip" />
+                                    <br/>
+                                    <section align='left' style="width:50%; float: left;">
+                                        โทรศัพท์ :
+                                        <span t-field="o.partner_id.phone"/>
+                                        <br/>
+                                    </section>
+                                    <section align='left' style="width:50%; float: left;">
+                                        โทรสาร :
+                                        <span t-field="o.partner_id.fax"/>
+                                        <br/>
+                                    </section>
+                                          E-mail : <span t-field="o.partner_id.email"/>
+                                    <br/>
+                                          ผู้ติดต่อ
+                                          : <span t-field="o.contact_person"/>
+                                    <br/>
+                                </td>
+                                <td style="border: 1px solid black;padding-left:5px;" width="50%" >
+                                          ชื่อผู้ว่าจ้าง
+                                    <br/>
+                                    <span t-field="o.company_id.name"/>
+                                    <br/>
+                                    <span t-field="o.company_id.street"/>
+                                    <br/>
+                                    <span t-field="o.company_id.street2"/>
+                                    <span t-field="o.company_id.city"/>
+                                    <span t-field="o.company_id.zip"/>
+                                    <br/>
+                                          โทรศัพท์
+                                          : <span t-field="o.company_id.phone"/>
+                                    <br/>
+                                    <br/>
+                                          ผู้ติดต่อ :<br/>
+                                </td>
+
+                            </tr>
+                        </thead>
+                    </table>
+                    <p/>
+                    <table  width="100%" class="table table-borderless" style="border: 1px solid black;border-collapse: collapse;font-family:'kinnari';">
+                        <thead align="center"  >
+                            <tr  >
+                                <th style="border: 1px solid black" width="25%">วันที่ออกใบสั่งซื้อ/จ้าง </th>
+                                <th style="border: 1px solid black" width="25%">ใบเสนอราคาเลขที่-ลงวันที่</th>
+                                <th style="border: 1px solid black" width="33%">เงื่อนไขการชำระเงิน</th>
+                                <th style="border: 1px solid black" width="17%">เลขที่รหัสงบประมาณ</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td align="center" style="border: 1px solid black">
+                                    <t t-set="year" t-value="(int((o.date_order).strftime('%Y')))+543"/>
+                                    <t t-set="date_order" t-value="'%s/%s' %((o.date_order).strftime('%d/%m'),year)"/>
+                                     <t t-esc="date_order"/>
+                                </td>
+                                <td align="center" style="border: 1px solid black">
+                                    <t t-set="year" t-value="(int((o.quote_id.date_order).strftime('%Y')))+543"/>
+                                    <t t-set="date_order" t-value="'%s/%s' %((o.quote_id.date_order).strftime('%d/%m'),year)"/>
+                                    <span t-field="o.quote_id.name"/> -  <t t-esc="date_order"/>
+                                </td>
+                                <td align="center" style="border: 1px solid black">
+                                    <span t-field="o.payment_term_id"/>
+                                </td>
+                                <td align="center" style="border: 1px solid black">
+                                    <span t-field="o.project_id.code"/>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p/>
+                    <div class='container'>
+                        <table   width="100%" style="border: 1px solid black;border-collapse: collapse;font-family:'kinnari';">
+                            <thead align="center"  >
+                                <tr  >
+                                    <th style="border: 1px solid black" width="7%">ลำดับที่ </th>
+                                    <th style="border: 1px solid black" width="43%">รายการ</th>
+                                    <th style="border: 1px solid black" width="16.66%">จำนวน/หน่วยนับ</th>
+                                    <th style="border: 1px solid black" width="16.66%">ราคาบาทต่อหน่วย</th>
+                                    <th style="border: 1px solid black" width="16.66%">จำนวนเงิน(บาท)</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="count" t-value="0"/>
+                                <tr height=" 250px" style="vertical-align: top; font-size:10pt;">
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <t t-set="count" t-value="count+1"/>
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="center">
+                                                        <span t-esc="count"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="left">
+                                                        <span t-field="line.name"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="right">
+                                                        <span t-esc="'{:,.2f}'.format(line.product_qty)"/>
+                                                        <span t-field="line.product_uom"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="right">
+                                                        <span t-esc="'{:,.2f}'.format(line.price_unit)" style="padding-right:2px;" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="right">
+                                                        <span t-esc="'{:,.2f}'.format(line.price_subtotal)" style="padding-right:2px;" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="3" style="border: 1px solid black;padding-left:5px;">
+                                        <br/>
+                                        <p/>
+                                        <strong style="padding-left:60px;"><t t-esc="thaibahttext" /></strong>
+                                        <br/>
+                                        <td colspan="1" style="padding-left:5px;">
+                                            <strong>จำนวนเงิน</strong>
+                                            <br/>
+                                            <strong>ภาษีมูลค่าเพิ่ม 7%</strong>
+                                            <br/>
+                                            <strong>จำนวนเงินรวม</strong>
+                                            <br/>
+                                        </td>
+                                        <td  align="right" colspan="1" style="padding-left:5px;">
+                                            <span t-esc="'{:,.2f}'.format(o.amount_untaxed)" style="padding-right:2px;" />
+                                            <br/>
+                                            <span t-esc="'{:,.2f}'.format(o.amount_tax)" style="padding-right:2px;" />
+                                            <br/>
+                                            <span t-esc="'{:,.2f}'.format(o.amount_total)" style="padding-right:2px;" />
+                                            <br/>
+                                        </td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="border: 1px solid black;padding-left:5px;">
+                                        <section align='left' style="width:10%; float: left; ">
+                                            <strong>
+                              หมายเหตุ
+                                            </strong>
+                                        </section>
+                                        <section align='left' style="width:90%; float: left; ">
+                                            <strong>
+                              1.ใบสั่งซื้อ/จ้างนี้จะสมบูรณ์ต่อเมื่อมีลายมือชื่อผู้มีอำนาจอนุมัติลงนาม
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                      2.หากผู้ขาย/ผู้รับจ้างส่งมอบสินค้า/งานจ้างล่าช้า ผู้ขาย/ผู้รับจ้างจะต้องชำระค่าปรับเป็นรายวันในอัตราร้อยละ 0.1
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                     ของราคาสิ่งของ/งานจ้าง/งานที่ยังไม่ได้รับมอบหมาย สำหรับงานจ้างจะต้องไม่น้อยกว่าวันละ 100 บาท
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                    3.กรณีเป็นการจ้าง ผู้รับจ้างจะต้องปิดอากรแสตมป์บนใบสั่งจ้างในอัตรา 1,000 บาท ละ1 บาท ราคาก่อน VAT
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                      (หากงานจ้างวงเงินเกิน 2 แสนบาท ต้องไปนำติดตราสาร ณ สรรพากร)
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                      4.กำหนดส่งมอบสินค้า/งานจ้าง ภายใน 30 วัน นับถัดจากได้รับอนุมัติใบสั่งซื้อสั่งจ้าง
+                                            </strong>
+                                            <br/>
+
+                                        </section>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <tr>
+                            <section align='left' style="width:50%; float: left;border: 1px solid black;border-collapse: collapse;font-family:'kinnari';">
+                                <td style="border: 1px solid black;">
+                                    <p> </p>
+                                    <strong style="padding-left:40px;">............................................................หัวหน้าเจ้าหน้าที่พัสดุ
+                                    </strong>
+                                    <br/>
+                                    <strong style="padding-left:70px;">
+                        (
+                                    </strong>
+                                    <strong  style="padding-left:200px;">
+                        )
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:60px;">
+                        ................/..................../...............
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                    <hr style="border-bottom: 1px solid black"/>
+                                    <p/>
+                                    <strong style="padding-left:40px;">............................................................ผู้มีอำนาจอนุมัติ
+                                    </strong>
+                                    <br/>
+                                    <strong style="padding-left:70px;">
+                        (
+                                    </strong>
+                                    <strong  style="padding-left:200px;">
+                        )
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:60px;">
+                        ................/..................../...............
+                                    </strong>
+                                    <br/>
+                                    <p/>
+
+                                </td>
+                            </section>
+                            <section align='left' style="width:114.2mm; float: left; border: 1px solid black;border-collapse: collapse;font-family:'kinnari';" >
+                                <td style="border: 1px solid black;">
+                                    <p> </p>
+                                    <strong style="padding-left:40px;">สำหรับผู้ขาย/ผู้จ้าง
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:40px;">ข้าพเจ้ารับทราบและยินยอมปฏิบัติตามเงื่อนไข
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:40px;">ในใบสั่งซื้อ/จ้างฉบับนี้ทุกประการ
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                    <strong style="padding-left:40px;">ลงชื่อ......................................................ผู้ขาย/ผู้รับจ้าง
+                                    </strong>
+                                    <br/>
+                                    <strong style="padding-left:60px;">
+                        (
+                                    </strong>
+                                    <strong  style="padding-left:200px;">
+                        )
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:70px;">
+                        ................/..................../...............
+                                    </strong>
+
+                                    <br/>
+                                    <br/>
+                                    <p/>
+                                </td>
+                            </section>
+                        </tr>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="purchase_order_report_view2">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.html_container">
+                    <div class='header'>
+                        <br/>
+                        <br/>
+                        <section align='left' style="width:20%; float: left; font-family:'kinnari';"  >
+                            <img src="/pfb_custom_qweb_report/static/img/DEPA.png" width="150px" height="130px" />
+                        </section>
+                        <section align='center' style="width:50%; float: left; font-family:'kinnari';"  >
+
+               สำนักงานส่งเสริมเศรษฐกิจดิจิทัล
+
+                            <br/>
+
+               เลขที่ 80 อาคารลาดพร้าวฮิลล์ ซ.ลาดพร้าว 4 ถ.ลาดพร้าว
+
+                            <br/>
+
+               แขวงจอมพล เขตจตุจักร กรุงเทพฯ 10900
+
+                            <br/>
+
+               โทรศัพท์ : 02-0262333
+
+                            <br/>
+
+               เลขประจำตัวผู้เสียภาษีอากร 099 4 0000 8751 9
+
+
+                        </section>
+                        <section align='right' style="width:30%; float: left; font-family:'kinnari';"  >
+                            <br/>
+                            <br/>
+                            ใบสั่งซื้อ/จ้าง
+                            <br/><t t-set="year" t-value="(int((o.date_order).strftime('%Y')))+543"/>
+                            เลขที่ <span t-field="o.name"/>/<t t-esc="year"/><br/>
+                            เลขที่สัญญา <span t-field="o.requisition_id" style="padding-left:10px"/>
+                        </section>
+
+                    </div>
+                    <br/>
+                    <br/>
+                    <table  width="100%" style="border: 1px solid black;border-collapse: collapse;font-family:'kinnari';border: 1px solid black;">
+                        <thead align="left"  >
+                            <tr  >
+                                <td style="border: 1px solid black;padding-left:5px;" width="50%" >
+                                          ชื่อผู้ขาย/ผู้รับจ้าง
+                                    <span t-field="o.partner_id"/>
+                                    <br/>
+                                          ที่อยู่
+                                    <span t-field="o.partner_id.street"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.street2" style="padding-left:35px;"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.city" style="padding-left:35px;"/>
+                                    <span t-field="o.partner_id.zip" />
+                                    <br/>
+                                    <section align='left' style="width:50%; float: left;">
+                                        โทรศัพท์ :
+                                        <span t-field="o.partner_id.phone"/>
+                                        <br/>
+                                    </section>
+                                    <section align='left' style="width:50%; float: left;">
+                                        โทรสาร :
+                                        <span t-field="o.partner_id.fax"/>
+                                        <br/>
+                                    </section>
+                                          E-mail : <span t-field="o.partner_id.email"/>
+                                    <br/>
+                                          ผู้ติดต่อ
+                                          : <span t-field="o.contact_person"/>
+                                    <br/>
+                                </td>
+                                <td style="border: 1px solid black;padding-left:5px;" width="50%" >
+                                          ชื่อผู้ว่าจ้าง
+                                    <br/>
+                                    <span t-field="o.company_id.name"/>
+                                    <br/>
+                                    <span t-field="o.company_id.street"/>
+                                    <br/>
+                                    <span t-field="o.company_id.street2"/>
+                                    <span t-field="o.company_id.city"/>
+                                    <span t-field="o.company_id.zip"/>
+                                    <br/>
+                                          โทรศัพท์
+                                          : <span t-field="o.company_id.phone"/>
+                                    <br/>
+                                    <br/>
+                                          ผู้ติดต่อ :<br/>
+                                </td>
+
+                            </tr>
+                        </thead>
+                    </table>
+                    <p/>
+                    <table  width="100%" class="table table-borderless" style="border: 1px solid black;border-collapse: collapse;font-family:'kinnari';">
+                        <thead align="center"  >
+                            <tr  >
+                                <th style="border: 1px solid black" width="25%">วันที่ออกใบสั่งซื้อ/จ้าง </th>
+                                <th style="border: 1px solid black" width="25%">ใบเสนอราคาเลขที่-ลงวันที่</th>
+                                <th style="border: 1px solid black" width="33%">เงื่อนไขการชำระเงิน</th>
+                                <th style="border: 1px solid black" width="17%">เลขที่รหัสงบประมาณ</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td align="center" style="border: 1px solid black">
+                                    <t t-set="year" t-value="(int((o.date_order).strftime('%Y')))+543"/>
+                                    <t t-set="date_order" t-value="'%s/%s' %((o.date_order).strftime('%d/%m'),year)"/>
+                                     <t t-esc="date_order"/>
+                                </td>
+                                <td align="center" style="border: 1px solid black">
+                                    <t t-set="year" t-value="(int((o.quote_id.date_order).strftime('%Y')))+543"/>
+                                    <t t-set="date_order" t-value="'%s/%s' %((o.quote_id.date_order).strftime('%d/%m'),year)"/>
+                                    <span t-field="o.quote_id.name"/> -  <t t-esc="date_order"/>
+                                </td>
+                                <td align="center" style="border: 1px solid black">
+                                    <span t-field="o.payment_term_id"/>
+                                </td>
+                                <td align="center" style="border: 1px solid black">
+                                    <span t-field="o.project_id.code"/>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p/>
+                    <div class='container'>
+                        <table   width="100%" style="border: 1px solid black;border-collapse: collapse;font-family:'kinnari';">
+                            <thead align="center"  >
+                                <tr  >
+                                    <th style="border: 1px solid black" width="7%">ลำดับที่ </th>
+                                    <th style="border: 1px solid black" width="43%">รายการ</th>
+                                    <th style="border: 1px solid black" width="16.66%">จำนวน/หน่วยนับ</th>
+                                    <th style="border: 1px solid black" width="16.66%">ราคาบาทต่อหน่วย</th>
+                                    <th style="border: 1px solid black" width="16.66%">จำนวนเงิน(บาท)</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="count" t-value="0"/>
+                                <tr height=" 250px" style="vertical-align: top; font-size:10pt;">
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <t t-set="count" t-value="count+1"/>
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="center">
+                                                        <span t-esc="count"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="left">
+                                                        <span t-field="line.name"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="right">
+                                                        <span t-esc="'{:,.2f}'.format(line.product_qty)"/>
+                                                        <span t-field="line.product_uom"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                             <t t-set="sum_price" t-value="0"/>
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="right">
+                                                        <t t-set="sum_price" t-value="(line.price_unit*100)/107"/>
+                                                        <span t-esc="'{:,.2f}'.format(sum_price)" style="padding-right:2px;" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+
+                                    <td align="right" style="border: 1px solid black">
+                                        <table width="100%">
+                                            <t t-foreach="o.order_line"  t-as="line">
+                                                <tr width="100%" height="10" valign="top">
+                                                    <td align="right">
+                                                        <span t-esc="'{:,.2f}'.format(line.price_subtotal)" style="padding-right:2px;" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="3" style="border: 1px solid black;padding-left:5px;">
+                                        <br/>
+                                        <p/>
+                                        <strong style="padding-left:60px;"><t t-esc="thaibahttext" /></strong>
+                                        <br/>
+                                        <td colspan="1" style="padding-left:5px;">
+                                            <strong>จำนวนเงิน</strong>
+                                            <br/>
+                                            <strong>ภาษีมูลค่าเพิ่ม 7%</strong>
+                                            <br/>
+                                            <strong>จำนวนเงินรวม</strong>
+                                            <br/>
+                                        </td>
+                                        <td  align="right" colspan="1" style="padding-left:5px;">
+                                            <span t-esc="'{:,.2f}'.format(o.amount_untaxed)" style="padding-right:2px;" />
+                                            <br/>
+                                            <span t-esc="'{:,.2f}'.format(o.amount_tax)" style="padding-right:2px;" />
+                                            <br/>
+                                            <span t-esc="'{:,.2f}'.format(o.amount_total)" style="padding-right:2px;" />
+                                            <br/>
+                                        </td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="border: 1px solid black;padding-left:5px;">
+                                        <section align='left' style="width:10%; float: left; ">
+                                            <strong>
+                              หมายเหตุ
+                                            </strong>
+                                        </section>
+                                        <section align='left' style="width:90%; float: left; ">
+                                            <strong>
+                              1.ใบสั่งซื้อ/จ้างนี้จะสมบูรณ์ต่อเมื่อมีลายมือชื่อผู้มีอำนาจอนุมัติลงนาม
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                      2.หากผู้ขาย/ผู้รับจ้างส่งมอบสินค้า/งานจ้างล่าช้า ผู้ขาย/ผู้รับจ้างจะต้องชำระค่าปรับเป็นรายวันในอัตราร้อยละ 0.1
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                     ของราคาสิ่งของ/งานจ้าง/งานที่ยังไม่ได้รับมอบหมาย สำหรับงานจ้างจะต้องไม่น้อยกว่าวันละ 100 บาท
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                    3.กรณีเป็นการจ้าง ผู้รับจ้างจะต้องปิดอากรแสตมป์บนใบสั่งจ้างในอัตรา 1,000 บาท ละ1 บาท ราคาก่อน VAT
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                      (หากงานจ้างวงเงินเกิน 2 แสนบาท ต้องไปนำติดตราสาร ณ สรรพากร)
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                      4.กำหนดส่งมอบสินค้า/งานจ้าง ภายใน 30 วัน นับถัดจากได้รับอนุมัติใบสั่งซื้อสั่งจ้าง
+                                            </strong>
+                                            <br/>
+
+                                        </section>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <tr>
+                            <section align='left' style="width:50%; float: left;border: 1px solid black;border-collapse: collapse;font-family:'kinnari';">
+                                <td style="border: 1px solid black;">
+                                    <p> </p>
+                                    <strong style="padding-left:40px;">............................................................หัวหน้าเจ้าหน้าที่พัสดุ
+                                    </strong>
+                                    <br/>
+                                    <strong style="padding-left:70px;">
+                        (
+                                    </strong>
+                                    <strong  style="padding-left:200px;">
+                        )
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:60px;">
+                        ................/..................../...............
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                    <hr style="border-bottom: 1px solid black"/>
+                                    <p/>
+                                    <strong style="padding-left:40px;">............................................................ผู้มีอำนาจอนุมัติ
+                                    </strong>
+                                    <br/>
+                                    <strong style="padding-left:70px;">
+                        (
+                                    </strong>
+                                    <strong  style="padding-left:200px;">
+                        )
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:60px;">
+                        ................/..................../...............
+                                    </strong>
+                                    <br/>
+                                    <p/>
+
+                                </td>
+                            </section>
+                            <section align='left' style="width:114.2mm; float: left; border: 1px solid black;border-collapse: collapse;font-family:'kinnari';" >
+                                <td style="border: 1px solid black;">
+                                    <p> </p>
+                                    <strong style="padding-left:40px;">สำหรับผู้ขาย/ผู้จ้าง
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:40px;">ข้าพเจ้ารับทราบและยินยอมปฏิบัติตามเงื่อนไข
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:40px;">ในใบสั่งซื้อ/จ้างฉบับนี้ทุกประการ
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                    <strong style="padding-left:40px;">ลงชื่อ......................................................ผู้ขาย/ผู้รับจ้าง
+                                    </strong>
+                                    <br/>
+                                    <strong style="padding-left:60px;">
+                        (
+                                    </strong>
+                                    <strong  style="padding-left:200px;">
+                        )
+                                    </strong>
+                                    <br/>
+                                    <strong  style="padding-left:70px;">
+                        ................/..................../...............
+                                    </strong>
+
+                                    <br/>
+                                    <br/>
+                                    <p/>
+                                </td>
+                            </section>
+                        </tr>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

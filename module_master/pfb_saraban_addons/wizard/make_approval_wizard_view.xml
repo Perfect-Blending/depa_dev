@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="make_approval_wizard_view_form_inherit" model="ir.ui.view">
+        <field name="name">make.approval.wizard.form.inherit</field>
+        <field name="model">make.approval.wizard</field>
+        <field name="inherit_id" ref="pfb_saraban.make_approval_wizard_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="replace">
+                <group col="2" colspan="4">
+                      <group col="2" colspan="4">
+                        <field name="employee_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                        <field name="approve_type" />
+                        <field name="total_for_approve" invisible="1"/>
+                        <field name="setting_line" invisible="1"/>
+                        <field name="setting_id" invisible="1"/>
+                        <field name="status" invisible="1"/>
+                        <field name="add_line" invisible="1"/>
+                        <field name="change_new" invisible="1"/>
+                        <field name="is_add_or_change" />
+                      </group>
+                </group>
+
+                <group attrs="{'invisible': [('is_add_or_change', '=', False)]}">
+
+                    <group>
+                        <field name="change_approver_groups" widget="many2many_tags" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                        <field name="change_approver" widget="many2many_tags" context="{'job_title_searchable': True}" domain="[('user_id', '!=', uid)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                    </group>
+                    <group>
+                        <label for="favorite_change" class="btn btn-info" attrs="{'invisible': [('favorite_change', '=', True)]}" />
+                        <field name="favorite_change" invisible="1" />
+                        <field name="group_name_change"  placeholder="Group favorite" attrs="{'invisible': [('favorite_change', '=', False)]}" />
+                        <field name="favorite_change" invisible="1"  />
+
+                        <label for="action_favorite_change_button" class="btn btn-success" attrs="{'invisible': [('favorite_change', '=', False)]}" />
+                        <label for="favorite_change_discard_button" class="btn btn-secondary" attrs="{'invisible': [('favorite_change', '=', False)]}"/>
+                        <field name="action_favorite_change_button" invisible="1"/>
+                        <field name="favorite_change_discard_button" invisible="1"/>
+                    </group>
+
+
+                    <group>
+                        <field name="add_approver_groups" widget="many2many_tags" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                        <field name="add_approver" widget="many2many_tags" context="{'job_title_searchable': True}" domain="[('user_id', '!=', uid)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                    </group>
+                    <group>
+                        <label for="favorite_add" class="btn btn-info" attrs="{'invisible': [('favorite_add', '=', True)]}" />
+                        <field name="favorite_add" invisible="1" />
+                        <field name="group_name_add"  placeholder="Group favorite" attrs="{'invisible': [('favorite_add', '=', False)]}" />
+                        <field name="favorite_add" invisible="1"  />
+
+                        <label for="action_favorite_add_button" class="btn btn-success" attrs="{'invisible': [('favorite_add', '=', False)]}" />
+                        <label for="favorite_add_discard_button" class="btn btn-secondary" attrs="{'invisible': [('favorite_add', '=', False)]}"/>
+                        <field name="action_favorite_add_button" invisible="1"/>
+                        <field name="favorite_add_discard_button" invisible="1"/>
+                    </group>
+                    <group colspan="1">
+                            <button name="save_approver_button" type="object" class="btn btn-primary" string="Save Approver" />
+                        </group>
+                </group>
+
+
+<!--                    </group>-->
+
+                    <group string="Memo" col="2" colspan="4" attrs="{'invisible': [('is_add_or_change', '=', True)]}">
+                        <div>
+                            <field name="is_approver_change" invisible="1"/>
+                            <field name="memo" attrs="{'required': [('is_add_or_change','=',False)], 'invisible': [('is_add_or_change', '=', True)]}" />
+                        </div>
+                    </group>
+<!--                </group>-->
+            </xpath>
+            <xpath expr="//footer" position="replace">
+                <footer attrs="{'invisible': [('is_add_or_change', '=', True)]}">
+                    <div style="display:flex; justify-content: space-between;" class="approver_button">
+                        <button string="Approve" name="action_approve" type="object" class="btn-success"/>
+                        <button string="Discard" class="btn-secondary" special="cancel"/>
+                        <button string="Reject " class="btn-danger" type="object" name="action_reject" confirm="Are you sure you want to do this?"
+                            attrs="{'invisible': [('approve_type', '!=', 'require')]}"/>
+                    </div>
+                    <script>
+                        $(function(){
+                            var invisible_button_count = 0;
+                            $('.approver_button button').each(function(){
+                                if($(this).hasClass('o_invisible_modifier')) {
+                                    invisible_button_count += 1;
+                                }
+                            });
+                            if(invisible_button_count == 1){
+                                $('.approver_button').css('width', '50%');
+                            }
+                        })
+                    </script>
+                </footer>
+            </xpath>
+
+<!--            <field name="memo" position="before">-->
+<!--                <field name="is_approver_change" invisible="1"/>-->
+<!--            </field>-->
+
+<!--            <field name="memo" position="attributes">-->
+<!--                <attribute name="attrs">{'required': [('is_approver_change','=',False)]}</attribute>-->
+<!--            </field>-->
+<!--            <field name="memo" position="replace">-->
+<!--                <field name="is_approver_change" invisible="1"/>-->
+<!--                <field name="memo" attrs="{'required': [('is_approver_change','=',False)]}" />-->
+<!--            </field>-->
+
+<!--            <xpath expr="//sheet" position="inside">-->
+<!--                <group>-->
+<!--                    <field name="change_approver" widget="many2many_tags" domain="[('user_id', '!=', uid)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>-->
+<!--                    <field name="add_approver" widget="many2many_tags" domain="[('user_id', '!=', uid)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>-->
+<!--                    <button name="save_approver_button" type="object" class="btn btn-sm btn-primary" string="Save Approver" />-->
+<!--&lt;!&ndash;                    <label for="save_approver_button" class="btn btn-sm btn-primary" />&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="save_approver_button" invisible="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button name="close_wizard" type="object" class="btn btn-sm btn-primary" string="Close Wizard" invisible="1"/>&ndash;&gt;-->
+<!--                </group>-->
+<!--            </xpath>-->
+
+        </field>
+    </record>
+
+</odoo>

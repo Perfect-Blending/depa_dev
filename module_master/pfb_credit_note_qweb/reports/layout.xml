@@ -1,0 +1,117 @@
+<odoo>
+    <template id="credit_report_assets_common" name="Credit Note  common assets" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/pfb_credit_note_qweb/static/css/style_report.css"/>
+        </xpath>
+    </template>
+
+    <template id="credit_note_pdf_report_layout">
+        <div class="article o_credit_notes_from" t-attf-style="background-image:url('/pfb_credit_note_qweb/static/src/img/credit_note.png');
+        background-size:300mm 424mm; width:300mm; height:424mm;">
+            <h4 class="number_invoice"><span t-esc="o.number"/></h4>
+<!--Box 1-->
+            <div class="company_vat">
+               <span t-field="o.partner_id.vat"/>
+            </div>
+            <div class="company_name">
+               <span t-field="o.partner_id.name"/>
+            </div>
+            <div class="company_address">
+               <span t-field="o.partner_id.street"/>
+            </div>
+            <div class="company_address2">
+               <span t-field="o.partner_id.street2"/>
+            </div>
+            <div class="company_address3">
+               <span t-field="o.partner_id.city"/>  <span t-field="o.partner_id.zip"/>
+            </div>
+<!--End Box 1-->
+<!--Box 2-->
+            <div class="invoice_date_cr">
+                    <!-- change A.D. to B.E. year-->
+                <t t-set="year" t-value="(int((o.date_invoice).strftime('%Y')))+543"/>
+                <t t-set="date_invoice" t-value="'%s/%s' %((o.date_invoice).strftime('%d/%m'),year)"/>
+                    <t t-esc="date_invoice"/>
+            </div>
+            <div class="payment_terms">
+              <span t-field="o.payment_term_id"/>
+            </div>
+            <div class="due_date">
+                    <!-- change A.D. to B.E. year-->
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="date_due" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                    <t t-esc="date_due"/>
+            </div>
+<!--End Box 2-->
+<!--Box 3 -->
+            <div class="container">
+              <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+              <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <table  width="100%" height="80%">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="79%"/>
+                            <td idth="15%"/>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <tr style="height: 320px; vertical-align: top; font-size:18pt;">
+                            <td align="center" >
+                                <table width="100%">
+                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="center">
+                                            <span t-esc="count"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+                            <td align="center" >
+                                <table width="100%">
+                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-field="line.name" style="padding-left:5px;"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+                            <td align="center"  >
+                                <table width="100%">
+                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                                <span t-esc="'{:,.2f}'.format(line.price_subtotal)" style="padding-right:15px;"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+<!--End Box 3-->
+<!--Box 4-->
+            <div class="total_amount"><span t-esc="'{:,.2f}'.format(o.amount_without_discount_tax)"/></div>
+            <div class="amount_vat"><span t-esc="'{:,.2f}'.format(o.amount_tax)"/></div>
+            <div class="grand_total"><span t-esc="'{:,.2f}'.format(o.amount_total)"/></div>
+            <div class="text_total"><td>( <t t-esc="thaibahttext" /> )</td></div>
+<!--End Box 4-->
+        </div>
+    </template>
+
+
+    <template id="credit_note_pdf_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="pfb_credit_note_qweb.credit_note_pdf_report_layout"/>
+            </t>
+        </t>
+    </template>
+</odoo>

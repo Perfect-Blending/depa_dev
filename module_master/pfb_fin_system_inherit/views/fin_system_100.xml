@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- FIN100 Carry out Wizard -->
+        <record id="wizard_fin_100_carry_out_view" model="ir.ui.view">
+            <field name="name">wizard.fin.100.carry.out.view</field>
+            <field name="model">wizard.fin.100.carry.out</field>
+            <field name="arch" type="xml">
+                <form string="FIN100 carry out">
+                    <group>
+                        <field name="fin_100_id" invisible="1" />
+                        <field name="fin_100_line_id" required="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                    </group>
+                    <group string="Current Data">
+                        <field name="current_projects_and_plan_id" readonly="1" options="{'no_create_edit': True, 'no_open': True}" force_save="1"/>
+                        <field name="current_fiscal_year" readonly="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                    </group>
+                    <group string="New Data">
+                        <field 
+                            name="new_projects_and_plan_id" 
+                            options="{'no_create_edit': True, 'no_open': True}"
+                            attrs="{'readonly':[('fin_100_line_id', '=', False)], 'required': [('fin_100_line_id', '!=', False)]}"
+                            />
+                        <field name="new_fiscal_year" readonly="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                    </group>
+                    <footer>
+                        <button name="fin_100_carry_out_submit" string="Submit" type="object" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_fin_100_carry_out_action" model="ir.actions.act_window">
+            <field name="name">FIN100 Carry out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.fin.100.carry.out</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <!-- END FIN100 Carry out Wizard -->
+
+        <record model="ir.ui.view" id="fin_system_100_all_fin_tree_view_inherit">
+            <field name="name">fin.system.100.all.fin.tree.view</field>
+            <field name="model">fw_pfb_fin_system_100</field>
+            <field name="arch" type="xml">
+                <tree string="All FIN100 EDIT"
+                      decoration-muted="is_fin_open == False"
+                      decoration-success="is_fin_open == True and state == 'completed'"
+                      decoration-warning="is_fin_open == True and state == 'cancelled'"
+                      decoration-danger="is_fin_open == True and state == 'reject'">
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="fin_type"/>
+                    <field name="fin_objective"/>
+                    <field name="fin_ref"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name"/>
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                    <field name="is_fin_open" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="fin_system_100_all_fin_form_view_inherit">
+            <field name="name">fin.system.100.all.fin.form.view</field>
+            <field name="model">fw_pfb_fin_system_100</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="approver_rights" invisible="1"/>
+                        <field name="is_fin_lock" invisible="1"/>
+                        <field name="target_approver" invisible="1"/>
+                        <field name="is_requester" invisible="1"/>
+                        <field name="can_cancel" invisible="1"/>
+                        <field name="can_set_complete" invisible="1"/>
+                        <field name="has_history" invisible="1"/>
+                        <button string="Set To Complete"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|', ('can_set_complete','!=',True), ('state','=','completed')]}"
+                                name="change_to_complete"
+                                type="object"/>
+                        <button string="Complete" name="fin_complete"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|','|',('target_approver','!=','DirectorOfOffice'),('is_fin_lock','=',True)]}"
+                                groups="fin_system.fw_pfb_fin_system_approver"/>
+                        <button string="FIN carry out"
+                                class="oe_highlight"
+                                name="%(wizard_fin_100_carry_out_action)d"
+                                type="action"/>
+                        <!-- <button string="Create PR"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state', '!=', 'completed'), ('fin_type', '!=', 'proo')]}"
+                                name="fin_create_pr"
+                                type="object" /> -->
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="Request">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_fin_open"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-check-square"
+                                    groups="fin_system.fw_pfb_fin_open_close_fin100">
+                                <field name="is_fin_open" widget="boolean_button"/>
+                            </button>
+                            <button name="fin100_history" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o" attrs="{'invisible': [('has_history', '=', False)]}">
+                                <label for="fin100_history" string="Reject History"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="fin_no" string="FIN NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="fin_no" placeholder="FIN NO."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="fin_type"
+                                       attrs="{'readonly':['|',('state', 'not in', ['draft','completed']), ('fin_type','!=','eroe'),]}"
+                                       force_save="1"/>
+                                <field name='requester'
+                                       options='{"create":False,"create_edit": False,"no_open": True}'
+                                       context="{'default_groups_ref': ['fw_pfb_fin_system_user']}"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='department'
+                                       options='{"create":False,"create_edit": False,"no_open": True}'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="fin_date"/>
+                                <field name='subject'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='subject_to'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_ref'
+                                       attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_objective'
+                                       widget="selection"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='objective'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='priority'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="can_cross_department"
+                                />
+                                <field name="template_id" widget="many2many_tags"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <label for="participantas_quantity" String="Participantas Quantity"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                           attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+
+                                <field name="place" widget="many2many_binary"
+                                />
+
+                                <field name="operation_date" widget="many2many_binary"
+                                />
+
+                                <field name="seminar_partcipants" widget="many2many_binary"
+                                />
+
+                                <field name='other'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='estimate_output'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='please_consider' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <!--                                <field name='fin_lines'-->
+                                <!--                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft', 'DirectorOfOffice']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}">-->
+                                <!--                                </field>-->
+                                <field name="fin_lines">
+                                    <tree editable="bottom">
+                                        <field name="fin100_state" invisible="1"/>
+                                        <field name="name" invisible="0"/>
+                                        <field name="product_id"/>
+                                        <field name="description"/>
+                                        <field name="fiscal_year"/>
+                                        <!--                        <field name='projects_and_plan_year' readonly="1"/>-->
+                                        <field name="projects_and_plan"/>
+                                        <field name="standard_price"/>
+                                        <field name="price_unit"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="product_uom"/>
+                                        <field name="price_subtotal"/>
+                                        <field name="price_all_fin401" readonly="1"/>
+                                        <field name="price_all_fin201" readonly="1"/>
+                                        <field name="balance" force_save="1"/>
+                                        <button name="button_trigger" string="Update" type="object"
+                                                groups="base.group_no_one" class="oe_edit_only oe_link"/>
+                                    </tree>
+                                </field>
+
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="price_total" string="Total"/>
+                                    </div>
+                                    <field name="price_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name='fin_remark'
+                                       attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"
+                                       class="oe_inline" paceholder="Remark..."/>
+                            </page>
+                            <page string="Participant">
+                                <field name="participants"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"
+                                       mode="tree">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="department_id"/>
+                                        <field name="job_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string='Budget Details'>
+                                <field name="fin_projects"/>
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template_eroe"
+                                           widget="selection"
+                                           attrs="{'invisible':[('fin_type','!=','eroe')]}"/>
+                                    <field name="flow_template_erob"
+                                           widget="selection"
+                                           attrs="{'invisible':[('fin_type','!=','erob')]}"/>
+                                    <field name="flow_template_proo"
+                                           widget="selection"
+                                           attrs="{'invisible':[('fin_type','!=','proo')]}"/>
+                                </group>
+                                <field name="approver">
+                                    <form>
+                                        <group>
+                                            <field name="approve_active"/>
+                                            <field name="position_index" readonly="1" force_save="1"/>
+                                            <field name="employee_id" readonly="0" force_save="1"/>
+                                            <field name="fin_position" readonly="1" force_save="1"/>
+                                            <field name="need_to_change_employee"/>
+                                            <field name="employee_line"
+                                                   attrs="{'invisible':[('need_to_change_employee','!=',True)]}">
+                                                <tree editable="bottom">
+                                                    <field name="data_activate"/>
+                                                    <field name="name" readonly="1"/>
+                                                </tree>
+                                            </field>
+                                            <field name="employee_user_id" invisible="1"/>
+                                            <field name="show_fin" invisible="1"/>
+                                            <field name="state" invisible="1"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Attachments">
+                                <group>
+                                    <field name="attachment" widget="many2many_binary"
+                                    />
+                                    <field name="attachment_base_price" widget="many2many_binary"
+                                    />
+                                    <field name="attachment_work_scope" widget="many2many_binary"
+                                    />
+                                    <field name="attachment_participants" widget="many2many_binary"
+                                    />
+                                    <field name="attachment_memo" widget="many2many_binary"
+                                    />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!-- Action All FIN100  -->
+        <record model="ir.actions.act_window" id="fin_system_100_all_fin_action_inherit">
+            <field name="name">All FIN100 EDIT</field>
+            <field name="res_model">fw_pfb_fin_system_100</field>
+            <field name="view_id" ref="fin_system_100_all_fin_tree_view_inherit"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="fin_system_100_all_fin_tree_view_action_inherit">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_100_all_fin_tree_view_inherit"/>
+            <field name="act_window_id" ref="fin_system_100_all_fin_action_inherit"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="fin_system_100_all_fin_form_view_action_inherit">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_100_all_fin_form_view_inherit"/>
+            <field name="act_window_id" ref="fin_system_100_all_fin_action_inherit"/>
+        </record>
+        <!-- End Action All FIN100 -->
+        <menuitem name="All FIN100 EDIT" id="fin_system_100_all_fin_inherit"
+                  parent="fin_system.fin_system_menu_main_100"
+                  action="fin_system_100_all_fin_action_inherit" sequence="15"
+                  groups="pfb_fin_system_inherit.fw_pfb_fin_system_edit_attach"/>
+
+        <!--FIN100 APPROVER Inherit-->
+        <record id="view_fw_pfb_fin_system_100_approver_form" model="ir.ui.view">
+            <field name="name">view.fin.system.100.approver.form</field>
+            <field name="model">fw_pfb_fin_system_100_approver</field>
+            <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_100_approver_form_view"/>
+            <field name="arch" type="xml">
+                <field name="position_index" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+            </field>
+        </record>
+        ช
+        <record id="view_fw_pfb_fin_system_100_approver_tree" model="ir.ui.view">
+            <field name="name">view.fin.system.100.approver.tree</field>
+            <field name="model">fw_pfb_fin_system_100_approver</field>
+            <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_100_approver_tree_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_reset_approval']" position="attributes">
+                    <attribute name="groups">pfb_fin_system_inherit.fw_pfb_fin_system_reset_fin</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

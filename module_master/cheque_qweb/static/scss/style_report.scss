@@ -1,0 +1,82 @@
+// Change Font
+@font-face {
+    font-family: 'THSarabun';
+    src: url('/debit_note_qweb/static/fonts/THSarabunNew Bold.ttf') format('truetype');
+}
+
+    .o_cheque_from{
+    font-family: 'THSarabun';
+    font-size: 24px;
+
+    .company_name {
+        width: 50%;
+        line-height:0.9;
+        font-size: 24px;
+        position: fixed;
+        top: 90px;
+        left: 139px;
+    }
+
+    .text_total {
+        font-size: 24px;
+        position: fixed;
+        top: 130px;
+       left: 180px;
+    }
+
+    .text_xxxx {
+        font-size: 24px;
+        position: fixed;
+        top: 98px;
+       right: 19px;
+    }
+
+    .amount_total {
+        font-size: 24px;
+        width: 38%;
+        display: inline-block;
+        text-align: left;
+        position: fixed;
+        top: 165px;
+        right: 5px;
+    }
+
+   .company_vat {
+        margin-left: 537px;
+        position: fixed;
+        top: 20px;
+        }
+
+   .company_pay {
+        font-size: 18px;
+        margin-left: 195px;
+        position: fixed;
+        top: 35px;
+    }
+
+   .box-vat {
+        font-size: 24px;
+        box-sizing: content-box;
+        width: 21px;
+        height: 23px;
+        text-align: center;
+        margin-bottom: 0px;
+        padding-left: 2px;
+    }
+
+    .box-vat2 {
+        font-size: 24px;
+        box-sizing: content-box;
+        width: 21px;
+        height: 23px;
+        text-align: left;
+        margin-bottom: 0px;
+        padding-left: 2px;
+    }
+
+   .vat_tab {
+        margin-left: 6px;
+    }
+
+
+}

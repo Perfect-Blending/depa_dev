@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+        <record id="product_template_only_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.template.product.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <div>
+                        <field name="fin_ok"/>
+                        <label for="fin_ok"/>
+                    </div>
+                    <div>
+                        <field name="pr_ok"/>
+                        <label for="pr_ok"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_sale_quote_template_form_inherit">
+            <field name="name">sale.quote.template.form.inherit</field>
+            <field name="model">sale.quote.template</field>
+            <field name="inherit_id" ref="website_quote.view_sale_quote_template_form"/>
+            <field name="arch" type="xml">
+                <field name="require_payment" position="after">
+                    <field name="fin_ok" />
+                </field>
+            </field>
+        </record>
+
+        <!-- Menu item -->
+        <menuitem name="FIN system" id="fin_system_menu_root"/>
+        <menuitem name="FIN 100" id="fin_system_menu_main_100" parent="fin_system_menu_root" sequence="5"/>
+        <menuitem name="FIN Purchase" id="fin_system_menu_main_purchase" parent="fin_system_menu_root" sequence="6" groups="fw_pfb_fin_system_show_menu_fin_purchase"/>
+        <menuitem name="FIN 401" id="fin_system_menu_main_401" parent="fin_system_menu_root" sequence="7"/>
+        <menuitem name="FIN 201" id="fin_system_menu_main_201" parent="fin_system_menu_root" sequence="8"/>
+        <menuitem name="Configurations" id="fin_system_menu_settings" parent="fin_system_menu_root" sequence="10"/>
+    </data>
+</openerp>

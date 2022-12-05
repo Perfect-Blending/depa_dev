@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="wizard_fin_recompute_budget_view" model="ir.ui.view">
+            <field name="name">wizard.fin.recompute.budget.form.view</field>
+            <field name="model">wizard.fin.recompute.budget</field>
+            <field name="arch" type="xml">
+                <form string="Re-compute Budget">
+                    <footer>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button string="Compute" name="action_recompute_budget" type="object" class="btn-success"/>
+                            </div>
+                            <div class="col-sm-3">
+                                <button string="Cancel" class="btn-secondary" special="cancel"/>
+                            </div>
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+<!--        <record id="wizard_fin_compute_budget_view" model="ir.actions.act_window">-->
+<!--            <field name="name">Re-compute Budget</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">fin.recompute.budget.wiz</field>-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="target">new</field> -->
+<!--        </record>-->
+        <act_window id="wizard_fin_recompute_budget_view"
+            name="Re-compute Budget"
+            res_model="wizard.fin.recompute.budget"
+            view_mode="form" target="new" view_type="form"/>
+
+        <menuitem
+            id="wizard_fin_recompute_budget_menu"
+            action="wizard_fin_recompute_budget_view"
+            parent="fin_system.fin_system_menu_root"
+            sequence="9"
+            groups="fin_system.fw_pfb_fin_show_menu_compute_budget"
+        />
+
+    </data>
+</odoo>

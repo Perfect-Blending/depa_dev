@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="word_wizard_form_view" model="ir.ui.view">
+			<field name="name">Word Wizard Report</field>
+			<field name="model">word.wizard.report</field>
+			<field name="arch" type="xml">
+				<form string="Word Document">
+					<sheet>
+						<footer>
+							<button name="print_xls_report" string="Generate Word Report" type="object" class="oe_highlight" />
+                        or
+							<button special="cancel" string="Cancel" class="oe_link"/>
+						</footer>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="action_document_internal_main_word" model="ir.actions.act_window">
+			<field name="name">Document Word Format</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">word.wizard.report</field>
+			<field name="src_model">document.internal.main</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="word_wizard_form_view"></field>
+			<field name="target">new</field>
+			<field name="binding_model_id" ref="pfb_saraban.model_document_internal_main" />
+			<field name="binding_type">report</field>
+		</record>
+
+<!--		<record model="ir.actions.server" id="archived">-->
+<!--			<field name="name">Archived</field>-->
+<!--			<field name="model_id" ref="model_document_internal_main"/>-->
+<!--			<field name="state">code</field>-->
+<!--			<field name="code">-->
+<!--        record.archived()-->
+<!--			</field>-->
+<!--			<field name="binding_model_id" ref="pfb_saraban.model_document_internal_main" />-->
+<!--			<field name="binding_type">action</field>-->
+<!--		</record>-->
+	</data>
+</odoo>

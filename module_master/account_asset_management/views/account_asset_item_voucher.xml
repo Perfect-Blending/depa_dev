@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_asset_voucher_view_form_result" model="ir.ui.view">
+        <field name="name">account.voucher.asset.result</field>
+        <field name="model">account.voucher.asset</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form string="Assets" edit="0" create="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="asset_profile_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+
+                        <page string="Journal Entries">
+                            <field name="voucher_move_ids">
+                                <tree string="Journal Entries">
+                                    <field name="name"/>
+                                    <field name="debit" sum="total"/>
+                                    <field name="credit" sum="total"/>
+                                    <field name="asset_profile_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Assets">
+                            <field name="voucher_asset_ids">
+                                <tree string="Assets" editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_account_voucher_asset_tree" model="ir.ui.view">
+        <field name="name">account.voucher.asset.tree</field>
+        <field name="model">account.voucher.asset</field>
+        <field name="arch" type="xml">
+            <tree string="Item Voucher Asset">
+                <field name="name"/>
+                <field name="asset_profile_id"/>
+                <field name="date"/>
+                <field name="total"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_asset_item_voucher_action" model="ir.actions.server">
+        <field name="name">Item Voucher Asset</field>
+        <field name="model_id" ref="model_account_voucher_asset"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_asset_item_voucher_action()</field>
+    </record>
+
+    <record id="action_asset_generate_no_action" model="ir.actions.server">
+        <field name="name">Generate vc no.</field>
+        <field name="model_id" ref="model_account_voucher_asset"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_asset_generate_no_action()</field>
+    </record>
+
+    <!--Generate vc no.-->
+    <menuitem id="account_asset_generate_no_menu"
+              action="action_asset_generate_no_action"
+              parent="menu_finance_assets"
+              sequence="110"/>
+
+    <menuitem id="account_asset_item_voucher_menu"
+              action="action_asset_item_voucher_action"
+              parent="menu_finance_assets"
+              sequence="111"/>
+
+</odoo>

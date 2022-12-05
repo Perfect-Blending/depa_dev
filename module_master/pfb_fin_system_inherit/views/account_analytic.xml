@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_account_analytic_account_list_report" model="ir.ui.view">
+        <field name="name">account.analytic.account.list.report</field>
+        <field name="model">account.analytic.account</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Analytic Accounts" create="0" delete="0">
+                <field name="fiscal_year"/>
+                <field name="group_id"/>
+                <field name="code"/>
+                <field name="name" string="Name"/>
+                <field name="active" invisible="1"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="budget"/>
+                <field name="budget_spend"/>
+                <field name="budget_balance"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_account_form_report" model="ir.ui.view">
+        <field name="name">analytic.analytic.account.form.report</field>
+        <field name="model">account.analytic.account</field>
+        <field name="arch" type="xml">
+            <form string="Analytic Account"  create="0" delete="0" edit="0">
+                <sheet string="Analytic Account">
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" class="oe_inline" placeholder="e.g. Project XYZ"/>
+                        </h1>
+                    </div>
+                    <div name="project"/>
+                    <group name="main">
+                        <group>
+                            <field name="code"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="group_id"/>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+                            <field name="fiscal_year" readonly="1" force_save="1"
+                                   options="{&quot;always_reload&quot;: True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="FIN100">
+                            <group string="FIN100: Expense All">
+                                <group colspan="12">
+                                    <group>
+                                        <button name="button_force_compute_fin100_lines" string="Compute"
+                                                type="object"/>
+                                        <button name="button_force_reset_fin100_lines" string="Clear" type="object"/>
+                                    </group>
+                                    <group>
+                                    </group>
+                                </group>
+
+                                <field name="fin100_project_ids" nolabel="1" colspan="12" readonly="1">
+                                    <tree colors="red:fin100_state == 'cancelled'" default_order="fin_id desc">
+                                        <field name="fin100_date" string="FIN100 Date"/>
+                                        <field name="fin_id" string="FIN100"/>
+                                        <field name="projects_residual"/>
+                                        <field name="projects_reserve" sum="Total"/>
+                                        <field name="projects_return" sum="Total"/>
+                                        <field name="projects_residual_amount"/>
+                                        <field name="fin100_state" string="FIN100 Status"/>
+                                        <button name="get_current_project_balance" string="Get" type="object"
+                                                invisible="1"/>
+                                    </tree>
+
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="fin_id" string="FIN100"/>
+                                                <field name="projects_residual"/>
+                                                <field name="projects_reserve" sum="Total"/>
+                                                <field name="projects_return" sum="Total"/>
+                                                <field name="projects_residual_amount"/>
+                                            </group>
+                                            <group>
+                                                <field name="projects_and_plan"/>
+                                                <field name="fin100_date" string="FIN100 Date"/>
+                                                <field name="fin100_state" string="FIN100 Status"/>
+                                            </group>
+                                        </group>
+                                    </form>
+
+                                </field>
+                            </group>
+                            <group string="FIN100: Expense Ready">
+                                <field name="fin100_project_ids_ready" nolabel="1">
+                                    <tree colors="red:fin100_state == 'cancelled'" default_order="fin_id desc">
+                                        <field name="fin100_date" string="FIN100 Date"/>
+                                        <field name="fin_id" string="FIN100"/>
+                                        <field name="projects_residual"/>
+                                        <field name="projects_reserve" sum="Total"/>
+                                        <field name="projects_return" sum="Total"/>
+                                        <field name="projects_residual_amount"/>
+                                        <field name="fin100_state" string="FIN100 Status"/>
+                                    </tree>
+
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="fin_id" string="FIN100"/>
+                                                <field name="projects_residual"/>
+                                                <field name="projects_reserve" sum="Total"/>
+                                                <field name="projects_return" sum="Total"/>
+                                                <field name="projects_residual_amount"/>
+                                            </group>
+                                            <group>
+                                                <field name="projects_and_plan"/>
+                                                <field name="fin100_date" string="FIN100 Date"/>
+                                                <field name="fin100_state" string="FIN100 Status"/>
+                                            </group>
+                                        </group>
+                                    </form>
+
+                                </field>
+                            </group>
+                            <group string="FIN100">
+                                <field name="fin100_ids" nolabel="1" context="{'analytic_fin_ids_form': True}">
+                                    <tree string="All FIN100" create="0" delete="0" default_order="fin_no desc"
+                                          decoration-muted="is_fin_open == False"
+                                          decoration-success="is_fin_open == True and state == 'completed'"
+                                          decoration-warning="is_fin_open == True and state == 'cancelled'"
+                                          decoration-danger="is_fin_open == True and state == 'reject'">
+                                        <field name="fin_date"/>
+                                        <field name="fin_no"/>
+                                        <field name="fin_type"/>
+                                        <field name="fin_objective"/>
+                                        <field name="fin_ref"/>
+                                        <field name="fin_remark"/>
+                                        <field name="price_total"/>
+                                        <field name="state"/>
+                                        <field name="requester"/>
+                                        <field name="actual_department_name"/>
+                                        <field name="is_fin_lock"/>
+                                        <field name="show_fin" invisible="1"/>
+                                        <field name="is_fin_open" invisible="1"/>
+                                    </tree>
+
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="report_pfb_account_analytic_action">
+        <field name="name">Analytic Account</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_id" ref="view_account_analytic_account_list_report"/>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <record model="ir.actions.act_window.view" id="report_pfb_tree_account_analytic_action">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_account_analytic_account_list_report"/>
+        <field name="act_window_id" ref="report_pfb_account_analytic_action"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="report_pfb_from_account_analytic_action">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_account_analytic_account_form_report"/>
+        <field name="act_window_id" ref="report_pfb_account_analytic_action"/>
+    </record>
+
+    <menuitem name="Reporting"
+              id="menu_1"
+              parent="fin_system.fin_system_menu_root"
+              sequence="8"
+             />
+    <menuitem name="Analytic Account"
+              id="report_pfb_account_analytic"
+              parent="menu_1"
+              sequence="10"
+              action="report_pfb_account_analytic_action"
+    />
+</odoo>

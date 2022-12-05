@@ -1,0 +1,367 @@
+<odoo>
+
+<!--    <template id="account_form_assets_common" name="Account Form common assets"-->
+<!--              inherit_id="web.report_assets_common">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <link rel="stylesheet" type="text/css" href="/all_qweb_form_depa/static/css/style_report.css"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+    <template id="report_customer_receipts">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="all_qweb_form_depa.report_customer_receipts_layout"/>
+                <t t-set="copy_count" t-value="3"/>
+                    <t t-foreach="range(copy_count)" t-as="cc">
+                        <t t-call="all_qweb_form_depa.report_customer_receipts_layout_copy"/>
+                    </t>
+            </t>
+        </t>
+    </template>
+    <template id="report_customer_receipts_layout">
+        <t t-call="web.html_container">
+            <t t-set="count_for" t-value="0"/>
+            <t t-set="group" t-value="[]"/>
+            <t t-foreach="docs.line_ids" t-as="doc">
+                <t t-set="count_for" t-value="count_for+1"/>
+                <t t-esc="group.append(doc)"/>
+            </t>
+            <t t-set="i" t-value="0"/>
+            <t t-set="record_per_page" t-value="19"/>
+            <t t-set="page_amount" t-value="1"/>
+            <t t-if="count_for &gt; record_per_page">
+                <t t-set="page_amount" t-value="count_for / record_per_page"/>
+                <t t-if="page_amount &gt; int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1"/>
+                </t>
+            </t>
+            <t t-set="current_page" t-value="0"/>
+            <t t-set="count_number" t-value="0"/>
+            <t t-set="sum_list" t-value="0"/>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1"/>
+                <div class="article">
+                    <div class="row" style="font-family: 'Kinnari';font-size: 18px;z-index: 120;">
+
+                        <!--Box1-->
+                        <div style="display: inline-block;width:500px;position: fixed;top: 120px;left: 930px;">
+                             <t t-if="o.vat_ids">
+                                <t t-set="name_header" t-value=""/>
+                                <t t-foreach="o.vat_ids" t-as="vat">
+                                    <t t-set="name_header" t-value="vat.name"/>
+                                </t>
+                                <t t-esc="name_header"/>
+                            </t>
+                        </div>
+
+                        <div style="display: inline-block;width:500px;position: fixed;top: 555px;left: 235px;">
+                            <span t-esc="docs.customer_id.vat"/>
+                            <t t-if="docs.customer_id.branch == '00000'">
+                                <span style="padding-left:10px;">สำนักงานใหญ่</span>
+                            </t>
+                            <t t-else="">
+                                <span style="padding-left:10px;">สาขา</span>
+                                <span t-esc="docs.customer_id.branch"/>
+                            </t>
+                        </div>
+                        <div style="display: inline-block;width:500px;position: fixed;top: 590px;left: 235px;">
+                            <span t-esc="docs.customer_id.name"/>
+                        </div>
+                        <div style="display: inline-block;width:500px;position: fixed;top: 623px;left: 235px;line-height:2;">
+                            <span t-esc="docs.customer_id.street"/>
+                            <span t-esc="docs.customer_id.street2"/>
+                            <span t-esc="docs.customer_id.city"/>
+                            <span t-esc="docs.customer_id.zip"/>
+                        </div>
+
+                        <div style="display: inline-block;width:500px;position: fixed;top: 550px;left: 900px;">
+                            <t t-set="year" t-value="(int((docs.date).strftime('%Y')))+543"/>
+                            <t t-set="date" t-value="'%s/%s' %((docs.date).strftime('%d/%m'),year)"/>
+                            <t t-esc="date"/>
+                        </div>
+                        <div style="display: inline-block;width:500px;position: fixed;top: 620px;left: 940px;">
+                            <t t-set="year" t-value="(int((docs.date_due).strftime('%Y')))+543"/>
+                            <t t-set="date_due" t-value="'%s/%s' %((docs.date_due).strftime('%d/%m'),year)"/>
+                            <t t-esc="date_due"/>
+                        </div>
+
+
+                        <!--Box4-->
+
+                        <t t-set="j" t-value="i + record_per_page"/>
+                        <t t-set="item_count" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+
+                        <t t-foreach="group[i:j]" t-as="cc">
+                            <div style="position:relative; z-index: 100;">
+
+                                <table t-attf-style="position:absolute; top: {{820 + (item_count*40)}}px;font-size: 18px;">
+                                    <tbody>
+                                        <tr>
+
+                                            <td align="left" style="position:absolute;left: 70px;">
+                                                <t t-set="item_count" t-value="item_count+1"/>
+                                                <t t-esc="item_count"/>
+                                            </td>
+                                            <td align="left" style="display: inline-block;width:500px;position:absolute;left: 140px;">
+                                                <t t-esc="cc.name"/>
+
+                                            </td>
+                                            <td align="right" style="display: inline-block;width:220px;position:absolute;left: 600px;">
+                                                <t t-esc="'{0:,.2f}'.format(cc.price_unit)"/>
+                                            </td>
+                                            <td align="right" style="display: inline-block;width:130px;position:absolute;left: 800px;">
+                                                <t t-esc="'{0:,.2f}'.format(cc.quantity)"/>
+                                            </td>
+                                            <td align="right" style="display: inline-block;width: 170px;position:absolute; left: 930px;">
+                                                <t t-set="sum_total" t-value="sum_total + cc.amount_receipt"/>
+                                                <t t-esc="'{0:,.2f}'.format(cc.amount_receipt)"/>
+                                            </td>
+                                        </tr>
+                                        <!-- END amount_total -->
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </t>
+
+                        <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                            <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                        </div>
+                        <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                            <t t-esc="'{:,.2f}'.format(docs.amount_vat)"/>
+                        </div>
+
+                        <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                            <t t-set="sum_total_end" t-value="sum_total+docs.amount_vat"/>
+                            <t t-esc="'{:,.2f}'.format(sum_total_end)"/>
+                        </div>
+                        <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                            (
+                            <t t-esc="docs.bath_text(sum_total_end)"/>
+                            )
+                        </div>
+
+                        <div style=" font-size: 30px;font-weight: bold;position: fixed;top: 1093px;left: 37px;">
+                            <t t-if="docs.amount_cash != 0">
+                                x
+                            </t>
+                        </div>
+                        <div style="font-size: 30px;font-weight: bold;position: fixed;top: 1093px;left: 323px;">
+                            <t t-if="docs.amount_banktr != 0">
+                                x
+                            </t>
+                        </div>
+                        <t t-if="docs.amount_cheque != 0">
+                            <t t-set="cheque_name" t-value=""/>
+                            <t t-set="date_cheque" t-value=""/>
+                            <t t-set="bank_cheque" t-value=""/>
+                            <t t-set="branch_bank" t-value=""/>
+                            <t t-foreach="docs.cheque_ids" t-as="cheque">
+                                <t t-set="cheque_name" t-value="cheque.name"/>
+                                <t t-set="date_cheque" t-value="cheque.cheque_date"/>
+                                <t t-set="bank_cheque" t-value="cheque.bank.name"/>
+                                <t t-set="branch_bank" t-value="cheque.bank.branch_bank"/>
+                            </t>
+                            <div style="font-size: 30px;font-weight: bold;position: fixed;top: 1130px;left: 37px;">
+                                x
+                            </div>
+                            <div style="position: fixed;top: 1142px;left: 160px;">
+                                <span t-esc="cheque_name"/>
+                            </div>
+                            <div style="position: fixed;top: 1142px;left: 430px;">
+                                <t t-set="year" t-value="(int((date_cheque).strftime('%Y')))+543"/>
+                                <t t-set="cheque_date" t-value="'%s/%s' %((date_cheque).strftime('%d/%m'),year)"/>
+                                <t t-esc="cheque_date"/>
+                            </div>
+                            <div style="display: block;width: 1000px;position: fixed;top: 1182px;left: 160px;">
+                                <span t-esc="bank_cheque"/>
+                            </div>
+                            <div style="display: block;width: 1000px;position: fixed;top: 1182px;left: 430px;">
+                                <span t-esc="branch_bank"/>
+                            </div>
+                        </t>
+
+                        <img src="/all_qweb_form_depa/static/src/img/payment_receipt.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page"/>
+            </t>
+
+        </t>
+    </template>
+    <template id="report_customer_receipts_layout_copy">
+        <t t-call="web.html_container">
+            <t t-set="count_for" t-value="0"/>
+            <t t-set="group" t-value="[]"/>
+            <t t-foreach="docs.line_ids" t-as="doc">
+                <t t-set="count_for" t-value="count_for+1"/>
+                <t t-esc="group.append(doc)"/>
+            </t>
+            <t t-set="i" t-value="0"/>
+            <t t-set="record_per_page" t-value="19"/>
+            <t t-set="page_amount" t-value="1"/>
+            <t t-if="count_for &gt; record_per_page">
+                <t t-set="page_amount" t-value="count_for / record_per_page"/>
+                <t t-if="page_amount &gt; int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1"/>
+                </t>
+            </t>
+            <t t-set="current_page" t-value="0"/>
+            <t t-set="count_number" t-value="0"/>
+            <t t-set="sum_list" t-value="0"/>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1"/>
+                <div class="article">
+                    <div class="row" style="font-family: 'Kinnari';font-size: 18px;z-index: 120;">
+
+                        <!--Box1-->
+                        <div style="display: inline-block;width:500px;position: fixed;top: 120px;left: 930px;">
+                             <t t-if="o.vat_ids">
+                                <t t-set="name_header" t-value=""/>
+                                <t t-foreach="o.vat_ids" t-as="vat">
+                                    <t t-set="name_header" t-value="vat.name"/>
+                                </t>
+                                <t t-esc="name_header"/>
+                            </t>
+                        </div>
+
+                        <div style="display: inline-block;width:500px;position: fixed;top: 555px;left: 235px;">
+                            <span t-esc="docs.customer_id.vat"/>
+                            <t t-if="docs.customer_id.branch == '00000'">
+                                <span style="padding-left:10px;">สำนักงานใหญ่</span>
+                            </t>
+                            <t t-else="">
+                                <span style="padding-left:10px;">สาขา</span>
+                                <span t-esc="docs.customer_id.branch"/>
+                            </t>
+                        </div>
+                        <div style="display: inline-block;width:500px;position: fixed;top: 590px;left: 235px;">
+                            <span t-esc="docs.customer_id.name"/>
+                        </div>
+                        <div style="display: inline-block;width:500px;position: fixed;top: 623px;left: 235px;line-height:2;">
+                            <span t-esc="docs.customer_id.street"/>
+                            <span t-esc="docs.customer_id.street2"/>
+                            <span t-esc="docs.customer_id.city"/>
+                            <span t-esc="docs.customer_id.zip"/>
+                        </div>
+
+                        <div style="display: inline-block;width:500px;position: fixed;top: 550px;left: 900px;">
+                            <t t-set="year" t-value="(int((docs.date).strftime('%Y')))+543"/>
+                            <t t-set="date" t-value="'%s/%s' %((docs.date).strftime('%d/%m'),year)"/>
+                            <t t-esc="date"/>
+                        </div>
+                        <div style="display: inline-block;width:500px;position: fixed;top: 620px;left: 940px;">
+                            <t t-set="year" t-value="(int((docs.date_due).strftime('%Y')))+543"/>
+                            <t t-set="date_due" t-value="'%s/%s' %((docs.date_due).strftime('%d/%m'),year)"/>
+                            <t t-esc="date_due"/>
+                        </div>
+
+
+                        <!--Box4-->
+
+                        <t t-set="j" t-value="i + record_per_page"/>
+                        <t t-set="item_count" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+
+                        <t t-foreach="group[i:j]" t-as="cc">
+                            <div style="position:relative; z-index: 100;">
+
+                                <table t-attf-style="position:absolute; top: {{820 + (item_count*40)}}px;font-size: 18px;">
+                                    <tbody>
+                                        <tr>
+
+                                            <td align="left" style="position:absolute;left: 70px;">
+                                                <t t-set="item_count" t-value="item_count+1"/>
+                                                <t t-esc="item_count"/>
+                                            </td>
+                                            <td align="left" style="display: inline-block;width:500px;position:absolute;left: 140px;">
+                                                <t t-esc="cc.name"/>
+
+                                            </td>
+                                            <td align="right" style="display: inline-block;width:220px;position:absolute;left: 600px;">
+                                                <t t-esc="'{0:,.2f}'.format(cc.price_unit)"/>
+                                            </td>
+                                            <td align="right" style="display: inline-block;width:130px;position:absolute;left: 800px;">
+                                                <t t-esc="'{0:,.2f}'.format(cc.quantity)"/>
+                                            </td>
+                                            <td align="right" style="display: inline-block;width: 170px;position:absolute; left: 930px;">
+                                                <t t-set="sum_total" t-value="sum_total + cc.amount_receipt"/>
+                                                <t t-esc="'{0:,.2f}'.format(cc.amount_receipt)"/>
+                                            </td>
+                                        </tr>
+                                        <!-- END amount_total -->
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </t>
+
+                        <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                            <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                        </div>
+                        <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                            <t t-esc="'{:,.2f}'.format(docs.amount_vat)"/>
+                        </div>
+
+                        <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                            <t t-set="sum_total_end" t-value="sum_total+docs.amount_vat"/>
+                            <t t-esc="'{:,.2f}'.format(sum_total_end)"/>
+                        </div>
+                        <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                            (
+                            <t t-esc="docs.bath_text(sum_total_end)"/>
+                            )
+                        </div>
+
+                        <div style=" font-size: 30px;font-weight: bold;position: fixed;top: 1093px;left: 37px;">
+                            <t t-if="docs.amount_cash != 0">
+                                x
+                            </t>
+                        </div>
+                        <div style="font-size: 30px;font-weight: bold;position: fixed;top: 1093px;left: 323px;">
+                            <t t-if="docs.amount_banktr != 0">
+                                x
+                            </t>
+                        </div>
+                        <t t-if="docs.amount_cheque != 0">
+                            <t t-set="cheque_name" t-value=""/>
+                            <t t-set="date_cheque" t-value=""/>
+                            <t t-set="bank_cheque" t-value=""/>
+                            <t t-set="branch_bank" t-value=""/>
+                            <t t-foreach="docs.cheque_ids" t-as="cheque">
+                                <t t-set="cheque_name" t-value="cheque.name"/>
+                                <t t-set="date_cheque" t-value="cheque.cheque_date"/>
+                                <t t-set="bank_cheque" t-value="cheque.bank.name"/>
+                                <t t-set="branch_bank" t-value="cheque.bank.branch_bank"/>
+                            </t>
+                            <div style="font-size: 30px;font-weight: bold;position: fixed;top: 1130px;left: 37px;">
+                                x
+                            </div>
+                            <div style="position: fixed;top: 1142px;left: 160px;">
+                                <span t-esc="cheque_name"/>
+                            </div>
+                            <div style="position: fixed;top: 1142px;left: 430px;">
+                                <t t-set="year" t-value="(int((date_cheque).strftime('%Y')))+543"/>
+                                <t t-set="cheque_date" t-value="'%s/%s' %((date_cheque).strftime('%d/%m'),year)"/>
+                                <t t-esc="cheque_date"/>
+                            </div>
+                            <div style="display: block;width: 1000px;position: fixed;top: 1182px;left: 160px;">
+                                <span t-esc="bank_cheque"/>
+                            </div>
+                            <div style="display: block;width: 1000px;position: fixed;top: 1182px;left: 430px;">
+                                <span t-esc="branch_bank"/>
+                            </div>
+                        </t>
+
+                        <img src="/all_qweb_form_depa/static/src/img/payment_receipt_copy.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page"/>
+            </t>
+
+        </t>
+    </template>
+
+
+</odoo>

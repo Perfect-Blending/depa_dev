@@ -1,0 +1,25 @@
+<odoo>
+
+<!--    <report string="Fin Report XLSX"-->
+<!--            id="action_finn_report_xlsx"-->
+<!--            model="report.pfb.fin.report"-->
+<!--            name="pfb_fin_report.report_fin_report_xlsx"-->
+<!--            file="Fin Report"-->
+<!--            report_type="xlsx"-->
+<!--            attachment_use="False"/>-->
+
+    <record id="action_summary_budget_report_html" model="ir.actions.client">
+        <field name="name">Summary Budget Report</field>
+        <field name="tag">budget_usage_report_backend</field>
+        <field name="context" eval="{'active_model': 'report.summary.budget.report'}" />
+    </record>
+
+    <report string="Summary Budget XLSX"
+            id="action_summary_budget_report_xlsx"
+            model="report.summary.budget.report"
+            name="pfb_fin_report.report_detailed_budget_report_xlsx"
+            file="Balance Summary Budget Report"
+            report_type="xlsx"
+            attachment_use="False"/>
+
+</odoo>

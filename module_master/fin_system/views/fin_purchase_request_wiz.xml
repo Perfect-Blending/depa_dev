@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  purpose: FIN100 request wiz
+  
+  2019-06-03 CKA created
+-->
+<odoo>
+	<data>
+	    <!-- FIN100 request wiz -->
+	    <record model="ir.ui.view" id="fin_purchase_request_wiz_form">
+	    <field name="name">fin_purchase_request_wiz_form</field>
+	    <field name="model">fin_purchase_request_wiz</field>
+	    <field name="arch" type="xml">
+            <form string="FIN100 request">
+                <sheet>
+                    <group>
+                        <field name="filter_product_can_be_expensed" attrs="{'readonly':[('filter_prall','=',True)]}" options="{'no_create_edit':1}" />
+                        <field name="filter_product" attrs="{'readonly':[('filter_prall','=',True)]}" options="{'no_create_edit':1}" />
+                        <field name="filter_code" attrs="{'readonly':[('filter_prall','=',True)]}" options="{'no_create_edit':1}" />
+                        <field name="filter_fin_type" readonly="1" options="{'no_create_edit':1}" />
+                        <field name="filter_prall" />
+                        <field name="filter_fin100_number" options="{'no_create_edit':1}" />
+                        <field name="filter_cross_department" />
+                    </group>
+                    <group>
+                        <field name="filter_action" />
+                    </group>
+                    <field name="item_fin100_ids" attrs="{'invisible':[('filter_prall','=',True)]}">
+                        <tree create="false" delete="false" editable="bottom">
+                            <field name="select" />
+                            <field name="date" readonly="1"/>
+                            <field name="fin100_number" readonly="1"/>
+                            <field name="fin_type" readonly="1"/>
+                            <field name="product_id" invisible="1"/>
+                            <field name="expense" readonly="1"/>
+                            <field name="description" readonly="1"/>
+                            <field name="unit" readonly="1"/>
+                            <field name="unit_name" readonly="1"/>
+                            <field name="price_unit" readonly="1"/>
+                            <field name="amount" readonly="1"/>
+                            <field name="total" readonly="1"/>
+                            <field name="status" readonly="1"/>
+                            <field name="fin_line_id" invisible="1"/>
+                        </tree>
+                    </field>
+                    <field name="item_fin100_ids_all" attrs="{'invisible':[('filter_prall','!=',True)]}">
+                        <tree create="false" delete="false" editable="bottom">
+                            <field name="date" readonly="1"/>
+                            <field name="fin100_number" readonly="1"/>
+                            <field name="fin_type" readonly="1"/>
+                            <field name="product_id" invisible="1"/>
+                            <field name="expense" readonly="1"/>
+                            <field name="description" readonly="1"/>
+                            <field name="unit" readonly="1"/>
+                            <field name="unit_name" readonly="1"/>
+                            <field name="price_unit" readonly="1"/>
+                            <field name="amount" readonly="1"/>
+                            <field name="total" readonly="1"/>
+                            <field name="status" readonly="1"/>
+                            <field name="fin_line_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <group>
+                        <button string="Finish" name="finish_choose" type="object"/>
+                        <button string="Cancel" special="cancel" />
+                    </group>
+                </footer>
+            </form>
+	    </field>
+	    </record>
+	    
+        <!-- Create PR Wizard -->
+        <record id="wizard_create_pr_fin_100_view" model="ir.ui.view">
+            <field name="name">wizard.create.pr.fin.100.view</field>
+            <field name="model">wizard.fin.system.100.create.pr</field>
+            <field name="arch" type="xml">
+                <form string="Create PR">
+                    <field name="pr_ids">
+                        <tree editable="bottom" create="0" >
+                            <field name="product_id_dummy" readonly="1"/>
+                            <field name="product_id" invisible="1"/>
+                            <field name="description" readonly="1"/>
+                            <field name="projects_and_plan" readonly="1"/>
+                            <field name="price_unit" />
+                            <field name="product_uom_qty" />
+                            <field name="product_uom" readonly="1"/>
+                            <field name="price_subtotal" readonly="1" />
+                            <field name="price_unit_limit" invisible="1"/>
+                            <field name="product_uom_qty_limit" invisible="1"/>
+                        </tree>
+                    </field>
+                    <footer>
+                        <button name="create_pr" string="สร้่างใบสั่งซื้อ" type="object" class="oe_highlight" />
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_create_pr_fin_100_action" model="ir.actions.act_window">
+            <field name="name">Create PR</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.fin.system.100.create.pr</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <!-- END Create PR Wizard -->
+
+        
+	</data>
+</odoo>

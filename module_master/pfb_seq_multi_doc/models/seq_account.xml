@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="ir_sequence_account">
+        <field name="name">ir.sequence</field>
+        <field name="model">ir.sequence</field>
+        <field name="inherit_id" ref="base.sequence_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[1]" position="after">
+                <page string="Accounting">
+                    <group>
+                        <field name="account_active"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

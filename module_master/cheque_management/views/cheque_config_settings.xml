@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_cheque_configuration" model="ir.ui.view">
+            <field name="name">Additional Info</field>
+            <field name="model">cheque.config.settings</field>
+            <field name="inherit_id" eval="False"/>
+            <field name="arch" type="xml">
+                <form class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <group string="Accounts">
+                        <field name="email"/>
+                        <field name="interim_account_id" options="{'no_create': True}"/>
+                        <field name="charges_account_id" options="{'no_create': True}"/>
+                    </group>
+                    <group string="Journal">
+                        <field name="cheque_journal_p_id" options="{'no_create': True}"/>
+                        <field name="cheque_journal_r_id" options="{'no_create': True}"/>
+                    </group>
+                    <separator string="Pending cheques alert"/>
+                    <group>
+                            <label for="alert_inbound"/>
+                            <div><field name="alert_inbound"  style="width:20%%"/> days before</div>
+                            <label for="alert_outbound"/>
+                            <div><field name="alert_outbound" style="width:20%%"/> days before</div>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="action_cheque_configuration2" model="ir.actions.act_window">
+            <field name="name">Additional Info</field>
+            <field name="res_model">cheque.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="menu_cheque_settings2" name="Additional Info"
+            parent="cheque_management.menu_settings" sequence="8" action="action_cheque_configuration2"/>
+    </data>
+</odoo>

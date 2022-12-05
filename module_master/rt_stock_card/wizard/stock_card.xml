@@ -1,0 +1,69 @@
+<odoo>
+	<data>
+
+	<record id="stock_card_form" model="ir.ui.view">
+		<field name="name">stock.card.form</field>
+		<field name="model">stock.card</field>
+		<field name="arch" type="xml">
+			<form string="Stock Card">
+				<sheet>
+					<p>Click on "Retrieve Stock Card - PDF" button to retrieve stock card based on criteria selected in PDF file format.</p>
+					<p>Click on "Retrieve Stock Card - Excel" button to retrieve stock card based on criteria selected in Excel file format.</p>
+					<field name="excel_flag" invisible="1"/>
+					<group col="2">
+						<group>
+							<field name="report_type" required="1"/>
+						</group>
+						<group>
+							<field name="move_type" required="1" widget="radio"/>
+						</group>
+					</group>
+					<group col="2">
+						<group>
+							<field name="product_categ_id" options="{'no_create': True}"/>
+							<field name="product_ids" domain="[('type','=','product')]" 
+								widget="many2many_tags" options="{'no_create': True}" />
+						</group>
+						<group>
+							<field name="date_from" />
+							<field name="date_to" />
+						</group>
+					</group>
+					<group attrs="{'invisible': [('excel_flag','!=',True)]}">
+						<p>Excel file format:
+							<field name="excelfile" readonly="1" filename="file_name"/>
+							<field name="file_name" invisible="1"/>
+						</p>
+					</group>
+					<footer>
+						<button name="print_report" string="Retrieve Stock Card - PDF"
+							type="object" class="oe_highlight"/>
+						<button name="stock_card_excel" string="Retrieve Stock Card - Excel"
+							type="object" class="oe_highlight" attrs="{'invisible': [('report_type','!=', 'stock_card')]}"/>
+
+						<button name="stock_card_summary_excel" string="Retrieve Stock Card Summary - Excel"
+							type="object" class="oe_highlight" attrs="{'invisible': [('report_type','!=', 'stock_card_summary')]}"/>
+
+						<button special="cancel" string="Cancel" class="oe_link" />
+					</footer>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_stock_card" model="ir.actions.act_window">
+		<field name="name">Stock Card</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stock.card</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="stock_card_form" />
+		<field name="target">new</field>
+	</record>
+
+	<menuitem id="menu_stock_card_wizard" name="Stock Card" sequence="49" 
+		action="action_stock_card" parent="stock.menu_warehouse_report"
+		groups="rt_stock_card.group_stock_card_qty_only" />
+
+	</data>
+</odoo>

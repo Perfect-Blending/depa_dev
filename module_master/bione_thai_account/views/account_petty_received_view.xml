@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--    <record id="account_petty_received_invoice_supplier_form" model="ir.ui.view">-->
+    <!--        <field name="model">account.invoice</field>-->
+    <!--        <field name="inherit_id" ref="account.invoice_supplier_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--&lt;!&ndash;            <xpath expr="//field[@name='partner_id']" position="attributes">&ndash;&gt;-->
+    <!--&lt;!&ndash;                <attribute name="context">{'invisible': [('is_petty_cash', '=', True)]}</attribute>&ndash;&gt;-->
+    <!--&lt;!&ndash;            </xpath>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;            <xpath expr="//field[@name='partner_id']" position="replace">&ndash;&gt;-->
+    <!--&lt;!&ndash;                 <field string="Vender" name="partner_id" widget="res_partner_many2one"&ndash;&gt;-->
+    <!--&lt;!&ndash;                     context="{'default_customer': 0, 'search_default_supplier': 1,&ndash;&gt;-->
+    <!--&lt;!&ndash;                     'action_mode': 'petty_received',&ndash;&gt;-->
+    <!--&lt;!&ndash;                      'default_supplier': 1, 'default_is_company': True, 'show_vat': True}"&ndash;&gt;-->
+    <!--&lt;!&ndash;                     domain="[('supplier', '=', True)]" invisible="[('is_petty_cash', '=', True)]"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;              <field string="Petty Cash Holder" name="partner_id" widget="res_partner_many2one"&ndash;&gt;-->
+    <!--&lt;!&ndash;                     context="{'default_customer': 0, 'search_default_supplier': 1,&ndash;&gt;-->
+    <!--&lt;!&ndash;                     'action_mode': 'petty_received',&ndash;&gt;-->
+    <!--&lt;!&ndash;                      'default_supplier': 1, 'default_is_company': True, 'show_vat': True}"&ndash;&gt;-->
+    <!--&lt;!&ndash;                     domain="[('supplier', '=', True)]" invisible="[('is_petty_cash', '=', False)]"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;            </xpath>&ndash;&gt;-->
+
+
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <record id="petty_received_invoice_supplier_form" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id"
+               ref="account_invoice_refund_link.view_supplier_account_invoice_add_refunds_details_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='refunds']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_petty_cash', '=', True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_account_petty_received" model="ir.actions.act_window">
+        <field name="name">Petty Cash Received</field>
+        <field name="res_model">account.invoice</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_petty_cash', '=', True)]</field>
+        <field name="context">{'action_mode': 'petty_received','default_type':'in_invoice', 'type':'in_invoice', 'journal_type': 'purchase'}</field>
+
+    </record>
+
+    <menuitem id="menu_petty_received"
+              parent="menu_petty_payment_main"
+              sequence="7"
+              action="action_account_petty_received"/>
+
+</odoo>

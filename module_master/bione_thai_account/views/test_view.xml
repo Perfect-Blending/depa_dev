@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="MODULE_NAME_root" name="" sequence=""/>
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="UNIQUE_ID_categ" name="" parent="" sequence=""/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="UNIQUE_ID_categ" name="" parent="" action="" sequence=""/>
+    
+    <record id="test_action" model="ir.actions.act_window">
+        <field name="name"></field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model"></field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="test_view_tree" model="ir.ui.view">
+        <field name="name">test_view_tree</field>
+        <field name="model"></field>
+        <field name="arch" type="xml">
+            <tree string="test_tree">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+	<record id="bi_inherit_stock_move_line_operation_tree" model="ir.ui.view">
+		<field name="name">stock.move.line.operations.tree</field>
+		<field name="model">stock.move.line</field>
+		<field name="inherit_id" ref="stock.view_stock_move_line_operation_tree"/>
+		<field name="arch" type="xml">
+			<field name="lot_name" position="after">
+				<field name="inc_best_before_date" groups="stock.group_production_lot"
+					invisible="not context.get('show_expiry_field')"
+					attrs="{'readonly': ['&amp;', ('package_level_id', '!=', False), ('parent.picking_type_entire_packs', '=', True)]}"/>
+				<field name="inc_removal_date" groups="stock.group_production_lot"
+					invisible="not context.get('show_expiry_field')"
+					attrs="{'readonly': ['&amp;', ('package_level_id', '!=', False), ('parent.picking_type_entire_packs', '=', True)]}"/>
+				<field name="inc_alert_date" groups="stock.group_production_lot"
+					invisible="not context.get('show_expiry_field')"
+					attrs="{'readonly': ['&amp;', ('package_level_id', '!=', False), ('parent.picking_type_entire_packs', '=', True)]}"/>
+				<field name="inc_life_date" groups="stock.group_production_lot"
+					invisible="not context.get('show_expiry_field')"
+					attrs="{'readonly': ['&amp;', ('package_level_id', '!=', False), ('parent.picking_type_entire_packs', '=', True)]}"/>
+			</field>
+		</field>
+    </record>
+
+	<record id="bi_inherit_stock_picking_form" model="ir.ui.view">
+		<field name="name">stock.picking.tree</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='move_line_ids_without_package']/tree/field[@name='lot_id']" position="after">
+				<field name="best_before_date" groups="stock.group_production_lot"
+					attrs="{'column_invisible': ['|',('parent.show_lots_text', '=', True),('parent.picking_type_code', '!=', 'incoming')], 'invisible': [('lots_visible', '=', False)]}"/>
+				<field name="removal_date" groups="stock.group_production_lot"
+					attrs="{'column_invisible': ['|',('parent.show_lots_text', '=', True),('parent.picking_type_code', '!=', 'incoming')], 'invisible': [('lots_visible', '=', False)]}"/>
+				<field name="alert_date" groups="stock.group_production_lot"	
+					attrs="{'column_invisible': ['|',('parent.show_lots_text', '=', True),('parent.picking_type_code', '!=', 'incoming')], 'invisible': [('lots_visible', '=', False)]}"/>
+				<field name="life_date" groups="stock.group_production_lot"
+					attrs="{'column_invisible': ['|',('parent.show_lots_text', '=', True),('parent.picking_type_code', '!=', 'incoming')], 'invisible': [('lots_visible', '=', False)]}"/>
+			</xpath>
+
+			<xpath expr="//field[@name='move_line_ids_without_package']/tree/field[@name='lot_name']" position="after">
+				<field name="inc_best_before_date" groups="stock.group_production_lot"
+					attrs="{'column_invisible': [('parent.show_lots_text', '=', False)], 'invisible': [('lots_visible', '=', False)]}"/>
+				<field name="inc_removal_date" groups="stock.group_production_lot"
+					attrs="{'column_invisible': [('parent.show_lots_text', '=', False)], 'invisible': [('lots_visible', '=', False)]}"/>
+				<field name="inc_alert_date" groups="stock.group_production_lot"
+					attrs="{'column_invisible': [('parent.show_lots_text', '=', False)], 'invisible': [('lots_visible', '=', False)]}"/>
+				<field name="inc_life_date" groups="stock.group_production_lot"
+					attrs="{'column_invisible': [('parent.show_lots_text', '=', False)], 'invisible': [('lots_visible', '=', False)]}"/>
+			</xpath>
+
+		</field>
+	</record>
+
+</odoo>

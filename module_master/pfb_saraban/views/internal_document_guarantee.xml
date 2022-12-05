@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- ตั้งค่าขั้นตอนการไหลหนังสือภายใน หนังสือรับรอง-->
+    <record model="ir.ui.view" id="document_internal_guarantee_form_view">
+        <field name="name">document.internal.guarantee.form</field>
+        <field name="model">document.internal.guarantee</field>
+        <field name="arch" type="xml">
+            <form string="หนังสือภายใน หนังสือรับรอง">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <field name="name"/>
+                    <notebook>
+                        <page name='infomation' string='ข้อมูล'>
+                            <group>
+                                <field name="department_id"/>
+                                <field name="employee_id" invisible="1" />
+                                <field name="date_document"/>
+                                <field name="speed"/>
+                                <field name="secret"/>
+                                <field name="subject"/>
+                                <field name="sign"/>
+                                <field name="material"/>
+                                <field name="for_document"/>
+                                <field name="note"/>
+
+                            </group>
+                        </page>
+                        <page name='infomation' string='ลำดับอุนมัต'>
+                            <group>
+                                <group>
+                                    <field name="routings_internal_id" />
+                                </group>
+                            </group>
+                            <field name="setting_line_ids">
+                                <tree edit="true" editable='bottom'>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="step"/>
+                                    <field name="status"/>
+                                    <field name="document_id" invisible='1'/>
+                                    <field name="job_id_name"/>
+                                    <field name="employee_id"/>
+                                    <field name="approve_type"/>
+                                    <field name="approve_time"/>
+                                    <field name="comment"/>
+                                    <field name="is_active"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Course views: Search -->
+    <record model="ir.ui.view" id="document_search_internal_guarantee_view">
+        <field name="name">document.internal.guarantee.search</field>
+        <field name="model">document.internal.guarantee</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="date_document"/>
+                <field name="department_id"/>
+                <field name="speed"/>
+                <field name="secret"/>
+                <group string="Group By">
+                    <filter name="by_responsible" string="Name" context="{'group_by': 'name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- Course views: Tree -->
+    <record model="ir.ui.view" id="document_internal_guarantee_tree_view">
+        <field name="name">document.internal.guarantee.tree</field>
+        <field name="model">document.internal.guarantee</field>
+        <field name="arch" type="xml">
+            <tree string="document Tree">
+                <field name="name"/>
+                <field name="date_document"/>
+                <field name="department_id"/>
+                <field name="speed"/>
+                <field name="secret"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="document_internal_guarantee_calendar_view">
+        <field name="name">document.internal.guarantee.calendar</field>
+        <field name="model">document.internal.guarantee</field>
+        <field name="arch" type="xml">
+            <calendar string="document internal Calendar" date_start="date_document">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="document_internal_guarantee_list_action">
+        <field name="name">หนังสือภายใน/หนังสือรับรอง</field>
+        <field name="res_model">document.internal.guarantee</field>
+       <field name="view_type">form</field>
+        <field name="view_mode">tree,calendar,form,kanban,pivot,graph</field>
+    </record>
+
+</odoo>

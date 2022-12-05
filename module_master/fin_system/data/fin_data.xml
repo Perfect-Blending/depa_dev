@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="seq_fw_pfb_fin_100" model="ir.sequence">
+            <field name="name">seq_fw_pfb_fin_100</field>
+            <field name="code">seq_fw_pfb_fin_100</field>
+        </record>
+
+        <record id="seq_fw_pfb_fin_401" model="ir.sequence">
+            <field name="name">seq_fw_pfb_fin_401</field>
+            <field name="code">seq_fw_pfb_fin_401</field>
+        </record>
+
+        <record id="seq_fw_pfb_fin_201" model="ir.sequence">
+            <field name="name">seq_fw_pfb_fin_201</field>
+            <field name="code">seq_fw_pfb_fin_201</field>
+        </record>
+
+    </data>
+</openerp>

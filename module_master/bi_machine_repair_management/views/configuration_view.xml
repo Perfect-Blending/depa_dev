@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+        <!-- Machine Repair Team -->
+        <record id="machine_repair_team_form_view" model="ir.ui.view">
+		<field name="name">machine.repair.team.form.view</field>
+		<field name="model">machine.repair.team</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet string="Machine Repair Team">
+					<group>
+						<group>
+							<field name="name" />
+							<field name="is_default_team"/>
+						</group>
+						<group>
+							<field name="leader_id" />
+						</group>
+					</group>
+					<notebook>
+						<page string="Team Members">
+							<field name="team_member_ids" />
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record id="machine_repair_team_tree_view" model="ir.ui.view">
+		<field name="name">machine.repair.team.tree.view</field>
+		<field name="model">machine.repair.team</field>
+		<field name="arch" type="xml">
+			<tree string="Machine Repair Team">
+				<field name="name" />
+				<field name="leader_id" />
+				<field name="is_default_team"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_machine_repair_team" model="ir.actions.act_window">
+		<field name="name">Machine Repair Team</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">machine.repair.team</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+    <!-- Machine Services -->
+        <record id="machine_services_form_view" model="ir.ui.view">
+		<field name="name">machine.services.form.view</field>
+		<field name="model">machine.services</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet string="Machine Services">
+					<group>
+						<group>
+							<field name="name" />
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record id="machine_services_tree_view" model="ir.ui.view">
+		<field name="name">machine.services.tree.view</field>
+		<field name="model">machine.services</field>
+		<field name="arch" type="xml">
+			<tree string="Machine Services">
+				<field name="name" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_machine_services" model="ir.actions.act_window">
+		<field name="name">Machine Services</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">machine.services</field>
+		<field name="view_mode">tree,form</field>
+	</record>	
+	
+	<!-- Machine Services Type-->
+        <record id="machine_service_type_form_view" model="ir.ui.view">
+		<field name="name">machine.service.type.form.view</field>
+		<field name="model">machine.service.type</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet string="Machine Service Type">
+					<group>
+						<group>
+							<field name="name" />
+							<field name="product_id" />
+						</group>
+						<group>
+							<field name="code" />
+							<field name="cost" />
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record id="machine_service_type_tree_view" model="ir.ui.view">
+		<field name="name">machine.service.type.tree.view</field>
+		<field name="model">machine.service.type</field>
+		<field name="arch" type="xml">
+			<tree string="Machine Service Type">
+				<field name="name" />
+				<field name="code" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_machine_service_type" model="ir.actions.act_window">
+		<field name="name">Machine Service Type</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">machine.service.type</field>
+		<field name="view_mode">tree,form</field>
+	</record>	
+	
+		<menuitem id="main_menu_machine_repair" name="Machine Repair" web_icon="bi_machine_repair_management,static/description/icon.png" sequence="41" />
+		
+		<menuitem id="main_menu_configuration" parent="main_menu_machine_repair" name="Configuration" sequence="3" groups="group_machine_repair_manager"/>
+		
+		<menuitem id="menu_services" parent="main_menu_configuration" name="Services" action="action_machine_services" sequence="1"/>
+		<menuitem id="menu_service_type" parent="main_menu_configuration" name="Service Type" action="action_machine_service_type" sequence="2"/>
+		<menuitem id="menu_machine_repair_team" parent="main_menu_configuration" name="Machine Repair Teams" action="action_machine_repair_team" sequence="3"/>
+
+	</data>
+</odoo>
+ 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <record id="account_cheque_inherit" model="ir.ui.view">
+        <field name="name">account.cheque.inherit</field>
+        <field name="model">account.cheque</field>
+        <field name="inherit_id" ref="bi_account_cheque.account_incoming_cheque_form_view"/>
+        <field name="arch" type="xml">
+            <field name="payee_user_id" position="replace">
+                <field name="payee_user_id" options='{"no_create_edit": True }'/>
+            </field>
+            <field name="payee_user_id" position="after">
+                <field name='bank_name'
+                       domain="[('partner_id','=', payee_user_id)]"
+                       context="{'show_only_bank': True}"
+                       options='{"always_reload": True , "no_create_edit": True }'/>
+            </field>
+        </field>
+   </record>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- quant form -->
+        <record id="view_stock_quant_form_inherit" model="ir.ui.view">
+                <field name="name">stock.inventory.form</field>
+                <field name="model">stock.quant</field>
+                <field name="inherit_id" ref="stock.view_stock_quant_form"/>
+                <field name="arch" type="xml">
+                    <field name="in_date" position="before">
+                    <label for="secondary_quantity" string="Secondary On Hand Quantity "/>
+                    <div class="o_row">
+                        
+                        <field name="secondary_quantity" groups="secondary_uom_app.group_secondary_uom"/>
+                        <field name="secondary_uom_id" groups="secondary_uom_app.group_secondary_uom"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+        <!-- quant tree -->
+        <record id="view_stock_quant_tree_inherit" model="ir.ui.view">
+            <field name="name">stock.quant.tree</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_uom_id" position="after">
+                    <field name="secondary_quantity" string="Secondary On Hand Qty" groups="secondary_uom_app.group_secondary_uom"/>
+                    <field name="secondary_uom_id" groups="secondary_uom_app.group_secondary_uom"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

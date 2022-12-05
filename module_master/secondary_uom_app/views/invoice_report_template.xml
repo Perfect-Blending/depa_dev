@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+            <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[3]" position="after">
+                <th class="text-right"><span>Secondary Qty</span></th>
+            </xpath>
+            <xpath expr="//tbody[@class='invoice_tbody']//tr//td[3]" position="after">
+                <td class="text-right">
+                    <span t-field="line.secondary_quantity"/>
+                    <span t-field="line.secondary_uom_id"  groups="uom.group_uom"/>
+                </td>
+            </xpath>
+        </template>
+	</data>
+</odoo>

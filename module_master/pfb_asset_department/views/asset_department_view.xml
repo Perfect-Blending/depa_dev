@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_asset_department_form" model="ir.ui.view">
+            <field name="name">view_asset_department_form</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset_management.account_asset_view_form" />
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="department_id"  />
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="purchase_order_form_inherit" model="ir.ui.view">
+                <field name="name">purchase.order.form</field>
+                <field name="model">purchase.order</field>
+                <field name="inherit_id" ref="purchase.purchase_order_form"/>
+                <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='product_uom']" position="after">
+                        <field name="secondary_quantity" groups="secondary_uom_app.group_secondary_uom"/>
+                        <field name="secondary_uom_id" groups="secondary_uom_app.group_secondary_uom"/>
+                </xpath>
+                </field>
+        </record>
+
+        <!-- purchase analysis report  -->
+        <record id="view_purchase_order_pivot_inherit" model="ir.ui.view">
+                <field name="name">purchase.report.form</field>
+                <field name="model">purchase.report</field>
+                <field name="inherit_id" ref="purchase.view_purchase_order_pivot"/>
+                <field name="arch" type="xml">
+                    <field name="unit_quantity" position="after">
+                        <field name="secondary_quantity" type="measure" groups="secondary_uom_app.group_secondary_uom"/>
+                    </field>
+                </field>
+        </record>
+
+        
+
+</data>
+</odoo>

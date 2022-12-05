@@ -1,0 +1,75 @@
+// Change Font
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('/pfb_purchase_voucher_qweb/static/fonts/THSarabunNew.ttf') format('truetype');
+}
+
+    .o_purchase_voucher_from{
+        font-family: 'THSarabunNew';
+        font-size: 24px;
+    }
+
+    .o_purchase_voucher_from .date_print {
+        font-size: 24px;
+        position: fixed;
+        top: 45px;
+        right: 105px;
+    }
+
+    .o_purchase_voucher_from .company_name {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 150px;
+        left: 100px;
+    }
+
+    .o_purchase_voucher_from .note_name {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 190px;
+        left: 125px;
+    }
+
+    .o_purchase_voucher_from .inv_number {
+        width: 50%;
+        font-size: 24px;
+        position: fixed;
+        top: 240px;
+        left: 125px;
+    }
+
+    .o_purchase_voucher_from .purchase_number_h1 {
+        font-size: 24px;
+        position: fixed;
+        top: 155px;
+        right: 100px;
+    }
+
+    .o_purchase_voucher_from .purchase_date {
+        font-size: 24px;
+        position: fixed;
+        top: 190px;
+        right: 110px;
+    }
+
+    .o_purchase_voucher_from .purchase_number {
+        font-size: 24px;
+        position: fixed;
+        top: 226px;
+        right: 100px;
+    }
+
+     .o_purchase_voucher_from .purchase_note {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 1350px;
+        left: 130px;
+    }
+
+
+
+
+}

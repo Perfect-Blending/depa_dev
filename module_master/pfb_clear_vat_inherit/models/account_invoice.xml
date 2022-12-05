@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <record id="account_invoice_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <header>
+                <button name="action_clear" string="Remove Vat" states="draft" type="object" class="oe_highlight" />
+            </header>
+        </field>
+   </record>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report
+            id="action_report_fin_system"
+            model="fw_pfb_fin_system_100"
+            string="FIN system"
+            name="fin_system.fin_system"
+            file="fin_system.fin_system"
+            report_type="qweb-pdf"
+            menu="True"
+        />
+
+    </data>
+</openerp>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="pfb_saraban.group_user_document_rec" model="res.groups">
+            <field name="name">สร้างหนังสือรับ</field>
+            <field name="comment">สร้างหนังสือรับ</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="pfb_saraban.group_user_document_rec_all" model="res.groups">
+            <field name="name">แสดงหนังสือรับทั้งหมด</field>
+            <field name="comment">แสดงหนังสือรับทั้งหมด</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="pfb_saraban.group_user_document_setting" model="res.groups">
+            <field name="name">Setting</field>
+            <field name="comment">Setting</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="pfb_saraban.group_user_document_internal" model="res.groups">
+            <field name="name">แสดงหนังสือภายในทั้งหมด</field>
+            <field name="comment">แสดงหนังสือภายในทั้งหมด</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="pfb_saraban.group_super_user_document" model="res.groups">
+            <field name="name">เลขที่เอกสาจริง วันที่เอกสารจริง แก้ไขได้</field>
+            <field name="comment">เลขที่เอกสาจริง วันที่เอกสารจริง แก้ไขได้</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+         <record id="group_super_user_saraban" model="res.groups">
+            <field name="name">แสดงระบบสารบรรณ</field>
+            <field name="comment">แสดงระบบสารบรรณ</field>
+            <field name="category_id" ref="pfb_saraban.module_category_saraban"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+    <menuitem id="pfb_saraban.internal_document_menu"  name="หนังสือภายใน" parent="pfb_saraban.main_document_menu" sequence="1"  groups="group_super_user_saraban"/>
+    <menuitem id="pfb_saraban.internal_created_menu" name="สร้างหนังสือภายใน" parent="pfb_saraban.internal_document_menu"  groups="group_super_user_saraban"/>
+    <menuitem id="pfb_saraban.internal_save_menu" name="บันทึกข้อความ" parent="pfb_saraban.internal_created_menu" action="pfb_saraban.document_internal_main_list_action"  groups="group_super_user_saraban"/>
+    <menuitem id="pfb_saraban.internal_announce_menu" name="หนังสือลงนาม" parent="pfb_saraban.internal_created_menu" action="pfb_saraban.document_internal_announce_list_action"  groups="group_super_user_saraban"/>
+    <menuitem id="pfb_saraban.internal_waiteing_menu" name="รอดำเนินการหนังสือภายใน" parent="pfb_saraban.internal_document_menu" action="pfb_saraban.document_internal_need_list_action"  groups="group_super_user_saraban"/>
+    <menuitem id="pfb_saraban.internal_all_menu" name="แสดงหนังสือภายในทั้งหมด" parent="pfb_saraban.internal_document_menu" action="pfb_saraban.document_internal_main_all_list_action"
+    groups="pfb_saraban.group_user_document_internal" />
+
+    <!-- หนังสือรับ -->
+    <menuitem id="pfb_saraban.receive_document_menu" name="หนังสือรับ" parent="pfb_saraban.main_document_menu" sequence="2"  groups="group_super_user_saraban"/>
+    <menuitem id="pfb_saraban.receive_receive_menu" name="หนังสือรับ/รับหนังสือ" parent="pfb_saraban.receive_document_menu" action="pfb_saraban.receive_document_main_list_action" groups="pfb_saraban.group_user_document_rec" sequence="3"/>
+    <menuitem id="pfb_saraban.receive_document_draft_menu name=" name="หนังสือรับ/หนังสือรับทุกแผนกฉบับร่าง" parent="pfb_saraban.receive_document_menu" action="pfb_saraban.receive_document_main_draft_list_action" groups="pfb_saraban.tag_receive_document" sequence="4"/>
+    <menuitem id="pfb_saraban.receive_waithing_menu" name="หนังสือรับ/รอดำเนินการ" parent="pfb_saraban.receive_document_menu" action="pfb_saraban.receive_document_main_need_list_action"  groups="group_super_user_saraban"/>
+    <menuitem id="pfb_saraban.receive_show_all_menu" name="แสดงหนังสือรับทั้งหมด" parent="pfb_saraban.receive_document_menu" action="pfb_saraban.receive_document_main_all_list_action" groups="pfb_saraban.group_user_document_rec_all" />
+</odoo>

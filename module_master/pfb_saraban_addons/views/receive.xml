@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- <record model="ir.actions.act_window" id="pfb_saraban.receive_document_main_need_action_list"> -->
+    <!--     <field name="domain">[('state', 'not in', ['draft', 'done']), ('show_receive_document', '=', True)]</field> -->
+    <!-- </record> -->
+
+
+    <record model="ir.ui.view" id="receive_document_main_form_view_inherit">
+        <field name="name">receive.document.main.form.inherit</field>
+        <field name="model">receive.document.main</field>
+        <field name="inherit_id" ref="pfb_saraban.receive_document_main_form_view"/>
+        <field name="arch" type="xml">
+            <field name="from_document" position="after">
+                <field name="refer_already_used" invisible="1" />
+                <label for="refer_already_used" string="*** Refer Already Used" style="color:red;" attrs="{'invisible': [('refer_already_used', '=', False)]}" />
+            </field>
+            <xpath expr="//field[@name='setting_line_ids']/tree/field[@name='employee_id']" position="after">
+                <field name="order_choices" widget="many2many_tags"  options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="receive_document_main_form_need_view_inherit">
+        <field name="name">receive.document.main.form.need.view.inherit</field>
+        <field name="model">receive.document.main</field>
+        <field name="inherit_id" ref="pfb_saraban.receive_document_main_form_need_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='setting_line_ids']/tree/field[@name='employee_id']" position="after">
+                <field name="order_choices" widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="receive_document_main_form_all_view_inherit">
+        <field name="name">receive.document.main.form.all.view.inherit</field>
+        <field name="model">receive.document.main</field>
+        <field name="inherit_id" ref="pfb_saraban.receive_document_main_form_all_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='setting_line_ids']/tree/field[@name='employee_id']" position="after">
+                <field name="order_choices" widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

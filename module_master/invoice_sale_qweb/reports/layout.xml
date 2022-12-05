@@ -1,0 +1,433 @@
+<odoo>
+    <template id="invoice_report_assets_common" name="Invoice Sale  common assets"
+              inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/invoice_sale_qweb/static/scss/style_report.css"/>
+        </xpath>
+    </template>
+
+    <template id="invoice_sale_pdf_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="container">
+                    <div class="article o_invoice_sale_from">
+                        <img src="/invoice_sale_qweb/static/src/img/invoice.png"
+                             style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+                        <h4 class="number_invoice">
+                            <span t-esc="o.number"/>
+                        </h4>
+                        <!--Box 1-->
+                        <div class="company_vat">
+                            <span t-field="o.partner_id.vat"/>
+                        </div>
+                        <div class="company_branch">
+                             <t t-if="o.partner_id.branch == '00000'">
+                                 สำนักงานใหญ่
+                             </t>
+                            <t t-if="o.partner_id.branch != '00000'">
+                                <t t-if="o.partner_id.branch">
+                                    สาขา  <span t-field="o.partner_id.branch"/>
+                                </t>
+                            </t>
+
+                        </div>
+                        <div class="company_name">
+                            <span t-field="o.partner_id"/>
+                        </div>
+                        <div class="company_address">
+                            <span t-field="o.partner_id.street"/>
+                        </div>
+                        <div class="company_address2">
+                            <span t-field="o.partner_id.street2"/>
+                        </div>
+                        <div class="company_address3">
+                            <span t-field="o.partner_id.city"/>
+                            <span t-field="o.partner_id.zip"/>
+                        </div>
+                        <!--End Box 1-->
+                        <!--Box 2-->
+                        <div class="invoice_date">
+                            <!-- change A.D. to B.E. year-->
+                            <t t-set="year" t-value="(int((o.date_invoice).strftime('%Y')))+543"/>
+                            <t t-set="date_invoice" t-value="'%s/%s' %((o.date_invoice).strftime('%d/%m'),year)"/>
+                            <t t-esc="date_invoice"/>
+                        </div>
+                        <div class="payment_terms">
+                            <span t-field="o.payment_term_id" />
+                        </div>
+                        <div class="due_date">
+                            <!-- change A.D. to B.E. year-->
+                            <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                            <t t-set="date_due" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                            <t t-esc="date_due"/>
+                        </div>
+                        <!--End Box 2-->
+                        <!--Box 3 -->
+                        <div class="container" style="z-index: 100;">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <p><!--.--></p>
+                             <table width="100%" height="80%">
+                                    <thead align="center">
+                                        <tr>
+                                            <td width="11%"/>
+                                            <td width="49%"/>
+                                            <td width="14%"/>
+                                            <td width="11%"/>
+                                            <td idth="15%"/>
+                                        </tr>
+                                    </thead>
+                                    <tbody valign="top">
+                                        <t t-set="count" t-value="0"/>
+                                        <t t-set="sum_price" t-value="0"/>
+                                        <tr style="height: 320px; vertical-align: top; font-size:18pt;">
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <t t-set="count" t-value="count+1"/>
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="center">
+                                                                <span t-esc="count"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="left">
+                                                                <span t-field="line.name" style="padding-left:5px;"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="right">
+                                                                <t t-set="sum_price" t-value="line.price_subtotal/line.quantity"/>
+                                                                <span t-esc="'{:,.2f}'.format(sum_price)"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="right">
+                                                                <span t-esc="'{:,.2f}'.format(line.quantity)"/>
+                                                                <span t-field="line.uom_id"
+                                                                      style="padding-right:13px;"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="right">
+                                                                <span t-esc="'{:,.2f}'.format(line.price_subtotal)"
+                                                                      style="padding-right:15px;"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                        <div class="container" style="z-index: 100;">
+                           <table  width="100%" class="table table-borderless" style="font-family:'kinnari';">
+                               <br/>
+                               <br/>
+                               <br/>
+                               <br/>
+                               <br/>
+                               <p><!--..--></p>
+                                <thead align="center">
+                                    <tr>
+                                        <td width="33%"/>
+                                        <td width="67%" >( <t t-esc="thaibahttext"/> )</td>
+                                    </tr>
+                                </thead>
+                                <tbody valign="top">
+                                    <t t-set="count" t-value="0"/>
+                                    <tr style="height: 100px; vertical-align: top; font-size:18pt;">
+                                        <td align="center" >
+                                        </td>
+                                         <td></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <t t-if="o.partner_bank_id">
+                            <div class="bank_name" style="width: 500px;"><span t-field="o.partner_bank_id"/></div>
+                            <div class="bank_number"><span t-field="o.partner_bank_id.acc_number"/></div>
+                            <div class="name_bank">
+                                <span t-field="o.partner_bank_id.partner_id"/>
+                                <t t-if="o.partner_bank_id.partner_id.mobile">
+                                    เบอร์โทร <span t-field="o.partner_bank_id.partner_id.mobile"/>
+                                </t>
+                            </div>
+                        </t>
+
+                        <!--End Box 3-->
+                        <!--Box 4-->
+                        <div class="total_amount">
+                            <span t-esc="'{:,.2f}'.format(o.amount_without_discount_tax)"/>
+                        </div>
+                        <div class="inv_amount_vat">
+                            <span t-esc="'{:,.2f}'.format(o.amount_tax)"/>
+                        </div>
+                        <div class="inv_grand_total">
+                            <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
+                        </div>
+                        <div class="text_total">
+                        </div>
+                        <!--End Box 4-->
+                    </div>
+                    <t t-set="copy_count" t-value="3"/>
+                    <t t-foreach="range(copy_count)" t-as="cc">
+                        <div class="article o_invoice_sale_from">
+                        <img src="/invoice_sale_qweb/static/src/img/invoice_copy.png"
+                             style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+                        <h4 class="number_invoice">
+                            <span t-esc="o.number"/>
+                        </h4>
+                        <!--Box 1-->
+                        <div class="company_vat">
+                            <span t-field="o.partner_id.vat"/>
+                        </div>
+                        <div class="company_branch">
+                             <t t-if="o.partner_id.branch == '00000'">
+                                 สำนักงานใหญ่
+                             </t>
+                            <t t-if="o.partner_id.branch != '00000'">
+                                <t t-if="o.partner_id.branch">
+                                    สาขา  <span t-field="o.partner_id.branch"/>
+                                </t>
+                            </t>
+
+                        </div>
+                        <div class="company_name">
+                            <span t-field="o.partner_id"/>
+                        </div>
+                        <div class="company_address">
+                            <span t-field="o.partner_id.street"/>
+                        </div>
+                        <div class="company_address2">
+                            <span t-field="o.partner_id.street2"/>
+                        </div>
+                        <div class="company_address3">
+                            <span t-field="o.partner_id.city"/>
+                            <span t-field="o.partner_id.zip"/>
+                        </div>
+                        <!--End Box 1-->
+                        <!--Box 2-->
+                        <div class="invoice_date">
+                            <!-- change A.D. to B.E. year-->
+                            <t t-set="year" t-value="(int((o.date_invoice).strftime('%Y')))+543"/>
+                            <t t-set="date_invoice" t-value="'%s/%s' %((o.date_invoice).strftime('%d/%m'),year)"/>
+                            <t t-esc="date_invoice"/>
+                        </div>
+                        <div class="payment_terms">
+                            <span t-field="o.payment_term_id" align="right"/>
+                        </div>
+                        <div class="due_date">
+                            <!-- change A.D. to B.E. year-->
+                            <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                            <t t-set="date_due" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                            <t t-esc="date_due"/>
+                        </div>
+                        <!--End Box 2-->
+                        <!--Box 3 -->
+                        <div class="container" style="z-index: 100;">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <p><!--.--></p>
+                             <table width="100%" height="80%">
+                                    <thead align="center">
+                                        <tr>
+                                            <td width="11%"/>
+                                            <td width="49%"/>
+                                            <td width="14%"/>
+                                            <td width="11%"/>
+                                            <td idth="15%"/>
+                                        </tr>
+                                    </thead>
+                                    <tbody valign="top">
+                                        <t t-set="count" t-value="0"/>
+                                        <t t-set="sum_price" t-value="0"/>
+                                        <tr style="height: 320px; vertical-align: top; font-size:18pt;">
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <t t-set="count" t-value="count+1"/>
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="center">
+                                                                <span t-esc="count"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="left">
+                                                                <span t-field="line.name" style="padding-left:5px;"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="right">
+                                                                <t t-set="sum_price" t-value="line.price_subtotal/line.quantity"/>
+                                                                <span t-esc="'{:,.2f}'.format(sum_price)"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="right">
+                                                                <span t-esc="'{:,.2f}'.format(line.quantity)"/>
+                                                                <span t-field="line.uom_id"
+                                                                      style="padding-right:13px;"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                            <td align="center">
+                                                <table width="100%">
+                                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                                        <tr width="100%" height="10" valign="top">
+                                                            <td align="right">
+                                                                <span t-esc="'{:,.2f}'.format(line.price_subtotal)"
+                                                                      style="padding-right:15px;"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                        <div class="container" style="z-index: 100;">
+                           <table  width="100%" class="table table-borderless" style="font-family:'kinnari';">
+                               <br/>
+                               <br/>
+                               <br/>
+                               <br/>
+                               <br/>
+                               <p><!--..--></p>
+                                <thead align="center">
+                                    <tr>
+                                        <td width="33%"/>
+                                        <td width="67%" >( <t t-esc="thaibahttext"/> )</td>
+                                    </tr>
+                                </thead>
+                                <tbody valign="top">
+                                    <t t-set="count" t-value="0"/>
+                                    <tr style="height: 100px; vertical-align: top; font-size:18pt;">
+                                        <td align="center" >
+                                        </td>
+                                         <td></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <t t-if="o.partner_bank_id">
+                            <div class="bank_name" style="width: 500px;"><span t-field="o.partner_bank_id"/></div>
+                            <div class="bank_number"><span t-field="o.partner_bank_id.acc_number"/></div>
+                            <div class="name_bank">
+                                <span t-field="o.partner_bank_id.partner_id"/>
+                                <t t-if="o.partner_bank_id.partner_id.mobile">
+                                    เบอร์โทร <span t-field="o.partner_bank_id.partner_id.mobile"/>
+                                </t>
+                            </div>
+                        </t>
+
+                        <!--End Box 3-->
+                        <!--Box 4-->
+                        <div class="total_amount">
+                            <span t-esc="'{:,.2f}'.format(o.amount_without_discount_tax)"/>
+                        </div>
+                        <div class="inv_amount_vat">
+                            <span t-esc="'{:,.2f}'.format(o.amount_tax)"/>
+                        </div>
+                        <div class="inv_grand_total">
+                            <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
+                        </div>
+                        <div class="text_total">
+                        </div>
+                        <!--End Box 4-->
+                    </div>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

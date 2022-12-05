@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <record id="account_analytic_account_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.account.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="priority" eval="51"/>
+        <field name="arch" type="xml">
+            <xpath  expr="//group[@name='main']" position='after'>
+                <notebook>
+                     <page string="Responsible">
+                        <group>
+                            <field name="department_pb"/>
+                            <field name="customer_pb"/>
+                            <field name="customer2_pb"/>
+                            <field name="customer3_pb"/>
+                        </group>
+                    </page>
+                    <page string="Information">
+                        <group>
+                            <field name="project_new" options="{'vertical': true}" widget="radio"/>
+                            <field name="date_start"/>
+                            <field name="date_to"/>
+                        </group>
+                    </page>
+                    <page string="Note">
+                        <group>
+                            <field name="notes1"/>
+                            <field name="notes2"/>
+                            <field name="notes3"/>
+                            <field name="notes4"/>
+                            <field name="notes5"/>
+                            <field name="notes6"/>
+                            <field name="notes7"/>
+                            <field name="notes8"/>
+                        </group>
+
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+   </record>
+
+
+</odoo>
+

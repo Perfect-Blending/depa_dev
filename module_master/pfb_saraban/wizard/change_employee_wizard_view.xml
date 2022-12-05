@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="change_employee_wizard_view_form" model="ir.ui.view">
+        <field name="name">change.employee.wizard.form</field>
+        <field name="model">change.employee.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Change Employee Wizard">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Approve" class="btn-primary" type="object" name="action_approve"/>
+                    <button string="Discard" class="btn-default" special="cancel" type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="change_employee_wizard_action" model="ir.actions.act_window">
+        <field name="name">Change Employee Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">change.employee.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="change_employee_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

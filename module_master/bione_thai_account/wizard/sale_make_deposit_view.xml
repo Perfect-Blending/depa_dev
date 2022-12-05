@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_sale_make_deposit_form" model="ir.ui.view">
+            <field name="name">view_sale_make_deposit_form</field>
+            <field name="model">sale.make.deposit</field>
+            <field name="arch" type="xml">
+                <form string="Make Deposits">
+                    <p class="oe_grey">
+                        Deposit will be created in draft so that you can review
+                        them before validation.
+                    </p>
+                    <group>
+                        <field name="amount" string="Amount"/>
+                    </group>
+                    <footer>
+                        <button name="create_invoices" string="Create and view Deposit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sale_make_deposit" model="ir.actions.act_window">
+            <field name="name">Make Deposit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.make.deposit</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <!--<field name="groups_id" eval="[(4,ref('sales_team.group_sale_salesman'))]"/>-->
+            <!-- TODO: check if we need this -->
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+        </record>
+
+</odoo>

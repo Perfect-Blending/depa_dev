@@ -1,0 +1,33 @@
+<odoo>
+
+    <report string="Fin Report XLSX"
+            id="action_finn_report_xlsx"
+            model="report.pfb.fin.report"
+            name="pfb_report_fin.report_fin_report_xlsx"
+            file="Fin Report"
+            report_type="xlsx"
+            attachment_use="False"/>
+
+    <record id="action_report_detailed_budget_report_html" model="ir.actions.client">
+        <field name="name">Detailed Budget Report</field>
+        <field name="tag">detailed_budget_report_backend</field>
+        <field name="context" eval="{'active_model': 'report.detailed.budget.report'}" />
+    </record>
+
+    <report string="Detailed Budget PDF"
+            id="action_detailed_budget_report_pdf"
+            model="report.detailed.budget.report"
+            name="pfb_report_fin.report_detailed_budget_report_pdf"
+            file="pfb_report_fin.report_detailed_budget_report_pdf"
+            report_type="qweb-pdf"
+            paperformat="pfb_report_fin.paperformat_detailed_budget"/>
+
+    <report string="Detailed Budget XLSX"
+            id="action_detailed_budget_report_xlsx"
+            model="report.detailed.budget.report"
+            name="pfb_report_fin.report_detailed_budget_report_xlsx"
+            file="Detailed Budget Report"
+            report_type="xlsx"
+            attachment_use="False"/>
+
+</odoo>

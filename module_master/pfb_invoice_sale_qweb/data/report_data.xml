@@ -1,0 +1,24 @@
+<odoo>
+    <report
+        string="ใบแจ้งหนี้ขาย (ไม่รวม Vat)"
+        id="invoice_sale_pdf_report"
+        model="account.invoice"
+        name="pfb_invoice_sale_qweb.invoice_sale_pdf_report_pdf"
+        file="pfb_invoice_sale_qweb.invoice_sale_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="pfb_invoice_sale_qweb.paperformat_invoice_sale"
+    />
+
+     <report
+        string="ใบแจ้งหนี้ขาย (รวม Vat)"
+        id="invoice_sale_pdf_report2"
+        model="account.invoice"
+        name="pfb_invoice_sale_qweb.invoice_sale_pdf_report_pdf2"
+        file="pfb_invoice_sale_qweb.invoice_sale_pdf_report_pdf2"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="pfb_invoice_sale_qweb.paperformat_invoice_sale"
+    />
+
+</odoo>

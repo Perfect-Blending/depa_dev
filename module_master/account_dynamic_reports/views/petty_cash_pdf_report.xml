@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+
+    <template id="account_dynamic_reports.petty_cash">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <style>
+                        .pims_report_content{
+                        font-size: 14px;
+                        font-family" 'Arial';
+                        }
+
+                        .pims_report_line_table {
+                        width:100%;
+                        --table-layout: fixed;
+                        --word-break: break-all;
+                        border-collapse: collapse;
+                        }
+
+                        .pims_report_line_main_tr {
+                        font-weight:bold;
+                        background-color: cyan;
+                        border:1px solid grey;
+                        }
+
+                        .pims_report_line_initial_tr {
+                        font-style:italic;
+                        }
+
+                        .pims_report_line_subtotal {
+                        font-weight:bold;
+                        background-color: white;
+                        border-top:2px solid grey;
+                        }
+
+                        <!-- For TB Only -->
+
+                        .pims_report_line_tb {
+                        border:1px solid grey;
+                        }
+
+                        .pims_report_line_tb td {
+                        overflow: hidden;
+                        }
+
+                        .pims_report_line_tb td+td {
+                        width: auto;
+                        }
+
+                        .pims_tb_head {
+                        font-weight:bold;
+                        background-color: cyan;
+                        border:1px solid grey;
+                        text-align:right;
+                        }
+                    </style>
+                    <table id="data-lines" class="system-data-table-tb" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                         <th colspan="19" class="text-center">
+                             <span>ใบแสดงรายละเอียดเงินสดย่อย</span>
+                             <br/>
+                             <span>วงเงินสดย่อย :  <t t-raw="filter_data['fund']"/></span>
+                             <br/>
+                             <t t-if="filter_data['date_from']">
+                                  <span>
+                                    <t t-raw="filter_data['date_from']"/>
+                                      to
+                                    <t t-raw="filter_data['date_to']"/>
+                                  </span>
+                             </t>
+                         </th>
+                    </tr>
+                            <tr>
+                                <th class="amt-head text-center">วันที่</th>
+                                <th class="amt-head text-center">เลขที่เอกสาร</th>
+                                <th class="amt-head text-center">รายการ</th>
+                                <th class="amt-head text-center">ผู้รับ</th>
+                                <th class="amt-head text-center">รับเงินสดย่อย</th>
+                                <th class="amt-head text-center">จำนวนเงินสดย่อยจ่าย</th>
+                                <th class="amt-head text-center">จำนวนเงินสดย่อยคงเหลือ</th>
+                                <th class="amt-head text-center">ค่าพาหนะเดินทาง</th>
+                                <th class="amt-head text-center">ค่าผ่านทางพิเศษ</th>
+                                <th class="amt-head text-center">วัสดุสำนักงาน</th>
+                                <th class="amt-head text-center">ค่าโทรศัพท์/อินเตอร์เน็ต</th>
+                                <th class="amt-head text-center">ค่าไปรษณีย์</th>
+                                <th class="amt-head text-center">ค่าอาหารรับรองการประชุม</th>
+                                <th class="amt-head text-center">ค่าเบี้ยเลี้ยง</th>
+                                <th class="amt-head text-center">ค่าที่พัก</th>
+                                <th class="amt-head text-center">ค่าพวงมาลา/แจกันดอกไม้</th>
+                                <th class="amt-head text-center">เงินขาด(เงินเกิน)บัญชี</th>
+                                <th class="amt-head text-center">ภาษีหัก ณ ที่จ่าย</th>
+                                <th class="amt-head text-center">อื่นๆ ชื่อบัญชี</th>
+                                <th class="amt-head text-center">อื่นๆ จำนวนเงิน</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <t t-foreach="account_data" t-as="account">
+                                <tr style="border:none;border-bottom:1px solid #666666;">
+                                    <td>
+                                        <t t-raw="account['date']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['name']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['desc']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['employee']"/>
+                                    </td>
+                                    <td t-att-style="style" class="text-right">
+                                        <t t-raw="account['receipt_amount']"/>
+                                    </td>
+                                    <td t-att-style="style" class="text-right">
+                                        <t t-raw="account['payment_amount']"/>
+                                    </td>
+                                    <td t-att-style="style" class="text-right">
+                                        <t t-raw="account['balance']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_1']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_2']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_3']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_4']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_5']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_6']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_7']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_8']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_9']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_10']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_11']"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <t t-raw="account['account_etc']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-raw="account['column_12']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr style="border:none;border-bottom:1px solid #666666;" class="text-right">
+                                <td colspan="4">
+                                </td>
+                                <td></td>
+                                <td>
+                                    <t t-raw="line_total['total_payment_amount']"/>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <t t-raw="line_total['t_column_1']"/>
+                                </td>
+
+                                <td>
+                                    <t t-raw="line_total['t_column_2']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_3']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_4']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_5']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_6']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_7']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_8']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_9']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_10']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_11']"/>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['t_column_12']"/>
+                                </td>
+
+                            </tr>
+                            <tr style="border:none;border-bottom:1px solid #666666;" class="text-right">
+                                <td colspan="4" class="text-center">
+                                    เงินสดย่อยคงเหลือ
+                                </td>
+                                <td></td>
+                                <td>
+                                    <t t-raw="line_total['total_payment_amount']"/>
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['total_balance_receipt']"/>
+                                </td>
+                                <td colspan="13">
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p style="text-align:center">*** END OF DOCUMENT ***</p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report id="action_petty_cash"
+            model="ins.petty.cash"
+            report_type="qweb-pdf"
+            menu="False"
+            string="Petty Cash"
+            name="account_dynamic_reports.petty_cash"
+            file="account_dynamic_reports.petty_cash"
+    />
+</odoo>

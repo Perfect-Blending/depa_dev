@@ -1,0 +1,229 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'THSarabunNew';
+  src: url("/check_work_qweb/static/fonts/THSarabunNew.ttf") format("truetype");
+}
+
+.o_check_work_from {
+    font-family: 'THSarabunNew';
+    font-size: 23px;
+}
+
+.o_check_work_from .number_po_x {
+    position: fixed;
+    top: 170px;
+    left: 930px;
+}
+
+.o_check_work_from .analytic_x {
+    position: fixed;
+    top: 330px;
+    left: 200px;
+}
+
+.o_check_work_from .amount_untaxed_x {
+    position: fixed;
+    top: 536px;
+    right: 35px;
+}
+
+.o_check_work_from .amount_tax_x {
+    position: fixed;
+    top: 580px;
+    right: 35px;
+}
+
+.o_check_work_from .sum_total_x {
+    position: fixed;
+    top: 620px;
+    right: 35px;
+}
+
+.o_check_work_from .thai_bahttext_x {
+    width: 100%;
+    position: fixed;
+    top: 535px;
+    left: 210px;
+}
+
+.o_check_work_from .count {
+    position: fixed;
+    top: 440px;
+    left: 90px;
+}
+
+.o_check_work_from .product_name_x {
+    width: 40%;
+    position: fixed;
+    top: 446px;
+    left: 150px;
+}
+
+.o_check_work_from .product_qty_x {
+    position: fixed;
+    top: 441px;
+    left: 650px;
+}
+
+.o_check_work_from .price_unit_x{
+    position: fixed;
+    top: 441px;
+    right: 215px;
+}
+
+.o_check_work_from .price_total_x {
+    position: fixed;
+    top: 441px;
+    right: 35px;
+}
+
+.o_check_work_from .wa_name_x {
+    position: fixed;
+    top: 180px;
+    left: 200px;
+}
+
+.o_check_work_from .wa_date_x {
+    position: fixed;
+    top: 215px;
+    left: 200px;
+}
+
+.o_check_work_from .wa_date_xx {
+    position: fixed;
+    top: 215px;
+    left: 750px;
+}
+
+.o_check_work_from .km_number_x {
+    position: fixed;
+    top: 252px;
+    left: 750px;
+}
+
+.o_check_work_from .km_date_x {
+    position: fixed;
+    top: 290px;
+    left: 750px;
+}
+
+.o_check_work_from .bo_name_x {
+    position: fixed;
+    top: 255px;
+    left: 200px;
+}
+
+.o_check_work_from .bo_od_x {
+    position: fixed;
+    top: 290px;
+    left: 200px;
+}
+
+.o_check_work_from .bo_dd_x {
+    position: fixed;
+    top: 368px;
+    left: 200px;
+}
+
+.o_check_work_from .bo_pn_x {
+    width: 100%;
+    position: fixed;
+    top: 332px;
+    left: 750px;
+}
+
+.o_check_work_from .bo_ad_x {
+    position: fixed;
+    top: 368px;
+    left: 750px;
+}
+
+.o_check_work_from .employee_1 {
+    position: fixed;
+    top: 875px;
+    left: 100px;
+}
+
+.o_check_work_from .employee_2 {
+    position: fixed;
+    top: 1056px;
+    left: 100px;
+}
+
+.o_check_work_from .employee_3 {
+    position: fixed;
+    top: 1236px;
+    left: 100px;
+}
+
+.o_check_work_from .employee_4 {
+    position: fixed;
+    top: 1416px;
+    left: 100px;
+}
+
+.o_check_work_from .employee_5 {
+    position: fixed;
+    top: 110px;
+    left: 100px;
+}
+
+.o_check_work_from .employee_6 {
+    position: fixed;
+    top: 290px;
+    left: 100px;
+}
+.o_check_work_from .employee_7 {
+    position: fixed;
+    top: 470px;
+    left: 100px;
+}
+
+.o_check_work_from .check_date {
+    position: fixed;
+    top: 615px;
+    left: 420px;
+}
+
+.o_check_work_from .fines {
+    position: fixed;
+    top: 740px;
+    left: 520px;
+}
+
+.o_check_work_from .date_check {
+    position: fixed;
+    top: 740px;
+    left: 280px;
+}
+
+
+.o_check_work_from .notes_check {
+    position: fixed;
+    top: 798px;
+    left: 300px;
+}
+
+
+.o_check_work_from .select_check1 {
+    position: fixed;
+    top: 657px;
+    left: 212px;
+}
+
+.o_check_work_from .select_check2 {
+    position: fixed;
+    top: 698px;
+    left: 212px;
+}
+
+.o_check_work_from .select_check3 {
+    position: fixed;
+    top: 780px;
+    left: 212px;
+}
+
+
+
+
+

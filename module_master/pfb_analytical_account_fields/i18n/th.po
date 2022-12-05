@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* analytical_account_fields
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-08 06:58+0000\n"
+"PO-Revision-Date: 2020-09-08 14:17+0700\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: th\n"
+"X-Generator: Poedit 2.0.7\n"
+
+#. module: analytical_account_fields
+#: model:ir.model,name:analytical_account_fields.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "บัญชีวิเคราะห์"
+
+#. module: analytical_account_fields
+#: selection:account.analytic.account,project_new:0
+msgid "Continue projects"
+msgstr "โครงการต่อเนื่อง"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__customer3_pb
+msgid "Coordinator"
+msgstr "ผู้ประสานงานโครงการ"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__department_pb
+msgid "Department"
+msgstr "แผนก"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__notes7
+msgid "Earn Income Plan"
+msgstr ""
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__date_to
+msgid "End Period"
+msgstr "วันที่สิ้นสุด"
+
+#. module: analytical_account_fields
+#: model_terms:ir.ui.view,arch_db:analytical_account_fields.account_analytic_account_inherit
+msgid "Information"
+msgstr "ข้อมูลอื่นๆ"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__customer_pb
+msgid "Manager"
+msgstr "ผู้จัดการโครงการ"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__customer2_pb
+msgid "Manager (Co)"
+msgstr "ผู้จัดการโครงการ(ร่วม)"
+
+#. module: analytical_account_fields
+#: selection:account.analytic.account,project_new:0
+msgid "New projects"
+msgstr "โครงการใหม่"
+
+#. module: analytical_account_fields
+#: model_terms:ir.ui.view,arch_db:analytical_account_fields.account_analytic_account_inherit
+msgid "Note"
+msgstr "โน้ต"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__notes2
+msgid "Objective"
+msgstr "วัตถุประสงค์"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__notes5
+msgid "Operation Area"
+msgstr "พื้นที่ดำเนินการ"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__notes8
+msgid "Partners"
+msgstr "หน่วยงานพันธมิตรร่วมดำเนินการ"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__notes1
+msgid "Principle And Reasons"
+msgstr "หลักการและเหตุผล"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__project_new
+msgid "Project Type"
+msgstr "ประเภทโครงการ"
+
+#. module: analytical_account_fields
+#: model_terms:ir.ui.view,arch_db:analytical_account_fields.account_analytic_account_inherit
+msgid "Responsible"
+msgstr "ผู้รับผิดชอบ"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__date_start
+msgid "Start Period"
+msgstr "วันที่เริ่มต้น"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__notes4
+msgid "Target Group"
+msgstr "เป้าหมายที่ได้รับประโยชน์"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__notes3
+msgid "Target Project"
+msgstr "เป้าหมายโครงการ"
+
+#. module: analytical_account_fields
+#: model:ir.model.fields,field_description:analytical_account_fields.field_account_analytic_account__notes6
+msgid "The Impact And Benefits"
+msgstr "ผลกระทบ!ประโยชน์ที่คาดว่าจะได้รับ"

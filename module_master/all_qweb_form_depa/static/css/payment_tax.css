@@ -1,0 +1,162 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'THSarabunNewBold';
+  src: url("https://depadev.odooerp.biz/all_qweb_form_depa/static/fonts/THSarabunNewBold.ttf") format("truetype");
+}
+
+
+.o_payment_receipt_from2 {
+  font-family: 'THSarabunNewBold';
+  font-size: 24px;
+}
+
+.o_payment_receipt_from2   .number_payment {
+        font-size: 24px;
+        position: fixed;
+        top: 120px;
+        left: 930px;
+}
+
+.o_payment_receipt_from2   .company_vat {
+        font-size: 24px;
+        position: fixed;
+        top: 555px;
+        left: 235px;
+}
+
+.o_payment_receipt_from2 .company_name {
+        width: 50%;
+        font-size: 24px;
+        position: fixed;
+        top: 590px;
+        left: 235px;
+}
+
+.o_payment_receipt_from2 .company_address {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 621px;
+        left: 235px;
+}
+
+.o_payment_receipt_from2 .company_address2 {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 655px;
+        left: 235px;
+}
+
+.o_payment_receipt_from2 .company_address3 {
+        font-size: 24px;
+        position: fixed;
+        top: 690px;
+        left: 235px;
+}
+
+.o_payment_receipt_from2 .payment_date {
+        font-size: 24px;
+        position: fixed;
+        top: 550px;
+        right: 100px;
+}
+
+.o_payment_receipt_from2 .payment_terms {
+        width: 10%;
+        font-size: 24px;
+        position: fixed;
+        top: 586px;
+        right: 80px;
+}
+
+.o_payment_receipt_from2 .due_date {
+        font-size: 24px;
+        position: fixed;
+        top: 620px;
+        right: 100px;
+}
+
+.o_payment_receipt_from2 .total_amount {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1105px;
+        right: 30px;
+}
+
+.o_payment_receipt_from2 .amount_vat {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1160px;
+        right: 30px;
+}
+
+.o_payment_receipt_from2 .grand_total {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1210px;
+        right: 30px;
+}
+
+.o_payment_receipt_from2 .text_total_py {
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1305px;
+        right: 240px;
+}
+
+.o_payment_receipt_from2 .payment_cash {
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1096px;
+        left: 50px;
+}
+
+.o_payment_receipt_from2 .payment_cr {
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1135px;
+        left: 50px;
+}
+
+.o_payment_receipt_from2 .payment_bank {
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1096px;
+        left: 335px;
+}
+
+.o_payment_receipt_from2 .number_re_tx {
+        font-size: 24px;
+        position: fixed;
+        top: 1140px;
+        left: 160px;
+}
+
+.o_payment_receipt_from2 .date_re_tx {
+        font-size: 24px;
+        position: fixed;
+        top: 1140px;
+        left: 430px;
+}
+
+.o_payment_receipt_from2 .bank_re_tx {
+        font-size: 24px;
+        position: fixed;
+        top: 1180px;
+        left: 160px;
+}
+
+.o_payment_receipt_from2 .bran_re_tx {
+        font-size: 24px;
+        position: fixed;
+        top: 1180px;
+        left: 430px;
+}

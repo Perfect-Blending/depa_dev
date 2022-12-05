@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<odoo>
+    
+    <record id="inventory_custom_form_view" model="ir.ui.view" >
+        <field name="name">stock.inventory.form</field>           
+        <field name="model">stock.inventory</field>           
+        <field name="inherit_id" ref="stock.view_inventory_form"/>        
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="inv_cost" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='product_id']" position="after">
+        		<field name="unit_price" attrs="{'column_invisible': [('parent.inv_cost', '=', False)]}" />
+
+            </xpath>  
+        </field>       
+        </record>
+
+    </odoo>

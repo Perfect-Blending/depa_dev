@@ -1,0 +1,14 @@
+<odoo>
+    <report
+        string="ใบสำคัญจ่าย"
+        id="payment_voucher_pdf_report"
+        model="account.move"
+        name="pfb_payment_voucher_qweb.payment_voucher_pdf_report_pdf"
+        file="pfb_payment_voucher_qweb.payment_voucher_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="pfb_payment_voucher_qweb.paperformat_payment_voucher"
+    />
+
+
+</odoo>

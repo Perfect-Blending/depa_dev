@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="fin_system_settings2_form">
+	    <field name="name">fin_system_settings2_form</field>
+	    <field name="model">fw_pfb_fin_settings2</field>
+	    <field name="arch" type="xml">
+	       <form>
+                <header>
+                    <button string="Apply" name="apply" type="object" class="oe_highlight"/>
+                    <button string="Cancel" type="object" class="oe_link" />
+                </header>
+                <sheet>    
+                    <separator string="Allow" />
+                    <separator string="Director of office and secretary" />
+                    <group>
+                        <group>
+                            <field name='directorOfOffice'/>
+                            <field name="directorOfOffice_secretary" >
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <label string="director" invisible="1"/>
+                        </group>
+                    </group>
+                    <div>
+                        <separator string="Senior Executive Vice President" />
+                        <field name="deputyOfOffice" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="name" />
+                                <field name="secretary" />
+                            </tree>
+                        </field>
+                    </div> 
+                    <div>
+                        <separator string="Executive Vice President" />
+                        <field name="assistantOfOffice" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="name" />
+                                <field name="secretary" />
+                            </tree>
+                        </field>
+                    </div> 
+
+                    <div>
+                        <group>
+                            <group>
+                                <field name='assistantOfOfficeManagement'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+
+
+
+                    <div>
+                        <group>
+                            <group>
+                                <field name='directorOfDirector'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+                    
+
+                    <div>
+                        <group>
+                            <group>
+                                <field name='directorOfFinance'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+
+
+                    <div>
+                        <group>
+                            <group>
+                                <field name='directorOfStrategy'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+
+
+                    <div>
+                        <group>
+                            <group>
+                                <field name='directorOfEEC'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+
+
+                    <div>
+                        <group>
+                            <group>
+                                <field name='budgetOwner'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+
+                    <div>
+                        <group>
+                            <group>
+                                <field name='ManagerOfStock'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+
+                     <div>
+                        <group>
+                            <group>
+                                <field name='director_of_department'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+
+
+                </sheet> 
+	       </form>
+	    </field>
+	    </record>
+
+
+        <record model="ir.actions.act_window" id="fin_system_settings2_action">
+            <field name="name">Settings</field>
+            <field name="res_model">fw_pfb_fin_settings2</field>
+            <field name="view_id" ref="fin_system_settings2_form"/>
+            <field name="view_type">form</field>
+            <field name="target">inline</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem name="Settings" 
+                    id="fin_system_settings2" 
+                    parent="fw_pfb_fin_system.fin_system_menu_settings"
+                    sequence="12" 
+                    action="fin_system_settings2_action"
+                    groups="fw_pfb_fin_system_show_menu_settings"/>
+
+    </data>
+</openerp>

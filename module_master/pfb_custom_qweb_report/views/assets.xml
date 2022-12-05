@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <template id="report_assets_common" name="Assets Reports" inherit_id="web.report_assets_common">
+            <xpath expr="//link[last()]" position="after">
+                <!-- เวลาจะเอาไฟล์ js หรือ css ที่ custom เองไปใช้กับ report ให้เอามาประกาศไว้ใน tag นี้
+                ตรง <template> กับ <xpath> ใช้ตามนี้ไปได้เลย มันจะเอาไฟล์ไปไว้ใน report_assets ของ odoo
+                ซึ่งจะทำให้สามารถเรียกใช้ได้โดยไม่ต้องประกาศซ้ำ
+                -->
+
+                <link rel="stylesheet" href="pfb_custom_qweb_report/static/css/font_style.css"/>
+                <!--
+                    วิธีเรียกใช้ font จะอยู่ใน font_style.css
+                    ใช้ format เป็นประมาณนั้น ส่วนจะเอาไปใช้กับ tag ไหนส่วนไหนบ้าง
+                    ลองดูเรื่อง css เพิ่มเติม
+
+                    font ที่จะใช้ใส่เข้ามาในไฟล์ module นี้ด้วย
+                -->
+
+                <script src="pfb_custom_qweb_report/static/js/BAHTTEXT.min.js"/>
+
+
+            </xpath>
+        </template>
+</odoo>

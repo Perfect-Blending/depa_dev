@@ -1,0 +1,548 @@
+<odoo>
+
+    <template id="assets_backend"
+              name="detailed_budget_report assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href="/pfb_fin_report/static/src/css/report.css" rel="stylesheet"/>
+            <script type="text/javascript"
+                    src="/pfb_fin_report/static/src/js/detailed_budget_report_backend.js"/>
+        </xpath>
+    </template>
+
+    <template id="pfb_fin_report.internal_layout">
+        <div class="article">
+            <link href="/pfb_fin_report/static/src/css/report.css" rel="stylesheet"/>
+            <t t-raw="0"/>
+        </div>
+        <div class="footer">
+            <div class="row">
+                <div class="col-6 custom_footer">
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                </div>
+                <div class="col-6 text-right custom_footer">
+                    <span class="page"/>/
+                    <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_buttons">
+        <div class="button_row">
+            <!--            <button class="o_detailed_budget_reports_print btn btn-sm oe_button"><span class="fa fa-print"/>Print-->
+            <!--            </button>-->
+            <button class="o_budget_usage_reports_export btn btn-sm oe_button"><span class="fa fa-download"/>Export
+            </button>
+        </div>
+    </template>
+
+    <template id="report_detailed_budget_report_html">
+        <div class="o_detailed_budget_reports_page">
+            <t t-call="pfb_fin_report.report_buttons"/>
+            <t t-call="pfb_fin_report.report_detailed_budget_report_base"/>
+        </div>
+    </template>
+
+
+    <template id="pfb_fin_report.report_detailed_budget_lines_header">
+        <div class="act_as_thead">
+            <div class="act_as_row labels">
+                <div class="act_as_cell">Fin100 Date</div>
+                <div class="act_as_cell">Fin100</div>
+                <div class="act_as_cell">Residual</div>
+                <div class="act_as_cell">Reserve</div>
+                <div class="act_as_cell">Return</div>
+                <div class="act_as_cell">Residual Amount</div>
+                <div class="act_as_cell">Fin100 Status</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="pfb_fin_report.report_detailed_budget_report_base">
+        <t t-set="name" t-value="[]"/>
+        <t t-set="name2" t-value="[]"/>
+        <t t-set="name_id" t-value="[]"/>
+        <t t-set="count_row" t-value="0"/>
+        <t t-set="count_row2" t-value="0"/>
+        <div class="container">
+            <t t-set="array_group" t-value="[]"/>
+            <t t-foreach="o.results.sorted(key=lambda r: r.id)" t-as="co">
+                <t t-if="co.group_id not in array_group">
+                    <t t-esc="array_group.append(co.group_id)"/>
+                </t>
+            </t>
+            <t t-set="count_aa" t-value="0"/>
+            <t t-foreach="sorted(array_group)" t-as="ga">
+                <strong>
+                    <t t-esc="ga.complete_name"/>
+                </strong>
+                <br/>
+                <t t-foreach="o.results" t-as="result">
+                    <t t-if="array_group[count_aa] == result.group_id">
+                        <strong style="padding-left: 50px;">
+                            <t t-esc="result.code"/>
+                            -
+                            <t t-esc="result.name"/>
+                        </strong>
+                        <div class="act_as_table data_table mt4" style="width: 100%;">
+                            <!-- Display header line-->
+                            <t t-call="pfb_fin_report.report_detailed_budget_lines_header"/>
+                            <!-- Display initial lines -->
+                            <t t-set="sum_residual" t-value="0"/>
+                            <t t-set="sum_reserve" t-value="0"/>
+                            <t t-set="sum_return" t-value="0"/>
+                            <t t-set="sum_residual_amount" t-value="0"/>
+                            <t t-foreach="result.fin100_project_ids.sorted(key=lambda r: r.fin_id.fin_no)"
+                               t-as="fin100_project"><!--, reverse=True-->
+
+                                <div class="act_as_row lines">
+                                    <div class="act_as_cell">
+                                        <t t-set="year"
+                                           t-value="(int((fin100_project.fin100_date).strftime('%Y')))+543"/>
+                                        <t t-set="date"
+                                           t-value="'%s/%s' %((fin100_project.fin100_date).strftime('%d/%m'),year)"/>
+                                        <t t-esc="date"/>
+                                    </div>
+                                    <div class="act_as_cell">
+                                        <t t-esc="fin100_project.fin_id.fin_no"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-set="sum_reserve"
+                                           t-value="sum_reserve + fin100_project.projects_reserve"/>
+                                        <t t-esc="'{0:,.2f}'.format(fin100_project.projects_reserve)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-set="sum_return"
+                                           t-value="sum_return + fin100_project.projects_return"/>
+                                        <t t-esc="'{0:,.2f}'.format(fin100_project.projects_return)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-set="sum_residual_amount"
+                                           t-value="fin100_project.projects_residual_amount"/>
+                                        <t t-esc="'{0:,.2f}'.format(fin100_project.projects_residual_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell ">
+                                        <t t-esc="fin100_project.fin100_state"/>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <div class="act_as_cell "></div>
+                            <div class="act_as_cell "></div>
+                            <div class="act_as_cell right">
+                                <strong>Total</strong>
+                            </div>
+                            <div class="act_as_cell right">
+                                <strong>
+                                    <t t-esc="'{0:,.2f}'.format(sum_reserve)"/>
+                                </strong>
+                            </div>
+                            <div class="act_as_cell right">
+                                <strong>
+                                    <t t-esc="'{0:,.2f}'.format(sum_return)"/>
+                                </strong>
+                            </div>
+                            <div class="act_as_cell right">
+                                <strong>
+                                    <t t-esc="'{0:,.2f}'.format(sum_residual_amount)"/>
+                                </strong>
+                            </div>
+                            <div class="act_as_cell "></div>
+                        </div>
+
+                    </t>
+                </t>
+                <t t-set="count_aa" t-value="count_aa+1"/>
+                <br/>
+            </t>
+        </div>
+    </template>
+
+    <template id="pfb_fin_report.report_detailed_budget_report_filters">
+        <div class="act_as_table data_table" style="width: 100%;">
+            <div class="act_as_row labels">
+                <div class="act_as_cell">Date From</div>
+                <div class="act_as_cell">Date To</div>
+                <div class="act_as_cell">Location</div>
+            </div>
+            <div class="act_as_row">
+                <div class="act_as_cell">
+                    1
+                </div>
+                <div class="act_as_cell">
+                    2
+                </div>
+                <div class="act_as_cell">
+                    3
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="pfb_fin_report.report_detailed_budget_lines">
+        <div class="act_as_row lines">
+            <div class="act_as_cell left">
+                4
+            </div>
+            <div class="act_as_cell left">
+                5
+            </div>
+            <div class="act_as_cell right">
+                6
+            </div>
+            <div class="act_as_cell right">
+                7
+            </div>
+            <div class="act_as_cell right">
+                8
+            </div>
+        </div>
+    </template>
+
+
+    <template id="summary_budget_report_html">
+        <div class="o_detailed_budget_reports_page">
+            <t t-call="pfb_fin_report.report_buttons"/>
+            <t t-call="pfb_fin_report.report_summary_budget_report_base"/>
+        </div>
+    </template>
+
+    <template id="pfb_fin_report.report_summary_budget_lines_header">
+        <div class="act_as_thead">
+            <div class="act_as_row" style="background-color:#0E2487 !important;color: white !important;">
+                <div class="act_as_cell">รายการ</div>
+                <div class="act_as_cell">ผู้รับผิดชอบงบประมาณ</div>
+                <div class="act_as_cell">รหัสงบประมาณ</div>
+                <div class="act_as_cell">งบประมาณ</div>
+                <div class="act_as_cell">ยอดกันงบประมาณ (Odoo)</div>
+                <div class="act_as_cell">คงเหลืองบประมาณหลังยอดกันงบประมาณ (Odoo)</div>
+                <div class="act_as_cell">ยอดเบิกจ่ายจริง</div>
+                <div class="act_as_cell">คงเหลืองบประมาณหลังยอดเบิกจ่ายจริง</div>
+                <div class="act_as_cell">ยอดค่าใช้จ่ายอยู่ระหว่างเบิกจ่าย</div>
+                <div class="act_as_cell">ภาระผูกพันสัญญา</div>
+                <div class="act_as_cell">รวมยอดผูกพัน</div>
+                <div class="act_as_cell">คงเหลืองบประมาณหลังเบิกจ่ายจริงและภาระผูกพันสัญญา</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="pfb_fin_report.report_summary_budget_report_base">
+        <div class="container">
+            <t t-set="header_group" t-value="[]"/>
+            <t t-set="header2_group" t-value="[]"/>
+            <t t-set="header3_group" t-value="[]"/>
+            <t t-set="ii" t-value="0"/>
+            <t t-set="loop_hea" t-value="0"/>
+            <t t-foreach="o.results.sorted(key=lambda r: r.id)" t-as="co">
+                <t t-if="co.group_id not in header_group">
+                    <t t-if="co.group_id.parent_id">
+                        <t t-if="co.group_id.parent_id.parent_id">
+                            <t t-if="co.group_id.parent_id.parent_id.parent_id">
+                                <t t-if="co.group_id.parent_id.parent_id.parent_id.parent_id"></t>
+                                <t t-else="">
+                                    <t t-if="co.group_id.parent_id.parent_id.parent_id not in header_group">
+                                        <t t-esc="header_group.append(co.group_id.parent_id.parent_id.parent_id)"/>
+                                    </t>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <t t-if="co.group_id.parent_id.parent_id not in header_group">
+                                    <t t-esc="header_group.append(co.group_id.parent_id.parent_id)"/>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <t t-if="co.group_id.parent_id not in header_group">
+                                <t t-esc="header_group.append(co.group_id.parent_id)"/>
+                            </t>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <t t-if="co.group_id not in header_group">
+                            <t t-esc="header_group.append(co.group_id)"/>
+                        </t>
+                    </t>
+
+                </t>
+            </t>
+            <t t-foreach="header_group" t-as="cc">
+                <t t-foreach="o.results.sorted(key=lambda r: r.id)" t-as="cl">
+                    <t t-if="header_group[ii] == cl.group_id">
+                        <t t-if="cl.group_id not in header2_group">
+                            <t t-esc="header2_group.append(cl.group_id)"/>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <t t-if="header_group[ii] == cl.group_id.parent_id">
+                            <t t-if="cl.group_id.parent_id">
+                                <t t-if="cl.group_id not in header2_group">
+                                    <t t-esc="header2_group.append(cl.group_id)"/>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <t t-if="header_group[ii] == cl.group_id.parent_id.parent_id">
+                                <t t-if="cl.group_id.parent_id.parent_id">
+                                    <t t-if="cl.group_id.parent_id not in header2_group">
+                                        <t t-esc="header2_group.append(cl.group_id.parent_id)"/>
+                                    </t>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <t t-if="header_group[ii] == cl.group_id.parent_id.parent_id.parent_id">
+                                    <t t-if="cl.group_id.parent_id.parent_id.parent_id">
+                                        <t t-if="cl.group_id.parent_id.parent_id not in header2_group">
+                                            <t t-esc="header2_group.append(cl.group_id.parent_id.parent_id)"/>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-else="">
+
+                                </t>
+
+                            </t>
+
+                        </t>
+                    </t>
+                </t>
+                <t t-set="ii" t-value="ii + 1 "/>
+            </t>
+            <t t-set="ii" t-value="0"/>
+            <t t-foreach="header2_group" t-as="cc">
+                <t t-foreach="o.results.sorted(key=lambda r: r.id)" t-as="cl">
+                    <t t-if="header2_group[ii] == cl.group_id">
+                        <t t-if="cl.group_id not in header3_group">
+                            <t t-esc="header3_group.append(cl.group_id)"/>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <t t-if="header2_group[ii] == cl.group_id.parent_id">
+                            <t t-if="cl.group_id.parent_id">
+                                <t t-if="cl.group_id not in header3_group">
+                                    <t t-esc="header3_group.append(cl.group_id)"/>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <t t-if="header2_group[ii] == cl.group_id.parent_id.parent_id">
+                                <t t-if="cl.group_id.parent_id.parent_id">
+                                    <t t-if="cl.group_id.parent_id not in header3_group">
+                                        <t t-esc="header3_group.append(cl.group_id.parent_id)"/>
+                                    </t>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <t t-if="header2_group[ii] == cl.group_id.parent_id.parent_id.parent_id">
+                                    <t t-if="cl.group_id.parent_id.parent_id.parent_id">
+                                        <t t-if="cl.group_id.parent_id.parent_id not in header3_group">
+                                            <t t-esc="header3_group.append(cl.group_id.parent_id.parent_id)"/>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-else="">
+
+                                </t>
+
+                            </t>
+
+                        </t>
+                    </t>
+                </t>
+                <t t-set="ii" t-value="ii + 1 "/>
+            </t>
+
+            <div class="act_as_table data_table mt4" style="width: 100%;">
+                <t t-call="pfb_fin_report.report_summary_budget_lines_header"/>
+                <t t-foreach="header_group" t-as="ca">
+                    <div class="act_as_row lines" style="font-size:16px !important;">
+                        <div class="act_as_cell left" style="padding-left: 5px;">
+                            <t t-esc="ca.name"/>
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+                        <div class="act_as_cell">
+                        </div>
+
+                    </div>
+                    <t t-foreach="header2_group" t-as="cb">
+                        <t t-if="ca == cb.parent_id">
+                            <div class="act_as_row lines" style="background-color:#CED1DB !important;">
+                                <div class="act_as_cell left"
+                                     style="padding-left: 15px !important;font-weight: bold;!important">
+                                    <t t-esc="cb.name"/>
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+                                <div class="act_as_cell">
+                                </div>
+
+                            </div>
+                            <t t-foreach="header3_group" t-as="cc">
+                                <t t-if="cb == cc.parent_id">
+                                    <div class="act_as_row lines labels">
+                                        <div class="act_as_cell left" style="padding-left: 25px !important;">
+                                            <t t-esc="cc.name"/>
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+                                        <div class="act_as_cell">
+                                        </div>
+
+                                    </div>
+                                    <t t-foreach="o.results" t-as="cd">
+                                        <t t-if="cc == cd.group_id">
+                                            <t t-set="sum_fin201" t-value="0"/>
+                                            <t t-set="sum_fin201_draft" t-value="0"/>
+                                            <!--ยอดผูกพัน-->
+                                            <t t-foreach="cd.fin100_project_ids" t-as="fin_ids">
+                                                <!--3-->
+                                                <t t-foreach="fin_ids.fin_id.fin_lines_to_edit" t-as="fin100">
+                                                    <t t-foreach="fin100.fin201_line_ids" t-as="fin201">
+                                                        <t t-if="fin201.fin201_state == 'completed'">
+                                                            <t t-set="sum_fin201"
+                                                               t-value="sum_fin201 + fin201.payment_amount"/>
+                                                        </t>
+                                                        <t t-if="fin201.fin201_state in ['sent','draft']">
+                                                            <t t-set="sum_fin201_draft"
+                                                               t-value="sum_fin201_draft + fin201.payment_amount"/>
+                                                        </t>
+                                                    </t>
+                                                </t>
+                                            </t>
+                                            <!--สัญญา-->
+                                            <t t-set="lines_po" t-value="o.env['purchase.order.line'].search([('account_analytic_id', '=', cd.id)])"/>
+                                            <t t-set="po_ids" t-value="[]"/>
+                                            <t t-foreach="lines_po" t-as="order_ids">
+                                                 <t t-if="order_ids.order_id not in po_ids">
+                                                    <t t-esc="po_ids.append(order_ids.order_id)"/>
+                                                 </t>
+                                            </t>
+                                            <t t-set="amount_inv" t-value="0"/>
+                                            <t t-foreach="po_ids" t-as="inv_ids">
+                                                <t t-foreach="inv_ids.invoice_ids" t-as="inv_line">
+                                                    <t t-if="inv_line.state == 'paid' ">
+                                                        <t t-set="amount_inv" t-value="amount_inv + inv_line.amount_total"/>
+                                                    </t>
+                                                </t>
+                                            </t>
+                                            <div class="act_as_row lines ">
+                                                <div class="act_as_cell left" style="padding-left: 35px !important;">
+                                                    <t t-esc="cd.name"/>
+                                                </div>
+                                                <div class="act_as_cell">
+                                                    <t t-esc="cd.manager.name"/>
+                                                </div>
+                                                <div class="act_as_cell">
+                                                    <t t-esc="cd.code"/>
+                                                </div>
+                                                <div class="act_as_cell right">
+                                                    <t t-esc="'{0:,.2f}'.format(cd.budget)"/>
+                                                </div>
+                                                <div class="act_as_cell right">
+                                                    <t t-esc="'{0:,.2f}'.format(cd.budget_reserve)"/>
+                                                </div>
+                                                <div class="act_as_cell right">
+                                                    <t t-set="sum_budget" t-value="cd.budget - cd.budget_reserve"/>
+                                                    <t t-esc="'{0:,.2f}'.format(sum_budget)"/>
+                                                </div>
+                                                <div class="act_as_cell right">
+                                                    <t t-esc="'{0:,.2f}'.format(sum_fin201)"/>
+                                                </div>
+                                                <div class="act_as_cell right">
+                                                    <t t-set="sum_fin_total" t-value="cd.budget - sum_fin201"/>
+                                                    <t t-esc="'{0:,.2f}'.format(sum_fin_total)"/>
+                                                </div>
+                                                <div class="act_as_cell right">
+                                                    <t t-esc="'{0:,.2f}'.format(sum_fin201_draft)"/>
+                                                </div>
+                                                <div class="act_as_cell">
+                                                    <t t-esc="'{0:,.2f}'.format(amount_inv)"/>
+                                                </div>
+                                                <div class="act_as_cell">
+                                                    <t t-set="sum_inv_total" t-value="sum_fin201_draft + amount_inv"/>
+                                                    <t t-esc="'{0:,.2f}'.format(sum_inv_total)"/>
+                                                </div>
+                                                <div class="act_as_cell">
+                                                    <t t-set="sum_inv_end" t-value="sum_fin_total - sum_inv_total"/>
+                                                    <t t-esc="'{0:,.2f}'.format(sum_inv_end)"/>
+                                                </div>
+
+                                            </div>
+                                        </t>
+                                    </t>
+                                </t>
+                            </t>
+                        </t>
+                    </t>
+                </t>
+            </div>
+        </div>
+    </template>
+
+</odoo>

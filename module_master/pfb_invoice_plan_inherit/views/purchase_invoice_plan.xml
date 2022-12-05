@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record id="purchase_invoice_plan_tree_amount_inherit" model="ir.ui.view">
+        <field name="name">purchase.invoice.plan.tree.amount.inherit</field>
+        <field name="model">purchase.invoice.plan</field>
+        <field name="inherit_id" ref="purchase_invoice_plan.view_purchase_invoice_plan_tree"/>
+        <field name="arch" type="xml">
+            <field name="percent" position="replace">
+                 <field name='percent'/>
+            </field>
+            <field name="percent" position="after">
+                 <field name='amount_invoice_plan'/>
+            </field>
+        </field>
+   </record>
+
+
+    <record id="purchase_order_form_invoice_plan_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_form_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+              <xpath expr="//page/field[@name='invoice_plan_ids']" position="after">
+                  <group class="oe_subtotal_footer oe_right">
+                      <field name="percent_all"/>
+                       <field name="amount_all"/>
+                  </group>
+              </xpath>
+        </field>
+    </record>
+
+
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_form_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase_invoice_plan.purchase_order_form"/>
+        <field name="arch" type="xml">
+              <xpath expr="//button[@name='action_view_invoice']" position="after">
+                  <field name="hide_button" invisible="1"/>
+                  <field name="hide_wa_button" invisible="1"/>
+              </xpath>
+            <xpath expr="//button[@name='%(purchase_invoice_plan.action_view_purchase_make_planned_invoice)d']" position="replace">
+                <button name="%(purchase_invoice_plan.action_view_purchase_make_planned_invoice)d"
+                string="Create Bill by Plan "
+                type="action"
+                class="btn-primary"
+                attrs="{'invisible': ['|',('hide_button', '=', True),('use_invoice_plan', '=', False )]}"
+                />
+            </xpath>
+             <xpath expr="//button[@name='action_view_wa']" position="replace">
+                <button name="action_view_wa"
+                        string="Create WA"
+                        type="object"
+                        class="oe_highlight"
+                        context="{'create_wa':True}"
+                        groups="purchase_work_acceptance.group_enable_wa_on_po"
+                        attrs="{'invisible': ['|',('state', 'not in', ('purchase', 'done')),('hide_wa_button', '=', True)]}"/>
+             </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_invoice_plan.action_view_purchase_make_planned_invoice" model="ir.actions.act_window">
+        <field name="name">Invoice Order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.make.planned.invoice</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

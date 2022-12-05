@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="order_choices_please_consider" model="order.choices">
+        <field name="name">โปรดพิจารณา</field>
+    </record>
+    <record id="order_choices_please_proceed" model="order.choices">
+        <field name="name">โปรดดำเนินการ</field>
+    </record>
+    <record id="order_choices_please_acknowledge" model="order.choices">
+        <field name="name">โปรดทราบ</field>
+    </record>
+
+</odoo>

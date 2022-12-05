@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="fin_system_settings2_form" model="ir.ui.view">
+        <field name="name">fin_system_settings2_form</field>
+        <field name="model">fw_pfb_fin_settings2</field>
+        <field name="inherit_id" ref="fin_system.fin_system_settings2_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="inside">
+                <group>
+                    <group>
+                        <field name="default_fin_purchase_partner_id"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,129 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'THSarabunNew';
+  src: url("/debit_note_qweb/static/fonts/THSarabunNew.ttf") format("truetype");
+}
+
+    .o_debit_notes_from {
+    font-family: 'THSarabunNew';
+    font-size: 24px;
+    }
+
+    .o_debit_notes_from .number_invoice {
+        font-size: 24px;
+        position: fixed;
+        top: 117px;
+        right: 120px;
+    }
+
+    .o_debit_notes_from .company_vat {
+        font-size: 24px;
+        position: fixed;
+        top: 565px;
+        left: 245px;
+    }
+
+    .o_debit_notes_from .company_name {
+        width: 50%;
+        font-size: 24px;
+        position: fixed;
+        top: 600px;
+        left: 245px;
+    }
+
+    .o_debit_notes_from .company_address {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 640px;
+        left: 245px;
+    }
+
+    .o_debit_notes_from .company_address2 {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 680px;
+        left: 245px;
+    }
+
+    .o_debit_notes_from .company_address3 {
+        font-size: 24px;
+        position: fixed;
+        top: 735px;
+        left: 240px;
+    }
+
+
+    .o_debit_notes_from .invoice_date_cr {
+        font-size: 24px;
+        position: fixed;
+        top: 560px;
+        right: 110px;
+    }
+
+    .o_debit_notes_from .payment_terms {
+        width: 10%;
+        font-size: 24px;
+        position: fixed;
+        top: 600px;
+        right: 80px;
+    }
+
+    .o_debit_notes_from .due_date {
+        font-size: 24px;
+        position: fixed;
+        top: 640px;
+        right: 110px;
+    }
+
+    .o_debit_notes_from .total_amount {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1070px;
+        right: 85px;
+    }
+
+    .o_debit_notes_from .amount_vat {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1145px;
+        right: 85px;
+    }
+
+    .o_debit_notes_from .grand_total {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1220px;
+        right: 85px;
+    }
+
+    .o_debit_notes_from .text_total {
+        width: 48%;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1300px;
+        left: 400px;
+    }
+
+    .o_debit_notes_from .note_text {
+        width: 50%;
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1140px;
+        left: 85px;
+    }
+
+    .o_debit_notes_from .bank_name {
+        font-size: 26px;
+        position: fixed;
+        top: 1243px;
+        left: 280px;
+    }
+

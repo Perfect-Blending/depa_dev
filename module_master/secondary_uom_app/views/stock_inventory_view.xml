@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_inventory_form_inherit" model="ir.ui.view">
+                <field name="name">stock.inventory.form</field>
+                <field name="model">stock.inventory</field>
+                <field name="inherit_id" ref="stock.view_inventory_form"/>
+                <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='product_uom_id']" position="after">
+                    <field name="secondary_quantity" force_save="1" groups="secondary_uom_app.group_secondary_uom"/>
+                    <field name="secondary_uom_id" force_save="1" groups="secondary_uom_app.group_secondary_uom"/>
+                </xpath>
+                </field>
+        </record>
+
+</data>
+</odoo>

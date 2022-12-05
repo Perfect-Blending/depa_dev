@@ -1,0 +1,14 @@
+<odoo>
+    <!-- Course views: Form -->
+    
+    <!-- Course menu -->
+    <menuitem id="main_document_menu" name="สารบรรณ"/>
+    
+    <menuitem id="internal_book_menu"
+        name="หนังสือภายใน"
+        parent="main_document_menu"/>
+
+    <menuitem id="external_book_menu"
+        name="หนังสือภายนอก"
+        parent="main_document_menu"/>
+</odoo>

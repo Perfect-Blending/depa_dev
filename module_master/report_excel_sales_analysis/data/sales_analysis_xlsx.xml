@@ -1,0 +1,2680 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<odoo>
+  <data noupdate="1">
+    <record id="report_excel_68" model="report.excel">
+      <field name="out_file_name">Sales Analysis_%d-%m-%Y</field>
+      <field name="name">Sales Analysis (XLSX)</field>
+      <field name="sheet_reference">Sales Analysis</field>
+      <field name="description">List of Sales Orders with the following Fields: Number, Date, Customer, Product, Ordered Quantity, Unit Price, Discont (%), Subtotal, Invoiced Quantity, Delivered Quantity, State, Salesperson
+List of Invoices with the following Fields: Number, Invoice Date, Due Date, Product, Quantity, Unit Price, Discont (%), Subtotal, Type, Status
+List of Payments with the following Fields: Name, Payment Date, Currency, Payment Amount
+List of Warehouse Operations with the following Fields: Reference, Date, Product, Initial Demand, Reserved, Done, Operation Type, State
+List of Projects with the following Fields: Project Name, Task Name, Assigned to, Planned Hours, Hours Spent, Remaining Hours, Deadline, Progress (%), Stage
+Timesheets for Tasks with the following Fields: Date, Description, Employee, Duration (Hours)
+Summary of Sales Orders, Invoices, Payments, Warehouse Operations, Projects
+</field>
+      <field name="description_report">Menu: Sales Analysis
+Full Path	Sales/Reporting/Sales Analysis (XLSX)</field>
+      <field name="root_model_id" model="report.excel" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+    </record>
+    <record id="report_excel_template_attachment_1149" model="ir.attachment">
+      <field name="name">sale_analysis_template.xlsx</field>
+      <field name="datas_fname">sale_analysis_template.xlsx</field>
+      <field name="type">binary</field>
+      <field name="datas" type="base64" file="report_excel_sales_analysis/static/template/sale_analysis_template.xlsx"/>
+      <field name="res_id" ref="report_excel_68"/>
+      <field name="res_model">report.excel</field>
+    </record>
+    <record id="report_excel_template_attachment_1148" model="ir.attachment">
+      <field name="name">sale_analysis_template_example.xlsx</field>
+      <field name="datas_fname">sale_analysis_template_example.xlsx</field>
+      <field name="type">binary</field>
+      <field name="datas" type="base64" file="report_excel_sales_analysis/static/template/sale_analysis_template_example.xlsx"/>
+      <field name="res_id" ref="report_excel_68"/>
+      <field name="res_model">report.excel</field>
+    </record>
+    <record id="report_excel_param_40" model="report.excel.param">
+      <field name="sequence" eval="0"/>
+      <field name="report_excel_id" ref="report_excel_68"/>
+      <field name="name">START DATE</field>
+      <field name="code">P1_start_date</field>
+      <field name="type_param">datetime</field>
+      <field name="param_ir_model_id" eval="[]"/>
+      <field name="param_required" eval="False"/>
+    </record>
+    <record id="report_excel_param_41" model="report.excel.param">
+      <field name="sequence">1</field>
+      <field name="report_excel_id" ref="report_excel_68"/>
+      <field name="name">END DATE</field>
+      <field name="code">P2_end_date</field>
+      <field name="type_param">datetime</field>
+      <field name="param_ir_model_id" eval="[]"/>
+      <field name="param_required" eval="False"/>
+    </record>
+    <record id="report_excel_param_42" model="report.excel.param">
+      <field name="sequence">2</field>
+      <field name="report_excel_id" ref="report_excel_68"/>
+      <field name="name">PARTNERS</field>
+      <field name="code">P3_partners</field>
+      <field name="type_param">many2many</field>
+      <field name="param_ir_model_id" ref="account.model_res_partner"/>
+      <field name="param_required" eval="False"/>
+    </record>
+    <record id="report_excel_param_43" model="report.excel.param">
+      <field name="sequence">3</field>
+      <field name="report_excel_id" ref="report_excel_68"/>
+      <field name="name">COMPANY</field>
+      <field name="code">P4_company</field>
+      <field name="type_param">many2many</field>
+      <field name="param_ir_model_id" ref="account.model_res_company"/>
+      <field name="param_required" eval="False"/>
+    </record>
+    <record id="report_excel_section_81" model="report.excel.section">
+      <field name="report_excel_id" ref="report_excel_68"/>
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="sequence">10</field>
+      <field name="name">SECTION 0 - Header</field>
+      <field name="parent_id" eval="[]"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" eval="[]"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="check_root_model">True</field>
+      <field name="section" eval="False"/>
+      <field name="section_level">1</field>
+      <field name="section_start">A1</field>
+      <field name="section_end">L5</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_965" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">L2</field>
+      <field name="report_excel_section_id" ref="report_excel_section_81"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">max</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_max"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula">True</field>
+      <field name="formulas">result = param(P1_start_date)</field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_966" model="report.excel.fields">
+      <field name="sequence">101</field>
+      <field name="cell">L3</field>
+      <field name="report_excel_section_id" ref="report_excel_section_81"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">max</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_max"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula">True</field>
+      <field name="formulas">result = param(P2_end_date)</field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_967" model="report.excel.fields">
+      <field name="sequence">102</field>
+      <field name="cell">L4</field>
+      <field name="report_excel_section_id" ref="report_excel_section_81"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">max</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_max"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula">True</field>
+      <field name="formulas">result = datetime.now()</field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_968" model="report.excel.fields">
+      <field name="sequence">103</field>
+      <field name="cell">L5</field>
+      <field name="report_excel_section_id" ref="report_excel_section_81"/>
+      <field name="group_by">True</field>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula">True</field>
+      <field name="formulas">result = user.name</field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_82" model="report.excel.section">
+      <field name="report_excel_id" ref="report_excel_68"/>
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="sequence">11</field>
+      <field name="name">SECTION 1 - SALE ORDER</field>
+      <field name="parent_id" eval="[]"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" eval="[]"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="check_root_model">True</field>
+      <field name="section" eval="False"/>
+      <field name="section_level">1</field>
+      <field name="section_start">A10</field>
+      <field name="section_end">AW13</field>
+      <field name="domain">["&amp;","&amp;","&amp;",["confirmation_date","&gt;=","param(P1_start_date)"],["confirmation_date","&lt;=","param(P2_end_date)"],["company_id","=","param(P4_company)"],["partner_id","=","param(P3_partners)"]]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_969" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">A11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">name</field>
+      <field name="field_type">char</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_970" model="report.excel.fields">
+      <field name="sequence">101</field>
+      <field name="cell">B11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">confirmation_date</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_971" model="report.excel.fields">
+      <field name="sequence">102</field>
+      <field name="cell">C11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">partner_id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_972" model="report.excel.fields">
+      <field name="sequence">103</field>
+      <field name="cell">E11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.product_uom_qty</field>
+      <field name="field_type">float</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_973" model="report.excel.fields">
+      <field name="sequence">104</field>
+      <field name="cell">H11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.price_subtotal</field>
+      <field name="field_type">monetary</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_974" model="report.excel.fields">
+      <field name="sequence">105</field>
+      <field name="cell">I11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.qty_invoiced</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_975" model="report.excel.fields">
+      <field name="sequence">106</field>
+      <field name="cell">J11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.qty_delivered</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_976" model="report.excel.fields">
+      <field name="sequence">107</field>
+      <field name="cell">K11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">state</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_977" model="report.excel.fields">
+      <field name="sequence">108</field>
+      <field name="cell">L11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">user_id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_978" model="report.excel.fields">
+      <field name="sequence">109</field>
+      <field name="cell">Q11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">invoice_ids.invoice_line_ids.quantity</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_979" model="report.excel.fields">
+      <field name="sequence">110</field>
+      <field name="cell">T11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">invoice_ids.amount_total</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_980" model="report.excel.fields">
+      <field name="sequence">111</field>
+      <field name="cell">Z11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">invoice_ids.payment_ids.amount</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_981" model="report.excel.fields">
+      <field name="sequence">112</field>
+      <field name="cell">AD11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">picking_ids.move_lines.product_uom_qty</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_982" model="report.excel.fields">
+      <field name="sequence">113</field>
+      <field name="cell">AE11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">picking_ids.move_lines.reserved_availability</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_983" model="report.excel.fields">
+      <field name="sequence">114</field>
+      <field name="cell">AF11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_82"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">picking_ids.move_lines.quantity_done</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_83" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="sequence">10</field>
+      <field name="name">SECTION 1-1 - SALE ORDER LINES</field>
+      <field name="parent_id" ref="report_excel_section_82"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="sale.field_sale_order__order_line"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">D12</field>
+      <field name="section_end">J12</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_984" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">D12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_83"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="model_field_selector">product_id</field>
+      <field name="field_type">many2one</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_985" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">E12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_83"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="model_field_selector">product_uom_qty</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_986" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">F12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_83"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="model_field_selector">price_unit</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_987" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">G12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_83"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="model_field_selector">discount</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_988" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">H12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_83"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="model_field_selector">price_subtotal</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_989" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">I12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_83"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="model_field_selector">qty_invoiced</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_990" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">J12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_83"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="model_field_selector">qty_delivered</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_84" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice')], limit=1).id"/>
+      <field name="sequence">11</field>
+      <field name="name">SECTION 1-2 - INVOICES</field>
+      <field name="parent_id" ref="report_excel_section_82"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="sale.field_sale_order__invoice_ids"/>
+      <field name="root_model_name">account.invoice</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">M12</field>
+      <field name="section_end">Z13</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_991" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">M12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_84"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice')], limit=1).id"/>
+      <field name="root_model_name">account.invoice</field>
+      <field name="model_field_selector">number</field>
+      <field name="field_type">char</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_992" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">N12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_84"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice')], limit=1).id"/>
+      <field name="root_model_name">account.invoice</field>
+      <field name="model_field_selector">date_invoice</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_993" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">O12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_84"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice')], limit=1).id"/>
+      <field name="root_model_name">account.invoice</field>
+      <field name="model_field_selector">date_due</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_994" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">V12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_84"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice')], limit=1).id"/>
+      <field name="root_model_name">account.invoice</field>
+      <field name="model_field_selector">state</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_85" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice.line')], limit=1).id"/>
+      <field name="sequence">10</field>
+      <field name="name">SECTION 1-2-1 - INVOICES LINES</field>
+      <field name="parent_id" ref="report_excel_section_84"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="account.field_account_invoice__invoice_line_ids"/>
+      <field name="root_model_name">account.invoice.line</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">P12</field>
+      <field name="section_end">U12</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_995" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">P12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_85"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice.line')], limit=1).id"/>
+      <field name="root_model_name">account.invoice.line</field>
+      <field name="model_field_selector">product_id</field>
+      <field name="field_type">many2one</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_996" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">Q12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_85"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice.line')], limit=1).id"/>
+      <field name="root_model_name">account.invoice.line</field>
+      <field name="model_field_selector">quantity</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_997" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">R12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_85"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice.line')], limit=1).id"/>
+      <field name="root_model_name">account.invoice.line</field>
+      <field name="model_field_selector">price_unit</field>
+      <field name="field_type">float</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_998" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">S12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_85"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice.line')], limit=1).id"/>
+      <field name="root_model_name">account.invoice.line</field>
+      <field name="model_field_selector">discount</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_999" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">T12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_85"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice.line')], limit=1).id"/>
+      <field name="root_model_name">account.invoice.line</field>
+      <field name="model_field_selector">price_total</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1000" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">U12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_85"/>
+      <field name="group_by">True</field>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.invoice.line')], limit=1).id"/>
+      <field name="root_model_name">account.invoice.line</field>
+      <field name="model_field_selector">invoice_type</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_86" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'account.payment')], limit=1).id"/>
+      <field name="sequence">11</field>
+      <field name="name">SECTION 1-2-1 - PAYMENTS</field>
+      <field name="parent_id" ref="report_excel_section_84"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="account.field_account_invoice__payment_ids"/>
+      <field name="root_model_name">account.payment</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">W12</field>
+      <field name="section_end">Z12</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1001" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">W12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_86"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.payment')], limit=1).id"/>
+      <field name="root_model_name">account.payment</field>
+      <field name="model_field_selector">name</field>
+      <field name="field_type">char</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1002" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">X12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_86"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.payment')], limit=1).id"/>
+      <field name="root_model_name">account.payment</field>
+      <field name="model_field_selector">payment_date</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1003" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">Y12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_86"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.payment')], limit=1).id"/>
+      <field name="root_model_name">account.payment</field>
+      <field name="model_field_selector">currency_id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1004" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">Z12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_86"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.payment')], limit=1).id"/>
+      <field name="root_model_name">account.payment</field>
+      <field name="model_field_selector">amount</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_87" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'stock.picking')], limit=1).id"/>
+      <field name="sequence">12</field>
+      <field name="name">SECTION 1-3 - STOCK</field>
+      <field name="parent_id" ref="report_excel_section_82"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="sale_stock.field_sale_order__picking_ids"/>
+      <field name="root_model_name">stock.picking</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">AA12</field>
+      <field name="section_end">AH12</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1005" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AA12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_87"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'stock.picking')], limit=1).id"/>
+      <field name="root_model_name">stock.picking</field>
+      <field name="model_field_selector">name</field>
+      <field name="field_type">char</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1006" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AB12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_87"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'stock.picking')], limit=1).id"/>
+      <field name="root_model_name">stock.picking</field>
+      <field name="model_field_selector">date_done</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1007" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AG12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_87"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'stock.picking')], limit=1).id"/>
+      <field name="root_model_name">stock.picking</field>
+      <field name="model_field_selector">picking_type_id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1008" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AH12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_87"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'stock.picking')], limit=1).id"/>
+      <field name="root_model_name">stock.picking</field>
+      <field name="model_field_selector">state</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_88" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'stock.move')], limit=1).id"/>
+      <field name="sequence">10</field>
+      <field name="name">SECTION 1-3-1 - STOCK MOVES</field>
+      <field name="parent_id" ref="report_excel_section_87"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="stock.field_stock_picking__move_lines"/>
+      <field name="root_model_name">stock.move</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">AC12</field>
+      <field name="section_end">AF12</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1009" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AC12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_88"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'stock.move')], limit=1).id"/>
+      <field name="root_model_name">stock.move</field>
+      <field name="model_field_selector">product_id</field>
+      <field name="field_type">many2one</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1010" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AD12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_88"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'stock.move')], limit=1).id"/>
+      <field name="root_model_name">stock.move</field>
+      <field name="model_field_selector">product_uom_qty</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1011" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AE12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_88"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'stock.move')], limit=1).id"/>
+      <field name="root_model_name">stock.move</field>
+      <field name="model_field_selector">reserved_availability</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1012" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AF12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_88"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'stock.move')], limit=1).id"/>
+      <field name="root_model_name">stock.move</field>
+      <field name="model_field_selector">quantity_done</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_89" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="sequence">13</field>
+      <field name="name">SECTION 1-4 - SO_LINES -PROJECTS TASKS</field>
+      <field name="parent_id" ref="report_excel_section_82"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="sale.field_sale_order__order_line"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">AI12</field>
+      <field name="section_end">AU13</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_90" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="sequence">10</field>
+      <field name="name">SECTION 1-4-1 - PROJECTS TASKS</field>
+      <field name="parent_id" ref="report_excel_section_89"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="sale_timesheet.field_sale_order_line__task_id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">AI12</field>
+      <field name="section_end">AU13</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1013" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AI12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_90"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">project_id</field>
+      <field name="field_type">many2one</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1014" model="report.excel.fields">
+      <field name="sequence">101</field>
+      <field name="cell">AJ12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_90"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">name</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1015" model="report.excel.fields">
+      <field name="sequence">102</field>
+      <field name="cell">AK12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_90"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">user_id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1016" model="report.excel.fields">
+      <field name="sequence">103</field>
+      <field name="cell">AL12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_90"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">planned_hours</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1017" model="report.excel.fields">
+      <field name="sequence">104</field>
+      <field name="cell">AM12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_90"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">effective_hours</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1018" model="report.excel.fields">
+      <field name="sequence">105</field>
+      <field name="cell">AN12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_90"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">remaining_hours</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1019" model="report.excel.fields">
+      <field name="sequence">106</field>
+      <field name="cell">AO12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_90"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">date_deadline</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1020" model="report.excel.fields">
+      <field name="sequence">107</field>
+      <field name="cell">AT12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_90"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">progress</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1021" model="report.excel.fields">
+      <field name="sequence">108</field>
+      <field name="cell">AU12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_90"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">stage_id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_91" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'account.analytic.line')], limit=1).id"/>
+      <field name="sequence">10</field>
+      <field name="name">SECTION 1-4-1-1 - TIMESHEETS</field>
+      <field name="parent_id" ref="report_excel_section_90"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="hr_timesheet.field_project_task__timesheet_ids"/>
+      <field name="root_model_name">account.analytic.line</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">AP12</field>
+      <field name="section_end">AS12</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1022" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AP12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_91"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">date</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.analytic.line')], limit=1).id"/>
+      <field name="root_model_name">account.analytic.line</field>
+      <field name="model_field_selector">date</field>
+      <field name="field_type">date</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1023" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AQ12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_91"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.analytic.line')], limit=1).id"/>
+      <field name="root_model_name">account.analytic.line</field>
+      <field name="model_field_selector">name</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1024" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AR12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_91"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.analytic.line')], limit=1).id"/>
+      <field name="root_model_name">account.analytic.line</field>
+      <field name="model_field_selector">employee_id</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1025" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AS12</field>
+      <field name="report_excel_section_id" ref="report_excel_section_91"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'account.analytic.line')], limit=1).id"/>
+      <field name="root_model_name">account.analytic.line</field>
+      <field name="model_field_selector">unit_amount</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_92" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'sale.order.line')], limit=1).id"/>
+      <field name="sequence">14</field>
+      <field name="name">SECTION 1-5 - SO_LINES -PROJECTS TASKS TOTAL</field>
+      <field name="parent_id" ref="report_excel_section_82"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="sale.field_sale_order__order_line"/>
+      <field name="root_model_name">sale.order.line</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">AK11</field>
+      <field name="section_end">AU11</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_93" model="report.excel.section">
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="sequence">10</field>
+      <field name="name">SECTION 1-5-1 - TASKS TOTAL</field>
+      <field name="parent_id" ref="report_excel_section_92"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" ref="sale_timesheet.field_sale_order_line__task_id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="check_root_model">True</field>
+      <field name="section">True</field>
+      <field name="section_level">1</field>
+      <field name="section_start">AK11</field>
+      <field name="section_end">AU11</field>
+      <field name="domain">[]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1026" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AL11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_93"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">planned_hours</field>
+      <field name="field_type">float</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1027" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AM11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_93"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">effective_hours</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1028" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AN11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_93"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">remaining_hours</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1029" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AT11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_93"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">avg</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_avg"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">progress</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1030" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">AK11</field>
+      <field name="report_excel_section_id" ref="report_excel_section_93"/>
+      <field name="group_by">True</field>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'project.task')], limit=1).id"/>
+      <field name="root_model_name">project.task</field>
+      <field name="model_field_selector">sale_order_id</field>
+      <field name="field_type">many2one</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_section_94" model="report.excel.section">
+      <field name="report_excel_id" ref="report_excel_68"/>
+      <field name="root_model_id" model="report.excel.section" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="sequence">12</field>
+      <field name="name">SECTION 2 - SALE ORDERS TOTAL</field>
+      <field name="parent_id" eval="[]"/>
+      <field name="type_data">data_line</field>
+      <field name="level" eval="0"/>
+      <field name="root_model_related_field_id" eval="[]"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="check_root_model">True</field>
+      <field name="section" eval="False"/>
+      <field name="section_level">1</field>
+      <field name="section_start">A14</field>
+      <field name="section_end">AW14</field>
+      <field name="domain">["&amp;","&amp;","&amp;",["confirmation_date","&gt;=","param(P1_start_date)"],["confirmation_date","&lt;=","param(P2_end_date)"],["company_id","=","param(P4_company)"],["partner_id","=","param(P3_partners)"]]</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1031" model="report.excel.fields">
+      <field name="sequence">100</field>
+      <field name="cell">A14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by">True</field>
+      <field name="aggregate" eval="False"/>
+      <field name="aggregate_id" eval="[]"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">require_payment</field>
+      <field name="field_type">boolean</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1032" model="report.excel.fields">
+      <field name="sequence">101</field>
+      <field name="cell">E14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.product_uom_qty</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1033" model="report.excel.fields">
+      <field name="sequence">102</field>
+      <field name="cell">H14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">amount_total</field>
+      <field name="field_type">monetary</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1034" model="report.excel.fields">
+      <field name="sequence">103</field>
+      <field name="cell">I14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection">value</field>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.qty_invoiced</field>
+      <field name="field_type">float</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1035" model="report.excel.fields">
+      <field name="sequence">104</field>
+      <field name="cell">J14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.qty_delivered</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1036" model="report.excel.fields">
+      <field name="sequence">105</field>
+      <field name="cell">Q14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">invoice_ids.invoice_line_ids.quantity</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1037" model="report.excel.fields">
+      <field name="sequence">106</field>
+      <field name="cell">T14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">invoice_ids.invoice_line_ids.price_total</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1038" model="report.excel.fields">
+      <field name="sequence">107</field>
+      <field name="cell">Z14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">invoice_ids.payment_ids.amount</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1039" model="report.excel.fields">
+      <field name="sequence">108</field>
+      <field name="cell">AD14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">picking_ids.move_lines.product_uom_qty</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1040" model="report.excel.fields">
+      <field name="sequence">109</field>
+      <field name="cell">AE14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">picking_ids.move_lines.reserved_availability</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1041" model="report.excel.fields">
+      <field name="sequence">110</field>
+      <field name="cell">AF14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">picking_ids.move_lines.quantity_done</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1042" model="report.excel.fields">
+      <field name="sequence">111</field>
+      <field name="cell">AL14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.task_id.planned_hours</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1043" model="report.excel.fields">
+      <field name="sequence">112</field>
+      <field name="cell">AM14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.task_id.effective_hours</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1044" model="report.excel.fields">
+      <field name="sequence">113</field>
+      <field name="cell">AN14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">sum</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_sum"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.task_id.remaining_hours</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_fields_1045" model="report.excel.fields">
+      <field name="sequence">114</field>
+      <field name="cell">AI14</field>
+      <field name="report_excel_section_id" ref="report_excel_section_94"/>
+      <field name="group_by" eval="False"/>
+      <field name="aggregate">avg</field>
+      <field name="aggregate_id" ref="report_excel.aggregate_avg"/>
+      <field name="having_operator" eval="False"/>
+      <field name="having_selection" eval="False"/>
+      <field name="having_param_id" eval="[]"/>
+      <field name="having_value_type">float</field>
+      <field name="having_value_float" eval="0.0"/>
+      <field name="having_value_date" eval="False"/>
+      <field name="having_value_datetime" eval="False"/>
+      <field name="sort_by" eval="False"/>
+      <field name="formula" eval="False"/>
+      <field name="formulas"></field>
+      <field name="check_root_model">True</field>
+      <field name="root_model_id" model="report.excel.fields" eval="obj().env['ir.model'].search([('model', '=', 'sale.order')], limit=1).id"/>
+      <field name="root_model_name">sale.order</field>
+      <field name="model_field_selector">order_line.task_id.progress</field>
+      <field name="field_type">integer</field>
+      <field name="image_bool" eval="False"/>
+      <field name="colOff" eval="0"/>
+      <field name="rowOff" eval="0"/>
+      <field name="cx">1500000</field>
+      <field name="cy">1500000</field>
+      <field name="description" eval="False"/>
+    </record>
+    <record id="report_excel_68_action1" model="ir.actions.act_window">
+      <field name="name">Sales Analysis (XLSX)</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">report_excel_wizard</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" model="report.excel" eval="obj().env['ir.ui.view'].search([('model', '=', 'report_excel_wizard')]).id"/>
+      <field name="target">new</field>
+      <field name="context" eval="{'model': 'report.excel', 'id': ref('report_excel_68')}"/>
+    </record>
+    <menuitem id="menu_report_excel_68_action1" name="Sales Analysis (XLSX)" parent="sale.menu_sale_report" sequence="100" action="report_excel_68_action1"/>
+    <record id="report_excel_68" model="report.excel">
+      <field name="report_excel_param_ids" eval="[[4, ref('report_excel_param_40'), False],[4, ref('report_excel_param_41'), False],[4, ref('report_excel_param_42'), False],[4, ref('report_excel_param_43'), False],]"/>
+    </record>
+    <record id="report_excel_68" model="report.excel">
+      <field name="template_name_id" ref="report_excel_template_attachment_1149"/>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,31 @@
+<odoo>
+    <template id="withholding_layout_report_inherit" inherit_id="l10n_th_withholding_tax_cert_form.withholding_layout_report">
+        <xpath expr="//div[@class='company_vat']" position="before">
+            <div>
+                <t t-if="o.book_number">
+                    <span class="book_number" t-field="o.book_number"/>
+                </t>
+                <t t-if="o.number">
+                    <span class="number" t-field="o.number"/>
+                </t>
+                <t t-if="o.sequence">
+                    <span class="sequence" t-field="o.sequence"/>
+                </t>
+                <span class="page_number">
+                    ฉบับที่ <t t-esc="i+1"/>
+                </span>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="withholding_tax_pdf" inherit_id="l10n_th_withholding_tax_cert_form.withholding_tax_pdf">
+        <xpath expr="//t[@t-foreach='docs']" position="replace">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="ncopies" t-value="2"/>
+                <t t-foreach="range(ncopies)" t-as="i">
+                    <t t-call="l10n_th_withholding_tax_cert_form.withholding_layout_report"/>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

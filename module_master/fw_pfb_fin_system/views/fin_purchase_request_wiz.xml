@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  purpose: FIN100 request wiz
+  
+  2019-06-03 CKA created
+-->
+<openerp>
+	<data>
+	    <!-- FIN100 request wiz -->
+	    <record model="ir.ui.view" id="fin_purchase_request_wiz_form">
+	    <field name="name">fin_purchase_request_wiz_form</field>
+	    <field name="model">fin_purchase_request_wiz</field>
+	    <field name="arch" type="xml">
+            <form string="FIN100 request">
+                <sheet>
+                    <group>
+                        <field name="filter_product_can_be_expensed" attrs="{'readonly':[('filter_prall','=',True)]}" options="{'no_create_edit':1}" />
+                        <field name="filter_product" attrs="{'readonly':[('filter_prall','=',True)]}" options="{'no_create_edit':1}" />
+                        <field name="filter_code" attrs="{'readonly':[('filter_prall','=',True)]}" options="{'no_create_edit':1}" />
+                        <field name="filter_fin_type" readonly="1" options="{'no_create_edit':1}" />
+                        <field name="filter_prall" />
+                        <field name="filter_fin100_number" options="{'no_create_edit':1}" />
+                    </group>
+                    <group>
+                        <field name="filter_action" />
+                    </group>
+                    <field name="item_fin100_ids" attrs="{'invisible':[('filter_prall','=',True)]}">
+                        <tree create="false" delete="false" editable="bottom">
+                            <field name="select" />
+                            <field name="date" readonly="1"/>
+                            <field name="fin100_number" readonly="1"/>
+                            <field name="fin_type" readonly="1"/>
+                            <field name="product_id" invisible="1"/>
+                            <field name="expense" readonly="1"/>
+                            <field name="description" readonly="1"/>
+                            <field name="unit" readonly="1"/>
+                            <field name="unit_name" readonly="1"/>
+                            <field name="price_unit" readonly="1"/>
+                            <field name="amount" readonly="1"/>
+                            <field name="total" readonly="1"/>
+                            <field name="status" readonly="1"/>
+                            <field name="fin_line_id" invisible="1"/>
+                        </tree>
+                    </field>
+                    <field name="item_fin100_ids_all" attrs="{'invisible':[('filter_prall','!=',True)]}">
+                        <tree create="false" delete="false" editable="bottom">
+                            <field name="date" readonly="1"/>
+                            <field name="fin100_number" readonly="1"/>
+                            <field name="fin_type" readonly="1"/>
+                            <field name="product_id" invisible="1"/>
+                            <field name="expense" readonly="1"/>
+                            <field name="description" readonly="1"/>
+                            <field name="unit" readonly="1"/>
+                            <field name="unit_name" readonly="1"/>
+                            <field name="price_unit" readonly="1"/>
+                            <field name="amount" readonly="1"/>
+                            <field name="total" readonly="1"/>
+                            <field name="status" readonly="1"/>
+                            <field name="fin_line_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <group>
+                        <button string="Finish" name="finish_choose" type="object"/>
+                        <button string="Cancel" special="cancel" />
+                    </group>
+                </footer>
+            </form>
+	    </field>
+	    </record>
+	    
+        
+	</data>
+</openerp>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--customer invoices -->
+        <record id="account_invoice_form_inherit" model="ir.ui.view">
+                <field name="name">account.invoice.form</field>
+                <field name="model">account.invoice</field>
+                <field name="inherit_id" ref="account.invoice_form"/>
+                <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='uom_id']" position="after">
+                        <field name="secondary_quantity" groups="secondary_uom_app.group_secondary_uom"/>
+                        <field name="secondary_uom_id" groups="secondary_uom_app.group_secondary_uom"/>
+                </xpath>
+                </field>
+        </record>
+
+        <!--vendor bill -->
+        <record id="invoice_supplier_form_inherit" model="ir.ui.view">
+                <field name="name">account.supplier.bill.form</field>
+                <field name="model">account.invoice</field>
+                <field name="inherit_id" ref="account.invoice_supplier_form"/>
+                <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='uom_id']" position="after">
+                        <field name="secondary_quantity" groups="secondary_uom_app.group_secondary_uom"/>
+                        <field name="secondary_uom_id" groups="secondary_uom_app.group_secondary_uom"/>
+                </xpath>
+                </field>
+        </record>
+
+
+</data>
+</odoo>

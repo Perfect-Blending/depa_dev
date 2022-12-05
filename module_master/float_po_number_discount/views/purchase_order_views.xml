@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+        <record id="po_view_order_form_inherit" model="ir.ui.view">
+            <field name="name">po.purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+                     <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                        <field name="discount_show"/>
+                        <field name="discount_amount"/>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
+                        <field name="discount_show"/>
+                        <field name="discount_amount"/>
+                    </xpath>
+
+<!--                    <xpath expr="//page[@name='order_line']//div[@name='discount']" position="after">-->
+<!--                        <field name="discount_amount"/>-->
+<!--                        <field name="discount_show" />-->
+<!--                    </xpath>-->
+
+<!--                    <xpath expr="//page[@name='order_line']//label[@for='discount']" position="attributes">-->
+<!--                        <attribute name="invisible">True</attribute>-->
+<!--                    </xpath>-->
+
+<!--                    <xpath expr="//page[@name='order_line']//div[@name='discount']" position="attributes">-->
+<!--                        <attribute name="invisible">True</attribute>-->
+<!--                    </xpath>-->
+
+<!--                    <xpath expr="//tree/field[@name='discount']" position="after">-->
+<!--                        <field name="discount_amount"/>-->
+<!--                    </xpath>-->
+
+<!--                    <xpath expr="//tree/field[@name='discount']" position="after">-->
+<!--                        <field name="discount_show"/>-->
+<!--                    </xpath>-->
+
+<!--                    <xpath expr="//tree/field[@name='discount']" position="attributes">-->
+<!--                        <attribute name="invisible">True</attribute>-->
+<!--                    </xpath>-->
+
+                    <xpath expr="//field[@name='amount_untaxed']" position="before">
+                        <field name="amount_without_discount_tax"/>
+                        <field name="discount"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

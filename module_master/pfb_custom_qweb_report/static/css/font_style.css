@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'sarabunregular';
+    src: url('/pfb_custom_qweb_report/static/font/sarabun-regular-webfont.woff2') format('woff2'),
+         url('/pfb_custom_qweb_report/static/font/sarabun-regular-webfont.woff') format('woff'),
+         url('/pfb_custom_qweb_report/static/font/Sarabun-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+  font-family: 'sarabunregular';
+}

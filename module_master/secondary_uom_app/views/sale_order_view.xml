@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='product_uom']" position="after">
+                    <field name="secondary_quantity" groups="secondary_uom_app.group_secondary_uom"/>
+                    <field name="secondary_uom_id" groups="secondary_uom_app.group_secondary_uom"/>
+                </xpath>
+                <xpath expr="//notebook/page/field[@name='order_line']/form/group/group[1]/field[@name='price_unit']" position="before">
+                    <field name="secondary_quantity" groups="secondary_uom_app.group_secondary_uom"/>
+                    <field name="secondary_uom_id" groups="secondary_uom_app.group_secondary_uom"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- sale analysis report pivot view -->
+        <record id="view_order_product_pivot_inherit" model="ir.ui.view">
+                <field name="name">sale.report.pivot</field>
+                <field name="model">sale.report</field>
+                <field name="inherit_id" ref="sale.view_order_product_pivot"/>
+                <field name="arch" type="xml">
+                    <field name="price_subtotal" position="after">
+                        <field name="secondary_quantity" groups="secondary_uom_app.group_secondary_uom"/>
+                    </field>
+                </field>
+        </record>
+
+</data>
+</odoo>

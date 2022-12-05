@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo> 
+	<record id="custom_inventory_settings" model="ir.ui.view">
+    <field name="name">Consumed Parts Settings</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="priority" eval="50" />
+    <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('settings')]/div[@data-string='Inventory']/div[hasclass('row')][3]" position="inside">
+       		<div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane">
+                    <field name="consume_parts" class="oe_inline" />
+                </div>
+                <div class="o_setting_right_pane">
+                    <label for="consume_parts"/>
+                    <div class="text-muted">
+                        Create Stock Move for consumed parts from Source Location to Consumed parts Location.
+                    </div>
+                    <div class="content-group" attrs="{'invisible':[('consume_parts','=',False)]}">
+                        <div class="mt8" >
+                            <label for="location_id"/>
+                            <field name="location_id" domain="[('usage','!=','view')]"/>
+                        </div>
+                        <div class="mt8">
+                            <label for="location_dest_id"/>
+                            <field name="location_dest_id" domain="[('usage','!=','view')]"/>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+   		</xpath>
+    </field>
+</record>
+
+ 
+</odoo>

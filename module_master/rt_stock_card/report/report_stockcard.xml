@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+<!-- STOCK CARD PDF REPORT -->
+	<report id="report_stockcard" string="Print Stock-Card"
+		model="product.template" report_type="qweb-pdf" file="rt_stock_card.report_stockcard_report"
+		name="rt_stock_card.report_stockcard_report" />
+
+	<record id="paperformat_landscape_custom" model="report.paperformat">
+		<field name="name">Landscape Custom</field>
+		<field name="default" eval="True" />
+		<field name="format">custom</field>
+		<field name="page_height">297</field>
+		<field name="page_width">210</field>
+		<field name="orientation">Landscape</field>
+		<field name="margin_top">30</field>
+		<field name="margin_bottom">23</field>
+		<field name="margin_left">5</field>
+		<field name="margin_right">5</field>
+		<field name="header_line" eval="False" />
+		<field name="header_spacing">20</field>
+		<field name="dpi">90</field>
+	</record>
+
+	<record id="report_stockcard" model="ir.actions.report">
+		<field name="paperformat_id" ref="rt_stock_card.paperformat_landscape_custom"/>
+	</record>
+
+<template id="report_stockcard_report">
+	<t t-call="web.html_container">
+	<t t-call="web.external_layout"><!-- web.external_layout_background -->
+		<t t-foreach="docs" t-as="o" ><!-- style="page-break-after:always;" -->
+			<div class="page">
+				<div class="oe_structure" />
+				<br></br>
+				<br></br>
+
+				<h4 class="text-center">
+					<span >Stock Card for </span>
+					<span t-field="o.name"/>
+					<t t-if="data and data['form']['date_from'] and data['form']['date_to']">
+						(<span t-esc="data['form']['date_from']"/> - To <span t-esc="data['form']['date_to']"/>)
+					</t>
+					<t t-if="data and data['form']['date_from'] and not data['form']['date_to']">
+						(<span t-esc="data['form']['date_from']"/> - Till Date)
+					</t>
+				</h4>
+
+				<t t-foreach="o.with_context(data['form']).get_opening_balance()" t-as="opening">
+					<div class="row" style="width:100%;">
+						<div style="width:50%;" groups="rt_stock_card.group_stock_card_qty_only">
+							<strong>Opening Qty: <span t-esc="opening['opening_qty']"/></strong>
+						</div>
+						<div style="width:50%;" class="text-right" groups="rt_stock_card.group_stock_card_qty_values">
+							<strong>Opening Value: <span t-esc="opening['opening_value']"/></strong>
+						</div>
+					</div>
+				</t>
+				
+				<table class="table table-condensed">
+					<thead>
+						<tr style="border-top: 3px solid black;border-bottom: double;">
+							<th>Date</th>
+							<th>Reference</th>
+							<th>Origin</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_only">In-Qty</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_only">Out-Qty</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_values">Unit Price</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_values">Value</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_only">Remaining Qty</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_values">Remaining Value</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_only">Balance Qty</th>
+							<th class="text-right" groups="rt_stock_card.group_stock_card_qty_values">Balance Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr t-foreach="o.with_context(data['form']).generate_stock_card()" t-as="line">
+							<td>
+								<span t-esc="line['date']" />
+							</td>
+							<td>
+								<span t-esc="line['reference']" />
+							</td>
+							<td>
+								<span t-esc="line['origin']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_only">
+								<span t-esc="line['inqty']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_only">
+								<span t-esc="line['outqty']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_values">
+								<span t-esc="line['price_unit']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_values">
+								<span t-esc="line['value']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_only">
+								<t t-if="line['remaining_qty']">
+									<span t-esc="line['remaining_qty']" />
+								</t>
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_values">
+								<t t-if="line['remaining_value']">
+									<span t-esc="line['remaining_value']" />
+								</t>
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_only">
+								<span t-esc="line['balance_qty']" />
+							</td>
+							<td class="text-right" groups="rt_stock_card.group_stock_card_qty_values">
+								<span t-esc="line['balance_value']" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="oe_structure" />
+			</div>
+		</t>
+	</t>
+	</t>
+</template>
+
+	</data>
+</odoo>

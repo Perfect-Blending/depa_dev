@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="work_acceptance_inherit">
+        <field name="name">work.acceptance.inherit</field>
+        <field name="model">work.acceptance</field>
+        <field name="inherit_id" ref="purchase_work_acceptance.view_work_acceptance_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[1]" position="after">
+                <page string="ผลการตรวจรับงาน">
+                    <group>
+                        <group>
+                            <field name="check_date"/>
+                            <field name="select_check"/>
+                        </group>
+                         <group>
+                             <field name="date_check"  attrs="{'invisible': [('select_check','!=','cw2')]}"/>
+                            <field name="fines" attrs="{'invisible': [('select_check','!=','cw2')]}"/>
+                            <field name="notes_check" attrs="{'invisible': [('select_check','!=','cw3')]}"/>
+                         </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

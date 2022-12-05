@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="0">
+
+    <record id="pfb_fin_system_reporting" model="res.groups">
+        <field name="name">Show Menu Report Fin</field>
+        <field name="comment">Show Menu Report Fin</field>
+        <field name="category_id" ref="fin_system.fw_pfb_fin_system_setting"/>
+    </record>
+    
+
+</data>
+</odoo>

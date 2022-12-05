@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_billing_order_type,billing.order.type,model_billing_order_type,account.group_account_user,1,0,0,0
+access_billing_order_type_manager,billing.order.type manager,model_billing_order_type,account.group_account_manager,1,1,1,1

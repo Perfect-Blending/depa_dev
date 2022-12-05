@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- FIN 100 system -->
+        <record model="ir.ui.view" id="fin_system_100_request_history_tree_view">
+            <field name="name">fin_system_100_request_history_tree_view</field>
+            <field name="model">fw_pfb_fin_system_100_history</field>
+            <field name="arch" type="xml">
+                <tree string="Request"
+                      decoration-muted="is_fin_open == False"
+                      decoration-success="is_fin_open == True and state == 'completed'"
+                      decoration-warning="is_fin_open == True and state == 'cancelled'"
+                      decoration-danger="is_fin_open == True and state == 'reject'">
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="priority"/>
+                    <field name="fin_type"/>
+                    <field name="fin_objective"/>
+                    <field name="fin_ref"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name" />
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                    <field name="is_fin_open" invisible="1" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_100_request_history_form_view">
+            <field name="name">fin_system_100_request_history_form_view</field>
+            <field name="model">fw_pfb_fin_system_100_history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Request">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_fin"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o"
+                                attrs="{'invisible': [('pr_count', '=', 0)]}">
+                                <field name="pr_count" widget="statinfo" string="Purchase Request"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" string="History No." class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" readonly="1" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='fin100_origin'
+                                    readonly="1" />
+                                <field name='fin_type'
+                                    readonly="1" />
+                                <field name='requester' 
+                                    readonly="1" />
+                                <field name='department'
+                                    readonly="1" />
+                                <field name="fin_date"/>
+                                <field name='subject'
+                                    readonly="1" />
+                                <field name='subject_to'
+                                    readonly="1" />
+                                <field name='fin_ref'
+                                    readonly="1" />
+                                <field name='fin_objective'
+                                    readonly="1" />
+                                <field name='objective'
+                                    readonly="1" />
+                                <field name='priority'
+                                    readonly="1" />
+
+                                <field name='can_cross_department'
+                                    readonly="1" />
+                            </group>
+                            <group>
+                                <label for="participantas_quantity_div" string="Participantas Quantity"/>
+                                <div name="participantas_quantity_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                        readonly="1" />
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+                        
+                                <field name='other'
+                                    readonly="1" />
+
+                                <field name='estimate_output'
+                                    readonly="1" />
+
+                                <field name='please_consider' readonly="1"/>
+
+                                <field name='template_id' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <field name='fin_lines'
+                                       readonly="1"/>
+
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="price_total" string="Total"/>
+                                    </div>
+                                    <field name="price_total" readonly="1" nolabel="1" class="oe_subtotal_footer_separator"
+                                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name='fin_remark'
+                                       readonly="1" 
+                                       class="oe_inline" paceholder="Remark..."/>
+                            </page>
+                            <page string="Participant">
+                                <field name="participants" readonly="1"  mode="tree">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="department_id"/>
+                                        <field name="job_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template" readonly="1"/>
+                                </group>
+                                <field name="approver"
+                                       readonly="1" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_100_line_tree_view_history">
+            <field name="name">fin_system_100_line_tree_view_history</field>
+            <field name="model">fw_pfb_fin_system_100_line_history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name='product_id'/>
+                    <field name="description"/>
+                    <field name="projects_and_plan"/>
+                    <field name="price_unit"/>
+                    <field name="product_uom_qty"/>
+                    <field name="product_uom"/>
+                    <field name="price_subtotal" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fw_pfb_fin_system_100_approver_tree_view_history">
+            <field name="name">fw_pfb_fin_system_100_approver_tree_view_history</field>
+            <field name="model">fw_pfb_fin_system_100_approver_history</field>
+            <field name="arch" type="xml">
+                <tree create="0" delete="0" editable="bottom">
+                    <field name="approve_active"/>
+                    <field name="position_index"/>
+                    <field name="approve_position" readonly="1"/>
+                    <field name="employee_id" />
+                    <field name="fin_position" readonly="1"/>
+                    <field name="action_date" readonly="1"/>
+                    <field name="memo" readonly="1"/>
+                    <field name="show_fin" invisible="1"/>
+                    <field name="is_related_department" invisible="1"/>
+                    <field name="is_not_related_department" invisible="1"/>
+                    <field name="employee_user_id" invisible="1"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- End FIN 100 system -->
+
+        <!-- Action request -->
+        <record model="ir.actions.act_window" id="fin_system_100_request_history_action">
+            <field name="name">FIN100 History</field>
+            <field name="res_model">fw_pfb_fin_system_100_history</field>
+            <field name="view_id" ref="fin_system_100_request_history_tree_view"/>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_100_request_history_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_100_request_history_tree_view"/>
+            <field name="act_window_id" ref="fin_system_100_request_history_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_100_request_history_form_view_action">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_100_request_history_form_view"/>
+            <field name="act_window_id" ref="fin_system_100_request_history_action"/>
+        </record>
+        <!-- End Action Request -->
+
+
+        <!--<menuitem name="FIN100 HISTORY" id="fin_system_100_request_history" parent="fin_system.fin_system_menu_main_100"
+                  action="fin_system_100_request_history_action" sequence="7"/> -->
+        
+
+    </data>
+</odoo>

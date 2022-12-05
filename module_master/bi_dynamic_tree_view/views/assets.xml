@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="assets_backend" name="dynamic_listview" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/bi_dynamic_tree_view/static/src/js/list_renderer_extend.js"/>
+            <script type="text/javascript" src="/bi_dynamic_tree_view/static/src/js/dynamic_tree.js"/>
+
+           <!--  <link rel="stylesheet" href="/bi_dynamic_tree_view/static/src/css/custom.css"/>	 -->
+        </xpath>
+    </template>
+</odoo>

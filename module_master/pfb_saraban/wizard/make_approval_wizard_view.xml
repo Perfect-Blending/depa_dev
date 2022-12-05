@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="make_approval_wizard_view_form" model="ir.ui.view">
+        <field name="name">make.approval.wizard.form</field>
+        <field name="model">make.approval.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Work Order">
+                <sheet>
+                    <group>
+                      <group>
+                        <field name="employee_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                        <field name="approve_type" />
+                      </group>
+                      <group>
+                        <field name="total_for_approve" invisible="1"/>
+                        <field name="setting_line" invisible="1"/>
+                        <field name="setting_id" invisible="1"/>
+                        <field name="status" invisible="1"/>
+                        <field name="add_line" invisible="1"/>
+                        <field name="change_new" invisible="1"/>
+                        
+                      </group>
+                    </group>
+                    <group string="Memo">
+                        <div>
+                            <field name="memo" require='1'/>
+                        </div>
+                    </group>
+                    <group>
+                        <div>
+                            <button class="btn-primary" name="action_add_index" type="object" style="margin-right: 10px;">
+                                <span>เพิ่มลำดับ</span>
+                            </button>
+                            <button class="btn-primary" name="action_change_employee" type="object">
+                                <span>เปลี่ยนพนักงาน</span>
+                            </button>
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('add_line', '!=', True),('change_new', '!=', True)]}">
+                        <field name="setting_line_ids" required='1'>
+                            <tree edit="true" required='1' editable='bottom' >
+                                <field name="sequence" widget="handle"/>
+                                <field name="is_active" readonly='1'/>
+                                <!-- <field name="step" readonly='1' invisible='1'/>
+                                <field name="status" invisible='1'/> -->
+                                <!-- <field name="document_id" invisible='1'/> -->
+                                <field name="job_id_name" required='1' options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                <field name="employee_id" required='1' options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                <!-- <field name="approve_type"/> -->
+                                <!-- <field name="approve_time" readonly='1'/> -->
+                                <!-- <field name="comment" readonly='1'/> -->
+                                <!-- <field name="status_approve" readonly='1'/> -->
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <footer>
+                    
+                    <div style="text-align:center">
+                    <button string="Approve" class="btn-primary pull-left" type="object" name="action_approve"/>
+                    <button string="Discard" class="btn-default center-block"  style='text-align: center' special="cancel" type="object"/>
+                    <button string="Reject " class="btn-default pull-right"   type="object" name="action_reject" confirm="Are you sure you want to do this?"
+                        attrs="{'invisible': [('approve_type', '!=', 'require')]}"/>
+                    </div>
+                    
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="make_approval_wizard_wizard_action" model="ir.actions.act_window">
+        <field name="name">Work Order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">make.approval.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="make_approval_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

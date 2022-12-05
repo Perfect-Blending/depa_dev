@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="bione_paper_quotation" model="report.paperformat">
+            <field name="name">Quotation</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">100</field>
+            <field name="margin_bottom">65</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">90</field>
+            <field name="dpi">300</field>
+        </record>
+
+		<template id="bione_quotation_external_layout">
+		    <t t-if="o and 'company_id' in o">
+		        <t t-set="company" t-value="doc.company_id"></t>
+		    </t>
+		    <t t-if="not o or not 'company_id' in o">
+		        <t t-set="company" t-value="res_company"></t>
+		    </t>
+		    <t t-call="bione_thai_account.bione_quotation_external_layout_header" />
+		    <t t-raw="0" />
+		    <t t-call="bione_thai_account.bione_quotation_external_layout_footer" />
+		</template>
+
+        <template id="bione_quotation_external_layout_header">
+		    <div class="header">
+                <div class="row">
+                    <div class="col-xs-3">
+		                <img t-if="doc.company_id.logo"
+                             t-att-src="'data:image/png;base64,%s' % to_text(doc.company_id.logo)"
+                             align="center"
+                             style="max-height: 70px;max-width: 160px;"/>
+                    </div>
+                    <!--<img t-if="doc.company_id.logo" t-att-src="'data:image/png;base64,%s' % to_text(doc.company_id.logo)" class="pull-left"/>-->
+                    <div class="col-xs-9">
+                        <div class="row" style="font-size: 18px">
+                            <strong><span t-field="doc.company_id.name"/></strong>
+                        </div>
+                        <div class="row" style="font-size: 11px">
+                            <span t-field="doc.company_id.partner_id.street"/> <span t-field="doc.company_id.partner_id.street2"/> <span t-field="doc.company_id.partner_id.city"/> <span t-field="doc.company_id.partner_id.zip"/>
+                        </div>
+                        <div class="row" style="font-size: 11px">
+                            โทร. <span t-field="doc.company_id.partner_id.phone" /> แฟ็กซ์. <span t-field="doc.company_id.partner_id.fax" /> อีเมล์. <span t-field="doc.company_id.partner_id.email"/>
+                        </div>
+                        <div t-if="doc.company_id.partner_id.vat" class="row" style="font-size: 11px">
+                            เลขประจำตัวผู้เสียภาษี <span t-field="doc.company_id.partner_id.vat" />
+                        </div>
+                        <p />
+                    </div>
+                </div>
+                <p />
+                <div class="row">
+                    <div class="col-xs-2">
+
+                    </div>
+                    <div class="col-xs-8" style="font-size: 22px;text-align:center">
+                        <strong>ใบเสนอราคา / Quotation</strong>
+                    </div>
+                    <div class="col-xs-2" style="text-align:right;font-size: 11px">
+                        <span class="page" /> / <span class="topage" />
+                    </div>
+                    <p />
+                </div>
+                <div class="row" style="font-size: 11px;padding: 0px;">
+                    <p />
+                    <div class="col-xs-8">
+                        <strong>ลูกค้า</strong>
+                        <p t-if="doc.partner_id.parent_id and doc.partner_id">
+                            <span t-field="doc.partner_id.parent_id.name"/>
+                            <br />
+                            <span t-field="doc.partner_id.parent_id.street" />
+                            <span t-field="doc.partner_id.parent_id.street2" />
+                            <span t-field="doc.partner_id.parent_id.city" />
+                            <span t-field="doc.partner_id.parent_id.zip" />
+                            <br />
+                            <strong>เลขประจำตัวผู้เสียภาษี</strong>
+                            <span t-field="doc.partner_id.parent_id.vat" />
+                        </p>
+                        <p t-if="doc.partner_id and not doc.partner_id.parent_id">
+                            <span t-field="doc.partner_id.name"/>
+                            <br />
+                            <span t-field="doc.partner_id.street" />
+                            <span t-field="doc.partner_id.street2" />
+                            <span t-field="doc.partner_id.city" />
+                            <span t-field="doc.partner_id.zip" />
+                            <br />
+                            เลขประจำตัวผู้เสียภาษี
+                            <span t-field="doc.partner_id.vat" />
+                        </p>
+                    </div>
+                    <div class="col-xs-2">
+                        <strong>เลขที่</strong>
+                        <p t-field="doc.name"/>
+                    </div>
+                    <div class="col-xs-2">
+                        <strong>วันที่</strong>
+                        <p t-field="doc.date_order" t-field-options='{"format": "dd/MM/yyyy"}'/>
+                    </div>
+                </div>
+                <div class="row" style="font-size: 11px;">
+                    <div class="col-xs-3">
+                        <strong>ติดต่อ</strong>
+                        <p t-if="doc.partner_id.parent_id">
+                            <span t-field="doc.partner_id.name"/>
+                        </p>
+                        <p t-if="not doc.partner_id.parent_id">
+                            -
+                        </p>
+                    </div>
+                    <div class="col-xs-2">
+                        <strong>โทรศัพท์</strong>
+                        <p t-field="doc.partner_id.phone"/>
+                    </div>
+                    <div class="col-xs-2">
+                        <strong>โทรสาร</strong>
+                        <p t-field="doc.partner_id.fax"/>
+                    </div>
+                    <div class="col-xs-5">
+                        <strong>อีเมล์</strong>
+                        <p t-field="doc.partner_id.email"/>
+                    </div>
+                </div>
+                <div class="row" style="font-size: 11px;padding: 0px;">
+                    <div class="col-xs-6">
+                        <strong>สถานที่ส่ง</strong>
+                        <p>
+                            <span t-field="doc.partner_shipping_id.name"/>
+                            <br />
+                            <span t-field="doc.partner_shipping_id.street" />
+                            <span t-field="doc.partner_shipping_id.street2" />
+                            <span t-field="doc.partner_shipping_id.city" />
+                            <span t-field="doc.partner_shipping_id.zip" />
+                        </p>
+                    </div>
+                    <div class="col-xs-2">
+                        <strong>เงื่อนไขเครดิต</strong>
+                        <p t-field="doc.payment_term_id.name"/>
+                    </div>
+                    <div class="col-xs-2">
+                        <strong>กำหนดส่ง</strong>
+                        <p t-field="doc.date_order" t-field-options='{"format": "dd/MM/yyyy"}'/>
+                    </div>
+                    <div class="col-xs-2">
+                        <strong>อ้างถึงใบสั่งซื้อ</strong>
+                        <p t-field="doc.client_order_ref" />
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+		    </div>
+		</template>
+
+		<template id="bione_quotation_external_layout_footer">
+		    <div class="footer">
+                <table style="font-size: 11px; width: 100%; max-width: 100%;">
+                    <thead>
+                        <th style="width: 15mm;"></th>
+                        <th style="width: 100mm;"></th>
+                        <th style="width: 20mm;"></th>
+                        <th class="text-right" style="width: 20mm;"></th>
+                        <th class="text-right" style="width: 20mm;"></th>
+                    </thead>
+                    <tbody>
+                        <tr style="padding: 8px; line-height: 1.42857143;vertical-align: top;">
+                            <td colspan="3" rowspan="2" >
+                                <!--<strong><span t-field="doc.bahttext"/></strong>
+                                <br />-->
+                                <span t-field="doc.note" />
+                            </td>
+                            <td>
+                                <strong>จำนวนเงิน</strong>
+                            </td>
+                            <td class="text-right" >
+                                <span t-field="doc.amount_untaxed"
+                                      t-field-options='{"widget": "monetary", "display_currency": "doc.currency_id"}' />
+                            </td>
+                        </tr>
+                        <tr style="padding: 8px; line-height: 1.42857143;vertical-align: top;">
+                            <td>
+                                <strong>ภาษี</strong>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="doc.amount_tax"
+                                      t-field-options='{"widget": "monetary", "display_currency": "doc.currency_id"}' />
+                            </td>
+                        </tr>
+                        <tr style="padding: 8px; line-height: 1.42857143;vertical-align: top;">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <strong>รวมทั้งสิ้น</strong>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="doc.amount_total"
+                                      t-field-options='{"widget": "monetary", "display_currency": "doc.currency_id"}' />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row" style="font-size: 11px;">
+                    <div class="col-xs-2" style="line-height: 60px">
+                        <strong>อนุมัติโดย</strong>
+                    </div>
+                    <div class="col-xs-4">
+
+                    </div>
+                    <div class="col-xs-2" style="line-height: 60px">
+                        <strong>พนักงานขาย</strong>
+                    </div>
+                    <div class="col-xs-4">
+
+                    </div>
+                </div>
+                <div class="row" style="font-size: 11px;">
+                    <div class="col-xs-2">
+
+                    </div>
+                    <div class="col-xs-4">
+                        (...........................................)
+                    </div>
+                    <div class="col-xs-2">
+
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <span t-field="doc.user_id.partner_id.name"/>
+                    </div>
+                </div>
+                <div class="row" style="font-size: 11px;">
+                    <div class="col-xs-2">
+
+                    </div>
+                    <div class="col-xs-4">
+                        ............../.............../..............
+                    </div>
+                    <div class="col-xs-2">
+
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <span t-field="doc.user_id.partner_id.mobile" />
+                    </div>
+                </div>
+                <div class="row" style="font-size: 11px;">
+                    <div class="col-xs-12" style="line-height: 60px">
+                        <p>ยืนเสนอราคา 7 วัน หากมีการอนุมัติหรือแก้ไขเปลี่ยนแปลงรายการ <b>กรุณาสแกนเอกสารและส่งเมล์มาที่ thitithup@gmail.com</b>
+                        </p>
+                    </div>
+                </div>
+		    </div>
+		</template>
+
+		<template id="bione_report_quotation_document">
+		    <t t-call="web.basic_layout">
+                <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
+		        <div class="page">
+		            <div class="oe_structure"/>
+                    <t t-call="bione_thai_account.bione_quotation_external_layout_header" />
+                    <table class="table table-condensed" style="font-size: 11px;">
+                        <thead>
+                            <th style="width: 10mm;" >ลำดับ</th>
+                            <th style="width: 100mm;">รายการ</th>
+                            <th style="width: 25mm;">จำนวน</th>
+                            <th class="text-right" style="width: 20mm;">ราคา/หน่วย</th>
+                            <th style="width: 10mm;" class="text-right">ส่วนลด(%)</th>
+                            <th class="text-right" style="width: 20mm;">ราคารวม</th>
+                        </thead>
+                        <tbody style="font-size: 11px;">
+                            <t t-set="line_no" t-value="1"/>
+                            <tr t-foreach="doc.order_line" t-as="line">
+                                <td>
+                                    <span t-esc="line_no" />
+                                </td>
+                                <td>
+                                    <span t-field="line.name" />
+                                </td>
+                                <td>
+                                    <span t-field="line.product_uom_qty"/>
+                                    <br />
+                                    <span t-field="line.product_uom.name"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.price_unit" />
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.discount" />
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.price_subtotal"
+                                        t-field-options='{"widget": "monetary", "display_currency": "doc.currency_id"}'/>
+                                </td>
+                                <t t-set="line_no" t-value="line_no + 1"/>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <t t-call="bione_thai_account.bione_quotation_external_layout_footer" />
+		            <div class="oe_structure"/>
+		        </div>
+		    </t>
+		</template>
+
+		<template id="bione_report_quotation_template">
+		    <t t-call="web.html_container">
+		        <t t-foreach="docs" t-as="doc">
+                    <t t-call="bione_thai_account.bione_report_quotation_document" t-lang="doc.partner_id.lang"/>
+		            <!--<t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'bione_thai_account.bione_report_quotation_document')"/>-->
+		        </t>
+		    </t>
+		</template>
+
+        <report
+            string="bione - QUOTATION"
+            id="bione_report_quotation"
+            model="sale.order"
+            report_type="qweb-pdf"
+            name="bione_thai_account.bione_report_quotation_template"
+        />
+
+        <record id="bione_report_quotation" model="ir.actions.report">
+            <field name="paperformat_id" ref="bione_thai_account.bione_paper_quotation"/>
+        </record>
+
+    </data>
+</odoo>

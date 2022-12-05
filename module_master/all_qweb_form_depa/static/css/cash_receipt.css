@@ -1,0 +1,86 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'THSarabunNewBold';
+  src: url("https://depadev.odooerp.biz/all_qweb_form_depa/static/fonts/THSarabunNewBold.ttf") format("truetype");
+}
+
+
+.o_cash_receipt_from {
+  font-family: 'THSarabunNewBold';
+  font-size: 24px;
+}
+
+.o_cash_receipt_from
+.number_cash {
+  position: fixed;
+  top: 189px;
+  right: 100px;
+}
+
+.o_cash_receipt_from .day_cash_cash {
+  position: fixed;top: 255px;right: 110px;
+}
+
+.o_cash_receipt_from .company_name {
+    width: 50%;font-size: 24px;position: fixed;top: 355px;left: 250px;
+}
+
+.o_cash_receipt_from .company_address {
+    width: 100%;
+    position: fixed;
+    top: 390px;
+    left: 250px;
+}
+
+.o_cash_receipt_from .total_amount {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1110px;right: 48px;
+}
+
+.o_cash_receipt_from .text_amount {
+        width: 100%;font-size: 26px;padding-left:15px;font-weight: bold;position: fixed;top: 1115px;left: 445px;
+}
+
+.o_cash_receipt_from .cash {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1243px;left: 64px;
+}
+
+.o_cash_receipt_from .bank {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1244px;left: 386px;
+}
+
+.o_cash_receipt_from .crv_cpv {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1243px;left: 702px;
+}
+
+.o_cash_receipt_from .check_branch {
+        font-size: 24px;font-weight: bold;position: fixed;top: 290px;left: 60px;
+}
+
+.o_cash_receipt_from .check_branch2 {
+        font-size: 24px;font-weight: bold;position: fixed;top: 290px;left: 212px;
+}
+
+.o_cash_receipt_from .check_no_xx {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1243px;left: 815px;
+}
+
+.o_cash_receipt_from .check_bank_xx {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1312px;left: 165px;
+}
+
+.o_cash_receipt_from .check_branch_xx {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1312px;left: 465px;
+}
+
+.o_cash_receipt_from .check_date_xx {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1312px;left: 802px;
+}
+
+.o_cash_receipt_from .check_bank_xxx {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1312px;left: 64px;
+}
+
+.o_cash_receipt_from .check_branch_xxx {
+        font-size: 24px;font-weight: bold;position: fixed;top: 1312px;left: 386px;
+}
+

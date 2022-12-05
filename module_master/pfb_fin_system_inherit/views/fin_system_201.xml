@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="fin_system_201_all_fin_tree_view_inherit">
+            <field name="name">fin.system.201.all.fin.tree.view</field>
+            <field name="model">fw_pfb_fin_system_201</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state == 'completed'" decoration-warning="state == 'cancelled'"
+                      decoration-danger="state == 'reject'" string="All FIN201">
+                    <field name='fin_audit'/>
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="reference"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name"/>
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="fin_system_201_all_fin_form_view_inherit">
+            <field name="name">fin.system.201.all.fin.form.view</field>
+            <field name="model">fw_pfb_fin_system_201</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="approver_rights" invisible="1"/>
+                        <field name="is_fin_lock" invisible="1"/>
+                        <field name="target_approver" invisible="1"/>
+                        <field name="is_requester" invisible="1"/>
+                        <field name="can_cancel" invisible="1"/>
+                        <button string="Update to FIN100"
+                                class="oe_highlight"
+                                group="fin_system.fw_pfb_fin_system_can_update_fin201_to_fin100"
+                                name="update_to_fin100"
+                                attrs="{'invisible':[('state','!=','completed')]}"
+                                type="object"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="Request">
+                        <div class="oe_title">
+                            <label for="fin_no" string="FIN NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="fin_no"
+                                       placeholder="FIN NO."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='fin_type'
+                                       readonly="1"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='requester'
+                                       options='{"create":False,"create_edit": False,"no_open": True}'
+                                       context="{'default_groups_ref': ['fw_pfb_fin_system_user']}"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='department'
+                                       options='{"create":False,"create_edit": False,"no_open": True}'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="fin_date"/>
+                                <field name="reference" readonly="1"/>
+                                <field name='subject'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='subject_to'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_objective'
+                                       widget="selection"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='objective'/>
+                                <field name='priority'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='approved_amount' readonly="1"/>
+                                <field name="template_id" widget="many2many_tags"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_audit'/>
+                            </group>
+                            <group>
+                                <label for="amount_div" string="Participantas Quantity"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                           attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+
+                                <field name="place" widget="many2many_binary"
+                                />
+
+                                <field name="operation_date" widget="many2many_binary"
+                                />
+
+                                <field name="seminar_partcipants" widget="many2many_binary"
+                                />
+
+                                <field name='other'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='estimate_output'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='please_consider' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <field name='fin_lines'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}">
+                                </field>
+
+                                <group>
+                                    <group name="description">
+                                        <label for="fin_remark"
+                                               string="In case of refunding the remaining amount, pay more than 20%. The reason is"/>
+                                        <field name='fin_remark'
+                                               attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"
+                                               colspan="4" nolabel="1"/>
+                                    </group>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <field name="request_amount_total" widget="monetary" readonly="1"
+                                               options="{'currency_field': 'currency_id'}"/>
+
+                                        <field name="load_amount_total" widget="monetary" readonly="1"
+                                               options="{'currency_field': 'currency_id'}"/>
+
+                                        <field name="price_total" widget="monetary" readonly="1"
+                                               options="{'currency_field': 'currency_id'}"/>
+
+                                        <field name="spent_amount_total" widget="monetary" readonly="1"
+                                               options="{'currency_field': 'currency_id'}"/>
+
+                                        <field name="remaining_total" widget="monetary" readonly="1"
+                                               options="{'currency_field': 'currency_id'}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string='Other Informations'>
+
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template" widget="selection"/>
+                                </group>
+                                <field name="approver">
+                                    <form>
+                                        <group>
+                                            <field name="approve_active"/>
+                                            <field name="position_index" readonly="1" force_save="1"/>
+                                            <field name="employee_id" readonly="0" force_save="1"/>
+                                            <field name="fin_position" readonly="1" force_save="1"/>
+                                            <field name="need_to_change_employee"/>
+                                            <field name="employee_line"
+                                                   attrs="{'invisible':[('need_to_change_employee','!=',True)]}">
+                                                <tree editable="bottom">
+                                                    <field name="data_activate"/>
+                                                    <field name="name" readonly="1"/>
+                                                </tree>
+                                            </field>
+                                            <field name="employee_user_id" invisible="1"/>
+                                            <field name="show_fin" invisible="1"/>
+                                            <field name="state" invisible="1"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Attachments">
+                                <group>
+                                    <field name="attachment" widget="many2many_binary"
+                                    />
+                                </group>
+                            </page>
+                            <page string="Other info Accounting">
+                                <field name="account_memo"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action All FIN201  -->
+        <record id="fin_system_201_completed_search_inherit" model="ir.ui.view">
+            <field name="name">fin.system.201.completed.search.inherit</field>
+            <field name="model">fw_pfb_fin_system_201</field>
+            <field name="arch" type="xml">
+                <search string="Search state">
+                    <!-- <field name="state"/> -->
+                    <field name="fin_no"/>
+                    <field name="requester"/>
+                    <field name="approver_name_list"/>
+                    <field name="action_date_list"/>
+                    <filter string="ตรวจสอบแล้ว" name="fin_audit" domain="[('fin_audit', '=', True)]"/>
+                    <filter string="Draft" name="state_draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Cancel" name="state_cancel" domain="[('state', '=', 'cancelled')]"/>
+                    <filter string="Reject" name="state_reject" domain="[('state', '=', 'reject')]"/>
+                    <filter string="Completed" name="state_completed" domain="[('state', '=', 'state_completed')]"/>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="fin_system_201_all_fin_action_inherit">
+            <field name="name">All FIN201 EDIT</field>
+            <field name="res_model">fw_pfb_fin_system_201</field>
+            <field name="search_view_id" ref="pfb_fin_system_inherit.fin_system_201_completed_search_inherit"/>
+            <field name="view_id" ref="fin_system_201_all_fin_tree_view_inherit"/>
+            <field name="context">{'search_default_state_completed':1}</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="fin_system_201_all_fin_tree_view_action_inherit">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_201_all_fin_tree_view_inherit"/>
+            <field name="act_window_id" ref="fin_system_201_all_fin_action_inherit"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="fin_system_201_all_fin_form_view_action_inherit">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_201_all_fin_form_view_inherit"/>
+            <field name="act_window_id" ref="fin_system_201_all_fin_action_inherit"/>
+        </record>
+
+        <!-- End Action All FIN201 -->
+        <menuitem name="All FIN201 EDIT" id="fin_system_201_all_fin_inherit"
+                  parent="fin_system.fin_system_menu_main_201"
+                  action="fin_system_201_all_fin_action_inherit" sequence="15"
+                  groups="pfb_fin_system_inherit.fw_pfb_fin_system_edit_attach"/>
+        <!--FIN201 APPROVER-->
+        <record id="view_fw_pfb_fin_system_201_approver_tree_inherit" model="ir.ui.view">
+            <field name="name">view.fin.system.201.approver.tree.inherit</field>
+            <field name="model">fw_pfb_fin_system_201_approver</field>
+            <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_201_approver_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="position_index" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+            </field>
+        </record>
+        <record id="view_fw_pfb_fin_system_201_approver_form" model="ir.ui.view">
+            <field name="name">view.fin.system.201.approver.form</field>
+            <field name="model">fw_pfb_fin_system_201_approver</field>
+            <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_201_approver_form_view"/>
+            <field name="arch" type="xml">
+                <field name="position_index" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+            </field>
+        </record>
+        <!--FIN Audit-->
+        <record model="ir.ui.view" id="fin_system_201_request_form_view_audit_inherit">
+            <field name="name">fin.system.201.request.audit.fin.form.view</field>
+            <field name="model">fw_pfb_fin_system_201</field>
+            <field name="inherit_id" ref="fin_system.fin_system_201_request_form_view"/>
+            <field name="arch" type="xml">
+                <field name="approved_amount" position="after">
+                    <field name='fin_audit' readonly="1"/>
+                </field>
+            </field>
+        </record>
+<!--        <record model="ir.ui.view" id="fin_system_201_completed_form_view_audit_inherit">-->
+<!--            <field name="name">fin.system.201.completed.audit.fin.form.view</field>-->
+<!--            <field name="model">fw_pfb_fin_system_201</field>-->
+<!--            <field name="inherit_id" ref="fin_system.fin_system_201_completed_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="approved_amount" position="after">-->
+<!--                    <field name='fin_audit' readonly="1"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record model="ir.ui.view" id="fin_system_201_director_form_view_audit_inherit">-->
+<!--            <field name="name">fin.system.201.director.audit.fin.form.view</field>-->
+<!--            <field name="model">fw_pfb_fin_system_201</field>-->
+<!--            <field name="inherit_id" ref="fin_system.fin_system_201_director_only_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="approved_amount" position="after">-->
+<!--                    <field name='fin_audit' readonly="1"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record model="ir.ui.view" id="fin_system_201_all_form_view_audit_inherit">-->
+<!--            <field name="name">fin.system.201.all.audit.fin.form.view</field>-->
+<!--            <field name="model">fw_pfb_fin_system_201</field>-->
+<!--            <field name="inherit_id" ref="fin_system.fin_system_201_all_fin_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="template_id" position="after">-->
+<!--                    <field name='fin_audit' readonly="1"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+        <record id="view_fw_pfb_fin_system_201_approver_tree" model="ir.ui.view">
+            <field name="name">view.fin.system.201.approver.tree</field>
+            <field name="model">fw_pfb_fin_system_201_approver</field>
+            <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_201_approver_tree_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_reset_approval']" position="attributes">
+                    <attribute name="groups">pfb_fin_system_inherit.fw_pfb_fin_system_reset_fin</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

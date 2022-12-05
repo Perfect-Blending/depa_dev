@@ -1,0 +1,197 @@
+<odoo>
+    <template id="sale_report_assets_common" name="Sale Report common assets"
+              inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/pfb_sale_report_qweb/static/scss/style_report.css"/>
+        </xpath>
+    </template>
+
+    <template id="sale_report_layout_pdf">
+        <t t-call="web.html_container">
+            <t t-set="count_for" t-value="0"/>
+            <t t-set="year_header" t-value=""/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="count_for" t-value="count_for+1"/>
+                <t t-set="year_header" t-value="(int((doc.date_dat).strftime('%Y')))+543"/>
+            </t>
+            <t t-set="i" t-value="0" />
+            <t t-set="record_per_page" t-value="18" />
+            <t t-set="page_amount" t-value="1" />
+            <t t-if="count_for > record_per_page">
+                <t t-set="page_amount" t-value="count_for / record_per_page" />
+                <t t-if="page_amount > int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1" />
+                </t>
+            </t>
+            <t t-set="current_page" t-value="0" />
+             <t t-set="count_number" t-value="0"/>
+            <t t-set="sum_base" t-value="0"/>
+            <t t-set="sum_amount" t-value="0"/>
+             <t t-set="amount_total" t-value="0.00"/>
+             <t t-set="sum_total" t-value="0"/>
+            <t t-set="sum_base2" t-value="0"/>
+            <t t-set="sum_amount2" t-value="0"/>
+            <t t-set="sum_total" t-value="0"/>
+            <t t-set="sum_total2" t-value="0"/>
+            <t t-set="end_count" t-value="0"/>
+            <t t-foreach="docs" t-as="co">
+                    <t t-set="end_count" t-value="end_count+1"/>
+                 <t t-set="sum_base2" t-value="sum_base2+co.amount_untaxed"/>
+                 <t t-set="sum_amount2" t-value="sum_amount2+co.amount_tax"/>
+                 <t t-set="sum_total2" t-value="sum_amount2+(co.amount_untaxed+co.amount_untaxed)"/>
+             </t>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1" />
+                <div class="article o_journal_voucher_from">
+                    <div class="row">
+                        <div class="page_number" style="width: 70px;position: absolute; z-index: 120; left: 1150px; top: 30px;font-size:20px;">
+                            Page <t t-esc="current_page" /> / <t t-esc="int(page_amount)" />
+                        </div>
+                        <div class="page_number" style="width: 500px;position: absolute; z-index: 120; left: 600px; top: 60px;font-size:30px;">
+                            <t t-if="mount_one == mount_two">
+                                <strong><t t-esc="mount_one"/> <t t-esc="year_header"/> </strong>
+                            </t>
+                            <t t-else="">
+                                <strong><t t-esc="mount_one"/> ถึง <t t-esc="mount_two"/> <t t-esc="year_header"/></strong>
+                            </t>
+                        </div>
+                        <t t-set="j" t-value="i + record_per_page" />
+                        <t t-set="item_count" t-value="0" />
+                        <t t-set="set_name" t-value="30"/>
+                        <t t-set="count_name" t-value="0"/>
+                        <t t-set="line_cc" t-value="0"/>
+
+                        <t t-foreach="docs[i:j]" t-as="cc">
+                            <t t-if="count_name &gt; 65">
+                                <t t-set="set_name" t-value="34"/>
+                            </t>
+                            <t t-if="count_name &lt; 64">
+                                <t t-set="set_name" t-value="30"/>
+                            </t>
+                            <t t-set="line_cc" t-value="265 + (item_count*set_name)"/>
+                            <t t-if="item_count == 16">
+                                <t t-set="line_cc" t-value="750"/>
+                            </t>
+                            <t t-if="line_cc == 745">
+                                <t t-set="line_cc" t-value="730"/>
+                            </t>
+                            <div style="position:relative; z-index: 100;">
+                                <table t-attf-style="position:absolute; left: 10px; top: {{(line_cc)}}px; font-family: 'THSarabunNew'">
+                                    <tbody>
+                                        <tr>
+                                            <td style="display: inline-block;width: 53px;position:absolute;  left: 5px;text-align:center;line-height: 0.9;">
+                                                <t t-set="count_number" t-value="count_number+1" />
+                                                <span t-esc="count_number"/>
+                                                 <t t-set="item_count" t-value="item_count+1" />
+
+                                            </td>
+                                            <td style="display: inline-block;width: 82px; position:absolute;  left: 60px;text-align:center;line-height: 0.9;">
+                                                <t t-set="year" t-value="(int((cc.date_dat).strftime('%Y')))+543"/>
+                                                <t t-set="date_dat" t-value="'%s/%s' %((cc.date_dat).strftime('%d/%m'),year)"/>
+                                                    <t t-esc="date_dat"/>
+                                            </td>
+                                            <td style="display: inline-block;width: 40px;position:absolute;  left: 147px;line-height: 0.9;">
+<!--                                                <t t-esc="set_name"/> <t t-esc="line_cc"/><t t-esc="item_count"/>-->
+                                            </td>
+                                            <td style="display: inline-block;width: 100px; position:absolute;  left: 198px;line-height: 0.9;">
+                                                <t t-esc="cc.number_tax"/>
+                                            </td>
+                                            <td style="display: inline-block;width: 290px;position:absolute;left: 320px;line-height: 0.9;">
+                                                <t t-esc="cc.partner"/>
+                                            </td>
+                                            <td style="display: inline-block;width: 150px;position:absolute;left: 615px;text-align:center;line-height: 0.9;">
+                                                <t t-esc="cc.partner_vat"/>
+                                            </td>
+                                             <td style="display: inline-block;width: 93px;position:absolute;left: 770px;text-align:center;line-height: 0.9;">
+                                                 <t t-if="cc.branch == '00000'">
+                                                     <t t-esc="cc.branch"/>
+                                                 </t>
+                                            </td>
+                                             <td style="display: inline-block;width: 83px;position:absolute;left: 870px;text-align:center;line-height: 0.9;">
+                                                 <t t-if="cc.branch != '00000'">
+                                                     <t t-esc="cc.branch"/>
+                                                 </t>
+                                            </td>
+                                             <td style="display: inline-block;width: 100px;position:absolute;left: 960px;text-align:right;line-height: 0.9;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.amount_untaxed)" />
+                                                 <t t-set="sum_base" t-value="sum_base+cc.amount_untaxed"/>
+                                            </td>
+                                            <td style="display: inline-block;width: 94px;position:absolute;left: 1070px;text-align:right;line-height: 0.9;">
+                                                <t t-esc="'{0:,.2f}'.format(cc.amount_tax)" />
+                                                <t t-set="sum_amount" t-value="sum_amount+cc.amount_tax"/>
+                                            </td>
+                                            <td style="display: inline-block;width: 94px;position:absolute;left: 1170px;text-align:right;line-height: 0.9;">
+                                                <t t-set="amount_total" t-value="cc.amount_untaxed+cc.amount_tax"/>
+                                                 <t t-set="count_name" t-value="len(str(cc.partner))"/>
+                                                <t t-esc="'{0:,.2f}'.format(amount_total)" />
+                                                <t t-set="sum_total" t-value="sum_total+amount_total"/>
+                                            </td>
+                                        </tr>
+                                        <!-- END amount_total -->
+                                    </tbody>
+                                    <t t-if="(item_count+1 > 18) and len(docs[i:j]) == 18">
+                                        <tr>
+                                            <td style="display: inline-block;width: 100px;text-align: right; position:absolute;  top: 40px; left: 960px;">
+                                                <span t-esc="'{0:,.2f}'.format(sum_base)" />
+                                            </td>
+                                            <td style="display: inline-block;width: 94px;text-align: right; position:absolute;  top: 40px; left: 1070px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_amount)" />
+                                            </td>
+                                            <td style="display: inline-block;width: 94px;text-align: right; position:absolute;  top: 40px; left: 1170px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_total)" />
+                                            </td>
+                                            <td style="display: inline-block;width: 100px;text-align: right; position:absolute;  top: 74px; left: 960px;">
+                                                <span t-esc="'{0:,.2f}'.format(sum_base)" />
+                                            </td>
+                                            <td style="display: inline-block;width: 94px;text-align: right; position:absolute;  top: 74px; left: 1070px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_amount)" />
+                                            </td>
+                                            <td style="display: inline-block;width: 94px;text-align: right; position:absolute;  top: 74px; left: 1170px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_total)" />
+                                            </td>
+
+                                        </tr>
+                                    </t>
+                                    <t t-if=" len(docs[i:j]) &lt; 18 and ((item_count) == len(docs[i:j]))">
+                                            <span style="display: inline-block;width: 100px;text-align: right; position:absolute;   top: 810px; left: 960px;">
+                                                <span t-esc="'{0:,.2f}'.format(sum_base)" />
+                                            </span>
+                                            <span style="display: inline-block;width: 94px;text-align: right; position:absolute;  top: 810px; left: 1070px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_amount)" />
+                                            </span>
+                                            <span style="display: inline-block;width: 94px;text-align: right; position:absolute; top: 810px; left: 1170px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_total)" />
+                                            </span>
+
+                                            <span style="display: inline-block;width: 100px;text-align: right; position:absolute;  top: 843px; left: 960px;">
+                                                <span t-esc="'{0:,.2f}'.format(sum_base)" />
+                                                <br/><t t-sec="item_count"/>
+                                            </span>
+                                            <span style="display: inline-block;width: 94px;text-align: right; position:absolute;  top: 843px; left: 1070px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_amount)" />
+                                            </span>
+                                            <span style="display: inline-block;width: 94px;text-align: right; position:absolute;  top: 843px; left: 1170px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_total)" />
+                                            </span>
+                                    </t>
+                                </table>
+                            </div>
+                        </t>
+
+                        <img src="/pfb_sale_report_qweb/static/src/img/sale_report.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page" />
+            </t>
+        </t>
+    </template>
+
+     <template id="sale_report_pdf">
+        <t t-call="web.html_container">
+            <t t-call="pfb_sale_report_qweb.sale_report_layout_pdf"/>
+        </t>
+    </template>
+
+
+
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="internal_document_menu"  name="หนังสือภายใน" parent="main_document_menu" sequence="1" />
+    <menuitem id="internal_created_menu" name="สร้างหนังสือภายใน" parent="internal_document_menu"/>
+    <menuitem id="internal_save_menu" name="บันทึกข้อความ" parent="internal_created_menu" action="document_internal_main_action_list"/>
+    <menuitem id="internal_announce_menu" name="หนังสือลงนาม" parent="internal_created_menu" action="document_internal_announce_action_list"/>
+    <menuitem id="internal_waiteing_menu" name="รอดำเนินการหนังสือภายใน" parent="internal_document_menu" action="document_main_internal_need_action_list"/>
+    <menuitem id="internal_all_menu" name="แสดงหนังสือภายในทั้งหมด" parent="internal_document_menu" action="document_internal_main_all_action_list"
+    groups="group_user_document_internal" />
+
+    <!-- หนังสือรับ -->
+    <menuitem id="receive_document_menu" name="หนังสือรับ" parent="main_document_menu" sequence="2" />
+    <menuitem id="receive_receive_menu" name="หนังสือรับ/รับหนังสือ" parent="receive_document_menu" action="receive_document_main_action_list" groups="group_user_document_rec" />
+     <menuitem id="receive_document_draft_menu name=" name="หนังสือรับ/หนังสือรับทุกแผนกฉบับร่าง" parent="receive_document_menu" action="receive_document_main_draft_action_list" groups="tag_receive_document"/>
+    <menuitem id="receive_waithing_menu" name="หนังสือรับ/รอดำเนินการ" parent="receive_document_menu" action="receive_document_main_need_action_list"/>
+    <menuitem id="receive_show_all_menu" name="แสดงหนังสือรับทั้งหมด" parent="receive_document_menu" action="receive_document_main_all_action_list" groups="group_user_document_rec_all" />
+
+
+
+</odoo>

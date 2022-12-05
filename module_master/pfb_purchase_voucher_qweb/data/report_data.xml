@@ -1,0 +1,14 @@
+<odoo>
+    <report
+        string="ใบสำคัญซื้อ"
+        id="purchase_voucher_pdf_report"
+        model="account.move"
+        name="pfb_purchase_voucher_qweb.purchase_voucher_pdf_report_pdf"
+        file="pfb_purchase_voucher_qweb.purchase_voucher_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="pfb_purchase_voucher_qweb.paperformat_purchase_voucher"
+    />
+
+
+</odoo>

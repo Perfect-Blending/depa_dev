@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_bione_billing" model="ir.sequence">
+            <field name="name">BiOne Billing</field>
+            <field name="code">bione.billing</field>
+            <field name="prefix">BL-</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+
+    <data>
+
+        <!-- bione.billing -->
+        <record id="view_bione_billing_form" model="ir.ui.view">
+            <field name="name">bione.billing.form</field>
+            <field name="model">bione.billing</field>
+            <field name="arch" type="xml">
+                <form string="Billing" version="12.0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="customer_id" domain="[('customer','=',True)]"/>
+                                <field name="amount_residual" readonly="1"/>
+                                <field name="amount_refund" readonly="1"/>
+                                <field name="amount_billing" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="name" attrs="{'readonly':[('change_number', '=', False)]}"/>
+                                <field name="date"/>
+                                <field name="date_due"/>
+                                <field name="change_number" groups="base.group_erp_manager"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Invoices">
+                                <group string="ใบแจ้งหนี้/ใบกำกับภาษี" colspan="4">
+                                    <field name="invoice_ids" nolabel="1" colspan="4"
+                                           domain="[('state','not in',['draft','cancel','paid']),
+                                        ('partner_id','=',customer_id),
+                                        ('billing_id','=',False),
+                                        ('type','in',['out_invoice'])]">
+                                        <tree string="Invoices">
+                                            <field name="number" string="เลขที่ใบกำกับ"/>
+                                            <field name="date_invoice" string="ลงวันที่"/>
+                                            <field name="date_due" string="วันครบกำหนด"/>
+                                            <field name="origin" string="อ้างถึง"/>
+                                            <field name="residual_signed" string="ยอดเงิน"/>
+                                            <field name="amount_tax" invisible="1"/>
+                                            <field name="amount_total_signed" string="ยอดคงเหลือ" sum="Total"/>
+                                            <field name="state" string="สถานะ" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group string="ใบลดหนี้" colspan="4">
+                                    <field name="refund_ids" nolabel="1" colspan="4"
+                                           domain="[('state','not in',['draft','cancel','paid']),
+                                        ('partner_id','=',customer_id),
+                                        ('billing_id','=',False),
+                                        ('type','in',['out_refund'])]">
+                                        <tree string="Refunds">
+                                            <field name="number" string="ใบลดหนี้"/>
+                                            <field name="date_invoice" string="ลงวันที่"/>
+                                            <field name="date_due" string="วันครบกำหนด"/>
+                                            <field name="origin" string="อ้างถึง"/>
+                                            <field name="residual_signed" string="ยอดเงิน"/>
+                                            <field name="amount_tax" invisible="1"/>
+                                            <field name="amount_total_signed" string="ยอดคงเหลือ" sum="Total"/>
+                                            <field name="state" string="สถานะ" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Note">
+                                <field name="note" nolabel="1" colspan="4"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_bione_billing_tree" model="ir.ui.view">
+            <field name="name">bione.billing.tree</field>
+            <field name="model">bione.billing</field>
+            <field name="arch" type="xml">
+                <tree string="Billing">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="date_due"/>
+                    <field name="customer_id"/>
+                    <field name="amount_residual"/>
+                    <field name="amount_refund"/>
+                    <field name="amount_billing"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_bione_billing_search" model="ir.ui.view">
+            <field name="name">bione.billing.search</field>
+            <field name="model">bione.billing</field>
+            <field name="arch" type="xml">
+                <search string="Billing">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="date_due"/>
+                    <field name="customer_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_bione_billing" model="ir.actions.act_window">
+            <field name="name">ใบวางบิล</field>
+            <field name="res_model">bione.billing</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_bione_billing_tree"/>
+            <field name="context">{}</field>
+            <field name="domain"></field>
+            <field name="search_view_id" ref="view_bione_billing_search"/>
+        </record>
+
+        <menuitem action="action_bione_billing" id="menu_bione_billing"
+                  parent="account.menu_finance_receivables" sequence="100"/>
+
+    </data>
+</odoo>

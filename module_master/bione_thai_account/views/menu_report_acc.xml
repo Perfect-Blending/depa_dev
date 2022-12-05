@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <!--ระบบรายงานบัญชีไทย-->
+
+    <menuitem name="ระบบรายงานบัญชีไทย"
+              id="menu_account_thai_report_all"
+              parent="account.menu_finance_reports"
+              sequence="20"/>
+
+        <menuitem name="1.รายงานลูกหนี้"
+              id="report_accounts_receivable"
+              parent="menu_account_thai_report_all"
+              sequence="1"/>
+
+        <menuitem name="2.รายงานเจ้าหนี้"
+              id="report_account_payable"
+              parent="menu_account_thai_report_all"
+              sequence="2"/>
+
+        <menuitem name="3.รายงานเกี่ยวกับเช็ค"
+              id="report_account_cheque"
+              parent="menu_account_thai_report_all"
+              sequence="3"/>
+
+        <menuitem name="4.รายงานรายงานสินค้าคงคลัง"
+              id="report_account_inventory_report"
+              parent="menu_account_thai_report_all"
+              sequence="4"/>
+
+        <menuitem name="5.รายงานบัญชี"
+              id="report_account_account"
+              parent="menu_account_thai_report_all"
+              sequence="5"/>
+
+        <menuitem name="6.รายงานภาษี"
+              id="report_account_tax"
+              parent="menu_account_thai_report_all"
+              sequence="6"/>
+
+        <menuitem name="7.รายงาน ภงด."
+              id="report_account_pnd"
+              parent="menu_account_thai_report_all"
+              sequence="7"/>
+
+        <menuitem name="8.รายงานสินทรัพย์"
+              id="report_account_asset"
+              parent="menu_account_thai_report_all"
+              sequence="8"/>
+
+        <menuitem name="9.รายงานวิเคาระห์การขาย"
+              id="report_account_sales_analysis"
+              parent="menu_account_thai_report_all"
+              sequence="9"/>
+
+
+        <menuitem name="10.รายงานวิเคาระห์การซื้อ"
+              id="report_account_purchase_analysis"
+              parent="menu_account_thai_report_all"
+              sequence="10"/>
+
+
+
+
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="wizard_fin201_approval_view" model="ir.ui.view">
+            <field name="name">view.wizard.fin201.approval.form</field>
+            <field name="model">wizard.fin201.approval</field>
+            <field name="arch" type="xml">
+                <form string="FIN201 Approval">
+                    <group>
+                        <group attrs="{'invisible':[('next_approval_id','=',False)]}">
+                            <field name="next_approval_id" readonly="1"/>
+                            <field name="employee_user_id" string="Approver User" readonly="1"/>
+                            <field name="approval_type" string="Approve Type" readonly="1"/>
+                        </group>
+                        <group attrs="{'invisible':[('next_approval_id','!=',False)]}">
+                            <field name="next_comment_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="next_comment_user_ids" widget="many2many_tags" readonly="1" default_order="id"/>
+                        </group>
+                    </group>
+                    <group string="Memo" colspan="12"/>
+                    <field name="note" colspan="12"/>
+                    <footer>
+                        <div style="display:flex; justify-content: space-between;" class="approver_button">
+                            <button string="Approve" name="action_approve" type="object" class="btn-success" attrs="{'invisible':[('next_approval_id','=',False)]}"/>
+                            <button string="Comment" name="action_comment" type="object" class="btn-info" attrs="{'invisible':[('next_approval_id','!=',False)]}"/>
+                            <button string="Discard" class="btn-secondary" special="cancel"/>
+                            <button string="Reject" name="action_reject" type="object" class="btn-danger" attrs="{'invisible':[('next_approval_id','=',False)]}" confirm="Are you sure you want to Reject?"/>
+                        </div>
+                        <script>
+                            $(function(){
+                                var invisible_button_count = 0;
+                                $('.approver_button button').each(function(){
+                                    if($(this).hasClass('o_invisible_modifier')) {
+                                        invisible_button_count += 1;
+                                    }
+                                });
+                                if(invisible_button_count == 2){
+                                    $('.approver_button').css('width', '50%');
+                                }
+                            })
+                        </script>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_wizard_fin201_approval"
+            name="FIN201 Approval"
+            res_model="wizard.fin201.approval"
+            view_mode="form" target="new" view_type="form"/>
+
+    </data>
+</odoo>

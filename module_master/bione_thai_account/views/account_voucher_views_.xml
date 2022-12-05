@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Sales Voucher -->
+    <record model="ir.ui.view" id="view_sale_receipt_form">
+        <field name="name">account.voucher.sale.form</field>
+        <field name="model">account.voucher</field>
+        <field name="inherit_id" ref="account_voucher.view_sale_receipt_form" />
+        <field name="arch" type="xml">
+            <button name="proforma_voucher" position ="after">
+                <field name="ref" invisible = '1'/>
+                <button class="oe_highlight" name="button_preview" string ="Preview Journal" type="object" context="{'action_id':active_id}"     attrs="{'invisible': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"/>
+                <button name="button_get_create_new_tax" string ="Create new invoice" type="object" context="{'action_id':active_id}" states="posted" invisible = '1'/>
+                <button name="%(ac_account_thai.action_account_invoice_refund_credit_note)d" type='action' string='Add Credit Note'
+                            groups="account.group_account_invoice" attrs="{'invisible': ['|',('state', 'in', ('draft'))]}"/>
+            </button>
+            <label for="number"  position='replace'/>
+            <field name="number" position = 'before'>
+                <div class="oe_button_box" name="button_box">
+                    <field name="is_refund" invisible = '1'/>
+                    <button class="oe_stat_button" name="button_get_refund"
+                            attrs="{'invisible': [('is_refund', '=', False)]}"
+                            string="Related Refund" type="object"
+                             icon="fa-refresh"/>
+                </div>
+            </field>
+
+            <field name="currency_id" position = 'replace'/>
+            <field name="payment_journal_id" position = 'replace'/>
+            <field name="account_date" position = 'after'>
+                <field name="currency_id" attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}" />
+            </field>
+            <field name="pay_now" position = 'replace'>
+                <field name="pay_now" required="1"  attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"/>
+            </field>
+            <field name="partner_id" position = 'replace'>
+                <field name="partner_id" domain="[('customer','=',True)]" string="Customer" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}' attrs="{'readonly': ['|',('state', '!=', 'draft')]}"/>
+            </field>
+
+            <field name="journal_id" position = 'replace'>
+                <field name="journal_id"
+                       domain="[('type','=','sale')]"
+                       widget="selection"
+                       groups="account.group_account_user" attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"/>
+            </field>
+            <field name="date" position = 'replace'>
+                <field name="date" attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"/>
+            </field>
+            <field name="account_date" position = 'replace'>
+                <field name="account_date" attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"/>
+            </field>
+
+            <field name="tax_amount" position = 'after'>
+                <field name="wht_amount" />
+            </field>
+
+            <!--<xpath expr="//notebook/page[1]" position="inside">-->
+            <field name="narration" position ="before">
+                <field name="ref" invisible = '1'/>
+                <group>
+                    <button name="compute_taxes" type="object" string="Compute Taxes" context="{'type_tax_use':'sale'}" class="btn-primary oe_edit_only" attrs="{'invisible': ['|',('state', 'not in', ('draft','confirm')),('ref','!=',False)]}"/>
+                </group>
+            </field>
+            <field name="line_ids" position = 'replace'>
+                <field name="line_ids">
+                    <tree string="Voucher Lines" editable="bottom">
+                        <field name="ref" invisible="1"/>
+                        <field name="product_id" attrs="{'readonly': ['|',('ref','!=',False)]}"/>
+                        <field name="name"/>
+                        <field name="account_id" groups="account.group_account_user" attrs="{'readonly': ['|',('ref','!=',False)]}" options="{'no_create': True}" domain="[('deprecated', '=', False)]"/>
+                        <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting" attrs="{'readonly': ['|',('ref','!=',False)]}"/>
+                        <field name="type_tax" invisible="1"/>
+                        <field name="type_wht" invisible="1"/>
+                        <field name="tax_ids" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('tax_group','!=',type_tax),('tax_group','!=',type_wht)]" attrs="{'readonly': ['|',('ref','!=',False)]}"/>
+                        <field name="quantity" attrs="{'readonly': ['|',('ref','!=',False)]}"/>
+                        <field name="price_unit" attrs="{'readonly': ['|',('ref','!=',False)]}"/>
+                        <field name="price_subtotal" attrs="{'readonly': ['|',('ref','!=',False)]}"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                    </tree>
+                </field>
+            </field>
+            <xpath expr="//notebook/page[2]" position="replace">
+                <page string="Taxes" name="taxes">
+                    <group string="VAT" col="4">
+                        <field name="vat_lines" nolabel="1" colspan="4" attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"
+                            context="
+                                    {'date':date
+                                    ,'partner_id':partner_id
+                                    ,'type_tax_use':'sale'
+                                    ,'company_id':company_id
+                                    ,'tree_view_ref':'ac_account_thai.view_default_vat_line_tree'
+                                    ,'form_view_ref':'ac_account_thai.view_default_vat_line_form'
+                            }"
+                        />
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="manual_vat" attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label string='Manual VAT'/>
+                                </div>
+                            </div>
+                        </div>
+                    </group>
+                    <group string="WHT">
+                        <field name="wht_lines" nolabel="1" colspan="8" attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"
+                            context="
+                                    {'date':date
+                                    ,'partner_id':partner_id
+                                    ,'type_tax_use':'sale'
+                                    ,'company_id':company_id
+                                    ,'tree_view_ref':'ac_account_thai.view_default_wht_line_tree'
+                                    ,'form_view_ref':'ac_account_thai.view_default_wht_line_form'
+                            }"
+                        />
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="manual_wht" attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label string='Manual WHT'/>
+                                </div>
+                            </div>
+                        </div>
+                    </group>
+                </page>
+                <page name = "payment" string="Payment" attrs="{'invisible': [('pay_now', '=', 'pay_later')]}">
+                    <group string="Cash">
+                        <field name="cash_moves" attrs="{'readonly': ['|',('state', 'not in',['draft','confirm']),('ref','!=',False)]}" nolabel="1"
+                            context="{
+                                'type':'in',
+                                'amount':amount,
+                                'company_id':company_id,
+                                'currency_rate':currency_rate,
+                                'currency_id':currency_id,
+                                'tree_view_ref':'ac_account_thai.view_default_cash_move_tree',
+                                'form_view_ref':'ac_account_thai.view_default_cash_move_form'
+                                }"
+                        />
+                    </group>
+                    <group string="Cheques">
+                        <field name="cheques" attrs="{'readonly': ['|',('state', 'not in',['draft','confirm']),('ref','!=',False)]}" nolabel="1"
+                            context="{
+                                'form_view_ref':'ac_account_thai.view_account_cheque_form',
+                                'tree_view_ref':'ac_account_thai.view_account_cheque_tree',
+                                'date':date,
+                                'currency_rate':currency_rate,
+                                'currency_id':currency_id,
+                                'partner_id':partner_id,
+                                'amount':amount,
+                                'type':'in',
+                                }"
+                        />
+                    </group>
+                    <group string="Credit Cards">
+                        <field name="credit_cards" attrs="{'readonly': ['|',('state', 'not in',['draft','confirm']),('ref','!=',False)]}" nolabel="1"
+                            context="{
+                                'form_view_ref':'ac_account_thai.view_account_credit_card_form',
+                                'tree_view_ref':'ac_account_thai.view_account_credit_card_tree',
+                                'date':date,
+                                'partner_id':partner_id,
+                                'currency_rate':currency_rate,
+                                'currency_id':currency_id,
+                                'amount':amount,
+                                'type': 'in',
+                                }"
+                        />
+                    </group>
+                    <group string="Transfer">
+                        <field name="bank_moves" attrs="{'readonly': ['|',('state', 'not in',['draft','confirm']),('ref','!=',False)]}" nolabel="1"
+                            context="{
+                                'form_view_ref':'ac_account_thai.view_default_bank_move_form',
+                                'tree_view_ref':'ac_account_thai.view_default_bank_move_tree',
+                                'date':date,
+                                'amount':amount,
+                                'currency_rate':currency_rate,
+                                'currency_id':currency_id,
+                                'type': 'in',
+                                'subtype':'transfer',
+                                }"
+                        />
+                    </group>
+                </page>
+                <page string="Other Info" groups="account.group_account_user">
+                    <group>
+                        <field name="move_id" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="currency_rate"  attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"/>
+                        <field name="currency_rate_date"  attrs="{'readonly': ['|',('state', '!=', 'draft'),('ref','!=',False)]}"/>
+                    </group>
+                </page>
+                <page string="invisible" invisible="1">
+                    <group col="2">
+                        <group>
+                            <field name="base"/>
+                            <field name="amount_word"/>
+                            <field name="amount_word_eng"/>
+                            <field name="taxinvoice_no"/>
+                            <field name="check_doc_type"/>
+                            <field name="cash_amount"/>
+                            <field name="bank_amount"/>
+                        </group>
+                        <group>
+                            <field name="check_cash"/>
+                            <field name="check_cheques"/>
+                            <field name="check_bank"/>
+                            <field name="check_credit"/>
+                        </group>
+                        <group>
+                            <field name="cheque_number1" />
+                            <field name="cheque_date1" />
+                            <field name="cheque_bank1" />
+                            <field name="cheque_branch1" />
+                            <field name="cheque_amount1" />
+
+                            <field name="cheque_number2" />
+                            <field name="cheque_date2" />
+                            <field name="cheque_bank2" />
+                            <field name="cheque_branch2" />
+                            <field name="cheque_amount2" />
+                        </group>
+                        <group>
+                            <field name="credit_number1" />
+                            <field name="credit_date1" />
+                            <field name="credit_bank1" />
+                            <field name="credit_branch1" />
+                            <field name="credit_amount1" />
+
+                            <field name="credit_number2" />
+                            <field name="credit_date2" />
+                            <field name="credit_bank2" />
+                            <field name="credit_branch1" />
+                            <field name="credit_amount2" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_voucher.action_sale_receipt" model="ir.actions.act_window">
+        <field name="name">Sales Receipts</field>
+        <field name="res_model">account.voucher</field>
+        <field name="context">{'default_voucher_type': 'sale', 'voucher_type': 'sale', 'menu_active': 'sale'}</field>
+    </record>
+
+
+    <!--  Purchase Vouchers -->
+    <record model="ir.ui.view" id="view_purchase_receipt_form">
+        <field name="name">account.voucher.purchase.form</field>
+        <field name="model">account.voucher</field>
+        <field name="inherit_id" ref="account_voucher.view_purchase_receipt_form" />
+        <field name="arch" type="xml">
+            <button name="proforma_voucher" position ="after">
+                <button class="oe_highlight" name="button_preview" string ="Preview Journal" type="object" context="{'action_id':active_id}"    attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                <button name="%(ac_account_thai.action_account_invoice_refund_credit_note)d" type='action' string='Add Credit Note' groups="account.group_account_invoice" attrs="{'invisible': ['|',('state', 'in', ('draft'))]}"/>
+            </button>
+            <label for="number"  position='replace'/>
+            <field name="number" position = 'before'>
+                <div class="oe_button_box" name="button_box">
+                    <field name="is_refund" invisible = '1'/>
+                    <button class="oe_stat_button" name="button_get_refund"
+                            attrs="{'invisible': [('is_refund', '=', False)]}"
+                            string="Related Refund" type="object"
+                             icon="fa-refresh"/>
+
+                    <field name="asset_count" invisible = '1'/>
+                    <button type="object"
+                        name="action_view_asset"
+                        class="oe_stat_button"
+                        icon="fa-bars" attrs="{'invisible':[('asset_count', '=',0)]}">
+                        <field name="asset_count" widget="statinfo" string="Fixed Asset"/>
+                    </button>
+                </div>
+            </field>
+            <field name="currency_id" position = 'replace'/>
+            <field name="payment_journal_id" position = 'replace'/>
+            <field name="account_date" position = 'after'>
+                <field name="currency_id" />
+            </field>
+
+            <field name="tax_amount" position = 'after'>
+                <field name="wht_amount" />
+            </field>
+            <field name="narration" position ="before">
+                <group>
+                    <button name="compute_taxes" type="object" string="Compute Taxes" context="{'type_tax_use':'purchase'}" class="btn-primary oe_edit_only" states="draft,confirm"/>
+                </group>
+            </field>
+            <field name="line_ids" position = 'replace'>
+                <field name="line_ids">
+                    <tree string="Voucher Lines" editable="bottom">
+                        <field name="product_id"/>
+                        <field name="name"/>
+                        <field name="account_id" groups="account.group_account_user" options="{'no_create': True}" domain="[('deprecated', '=', False)]"/>
+                        <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                        <field name="type_tax" invisible="1"/>
+                        <field name="type_wht" invisible="1"/>
+                        <field name="tax_ids" widget="many2many_tags" domain="[('type_tax_use','=','purchase'),('tax_group','!=',type_tax),('tax_group','!=',type_wht)]"/>
+                        <field name="quantity"/>
+                        <field name="price_unit"/>
+                        <field name="price_subtotal"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                    </tree>
+                </field>
+            </field>
+            <xpath expr="//notebook/page[2]" position="replace">
+                <page string="Taxes" name="taxes">
+                    <group string="VAT" col="4">
+                        <field name="vat_lines" nolabel="1" colspan="4"
+                            context="
+                                    {'date':date
+                                    ,'partner_id':partner_id
+                                    ,'type_tax_use':'purchase'
+                                    ,'company_id':company_id
+                                    ,'tree_view_ref':'ac_account_thai.view_default_vat_line_tree'
+                                    ,'form_view_ref':'ac_account_thai.view_default_vat_line_form'
+                            }"
+                        />
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="manual_vat"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label string='Manual VAT'/>
+                                </div>
+                            </div>
+                        </div>
+                    </group>
+                    <group string="WHT">
+                        <field name="wht_lines" nolabel="1" colspan="8"
+                            context="
+                                    {'date':date
+                                    ,'partner_id':partner_id
+                                    ,'type_tax_use':'purchase'
+                                    ,'company_id':company_id
+                                    ,'tree_view_ref':'ac_account_thai.view_default_wht_line_tree'
+                                    ,'form_view_ref':'ac_account_thai.view_default_wht_line_form'
+                            }"
+                        />
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="manual_wht"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label string='Manual WHT'/>
+                                </div>
+                            </div>
+                        </div>
+                    </group>
+                </page>
+                <page name = "payment" string="Payment" attrs="{'invisible': [('pay_now', '=', 'pay_later')]}">
+                    <group string="Cash">
+                        <field name="cash_moves" attrs="{'readonly': [('state', 'not in',['draft','confirm'])]}" nolabel="1"
+                            context="{
+                                'type':'out',
+                                'amount':amount,
+                                'company_id':company_id,
+                                'currency_rate':currency_rate,
+                                'currency_id':currency_id,
+                                'tree_view_ref':'ac_account_thai.view_default_cash_move_tree',
+                                'form_view_ref':'ac_account_thai.view_default_cash_move_form'
+                                }"
+                        />
+                    </group>
+                    <group string="Cheques">
+                        <field name="cheques" attrs="{'readonly': [('state', 'not in',['draft','confirm'])]}" nolabel="1"
+                            context="{
+                                'form_view_ref':'ac_account_thai.view_account_cheque_form',
+                                'tree_view_ref':'ac_account_thai.view_account_cheque_tree',
+                                'date':date,
+                                'currency_rate':currency_rate,
+                                'currency_id':currency_id,
+                                'partner_id':partner_id,
+                                'amount':amount,
+                                'type':'out',
+                                }"
+                        />
+                    </group>
+                    <group string="Credit Cards">
+                        <field name="credit_cards" attrs="{'readonly': [('state', 'not in',['draft','confirm'])]}" nolabel="1"
+                            context="{
+                                'form_view_ref':'ac_account_thai.view_account_credit_card_form',
+                                'tree_view_ref':'ac_account_thai.view_account_credit_card_tree',
+                                'date':date,
+                                'partner_id':partner_id,
+                                'currency_rate':currency_rate,
+                                'currency_id':currency_id,
+                                'amount':amount,
+                                'type': 'out',
+                                }"
+                        />
+                    </group>
+                    <group string="Transfer">
+                        <field name="bank_moves" attrs="{'readonly': [('state', 'not in',['draft','confirm'])]}" nolabel="1"
+                            context="{
+                                'form_view_ref':'ac_account_thai.view_default_bank_move_form',
+                                'tree_view_ref':'ac_account_thai.view_default_bank_move_tree',
+                                'date':date,
+                                'amount':amount,
+                                'currency_rate':currency_rate,
+                                'currency_id':currency_id,
+                                'type': 'out',
+                                'subtype':'transfer',
+                                }"
+                        />
+                    </group>
+                </page>
+                <page string="Other Info" groups="account.group_account_user">
+                    <group>
+                        <field name="move_id" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="currency_rate"/>
+                        <field name="currency_rate_date"/>
+                    </group>
+                </page>
+                <page string="invisible" invisible="1">
+                    <group col="2">
+                        <group>
+                            <field name="base"/>
+                            <field name="amount_word"/>
+                            <field name="amount_word_eng"/>
+                            <field name="taxinvoice_no"/>
+                            <field name="check_doc_type"/>
+                            <field name="cash_amount"/>
+                            <field name="bank_amount"/>
+                        </group>
+                        <group>
+                            <field name="check_cash"/>
+                            <field name="check_cheques"/>
+                            <field name="check_bank"/>
+                            <field name="check_credit"/>
+                        </group>
+                        <group>
+                            <field name="cheque_number1" />
+                            <field name="cheque_date1" />
+                            <field name="cheque_bank1" />
+                            <field name="cheque_branch1" />
+                            <field name="cheque_amount1" />
+
+                            <field name="cheque_number2" />
+                            <field name="cheque_date2" />
+                            <field name="cheque_bank2" />
+                            <field name="cheque_branch2" />
+                            <field name="cheque_amount2" />
+                        </group>
+                        <group>
+                            <field name="credit_number1" />
+                            <field name="credit_date1" />
+                            <field name="credit_bank1" />
+                            <field name="credit_branch1" />
+                            <field name="credit_amount1" />
+
+                            <field name="credit_number2" />
+                            <field name="credit_date2" />
+                            <field name="credit_bank2" />
+                            <field name="credit_branch1" />
+                            <field name="credit_amount2" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="account_voucher.action_purchase_receipt" model="ir.actions.act_window">
+        <field name="name">Purchase Receipts</field>
+        <field name="res_model">account.voucher</field>
+        <field name="context">{'default_voucher_type': 'purchase', 'voucher_type': 'purchase', 'menu_active': 'purchase'}</field>
+    </record>
+
+
+</odoo>

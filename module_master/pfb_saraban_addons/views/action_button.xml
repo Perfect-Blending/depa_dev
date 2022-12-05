@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<!--<act_window name="Send Email" -->
+<!--		res_model="send.email"-->
+<!--		src_model="document.internal.main" -->
+<!--		view_type="form"-->
+<!--		view_mode="form"-->
+<!--		multi="True"-->
+<!--		target="new" -->
+<!--		key2="client_action_multi"-->
+<!--		id="action_document_internal_main_mail" />-->
+
+</odoo>

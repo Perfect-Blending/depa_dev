@@ -1,0 +1,137 @@
+// Change Font
+@font-face {
+    font-family: 'THSarabun';
+    src: url('../fonts/THSarabunNew Bold.ttf') format('truetype');
+}
+
+.o_debit_notes_from{
+    font-family: 'THSarabun';
+    font-size: 24px;
+
+    .number_payment {
+        font-size: 24px;
+        position: fixed;
+        top: 120px;
+        right: 50px;
+    }
+
+    .company_vat {
+        font-size: 24px;
+        position: fixed;
+        top: 555px;
+        left: 235px;
+    }
+
+    .company_name {
+        width: 50%;
+        font-size: 24px;
+        position: fixed;
+        top: 590px;
+        left: 235px;
+    }
+
+    .company_address {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 621px;
+        left: 235px;
+    }
+
+    .company_address2 {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 655px;
+        left: 235px;
+    }
+
+    .company_address3 {
+        font-size: 24px;
+        position: fixed;
+        top: 690px;
+        left: 235px;
+    }
+
+
+    .payment_date {
+        font-size: 24px;
+        position: fixed;
+        top: 550px;
+        right: 100px;
+    }
+
+    .payment_terms {
+        width: 10%;
+        font-size: 24px;
+        position: fixed;
+        top: 586px;
+        right: 80px;
+    }
+
+    .due_date {
+        font-size: 24px;
+        position: fixed;
+        top: 620px;
+        right: 100px;
+    }
+
+    .total_amount {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1110px;
+        right: 30px;
+    }
+
+    .amount_vat {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1160px;
+        right: 30px;
+    }
+
+    .grand_total {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1210px;
+        right: 30px;
+    }
+
+    .text_total_py {
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1299px;
+        right: 350px;
+    }
+
+    .payment_cash {
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1096px;
+        left: 50px;
+    }
+
+    .payment_cr {
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1135px;
+        left: 50px;
+    }
+
+    .payment_bank {
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1096px;
+        left: 335px;
+    }
+
+
+
+}

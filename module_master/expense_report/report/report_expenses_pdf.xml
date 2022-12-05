@@ -1,0 +1,272 @@
+<odoo>
+
+      <template id="expense_report_assets_common" name="expense report  common assets" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/expense_report/static/src/css/report.css"/>
+        </xpath>
+    </template>
+
+    <template id="expense_report_view">
+       <t t-call="web.html_container">
+          <div class="article o_expense_report">
+              <br/>
+                <p style="text-align: center;font-size: 22px;">สำนักงานส่งเสริมเศรษฐกิจดิจิทัล</p>
+                <p style="text-align: center; font-size: 18px;">สรุปการเบิกจ่ายเงินสดย่อยประจำวัน - สาขาใหญ่</p>
+                <p style="text-align: center;font-size: 18px;">
+                    <strong>ช่วงวันที่</strong>
+                    <t t-esc="date_from_test[8] "/>
+                    <t t-esc="date_from_test[9]"/>/
+                    <t t-esc="date_from_test[5:6]"/>
+                    <t t-esc="date_from_test[6:7]"/>/
+                    <t t-esc="yaer"/>
+                    <strong>ถึง</strong>
+                    <t t-esc="date_to_test[8:9]"/>
+                    <t t-esc="date_to_test[9:10]"/>/
+                    <t t-esc="date_to_test[5:6]"/>
+                    <t t-esc="date_to_test[6:7]"/>/
+                    <t t-esc="yaer"/>
+                </p>
+           <div class="container o_expense_report">
+               <table class="center" width="100%"  style="border-collapse: collapse;">
+                    <thead align="center">
+                        <tr>
+                            <th style="border: 1px solid black">ที่</th>
+                            <th style="border: 1px solid black">วันที่</th>
+                            <th style="border: 1px solid black">เลขที่เอกสาร</th>
+                            <th style="border: 1px solid black">รายการ</th>
+                            <th style="border: 1px solid black">ผู้รับเงิน</th>
+                            <th style="border: 1px solid black">รับเงินสดย่อย</th>
+                            <th style="border: 1px solid black">จำนวนเงินสด ย่อยจ่าย</th>
+                            <th style="border: 1px solid black">จำนวนเงินสด ย่อยคงเหลือ</th>
+                        </tr>
+                    </thead>
+                   <tbody>
+                       <tr>
+                           <td style="border-bottom: 1px solid black;border-left: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black">ยอดยกมา</td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border: 1px solid black"></td>
+                       </tr>
+                       <tr>
+                           <td style="border-bottom: 1px solid black;border-left: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black">เบิกชดเชยเงินสดย่อย</td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border: 1px solid black" align="right"><t t-esc="'{0:,.2f}'.format(init_balance)"/></td>
+                           <td style="border: 1px solid black"></td>
+                           <td style="border: 1px solid black"></td>
+                       </tr>
+                       <!-- (3) = init_balance -->
+                       <t t-value='0' t-set='x' />
+                       <t t-set="count" t-value="0"/>
+                       <t t-set="sum_cash" t-value="0"/>
+                       <t t-set="sum_receipt" t-value="0"/>
+                       <t t-foreach="docs" t-as="doc">
+                           <t t-foreach="doc.sheet_id.expense_line_ids" t-as="line_ex">
+                               <tr>
+                                   <td style="border: 1px solid black" align="center">
+                                      <t t-set="count" t-value="count+1"/>
+                                       <t t-esc="count"/>
+                                   </td>
+                                    <td style="border: 1px solid black">
+                                        <t t-set="year3" t-value="(int((line_ex.date).strftime('%Y')))+543"/>
+                                        <t t-set="date3" t-value="'%s/%s' %((line_ex.date).strftime('%d/%m'),year3)"/>
+                                        <t t-esc="date3"/>
+                                    </td>
+                                    <td style="border: 1px solid black"><span t-field="doc.sheet_id.account_move_id"/></td>
+                                    <td style="border: 1px solid black"><span t-field="line_ex.name"/></td>
+                                    <td style="border: 1px solid black"><span t-field="doc.employee_id"/></td>
+                                    <td style="border: 1px solid black"></td>
+                                    <td style="border: 1px solid black" align="right">
+                                        <t t-esc="'{0:,.2f}'.format(line_ex.total_amount)"/>
+                                        <t t-set="sum_receipt" t-value="sum_receipt+line_ex.total_amount"/>
+                                    </td>
+                                    <td style="border: 1px solid black" align="right">
+                                        <!-- (3) - (2) -->
+                                            <t t-value='init_balance-line_ex.total_amount' t-set='x' />
+                                            <t t-set="init_balance" t-value="x"/>
+                                            <t t-set="sum_cash" t-value="sum_cash+init_balance"/>
+                                            <t t-esc="'{0:,.2f}'.format(x)" />
+                                    </td>
+                               </tr>
+                           </t>
+                       </t>
+                       <tr>
+                           <td style="border-bottom: 1px solid black;border-left: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black"></td>
+                           <td style="border-bottom: 1px solid black">เงินสดย่อยคงเหลือ</td>
+                           <td style="border: 1px solid black"></td>
+                           <td style="border: 1px solid black" align="right"><t t-esc="'{0:,.2f}'.format(sum_receipt)"/></td>
+                           <td style="border: 1px solid black" align="right"><t t-esc="'{0:,.2f}'.format(x)" /></td>
+                       </tr>
+                       <tr>
+                           <td ></td>
+                           <td></td>
+                           <td></td>
+                           <td ></td>
+                           <td ><br/>ค่าใช้จ่ายที่เบิกจากเงินสดย่อย</td>
+                           <td  align="right"><br/><t t-esc="'{0:,.2f}'.format(sum_receipt)"/></td>
+                           <td></td>
+                           <td></td>
+                       </tr>
+                       <tr>
+                           <td ></td>
+                           <td></td>
+                           <td></td>
+                           <td ></td>
+                           <td >เงินสดย่อยคงเหลือ</td>
+                           <td  align="right"><t t-esc="'{0:,.2f}'.format(x)"/></td>
+                           <td></td>
+                           <td></td>
+
+                       </tr>
+                       <tr>
+                           <td ></td>
+                           <td></td>
+                           <td></td>
+                           <td ></td>
+                           <td >รวม</td>
+                           <td  align="right" style=" border-bottom: double;border-top: 1px solid black;">
+                               <t t-set="sum_end" t-value="0"/>
+                               <t t-set="sum_end" t-value="sum_receipt+x"/>
+                               <t t-esc="'{0:,.2f}'.format(sum_end)"/></td>
+                           <td></td>
+                           <td></td>
+                       </tr>
+                   </tbody>
+               </table>
+               <table>
+
+               </table>
+           </div>
+          </div>
+        </t>
+    </template>
+
+    <template id="expense_report_view2">
+       <t t-call="web.html_container">
+          <div class="o_expense_report">
+              <br/>
+                <p style="text-align: center;font-size: 22px;">ทะเบียนคุมลูกหนี้เงินยืมทดรองจ่าย</p>
+                <p style="text-align: center; font-size: 18px;">ปี
+                    <t t-set="year" t-value="(int((date).strftime('%Y')))+543"/>
+                    <t t-esc="year"/>
+                </p>
+           <div class="container o_expense_report">
+               <div class="container">
+                    <div class="table-responsive">
+                        <table  class="table table-bordered"   style="border-collapse: collapse;">
+                    <thead align="center">
+                        <tr style="background-color: #4CAF50; ">
+                            <th style="border: 1px solid black; margin-left:auto;margin-right:auto;">เลขที่สัญญา FIN 401</th>
+                            <th style="border: 1px solid black">วันที่อนุมัติ</th>
+                            <th style="border: 1px solid black">ชื่อผู้ยืม</th>
+                            <th style="border: 1px solid black">ฝ่าย/ส่วนงาน</th>
+                            <th style="border: 1px solid black">จำนวนเงินยืมทดรอง</th>
+                            <th style="border: 1px solid black">วันที่จ่าย</th>
+                            <th style="border: 1px solid black">วันที่เริ่มยืม</th>
+                            <th style="border: 1px solid black">วันที่สิ้นสุดยืม </th>
+                            <th style="border: 1px solid black">วันครบกำหนด </th>
+                            <th style="border: 1px solid black">วันที่รับเอกสาร </th>
+                            <th style="border: 1px solid black">วันที่รับเงิน </th>
+                            <th style="border: 1px solid black">ค่าใช้จ่ายจริง </th>
+                            <th style="border: 1px solid black">วันที่อนุมัติหักล้างเงินทดรอง </th>
+                            <th style="border: 1px solid black">หมายเหตุ </th>
+                        </tr>
+                    </thead>
+                   <tbody>
+                       <t t-set="count_sheet" t-value="0"/>
+                       <t t-foreach="docs" t-as="doc">
+                           <t t-foreach="doc.sheet_id.expense_line_ids" t-as="line_ex">
+                               <tr>
+                                   <t t-set="fin" t-value="doc.env['fw_pfb_fin_system_401'].search([('fin_no', '=', doc.reference)])"/>
+                                   <td style="border: 1px solid black" align="center"><span t-field="doc.reference"/></td>
+                                    <td style="border: 1px solid black"><t t-esc="date_tb"/></td>
+                                    <td style="border: 1px solid black"><span t-field="doc.employee_id"/></td>
+                                    <td style="border: 1px solid black">
+                                         <t t-if="doc.sheet_id.employee_id.department_id">
+                                             <span t-field="doc.sheet_id.employee_id.department_id.name"/>
+                                        </t>
+                                    </td>
+                                    <td style="border: 1px solid black" align="right"><t t-esc="'{0:,.2f}'.format(doc.total_amount)"/></td>
+                                    <td style="border: 1px solid black">
+                                        <t t-set="year" t-value="(int((doc.sheet_id.accounting_date).strftime('%Y')))+543"/>
+                                        <t t-set="sheet_day" t-value="'%s/%s' %((doc.sheet_id.accounting_date).strftime('%d/%m'),year)"/>
+                                        <t t-esc="sheet_day"/>
+                                    </td>
+                                    <td style="border: 1px solid black"><t t-esc="sheet_day"/></td>
+                                    <td style="border: 1px solid black" >
+                                        <t t-if="fin.activity_end_date">
+                                            <t t-set="activity_end_date" t-value="'%s/%s' %((fin.activity_end_date).strftime('%d/%m'),year)"/>
+                                            <t t-esc="activity_end_date"/>
+                                        </t>
+                                    </td>
+                                    <td style="border: 1px solid black">
+                                        <t t-if="fin.fin_end_date">
+                                            <t t-set="fin401_end_date" t-value="'%s/%s' %((fin.fin_end_date).strftime('%d/%m'),year)"/>
+                                            <t t-esc="fin401_end_date"/>
+                                        </t>
+                                    </td>
+                                    <td style="border: 1px solid black">
+                                        <t t-if="doc.sheet_id.advance_sheet_id.accounting_date">
+                                            <t t-set="year" t-value="(int((doc.sheet_id.advance_sheet_id.accounting_date).strftime('%Y')))+543"/>
+                                            <t t-set="accounting_date" t-value="'%s/%s' %((doc.sheet_id.advance_sheet_id.accounting_date).strftime('%d/%m'),year)"/>
+                                            <t t-esc="accounting_date"/>
+                                        </t>
+                                    </td>
+                                    <td style="border: 1px solid black"> <t t-esc="accounting_date"/></td>
+                                    <td style="border: 1px solid black" align="right">
+                                        <t t-esc="'{0:,.2f}'.format(doc.sheet_id.total_amount)"/>
+                                        <t t-set="count_sheet" t-value="count_sheet + doc.sheet_id.total_amount"/>
+                                    </td>
+                                    <td style="border: 1px solid black" align="center">
+                                        <t t-set="fin201_array" t-value="[]"/>
+                                        <t t-foreach="fin.fin_lines" t-as="fin401_line">
+                                            <t t-set="fin201_line" t-value="fin401_line.env['fw_pfb_fin_system_201_line'].search( [('fin_line_id', '=', fin401_line.fin_line_id )] )"/>
+                                            <t t-foreach="fin201_line" t-as="fin201">
+                                                <t t-esc="fin201_array.append(fin201.fin_id)"/>
+                                            </t>
+                                        </t>
+                                        <t t-if="fin201_array != [] ">
+                                            <t t-set="fin201_day" t-value="'%s/%s' %((fin201_array[0].fin_date).strftime('%d/%m'),year)"/>
+                                            <t t-esc="fin201_day"/>
+                                        </t>
+                                        <t t-else=""></t>
+
+                                    </td>
+                                    <td style="border: 1px solid black"><span t-field="doc.description"/></td>
+                               </tr>
+                           </t>
+                       </t>
+                        <tr>
+                            <td style="border-bottom: 1px solid black" ></td>
+                            <td style="border-bottom: 1px solid black"></td>
+                            <td style="border-bottom: 1px solid black" align="center">รวม</td>
+                            <td style="border-bottom: 1px solid black"></td>
+                            <td style="border: 1px solid black" align="right"><t t-esc=" '{0:,.2f}'.format(init_balance)"/></td>
+                            <td style="border-bottom: 1px solid black"></td>
+                            <td style="border-bottom: 1px solid black" ></td>
+                            <td style="border-bottom: 1px solid black" ></td>
+                            <td style="border-bottom: 1px solid black">รวม</td>
+                            <td style="border-bottom: 1px solid black"></td>
+                            <td style="border-bottom: 1px solid black"></td>
+                            <td style="border: 1px solid black" align="right"> <t t-esc="'{0:,.2f}'.format(count_sheet)"/></td>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                        </tr>
+                   </tbody>
+               </table>
+                    </div>
+               </div>
+           </div>
+          </div>
+        </t>
+    </template>
+</odoo>

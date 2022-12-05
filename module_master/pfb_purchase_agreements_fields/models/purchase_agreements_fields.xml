@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <record id="purchase_requisition_test_inherit" model="ir.ui.view">
+        <field name="name">purchase_requisition.inherit</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="contract_number"/>
+            </field>
+            <notebook>
+                <page string="Committee Name">
+                    <field name="line_agreement">
+                            <tree edit="true" editable="bottom">
+                                <field name="test_two"/>
+                                <field name="test_one"/>
+                                <field name="test_three"/>
+                            </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+   </record>
+
+
+    <record id="purchase_requisition_view_tree_inherit" model="ir.ui.view">
+            <field name="name">purchase.requisition.tree (contract_number)</field>
+            <field name="model">purchase.requisition</field>
+            <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="ordering_date" position="before">
+                        <field name="contract_number"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+</odoo>

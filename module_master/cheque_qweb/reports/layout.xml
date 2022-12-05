@@ -1,0 +1,53 @@
+<odoo>
+    <template id="cheque_report_assets_common" name="Cheque  common assets" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/cheque_qweb/static/scss/style_report.scss"/>
+        </xpath>
+    </template>
+
+    <template id="cheque_pdf_report_layout">
+        <div class="article o_cheque_from" t-attf-style="background-image:url('/cheque_qweb/static/src/img/cheque.png'');
+        background-size:17.5cm 8cm; width:17.5cm; height:8cm;">
+
+            <p><!--.--></p><br/>
+            <div class="company_vat">
+                <t t-if="o.cheque_date">
+                    <div class="row">
+                        <t t-set="year" t-value="(int((o.cheque_date).strftime('%Y')))+543"/>
+                        <t t-set="date_issue" t-value="'%s %s' %((o.cheque_date).strftime('%d %m'),year)"/>
+                        <p class="box-vat"><t t-esc="date_issue[:1]"/></p>
+                        <p class="box-vat vat_tab "><t t-esc="date_issue[1:2]"/></p>
+                        <p class="box-vat2 vat_tab" ><t t-esc="date_issue[2:4]"/></p>
+                        <p class="box-vat2 vat_tab"><t t-esc="date_issue[4:5]"/></p>
+                        <p class="box-vat2 vat_tab"><t t-esc="date_issue[5:7]"/></p>
+                        <p class="box-vat2 vat_tab"><t t-esc="date_issue[7:8]"/></p>
+                        <p class="box-vat2 vat_tab"><t t-esc="date_issue[8:9]"/></p>
+                        <p class="box-vat2 vat_tab"><t t-esc="date_issue[9:10]"/></p>
+                    </div>
+                </t>
+            </div>
+            <div class="company_pay" >
+               <table width="30%">
+                 <thead align="center"  >
+                     <tr >
+                         <td width="10%" style="border-bottom: 1px solid;border-top: 1px solid">A/C PAYEE ONLY</td>
+                     </tr>
+                 </thead>
+               </table>
+            </div>
+            <div class="company_name"><span t-field="o.pay_to"/></div>
+            <div class="text_total">-<t t-esc="thaibahttext" />-</div>
+            <div class="amount_total">=<span t-esc="'{:,.2f}'.format(o.amount)"/>=</div>
+            <div class="text_xxxx">XXXXX</div>
+        </div>
+    </template>
+
+
+    <template id="cheque_pdf_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="cheque_qweb.cheque_pdf_report_layout"/>
+            </t>
+        </t>
+    </template>
+</odoo>

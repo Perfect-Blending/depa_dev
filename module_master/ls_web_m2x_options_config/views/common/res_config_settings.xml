@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="ls_web_m2x_options_config.form_res_config_settings" model="ir.ui.view">
+      <field name="name">Res Config Settings Form View</field>
+      <field name="model">res.config.settings</field>
+      <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+      <field name="arch" type="xml">
+        <div id="business_documents" position="after">
+          <h2 id="web_m2x_options_title">Web M2X Options</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="m2x_create"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="m2x_create"/>
+                <div class="text-muted">
+                  Whether to display the "Create..." entry in dropdown panel for all fields in the odoo instance.
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="m2x_m2o_dialog"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="m2x_m2o_dialog"/>
+                <div class="text-muted">
+                  Whether to display the many2one dialog in case of validation error for all fields in the odoo
+                  instance.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt16 o_settings_container">
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="m2x_create_edit"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="m2x_create_edit"/>
+                <div class="text-muted">
+                  Whether to display "Create and Edit..." entry in dropdown panel for all fields in the odoo instance.
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="m2x_search_more"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="m2x_search_more"/>
+                <div class="text-muted">
+                  Whether the field should always show "Search more..." entry or not.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt16 o_settings_container">
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+              </div>
+              <div class="o_setting_right_pane">
+                <span class="o_form_label">Default Limit</span>
+                <div class="text-muted">
+                  Number of displayed record in drop-down panel for all fields in the odoo instance
+                </div>
+                <div class="content-group">
+                  <div class="mt16 row">
+                    <label for="m2x_limit" string="Limit" class="col-3 o_light_label"/>
+                    <field name="m2x_limit" class="col-5"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </field>
+    </record>
+  </data>
+</odoo>

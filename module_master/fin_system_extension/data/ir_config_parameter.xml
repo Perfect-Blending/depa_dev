@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="ir_config_parameter_database_name" model="ir.config_parameter">
+        <field name="key">database.name</field>
+        <field name="value">''</field>
+    </record>
+
+    <record id="ir_config_parameter_default_outgoing_mail_server" model="ir.config_parameter">
+        <field name="key">default_outgoing_mail_server</field>
+        <field name="value">1</field>
+    </record>
+
+    <record id="ir_config_parameter_default_email_from" model="ir.config_parameter">
+        <field name="key">default_email_from</field>
+        <field name="value">odoo@depa.or.th</field>
+    </record>
+
+    <record id="ir_config_parameter_default_email_cc" model="ir.config_parameter">
+        <field name="key">default_email_cc</field>
+        <field name="value">sonthi.na@depa.or.th</field>
+    </record>
+
+
+</odoo>

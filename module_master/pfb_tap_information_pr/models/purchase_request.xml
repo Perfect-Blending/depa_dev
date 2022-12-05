@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="tap_purchase_request_inherit">
+        <field name="name">ir.sequence</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+           <field name="number_pr" position="after">
+                    <field name="pr_test_on"/>
+           </field>
+            <xpath expr="//page[1]" position="after">
+                <page string="Information">
+                    <group>
+                        <group>
+                            <field name="method_of_recruitment"/>
+                            <field name="date_pr"/>
+<!--                            <field name="select_check"/>-->
+                            <label for="select_check"/>
+                                <div>
+                                    <field name="pr_ck"/>
+                                    <label for="pr_ck"/>
+                                </div>
+                            <label for=""/>
+                                <div>
+                                    <field name="pr2_ck"/>
+                                    <label for="pr2_ck"/>
+                                </div>
+                            <label for=""/>
+                                <div>
+                                    <field name="pr3_ck"/>
+                                    <label for="pr3_ck"/>
+                                </div>
+                            <field name="notes_check" attrs="{'invisible': [('pr3_ck','!=', True)]}"/>
+
+                            <label for=""/>
+                                <div>
+                                    <field name="pr4_ck"/>
+                                    <label for="pr4_ck"/>
+                                </div>
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

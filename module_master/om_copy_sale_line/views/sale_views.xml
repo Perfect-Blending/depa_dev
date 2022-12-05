@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_copy_sale_order_line_form" model="ir.ui.view">
+        <field name="name">view.copy.sale.order.line.form</field>
+     	<field name="model">sale.order</field>
+	    <field name="inherit_id" ref="sale.view_order_form"/>
+     	<field name="arch" type="xml">
+	        <xpath expr="//page[@name='order_lines']//field[@name='order_line']//tree//field[@name='currency_id']" position="after">
+	            <button type="object" name="copy_sale_line" class="fa fa-files-o" attrs="{'invisible':[('state','not in',['draft','sent'])]}"/>
+            </xpath>
+     	</field>
+	 </record>
+</odoo>

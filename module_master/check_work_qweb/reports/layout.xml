@@ -1,0 +1,420 @@
+<odoo>
+    <template id="check_work_report_assets_common" name="Check Work  common assets" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/check_work_qweb/static/css/style_report.css"/>
+        </xpath>
+    </template>
+
+    <template id="check_work_pdf_report_layout">
+            <div class="number_po_x"><t t-esc="number_po"/></div>
+            <div class="wa_name_x"><t t-esc="wa_name"/> </div>
+            <div class="wa_date_x"><t t-esc="wa_date"/> </div>
+            <div class="wa_date_xx"><t t-esc="wa_date2"/></div>
+            <div class="analytic_x"><t t-esc="analytic"/></div>
+            <div class="km_number_x"><t t-esc="number_km"/></div>
+            <div class="km_date_x">
+                <t t-esc="instalment"/>
+            </div>
+
+            <div class="count">
+                <t t-foreach="count2" t-as="line_inv">
+                    <t t-esc="line_inv"/><br/>
+                </t>
+            </div>
+            <div class="product_name_x" style="line-height: 1;">
+                <t t-foreach="product_name" t-as="line_inv">
+                    <t t-esc="line_inv"/><br/>
+                </t>
+            </div>
+            <div class="product_qty_x" align="right">
+                 <t t-foreach="product_qty" t-as="line_inv">
+                    <t t-esc="'{0:,.2f}'.format(line_inv)"/><br/>
+                </t>
+            </div>
+            <div class="price_unit_x" align="right">
+                 <t t-foreach="price_unit" t-as="line_inv">
+                    <t t-esc="'{0:,.2f}'.format(line_inv)"/><br/>
+                </t>
+            </div>
+            <t t-set="sum_wa" t-value="0"/>
+            <div class="price_total_x" align="right">
+                 <t t-foreach="price_total" t-as="line_inv">
+                   <t t-esc="'{0:,.2f}'.format(line_inv)"/><br/>
+                     <t t-set="sum_wa" t-value="sum_wa+line_inv"/>
+                </t>
+            </div>
+
+            <div class="thai_bahttext_x">( <t t-esc="thaibahttext"/> ) </div>
+            <div class="amount_untaxed_x"><t t-esc="'{0:,.2f}'.format(sum_wa)"/></div>
+            <div class="amount_tax_x"><t t-esc="'{0:,.2f}'.format(amount_tax)"/></div>
+            <div class="sum_total_x"><t t-esc="'{0:,.2f}'.format(sum_wa)"/></div>
+
+            <div class="bo_name_x"><t t-esc="bo_name"/></div>
+            <div class="bo_od_x"><t t-esc="bo_od"/></div>
+            <div class="bo_dd_x"><t t-esc="bo_od"/></div>
+            <div class="bo_pn_x"><t t-esc="bo_pn"/></div>
+            <div class="bo_ad_x"><t t-esc="bo_dd"/></div>
+            <!--            box employee-->
+            <t t-if="count_employee > 0 ">
+                <table  width="100%" class="employee_1" style="border-collapse: collapse;">
+                    <thead>
+                        <tr align="center">
+                            <th width="28%" style="padding-right: 20px">( <t t-esc="employee[0]" /> )</th>
+                            <th width="30" >
+                                <t t-if="count_employee >= 2 ">
+                                ( <t t-esc="employee[1]" /> )
+                                </t>
+                            </th>
+                            <th width="30%" >
+                                 <t t-if="count_employee >= 3 ">
+                                    ( <t t-esc="employee[2]" /> )
+                                </t>
+                            </th>
+                             <th width="12%"><!--.--></th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr  align="center">
+                             <td style="padding-right: 20px"> <t t-esc="position[0]" /> </td>
+                             <td>
+                                 <t t-if="count_employee >= 2 ">
+                                      <t t-esc="position[1]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 3 ">
+                                      <t t-esc="position[2]" />
+                                 </t>
+                             </td>
+                         </tr>
+                     </tbody>
+                </table>
+                <table  width="100%" class="employee_2" style="border-collapse: collapse;">
+                    <thead>
+                        <tr align="center">
+                            <th width="28%" style="padding-right: 20px">
+                                <t t-if="count_employee >= 4 ">
+                                ( <t t-esc="employee[3]" /> )
+                                </t>
+                            </th>
+                            <th width="30" >
+                                <t t-if="count_employee >= 5 ">
+                                ( <t t-esc="employee[4]" /> )
+                                </t>
+                            </th>
+                            <th width="30%" >
+                                 <t t-if="count_employee >= 6 ">
+                                    ( <t t-esc="employee[5]" /> )
+                                </t>
+                            </th>
+                             <th width="12%"><!--.--></th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr  align="center">
+                             <td style="padding-right: 20px">
+                                 <t t-if="count_employee >= 4 ">
+                                      <t t-esc="position[3]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 5 ">
+                                      <t t-esc="position[4]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 6 ">
+                                      <t t-esc="position[5]" />
+                                 </t>
+                             </td>
+                         </tr>
+                     </tbody>
+                </table>
+                <table  width="100%" class="employee_3" style="border-collapse: collapse;">
+                    <thead>
+                        <tr align="center">
+                            <th width="28%" style="padding-right: 20px">
+                                <t t-if="count_employee >= 7 ">
+                                ( <t t-esc="employee[6]" /> )
+                                </t>
+                            </th>
+                            <th width="30" >
+                                <t t-if="count_employee >= 8 ">
+                                ( <t t-esc="employee[7]" /> )
+                                </t>
+                            </th>
+                            <th width="30%" >
+                                 <t t-if="count_employee >= 9 ">
+                                    ( <t t-esc="employee[8]" /> )
+                                </t>
+                            </th>
+                             <th width="12%"><!--.--></th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr  align="center">
+                             <td style="padding-right: 20px">
+                                 <t t-if="count_employee >= 7 ">
+                                      <t t-esc="position[6]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 8 ">
+                                      <t t-esc="position[7]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 9 ">
+                                      <t t-esc="position[8]" />
+                                 </t>
+                             </td>
+                         </tr>
+                     </tbody>
+                </table>
+                <table  width="100%" class="employee_4" style="border-collapse: collapse;">
+                    <thead>
+                        <tr align="center">
+                            <th width="28%" style="padding-right: 20px">
+                                <t t-if="count_employee >= 10 ">
+                                ( <t t-esc="employee[9]" /> )
+                                </t>
+                            </th>
+                            <th width="30" >
+                                <t t-if="count_employee >= 11 ">
+                                ( <t t-esc="employee[10]" /> )
+                                </t>
+                            </th>
+                            <th width="30%" >
+                                 <t t-if="count_employee >= 12 ">
+                                    ( <t t-esc="employee[11]" /> )
+                                </t>
+                            </th>
+                             <th width="12%"><!--.--></th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr  align="center">
+                             <td style="padding-right: 20px">
+                                 <t t-if="count_employee >= 10 ">
+                                      <t t-esc="position[9]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 11 ">
+                                      <t t-esc="position[10]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 12 ">
+                                      <t t-esc="position[11]" />
+                                 </t>
+                             </td>
+                         </tr>
+                     </tbody>
+                </table>
+            </t>
+    </template>
+
+     <template id="check_work_pdf_report_layout2">
+          <table  width="100%" class="employee_5" style="border-collapse: collapse;">
+                    <thead>
+                        <tr align="center">
+                            <th width="28%" style="padding-right: 20px">
+                                <t t-if="count_employee >= 13 ">
+                                ( <t t-esc="employee[12]" /> )
+                                </t>
+                            </th>
+                            <th width="30" >
+                                <t t-if="count_employee >= 14 ">
+                                ( <t t-esc="employee[13]" /> )
+                                </t>
+                            </th>
+                            <th width="30%" >
+                                 <t t-if="count_employee >= 15 ">
+                                    ( <t t-esc="employee[14]" /> )
+                                </t>
+                            </th>
+                             <th width="12%"><!--.--></th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr  align="center">
+                             <td style="padding-right: 20px">
+                                 <t t-if="count_employee >= 13 ">
+                                      <t t-esc="position[12]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 14 ">
+                                      <t t-esc="position[13]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 15 ">
+                                      <t t-esc="position[14]" />
+                                 </t>
+                             </td>
+                         </tr>
+                     </tbody>
+                </table>
+          <table  width="100%" class="employee_6" style="border-collapse: collapse;">
+                    <thead>
+                        <tr align="center">
+                            <th width="28%" style="padding-right: 20px">
+                                <t t-if="count_employee >= 16 ">
+                                ( <t t-esc="employee[15]" /> )
+                                </t>
+                            </th>
+                            <th width="30" >
+                                <t t-if="count_employee >= 17 ">
+                                ( <t t-esc="employee[16]" /> )
+                                </t>
+                            </th>
+                            <th width="30%" >
+                                 <t t-if="count_employee >= 18 ">
+                                    ( <t t-esc="employee[17]" /> )
+                                </t>
+                            </th>
+                             <th width="12%"><!--.--></th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr  align="center">
+                             <td style="padding-right: 20px">
+                                 <t t-if="count_employee >= 19 ">
+                                      <t t-esc="position[18]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 20 ">
+                                      <t t-esc="position[19]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 21 ">
+                                      <t t-esc="position[20]" />
+                                 </t>
+                             </td>
+                         </tr>
+                     </tbody>
+                </table>
+          <table  width="100%" class="employee_7" style="border-collapse: collapse;">
+                    <thead>
+                        <tr align="center">
+                            <th width="28%" style="padding-right: 20px">
+                                <t t-if="count_employee >= 10 ">
+                                ( <t t-esc="employee[9]" /> )
+                                </t>
+                            </th>
+                            <th width="30" >
+                                <t t-if="count_employee >= 11 ">
+                                ( <t t-esc="employee[10]" /> )
+                                </t>
+                            </th>
+                            <th width="30%" >
+                                 <t t-if="count_employee >= 12 ">
+                                    ( <t t-esc="employee[11]" /> )
+                                </t>
+                            </th>
+                             <th width="12%"><!--.--></th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr  align="center">
+                             <td style="padding-right: 20px">
+                                 <t t-if="count_employee >= 10 ">
+                                      <t t-esc="position[9]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 11 ">
+                                      <t t-esc="position[10]" />
+                                 </t>
+                             </td>
+                             <td>
+                                 <t t-if="count_employee >= 12 ">
+                                      <t t-esc="position[11]" />
+                                 </t>
+                             </td>
+                         </tr>
+                     </tbody>
+                </table>
+     </template>
+
+    <template id="check_work_pdf_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                 <div class="container">
+                    <div class="article o_check_work_from">
+                        <t t-if="count_employee &gt; 0 and count_employee &lt; 4">
+                            <img src="/check_work_qweb/static/src/img/cw1.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                        </t>
+                        <t t-if="count_employee &gt; 3 and count_employee &lt; 7">
+                            <img src="/check_work_qweb/static/src/img/cw21.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                        </t>
+                        <t t-if="count_employee &gt; 6 and count_employee &lt; 10">
+                            <img src="/check_work_qweb/static/src/img/cw31.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                        </t>
+                        <t t-if="count_employee &gt; 9 and count_employee &lt; 13">
+                            <img src="/check_work_qweb/static/src/img/cw41.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                        </t>
+                        <t t-if="count_employee &gt; 12 and count_employee &lt; 16">
+                            <img src="/check_work_qweb/static/src/img/cw51.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                        </t>
+                        <t t-if="count_employee &gt; 15 and count_employee &lt; 19">
+                            <img src="/check_work_qweb/static/src/img/cw51.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                        </t>
+                        <t t-if="count_employee &gt; 18 and count_employee &lt; 22">
+                            <img src="/check_work_qweb/static/src/img/cw51.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                        </t>
+                         <div class="select_check1"><input type="checkbox" /></div>
+                         <div class="select_check2"><input type="checkbox" /></div>
+                         <div class="select_check3"><input type="checkbox" /></div>
+                         <div class="check_date"><t t-esc="check_date"/></div>
+                        <t t-if="o.select_check == 'cw1'">
+                             <div class="select_check1"><input type="checkbox"  checked="True"/></div>
+                        </t>
+                          <t t-if="o.select_check == 'cw2'">
+                              <div class="select_check2"><input type="checkbox"  checked="True"/></div>
+                              <div class="fines"><t t-esc="'{0:,.2f}'.format(fines)"/></div>
+                              <div class="date_check"><t t-esc="date_check"/></div>
+                          </t>
+                         <t t-if="o.select_check == 'cw3'">
+                              <div class="select_check3"><input type="checkbox"  checked="True"/></div>
+                             <div class="notes_check"><t t-esc="notes_check"/></div>
+                          </t>
+                        <t t-call="check_work_qweb.check_work_pdf_report_layout"/>
+                    </div>
+                     <t t-set="copy_count" t-value="1"/>
+                     <t t-foreach="range(copy_count)" t-as="cc">
+                         <div class="article o_check_work_from">
+                              <t t-if="count_employee &gt; 3 and count_employee &lt; 7">
+                                  <img src="/check_work_qweb/static/src/img/cw22.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                              </t>
+                              <t t-if="count_employee &gt; 6 and count_employee &lt; 10">
+                                  <img src="/check_work_qweb/static/src/img/cw32.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                              </t>
+                              <t t-if="count_employee &gt; 9 and count_employee &lt; 13">
+                                  <img src="/check_work_qweb/static/src/img/cw42.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                              </t>
+                              <t t-if="count_employee &gt; 12 and count_employee &lt; 16">
+                                  <img src="/check_work_qweb/static/src/img/cw52.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                                  <t t-call="check_work_qweb.check_work_pdf_report_layout2"/>
+                              </t>
+                              <t t-if="count_employee &gt; 15 and count_employee &lt; 19">
+                                  <img src="/check_work_qweb/static/src/img/cw62.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                                  <t t-call="check_work_qweb.check_work_pdf_report_layout2"/>
+                              </t>
+                             <t t-if="count_employee &gt; 18 and count_employee &lt; 21">
+                                  <img src="/check_work_qweb/static/src/img/cw72.png" style="width:300mm; height:424mm; position:absolute; z-index: -999;" />
+                                  <t t-call="check_work_qweb.check_work_pdf_report_layout2"/>
+                              </t>
+                         </div>
+                     </t>
+                 </div>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+

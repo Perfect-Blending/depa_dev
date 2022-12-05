@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="fin_system_settings_form">
+	    <field name="name">fin_system_settings_form</field>
+	    <field name="model">fw_pfb_fin_settings</field>
+	    <field name="arch" type="xml">
+	       <form>
+                <header>
+                    <button string="Apply" name="apply" type="object" class="oe_highlight"/>
+                    <button string="Cancel" type="object" class="oe_link" />
+                </header>
+                <sheet>    
+                    <separator string="Allow" />
+                    <separator string="Director Position" />
+                    <group>
+                        <group>
+                            <field name='director'/>
+                            <field name="director_secretary" >
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <label for="" string="director" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <div>
+                            <separator string="Deputy Director Position" />
+                            <field name="deputy_ids" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="secretary" />
+                                </tree>
+                            </field>
+                        </div> 
+                    </group>
+                   
+                    <div>
+                        <separator string="Assistant Director Position" />
+                        <field name="assistant_ids" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="name" />
+                                <field name="secretary" />
+                            </tree>
+                        </field>
+                    </div> 
+                    <div>
+                        <separator string="FIN100" />
+                        <group>
+                            <group>
+                                <field name='related_department'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label for="" string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+                    <div>
+                        <separator string="FIN401" />
+                        <group>
+                            <group>
+                                <field name='document_inspection1'>
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label for="" string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+                    <div>
+                        <separator string="FIN201" />
+                        <group>
+                            <group>
+                                <field name="document_inspection2" >
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                                <field name="financial_department" >
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <label for="" string="FIN100" invisible="1"/>
+                            </group>
+                        </group>
+                    </div>
+                </sheet> 
+	       </form>
+	    </field>
+	    </record>
+
+
+        <record model="ir.actions.act_window" id="fin_system_settings_action">
+            <field name="name">Settings</field>
+            <field name="res_model">fw_pfb_fin_settings</field>
+            <field name="view_id" ref="fin_system_settings_form"/>
+            <field name="view_type">form</field>
+            <field name="target">inline</field>
+            <field name="view_mode">form</field>
+        </record>
+
+       <!-- <menuitem name="Settings" 
+                    id="fin_system_settings" 
+                    parent="fin_system.fin_system_menu_settings"
+                    sequence="12" 
+                    action="fin_system_settings_action"
+                    groups="fw_pfb_fin_system_show_menu_settings"/>
+                    -->
+
+    </data>
+</odoo>

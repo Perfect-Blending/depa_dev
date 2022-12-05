@@ -1,0 +1,1301 @@
+<odoo>
+    <template id="cash_receipt_depa_common" name="Cash Receipt Depa" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/all_qweb_form_depa/static/css/cash_receipt.css"/>
+        </xpath>
+    </template>
+
+    <template id="cash_receipt_pdf_report_layout">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/cash_receipt.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <!--           Box 1-->
+            <div  style="position: fixed;top: 191px;left: 950px;">
+                <span t-field="o.name"/>
+            </div>
+            <div style="position: fixed;top: 255px;right: 110px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="date"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 355px;left: 250px;">
+                <span t-field="o.customer_id"/>
+            </div>
+            <div style="width: 100%;position: fixed;top: 390px;left: 250px;">
+                <span t-field="o.customer_id.street"/>
+                <span t-field="o.customer_id.street2"/>
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <t t-if="o.customer_id.branch == '00000'">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+            <t t-else="">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+
+
+            <!--            End Box 1-->
+            <!--            Box 2-->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p></p>
+                <table width="100%">
+                    <thead align="center">
+                        <tr>
+                            <td width="10%"><!--.--></td>
+                            <td width="70%"><!--.--></td>
+                            <td><!--.--></td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <tr style="vertical-align: top;">
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="center">
+                                                <span t-esc="count"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                                <span t-esc="'{:,.2f}'.format(line.amount_receipt)"
+                                                      style="padding-right:25px;"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            End Box 2-->
+            <!--            Box 3-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1115px;right: 48px;">
+                <t t-set="sum_gg" t-value="0"/>
+                <t t-foreach="o.line_ids" t-as="line">
+                    <t t-set="sum_gg" t-value="sum_gg+line.amount_receipt"/>
+                </t>
+                <span t-esc="'{:,.2f}'.format(sum_gg)"/>
+            </div>
+            <div style="display: block;
+            width: 60%;
+            position: fixed;top: 1115px;left: 230px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--            End Box 3-->
+            <!--            Box 4-->
+            <t t-if="check_if == 1">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 64px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 702px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 64px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 386px;">x</p>
+                <t t-foreach="o.cheque_ids" t-as="cr">
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1245px;left: 820px;">
+                        <t t-esc="cr.name"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 170px;">
+                        <t t-esc="cr.bank_customer"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 470px;">
+                        <t t-esc="cr.bank_branch_customer"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 810px;">
+                        <t t-set="year" t-value="(int((cr.cheque_date).strftime('%Y')))+543"/>
+                        <t t-set="cheque_date" t-value="'%s/%s' %((cr.cheque_date).strftime('%d/%m'),year)"/>
+                        <t t-esc="cheque_date"/>
+                    </p>
+                </t>
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1244px;left: 386px;">x</p>
+            </t>
+            <!--            End Box 4-->
+
+        </div>
+    </template>
+    <template id="cash_receipt_pdf_report_layout8">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/cash_receipt.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <!--           Box 1-->
+            <div style="position: fixed;top: 191px;left: 950px;width:2000px;">
+                <span t-field="o.name"/>
+            </div>
+            <div style="position: fixed;top: 255px;right: 110px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="date"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 355px;left: 250px;">
+                <span t-field="o.customer_id"/>
+            </div>
+            <div style="width: 100%;position: fixed;top: 390px;left: 250px;">
+                <span t-field="o.customer_id.street"/>
+                <span t-field="o.customer_id.street2"/>
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <t t-if="o.customer_id.branch == '00000'">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+            <t t-else="">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+
+
+            <!--            End Box 1-->
+            <!--            Box 2-->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p></p>
+                <table width="100%">
+                    <thead align="center">
+                        <tr>
+                            <td width="10%"><!--.--></td>
+                            <td width="70%"><!--.--></td>
+                            <td><!--.--></td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="8"/>
+                        <tr style="vertical-align: top;">
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="center">
+                                                <span t-esc="count"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                                <span t-esc="'{:,.2f}'.format(line.amount_receipt)"
+                                                      style="padding-right:25px;"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            End Box 2-->
+            <!--            Box 3-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1115px;right: 48px;">
+                <t t-set="sum_gg" t-value="0"/>
+                <t t-foreach="o.line_ids" t-as="line">
+                    <t t-set="sum_gg" t-value="sum_gg+line.amount_receipt"/>
+                </t>
+                <span t-esc="'{:,.2f}'.format(sum_gg)"/>
+            </div>
+            <div style="display: block;
+            width: 60%;
+            position: fixed;top: 1115px;left: 230px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--            End Box 3-->
+            <!--            Box 4-->
+            <t t-if="check_if == 1">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 64px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 702px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 64px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 386px;">x</p>
+                <t t-foreach="o.cheque_ids" t-as="cr">
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1245px;left: 820px;">
+                        <t t-esc="cr.name"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 170px;">
+                        <t t-esc="cr.bank_customer"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 470px;">
+                        <t t-esc="cr.bank_branch_customer"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 810px;">
+                        <t t-set="year" t-value="(int((cr.cheque_date).strftime('%Y')))+543"/>
+                        <t t-set="cheque_date" t-value="'%s/%s' %((cr.cheque_date).strftime('%d/%m'),year)"/>
+                        <t t-esc="cheque_date"/>
+                    </p>
+                </t>
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1244px;left: 386px;">x</p>
+            </t>
+            <!--            End Box 4-->
+
+        </div>
+    </template>
+    <template id="cash_receipt_copy_pdf_report_layout">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/cash_receipt_copy.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <!--           Box 1-->
+            <div style="position: fixed;top: 191px;left: 950px;width:2000px;">
+                <span t-field="o.name"/>
+            </div>
+            <div style="position: fixed;top: 255px;right: 110px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="date"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 355px;left: 250px;">
+                <span t-field="o.customer_id"/>
+            </div>
+            <div style="width: 100%;position: fixed;top: 390px;left: 250px;">
+                <span t-field="o.customer_id.street"/>
+                <span t-field="o.customer_id.street2"/>
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <t t-if="o.customer_id.branch == '00000'">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+            <t t-else="">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+
+
+            <!--            End Box 1-->
+            <!--            Box 2-->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p></p>
+                <table width="100%">
+                    <thead align="center">
+                        <tr>
+                            <td width="10%"><!--.--></td>
+                            <td width="70%"><!--.--></td>
+                            <td><!--.--></td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <tr style="vertical-align: top;">
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="center">
+                                                <span t-esc="count"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                                <span t-esc="'{:,.2f}'.format(line.amount_receipt)"
+                                                      style="padding-right:25px;"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            End Box 2-->
+            <!--            Box 3-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1115px;right: 48px;">
+                <t t-set="sum_gg" t-value="0"/>
+                <t t-foreach="o.line_ids" t-as="line">
+                    <t t-set="sum_gg" t-value="sum_gg+line.amount_receipt"/>
+                </t>
+                <span t-esc="'{:,.2f}'.format(sum_gg)"/>
+            </div>
+            <div style="display: block;
+            width: 60%;
+            position: fixed;top: 1115px;left: 230px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--            End Box 3-->
+            <!--            Box 4-->
+            <t t-if="check_if == 1">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 64px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 702px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 64px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 386px;">x</p>
+                <t t-foreach="o.cheque_ids" t-as="cr">
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1245px;left: 820px;">
+                        <t t-esc="cr.name"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 170px;">
+                        <t t-esc="cr.bank_customer"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 470px;">
+                        <t t-esc="cr.bank_branch_customer"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 810px;">
+                        <t t-set="year" t-value="(int((cr.cheque_date).strftime('%Y')))+543"/>
+                        <t t-set="cheque_date" t-value="'%s/%s' %((cr.cheque_date).strftime('%d/%m'),year)"/>
+                        <t t-esc="cheque_date"/>
+                    </p>
+                </t>
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1244px;left: 386px;">x</p>
+            </t>
+            <!--            End Box 4-->
+
+        </div>
+    </template>
+    <template id="cash_receipt_copy_pdf_report_layout8">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/cash_receipt_copy.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <!--           Box 1-->
+            <div style="position: fixed;top: 191px;left: 950px;width:2000px;">
+                <span t-field="o.name"/>
+            </div>
+            <div style="position: fixed;top: 255px;right: 110px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="date"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 355px;left: 250px;">
+                <span t-field="o.customer_id"/>
+            </div>
+            <div style="width: 100%;position: fixed;top: 390px;left: 250px;">
+                <span t-field="o.customer_id.street"/>
+                <span t-field="o.customer_id.street2"/>
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <t t-if="o.customer_id.branch == '00000'">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+            <t t-else="">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+
+
+            <!--            End Box 1-->
+            <!--            Box 2-->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p></p>
+                <table width="100%">
+                    <thead align="center">
+                        <tr>
+                            <td width="10%"><!--.--></td>
+                            <td width="70%"><!--.--></td>
+                            <td><!--.--></td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="8"/>
+                        <tr style="vertical-align: top;">
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="center">
+                                                <span t-esc="count"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="group[0:7]" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                                <span t-esc="'{:,.2f}'.format(line.amount_receipt)"
+                                                      style="padding-right:25px;"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            End Box 2-->
+            <!--            Box 3-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1115px;right: 48px;">
+                <t t-set="sum_gg" t-value="0"/>
+                <t t-foreach="o.line_ids" t-as="line">
+                    <t t-set="sum_gg" t-value="sum_gg+line.amount_receipt"/>
+                </t>
+                <span t-esc="'{:,.2f}'.format(sum_gg)"/>
+            </div>
+            <div style="display: block;
+            width: 60%;
+            position: fixed;top: 1115px;left: 230px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--            End Box 3-->
+            <!--            Box 4-->
+            <t t-if="check_if == 1">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 64px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 702px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 64px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 386px;">x</p>
+                <t t-foreach="o.cheque_ids" t-as="cr">
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1245px;left: 820px;">
+                        <t t-esc="cr.name"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 170px;">
+                        <t t-esc="cr.bank_customer"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 470px;">
+                        <t t-esc="cr.bank_branch_customer"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 810px;">
+                        <t t-set="year" t-value="(int((cr.cheque_date).strftime('%Y')))+543"/>
+                        <t t-set="cheque_date" t-value="'%s/%s' %((cr.cheque_date).strftime('%d/%m'),year)"/>
+                        <t t-esc="cheque_date"/>
+                    </p>
+                </t>
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1244px;left: 386px;">x</p>
+            </t>
+            <!--            End Box 4-->
+
+        </div>
+    </template>
+    <template id="cash_receipt_pdf_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="container">
+                    <t t-call="all_qweb_form_depa.cash_receipt_pdf_report_layout"/>
+                    <t t-if="len(group) &gt; 8">
+                        <t t-call="all_qweb_form_depa.cash_receipt_pdf_report_layout8"/>
+                    </t>
+                    <t t-set="copy_count" t-value="3"/>
+                    <t t-foreach="range(copy_count)" t-as="cc">
+                        <t t-call="all_qweb_form_depa.cash_receipt_copy_pdf_report_layout"/>
+                        <t t-if="len(group) &gt; 8">
+                            <t t-call="all_qweb_form_depa.cash_receipt_copy_pdf_report_layout8"/>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="cash_payment_pdf_report_layout">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/cash_receipt.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <!--           Box 1-->
+            <div style="position: fixed;top: 191px;left: 950px;width:2000px;">
+                <span t-field="o.name"/>
+            </div>
+            <div style="position: fixed;top: 255px;right: 110px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="date"/>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 355px;left: 250px;">
+                <span t-field="o.partner_id"/>
+            </div>
+            <div style="width: 100%;position: fixed;top: 390px;left: 250px;">
+                <span t-field="o.partner_id.street"/>
+                <span t-field="o.partner_id.street2"/>
+                <span t-field="o.partner_id.city"/>
+                <span t-field="o.partner_id.zip"/>
+            </div>
+            <t t-if="o.partner_id.branch == '00000'">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+            <t t-else="">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+
+
+            <!--            End Box 1-->
+            <!--            Box 2-->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p></p>
+                <table width="100%">
+                    <thead align="center">
+                        <tr>
+                            <td width="10%"><!--.--></td>
+                            <td width="70%"><!--.--></td>
+                            <td><!--.--></td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <tr style="vertical-align: top;">
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="o.other_ids" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="center">
+                                                <span t-esc="count"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="o.other_ids" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="o.other_ids" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                                <span t-esc="'{:,.2f}'.format(line.amount)"
+                                                      style="padding-right:25px;"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            End Box 2-->
+            <!--            Box 3-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1115px;right: 48px;">
+                <t t-set="sum_gg" t-value="0"/>
+                <t t-foreach="o.other_ids" t-as="line">
+                    <t t-set="sum_gg" t-value="sum_gg+line.amount"/>
+                </t>
+                <span t-esc="'{:,.2f}'.format(sum_gg)"/>
+            </div>
+            <div style="display: block;
+            width: 60%;
+            position: fixed;top: 1115px;left: 230px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--            End Box 3-->
+            <!--            Box 4-->
+            <t t-if="check_if == 1">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 64px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 702px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 64px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 386px;">x</p>
+                <t t-foreach="o.cheque_ids" t-as="cr">
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1245px;left: 820px;">
+                        <t t-esc="cr.name"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 170px;">
+                        <t t-esc="cr.bank.name"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 470px;">
+                        <t t-esc="cr.bank.branch_bank"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 810px;">
+                        <t t-set="year" t-value="(int((cr.cheque_date).strftime('%Y')))+543"/>
+                        <t t-set="cheque_date" t-value="'%s/%s' %((cr.cheque_date).strftime('%d/%m'),year)"/>
+                        <t t-esc="cheque_date"/>
+                    </p>
+                </t>
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1244px;left: 386px;">x</p>
+            </t>
+            <!--            End Box 4-->
+
+        </div>
+    </template>
+    <template id="cash_payment_copy_pdf_report_layout">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/cash_receipt_copy.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <!--           Box 1-->
+            <div style="position: fixed;top: 191px;left: 950px;width:2000px;">
+                <span t-field="o.name"/>
+            </div>
+            <div style="position: fixed;top: 255px;right: 110px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="date"/>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 355px;left: 250px;">
+                <span t-field="o.partner_id"/>
+            </div>
+            <div style="width: 100%;position: fixed;top: 390px;left: 250px;">
+                <span t-field="o.partner_id.street"/>
+                <span t-field="o.partner_id.street2"/>
+                <span t-field="o.partner_id.city"/>
+                <span t-field="o.partner_id.zip"/>
+            </div>
+            <t t-if="o.partner_id.branch == '00000'">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+            <t t-else="">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+            </t>
+
+
+            <!--            End Box 1-->
+            <!--            Box 2-->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p></p>
+                <table width="100%">
+                    <thead align="center">
+                        <tr>
+                            <td width="10%"><!--.--></td>
+                            <td width="70%"><!--.--></td>
+                            <td><!--.--></td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <tr style="vertical-align: top;">
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="o.other_ids" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="center">
+                                                <span t-esc="count"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="o.other_ids" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="left">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                            <td align="center">
+                                <table width="100%">
+                                    <t t-foreach="o.other_ids" t-as="line">
+                                        <t t-set="count" t-value="count+1"/>
+                                        <tr width="100%" height="10" valign="top">
+                                            <td align="right">
+                                                <span t-esc="'{:,.2f}'.format(line.amount)"
+                                                      style="padding-right:25px;"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            End Box 2-->
+            <!--            Box 3-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1115px;right: 48px;">
+                <t t-set="sum_gg" t-value="0"/>
+                <t t-foreach="o.other_ids" t-as="line">
+                    <t t-set="sum_gg" t-value="sum_gg+line.amount"/>
+                </t>
+                <span t-esc="'{:,.2f}'.format(sum_gg)"/>
+            </div>
+            <div style="display: block;
+            width: 60%;
+            position: fixed;top: 1115px;left: 230px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--            End Box 3-->
+            <!--            Box 4-->
+            <t t-if="check_if == 1">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 64px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 702px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 64px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 386px;">x</p>
+                <t t-foreach="o.cheque_ids" t-as="cr">
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1245px;left: 820px;">
+                        <t t-esc="cr.name"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 170px;">
+                        <t t-esc="cr.bank.name"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 470px;">
+                        <t t-esc="cr.bank.branch_bank"/>
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 810px;">
+                        <t t-set="year" t-value="(int((cr.cheque_date).strftime('%Y')))+543"/>
+                        <t t-set="cheque_date" t-value="'%s/%s' %((cr.cheque_date).strftime('%d/%m'),year)"/>
+                        <t t-esc="cheque_date"/>
+                    </p>
+                </t>
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1244px;left: 386px;">x</p>
+            </t>
+            <!--            End Box 4-->
+
+        </div>
+    </template>
+    <template id="cash_payment_pdf_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="container">
+                    <t t-call="all_qweb_form_depa.cash_payment_pdf_report_layout"/>
+                    <t t-set="copy_count" t-value="3"/>
+                    <t t-foreach="range(copy_count)" t-as="cc">
+                        <t t-call="all_qweb_form_depa.cash_payment_copy_pdf_report_layout"/>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="account_advance_pdf_report_layout">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/cash_receipt.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <!--           Box 1-->
+            <div style="position: fixed;top: 191px;left: 950px;width:2000px;">
+                <span t-field="o.name"/>
+            </div>
+            <div style="position: fixed;top: 255px;right: 110px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="date"/>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 355px;left: 250px;">
+                <span t-field="o.employee_id"/>
+            </div>
+            <div style="width: 100%;position: fixed;top: 390px;left: 250px;">
+<!--                <span t-field="o.employee_id.street"/>-->
+<!--                <span t-field="o.employee_id.street2"/>-->
+<!--                <span t-field="o.employee_id.city"/>-->
+<!--                <span t-field="o.employee_id.zip"/>-->
+            </div>
+<!--            <t t-if="o.employee_id.branch == '00000'">-->
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+<!--            </t>-->
+<!--            <t t-else="">-->
+<!--                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>-->
+<!--            </t>-->
+
+
+            <!--            End Box 1-->
+            <!--            Box 2-->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p></p>
+                <table width="100%">
+                    <thead align="center">
+                        <tr>
+                            <td width="10%"><!--.--></td>
+                            <td width="70%"><!--.--></td>
+                            <td><!--.--></td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <t t-foreach="o.lines" t-as="line">
+                            <tr>
+                                <td align="center">
+                                    <t t-set="count" t-value="count + 1" />
+                                    <span t-esc="count"/>
+                                </td>
+
+                                <td align="left">
+                                    <span t-field="line.name"/>
+                                </td>
+
+                                <td align="right" style="padding-right: 15px;">
+                                    <span t-esc="'{:,.2f}'.format(line.amount)"/>
+                                </td>
+
+                            </tr>
+                        </t>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            End Box 2-->
+            <!--            Box 3-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1115px;right: 48px;">
+                <t t-set="sum_gg" t-value="0"/>
+                <t t-foreach="o.lines" t-as="line">
+                    <t t-set="sum_gg" t-value="sum_gg+line.amount"/>
+                </t>
+                <span t-esc="'{:,.2f}'.format(sum_gg)"/>
+            </div>
+            <div style="display: block;
+            width: 60%;
+            position: fixed;top: 1115px;left: 230px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--            End Box 3-->
+            <!--            Box 4-->
+            <t t-if="check_if == 1">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 64px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 702px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 64px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 386px;">x</p>
+                <t t-foreach="o.cheque_ids" t-as="cr">
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1245px;left: 820px;">
+<!--                        <t t-esc="cr.name"/>-->
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 170px;">
+<!--                        <t t-esc="cr.bank.name"/>-->
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 470px;">
+<!--                        <t t-esc="cr.bank.branch_bank"/>-->
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 810px;">
+<!--                        <t t-set="year" t-value="(int((cr.cheque_date).strftime('%Y')))+543"/>-->
+<!--                        <t t-set="cheque_date" t-value="'%s/%s' %((cr.cheque_date).strftime('%d/%m'),year)"/>-->
+<!--                        <t t-esc="cheque_date"/>-->
+                    </p>
+                </t>
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1244px;left: 386px;">x</p>
+            </t>
+            <!--            End Box 4-->
+
+        </div>
+    </template>
+    <template id="account_advance_copy_pdf_report_layout">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/cash_receipt_copy.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <!--           Box 1-->
+            <div style="position: fixed;top: 191px;left: 950px;width:2000px;">
+                <span t-field="o.name"/>
+            </div>
+            <div style="position: fixed;top: 255px;right: 110px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="date"/>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 355px;left: 250px;">
+                <span t-field="o.employee_id"/>
+            </div>
+            <div style="width: 100%;position: fixed;top: 390px;left: 250px;">
+<!--                <span t-field="o.employee_id.street"/>-->
+<!--                <span t-field="o.employee_id.street2"/>-->
+<!--                <span t-field="o.employee_id.city"/>-->
+<!--                <span t-field="o.employee_id.zip"/>-->
+            </div>
+<!--            <t t-if="o.employee_id.branch == '00000'">-->
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>
+<!--            </t>-->
+<!--            <t t-else="">-->
+<!--                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 290px;left: 60px;">x</p>-->
+<!--            </t>-->
+
+
+            <!--            End Box 1-->
+            <!--            Box 2-->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p></p>
+                <table width="100%">
+                    <thead align="center">
+                        <tr>
+                            <td width="10%"><!--.--></td>
+                            <td width="70%"><!--.--></td>
+                            <td><!--.--></td>
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <t t-foreach="o.lines" t-as="line">
+                            <tr>
+                                <td align="center">
+                                    <t t-set="count" t-value="count + 1" />
+                                    <span t-esc="count"/>
+                                </td>
+
+                                <td align="left">
+                                    <span t-field="line.name"/>
+                                </td>
+
+                                <td align="right" style="padding-right: 15px;">
+                                    <span t-esc="'{:,.2f}'.format(line.amount)"/>
+                                </td>
+
+                            </tr>
+                        </t>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            End Box 2-->
+            <!--            Box 3-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1115px;right: 48px;">
+                <t t-set="sum_gg" t-value="0"/>
+                <t t-foreach="o.lines" t-as="line">
+                    <t t-set="sum_gg" t-value="sum_gg+line.amount"/>
+                </t>
+                <span t-esc="'{:,.2f}'.format(sum_gg)"/>
+            </div>
+            <div style="display: block;
+            width: 60%;
+            position: fixed;top: 1115px;left: 230px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--            End Box 3-->
+            <!--            Box 4-->
+            <t t-if="check_if == 1">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 64px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1243px;left: 702px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 64px;">x</p>
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1312px;left: 386px;">x</p>
+                <t t-foreach="o.cheque_ids" t-as="cr">
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1245px;left: 820px;">
+<!--                        <t t-esc="cr.name"/>-->
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 170px;">
+<!--                        <t t-esc="cr.bank.name"/>-->
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 470px;">
+<!--                        <t t-esc="cr.bank.branch_bank"/>-->
+                    </p>
+                    <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1315px;left: 810px;">
+<!--                        <t t-set="year" t-value="(int((cr.cheque_date).strftime('%Y')))+543"/>-->
+<!--                        <t t-set="cheque_date" t-value="'%s/%s' %((cr.cheque_date).strftime('%d/%m'),year)"/>-->
+<!--                        <t t-esc="cheque_date"/>-->
+                    </p>
+                </t>
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 18px;font-weight: bold;position: fixed;top: 1244px;left: 386px;">x</p>
+            </t>
+            <!--            End Box 4-->
+
+        </div>
+    </template>
+    <template id="account_advance_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="container">
+                    <t t-call="all_qweb_form_depa.account_advance_pdf_report_layout"/>
+                    <t t-set="copy_count" t-value="3"/>
+                    <t t-foreach="range(copy_count)" t-as="cc">
+                        <t t-call="all_qweb_form_depa.account_advance_copy_pdf_report_layout"/>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

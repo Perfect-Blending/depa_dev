@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+
+		<template id="machine_repair_template_view">
+			<t t-call="web.external_layout">
+				<div class="page">
+					<t t-foreach="docs" t-as="o">
+						<div class="row">
+                            <h2><span t-field="o.sequence" style="margin-left: 8px;"/> - <span t-field="o.name"/></h2><br/>
+                        </div>
+                        <h2 style="text-align : center;">Client Information</h2><br/>
+                        
+						<table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
+                    <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;height:50%;">
+                        <td><strong >Technician : </strong> </td>
+                        <td><span t-field="o.technician_id.name"/></td>
+                        
+                        <td><strong >Client : </strong> </td>
+                        <td><span t-field="o.partner_id.name" /></td>
+                    </tr>
+                    
+                    <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;">
+                        <td><strong >Email : </strong> </td>
+                        <td><span t-field="o.client_email" /></td>
+                        
+                        <td><strong >Phone : </strong> </td>
+                        <td><span t-field="o.client_phone" /></td>
+                        
+                    </tr>
+                    
+                    <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;">
+                        <td><strong >Company : </strong> </td>
+                        <td><span t-field="o.technician_id.company_id.name" /></td>
+                        
+                        <td><strong ></strong> </td>
+                        <td></td>
+                    </tr>
+                </table>
+
+						<h2>Machine Information</h2>
+						<br />
+						<table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
+                    <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;height:50%;">
+                        
+                        <td><strong >Machine : </strong> </td>
+                        <td><span t-field="o.product_id.name" /></td>
+                    </tr>
+                    
+                    <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;">
+                        <td><strong >Brand : </strong> </td>
+                        <td><span t-field="o.brand" /></td>
+                        
+                        <td><strong >Model : </strong> </td>
+                        <td><span t-field="o.model" /></td>
+                        
+                    </tr>
+                    
+                    <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;">
+                        <td><strong >Color : </strong> </td>
+                        <td><span t-field="o.color" /></td>
+                        
+                        <td><strong >Year : </strong> </td>
+                        <td><span t-field="o.year" /></td>
+                    </tr>
+
+                    <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;">
+                        <td><strong >Accompanying Items : </strong> </td>
+                        <td><span t-field="o.accompanying_item" /></td>
+                        
+                        <td t-if="o.is_warranty == True"><strong>Warranty : </strong> </td>
+                        <td t-if="o.is_warranty == True"><span t-field="o.is_warranty" /></td>
+
+                        <td t-if="o.is_warranty == False"><strong>Warranty : </strong> </td>
+                        <td t-if="o.is_warranty == False"><span>No</span></td>
+                    </tr>                    
+                </table>
+
+						<h2>Other Information</h2>
+						<br />
+						<table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
+                    <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;height:50%;">
+                        <td><strong >Requested Date : </strong> </td>
+                        <td><span t-field="o.repair_request_date"/></td>
+                        
+                        <td><strong >Repair Date : </strong> </td>
+                        <td><span t-field="o.close_date" /></td>
+                    </tr>
+                    
+                    <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;">
+                        <td><strong >Is Repaired : </strong> </td>
+                        <td><span t-field="o.is_repaired" /></td>
+                        
+                        <td><strong >Total Hours Spent Repair : </strong> </td>
+                        <td><span t-field="o.repairing_duration" /></td>
+                        
+                    </tr>
+                    
+                </table>
+
+                        <h2>Sale Order</h2>
+                        <br />
+                        <table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
+                            <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;height:50%;">
+                                <td><strong >Sale Order Number : </strong> </td>
+                                <td>
+                                    <t t-set="order_count" t-value="0"/>
+                                    <t t-foreach="o.machine_orders_ids" t-as="sale_order">
+                                        <t t-if="order_count &gt; 0">
+                                            <span>,</span>
+                                        </t>
+                                        <span t-field="sale_order.name"/>
+                                        <t t-set="order_count" t-value="int(order_count)+1"/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                
+                <h2>Description</h2><br/>
+                    <span t-field="o.accompanying_item"/><br/>
+                <br/>
+                <h2>Timesheets</h2><br/>
+                <table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th>Project</th>
+                            <th>Service Type</th>
+                            <th>Cost</th>
+                            <th>Description</th>
+                            <th>Duration(Hours)</th>
+                        </tr>
+                    </thead>  
+                    <tbody class="consumed_tbody">
+                        <t t-foreach="o.timesheet_ids" t-as="timesheet">     
+                        <tr>
+                            <td>
+                                <span t-field="timesheet.date" />
+                            </td>
+                            <td>
+                                <span t-field="timesheet.user_id" />
+                            </td>
+                            <td>
+                                <span t-field="timesheet.project_id" />
+                            </td>
+                            <td>
+                                <span t-field="timesheet.machine_service_id" />
+                            </td>
+                            <td>
+                                <span t-field="timesheet.total_cost" />
+                            </td>
+                            <td>
+                                <span t-field="timesheet.name" />
+                            </td>
+                            <td>
+                                <span t-field="timesheet.unit_amount" />
+                            </td>
+                        </tr>
+                        </t>
+                    </tbody>
+                </table>
+					</t>
+				</div>
+			</t>
+		</template>
+
+		<template id="machine_repair_temp_id">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<t t-call="bi_machine_repair_management.machine_repair_template_view" /><!-- 
+						t-lang="doc.partner_id.lang" -->
+				</t>
+			</t>
+		</template>
+
+	</data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Sales Voucher -->
+
+
+    <record id="account_voucher.action_sale_receipt" model="ir.actions.act_window">
+        <field name="name">Sales Receipts</field>
+        <field name="res_model">account.voucher</field>
+        <field name="context">{'default_voucher_type': 'sale', 'voucher_type': 'sale', 'menu_active': 'sale'}</field>
+    </record>
+
+
+    <!--  Purchase Vouchers -->
+
+
+
+    <record id="account_voucher.action_purchase_receipt" model="ir.actions.act_window">
+        <field name="name">Purchase Receipts</field>
+        <field name="res_model">account.voucher</field>
+        <field name="context">{'default_voucher_type': 'purchase', 'voucher_type': 'purchase', 'menu_active': 'purchase'}</field>
+    </record>
+
+
+
+</odoo>

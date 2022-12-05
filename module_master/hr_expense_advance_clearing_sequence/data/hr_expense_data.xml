@@ -1,0 +1,10 @@
+<odoo noupdate="1">
+
+    <record model="ir.sequence" id="seq_expense_petty_cash">
+        <field name="name">Expense report sequence (Advance)</field>
+        <field name="code">hr.expense.sheet.advance</field>
+        <field name="padding" eval="4"/>
+        <field name="prefix">EXAV</field>
+    </record>
+
+</odoo>

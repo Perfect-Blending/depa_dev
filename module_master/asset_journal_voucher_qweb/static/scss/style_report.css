@@ -1,0 +1,55 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('/asset_journal_voucher_qweb/static/fonts/THSarabunNew.ttf') format('truetype');
+}
+
+    .o_journal_voucher_from{
+    font-family: 'THSarabunNew';
+    font-size: 18px;
+    }
+
+    .o_journal_voucher_from .date_print {
+        font-size: 18px !important;
+        position: fixed;
+        top: 45px !important;
+        right: 105px !important;
+    }
+
+    .o_journal_voucher_from .journal_note_name {
+        width: 58%;
+        font-size: 18px;
+        position: fixed;
+        top: 153px;
+        left: 120px;
+    }
+
+    .o_journal_voucher_from .journal_number_h1 {
+        font-size: 18px;
+        position: fixed;
+        top: 123px;
+        left: 750px;
+    }
+
+    .o_journal_voucher_from .journal_date {
+        font-size: 18px;
+        position: fixed;
+        top: 152px;
+        left: 750px;
+    }
+
+    .o_journal_voucher_from .journal_number {
+        font-size: 18px;
+        position: fixed;
+        top: 180px;
+        left: 750px;
+    }
+
+    .o_journal_voucher_from .journal_note {
+        width: 90%;
+        font-size: 18px;
+        position: fixed;
+        top: 1070px;
+        left: 120px;
+    }
+

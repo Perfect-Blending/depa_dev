@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_petty_fund_tree" model="ir.ui.view">
+        <field name="name">account.petty.fund.tree</field>
+        <field name="model">account.petty.fund</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="account_id" options="{'no_create': True}" domain="[('deprecated', '=', False)]"/>
+                <field name="max_amount"/>
+                <!--<field name="account_id" options="{'no_create': True}" domain="[('type','!=','view'),('deprecated', '=', False)]" />-->
+                <field name="balance"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_petty_fund_search" model="ir.ui.view">
+        <field name="name">acccount.petty.fund.search</field>
+        <field name="model">account.petty.fund</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_account_petty_fund_form" model="ir.ui.view">
+        <field name="name">account.petty.fund.form</field>
+        <field name="model">account.petty.fund</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group cor='2'>
+                        <group>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="code"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="General" name="page_general">
+                            <group cor='2'>
+                                <group>
+                                    <field name="max_amount"/>
+                                    <field name="balance"/>
+                                </group>
+                                <group>
+                                    <field name="account_id" options="{'no_create': True}"
+                                           domain="[('deprecated', '=', False)]"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Other Info" name="page_otherinfo">
+                            <group>
+                                <field name="company_id"/>
+                            </group>
+                            <group string="Notes" colspan="8">
+                                <field name="notes" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_account_petty_fund" model="ir.actions.act_window">
+        <field name="name">Petty Cash Fund</field>
+        <field name="res_model">account.petty.fund</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- <menuitem id="menu_account_petty_fund" parent="menu_petty" sequence="100" action="action_account_petty_fund"/> -->
+    <!--    <menuitem id="menu_petty_payments_main" name="Petty Cash" parent="account.menu_finance" sequence="3"/>-->
+    <!--        <menuitem id="menu_petty" name="Petty Cash" parent="menu_petty_payments_main" sequence="10"/>-->
+    <!--            <menuitem id="menu_petty_received" parent="menu_petty" sequence="5" action="action_account_petty_received"/>-->
+    <!--            <menuitem id="menu_account_petty_fund" parent="menu_petty" sequence="100" action="action_account_petty_fund"/>-->
+    <!--            <menuitem id="menu_petty_payment" parent="menu_petty" sequence="10" action="action_account_petty_payment"/>-->
+
+
+</odoo>

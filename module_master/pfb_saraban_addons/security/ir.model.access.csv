@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+approval_order_choices,order_choices,model_order_choices,,1,1,1,1
+setting_employee_group,setting manager,model_document_employee_groups,,1,1,1,1

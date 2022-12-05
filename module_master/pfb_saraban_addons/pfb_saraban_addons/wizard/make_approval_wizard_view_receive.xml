@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="make_approval_wizard_view_receive_form_inherit" model="ir.ui.view">
+        <field name="name">make.approval.wizard.receive.form.inherit</field>
+        <field name="model">make.approval.wizard.receive</field>
+        <field name="inherit_id" ref="pfb_saraban.make_approval_wizard_view_receive_form"/>
+        <field name="arch" type="xml">
+
+
+            <field name="memo" position="replace">
+                <field name="is_approver_change" invisible="1"/>
+                <field name="memo" attrs="{'required': [('is_approver_change','=',False)]}" />
+            </field>
+
+            <xpath expr="//sheet" position="inside">
+                <group>
+                    <field name="add_approver" widget="many2many_tags" domain="[('user_id', '!=', uid)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                    <button name="save_approver_button" type="object" class="btn btn-sm btn-primary" string="Save Approver" />
+
+<!--                    <label for="save_approver_button" class="btn btn-sm btn-primary" />-->
+<!--                    <field name="save_approver_button" invisible="1"/>-->
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

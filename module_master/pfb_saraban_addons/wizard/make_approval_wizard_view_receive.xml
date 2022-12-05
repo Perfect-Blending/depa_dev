@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="make_approval_wizard_view_receive_form_inherit" model="ir.ui.view">
+        <field name="name">make.approval.wizard.receive.form.inherit</field>
+        <field name="model">make.approval.wizard.receive</field>
+        <field name="inherit_id" ref="pfb_saraban.make_approval_wizard_view_receive_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="replace">
+                <group>
+                    <group>
+                        <field name="employee_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                        <field name="approve_type" />
+                        <field name="total_for_approve" invisible="1"/>
+                        <field name="setting_line" invisible="1"/>
+                        <field name="setting_id" invisible="1"/>
+                        <field name="status" invisible="1"/>
+                        <field name="add_line" invisible="1"/>
+                        <field name="change_new" invisible="1"/>
+                        <field name="is_add" />
+                    </group>
+                    <group>
+                        <field name="material" attrs="{'invisible': [('status','!=','1')]}" />
+                    </group>
+                    <group attrs="{'invisible': [('is_add', '=', False)]}" col="2" colspan="3">
+                        <group colspan="3">
+                            <field name="to_approver" context="{'job_title_searchable': True}" widget="many2many_tags" domain="[('user_id', '!=', uid)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                            <field name="add_approver" context="{'job_title_searchable': True}" widget="many2many_tags" domain="[('user_id', '!=', uid)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                        </group>
+<!--                        <group colspan="1">-->
+<!--                            <button name="save_approver_button" type="object" class="btn btn-primary" string="Save Approver" />-->
+<!--                        </group>-->
+                    </group>
+                </group>
+                <group>
+                    <field name="is_approver_change" invisible="1"/>
+                    <field name="memo" required="1"/>
+                    <field name="order_choices" widget="many2many_checkboxes" attrs="{'invisible': [('is_add', '=', False)]}"/>
+<!--                           attrs="{'required': [('is_approver_change','=',False)], 'invisible': [('is_add', '=', True)]}" />-->
+                </group>
+            </xpath>
+            <xpath expr="//footer" position="replace">
+                <footer>
+                    <div style="display:flex; justify-content: space-between; width: 50%;" class="approver_button">
+                        <button string="Approve" name="action_approve" type="object" class="btn-success"/>
+                        <button string="Discard" class="btn-secondary" special="cancel"/>
+                    </div>
+                </footer>
+            </xpath>
+
+
+<!--            <field name="memo" position="replace">-->
+<!--                <field name="is_approver_change" invisible="1"/>-->
+<!--                <field name="memo" attrs="{'required': [('is_approver_change','=',False)]}" />-->
+<!--            </field>-->
+
+<!--            <field name="approve_type" position="after">-->
+<!--                <group>-->
+<!--                    <field name="show_note" invisible="1" />-->
+<!--                    <field name="note" attrs="{'invisible': [('show_note','=',False)]}" />-->
+<!--                </group>-->
+<!--            </field>-->
+
+<!--            <xpath expr="//group[1]" position="after">-->
+<!--                <group>-->
+<!--                    <field name="add_approver" widget="many2many_tags" domain="[('user_id', '!=', uid)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>-->
+<!--                    <button name="save_approver_button" type="object" class="btn btn-sm btn-primary" string="Save Approver" />-->
+
+<!--&lt;!&ndash;                    <label for="save_approver_button" class="btn btn-sm btn-primary" />&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="save_approver_button" invisible="1"/>&ndash;&gt;-->
+<!--                </group>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//group[4]" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//group[5]" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+
+        </field>
+    </record>
+
+</odoo>

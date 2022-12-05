@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="fin_system.fw_pfb_fin_system_setting" model="ir.module.category">
+        <field name="name">FIN System</field>
+        <field name="sequence">150</field>
+    </record>
+
+    <record id="fw_pfb_fin_system_edit_attach" model="res.groups">
+        <field name="name">FIN System Edit</field>
+        <field name="comment">edit attach FIN system</field>
+        <field name="category_id" ref="fin_system.fw_pfb_fin_system_setting"/>
+    </record>
+
+    <record id="fw_pfb_fin_system_reset_fin" model="res.groups">
+        <field name="name">FIN System Reset</field>
+        <field name="comment">Reset FIN system</field>
+        <field name="category_id" ref="fin_system.fw_pfb_fin_system_setting"/>
+    </record>
+</odoo>

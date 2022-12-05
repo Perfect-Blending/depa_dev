@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="document_internal_main_all_tree_view_inherit">
+        <field name="name">document.internal.main.tree.view.inherit</field>
+        <field name="model">document.internal.main</field>
+        <field name="inherit_id" ref="pfb_saraban.document_internal_main_all_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_sort">speed desc</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

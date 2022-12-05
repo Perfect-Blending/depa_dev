@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <!--ระบบรายงานบัญชีไทย-->
+
+
+
+
+        <!--1.การ์ดเจ้าหนี้-->
+        <record model="ir.actions.act_url" id="action_account_card_of_creditor">
+           <field name="name">2.การ์ดเจ้าหนี้</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="การ์ดเจ้าหนี้"
+                  id="menu_account_card_of_creditor"
+                  action="action_account_card_of_creditor"
+                  sequence="12"
+                  parent="report_account_payable"/>
+
+
+          <!--2.การ์ดลูกหนี้-->
+        <record model="ir.actions.act_url" id="action_account_card_of_debtor">
+           <field name="name">1.การ์ดลูกหนี้</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="การ์ดลูกหนี้"
+                  id="menu_account_card_of_debtor"
+                  action="action_account_card_of_debtor"
+                  sequence="11"
+                  parent="report_accounts_receivable"/>
+
+        <!--3.อายุลูกหนี้เกินกำหนด-->
+        <record model="ir.actions.act_url" id="action_account_report_partneraging">
+           <field name="name">1.อายุลูกหนี้เกินกำหนด</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="อายุลูกหนี้เกินกำหนด"
+                  id="menu_account_report_partneraging"
+                  action="action_account_report_partneraging"
+                  sequence="13"
+                  parent="report_accounts_receivable"/>
+
+        <!--4.อายุเจ้าหนี้เกินกำหนด-->
+        <record model="ir.actions.act_url" id="action_account_report_partneraging_1">
+           <field name="name">1.อายุเจ้าหนี้เกินกำหนด</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="อายุเจ้าหนี้เกินกำหนด"
+                  id="menu_account_report_partneraging_1"
+                  action="action_account_report_partneraging"
+                  sequence="14"
+                  parent="report_account_payable"/>
+
+        <!--5.ภาษีมูลค่าเพิ่ม-->
+<!--        <record model="ir.actions.act_url" id="action_account_report_report_vat">-->
+<!--           <field name="name">5.รายงานภาษีมูลค่าเพิ่ม</field>-->
+<!--           <field name="url"></field>-->
+<!--           &lt;!&ndash;<field name="target">self</field>&ndash;&gt;-->
+<!--            <field name="target">new</field>-->
+<!--        </record>-->
+<!--        <menuitem name="รายงานภาษีมูลค่าเพิ่ม"-->
+<!--                  id="menu_account_report_report_sale_vat"-->
+<!--                  action="l10n_th_vat_report."-->
+<!--                  sequence="13"-->
+<!--                  parent="report_account_tax"/>-->
+
+        <!--5.ภาษีขาย-->
+        <record model="ir.actions.act_url" id="action_account_report_report_sale_tax_2_1">
+           <field name="name">5.รายงานภาษีขาย</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="รายงานภาษีขาย"
+                  id="menu_account_report_report_sale_tax_2_1"
+                  action="action_account_report_report_sale_tax_2_1"
+                  sequence="14"
+                  parent="report_account_tax"/>
+
+         <!--6.ภาษีซื้อ-->
+        <record model="ir.actions.act_url" id="action_account_report_report_sale_tax_2_1_1">
+           <field name="name">6.รายงานภาษีซื้อ</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="รายงานภาษีซื้อ"
+                  id="menu_account_report_report_sale_tax_2_1_1"
+                  action="action_account_report_report_sale_tax_2_1_1"
+                  sequence="15"
+                  parent="report_account_tax"/>
+
+        <!--7.รายงานบัญชีแยกประเภท-->
+        <record model="ir.actions.act_url" id="action_account_report_report_general_ledger2_2">
+           <field name="name">7.รายงานบํญชีแยกประเภท</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="รายงานบัญชีแยกประเภท"
+                  id="menu_account_report_report_general_ledger2_2"
+                  action="action_account_report_report_general_ledger2_2"
+                  sequence="16"
+                  parent="report_account_account"/>
+
+        <!--8.รายงาน สมุดรายวันต่างๆ-->
+        <record model="ir.actions.act_url" id="action_account_report_journal_report">
+           <field name="name">8.รายงานสมุดรายวันต่างๆ</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="รายงานสมุดรายวันต่างๆ"
+                  id="menu_account_report_journal_report"
+                  action="action_account_report_journal_report"
+                  sequence="16"
+                  parent="report_account_account"/>
+
+        <!--9.รายงาน สมุดรายวันต่างๆ-->
+        <record model="ir.actions.act_url" id="action_account_report_report_tial_balance">
+           <field name="name">9.งบทดลอง</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="งบทดลอง"
+                  id="menu_account_report_report_tial_balance"
+                  action="action_account_report_report_tial_balance"
+                  sequence="16"
+                  parent="report_account_account"/>
+
+        <!--10.รายงานสต๊อกการ์ด (มูลค่าภาษี)-->
+        <record model="ir.actions.act_url" id="action_account_report_report_stock_card_tax2">
+           <field name="name">10.รายงานสต๊อกการ์ด (มูลค่าภาษี)</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="รายงานสต๊อกการ์ด (มูลค่าภาษี)"
+                  id="menu_account_report_report_stock_card_tax2"
+                  action="action_account_report_report_stock_card_tax2"
+                  sequence="17"
+                  parent="report_account_inventory_report"/>
+
+         <!--11.รายงานสรุปสินค้าคงเหลือ (มูลค่าภาษี)-->
+        <record model="ir.actions.act_url" id="action_account_report_report_stock_card_tax">
+           <field name="name">11.รายงานสรุปสินค้าคงเหลือ (มูลค่าภาษี)</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="รายงานสรุปสินค้าคงเหลือ (มูลค่าภาษี)"
+                  id="menu_account_report_report_stock_card_tax"
+                  action="action_account_report_report_stock_card_tax"
+                  sequence="18"
+                  parent="report_account_inventory_report"/>
+
+        <!--12.รายงานสินค้าเคลื่อนไหว (รวมสินค้าบัญชี)-->
+        <record model="ir.actions.act_url" id="action_account_report_stock_sale">
+           <field name="name">12.รายงานสินค้าเคลื่อนไหว (รวมสินค้าบัญชี)</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="รายงานสรุปสินค้าคงเหลือ (มูลค่าภาษี)"
+                  id="menu_account_report_stock_sale"
+                  action="action_account_report_stock_sale"
+                  sequence="19"
+                  parent="report_account_inventory_report"/>
+
+        <!--13.รายงานสต๊อกการ์ด คลังสินค้า (Stock Card)-->
+        <record model="ir.actions.act_url" id="action_account_report_report_stock_card">
+           <field name="name">13.รายงานสต๊อกการ์ด คลังสินค้า (Stock Card)</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="รายงานสต๊อกการ์ด คลังสินค้า (Stock Card)"
+                  id="menu_account_report_report_stock_card"
+                  action="action_account_report_report_stock_card"
+                  sequence="20"
+                  parent="report_account_inventory_report"/>
+
+        <!--14.สถานะลูกหนี้-->
+        <record model="ir.actions.act_url" id="action_account_report_status_of_debtor">
+           <field name="name">14.สถานะลูกหนี้</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="สถานะลูกหนี้"
+                  id="menu_account_report_status_of_debtor"
+                  action="action_account_report_status_of_debtor"
+                  sequence="21"
+                  parent="report_accounts_receivable"/>
+
+         <!--15.สถานะเจ้าหนี้-->
+        <record model="ir.actions.act_url" id="action_account_report_status_of_creditor">
+           <field name="name">15.สถานะเจ้าหนี้</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="สถานะเจ้าหนี้"
+                  id="menu_account_report_status_of_creditor"
+                  action="action_account_report_status_of_creditor"
+                  sequence="21"
+                  parent="report_account_payable"/>
+
+        <!--16.สถานะเช็ครับ-->
+        <record model="ir.actions.act_url" id="action_account_report_status_of_cheque_rev">
+           <field name="name">16.สถานะเช็ครับ</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="สถานะเช็ครับ"
+                  id="menu_account_report_status_of_cheque_rev"
+                  action="action_account_report_status_of_cheque_rev"
+                  sequence="10"
+                  parent="report_account_cheque"/>
+
+        <!--17.สถานะเช็คจ่าย-->
+        <record model="ir.actions.act_url" id="action_account_report_status_of_cheque_paid">
+           <field name="name">17.สถานะเช็คจ่าย</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="สถานะเช็คจ่าย"
+                  id="menu_account_report_status_of_cheque_paid"
+                  action="action_account_report_status_of_cheque_paid"
+                  sequence="20"
+                  parent="report_account_cheque"/>
+
+        <!--รายงาน ภงด.-->
+        <record model="ir.actions.act_url" id="action_account_report_status_of_pnd">
+           <field name="name">รายงาน ภงด.</field>
+           <field name="url"></field>
+           <!--<field name="target">self</field>-->
+            <field name="target">new</field>
+        </record>
+        <menuitem name="รายงาน ภงด.1,3,53"
+                  id="menu_account_report_status_of_pnd"
+                  action="action_account_report_status_of_pnd"
+                  sequence="20"
+                  parent="report_account_pnd"/>
+
+        <!--รายงาน asset-->
+<!--        <record model="ir.actions.act_url" id="action_account_report_status_of_asset">-->
+<!--           <field name="name">รายงาน สินทรัพย์</field>-->
+<!--           <field name="url"></field>-->
+<!--           &lt;!&ndash;<field name="target">self</field>&ndash;&gt;-->
+<!--            <field name="target">new</field>-->
+<!--        </record>-->
+<!--        <menuitem name="ทะเบียนสินทรัพย์"-->
+<!--                  id="menu_account_report_status_of_asset"-->
+<!--                  action="l10n_th_asset_register_report.action_asset_register_wizard"-->
+<!--                  sequence="10"-->
+<!--                  parent="report_account_asset"/>-->
+
+        <!--รายงาน asset analysis-->
+<!--        <record model="ir.actions.act_url" id="action_account_report_status_of_asset_analysis">-->
+<!--           <field name="name">Asset Analysis</field>-->
+<!--           <field name="url"></field>-->
+<!--           &lt;!&ndash;<field name="target">self</field>&ndash;&gt;-->
+<!--            <field name="target">new</field>-->
+<!--        </record>-->
+<!--        <menuitem name="Asset Analysis"-->
+<!--                  id="menu_account_report_status_of_asset_ananlysis"-->
+<!--                  action="account_asset_management.action_account_asset_report"-->
+<!--                  sequence="20"-->
+<!--                  parent="report_account_asset"/>-->
+
+    </data>
+</odoo>

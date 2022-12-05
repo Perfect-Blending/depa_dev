@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <!--FIN-PURCHASE-->
+    <record id="view_fin_system_purchase_request_form" model="ir.ui.view">
+        <field name="name">view_fin_system_purchase_request_form</field>
+        <field name="model">fw_pfb_fin_system_purchase</field>
+        <field name="inherit_id" ref="fin_system.fin_system_purchase_request_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form/header/button[@name='fin_complete']" position="replace">
+                <field name="can_complete" invisible="1"/>
+                <button name="fin_complete" string="Complete" type="object" class="oe_highlight"
+                    attrs="{'invisible':[('can_complete','!=',True)]}"
+                    groups="fin_system.fw_pfb_fin_system_approver"/>
+            </xpath>
+
+            <xpath expr="//form/header/button[@name='change_to_complete']" position="after">
+                <button name="action_create_purchase_order" string="Create PO" type="object"
+                    states="ManagerOfStock" class="oe_highlight" confirm="Are you sure?"/>
+            </xpath>
+
+            <xpath expr="//sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_view_purchase_orders" class="oe_stat_button" type="object" icon='fa-list'>
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="purchase_order_count" widget="statinfo" nolabel="1"/>
+                            </span>
+                            <span class="o_stat_text o_stat_info">Purchase Orders</span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+
+            <xpath expr="//sheet/notebook/page/field[@name='approver']" position="before">
+                <button name="button_trigger" string="Update" type="object" groups="base.group_no_one"/>
+                <button name="action_generate_mail_to_approve" string="e-mail Approve" type="object" groups="base.group_no_one"/>
+                <button name="action_generate_mail_to_comment" string="e-mail Comment" type="object" groups="base.group_no_one"/>
+                <button name="action_generate_mail_to_reject" string="e-mail Reject" type="object" groups="base.group_no_one"/>
+                <field name="show_button_make_approval" invisible="1"/>
+                <field name="hide_button_make_approval" invisible="1"/>
+                <group groups="base.group_no_one">
+                    <group>
+                        <field name="next_approval_id"/>
+                        <field name="next_approval_ids" widget="many2many_tags"/>
+                        <field name="next_approval_user_ids" widget="many2many_tags"/>
+                        <field name="can_approve"/>
+                    </group>
+                    <group>
+                        <field name="next_comment_ids" widget="many2many_tags"/>
+                        <field name="next_comment_user_ids" widget="many2many_tags"/>
+                        <field name="can_comment"/>
+                    </group>
+                </group>
+                <button name="%(action_wizard_fin_purchase_approval)d" string="Make Approval" type="action" class="btn-primary"
+                    context="{'next_approval_id': next_approval_id}"
+                    attrs="{'invisible':['|', '|', ('can_approve','=',False),('state','in',['draft','completed','cancelled','reject']),('show_button_make_approval','=',False)]}"
+                />
+                <button name="%(action_wizard_fin_purchase_approval)d" string="Make Comment" type="action" class="btn-primary"
+                    context="{'next_comment_ids': next_comment_ids}"
+                    attrs="{'invisible':['|',('can_comment','=',False),('state','in',['draft','completed','cancelled','reject'])]}"
+                />
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="fin_system_purchase_all_fin_form_view" model="ir.ui.view">
+        <field name="name">fin_system_purchase_all_fin_form_view</field>
+        <field name="model">fw_pfb_fin_system_purchase</field>
+        <field name="inherit_id" ref="fin_system.fin_system_purchase_all_fin_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form/header/button[@name='change_to_complete']" position="after">
+                <button name="action_create_purchase_order" string="Create PO" type="object"
+                    states="completed" class="oe_highlight" confirm="Are you sure?"/>
+            </xpath>
+
+            <xpath expr="//sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_view_purchase_orders" class="oe_stat_button" type="object" icon='fa-list'>
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="purchase_order_count" widget="statinfo" nolabel="1"/>
+                            </span>
+                            <span class="o_stat_text o_stat_info">Purchase Orders</span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+
+            <xpath expr="//sheet/notebook/page/field[@name='approver']" position="before">
+                <button name="button_trigger" string="Update" type="object" groups="base.group_no_one"/>
+                <group groups="base.group_no_one">
+                    <group>
+                        <field name="next_approval_id"/>
+                        <field name="next_approval_user_ids" widget="many2many_tags"/>
+                        <field name="can_approve"/>
+                    </group>
+                    <group>
+                        <field name="next_comment_ids" widget="many2many_tags"/>
+                        <field name="next_comment_user_ids" widget="many2many_tags"/>
+                        <field name="can_comment"/>
+                    </group>
+                </group>
+                <button name="%(action_wizard_fin_purchase_approval)d" string="Make Approval" type="action" class="btn-primary"
+                    context="{'next_approval_id': next_approval_id}" attrs="{'invisible':[('can_approve','=',False)]}"/>
+                <button name="%(action_wizard_fin_purchase_approval)d" string="Make Comment" type="action" class="btn-primary"
+                    context="{'next_comment_ids': next_comment_ids}" attrs="{'invisible':[('can_comment','=',False)]}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--FIN-PURCHASE-APPROVER-->
+    <record id="view_fw_pfb_fin_system_purchase_approver_tree" model="ir.ui.view">
+        <field name="name">view_fw_pfb_fin_system_purchase_approver_tree</field>
+        <field name="model">fw_pfb_fin_system_purchase_approver</field>
+        <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_purchase_approver_tree_view"/>
+        <field name="arch" type="xml">
+
+            <field name="position_index" position="after">
+                <field name="approve_step"/>
+            </field>
+
+            <field name="state" position="before">
+                <field name="user_id"/>
+                <field name="approval_type"/>
+            </field>
+
+            <field name="approve_active" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+
+            <field name="position_index" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+
+            <button name="%(fin_system.wizard_approver_fin_purchase_action)d" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+
+            <button name="%(fin_system.wizard_approver_fin_purchase_action)d" position="after">
+                <field name="can_reset" invisible="1"/>
+                <button name="action_reset_approval" string="RESET" type="object" confirm="Are you sure?"
+                    attrs="{'invisible':[('can_reset','!=',True)]}"
+                />
+            </button>
+
+        </field>
+    </record>
+
+    <record id="view_fw_pfb_fin_system_purchase_approver_form" model="ir.ui.view">
+        <field name="name">view.fin.system.purchase.approver.form</field>
+        <field name="model">fw_pfb_fin_system_purchase_approver</field>
+        <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_purchase_approver_form_view"/>
+        <field name="arch" type="xml">
+            <field name="fin_position" position="after">
+                <field name="approval_type"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_server_fin_purchase_to_approve" model="ir.actions.server">
+        <field name="name">Pending</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="fin_system.model_fw_pfb_fin_system_purchase"/>
+        <field name="code"> action = model.get_action_fin_purchase_to_approve()</field>
+    </record>
+
+    <!--<menuitem id="fin_system_purchase_pending_v2" name="Pending V2"-->
+    <!--parent="fin_system.fin_system_menu_main_purchase"-->
+    <!--action="fin_system_extension.action_server_fin_purchase_to_approve"-->
+    <!--sequence="8" groups="fin_system.fw_pfb_fin_system_approver"/>-->
+
+    <menuitem id="fin_system.fin_system_purchase_pending" name="Pending"
+        parent="fin_system.fin_system_menu_main_purchase"
+        action="fin_system_extension.action_server_fin_purchase_to_approve"
+        sequence="7" groups="fin_system.fw_pfb_fin_system_approver"/>
+
+</data>
+</openerp>

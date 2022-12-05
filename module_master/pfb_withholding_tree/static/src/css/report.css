@@ -1,0 +1,1430 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'THSarabunNew';
+  src: url('/all_qweb_form_depa/static/fonts/THSarabunNew.ttf') format('truetype');
+}
+
+.o_without_tax_from {
+  font-family: 'THSarabunNew';
+  font-size: 20px;
+}
+
+/*-----------------PND53-----------------*/
+
+.o_without_tax_from .address1_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position:relative;
+    width:20px;
+    white-space:nowrap;
+    font-size:20px;
+    margin-right:4.1cm;
+   top: 0.5cm;
+}
+
+.o_without_tax_from .address2_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 5cm;
+        right: 6.5cm;
+}
+
+.o_without_tax_from .address3_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 12cm;
+        right: 5.3cm;
+}
+
+.o_without_tax_from .address4_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 4.7cm;
+        right: 8.9cm;
+}
+
+.o_without_tax_from .address5_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.7cm;
+        right: 1.72cm;
+}
+
+.o_without_tax_from .address6_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3cm;
+        right: 7.9cm;
+}
+
+.o_without_tax_from .address7_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.2cm;
+        right: 7.4cm;
+}
+
+.o_without_tax_from .address8_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3.2cm;
+        right: 8cm;
+}
+
+.o_without_tax_from .address9_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9cm;
+        right: 8.2cm;
+}
+
+.o_without_tax_from .address10_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3.8cm;
+        right: 8.8cm;
+}
+
+.o_without_tax_from .address11_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 10cm;
+        right: 8.2cm;
+}
+
+.o_without_tax_from .address12_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 20.5cm;
+        right: 13.6cm;
+}
+
+.o_without_tax_from .address13_pnd53 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 20.5cm;
+        right: 14.15cm;
+}
+
+.o_without_tax_from .address14_pnd53 {
+     display:block;
+     width: 10%;
+     text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 18cm;
+        right: 18.2cm;
+}
+
+.o_without_tax_from .address15_pnd53 {
+        display:block;
+        width: 10%;
+        text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 18cm;
+        right: 18.9cm;
+}
+
+
+.o_without_tax_from .address16_pnd53 {
+        display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 10.8cm;
+        right: 13.5cm;
+}
+.o_without_tax_from .address161_pnd53 {
+        display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 14.9cm;
+        right: 7.1cm;
+}
+
+.o_without_tax_from .address17_pnd53 {
+     display:block;
+     width: 10%;
+     text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 18cm;
+        right: 20.5cm;
+}
+
+.o_without_tax_from .mount1_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 1.5cm;
+    right: 11.7cm;
+}
+.o_without_tax_from .mount2_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 1.5cm;
+    right:12.3cm;
+}
+.o_without_tax_from .mount3_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 1.5cm;
+    right:12.8cm;
+}
+.o_without_tax_from .mount4_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 4.5cm;
+    right: 11.7cm;
+}
+.o_without_tax_from .mount5_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 4.5cm;
+    right: 12.3cm;
+}
+.o_without_tax_from .mount6_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 4.5cm;
+    right: 12.8cm;
+}
+.o_without_tax_from .mount7_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 7.6cm;
+    right: 11.7cm;
+}
+.o_without_tax_from .mount8_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 7.6cm;
+    right: 12.3cm;
+}
+.o_without_tax_from .mount9_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 7.6cm;
+    right: 12.8cm;
+}
+.o_without_tax_from .mount10_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 10.5cm;
+    right: 11.7cm;
+}
+
+.o_without_tax_from .year_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 12.5cm;
+    right: 10.7cm;
+}
+
+.o_without_tax_from .mount11_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 10.5cm;
+    right: 12.3cm;
+}
+.o_without_tax_from .mount12_pnd53 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 10.5cm;
+    right: 12.8cm;
+}
+/*----------------- END PND53------------------------*/
+/*----------------- PND3-----------------------------*/
+.o_without_tax_from .address1_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position:relative;
+    width:20px;
+    white-space:nowrap;
+    font-size:20px;
+    margin-right:4.1cm;
+   top: 0.5cm;
+}
+
+.o_without_tax_from .address2_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 4.8cm;
+        right: 6.4cm;
+}
+
+.o_without_tax_from .address3_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 12.2cm;
+        right: 5.1cm;
+}
+
+.o_without_tax_from .address4_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 4.65cm;
+        right: 8.9cm;
+}
+
+.o_without_tax_from .address5_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.9cm;
+        right: 1.48cm;
+}
+
+.o_without_tax_from .address6_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3cm;
+        right: 7.8cm;
+}
+
+.o_without_tax_from .address7_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.4cm;
+        right: 7.2cm;
+}
+
+.o_without_tax_from .address8_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3.2cm;
+        right: 8cm;
+}
+
+.o_without_tax_from .address9_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.3cm;
+        right: 8.1cm;
+}
+
+.o_without_tax_from .address10_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3.8cm;
+        right: 8.8cm;
+}
+
+.o_without_tax_from .address11_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 10cm;
+        right: 8.1cm;
+}
+
+.o_without_tax_from .address12_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 21.5cm;
+        right: 14.3cm;
+}
+
+.o_without_tax_from .address13_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 21.5cm;
+        right: 15.1cm;
+}
+
+.o_without_tax_from .address14_pnd3 {
+     display:block;
+     width: 10%;
+     text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        position: fixed;
+        top: 19.4cm;
+        right: 19cm;
+}
+
+.o_without_tax_from .address15_pnd3 {
+    display:block;
+    width: 10%;
+    text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        position: fixed;
+        top: 19.4cm;
+        right: 19.8cm;
+}
+
+.o_without_tax_from .address16_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 11.2cm;
+        right: 14.2cm;
+}
+.o_without_tax_from .address161_pnd3 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 14.7cm;
+        right: 12.9cm;
+}
+
+.o_without_tax_from .address17_pnd3 {
+    display:block;
+    width: 10%;
+    text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        position: fixed;
+        top: 19.4cm;
+        right: 21.2cm;
+}
+
+.o_without_tax_from .mount0_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 21.8cm;
+    right: 5.1cm;
+}
+
+.o_without_tax_from .mount1_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 13.8cm;
+    right: 6.6cm;
+}
+.o_without_tax_from .mount2_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 13.8cm;
+    right: 7.5cm;
+}
+.o_without_tax_from .mount3_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 13.8cm;
+    right: 8.5cm;
+}
+.o_without_tax_from .mount4_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 16.1cm;
+    right: 6.6cm;
+}
+.o_without_tax_from .mount5_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 16.1cm;
+    right: 7.5cm;
+}
+.o_without_tax_from .mount6_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 16.1cm;
+    right: 8.5cm;
+}
+.o_without_tax_from .mount7_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 18.5cm;
+    right: 6.6cm;
+}
+.o_without_tax_from .mount8_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 18.5cm;
+    right: 7.5cm;
+}
+.o_without_tax_from .mount9_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 18.5cm;
+    right: 8.5cm;
+}
+.o_without_tax_from .mount10_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 20.8cm;
+    right: 6.6cm;
+}
+.o_without_tax_from .mount11_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 20.8cm;
+    right: 7.5cm;
+}
+.o_without_tax_from .mount12_pnd3 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 20.8cm;
+    right: 8.5cm;
+}
+/*----------------- END PND3------------------------*/
+/*----------------- PND1-----------------------------*/
+.o_without_tax_from .address1_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position:relative;
+    width:20px;
+    white-space:nowrap;
+    font-size:20px;
+    margin-right:3.7cm;
+    top: 0.5cm;
+}
+
+.o_without_tax_from .address2_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 4.4cm;
+        right: 5.9cm;
+}
+
+.o_without_tax_from .address3_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 12cm;
+        right: 4.6cm;
+}
+
+.o_without_tax_from .address4_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 4.5cm;
+        right: 8.5cm;
+}
+
+.o_without_tax_from .address5_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.6cm;
+        right: 1.2cm;
+}
+
+.o_without_tax_from .address6_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3cm;
+        right: 7.4cm;
+}
+
+.o_without_tax_from .address7_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.2cm;
+        right: 6.9cm;
+}
+
+.o_without_tax_from .address8_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3.2cm;
+        right: 7.6cm;
+}
+
+.o_without_tax_from .address9_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.3cm;
+        right: 7.7cm;
+}
+
+.o_without_tax_from .address10_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3.9cm;
+        right: 8.3cm;
+}
+
+.o_without_tax_from .address11_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 10cm;
+        right: 7.8cm;
+}
+
+.o_without_tax_from .address12_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 14cm;
+        right: 23.1cm;
+}
+.o_without_tax_from .address12_pnd11 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 14cm;
+        right: 21.6cm;
+}
+
+.o_without_tax_from .address13_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 20.7cm;
+        right: 13cm;
+}
+
+.o_without_tax_from .address14_pnd1 {
+     display:block;
+     width: 10%;
+     text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 16.1cm;
+        right: 21.5cm;
+}
+
+.o_without_tax_from .address15_pnd1 {
+    display:block;
+    width: 10%;
+    text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 19.8cm;
+        right: 21.5cm;
+}
+.o_without_tax_from .address14_pnd11 {
+     display:block;
+     width: 10%;
+     text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 16.1cm;
+        right: 20cm;
+}
+
+.o_without_tax_from .address15_pnd11 {
+    display:block;
+    width: 10%;
+    text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 19.8cm;
+        right: 20cm;
+}
+
+.o_without_tax_from .address16_pnd1 {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 10.45cm;
+        right: 13.1cm;
+}
+
+.o_without_tax_from .address17_pnd1 {
+    display:block;
+    width: 10%;
+    text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        position: fixed;
+        top: 19.8cm;
+        right: 23cm;
+}
+
+.o_without_tax_from .mount1_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 13.4cm;
+    right: 6.4cm;
+}
+.o_without_tax_from .mount2_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 13.4cm;
+    right: 7.3cm;
+}
+.o_without_tax_from .mount3_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 13.4cm;
+    right: 8.3cm;
+}
+.o_without_tax_from .mount4_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 15.7cm;
+    right: 6.4cm;
+}
+
+.o_without_tax_from .mount0_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 21.6cm;
+    right: 4.8cm;
+}
+
+.o_without_tax_from .mount5_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 15.7cm;
+    right: 7.3cm;
+}
+.o_without_tax_from .mount6_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 15.7cm;
+    right: 8.3cm;
+}
+.o_without_tax_from .mount7_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 18.1cm;
+    right: 6.4cm;
+}
+.o_without_tax_from .mount8_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 18.1cm;
+    right: 7.3cm;
+}
+.o_without_tax_from .mount9_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 18.1cm;
+    right: 8.3cm;
+}
+.o_without_tax_from .mount10_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 20.4cm;
+    right: 6.4cm;
+}
+.o_without_tax_from .mount11_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 20.4cm;
+    right: 7.3cm;
+}
+.o_without_tax_from .mount12_pnd1 {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 20.4cm;
+    right: 8.3cm;
+}
+/*----------------- END PND1------------------------*/
+/*----------------- PND1a-----------------------------*/
+.o_without_tax_from .address1_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position:relative;
+    width:20px;
+    white-space:nowrap;
+    font-size:20px;
+    margin-right:3.6cm;
+    top: 0.5cm;
+}
+
+.o_without_tax_from .address2_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 4.5cm;
+        right: 5.9cm;
+}
+
+.o_without_tax_from .address3_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 12.1cm;
+        right: 4.5cm;
+}
+
+.o_without_tax_from .address4_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 4.6cm;
+        right: 8.5cm;
+}
+
+.o_without_tax_from .address5_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.7cm;
+        right: 0.9cm;
+}
+
+.o_without_tax_from .address6_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3cm;
+        right: 7.4cm;
+}
+
+.o_without_tax_from .address7_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.2cm;
+        right: 6.8cm;
+}
+
+.o_without_tax_from .address8_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3.2cm;
+        right: 7.5cm;
+}
+
+.o_without_tax_from .address9_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 9.3cm;
+        right: 7.6cm;
+}
+
+.o_without_tax_from .address10_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 3.9cm;
+        right: 8.3cm;
+}
+
+.o_without_tax_from .address11_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 10cm;
+        right: 7.6cm;
+}
+
+.o_without_tax_from .address12_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 13.6cm;
+        right: 22.8cm;
+}
+.o_without_tax_from .address12_pnd11a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 13.6cm;
+        right: 24.3cm;
+}
+
+.o_without_tax_from .address13_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 21.5cm;
+        right: 13.78cm;
+}
+
+.o_without_tax_from .address14_pnd1a {
+     display:block;
+     width: 10%;
+     text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 16.6cm;
+        right: 21.2cm;
+}
+
+.o_without_tax_from .address15_pnd1a {
+    display:block;
+    width: 10%;
+    text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 20.5cm;
+        right: 21.2cm;
+}
+.o_without_tax_from .address14_pnd11a {
+     display:block;
+     width: 10%;
+     text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 16.6cm;
+        right: 22.6cm;
+}
+
+.o_without_tax_from .address15_pnd11a {
+    display:block;
+    width: 10%;
+    text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 20.5cm;
+        right: 22.6cm;
+}
+
+.o_without_tax_from .address16_pnd1a {
+     display:block;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+        position: fixed;
+        top: 10.2cm;
+        right: 13.8cm;
+}
+
+.o_without_tax_from .address17_pnd1a {
+    display:block;
+    width: 10%;
+    text-align: right;
+        filter: flipv fliph;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        position: fixed;
+        top: 19.5cm;
+        right: 22.7cm;
+}
+
+.o_without_tax_from .mount1_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 21.5cm;
+    right: 4.8cm;
+}
+.o_without_tax_from .mount2_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 14.09cm;
+    right: 7.8cm;
+}
+.o_without_tax_from .mount3_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 13.4cm;
+    right: 8.3cm;
+}
+.o_without_tax_from .mount4_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 15.7cm;
+    right: 6.4cm;
+}
+
+.o_without_tax_from .mount0_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 21.6cm;
+    right: 4.8cm;
+}
+
+.o_without_tax_from .mount5_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 15.7cm;
+    right: 7.3cm;
+}
+.o_without_tax_from .mount6_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 15.7cm;
+    right: 8.3cm;
+}
+.o_without_tax_from .mount7_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 18.1cm;
+    right: 6.4cm;
+}
+.o_without_tax_from .mount8_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 18.1cm;
+    right: 7.3cm;
+}
+.o_without_tax_from .mount9_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 18.1cm;
+    right: 8.3cm;
+}
+.o_without_tax_from .mount10_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 20.4cm;
+    right: 6.4cm;
+}
+.o_without_tax_from .mount11_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 20.4cm;
+    right: 7.3cm;
+}
+.o_without_tax_from .mount12_pnd1a {
+    display:block;
+    filter: flipv fliph;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 20.4cm;
+    right: 8.3cm;
+}
+/*----------------- END PND1------------------------*/
+
+
+

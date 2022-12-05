@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="account_dynamic_reports.advances">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <style>
+                        .pims_report_content{
+                        font-size: 14px;
+                        font-family" 'Arial';
+                        }
+
+                        .pims_report_line_table {
+                        width:100%;
+                        --table-layout: fixed;
+                        --word-break: break-all;
+                        border-collapse: collapse;
+                        }
+
+                        .pims_report_line_main_tr {
+                        font-weight:bold;
+                        background-color: cyan;
+                        border:1px solid grey;
+                        }
+
+                        .pims_report_line_initial_tr {
+                        font-style:italic;
+                        }
+
+                        .pims_report_line_subtotal {
+                        font-weight:bold;
+                        background-color: white;
+                        border-top:2px solid grey;
+                        }
+
+                        <!-- For TB Only -->
+
+                        .pims_report_line_tb {
+                        border:1px solid grey;
+                        }
+
+                        .pims_report_line_tb td {
+                        overflow: hidden;
+                        }
+
+                        .pims_report_line_tb td+td {
+                        width: auto;
+                        }
+
+                        .pims_tb_head {
+                        font-weight:bold;
+                        background-color: cyan;
+                        border:1px solid grey;
+                        text-align:right;
+                        }
+                    </style>
+                    <table id="data-lines" class="system-data-table-tb" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th colspan="19" class="text-center">
+                                    <span>ทะเบียนคุมลูกหนี้เงินยืมทดรองจ่าย</span>
+                                    <br/>
+                                    <t t-if="filter_data">
+                                        <span>
+                                            <t t-raw="filter_data['date_from']"/>
+                                            to
+                                            <t t-raw="filter_data['date_to']"/>
+                                        </span>
+                                    </t>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="amt-head text-center">เลขที่สัญญา FIN 401</th>
+                                <th class="amt-head text-center">วันที่อนุมัติ</th>
+                                <th class="amt-head text-center">ชื่อผู้ยืม</th>
+                                <th class="amt-head text-center">ฝ่าย/ส่วนงาน</th>
+                                <th class="amt-head text-center">จำนวนเงินยืมทดรอง</th>
+                                <th class="amt-head text-center">วันที่จ่าย</th>
+                                <th class="amt-head text-center">วันที่เริ่มต้น</th>
+                                <th class="amt-head text-center">วันที่สิ้นสุดยืม</th>
+                                <th class="amt-head text-center">วันครบกำหนด</th>
+                                <th class="amt-head text-center">จำนวนวันเกินกำหนด</th>
+                                <th class="amt-head text-center">วันที่รับเอกสาร</th>
+                                <th class="amt-head text-center">วันที่รับเงิน</th>
+                                <th class="amt-head text-center">ค่าใช้จ่ายจริง</th>
+                                <th class="amt-head text-center">วันที่อนุมัติหักล้างเงินยืมทดลอง</th>
+                                <th class="amt-head text-center">หมายเหตุ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <t t-foreach="account_data" t-as="account">
+                                <tr style="border:none;border-bottom:1px solid #666666;">
+                                    <td>
+                                        <t t-raw="account['name']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['due_date']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['employee']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['department']"/>
+                                    </td>
+                                    <td t-att-style="style" class="text-right">
+                                         <span t-esc="'{:,.2f}'.format(account['contract_amount'])"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['date']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['date']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['contract_end']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['contract_end']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['doc_date']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['fin_date201']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['fin_date201']"/>
+                                    </td>
+                                    <td t-att-style="style" class="text-right">
+                                        <span t-esc="'{:,.2f}'.format(account['amount_clear'])"/>
+                                    </td>
+
+                                     <td class="text-center">
+                                        <t t-raw="account['action_date201']"/>
+                                    </td>
+                                    <td>
+                                        <t t-raw="account['fin_remark201']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td colspan="4">
+                                    รวม
+                                </td>
+                                <td>
+                                    <t t-raw="line_total['total_contract_amount']"/>
+                                </td>
+                                <td colspan="4">
+                                    รวม
+                                </td>
+                                <td>
+                                </td>
+                                <td colspan="4">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report id="action_advances"
+            model="ins.advances"
+            report_type="qweb-pdf"
+            menu="False"
+            string="Advances"
+            name="account_dynamic_reports.advances"
+            file="account_dynamic_reports.advances"
+    />
+</odoo>

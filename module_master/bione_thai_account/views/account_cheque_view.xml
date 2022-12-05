@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem name="Cheque Management" parent="account.menu_finance"
+                  id="menu_bione_cheque_main" sequence="3"/>
+
+        <menuitem name="ระบบเช็ครับ" parent="menu_bione_cheque_main"
+                  id="menu_bione_cheque_in" sequence="10"/>
+
+        <menuitem name="ระบบเช็คจ่าย" parent="menu_bione_cheque_main"
+                  id="menu_bione_cheque_out" sequence="20"/>
+
+<!--        <menuitem name="ทะเบียนเช็ค" parent="menu_bione_cheque_main"-->
+<!--                  id="menu_bione_cheque" sequence="30"/>-->
+
+        <!-- bione.cheque -->
+        <record id="view_bione_cheque_form" model="ir.ui.view">
+            <field name="name">bione.cheque.form</field>
+            <field name="model">bione.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Cheque" version="12.0">
+                    <header>
+                        <button name="action_assigned" type="object" states="draft,pending" string="Assigned"/>
+                        <button name="action_done" type="object" states="assigned" string="Done"/>
+                        <button name="pending_cheque" type="object" states="draft,assigned" string="Pending"/>
+                        <button name="reject_cheque" type="object" states="draft,assigned,pending" string="Reject"/>
+                        <button name="cancel_cheque" type="object" states="draft,pending,reject" string="Cancel"/>
+                        <button name="action_cancel_draft" type="object" states="cancel" string="Set to Draft"/>
+                        <button name="action_done_draft" type="object" states="done" string="Set to Draft"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="cancel,draft,assigned,pending,reject,done"
+                               statusbar_colors='{"assigned":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                <field name="bank_customer"
+                                       attrs="{'invisible': [('type', '=', 'out')],'required':[('type', '=', 'in')]}"/>
+                                <field name="bank_branch_customer"
+                                       attrs="{'invisible': [('type', '=', 'out')],'required':[('type', '=', 'in')]}"/>
+
+
+                                <field name="account_bank_id" domain="[('type','=','bank')]"
+                                       attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                <field name="bank" />
+                                <field name="partner_id" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                <field name='pay_to' attrs="{'readonly':[('state','!=','draft')]}" domain="['|', ('supplier','=',True), ('customer','=',True),  ('parent_id', '=', False)]"/>
+                                <field name='user' attrs="{'readonly':[('state','!=','draft')]}" />
+<!--                                <field name='user' attrs="{'readonly':[('state','!=','draft')], 'invisible': [('type', '=', 'in')],'required':[('type', '=', 'out')]}" />-->
+                                <field name="amount" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                <field name='strike' class="oe_inline" attrs="{'readonly':[('state','!=','draft')]}"/>
+<!--                                <div>-->
+<!--                                    <field name='amount' class="oe_inline" attrs="{'readonly':[('state','!=','draft')]}"/>-->
+<!--                                    <label class="oe_inline" string="A/C Payee Only" />-->
+<!--                                    <field name='strike' class="oe_inline" attrs="{'readonly':[('state','!=','draft')]}"/>-->
+<!--                                </div>-->
+
+                                <field name="move_line_id" invisible="1" />
+                                <!--<field name="voucher_id" readonly="1"/>-->
+                            </group>
+                            <group>
+                                <field name="cheque_date" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                <field name="cheque_date_reconcile"
+                                       attrs="{'readonly': [('state','in',('assigned'))]}"/>
+                                <field name="type" />
+                                <field name="account_receipt_id"
+                                       attrs="{'invisible': [('type', '=', 'out')],'required':[('type', '=', 'in')]}"/>
+                                <field name="account_pay_id"
+                                       attrs="{'invisible': [('type', '=', 'in')],'required':[('type', '=', 'out')]}"/>
+                                <field name="move_id" readonly="1"/>
+                                <field name="type" required="1" invisible="1"/>
+                                <field name="customer_payment_id" string="Received Document" readonly="1" />
+                                <field name="customer_receipts_id" string="Receipts Document" readonly="1" />
+                                <field name="supplier_payment_id" string="Payment Document" readonly="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Note">
+                                <field name="note" colspan="4" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                            </page>
+<!--                            <page string="General Ledger" attrs="{'invisible': [('state','not in',('done'))]}">-->
+<!--                                <field name="account_move_lines" readonly="1">-->
+<!--                                    <tree string="General ledgers">-->
+<!--                                        <field name="date"/>-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="account_id"/>-->
+<!--                                        <field name="debit" sum="Total Debit"/>-->
+<!--                                        <field name="credit" sum="Total Credit"/>-->
+<!--                                        <field name="analytic_account_id" invisible="1"/>-->
+<!--                                        <field name="quantity" invisible="1"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </page>-->
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_bione_cheque_tree" model="ir.ui.view">
+            <field name="name">bione.cheque.tree</field>
+            <field name="model">bione.cheque</field>
+            <field name="arch" type="xml">
+                <tree string="Cheque">
+                    <!--<field name="voucher_id"/>-->
+                    <field name="name"/>
+                    <!--<field name="move_id"/>-->
+                    <field name="cheque_date"/>
+                    <field name="cheque_date_reconcile"/>
+                    <field name="account_bank_id" />
+                    <field name="bank"/>
+                    <field name="partner_id"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_bione_cheque_search" model="ir.ui.view">
+            <field name="name">bione.cheque.search</field>
+            <field name="model">bione.cheque</field>
+            <field name="arch" type="xml">
+                <search string="cheque">
+                    <filter icon="terp-document-new" string="Draft" domain="[('state','=','draft')]"
+                            name="cheque_draft"/>
+                    <filter icon="terp-camera_test" string="Cancel" domain="[('state','=','cancel')]"
+                            name="cheque_cancel"/>
+                    <filter icon="terp-camera_test" string="Assigned" domain="[('state','=','assigned')]"
+                            name="cheque_assigned"/>
+                    <filter icon="terp-camera_test" string="Pending" domain="[('state','=','pending')]"
+                            name="cheque_pending"/>
+                    <filter icon="terp-camera_test" string="Reject" domain="[('state','=','reject')]"
+                            name="cheque_reject"/>
+                    <filter icon="terp-camera_test" string="Done" domain="[('state','=','done')]" name="cheque_done"/>
+                    <field name="name"/>
+                    <field name="cheque_date"/>
+                    <field name="cheque_date_reconcile"/>
+                    <field name="account_bank_id" />
+                    <field name="bank"/>
+                    <field name="partner_id"/>
+                    <!--<field name="voucher_id"/>-->
+                    <field name="amount"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_bione_cheque_in_form" model="ir.actions.act_window">
+            <field name="name">เช็ครับ</field>
+            <field name="res_model">bione.cheque</field>
+            <field name="domain">[('type','=','in')]</field>
+            <field name="context">{'default_type': 'in','search_default_cheque_draft': 1, 'type': 'in'}</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_bione_cheque_in_form" icon="STOCK_JUSTIFY_FILL" sequence="10"
+                  id="menu_action_bione_cheque_in_form" parent="menu_bione_cheque_in"/>
+
+
+        <record id="action_bione_cheque_out_form" model="ir.actions.act_window">
+            <field name="name">เช็คจ่าย</field>
+            <field name="res_model">bione.cheque</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('type','=','out')]</field>
+            <field name="context">{'default_type': 'out','search_default_cheque_draft': 1, 'type': 'out'}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_bione_cheque_out_form" icon="STOCK_JUSTIFY_FILL" sequence="20"
+                  id="menu_action_bione_cheque_out_form" parent="menu_bione_cheque_out"/>
+
+
+    </data>
+</odoo>
+        

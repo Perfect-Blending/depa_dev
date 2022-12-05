@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record model="ir.ui.view" id="invoice_plan_calendar">
+            <field name="name">purchase.invoice.plan.calendar</field>
+            <field name="model">purchase.invoice.plan</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="Calendar View" date_start="plan_date" color="partner_id">
+                    <field name="purchase_id"/>
+                    <field name="percent" widget="monetary"/>
+                    <field name="partner_id"/>
+                </calendar>
+            </field>
+        </record>
+</odoo>

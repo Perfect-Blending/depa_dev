@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="fw_pfb_flow_template_approve_form_view">
+            <field name="name">fw_pfb_flow_template_approve_form_view</field>
+            <field name="model">fw_pfb_flow_template_approve</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="position_index"/>
+                                <field name="approve_position"/>
+                                <field name="position"/>
+                            </group>
+                            <group>
+                                <field name="data_activate"/>
+                                <field name="emp_name" invisible="1"/>
+                            </group>
+                        </group>
+                        <div>
+                            <group>
+                                <group>
+                                    <field name="employee_line">
+                                        <tree editable="bottom" create="0">
+                                            <field name="data_activate" />
+                                            <field name="name" readonly="1" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                        </div>
+                    </sheet> 
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_flow_template_tree_view">
+            <field name="name">fin_system_flow_template_tree_view</field>
+            <field name="model">fw_pfb_flow_template</field>
+            <field name="arch" type="xml">
+                <tree string="Flow Template">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="department"/>
+                </tree>
+            </field>
+        </record>
+
+         <record model="ir.ui.view" id="fin_system_flow_template_form_view">
+            <field name="name">fin_system_flow_template_form_view</field>
+            <field name="model">fw_pfb_flow_template</field>
+            <field name="arch" type="xml">
+            <form>
+                    <header>
+                        <button string="Generate Index" 
+                                class="oe_highlight"
+                                name="generate_index" 
+                                type="object" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="type"/>
+                            </group>
+                            <group>
+                                <field name="department"/>
+                                <field name="data_activate"/>
+                            </group>
+                        </group>
+
+                        <div>
+                        <group>
+                            <group>
+                                <notebook>
+                                    <page string="Approval Order">
+                                        <field name="approve_line">
+                                            <tree>
+                                                <field name="position_index"/>
+                                                <field name="approve_position"/>
+                                                <field name="position"/>
+                                                <field name="emp_name"/>
+                                                <field name="data_activate"/>
+                                            </tree>
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </group>
+                        </group>
+                    </div>
+                    </sheet> 
+            </form>
+            </field>
+        </record>
+
+        <!-- Action request -->
+        <record model="ir.actions.act_window" id="fin_system_flow_template_action">
+            <field name="name">Flow Template</field>
+            <field name="res_model">fw_pfb_flow_template</field>
+            <field name="view_id" ref="fin_system_flow_template_tree_view"/>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_flow_template_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_flow_template_tree_view"/>
+            <field name="act_window_id" ref="fin_system_flow_template_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_flow_template_form_view_action">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_flow_template_form_view"/>
+            <field name="act_window_id" ref="fin_system_flow_template_action"/>
+        </record>
+        <!-- End Action Request -->
+
+           
+        <menuitem name="Flow Template" 
+                    id="fin_system_flow_template" 
+                    parent="fw_pfb_fin_system.fin_system_menu_settings"
+                    sequence="13" 
+                    action="fin_system_flow_template_action"
+                    groups="fw_pfb_fin_system_show_menu_settings"/>
+
+    </data>
+</openerp>

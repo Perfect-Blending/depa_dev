@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--FIN201-->
+    <record id="fin_system.fin_system_201_request_search" model="ir.ui.view">
+        <field name="name">fin.system.201.request.search</field>
+        <field name="model">fw_pfb_fin_system_201</field>
+        <field name="arch" type="xml">
+            <search string="Search state">
+                <field name="fin_no"/>
+                <field name="fin_type"/>
+                <field name="fin_date"/>
+                <field name="reference"/>
+                <field name="requester"/>
+                <field name="department"/>
+
+                <filter string="Draft" name="state_draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Completed" name="state_completed" domain="[('state', '=', 'completed')]"/>
+                <filter string="Cancel" name="state_cancel" domain="[('state', '=', 'cancelled')]"/>
+                <filter string="Reject" name="state_reject" domain="[('state', '=', 'reject')]"/>
+
+                <filter string="FIN Type" name="group_by_fin_type" context="{'group_by':'fin_type'}"/>
+                <filter string="FIN Date" name="group_by_fin_date" context="{'group_by':'fin_date'}"/>
+                <filter string="Priority" name="group_by_priority" context="{'group_by':'priority'}"/>
+                <filter string="Status" name="group_by_state" context="{'group_by':'state'}"/>
+                <filter string="Requester" name="group_by_requester" context="{'group_by':'requester'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_fin_system_201_request_form" model="ir.ui.view">
+        <field name="name">view.fin.system.201.request.form</field>
+        <field name="model">fw_pfb_fin_system_201</field>
+        <field name="inherit_id" ref="fin_system.fin_system_201_request_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form/header/button[@name='fin_complete']" position="replace">
+                <field name="can_complete" invisible="1"/>
+                <button name="fin_complete" string="Complete" type="object" class="oe_highlight"
+                    attrs="{'invisible':[('can_complete','!=',True)]}"
+                    groups="fin_system.fw_pfb_fin_system_approver"/>
+            </xpath>
+
+            <xpath expr="//form/header" position="inside">
+                <button name="action_set_draft" string=">Set to Draft" type="object" groups="base.group_no_one"/>
+                <button name="action_set_done" string=">Set to Completed" type="object" groups="base.group_no_one"/>
+                <button name="action_set_cancel" string=">Set to Cancelled" type="object" groups="base.group_no_one"/>
+            </xpath>
+
+            <xpath expr="//notebook/page/field[@name='fin_lines']" position="replace">
+                <field name="fin_lines" nolabel="1"
+					attrs="{'readonly':['|', '|', ('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False), ('is_director', '=', False)]}">
+                    <tree>
+                        <field name="fin100_line_id"/>
+                        <field name="fin100_id" string="FIN100"/>
+                        <field name="fin_type"/>
+                        <field name='product_id'/>
+                        <field name="description"/>
+                        <field name="fin_id" string="FIN201" invisible="0"/>
+                        <field name="fin401_id" />
+                        <field name="price_unit"/>
+                        <field name="product_uom_qty"/>
+                        <field name="product_uom"/>
+                        <field name="price_subtotal" sum="Total"/>
+                        <field name="loan_amount"/>
+                        <field name="fin100_line_residual" invisible="1"/>
+                        <field name="fin401_current_amount"/>
+                        <field name="payment_amount"/>
+                        <field name="fin100_line_residual_amount" options='{"always_reload": True}' />
+                    </tree>
+                </field>
+            </xpath>
+
+            <xpath expr="//notebook/page/field[@name='fin_lines']" position="before">
+                <button name="button_force_compute_fin201_lines" string="Compute" type="object" groups="base.group_no_one" invisible="1"/>
+                <button name="button_trigger" string="Update" type="object" groups="base.group_no_one"/>
+                <button name="action_generate_mail_to_approve" string="e-mail Approve" type="object" groups="base.group_no_one"/>
+                <button name="action_generate_mail_to_comment" string="e-mail Comment" type="object" groups="base.group_no_one"/>
+                <button name="action_generate_mail_to_reject" string="e-mail Reject" type="object" groups="base.group_no_one"/>
+            </xpath>
+
+            <field name="fin_date" position="attributes">
+                <attribute name="readonly">False</attribute>
+            </field>
+
+            <xpath expr="//sheet/notebook/page/field[@name='approver']" position="before">
+                <button name="button_trigger" string="Update" type="object" groups="base.group_no_one"/>
+                <group groups="base.group_no_one">
+                    <group>
+                        <field name="next_approval_id"/>
+                        <field name="next_approval_ids" widget="many2many_tags"/>
+                        <field name="next_approval_user_ids" widget="many2many_tags"/>
+                        <field name="can_approve"/>
+                    </group>
+                    <group>
+                        <field name="next_comment_ids" widget="many2many_tags"/>
+                        <field name="next_comment_user_ids" widget="many2many_tags"/>
+                        <field name="can_comment"/>
+                    </group>
+                </group>
+                <button name="%(action_wizard_fin201_approval)d" string="Make Approval" type="action" class="btn-primary"
+                    context="{'next_approval_id': next_approval_id}"
+                    attrs="{'invisible':['|',('can_approve','=',False),('state','in',['draft','completed','cancelled','reject'])]}"
+                />
+                <button name="%(action_wizard_fin201_approval)d" string="Make Comment" type="action" class="btn-primary"
+                    context="{'next_comment_ids': next_comment_ids}"
+                    attrs="{'invisible':['|',('can_comment','=',False),('state','in',['draft','completed','cancelled','reject'])]}"
+                />
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- FIN201 pending view -->
+    <record id="fin_system_201_pending_form_view_inherit" model="ir.ui.view">
+        <field name="name">fin.system.201.pending.form.view.inherit</field>
+        <field name="model">fw_pfb_fin_system_201</field>
+        <field name="inherit_id" ref="fin_system.fin_system_201_pending_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet/notebook/page/field[@name='approver']" position="before">
+                <button name="button_trigger" string="Update" type="object" groups="base.group_no_one"/>
+                <group groups="base.group_no_one">
+                    <group>
+                        <field name="next_approval_id"/>
+                        <field name="next_approval_ids" widget="many2many_tags"/>
+                        <field name="next_approval_user_ids" widget="many2many_tags"/>
+                        <field name="can_approve"/>
+                    </group>
+                    <group>
+                        <field name="next_comment_ids" widget="many2many_tags"/>
+                        <field name="next_comment_user_ids" widget="many2many_tags"/>
+                        <field name="can_comment"/>
+                    </group>
+                </group>
+                <button name="%(action_wizard_fin201_approval)d" string="Make Approval" type="action" class="btn-primary"
+                    context="{'next_approval_id': next_approval_id}"
+                    attrs="{'invisible':['|',('can_approve','=',False),('state','in',['draft','completed','cancelled','reject'])]}"
+                />
+                <button name="%(action_wizard_fin201_approval)d" string="Make Comment" type="action" class="btn-primary"
+                    context="{'next_comment_ids': next_comment_ids}"
+                    attrs="{'invisible':['|',('can_comment','=',False),('state','in',['draft','completed','cancelled','reject'])]}"
+                />
+            </xpath>
+
+        </field>
+    </record>
+    <!-- END FIN201 pending view -->
+
+
+    <record id="view_fin_system_201_all_fin_form" model="ir.ui.view">
+        <field name="name">view.fin.system.201.all.fin.form</field>
+        <field name="model">fw_pfb_fin_system_201</field>
+        <field name="inherit_id" ref="fin_system.fin_system_201_all_fin_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form/header" position="inside">
+                <button name="action_set_draft" string=">Set to Draft" type="object" groups="base.group_no_one"/>
+                <button name="action_set_done" string=">Set to Completed" type="object" groups="base.group_no_one"/>
+                <button name="action_set_cancel" string=">Set to Cancelled" type="object" groups="base.group_no_one"/>
+            </xpath>
+
+            <xpath expr="//notebook/page/field[@name='fin_lines']" position="replace">
+                <field name="fin_lines" nolabel="1"
+					attrs="{'readonly':['|', '|', ('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}">
+                    <tree>
+                        <field name="fin100_line_id"/>
+                        <field name="fin100_id" string="FIN100"/>
+                        <field name="fin_type"/>
+                        <field name='product_id'/>
+                        <field name="description"/>
+                        <field name="fin_id" string="FIN201" invisible="0"/>
+                        <field name="fin401_id" />
+                        <field name="price_unit"/>
+                        <field name="product_uom_qty"/>
+                        <field name="product_uom"/>
+                        <field name="price_subtotal" sum="Total"/>
+                        <field name="loan_amount"/>
+                        <field name="fin100_line_residual" invisible="1"/>
+                        <field name="fin401_current_amount"/>
+                        <field name="payment_amount"/>
+                        <field name="fin100_line_residual_amount" options='{"always_reload": True}' />
+                    </tree>
+                </field>
+            </xpath>
+
+            <xpath expr="//notebook/page/field[@name='fin_lines']" position="before">
+                <button name="button_force_compute_fin201_lines" string="Compute" type="object" groups="base.group_no_one" invisible="1"/>
+                <button name="button_trigger" string="Update" type="object" groups="base.group_no_one"/>
+                <button name="action_generate_mail_to_approve" string="e-mail Approve" type="object" groups="base.group_no_one"/>
+                <button name="action_generate_mail_to_comment" string="e-mail Comment" type="object" groups="base.group_no_one"/>
+                <button name="action_generate_mail_to_reject" string="e-mail Reject" type="object" groups="base.group_no_one"/>
+            </xpath>
+
+            <xpath expr="//sheet/notebook/page/field[@name='approver']" position="before">
+                <button name="button_trigger" string="Update" type="object" groups="base.group_no_one"/>
+                <group groups="base.group_no_one">
+                    <group>
+                        <field name="next_approval_id"/>
+                        <field name="next_approval_user_ids" widget="many2many_tags"/>
+                        <field name="can_approve"/>
+                    </group>
+                    <group>
+                        <field name="next_comment_ids" widget="many2many_tags"/>
+                        <field name="next_comment_user_ids" widget="many2many_tags"/>
+                        <field name="can_comment"/>
+                    </group>
+                </group>
+                <button name="%(action_wizard_fin201_approval)d" string="Make Approval" type="action" class="btn-primary"
+                    context="{'next_approval_id': next_approval_id}"
+                    attrs="{'invisible':['|',('can_approve','=',False),('state','in',['draft','completed','cancelled','reject'])]}"
+                />
+                <button name="%(action_wizard_fin201_approval)d" string="Make Comment" type="action" class="btn-primary"
+                    context="{'next_comment_ids': next_comment_ids}"
+                    attrs="{'invisible':['|',('can_comment','=',False),('state','in',['draft','completed','cancelled','reject'])]}"
+                />
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--FIN201 APPROVER-->
+    <record id="view_fw_pfb_fin_system_201_approver_tree" model="ir.ui.view">
+        <field name="name">view.fin.system.201.approver.tree</field>
+        <field name="model">fw_pfb_fin_system_201_approver</field>
+        <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_201_approver_tree_view"/>
+        <field name="arch" type="xml">
+
+            <field name="position_index" position="after">
+                <field name="approve_step"/>
+            </field>
+
+            <field name="state" position="before">
+                <field name="user_id"/>
+                <field name="approval_type"/>
+            </field>
+        
+            <field name="approve_active" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+
+            <field name="position_index" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+
+            <button name="%(fin_system.wizard_approver_fin_201_action)d" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+
+            <button name="%(fin_system.wizard_approver_fin_201_action)d" position="after">
+                <field name="can_reset" invisible="1"/>
+                <button name="action_reset_approval" string="RESET" type="object" confirm="Are you sure?"
+                    attrs="{'invisible':[('can_reset','!=',True)]}"
+                />
+            </button>
+
+        </field>
+    </record>
+
+    <record id="view_fw_pfb_fin_system_201_approver_form" model="ir.ui.view">
+        <field name="name">view.fin.system.201.approver.form</field>
+        <field name="model">fw_pfb_fin_system_201_approver</field>
+        <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_201_approver_form_view"/>
+        <field name="arch" type="xml">
+            <field name="fin_position" position="after">
+                <field name="approval_type"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_fin_system_201_line" model="ir.actions.act_window">
+        <field name="name">FIN201 Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fw_pfb_fin_system_201_line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('fin_system.fin_system_201_line_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('fin_system.fin_system_201_line_form_view')}),
+            ]"/>
+    </record>
+
+    <!-- Action Pending -->
+    <record model="ir.actions.act_window" id="fin_system_201_pending_action">
+        <field name="name">Pending FIN201</field>
+        <field name="res_model">fw_pfb_fin_system_201</field>
+        <field name="view_id" ref="fin_system.fin_system_201_pending_tree_view"/>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[
+            ('state','not in',['draft', 'cancelled', 'reject', 'completed']),
+            '|',
+            ('next_approval_user_ids', 'in', uid),
+            ('next_comment_user_ids', 'in', uid)]</field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="fin_system_201_pending_tree_view_action">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="fin_system.fin_system_201_pending_tree_view"/>
+        <field name="act_window_id" ref="fin_system_201_pending_action"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="fin_system_201_pending_form_view_action">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="fin_system.fin_system_201_pending_form_view"/>
+        <field name="act_window_id" ref="fin_system_201_pending_action"/>
+    </record>
+    <!-- End Action Pending -->
+
+    <!-- <record id="action_server_fin_201_to_approve" model="ir.actions.server">
+        <field name="name">Pending FIN201</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="fin_system.model_fw_pfb_fin_system_201"/>
+        <field name="code"> action = model.get_action_fin_201_to_approve()</field>
+    </record> -->
+
+    <!--<menuitem id="fin_system_201_pending_v2" name="Pending V2"-->
+    <!--parent="fin_system.fin_system_menu_main_201"-->
+    <!--action="fin_system_extension.action_server_fin_201_to_approve"-->
+    <!--sequence="8" groups="fin_system.fw_pfb_fin_system_approver"/>-->
+
+    <!-- <menuitem id="fin_system.fin_system_201_pending" name="Pending FIN201"
+        parent="fin_system.fin_system_menu_main_201"
+        action="fin_system_extension.action_server_fin_201_to_approve"
+        sequence="7" groups="fin_system.fw_pfb_fin_system_approver"/> -->
+
+    <menuitem id="fin_system.fin_system_201_pending" name="Pending FIN201"
+        parent="fin_system.fin_system_menu_main_201"
+        action="fin_system_extension.fin_system_201_pending_action"
+        sequence="7" groups="fin_system.fw_pfb_fin_system_approver"/>
+
+</odoo>

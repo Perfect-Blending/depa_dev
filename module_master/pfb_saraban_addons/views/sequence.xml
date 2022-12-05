@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="ir_sequence_sarabun">
+        <field name="name">ir.sequence</field>
+        <field name="model">ir.sequence</field>
+        <field name="inherit_id" ref="base.sequence_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[1]" position="after">
+                <page string="Sarabun">
+                    <group>
+                        <field name="sarabun_active"/>
+                        <field name="circular_letter"/>
+                        <field name="receive_document"/>
+                        <field name="department_id"/>
+                        <field name="document_type"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

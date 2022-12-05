@@ -1,0 +1,232 @@
+<odoo>
+    <template id="bione_billing_form">
+        <div class="header">
+            <div class="row">
+                <div class="col-5">
+                    <div>
+                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="max-height: 75px;"/>
+                    </div>
+                    <table class="mt16">
+                        <tr>
+                            <td colspan="2">
+                                <span t-field="o.company_id.street"/><br/>
+                                <span t-field="o.company_id.street2"/>
+                                <span t-field="o.company_id.city"/>
+                                <span t-field="o.company_id.state_id.name"/>
+                                <span t-field="o.company_id.country_id.name"/>
+                                <span t-field="o.company_id.zip"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>T. <span t-field="o.company_id.phone"/></td>
+                            <td>F. <span t-field="o.company_id.fax"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">TAX ID NO.: <span t-field="o.company_id.vat"/> / Branch: Head Office</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-7">
+                    <h4 class="text-right">
+                        <t t-if="i == 0">
+                            BILLING NOTE (ORIGINAL)
+                        </t>
+                        <t t-else="">
+                            BILLING NOTE (COPY)
+                        </t>
+                    </h4>
+                    <div class="row mt32">
+                        <div class="col-6 text-right">
+                            <p>Document No. :</p>
+                        </div>
+                        <div class="col-6">
+                            <span t-field="o.name"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 text-right">
+                            <p>
+                                Date :<br/>
+                                Page :
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <span t-field="o.date"/><br/>
+                            <span class="page"/> / <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="article billing_form">
+            <div class="table_company">
+                <table class="table table-sm table-borderless table_company_data mt4">
+                    <thead>
+                        <tr class="text-center">
+                            <th>CUSTOMER DETAILS</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="row">
+                    <div class="col-7">
+                        <div class="row">
+                            <div class="col-3">
+                                NAME
+                            </div>
+                            <div class="col-9">
+                                <span t-field="o.partner_id.name"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                TAX ID NO.
+                            </div>
+                            <div class="col-9">
+                                <span t-field="o.partner_id.vat"/> / <span t-field="o.partner_id.branch"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                ADDRESS
+                            </div>
+                            <div class="col-9">
+                                <span t-field="o.partner_id.street"/>
+                                <span t-field="o.partner_id.street2"/>
+                                <span t-field="o.partner_id.city"/>
+                                <span t-field="o.partner_id.state_id.name"/>
+                                <span t-field="o.partner_id.country_id.name"/>
+                                <span t-field="o.partner_id.zip"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-3">
+                                PO.NO.
+                            </div>
+                            <div class="col-9">
+                                Please see below in description
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                TERM
+                            </div>
+                            <div class="col-9">
+                                <span t-field="o.partner_id.property_payment_term_id"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-sm table-borderless table_data mt16">
+                <thead>
+                    <tr class="text-center" valign="text-middle">
+                        <th>NO.</th>
+                        <th>INVOICE NO.</th>
+                        <th>INVOICE DATE</th>
+                        <th>DUE DATE</th>
+                        <th>AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="n" t-value="1"/>
+                    <t t-set="total_amount" t-value="0"/>
+                    <t t-foreach="o.invoice_ids" t-as="line">
+                        <tr class="text-center">
+                            <td>
+                                <span t-esc="n"/>
+                                <t t-set="n" t-value="n+1"/>
+                            </td>
+                            <td>
+                                <span t-field="line.number"/>
+                            </td>
+                            <td>
+                                <span t-field="line.date_invoice"/>
+                            </td>
+                            <td>
+                                <span t-field="line.date_due"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="'{0:,.2f}'.format(line.amount_total)"/>
+                                <t t-set="total_amount" t-value="total_amount + line.amount_total"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+
+            <div class="clearfix">
+                <div class="row">
+                    <div class="col-8">
+                    </div>
+                    <div class="col-4">
+                        <table class="table table-sm table-borderless">
+                            <tr>
+                                <td class="text-right">
+                                    <strong>Grand Total</strong>
+                                </td>
+                                <td class="text-right horizontal_double_line">
+                                    <span t-esc="'{0:,.2f}'.format(total_amount)"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer table">
+            <div class="row mb32">
+                <div class="col-4">
+                    <table class="table table-sm table_signature">
+                        <thead>
+                            <th>Receeived by:</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><br/><br/>Date :</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4">
+                    <table class="table table-sm table_signature">
+                        <thead>
+                            <th>Billing by:</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><br/><br/>Date :</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4">
+                    <table class="table table-sm table_signature">
+                        <thead>
+                            <th>Authorized Signature:</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><br/><br/>Date :</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="bione_billing_form_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="ncopies" t-value="2"/>
+                <t t-foreach="range(ncopies)" t-as="i">
+                    <t t-call="bione_account_form.bione_billing_form"/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

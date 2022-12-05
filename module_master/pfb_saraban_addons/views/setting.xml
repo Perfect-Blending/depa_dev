@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="saraban_assets_backend" name="saraban assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/pfb_saraban_addons/static/js/hide_archive.js"/>
+        </xpath>
+    </template>
+
+    <record model="ir.ui.view" id="document_internal_setting_form_view_inherit">
+        <field name="name">document.setting.internal.form.inherit</field>
+        <field name="model">document.internal.setting</field>
+        <field name="inherit_id" ref="pfb_saraban.document_internal_setting_form_view"/>
+        <field name="arch" type="xml">
+            <field name="employee_id" position="replace">
+                <field name="employee_id" context="{'job_title_searchable': True}" required='1' options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="document_external_setting_form_view_inherit">
+        <field name="name">document.setting.external.form.inherit</field>
+        <field name="model">document.external.setting</field>
+        <field name="inherit_id" ref="pfb_saraban.document_external_setting_form_view"/>
+        <field name="arch" type="xml">
+            <field name="employee_id" position="replace">
+                <field name="employee_id" context="{'job_title_searchable': True}" required='1' options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

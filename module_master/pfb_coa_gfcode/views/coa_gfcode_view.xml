@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_coa_gfcode_tree" model="ir.ui.view">
+            <field name="name">view_coa_gfcode_tree</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_list"/>
+            <field name="arch" type="xml">
+                <field name="code" position="after">
+                    <field name="gf_code"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_coa_gfcode_form" model="ir.ui.view">
+            <field name="name">view_coa_gfcode_form</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <field name="code" position="after">
+                    <field name="gf_code"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Accounts -->
+
+        <record id="view_account_form" model="ir.ui.view">
+            <field name="name">account.account.form</field>
+            <field name="model">gf.code</field>
+            <field name="arch" type="xml">
+                <form string="Account">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="gf_code_id" context="{'gf_code_mode':'gf_code'}"/>
+                                <field name="name"/>
+                                <field name="gf_code_text" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_account_list" model="ir.ui.view">
+            <field name="name">account.account.list</field>
+            <field name="model">gf.code</field>
+            <field name="arch" type="xml">
+                <tree string="Chart of accounts" toolbar="1">
+                    <field name="gf_code_id" context="{'gf_code_mode':'gf_code'}"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_account_form" model="ir.actions.act_window">
+            <field name="name">GF Chart of Accounts</field>
+            <field name="res_model">gf.code</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_account_list"/>
+            <field name="context">{'gf_code_mode':'gf_code'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new account
+                </p>
+                <p>
+                    An account is part of a ledger allowing your company
+                    to register all kinds of debit and credit transactions.
+                    Companies present their annual accounts in two main parts: the
+                    balance sheet and the income statement (profit and loss
+                    account). The annual accounts of a company are required by law
+                    to disclose a certain amount of information.
+                </p>
+            </field>
+        </record>
+        <menuitem action="action_account_form" id="menu_action_account_form"
+                  parent="account.account_account_menu"
+                  groups="account.group_account_user" sequence="2"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,19 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'THSarabunNew';
+  src: url("../fonts/THSarabunNew.ttf") format("truetype");
+}
+
+.o_expense_report {
+  font-family: 'THSarabunNew';
+  font-size: 20px;
+}
+.o_expense_report.center{
+   text-align: center;
+ }
+
+.o_expense_report .table .center .td .tr .th{
+
+  margin-left:auto;
+  margin-right:auto;
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <record id="test_inherit" model="ir.ui.view">
+        <field name="name">test.inherit</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="picking_type_id" position="after">
+                <field name="method_of_recruitment"/>
+                <field name="currency_id"/>
+            </field>
+        </field>
+   </record>
+</odoo>

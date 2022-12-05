@@ -1,0 +1,124 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'THSarabun';
+  src: url("../fonts/THSarabunNew Bold.ttf") format("truetype");
+}
+
+main_doc {
+    background-image: url('/pfb_invoice_sale_qweb/static/src/img/invoice.png');
+    background-size: 300mm 424mm;
+    width:300mm;
+    height:424mm;
+}
+
+copy_doc {
+    background-image: url('/pfb_invoice_sale_qweb/static/src/img/invoice_copy.png');
+    background-size:300mm 424mm;
+    width:300mm;
+    height:424mm;
+}
+
+.o_invoice_sale_from {
+  font-family: 'THSarabun';
+  font-size: 24px;
+}
+
+.o_invoice_sale_from
+.number_invoice {
+  font-size: 24px;
+  position: fixed;
+  top: 120px;
+  right: 50px;
+}
+
+.o_invoice_sale_from .company_vat {
+  font-size: 24px;
+  position: fixed;
+  top: 555px;
+  left: 235px;
+}
+
+.o_invoice_sale_from .company_name {
+  width: 50%;
+  font-size: 24px;
+  position: fixed;
+  top: 590px;
+  left: 235px;
+}
+
+.o_invoice_sale_from .company_address {
+  width: 100%;
+  font-size: 24px;
+  position: fixed;
+  top: 621px;
+  left: 235px;
+}
+
+.o_invoice_sale_from .company_address2 {
+  width: 100%;
+  font-size: 24px;
+  position: fixed;
+  top: 655px;
+  left: 235px;
+}
+
+.o_invoice_sale_from .company_address3 {
+  font-size: 24px;
+  position: fixed;
+  top: 690px;
+  left: 235px;
+}
+
+.o_invoice_sale_from .invoice_date {
+  font-size: 24px;
+  position: fixed;
+  top: 550px;
+  right: 100px;
+}
+
+.o_invoice_sale_from .payment_terms {
+  width: 10%;
+  font-size: 24px;
+  position: fixed;
+  top: 586px;
+  right: 80px;
+}
+
+.o_invoice_sale_from .due_date {
+  font-size: 24px;
+  position: fixed;
+  top: 620px;
+  right: 100px;
+}
+
+.o_invoice_sale_from .total_amount {
+  font-size: 24px;
+  font-weight: bold;
+  position: fixed;
+  top: 1110px;
+  right: 30px;
+}
+
+.o_invoice_sale_from .inv_amount_vat {
+  font-size: 24px;
+  font-weight: bold;
+  position: fixed;
+  top: 1179px;
+  right: 30px;
+}
+
+.o_invoice_sale_from .inv_grand_total {
+  font-size: 24px;
+  font-weight: bold;
+  position: fixed;
+  top: 1240px;
+  right: 30px;
+}
+
+.o_invoice_sale_from .text_total {
+  font-size: 30px;
+  font-weight: bold;
+  position: fixed;
+  top: 1330px;
+  right: 200px;
+}

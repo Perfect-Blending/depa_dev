@@ -1,0 +1,251 @@
+id,code,name,user_type_id:id,reconcile,chart_template_id:id
+1111-00,1111-00,เงินสด,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1111-50,1111-50,เงินสดย่อย,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1111-60,1111-60,เงินทดลองจ่าย,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1111-70,1111-70,เงินโอนระหว่างบัญชี,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1112-01,1112-01,เงินฝากกระแสรายวัน 999-9-99999-1,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1112-02,1112-02,เงินฝากกระแสรายวัน 999-9-99999-2,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1112-03,1112-03,เงินฝากกระแสรายวัน 999-9-99999-3,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1113-01,1113-01,เงินฝากออมทรัพย์ 999-9-99999-1,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1113-02,1113-02,เงินฝากออมทรัพย์ 999-9-99999-2,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1113-03,1113-03,เงินฝากออมทรัพย์ 999-9-99999-3,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1114-01,1114-01,เงินฝากประจำ 999-9-99999-1,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1114-02,1114-02,เงินฝากประจำ 999-9-99999-2,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1114-03,1114-03,เงินฝากประจำ 999-9-99999-3,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1120-00,1120-00,เงินลงทุนระยะสั้น,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1130-01,1130-01,ลูกหนี้การค้า,account.data_account_type_receivable,TRUE,l10n_th_thaiodoo_c1.chart
+1130-02,1130-02,เช็ครับลงวันที่ล่วงหน้า,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1130-03,1130-03,ค่าเผื่อหนี้สงสัยจะสูญ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1130-04,1130-04,ลูกหนี้อื่น ๆ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1130-05,1130-05,บัตรกำนัลค็อกพิท,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1141-01,1141-01,วัตถุดิบคงเหลือ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1142-01,1142-01,เครื่องใช้สำนักงานและวัสดุสิ้นเปลืองอื่นคงเหลือ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1143-01,1143-01,อุปกรณฺเครื่องเขียนคงเหลือ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1151-01,1151-01,ค่าใช้จ่ายจ่ายล่วงหน้า-ค่าสินค้า,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1151-02,1151-02,ภาษีเงินได้ถูกหัก ณ ที่จ่าย,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1151-03,1151-03,ค่าใช้จ่ายจ่ายล่วงหน้า-ค่าเช่า,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1151-04,1151-04,ค่าใช้จ่ายจ่ายล่วงหน้า-อื่น ๆ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1151-05,1151-05,ภาษีนิติบุคคลจ่ายล่วงหน้า,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1151-06,1151-06,เงินมัดจำและเงินค้ำประกัน,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1151-07,1151-07,ค่าใช้จ่ายจ่ายล่วงหน้า-เงินเดือน,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1151-08,1151-08,ค่าเบี้ยประกันภัยจ่ายล่วงหน้า,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1152-00,1152-00,เงินทดลองจ่ายพนักงาน,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1153-01,1153-01,ดอกเบี้ยค้างรับ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1153-02,1153-02,ส่วนลดรับค้างรับ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1154-00,1154-00,ภาษีซื้อ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1155-00,1155-00,ภาษีซื้อ-ยังไม่ถึงกำหนด,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1156-00,1156-00,ลูกหนี้-กรมสรรพากร,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1210-00,1210-00,ลูกหนี้เงินให้กู้ยืม-นาย...,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1410-01,1410-01,ส/ทสนง.-ที่ดิน,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1410-02,1410-02,ส/ทสนง.-อาคาร,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1410-03,1410-03,ส/ทสนง.-อุปกรณ์สำนักงาน,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1410-04,1410-04,ส/ทสนง.-เครื่องตกแต่งสนง.,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1410-05,1410-05,ส/ทสนง.-ยานพาหนะ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1410-06,1410-06,ส/ทสนง.-เครื่องจักร,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1420-02,1420-02,ค่าเสื่อมราคาสะสม-อาคาร,account.data_account_type_depreciation,TRUE,l10n_th_thaiodoo_c1.chart
+1420-03,1420-03,ค่าเสื่อมราคาสะสม-อุปกรณ์สำนักงาน,account.data_account_type_depreciation,TRUE,l10n_th_thaiodoo_c1.chart
+1420-04,1420-04,ค่าเสื่อมราคาสะสม-เครื่องตกแต่งสำนักงาน,account.data_account_type_depreciation,TRUE,l10n_th_thaiodoo_c1.chart
+1420-05,1420-05,ค่าเสื่อมราคาสะสม-ยานพาหนะ,account.data_account_type_depreciation,TRUE,l10n_th_thaiodoo_c1.chart
+1420-31,1420-31,ค่าเสื่อมราคาสะสม-เครื่องจักร,account.data_account_type_depreciation,TRUE,l10n_th_thaiodoo_c1.chart
+1500-01,1500-01,กรมธรรม์ประกันอัคคีภัย-สินค้าและอาคาร,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1500-02,1500-02,กรมธรรม์ประกันอัคคีภัย-ยานพาหนะ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1500-03,1500-03,กรมธรรม์ประกันอุบัติเหตุพนักงาน,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1500-04,1500-04,พันธบัตรโทรศัพท์,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1500-11,1500-11,ดอกเบี้ยเช่าซื้อรอตัดบัญชี-ไทยพาณิชย์,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1500-12,1500-12,ดอกเบี้ยเช่าซื้อรอตัดบัญชี-โตโยต้า,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1600-01,1600-01,โปรแกรมบัญชีสำเร็จรูป,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1700-01,1700-01,งานระหว่างก่อสร้าง-อาคาร,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1800-01,1800-01,เงินรับส่งเสริมการขายทองคำรอตัด,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+1800-02,1800-02,เงินรับส่งเสริมการขายอื่น ๆ,account.data_account_type_current_assets,TRUE,l10n_th_thaiodoo_c1.chart
+2120-01,2120-01,เจ้าหนี้การค้า,account.data_account_type_payable,TRUE,l10n_th_thaiodoo_c1.chart
+2120-02,2120-02,เช็คจ่ายล่วงหน้า,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2120-03,2120-03,เจ้าหนี้การค้า-ตปท.,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-01,2131-01,เงินเดือนค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-02,2131-02,เงินโบนัสค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-03,2131-03,ค่านายหน้าค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-04,2131-04,เงินประกันสังคมรอนำส่ง,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-05,2131-05,ค่าโทรศัพท์ค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-06,2131-06,ค่าไฟฟ้าค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-07,2131-07,ค่าน้ำประปาค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-08,2131-08,ดอกเบี้ยเงินกู้ค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-09,2131-09,ค่าใช้จ่ายค้างจ่าย-อื่น ๆ,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-10,2131-10,ค่าบริการทำบัญชีค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-11,2131-11,ค่าสอบบัญชีค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2131-12,2131-12,เงินสมทบกองทุนปกส.ค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2132-01,2132-01,ภาษีหัก ณ ที่จ่ายค้างจ่าย ภงด.1,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2132-02,2132-02,ภาษีหัก ณ ที่จ่ายค้างจ่าย ภงด.3,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2132-03,2132-03,ภาษีหัก ณ ที่จ่ายค้างจ่าย ภงด.53,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2132-04,2132-04,ภาษีเงินได้นิติบุคคลค้างจ่าย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2133-01,2133-01,รายได้รับล่วงหน้า-ค่าสินค้า,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2133-02,2133-02,รายได้รับล่วงหน้า-ค่านายหน้า,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2134-01,2134-01,เจ้าหนี้ซื้อผ่อนชำระ-ไทยพาณิชย์,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2134-02,2134-02,เจ้าหนี้ซื้อผ่อนชำระ-โตโยต้า ลิสซิ่ง,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2135-00,2135-00,ภาษีขาย,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2136-00,2136-00,ภาษีขาย-รอเรียกเก็บ,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2137-00,2137-00,เจ้าหนี้กรมสรรพากร,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2137-01,2137-01,ภาษีมูลค่าเพิ่ม,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2138-00,2138-00,เงินกู้ยืมจากกรรมการ,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2210-00,2210-00,เงินกู้ยืมธนาคารระยะยาว,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+2300-00,2300-00,หนี้สินอื่น ๆ,account.data_account_type_current_liabilities,TRUE,l10n_th_thaiodoo_c1.chart
+3100-01,3100-01,ทุน-หุ้นสามัญ,account.data_account_type_equity,TRUE,l10n_th_thaiodoo_c1.chart
+3100-02,3100-02,ทุน-หุ้นบุริมสิทธิ์,account.data_account_type_equity,TRUE,l10n_th_thaiodoo_c1.chart
+3100-11,3100-11,ส่วนเกินมูลค่า-หุ้นสามัญ,account.data_account_type_equity,TRUE,l10n_th_thaiodoo_c1.chart
+3201-01,3201-01,จัดสรรแล้ว - สำรองตามกฎหมาย,account.data_account_type_equity,TRUE,l10n_th_thaiodoo_c1.chart
+3202-00,3202-00,กำไร(ขาดทุน)-ยังไม่จัดสรร,account.data_account_type_equity,TRUE,l10n_th_thaiodoo_c1.chart
+4100-01,4100-01,รายได้จากการขายสินค้า,account.data_account_type_revenue,TRUE,l10n_th_thaiodoo_c1.chart
+4100-02,4100-02,รายได้จากการให้บริการ,account.data_account_type_revenue,TRUE,l10n_th_thaiodoo_c1.chart
+4100-03,4100-03,รับคืนสินค้า,account.data_account_type_revenue,TRUE,l10n_th_thaiodoo_c1.chart
+4100-04,4100-04,ส่วนลดจ่าย,account.data_account_type_revenue,TRUE,l10n_th_thaiodoo_c1.chart
+4200-01,4200-01,ดอกเบี้ยรับ,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-02,4200-02,กำไร(ขาดทุน)จากการจำหน่ายทรัพย์สิน,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-03,4200-03,ส่วนลดเงินสดรับ,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-04,4200-04,กำไรจากอัตราแลกเปลี่ยน,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-05,4200-05,รายได้จากการขายเศษวัสดุ,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-06,4200-06,รายได้ให้เช่าที่จอดรถ,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-07,4200-07,รายได้บริการให้คำปรึกษา,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-08,4200-08,รายได้จากการส่งเสริมการขาย,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-09,4200-09,รายได้ค่าพาหนะไปอบรม,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-10,4200-10,รายได้เบ็ดเตล็ด,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+4200-11,4200-11,รายได้ค่าสินไหมทดแทน,account.data_account_type_other_income,TRUE,l10n_th_thaiodoo_c1.chart
+5110-01,5110-01,ต้นทุนการขายสินค้า-วัตถุดิบและอุปกรณ์,account.data_account_type_direct_costs,TRUE,l10n_th_thaiodoo_c1.chart
+5110-02,5110-02,ต้นทุนการให้บริการ-วัตถุดิบและอุปกรณ์,account.data_account_type_direct_costs,TRUE,l10n_th_thaiodoo_c1.chart
+5130-01,5130-01,ซื้อ,account.data_account_type_direct_costs,TRUE,l10n_th_thaiodoo_c1.chart
+5130-02,5130-02,ส่วนลดรับ,account.data_account_type_direct_costs,TRUE,l10n_th_thaiodoo_c1.chart
+5130-03,5130-03,ส่งคืนสินค้า,account.data_account_type_direct_costs,TRUE,l10n_th_thaiodoo_c1.chart
+5140-01,5140-01,ค่าใช้จ่ายในการนำเข้า,account.data_account_type_direct_costs,TRUE,l10n_th_thaiodoo_c1.chart
+5150-01,5150-01,เงินเดือน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-02,5150-02,ค่าจ้างแรงงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-03,5150-03,ค่าล่วงเวลา,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-04,5150-04,ค่าเบี้ยเลี้ยง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-05,5150-05,โบนัส,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-06,5150-06,เงินเพิ่มพิเศษ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-07,5150-07,ค่าที่พักอาศัย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-08,5150-08,เงินสมทบกองทุนประกันสังคม,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-09,5150-09,เงินสมทบกองทุนทดแทน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-10,5150-10,ค่ารักษาพยาบาล,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-11,5150-11,ค่าอบรมสัมนา,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-12,5150-12,ค่าแบบฟอร์มพนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-13,5150-13,ค่าเบี้ยประกันชีวิตและอุบัติเหตุ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-14,5150-14,ค่าอาหารและเครื่องดื่ม,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-15,5150-15,ค่าจัดเลี้ยงและสันทนาการ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5150-16,5150-16,ค่าสวัสดิการอื่น ๆ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-01,5160-01,ค่าใช้จ่ายสำนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-02,5160-02,ค่าเครื่องเขียนและแบบพิมพ์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-03,5160-03,ค่าปรับปรุงซ่อมแซม,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-04,5160-04,วัสดุสิ้นเปลือง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-05,5160-05,ค่าวารสารและสมาชิก,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-06,5160-06,ค่าเช่าสำนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-07,5160-07,ค่ายามรักษาความปลอดภัย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-08,5160-08,ค่ารักษาความสะอาด,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-09,5160-09,ค่าเช่าอาคาร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-10,5160-10,ค่าเช่ารถ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-11,5160-11,ค่าใช้จ่ายเบ็ดเตล็ด,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-12,5160-12,ค่าใช้จ่ายยานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-13,5160-13,ค่าวัสดุสำนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-14,5160-14,ค่าสาธารณูปโภคและสื่อสาร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-15,5160-15,ค่าโทรศัพท์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-16,5160-16,ค่าไฟฟ้า,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-17,5160-17,ค่าน้ำประปา,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-18,5160-18,ค่าไปรษณีย์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-19,5160-19,ค่าเสื่อมราคา,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-20,5160-20,ค่าเสื่อมราคา-อาคาร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-21,5160-21,ค่าเสื่อมราคา-อุปกรณ์สำนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-22,5160-22,ค่าเสื่อมราคา-เครื่องตกแต่งสำนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-23,5160-23,ค่าเสื่อมราคา-ยานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-24,5160-24,ค่าเสื่อมราคา-เครื่องจักร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-25,5160-25,ค่าเบี้ยประกันภัย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-26,5160-26,ค่าเบี้ยประกัน-อาคาร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-27,5160-27,ค่าเบี้ยประกัน-อุปกรณ์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-28,5160-28,ค่าเบี้ยประกัน-เครื่องตกแต่ง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-29,5160-29,ค่าเบี้ยประกัน-ยานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-30,5160-30,ค่าเบี้ยประกันภัย-ยานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-31,5160-31,ค่าเบี้ยประกันภัย-อัคคีภัย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-32,5160-32,ค่าภาษีและค่าธรรมเนียม,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-33,5160-33,ภาษีบำรุงท้องที่และภาษีโรงเรือน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5160-34,5160-34,ค่าภาษียานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-01,5200-01,ค่านายหน้า,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-02,5200-02,ค่าโฆษณา,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-03,5200-03,ค่าสินค้าตัวอย่าง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-04,5200-04,ค่าส่งเสริมการขาย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-05,5200-05,ค่าขนส่งเข้า,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-06,5200-06,ค่ารับรอง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-07,5200-07,ค่าประกันภัยสินค้า,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-08,5200-08,คชจ.ในการขาย-ค่าติดต่อสื่อสาร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-09,5200-09,ค่าใช้จ่ายเดินทาง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-10,5200-10,ค่าใช้จ่ายเกี่ยวกับยานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-11,5200-11,คชจ.ขาย ค่าวัสดุสิ้นเปลือง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-12,5200-12,ค่าแฟรน์ไชส์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5200-13,5200-13,ค่าวิจัยตลาด,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-01,5310-01,เงินเดือน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-02,5310-02,ค่าล่วงเวลา,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-03,5310-03,ค่าเบี้ยเลี้ยง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-04,5310-04,โบนัส,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-05,5310-05,เงินเพิ่มพิเศษ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-07,5310-07,ค่าที่พักอาศัย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-08,5310-08,ค่านายหน้า,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-09,5310-09,เงินสมทบกองทุนประกันสังคม,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-10,5310-10,เงินสมทบกองทุนทดแทน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-11,5310-11,ค่ารักษาพยาบาล,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-12,5310-12,ค่าอบรมสัมนา,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-13,5310-13,ค่าแบบฟอร์มพนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-14,5310-14,ค่าเบี้ยประกันชีวิตและอุบัติเหตุ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-15,5310-15,ค่าอาหารและเครื่องดื่ม,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-16,5310-16,ค่าจัดเลี้ยงและสันทนาการ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-17,5310-17,ค่าสวัสดิการอื่น ๆ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-19,5310-19,โปรแกรมสำเร็จรูปตัดจ่าย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-20,5310-20,ค่าซ่อมอุปกรณ์คอมพิวเตอร์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5310-21,5310-21,ค่าเปรียบเทียบปรับ ประกันสังคม,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-01,5320-01,ค่าเครื่องเขียนและแบบพิมพ์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-02,5320-02,ค่าปรับปรุงซ่อมแซม,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-03,5320-03,วัสดุสิ้นเปลือง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-04,5320-04,ค่าวารสารและสมาชิก,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-05,5320-05,ค่าเช่าสำนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-06,5320-06,ค่ายามรักษาความปลอดภัย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-07,5320-07,ค่ารักษาความสะอาด,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-08,5320-08,ค่าเช่าอาคาร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-09,5320-09,ค่าเช่ารถ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-10,5320-10,ค่าใช้จ่ายเบ็ดเตล็ด,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-11,5320-11,ค่าใช้จ่ายยานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5320-12,5320-12,ค่าวัสดุสำนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5330-01,5330-01,ค่าโทรศัพท์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5330-02,5330-02,ค่าไฟฟ้า,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5330-03,5330-03,ค่าน้ำประปา,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5330-04,5330-04,ค่าไปรษณีย์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5340-02,5340-02,ค่าเสื่อมราคา-อาคาร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5340-03,5340-03,ค่าเสื่อมราคา-อุปกรณ์สำนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5340-04,5340-04,ค่าเสื่อมราคา-เครื่องตกแต่งสำนักงาน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5340-05,5340-05,ค่าเสื่อมราคา-ยานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5340-31,5340-31,ค่าเสื่อมราคา-เครื่องจักร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5350-01,5350-01,ค่าเบี้ยประกัน-อาคาร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5350-02,5350-02,ค่าเบี้ยประกัน-อุปกรณ์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5350-03,5350-03,ค่าเบี้ยประกัน-เครื่องตกแต่ง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5350-04,5350-04,ค่าเบี้ยประกัน-ยานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5350-05,5350-05,ค่าเบี้ยประกันภัย-ยานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5350-06,5350-06,ค่าเบี้ยประกันภัย-อัคคีภัย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-01,5360-01,ภาษีบำรุงท้องที่และภาษีโรงเรือน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-02,5360-02,ค่าภาษียานพาหนะ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-03,5360-03,ภาษีป้าย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-04,5360-04,ค่าธรรมเนียมธนาคาร,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-05,5360-05,ค่าตรวจสอบบัญชีและปรึกษากฏหมาย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-06,5360-06,ค่าธรรมเนียมหนังสือค้ำประกัน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-07,5360-07,ค่าจัดตั้งบริษัท,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-08,5360-08,ค่าจัดทำบัญชี,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-09,5360-09,ค่าสอบบัญชี,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-10,5360-10,ค่าธรรมเนียมอื่น,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5360-11,5360-11,ค่าภาษีป้ายรถยนต์,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5370-01,5370-01,ดอกเบี้ยจ่าย,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5370-02,5370-02,หนี้สงสัยจะสูญ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5370-03,5370-03,ค่ารับรอง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5370-04,5370-04,ค่าบริจาคการกุศล,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5370-05,5370-05,ส่วนลดจากการขายลดเช็ค,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5370-06,5370-06,ดอกเบี้ยเช่าซื้อ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5370-07,5370-07,กำไรขาดทุนจากอัตราแลกเปลี่ยน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5370-11,5370-11,หนังสือรับรอง,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5380-00,5380-00,หนี้สูญ,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5390-01,5390-01,ภาษีซื้อไม่ขอคืน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5390-02,5390-02,ภาษีซื้อขอคืนไม่ได้,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5390-03,5390-03,เบี้ยปรับเงินเพิ่ม,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5390-04,5390-04,ค่าภาษีถูกหัก ณ ที่จ่ายไม่ขอคืน,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+5390-05,5390-05,รายจ่ายต้องห้ามตามม.65 ตรี,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+6000-00,6000-00,ภาษีเงินได้นิติบุคคล,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart
+9999-99,9999-99,บัญชีพัก,account.data_account_type_expenses,TRUE,l10n_th_thaiodoo_c1.chart

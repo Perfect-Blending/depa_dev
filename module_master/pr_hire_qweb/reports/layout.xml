@@ -1,0 +1,362 @@
+<odoo>
+    <template id="pr_hire_assets_common" name="Pr Hire  common assets" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/pr_hire_qweb/static/css/style_report.css"/>
+        </xpath>
+    </template>
+
+    <template id="purchase_request_report_layout">
+        <div class="container">
+            <t t-set="i" t-value="0"/>
+            <t t-set="record_per_page" t-value="3"/>
+            <t t-set="page_amount" t-value="1"/>
+            <t t-if="len(o_value['group']) > record_per_page">
+                <t t-set="page_amount" t-value="len(o_value['group']) / record_per_page"/>
+                <t t-if="page_amount > int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1"/>
+                </t>
+                <t t-esc="page_amount"/>
+            </t>
+            <t t-set="current_page" t-value="0"/>
+            <t t-set="count" t-value="0"/>
+            <t t-set="ii" t-value="0"/>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1"/>
+                <div class="article o_pr_from">
+                    <div class="row">
+                        <div style="position: fixed;top: 170px;right: 80px;font-size: 18px; ">
+                            <t t-esc="o_value['fin_number']"/>
+                        </div>
+                        <div class="sum_total">
+                            <t t-esc="'{0:,.2f}'.format(o_value['sum_total'])"/>
+                        </div>
+                        <div class="bath_text">(
+                            <t t-esc="o_value['thai_baht_text']"/>
+                            )
+                        </div>
+                        <div class="select_1">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_2">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_3">
+                            <input type="checkbox"/>
+                        </div>
+
+                        <div class="number_pr">
+                            <span t-esc="o_value['name']"/>
+                        </div>
+                        <div class="date_start">
+                            <span t-esc="o_value['date_start']"/>
+                        </div>
+                        <div class="analytic_account_pr">
+                            <span t-esc="o_value['analytic_account_code']"/>
+                        </div>
+                        <div class="analytic_account_pr2">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="analytic_account_pr21">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="analytic_account_pr3">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="analytic_account_pr4">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="project1">
+                            <span t-esc="o_value['analytic_account_name']"/>
+                        </div>
+                        <div class="project2">
+                            <span t-esc="o_value['analytic_account_code']"/>
+                        </div>
+                        <div class="project3">
+                            <span t-esc="o_value['analytic_account_department']"/>
+                        </div>
+                        <div class="department">
+                            <span t-esc="o_value['department']"/>
+                        </div>
+                        <div class="year_pr">
+                            <span t-esc="o_value['line_name'][0]"/>
+                        </div>
+
+                        <div class="select_11">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_12">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_13">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_14">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_15">
+                            <input type="checkbox"/>
+                        </div>
+
+                        <div class="select_21">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_22">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_23">
+                            <input type="checkbox"/>
+                        </div>
+
+                        <div class="select_31">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_32">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_33">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="select_34">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="pr1">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="pr2">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="pr3">
+                            <input type="checkbox"/>
+                        </div>
+                        <div class="pr4">
+                            <input type="checkbox"/>
+                        </div>
+
+                        <t t-if="o_value['analytic_account_id']">
+                            <div class="analytic_account_pr2">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                            <div class="analytic_account_pr3">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                            <div class="analytic_account_pr32">
+                                <span t-esc="o_value['analytic_account_year']"/>
+                            </div>
+                        </t>
+                        <t t-if="o_value['pr_ck'] == True">
+                            <div class="pr1">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                        </t>
+                        <t t-if="o_value['pr3_ck'] == True">
+                            <div class="pr2">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                            <div class="pr21">
+                                <t t-esc="o_value['notes_check']"/>
+                            </div>
+                        </t>
+                        <t t-if="o_value['pr4_ck']  == True">
+                            <div class="pr3">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                        </t>
+                        <t t-if="o_value['pr2_ck'] == True">
+                            <div class="pr4">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                        </t>
+
+                        <t t-if="o_value['method_of_recruitment'] == 'การจัดซื้อจัดจ้างพัสดุ'">
+                            <div class="select_1">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                        </t>
+                        <t t-if="o_value['method_of_recruitment'] == 'งานจ้างที่ปรึกษา'">
+                            <div class="select_1">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                        </t>
+                        <t t-if="o_value['method_of_recruitment'] == 'งานออกแบบหรือควบคุมงานก่อสร้าง'">
+                            <div class="select_1">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                        </t>
+                        <t t-if="o_value['method_of_recruitment_partner'] == 'การจัดซื้อจัดจ้างพัสดุ' ">
+                            <div class="select_1">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                            <t t-if="o_value['method_of_recruitment'] == 'e-market'">
+                                <div class="select_11">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                            <t t-if="o_value['method_of_recruitment'] == 'e bidding'">
+                                <div class="select_12">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                            <t t-if="o_value['method_of_recruitment'] == 'สอบราคา'">
+                                <div class="select_13">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                            <t t-if="o_value['method_of_recruitment'] == 'วิธีคัดเลือก'">
+                                <div class="select_14">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                            <t t-if="o_value['method_of_recruitment'] == 'วิธีเฉพาะเจาะจง'">
+                                <div class="select_15">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                        </t>
+                        <t t-if="o_value['method_of_recruitment_partner'] == 'งานจ้างที่ปรึกษา'">
+                            <div class="select_2">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                            <t t-if="o_value['method_of_recruitment'] == 'วิธีประกาศเชิญชวนทั่วไป'">
+                                <div class="select_21">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                            <t t-if="o_value['method_of_recruitment'] == 'วิธีคัดเลือก'">
+                                <div class="select_22">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                            <t t-if="o_value['method_of_recruitment'] == 'วิธีเฉพาะเจาะจง'">
+                                <div class="select_23">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                        </t>
+                        <t t-if="o_value['method_of_recruitment_partner'] == 'งานออกแบบหรือควบคุมงานก่อสร้าง'">
+                            <div class="select_3">
+                                <input type="checkbox" checked="True"/>
+                            </div>
+                            <t t-if="o_value['method_of_recruitment'] == 'วิธีประกาศเชิญชวนทั่วไป'">
+                                <div class="select_31">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                            <t t-if="o_value['method_of_recruitment'] == 'วิธีคัดเลือก'">
+                                <div class="select_32">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                            <t t-if="o_value['method_of_recruitment'] == 'วิธีเฉพาะเจาะจง'">
+                                <div class="select_33">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                            <t t-if="o_value['method_of_recruitment'] == 'วิธีประกวดแบบ'">
+                                <div class="select_34">
+                                    <input type="checkbox" checked="True"/>
+                                </div>
+                            </t>
+                        </t>
+<!--                        ผู้ขอจัด-->
+                        <div class="address1">
+                            <t t-esc="o_value['display_name']"/>
+                        </div>
+                        <div class="address2">
+                            ตำแหน่ง <t t-esc="o_value['position']"/>
+                        </div>
+                        <div class="address3">
+                            <t t-esc="o_value['create_date']"/>
+                        </div>
+<!--                        ผู้บัญคับบัญชา-->
+                        <div class="address4">
+                            <t t-esc="o_value['employee_name']"/>
+                        </div>
+                        <div class="address5">
+                            ตำแหน่ง <t t-esc="o_value['employee_job']"/>
+                        </div>
+                        <div class="address6">
+                            <t t-esc="o_value['create_date']"/>
+                        </div>
+<!--                        หัวหน้าเจ้าหน้าที่-->
+                         <div class="address71">
+                            <t t-esc="o_value['tag']"/>
+                        </div>
+                        <div class="address7">
+                            <t t-esc="o_value['approver_name'][0]"/>
+                        </div>
+                        <div class="address8">ตำแหน่ง <t t-esc="o_value['approver_job'][0]"/></div>
+                        <div class="address9">
+                            <t t-esc="o_value['approver_date'][0]"/>
+                        </div>
+                        <div class="des_pr">
+                            <t t-esc="o_value['des_pr'][0:340]"/>
+                        </div>
+
+
+                        <t t-set="j" t-value="i + record_per_page"/>
+                        <t t-set="item_count" t-value="0"/>
+                        <t t-set="len_count" t-value="0"/>
+                        <t t-set="i4" t-value="560"/>
+                        <t t-set="i6" t-value="0"/>
+                        <t t-set="iii" t-value="0"/>
+                        <t t-foreach="o_value['group'][i:j]" t-as="cc">
+                            <t t-if="cc.name">
+                                <t t-set="iii" t-value="len(cc.name)"/>
+                            </t>
+                            <div style="position:relative; z-index: 100;">
+                                <t t-if="iii &gt;= 66">
+                                    <t t-set="len_count" t-value="35"/>
+                                </t>
+                                <t t-if="iii &lt;= 65">
+                                    <t t-set="len_count" t-value="20"/>
+                                </t>
+                                <table t-attf-style="position:absolute; left: 70px; top: {{i4}}px;font-size: 18px;">
+                                    <tbody>
+                                        <t t-set="sum_total" t-value="0"/>
+                                        <tr>
+                                            <td style="position:absolute; right: 1px;line-height: 0.9">
+                                                <t t-set="item_count" t-value="item_count+1"/>
+                                                <t t-set="count" t-value="count+1"/>
+                                                <span t-esc="count"/>
+                                            </td>
+                                            <td width='350px' style="position:fixed; left: 105px;line-height: 0.9">
+                                                <!--                                                <t t-esc="o_value['uom'][ii]"/>-->
+                                                <span t-esc="str(cc.name)[0:115]"/>
+                                            </td>
+                                            <td width='420px' style="position:fixed; left:500px;line-height: 1">
+                                                <span t-esc="cc.product_qty"/>
+                                                <span t-esc="cc.product_uom_id.name" style="padding-left: 10px;"/>
+                                            </td>
+                                            <td style="position:fixed; right: 220px;line-height: 0.9">
+                                                <t t-esc="'{0:,.2f}'.format(cc.estimated_cost)"/>
+                                            </td>
+                                            <td style="position:fixed; right: 55px;line-height: 0.9">
+                                                <t t-set="sum_line" t-value="cc.product_qty * cc.estimated_cost"/>
+                                                <t t-set="sum_total" t-value="sum_total+sum_line"/>
+                                                <t t-esc="'{0:,.2f}'.format(sum_line)"/>
+                                                <t t-set="ii" t-value="ii+1"/>
+                                                <t t-set="i6" t-value="i4 + len_count"/>
+                                                <t t-set="i4" t-value="i6"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+                        <img src="/pr_hire_qweb/static/src/img/pr.png"
+                             style="position:absolute; z-index: -9999; width: 95%; "/>
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page"/>
+            </t>
+        </div>
+    </template>
+    <template id="pr_hire_pdf_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="pr_hire_qweb.purchase_request_report_layout"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

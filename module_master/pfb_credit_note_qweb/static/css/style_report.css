@@ -1,0 +1,113 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'THSarabunNew';
+  src: url("/pfb_credit_note_qweb/static/fonts/THSarabunNew.ttf") format("truetype");
+}
+
+    .o_credit_notes_from {
+    font-family: 'THSarabunNew';
+    font-size: 24px;
+    }
+
+    .o_credit_notes_from .number_invoice {
+        font-size: 24px;
+        position: fixed;
+        top: 137px;
+        right: 140px;
+    }
+
+    .o_credit_notes_from .company_vat {
+        font-size: 24px;
+        position: fixed;
+        top: 525px;
+        left: 235px;
+    }
+
+    .o_credit_notes_from .company_name {
+        width: 50%;
+        font-size: 24px;
+        position: fixed;
+        top: 560px;
+        left: 235px;
+    }
+
+    .o_credit_notes_from .company_address {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 595px;
+        left: 235px;
+    }
+
+    .o_credit_notes_from .company_address2 {
+        width: 100%;
+        font-size: 24px;
+        position: fixed;
+        top: 627px;
+        left: 235px;
+    }
+
+    .o_credit_notes_from .company_address3 {
+        font-size: 24px;
+        position: fixed;
+        top: 658px;
+        left: 235px;
+    }
+
+
+    .o_credit_notes_from .invoice_date_cr {
+        font-size: 24px;
+        position: fixed;
+        top: 520px;
+        right: 110px;
+    }
+
+    .o_credit_notes_from .payment_terms {
+        width: 10%;
+        font-size: 24px;
+        position: fixed;
+        top: 558px;
+        right: 80px;
+    }
+
+    .o_credit_notes_from .due_date {
+        font-size: 24px;
+        position: fixed;
+        top: 590px;
+        right: 110px;
+    }
+
+    .o_credit_notes_from .total_amount {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1070px;
+        right: 30px;
+    }
+
+    .o_credit_notes_from .amount_vat {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1135px;
+        right: 30px;
+    }
+
+    .o_credit_notes_from .grand_total {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
+        top: 1205px;
+        right: 30px;
+    }
+
+    .o_credit_notes_from .text_total {
+        width: 48%;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        position: fixed;
+        top: 1300px;
+        left: 400px;
+    }
+

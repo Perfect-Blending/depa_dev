@@ -1,0 +1,1620 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pfb_saraban
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-29 07:37+0000\n"
+"PO-Revision-Date: 2020-07-29 16:08+0700\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: th\n"
+"X-Generator: Poedit 2.4\n"
+
+#. module: pfb_saraban
+#: code:addons/pfb_saraban/models/models.py:174
+#, python-format
+msgid "A session's instructor can't be an attendee"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_needaction
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_needaction
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_needaction
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_needaction
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_needaction
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_needaction
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_needaction
+msgid "Action Needed"
+msgstr "ต้องดำเนินการ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__is_active
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__is_active
+msgid "Active"
+msgstr "เปิดใช้งาน"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__activity_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__activity_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__activity_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__activity_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__activity_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__activity_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__activity_ids
+msgid "Activities"
+msgstr "กิจกรรม"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__activity_state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__activity_state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__activity_state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__activity_state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__activity_state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__activity_state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__activity_state
+msgid "Activity State"
+msgstr "สถานะกิจกรรม"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting__user_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__user_id
+msgid "Approval"
+msgstr "อนุมัติ"
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_external_setting_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_setting_form_view
+msgid "Approval Order"
+msgstr "ลำดับการอนุมัติ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__approve_type
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__approve_type
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__approve_type
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__approve_type
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__approve_type
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__approve_type
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__approve_type
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__approve_type
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__approve_type
+msgid "Approve type"
+msgstr "ชนิดการอนุมัติ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__attachment_id
+msgid "Attachment"
+msgstr "ไฟล์แนบ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_attachment_count
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_attachment_count
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_attachment_count
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_attachment_count
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_attachment_count
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_attachment_count
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_attachment_count
+msgid "Attachment Count"
+msgstr "จำนวนไฟล์แนบ"
+
+#. module: pfb_saraban
+#: selection:document.external.setting.lines,approve_type:0
+#: selection:document.internal.announce.setting.line,approve_type:0
+#: selection:document.internal.external.setting.line,approve_type:0
+#: selection:document.internal.gurantee.setting.line,approve_type:0
+#: selection:document.internal.main.setting.line,approve_type:0
+#: selection:document.internal.order.setting.line,approve_type:0
+#: selection:document.internal.rule.setting.line,approve_type:0
+#: selection:document.internal.rules.setting.line,approve_type:0
+#: selection:document.internal.setting.lines,approve_type:0
+msgid "Comments only"
+msgstr "แสดงความคิดเห็นเท่านั้น"
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.configuration_menu
+msgid "Configuration"
+msgstr "การกำหนดค่า"
+
+#. module: pfb_saraban
+#: code:addons/pfb_saraban/models/models.py:33
+#, python-format
+msgid "Copy of {}"
+msgstr ""
+
+#. module: pfb_saraban
+#: code:addons/pfb_saraban/models/models.py:35
+#, python-format
+msgid "Copy of {} ({})"
+msgstr ""
+
+#. module: pfb_saraban
+#: code:addons/pfb_saraban/models/models.py:31
+#, python-format
+msgid "Copy of {}%"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__create_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__create_uid
+msgid "Created by"
+msgstr "สร้างโดย"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__create_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__create_date
+msgid "Created on"
+msgstr "สร้างเมื่อ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__date_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__date_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__date_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__date_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__date_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__date_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__date_document
+msgid "Date"
+msgstr "วันที่"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__dear
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__dear
+msgid "Dear"
+msgstr "เรียน"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__department_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__department_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__department_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__department_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__department_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__department_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__department_id
+msgid "Department"
+msgstr "ส่วน/ฝ่าย"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__display_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__display_name
+msgid "Display Name"
+msgstr "ชื่อที่ใช้แสดง"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__document_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__document_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__document_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__document_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__document_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__document_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__document_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__document_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__document_id
+msgid "Document id"
+msgstr "เลขที่เอกสาร"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__setting_line_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__setting_line_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__setting_line_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__setting_line_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__setting_line_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__setting_line_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__setting_line_ids
+msgid "Document main line"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__routings_internal_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__routings_internal_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__routings_internal_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__routings_internal_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__routings_internal_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__routings_internal_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__routings_internal_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__routings_internal_ids
+msgid "Document routing"
+msgstr "ขั้นตอนการไหล"
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,state:0
+#: selection:document.internal.external,state:0
+#: selection:document.internal.guarantee,state:0
+#: selection:document.internal.main,state:0
+#: selection:document.internal.order,state:0
+#: selection:document.internal.rule,state:0
+#: selection:document.internal.rules,state:0
+msgid "Draft"
+msgstr "ฉบับร่าง"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_hr_employee__dummy
+msgid "Dummy"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_hr_employee
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__employee_id
+msgid "Employee"
+msgstr "บุคลากร"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__employee_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__employee_id
+msgid "Employee Name"
+msgstr "ชื่อบุคลากร"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__empolyee_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__empolyee_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__empolyee_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__empolyee_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__empolyee_name
+msgid "Employee name"
+msgstr "บุคลากร"
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,speed:0
+#: selection:document.internal.external,speed:0
+#: selection:document.internal.guarantee,speed:0
+#: selection:document.internal.main,speed:0
+#: selection:document.internal.order,speed:0
+#: selection:document.internal.rule,speed:0
+#: selection:document.internal.rules,speed:0
+msgid "Express"
+msgstr "ด่วน"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_follower_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_follower_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_follower_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_follower_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_follower_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_follower_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_follower_ids
+msgid "Followers"
+msgstr "ผู้ติดตาม"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_channel_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_channel_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_channel_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_channel_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_channel_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_channel_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "ผู้ติดตาม (ช่องทาง)"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_partner_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_partner_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_partner_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_partner_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_partner_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_partner_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "ผู้ติดตาม (คู่ค้า)"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__for_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__for_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__for_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__for_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__for_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__for_document
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__for_document
+msgid "For Document"
+msgstr "เพื่อ"
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_external_setting_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_announce_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_external_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_guarantee_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_main_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_order_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_rule_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_setting_view
+msgid "Group By"
+msgstr "จัดกลุ่มโดย"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__id
+msgid "ID"
+msgstr "รหัส"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_announce__message_unread
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_external__message_unread
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_guarantee__message_unread
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_main__message_unread
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_order__message_unread
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rule__message_unread
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rules__message_unread
+msgid "If checked new messages require your attention."
+msgstr "ถ้าเลือก ข้อความใหม่จะต้องการความสนใจจากคุณ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_announce__message_needaction
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_external__message_needaction
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_guarantee__message_needaction
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_main__message_needaction
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_order__message_needaction
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rule__message_needaction
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rules__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "ถ้าเลือก ข้อความใหม่จะต้องการความสนใจจากคุณ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_announce__message_has_error
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_external__message_has_error
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_guarantee__message_has_error
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_main__message_has_error
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_order__message_has_error
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rule__message_has_error
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rules__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_external_setting_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_setting_view
+msgid "Inactive"
+msgstr "ไม่เปิดใช้งาน"
+
+#. module: pfb_saraban
+#: code:addons/pfb_saraban/models/models.py:136
+#, python-format
+msgid "Increase seats or remove excess attendees"
+msgstr ""
+
+#. module: pfb_saraban
+#: code:addons/pfb_saraban/models/models.py:128
+#: code:addons/pfb_saraban/models/models.py:135
+#, python-format
+msgid "Invalid value"
+msgstr "ค่าไม่ถูกต้อง"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_is_follower
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_is_follower
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_is_follower
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_is_follower
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_is_follower
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_is_follower
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_is_follower
+msgid "Is Follower"
+msgstr "เป็นผู้ติดตาม"
+
+#. module: pfb_saraban
+#: selection:document.external.setting.lines,approve_type:0
+#: selection:document.internal.announce.setting.line,approve_type:0
+#: selection:document.internal.external.setting.line,approve_type:0
+#: selection:document.internal.gurantee.setting.line,approve_type:0
+#: selection:document.internal.main.setting.line,approve_type:0
+#: selection:document.internal.order.setting.line,approve_type:0
+#: selection:document.internal.rule.setting.line,approve_type:0
+#: selection:document.internal.rules.setting.line,approve_type:0
+#: selection:document.internal.setting.lines,approve_type:0
+msgid "Is require to approve"
+msgstr "จำเป็นต้องอนุมัติ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__issue
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__issue
+msgid "Issue"
+msgstr "ฉบับ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__job_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__job_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__job_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__job_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__job_name
+msgid "Job name"
+msgstr "ชื่อตำแหน่ง"
+
+#. module: pfb_saraban
+#: selection:document.internal.external,dear:0
+#: selection:document.internal.main,dear:0
+msgid "Job position"
+msgstr "ตำแหน่ง"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting____last_update
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines____last_update
+msgid "Last Modified on"
+msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__write_uid
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__write_uid
+msgid "Last Updated by"
+msgstr "อัพเดทครั้งสุดท้ายโดย"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__write_date
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__write_date
+msgid "Last Updated on"
+msgstr "อัพเดทครั้งสุดท้ายเมื่อ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_main_attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_main_attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_main_attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_main_attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_main_attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_main_attachment_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__material
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__material
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__material
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__material
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__material
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__material
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__material
+msgid "Material"
+msgstr "เนื้อหา"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_has_error
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_has_error
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_has_error
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_has_error
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_has_error
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_has_error
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_ids
+msgid "Messages"
+msgstr "ข้อความ"
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_external_setting_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_announce_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_external_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_guarantee_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_main_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_order_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_rule_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_search_internal_setting_view
+msgid "Name"
+msgstr "ชื่อ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__activity_date_deadline
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__activity_date_deadline
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__activity_date_deadline
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__activity_date_deadline
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__activity_date_deadline
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__activity_date_deadline
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__activity_summary
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__activity_summary
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__activity_summary
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__activity_summary
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__activity_summary
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__activity_summary
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__activity_type_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__activity_type_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__activity_type_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__activity_type_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__activity_type_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__activity_type_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,secret:0
+#: selection:document.internal.announce,speed:0
+#: selection:document.internal.external,secret:0
+#: selection:document.internal.external,speed:0
+#: selection:document.internal.guarantee,secret:0
+#: selection:document.internal.guarantee,speed:0
+#: selection:document.internal.main,secret:0
+#: selection:document.internal.main,speed:0
+#: selection:document.internal.order,secret:0
+#: selection:document.internal.order,speed:0
+#: selection:document.internal.rule,secret:0
+#: selection:document.internal.rule,speed:0
+#: selection:document.internal.rules,secret:0
+#: selection:document.internal.rules,speed:0
+msgid "Normal"
+msgstr "ปกติ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__note
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__note
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__note
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__note
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__note
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__note
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__note
+msgid "Note"
+msgstr "หมายเหตุ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_needaction_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_needaction_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_needaction_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_needaction_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_needaction_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_needaction_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_needaction_counter
+msgid "Number of Actions"
+msgstr "จำนวนกิจกรรม"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_has_error_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_has_error_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_has_error_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_has_error_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_has_error_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_has_error_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_has_error_counter
+msgid "Number of error"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_announce__message_needaction_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_external__message_needaction_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_guarantee__message_needaction_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_main__message_needaction_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_order__message_needaction_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rule__message_needaction_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rules__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_announce__message_has_error_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_external__message_has_error_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_guarantee__message_has_error_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_main__message_has_error_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_order__message_has_error_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rule__message_has_error_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rules__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_announce__message_unread_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_external__message_unread_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_guarantee__message_unread_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_main__message_unread_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_order__message_unread_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rule__message_unread_counter
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rules__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,activity_state:0
+#: selection:document.internal.external,activity_state:0
+#: selection:document.internal.guarantee,activity_state:0
+#: selection:document.internal.main,activity_state:0
+#: selection:document.internal.order,activity_state:0
+#: selection:document.internal.rule,activity_state:0
+#: selection:document.internal.rules,activity_state:0
+msgid "Overdue"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,activity_state:0
+#: selection:document.internal.external,activity_state:0
+#: selection:document.internal.guarantee,activity_state:0
+#: selection:document.internal.main,activity_state:0
+#: selection:document.internal.order,activity_state:0
+#: selection:document.internal.rule,activity_state:0
+#: selection:document.internal.rules,activity_state:0
+msgid "Planned"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__activity_user_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__activity_user_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__activity_user_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__activity_user_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__activity_user_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__activity_user_id
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__activity_user_id
+msgid "Responsible User"
+msgstr "ผู้ใช้ที่รับผิดชอบ"
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,secret:0
+#: selection:document.internal.external,secret:0
+#: selection:document.internal.guarantee,secret:0
+#: selection:document.internal.main,secret:0
+#: selection:document.internal.order,secret:0
+#: selection:document.internal.rule,secret:0
+#: selection:document.internal.rules,secret:0
+msgid "Secret"
+msgstr "ลับ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__secret
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__secret
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__secret
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__secret
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__secret
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__secret
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__secret
+msgid "Secret ​​class"
+msgstr "ชั้นความลับ"
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,state:0
+#: selection:document.internal.external,state:0
+#: selection:document.internal.guarantee,state:0
+#: selection:document.internal.main,state:0
+#: selection:document.internal.order,state:0
+#: selection:document.internal.rule,state:0
+#: selection:document.internal.rules,state:0
+msgid "Sent"
+msgstr "ส่งแล้ว"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__sequence
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__sequence
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__sequence
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__sequence
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__sequence
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__sequence
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__sequence
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__sequence
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__sequence
+msgid "Sequence"
+msgstr "ลำดับ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_res_users__setting
+msgid "Setting"
+msgstr "ตั้งค่า"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__sign
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__sign
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__sign
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__sign
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__sign
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__sign
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__sign
+msgid "Sign"
+msgstr "ลงนาม"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__speed
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__speed
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__speed
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__speed
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__speed
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__speed
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__speed
+msgid "Speed ​​class"
+msgstr "ชั้นความเร็ว"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__status
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__status
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__status
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__status
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__status
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__status
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__status
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__state
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__status
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__status
+msgid "Status"
+msgstr "สถานะ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_announce__activity_state
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_external__activity_state
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_guarantee__activity_state
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_main__activity_state
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_order__activity_state
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rule__activity_state
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rules__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__subject
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__subject
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__subject
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__subject
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__subject
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__subject
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__subject
+msgid "Subject"
+msgstr "เรื่อง"
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,secret:0
+#: selection:document.internal.external,secret:0
+#: selection:document.internal.guarantee,secret:0
+#: selection:document.internal.main,secret:0
+#: selection:document.internal.order,secret:0
+#: selection:document.internal.rule,secret:0
+#: selection:document.internal.rules,secret:0
+msgid "The most secret"
+msgstr "ลับที่สุด"
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,speed:0
+#: selection:document.internal.external,speed:0
+#: selection:document.internal.guarantee,speed:0
+#: selection:document.internal.main,speed:0
+#: selection:document.internal.order,speed:0
+#: selection:document.internal.rule,speed:0
+#: selection:document.internal.rules,speed:0
+msgid "The most urgent"
+msgstr "ด่วนที่สุด"
+
+#. module: pfb_saraban
+#: code:addons/pfb_saraban/models/models.py:129
+#, python-format
+msgid "The number of seats can't be negative"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,activity_state:0
+#: selection:document.internal.external,activity_state:0
+#: selection:document.internal.guarantee,activity_state:0
+#: selection:document.internal.main,activity_state:0
+#: selection:document.internal.order,activity_state:0
+#: selection:document.internal.rule,activity_state:0
+#: selection:document.internal.rules,activity_state:0
+msgid "Today"
+msgstr "วันนี้"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_unread
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_unread
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_unread
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_unread
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_unread
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_unread
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_unread
+msgid "Unread Messages"
+msgstr "ข้อความที่ยังไม่ได้อ่าน"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__message_unread_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__message_unread_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__message_unread_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__message_unread_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__message_unread_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__message_unread_counter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "จำนวนข้อความที่ยังไม่ได้อ่าน"
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_res_users
+msgid "Users"
+msgstr "ผู้ใช้งาน"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__website_message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__website_message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__website_message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__website_message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__website_message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__website_message_ids
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__website_message_ids
+msgid "Website Messages"
+msgstr "ข้อความจากเว็บไซต์"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_announce__website_message_ids
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_external__website_message_ids
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_guarantee__website_message_ids
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_main__website_message_ids
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_order__website_message_ids
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rule__website_message_ids
+#: model:ir.model.fields,help:pfb_saraban.field_document_internal_rules__website_message_ids
+msgid "Website communication history"
+msgstr "ประวัติการสื่อสารเว็บไซต์"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__approve_time
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__approve_time
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__approve_time
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__approve_time
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__approve_time
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__approve_time
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__approve_time
+msgid "approve time"
+msgstr "วันเวลา อนุมัติ/รับทราบ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__comment
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__comment
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__comment
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__comment
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__comment
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__comment
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__comment
+msgid "comment"
+msgstr "ข้อคิดเห็น"
+
+#. module: pfb_saraban
+#: model:res.groups,name:pfb_saraban.group_manager
+msgid "document / Manager"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_external_setting_tree_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_announce_tree_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_external_tree_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_guarantee_tree_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_main_tree_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_order_tree_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_rule_tree_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_rules_tree_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_setting_tree_view
+msgid "document Tree"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__setting_id
+msgid "document announce"
+msgstr "หนังสือภายใน ประกาศ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__setting_id
+msgid "document external"
+msgstr "หนังสือภายใน หนังสือภายนอก"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__setting_id
+msgid "document gurantee"
+msgstr "หนังสือภายใน หนังสือรับรอง"
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_calendar_view
+msgid "document internal Calendar"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__setting_id
+msgid "document main"
+msgstr "หนังสือภายใน บันทึกข้อความ"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__setting_id
+msgid "document order"
+msgstr "หนังสือภายใน คำสั่ง"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__setting_id
+msgid "document rule"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__setting_id
+msgid "document rules"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_announce_setting_line
+msgid "document.internal.announce.setting.line"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_external_setting_line
+msgid "document.internal.external.setting.line"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_gurantee_setting_line
+msgid "document.internal.gurantee.setting.line"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_main_setting_line
+msgid "document.internal.main.setting.line"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_order_setting_line
+msgid "document.internal.order.setting.line"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_rule_setting_line
+msgid "document.internal.rule.setting.line"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_rules_setting_line
+msgid "document.internal.rules.setting.line"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.external,dear:0
+#: selection:document.internal.main,dear:0
+msgid "empolyee name"
+msgstr "บุคลากร"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__job_id_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__job_id_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__job_id_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__job_id_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__job_id_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__job_id_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__job_id_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__job_id_name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__job_id_name
+msgid "job id"
+msgstr "ตำแหน่ง"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__name
+msgid "name"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting_lines__step
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce_setting_line__step
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external_setting_line__step
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_gurantee_setting_line__step
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main_setting_line__step
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order_setting_line__step
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule_setting_line__step
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules_setting_line__step
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting_lines__step
+msgid "step"
+msgstr "step"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__test
+msgid "test"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,speed:0
+#: selection:document.internal.external,speed:0
+#: selection:document.internal.guarantee,speed:0
+#: selection:document.internal.main,speed:0
+#: selection:document.internal.order,speed:0
+#: selection:document.internal.rule,speed:0
+#: selection:document.internal.rules,speed:0
+msgid "urgent"
+msgstr "ด่วน"
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,secret:0
+#: selection:document.internal.external,secret:0
+#: selection:document.internal.guarantee,secret:0
+#: selection:document.internal.main,secret:0
+#: selection:document.internal.order,secret:0
+#: selection:document.internal.rule,secret:0
+#: selection:document.internal.rules,secret:0
+msgid "very secret"
+msgstr "ลับมาก"
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__year
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__year
+msgid "year"
+msgstr "พ.ศ."
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.internal_rules_menu
+msgid "ข้อบังคับ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_announce_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_external_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_guarantee_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_main_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_order_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_rule_form_view
+msgid "ข้อมูล"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.internal_order_menu
+msgid "คำสั้ง"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,state:0
+#: selection:document.internal.announce.setting.line,status:0
+#: selection:document.internal.external,state:0
+#: selection:document.internal.external.setting.line,status:0
+#: selection:document.internal.guarantee,state:0
+#: selection:document.internal.gurantee.setting.line,status:0
+#: selection:document.internal.main,state:0
+#: selection:document.internal.main.setting.line,status:0
+#: selection:document.internal.order,state:0
+#: selection:document.internal.order.setting.line,status:0
+#: selection:document.internal.rule,state:0
+#: selection:document.internal.rule.setting.line,status:0
+#: selection:document.internal.rules,state:0
+#: selection:document.internal.rules.setting.line,status:0
+#: selection:document.internal.setting.lines,status:0
+msgid "ชสศด."
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_external_setting__name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_announce__name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_guarantee__name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_order__name
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_setting__name
+msgid "ชื่อ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_external_setting_cat_list_action
+#: model:ir.ui.menu,name:pfb_saraban.contact_cat_menu
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_external_setting_form_view
+msgid "ตั้งค่าการไหลเอกสารหนังสือรับ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_internal_setting_list_action
+#: model:ir.ui.menu,name:pfb_saraban.contact_menu
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_setting_form_view
+msgid "ตั้งค่าขั้นตอนการไหลหนังสือภายใน"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_internal_setting_cat_list_action
+#: model:ir.actions.act_window,name:pfb_saraban.document_start_setting_cat_list_action
+#: model:ir.ui.menu,name:pfb_saraban.setting_menu
+msgid "ตั้งค่าเริ่มต้นเอกสาร"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.internal_save_menu
+msgid "บันทึกข้อความ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.internal_announce_menu
+msgid "ประกาศ"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,state:0
+#: selection:document.internal.announce.setting.line,status:0
+#: selection:document.internal.external,state:0
+#: selection:document.internal.external.setting.line,status:0
+#: selection:document.internal.guarantee,state:0
+#: selection:document.internal.gurantee.setting.line,status:0
+#: selection:document.internal.main,state:0
+#: selection:document.internal.main.setting.line,status:0
+#: selection:document.internal.order,state:0
+#: selection:document.internal.order.setting.line,status:0
+#: selection:document.internal.rule,state:0
+#: selection:document.internal.rule.setting.line,status:0
+#: selection:document.internal.rules,state:0
+#: selection:document.internal.rules.setting.line,status:0
+#: selection:document.internal.setting.lines,status:0
+msgid "ผสศด."
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.external.setting.lines,status:0
+#: selection:document.internal.announce,state:0
+#: selection:document.internal.announce.setting.line,status:0
+#: selection:document.internal.external,state:0
+#: selection:document.internal.external.setting.line,status:0
+#: selection:document.internal.guarantee,state:0
+#: selection:document.internal.gurantee.setting.line,status:0
+#: selection:document.internal.main,state:0
+#: selection:document.internal.main.setting.line,status:0
+#: selection:document.internal.order,state:0
+#: selection:document.internal.order.setting.line,status:0
+#: selection:document.internal.rule,state:0
+#: selection:document.internal.rule.setting.line,status:0
+#: selection:document.internal.rules,state:0
+#: selection:document.internal.rules.setting.line,status:0
+#: selection:document.internal.setting.lines,status:0
+msgid "ผอ.ฝ่าย"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.external.setting.lines,status:0
+msgid "ฝ่ายที่เกี่ยวข้อง"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,state:0
+#: selection:document.internal.announce.setting.line,status:0
+#: selection:document.internal.external,state:0
+#: selection:document.internal.external.setting.line,status:0
+#: selection:document.internal.guarantee,state:0
+#: selection:document.internal.gurantee.setting.line,status:0
+#: selection:document.internal.main,state:0
+#: selection:document.internal.main.setting.line,status:0
+#: selection:document.internal.order,state:0
+#: selection:document.internal.order.setting.line,status:0
+#: selection:document.internal.rule,state:0
+#: selection:document.internal.rule.setting.line,status:0
+#: selection:document.internal.rules,state:0
+#: selection:document.internal.rules.setting.line,status:0
+#: selection:document.internal.setting.lines,status:0
+msgid "ฝ่ายที่เกี่ยวข้อง-1"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,state:0
+#: selection:document.internal.announce.setting.line,status:0
+#: selection:document.internal.external,state:0
+#: selection:document.internal.external.setting.line,status:0
+#: selection:document.internal.guarantee,state:0
+#: selection:document.internal.gurantee.setting.line,status:0
+#: selection:document.internal.main,state:0
+#: selection:document.internal.main.setting.line,status:0
+#: selection:document.internal.order,state:0
+#: selection:document.internal.order.setting.line,status:0
+#: selection:document.internal.rule,state:0
+#: selection:document.internal.rule.setting.line,status:0
+#: selection:document.internal.rules,state:0
+#: selection:document.internal.rules.setting.line,status:0
+#: selection:document.internal.setting.lines,status:0
+msgid "ฝ่ายที่เกี่ยวข้อง-2"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,state:0
+#: selection:document.internal.announce.setting.line,status:0
+#: selection:document.internal.external,state:0
+#: selection:document.internal.external.setting.line,status:0
+#: selection:document.internal.guarantee,state:0
+#: selection:document.internal.gurantee.setting.line,status:0
+#: selection:document.internal.main,state:0
+#: selection:document.internal.main.setting.line,status:0
+#: selection:document.internal.order,state:0
+#: selection:document.internal.order.setting.line,status:0
+#: selection:document.internal.rule,state:0
+#: selection:document.internal.rule.setting.line,status:0
+#: selection:document.internal.rules,state:0
+#: selection:document.internal.rules.setting.line,status:0
+#: selection:document.internal.setting.lines,status:0
+msgid "รสศด."
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.internal_waiteing_menu
+msgid "รอดำเนินการหนังสือภายใน"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.receive_waithing_menu
+msgid "รอดำเนินการหนังสือรับ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.res_users_document
+msgid "ระบบสารบรรณ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.internal_rule_menu
+msgid "ระเบียบ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.receive_receive_menu
+msgid "รับหนังสือ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_announce_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_external_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_guarantee_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_main_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_order_form_view
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_rule_form_view
+msgid "ลำดับอุนมัต"
+msgstr "ลำดับอุนมัติ"
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.internal_created_menu
+msgid "สร้างหนังสือภายใน"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_res_users__document_rec
+msgid "สร้างหนังสือรับ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_list_action
+#: model:ir.model,name:pfb_saraban.model_document_external_setting
+#: model:ir.model,name:pfb_saraban.model_document_internal_setting
+#: model:ir.ui.menu,name:pfb_saraban.main_document_menu
+msgid "สารบรรณ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_rules
+msgid "สารบรรณ หนังสือภายใน ข้อบังคับ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_announce
+#: model:ir.model,name:pfb_saraban.model_document_internal_order
+msgid "สารบรรณ หนังสือภายใน คำสั้ง"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_main
+msgid "สารบรรณ หนังสือภายใน บันทึกข้อความ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_rule
+msgid "สารบรรณ หนังสือภายใน ระเบียบ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_external
+msgid "สารบรรณ หนังสือภายใน หนังสือภายนอก"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_internal_guarantee
+msgid "สารบรรณ หนังสือภายใน หนังสือรับรอง"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model,name:pfb_saraban.model_document_external_setting_lines
+#: model:ir.model,name:pfb_saraban.model_document_internal_main_lines
+#: model:ir.model,name:pfb_saraban.model_document_internal_setting_lines
+msgid "สารบัญ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.external_book_menu
+#: model:ir.ui.menu,name:pfb_saraban.internal_external_menu
+msgid "หนังสือภายนอก"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.receive_document_menu
+msgid "หนังสือภายรับ"
+msgstr "หนังสือรับ"
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.internal_book_menu
+#: model:ir.ui.menu,name:pfb_saraban.internal_document_menu
+msgid "หนังสือภายใน"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_rule_form_view
+msgid "หนังสือภายใน ข้อบังคับ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_order_form_view
+msgid "หนังสือภายใน คำสั้ง"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_main_form_view
+msgid "หนังสือภายใน บันทึกข้อความ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_announce_form_view
+msgid "หนังสือภายใน ประกาศ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_external_form_view
+msgid "หนังสือภายใน หนังสือภายนอก"
+msgstr ""
+
+#. module: pfb_saraban
+#: model_terms:ir.ui.view,arch_db:pfb_saraban.document_internal_guarantee_form_view
+msgid "หนังสือภายใน หนังสือรับรอง"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_internal_rules_list_action
+msgid "หนังสือภายใน/ข้อบังคับ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_internal_order_list_action
+msgid "หนังสือภายใน/คำสั้ง"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_internal_main_list_action
+msgid "หนังสือภายใน/บันทึกข้อความ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_internal_announce_list_action
+msgid "หนังสือภายใน/ประกาศ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_internal_rule_list_action
+msgid "หนังสือภายใน/ระเบียบ"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_internal_external_list_action
+msgid "หนังสือภายใน/หนังสือภายนอก"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.actions.act_window,name:pfb_saraban.document_internal_guarantee_list_action
+msgid "หนังสือภายใน/หนังสือรับรอง"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.ui.menu,name:pfb_saraban.internal_recive_menu
+msgid "หนังสือรับรอง"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_external__circular_letter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_main__circular_letter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rule__circular_letter
+#: model:ir.model.fields,field_description:pfb_saraban.field_document_internal_rules__circular_letter
+msgid "หนังสือเวียน"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,for_document:0
+#: selection:document.internal.external,for_document:0
+#: selection:document.internal.guarantee,for_document:0
+#: selection:document.internal.main,for_document:0
+#: selection:document.internal.order,for_document:0
+#: selection:document.internal.rule,for_document:0
+#: selection:document.internal.rules,for_document:0
+msgid "อื่นๆ"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,for_document:0
+#: selection:document.internal.external,for_document:0
+#: selection:document.internal.guarantee,for_document:0
+#: selection:document.internal.main,for_document:0
+#: selection:document.internal.order,for_document:0
+#: selection:document.internal.rule,for_document:0
+#: selection:document.internal.rules,for_document:0
+msgid "เพื่อดำเนินการ"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,for_document:0
+#: selection:document.internal.external,for_document:0
+#: selection:document.internal.guarantee,for_document:0
+#: selection:document.internal.main,for_document:0
+#: selection:document.internal.order,for_document:0
+#: selection:document.internal.rule,for_document:0
+#: selection:document.internal.rules,for_document:0
+msgid "เพื่อโปรดทราบ"
+msgstr ""
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,for_document:0
+#: selection:document.internal.external,for_document:0
+#: selection:document.internal.guarantee,for_document:0
+#: selection:document.internal.main,for_document:0
+#: selection:document.internal.order,for_document:0
+#: selection:document.internal.rule,for_document:0
+#: selection:document.internal.rules,for_document:0
+msgid "เพื่อโปรเจคพิจารณา"
+msgstr "เพื่อโปรดพิจารณา"
+
+#. module: pfb_saraban
+#: selection:document.internal.announce,state:0
+#: selection:document.internal.external,state:0
+#: selection:document.internal.guarantee,state:0
+#: selection:document.internal.main,state:0
+#: selection:document.internal.order,state:0
+#: selection:document.internal.rule,state:0
+#: selection:document.internal.rules,state:0
+msgid "เสร็จสมบูรณ์"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_res_users__document_internal
+#: model:ir.ui.menu,name:pfb_saraban.internal_all_menu
+msgid "แสดงหนังสือภายในทั้งหมด"
+msgstr ""
+
+#. module: pfb_saraban
+#: model:ir.model.fields,field_description:pfb_saraban.field_res_users__document_rec_all
+#: model:ir.ui.menu,name:pfb_saraban.receive_show_all_menu
+msgid "แสดงหนังสือรับทั้งหมด"
+msgstr ""

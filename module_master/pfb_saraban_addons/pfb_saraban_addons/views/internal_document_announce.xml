@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="pfb_saraban.document_internal_need_list_action">
+        <field name="domain">[('state', 'not in', ['draft', 'done']), ('show_internal_document', '=', True)]</field>
+    </record>
+
+</odoo>

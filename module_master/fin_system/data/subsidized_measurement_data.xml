@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="depa_digital_startup_fund" model="subsidized.measurement">
+        <field name="name">DEPA Digital Startup Fund</field>
+    </record>
+    <record id="depa_digital_transformation_fund" model="subsidized.measurement">
+        <field name="name">DEPA Digital Transformation Fund</field>
+    </record>
+    <record id="depa_digital_research_development_and_innovation_fund" model="subsidized.measurement">
+        <field name="name">DEPA Digital Research Development and Innovation Fund</field>
+    </record>
+    <record id="depa_digital_event_and_marketing_fund" model="subsidized.measurement">
+        <field name="name">DEPA Digital Event And Marketing Fund</field>
+    </record>
+    <record id="depa_digital_infrastructure_fund_for_government_and_public_investment" model="subsidized.measurement">
+        <field name="name">DEPA Digital Infrastructure Fund for Government &amp; Public Investment</field>
+    </record>
+    <record id="depa_digital_infrastructure_fund_for_private_investment" model="subsidized.measurement">
+        <field name="name">DEPA Digital Infrastructure Fund for Private Investment</field>
+    </record>
+    <record id="depa_digital_manpower_fund" model="subsidized.measurement">
+        <field name="name">DEPA Digital Manpower Fund</field>
+    </record>
+    <record id="depa_scholarship" model="subsidized.measurement">
+        <field name="name">DEPA Scholarship</field>
+    </record>
+    <record id="depa_digital_transformation_fund_for_commmunity" model="subsidized.measurement">
+        <field name="name">DEPA Digital Transformation Fund for Community</field>
+    </record>
+    <record id="other" model="subsidized.measurement">
+        <field name="name">Other</field>
+    </record>
+
+</odoo>

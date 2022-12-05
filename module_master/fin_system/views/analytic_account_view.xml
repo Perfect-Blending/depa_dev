@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_account_analytic_account_list_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.account.list.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
+        <field name="arch" type="xml">
+            <field name="debit" position="replace"></field>
+            <field name="credit" position="replace"></field>
+            <field name="balance" position="replace">
+                <field name="budget" sum="Budget" />
+                <field name="budget_spend" sum="Budget spend" />
+                <field name="budget_balance" sum="Budget balance" />
+            </field>
+            <field name="name" position="replace">
+                <field name="fiscal_year" />
+            </field>
+            <field name="code" position="before">
+                <field name="group_id" />
+            </field>
+            <field name="partner_id" position="replace">
+                <field name="name" />
+            </field>
+        </field>
+    </record>
+
+    <record id="account_analytic_account_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.account.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <xpath  expr="//group[@name='main']" position='after'>
+                <notebook>
+                     <page string="Responsible">
+                        <group>
+                            <field name="department"/>
+                            <field name="manager"/>
+                            <field name="manager_co"/>
+                            <field name="coordinator"/>
+                        </group>
+                    </page>
+                    <page string="Information">
+                        <group>
+                            <field name="project_type" options="{'vertical': true}" widget="radio"/>
+                            <field name="date_start"/>
+                            <field name="date_to"/>
+                            <field name="budget"/>
+                            <field name="budget_balance"/>
+                            <field name="budget_balance_percent" widget="progressbar"/>
+                            <field name="allow_negative" groups="fin_system.fw_pfb_fin_system_allow_negative_fin_100"/>
+                        </group>
+                    </page>
+                    <page string="Note">
+                        <group>
+                            <field name="principle_and_reason"/>
+                            <field name="objective"/>
+                            <field name="target_project"/>
+                            <field name="target_group"/>
+                            <field name="operation_area"/>
+                            <field name="impact_and_benefit"/>
+                            <field name="earn_income_plan"/>
+                            <field name="partners"/>
+                        </group>
+
+                    </page>
+                </notebook>
+            </xpath>
+            <field name="group_id" position="after">
+                <field name="fiscal_year" readonly="1" force_save="1" options='{"always_reload": True}'  />
+            </field>
+        </field>
+    </record>
+
+
+    <record id="account_analytic_group_form_view_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.group.form.inherit</field>
+        <field name="model">account.analytic.group</field>
+        <field name="inherit_id" ref="analytic.account_analytic_group_form_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="fiscal_year" />
+            </field>
+        </field>
+    </record>
+
+
+    <record id="account_analytic_group_tree_view_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.group.tree.inherit</field>
+        <field name="model">account.analytic.group</field>
+        <field name="inherit_id" ref="analytic.account_analytic_group_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="replace">
+                <field name="complete_name"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="fw_pfb_fin_system_fiscal_year_form_view" model="ir.ui.view">
+        <field name="name">fw.pfb.fin.system.fiscal.year.form</field>
+        <field name="model">fw_pfb_fin_system_fiscal_year</field>
+        <field name="arch" type="xml">
+            <form string="Fiscal Year">
+                <sheet>
+                    <group>
+                        <field name="fiscal_year"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="fw_pfb_fin_system_fiscal_year_tree_view" model="ir.ui.view">
+        <field name="name">fw.pfb.fin.system.fiscal.year.tree</field>
+        <field name="model">fw_pfb_fin_system_fiscal_year</field>
+        <field name="arch" type="xml">
+            <tree string="Fiscal Year">
+                <field name="fiscal_year"/>
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="fin_system_fw_pfb_account_analytic_action">
+        <field name="name">Analytic Account</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_id" ref="analytic.view_account_analytic_account_list"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="fin_system_fw_pfb_account_analytic_groups_action">
+        <field name="name">Analytic Account Group</field>
+        <field name="res_model">account.analytic.group</field>
+        <field name="view_id" ref="analytic.account_analytic_group_tree_view"/>
+        <field name="context">{'group_by':'fiscal_year'}</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="fin_system_fw_pfb_fiscal_year_action">
+        <field name="name">Fiscal Year</field>
+        <field name="res_model">fw_pfb_fin_system_fiscal_year</field>
+        <field name="view_id" ref="fin_system.fw_pfb_fin_system_fiscal_year_tree_view"/>
+        <field name="domain">['|', ('active', '=', True), ('active', '=', False)]</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Analytic Account"
+                    id="fin_system_fw_pfb_account_analytic_root"
+                    parent="fin_system.fin_system_menu_settings"
+                    sequence="20"
+                    groups="fw_pfb_fin_system_show_menu_settings"/>
+    <menuitem name="Analytic Account"
+                id="fin_system_fw_pfb_account_analytic"
+                parent="fin_system.fin_system_fw_pfb_account_analytic_root"
+                sequence="21"
+                action="fin_system_fw_pfb_account_analytic_action"
+                groups="fw_pfb_fin_system_show_menu_settings"/>
+    <menuitem name="Analytic Account Groups"
+                id="fin_system_fw_pfb_account_analytic_groups"
+                parent="fin_system.fin_system_fw_pfb_account_analytic_root"
+                sequence="22"
+                action="fin_system_fw_pfb_account_analytic_groups_action"
+                groups="fw_pfb_fin_system_show_menu_settings"/>
+    <menuitem name="Fiscal Year"
+                id="fin_system_fw_pfb_fiscal_year"
+                parent="fin_system.fin_system_fw_pfb_account_analytic_root"
+                sequence="23"
+                action="fin_system_fw_pfb_fiscal_year_action"
+                groups="fw_pfb_fin_system_show_menu_settings"/>
+
+
+</odoo>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+	
+ 		<record id="sh_sale_order_edit_sequence_form_inherit" model="ir.ui.view">
+			<field name="name">sale.order.edit.sequence.form</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+			
+	 			<field name="name" position="replace">
+ 					<field name="sale_edit_sequence" invisible="1" />
+ 					<field name="name" attrs="{ 'readonly': [('sale_edit_sequence','=',False)] }"/>  			
+ 	 			</field>
+ 	 			
+			</field>
+		</record>
+
+	</data>	
+</odoo>

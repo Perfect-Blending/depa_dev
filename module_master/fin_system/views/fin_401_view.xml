@@ -1,0 +1,1736 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Approver Wizard -->
+        <record id="wizard_approver_fin_401_view" model="ir.ui.view">
+            <field name="name">wizard.approver.fin.401.view</field>
+            <field name="model">wizard.fw_pfb_fin_system_401_approver</field>
+            <field name="arch" type="xml">
+                <form string="Memo">
+                    <group>
+                        <field name="memo"/>
+                    </group>
+                    <footer>
+                        <button name="approve_fin_401" string="Approve" type="object" class="oe_highlight" />
+                        <button name="reject_fin_401" string="Reject" type="object" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_approver_fin_401_action" model="ir.actions.act_window">
+            <field name="name">Approver Memo</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.fw_pfb_fin_system_401_approver</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <!-- END Approver Wizard -->
+
+        <!-- Approve To Cancel Wizard -->
+        <record id="wizard_approve_to_cancel_fin_401_view" model="ir.ui.view">
+            <field name="name">wizard.approve.to.cancel.fin.401.view</field>
+            <field name="model">wizard.fw_pfb_fin_system_401_approve_to_cancel</field>
+            <field name="arch" type="xml">
+                <form string="Memo">
+                    <group>
+                        <field name="memo"/>
+                    </group>
+                    <footer>
+                        <button name="approve_to_cancel_fin_401" string="Approve" type="object" class="oe_highlight"
+                                invisible="context.get('ack', False)"/>
+                        <button name="reject_to_cancel_fin_401" string="Reject" type="object" class="oe_highlight" confirm="Are you sure you want to Reject?"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_approve_to_cancel_action_401" model="ir.actions.act_window">
+            <field name="name">Approve To Cancel</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.fw_pfb_fin_system_401_approve_to_cancel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- END Approve To Cancel Wizard -->
+
+        <!-- Request To Cancel Wizard -->
+        <record id="wizard_request_to_cancel_fin_401_view" model="ir.ui.view">
+            <field name="name">wizard.request.to.cancel.fin.401.view</field>
+            <field name="model">wizard.fw_pfb_fin_system_401_request_to_cancel_request</field>
+            <field name="arch" type="xml">
+                <form string="Memo">
+                    <group>
+                        <field name="memo"/>
+                    </group>
+                    <footer>
+                        <button name="confirm_to_request_to_cancel_fin_401" string="Approve" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_request_to_cancel_action_401" model="ir.actions.act_window">
+            <field name="name">Request To Cancel</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.fw_pfb_fin_system_401_request_to_cancel_request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <!-- End Request To Cancel Wizard -->
+
+        <!-- FIN 401 system -->
+        <record model="ir.ui.view" id="fin_system_401_request_tree_view">
+            <field name="name">fin.system.401.request.tree.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state == 'completed'" decoration-warning="state == 'cancelled'" decoration-danger="state == 'reject'" string="Request">
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="priority"/>
+                    <field name="fin_type"/>
+                    <field name="fin_objective"/>
+                    <field name="fin_ref"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name"/>
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_request_form_view">
+            <field name="name">fin.system.401.request.form.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="approver_rights" invisible="1"/>
+                        <field name="is_fin_lock" invisible="1"/>
+                        <field name="target_approver" invisible="1"/>
+                        <field name="is_requester" invisible="1"/>
+                        <field name="is_director" invisible="1"/>
+                        <field name="can_cancel" invisible="1"/>
+                        <field name="swap" invisible="1"/>
+                        <button string="Sent to supervisor" name="fin_sent_to_supervisor" states="draft" type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|', '|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                        <button string="Set to draft" name="fin_set_to_draft" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True), ('state','not in',['cancelled','reject']) ]}"/>
+                        <button string="Complete" name="fin_complete"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|','|',('target_approver','!=','DirectorOfOffice'),('is_fin_lock','=',True)]}"
+                                groups="fin_system.fw_pfb_fin_system_approver"/>
+                        <button string="Lock" name="fin_lock" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True)]}"/>
+                        <button string="Unlock" name="fin_unlock" type="object"
+                                attrs="{'invisible':[('is_fin_lock','!=',True)]}"/>
+                        <button name="button_request_fin100" 
+                                states="draft" string="Add FIN100 Request" type="object"/>
+                        <button string="Cancel" name="fin_cancel" type="object"
+                                attrs="{'invisible':['|','|',('state','in',['draft','cancelled']),('is_fin_lock','=',True),('can_cancel','=',False)]}"/>
+                        
+                        <button string="Swap" name="swapFIN401" type="object" class="oe_highlight"
+                                group="fin_system.fw_pfb_fin_system_can_swap_data_FIN401"
+                                attrs="{'invisible':['|',('swap','=',True),('state','in',['draft', 'cancel'] )]}"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="Request">
+                        <div class="oe_title">
+                            <label for="fin_no" string="FIN NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="fin_no"
+                                       placeholder="FIN NO."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='fin_type'
+                                        readonly="1"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='requester'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    context="{'default_groups_ref': ['fw_pfb_fin_system_user']}"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+<!--                                <field name="emp_code" />-->
+                                <field name="position" />
+                                <field name='department'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="fin_date"/>
+                                <field name="activity_end_date" 
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="loan_period" 
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="fin_end_date"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_ref'
+                                    attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_objective'
+                                    widget="selection" 
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='objective'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='priority'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <label for="amount_div" string="Participantas Quantity"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+                            
+                                <field name="place" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="operation_date" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="seminar_partcipants" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='other'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='estimate_output'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='please_consider' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <field name='fin_lines'
+                                       attrs="{'readonly':['|', '|', ('state', 'not in', ['draft']),
+                                       ('is_fin_lock','=',True),
+                                       ('is_requester', '=', False),
+                                       ('is_director', '=', False)]}">
+                                </field>
+
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="price_total" string="Total"/>
+                                    </div>
+                                    <field name="price_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name='fin_remark'
+                                       attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False), ('is_director', '=', False)]}"
+                                       class="oe_inline" paceholder="Remark..."/>
+                            </page>
+                            <page string='Other Informations'>
+                                <group>
+                                    <group string="FIN Information">
+                                        <field name="loan_residual_selection" widget="radio" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_amount" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_reason" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+
+                                        <label for="bank_transfer" string="Transfer To KTB"/>
+                                        <div name="bank_transfer">
+                                            <label for="bank_transfer_branch" string="Branch" />
+                                            <field class="oe_inline" name="bank_transfer_branch" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                            <label for="bank_transfer_account" string="Account ID" />
+                                            <field class="oe_inline" name="bank_transfer_account" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        </div>
+                                    </group>
+                                    <group string="Financial Staff Verification" groups="fin_system.fw_pfb_fin_system_show_financial_staff">
+                                        <field name="canedit_financial" invisible="1" />
+                                        <field name="fin_staff_loan_residual_selection" widget="radio" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_loan_residual_amount" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_employee" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_verify_date" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template" widget="selection"/>
+                                </group>
+                                <field name="approver"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </page>
+                            <page string="Attachments">
+                                <group>
+                                    <field name="attachment" widget="many2many_binary"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="fin_system_401_request_search" model="ir.ui.view">
+            <field name="name">fin.system.401.request.search</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <search string="Search state">
+                    <!-- <field name="state"/> -->
+                    <filter string="Draft" name="state_draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Cancel" name="state_cancel" domain="[('state', '=', 'cancelled')]"/>
+                    <filter string="Reject" name="state_reject" domain="[('state', '=', 'reject')]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- FIN401 completed view -->
+
+        <record model="ir.ui.view" id="fin_system_401_completed_tree_view">
+            <field name="name">fin.system.401.completed.tree.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state == 'completed'" decoration-warning="state == 'cancelled'" decoration-danger="state == 'reject'" string="Request">
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="priority"/>
+                    <field name="fin_type"/>
+                    <field name="fin_objective"/>
+                    <field name="fin_ref"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name"/>
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_completed_form_view">
+            <field name="name">fin.system.401.completed.form.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="approver_rights" invisible="1"/>
+                        <field name="is_fin_lock" invisible="1"/>
+                        <field name="target_approver" invisible="1"/>
+                        <field name="is_requester" invisible="1"/>
+                        <field name="is_director" invisible="1"/>
+                        <field name="can_cancel" invisible="1"/>
+                        <field name="swap" invisible="1"/>
+                        <field name="allowed_to_cancel" invisible="1"/>
+                        <field name="is_request_to_cancel" invisible="1"/>
+                        <button string="Sent to supervisor" name="fin_sent_to_supervisor" states="draft" type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|', '|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                        <button string="Set to draft" name="fin_set_to_draft" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True), ('state','not in',['cancelled','reject']) ]}"/>
+                        <button string="Complete" name="fin_complete"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|','|',('target_approver','!=','DirectorOfOffice'),('is_fin_lock','=',True)]}"
+                                groups="fin_system.fw_pfb_fin_system_approver"/>
+                        <button string="Lock" name="fin_lock" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True)]}"/>
+                        <button string="Unlock" name="fin_unlock" type="object"
+                                attrs="{'invisible':[('is_fin_lock','!=',True)]}"/>
+                        <button name="button_request_fin100"
+                                states="draft" string="Add FIN100 Request" type="object"/>
+                        <button string="Cancel" name="fin_cancel" type="object"
+                                attrs="{'invisible':['|','|','|',('allowed_to_cancel', '=', False),('state','in',['draft','cancelled']),('is_fin_lock','=',True),('can_cancel','=',False)]}"/>
+                        <button name="%(wizard_request_to_cancel_action_401)d"
+                                string="Request To Cancel"  type="action"
+                                attrs="{'invisible':['|','|','|','|','|',('state','in',['draft','cancelled']),('is_request_to_cancel', '=', True),('allowed_to_cancel', '=', True),('is_requester', '=', False),('is_fin_lock','=',True),('can_cancel','=',False)]}" />
+                        <button string="Swap" name="swapFIN401" type="object" class="oe_highlight"
+                                group="fin_system.fw_pfb_fin_system_can_swap_data_FIN401"
+                                attrs="{'invisible':['|',('swap','=',True),('state','in',['draft', 'cancel'] )]}"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="Request">
+                        <div class="oe_title">
+                            <label for="fin_no" string="FIN NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="fin_no"
+                                       placeholder="FIN NO."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='fin_type'
+                                        readonly="1"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='requester'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    context="{'default_groups_ref': ['fw_pfb_fin_system_user']}"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+<!--                                <field name="emp_code" />-->
+                                <field name="position" />
+                                <field name='department'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="fin_date"/>
+                                <field name="activity_end_date"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="loan_period"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="fin_end_date"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_ref'
+                                    attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_objective'
+                                    widget="selection"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='objective'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='priority'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <label for="amount_div" string="Participantas Quantity"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+
+                                <field name="place" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="operation_date" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="seminar_partcipants" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='other'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='estimate_output'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='please_consider' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <field name='fin_lines'
+                                       attrs="{'readonly':['|', '|', ('state', 'not in', ['draft']),
+                                       ('is_fin_lock','=',True),
+                                       ('is_requester', '=', False),
+                                       ('is_director', '=', False)]}">
+                                </field>
+
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="price_total" string="Total"/>
+                                    </div>
+                                    <field name="price_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name='fin_remark'
+                                       attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False), ('is_director', '=', False)]}"
+                                       class="oe_inline" paceholder="Remark..."/>
+                            </page>
+                            <page string='Other Informations'>
+                                <group>
+                                    <group string="FIN Information">
+                                        <field name="loan_residual_selection" widget="radio" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_amount" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_reason" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+
+                                        <label for="bank_transfer" string="Transfer To KTB"/>
+                                        <div name="bank_transfer">
+                                            <label for="bank_transfer_branch" string="Branch" />
+                                            <field class="oe_inline" name="bank_transfer_branch" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                            <label for="bank_transfer_account" string="Account ID" />
+                                            <field class="oe_inline" name="bank_transfer_account" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        </div>
+                                    </group>
+                                    <group string="Financial Staff Verification" groups="fin_system.fw_pfb_fin_system_show_financial_staff">
+                                        <field name="canedit_financial" invisible="1" />
+                                        <field name="fin_staff_loan_residual_selection" widget="radio" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_loan_residual_amount" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_employee" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_verify_date" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template" widget="selection"/>
+                                </group>
+                                <field name="approver"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </page>
+                            <page string="Attachments">
+                                <group>
+                                    <field name="attachment" widget="many2many_binary"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- END FIN401 completed view -->
+
+
+        <record model="ir.ui.view" id="fin_system_401_pending_tree_view">
+            <field name="name">fin.system.401.pending.tree.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state == 'completed'" decoration-warning="state == 'cancelled'" decoration-danger="state == 'reject'" string="Fin401 Pending" >
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="priority"/>
+                    <field name="fin_ref"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name"/>
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_pending_form_view">
+            <field name="name">fin.system.401.pending.form.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="approver_rights" invisible="1"/>
+                        <field name="is_fin_lock" invisible="1"/>
+                        <field name="target_approver" invisible="1"/>
+                        <field name="is_requester" invisible="1"/>
+                        <field name="is_director" invisible="1"/>
+                        <field name="can_cancel" invisible="1"/>
+                        <field name="swap" invisible="1"/>
+                        <field name="allowed_to_cancel" invisible="1"/>
+                        <field name="is_request_to_cancel" invisible="1"/>
+                        <button string="Sent to supervisor" name="fin_sent_to_supervisor" states="draft" type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|', '|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                        <button string="Set to draft" name="fin_set_to_draft" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True), ('state','not in',['cancelled','reject']) ]}"/>
+                        <button string="Complete" name="fin_complete"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|','|',('target_approver','!=','DirectorOfOffice'),('is_fin_lock','=',True)]}"
+                                groups="fin_system.fw_pfb_fin_system_approver"/>
+                        <button string="Lock" name="fin_lock" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True)]}"/>
+                        <button string="Unlock" name="fin_unlock" type="object"
+                                attrs="{'invisible':[('is_fin_lock','!=',True)]}"/>
+                        <button name="button_request_fin100"
+                                states="draft" string="Add FIN100 Request" type="object"/>
+                        <button string="Swap" name="swapFIN401" type="object" class="oe_highlight"
+                                group="fin_system.fw_pfb_fin_system_can_swap_data_FIN401"
+                                attrs="{'invisible':['|',('swap','=',True),('state','in',['draft', 'cancel'] )]}"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="Request">
+                        <div class="oe_title">
+                            <label for="fin_no" string="FIN NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="fin_no"
+                                       placeholder="FIN NO."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='fin_type'
+                                        readonly="1"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='requester'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    context="{'default_groups_ref': ['fw_pfb_fin_system_user']}"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+<!--                                <field name="emp_code" />-->
+                                <field name="position" />
+                                <field name='department'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="fin_date"/>
+                                <field name="activity_end_date"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="loan_period"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="fin_end_date"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_ref'
+                                    attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_objective'
+                                    widget="selection"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='objective'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='priority'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <label for="amount_div" string="Participantas Quantity"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+
+                                <field name="place" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="operation_date" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="seminar_partcipants" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='other'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='estimate_output'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='please_consider' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <field name='fin_lines'
+                                       attrs="{'readonly':['|', '|', ('state', 'not in', ['draft']),
+                                       ('is_fin_lock','=',True),
+                                       ('is_requester', '=', False),
+                                       ('is_director', '=', False)]}">
+                                </field>
+
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="price_total" string="Total"/>
+                                    </div>
+                                    <field name="price_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name='fin_remark'
+                                       attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False), ('is_director', '=', False)]}"
+                                       class="oe_inline" paceholder="Remark..."/>
+                            </page>
+                            <page string='Other Informations'>
+                                <group>
+                                    <group string="FIN Information">
+                                        <field name="loan_residual_selection" widget="radio" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_amount" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_reason" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+
+                                        <label for="bank_transfer" string="Transfer To KTB"/>
+                                        <div name="bank_transfer">
+                                            <label for="bank_transfer_branch" string="Branch" />
+                                            <field class="oe_inline" name="bank_transfer_branch" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                            <label for="bank_transfer_account" string="Account ID" />
+                                            <field class="oe_inline" name="bank_transfer_account" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        </div>
+                                    </group>
+                                    <group string="Financial Staff Verification" groups="fin_system.fw_pfb_fin_system_show_financial_staff">
+                                        <field name="canedit_financial" invisible="1" />
+                                        <field name="fin_staff_loan_residual_selection" widget="radio" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_loan_residual_amount" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_employee" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_verify_date" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template" widget="selection"/>
+                                </group>
+                                <field name="approver"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </page>
+                            <page string="Attachments">
+                                <group>
+                                    <field name="attachment" widget="many2many_binary"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_line_tree_view">
+            <field name="name">fin.system.401.line.tree.view</field>
+            <field name="model">fw_pfb_fin_system_401_line</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name='product_id'/>
+                    <field name="description"/>
+                    <field name="fin_id" invisible="1"/>
+                    <field name="fin100_id"/>
+                    <field name="fin_type"/>
+                    <field name="price_unit"/>
+                    <field name="product_uom_qty"/>
+                    <field name="product_uom"/>
+                    <field name="price_subtotal" sum="otal" />
+                    <field name="lend" sum="Lend Total"/>
+                    <field name="price_all_fin201" sum="FIN201 Total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_line_form_view">
+            <field name="name">fin.system.401.line.form.view</field>
+            <field name="model">fw_pfb_fin_system_401_line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name='product_id' readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                            <field name="fin_id" readonly="1"/>
+                            <field name="fin_type" readonly="1"/>
+                            <field name="price_unit" readonly="1"/>
+                            <field name="product_uom_qty" readonly="1"/>
+                            <field name="product_uom" readonly="1"/>
+                            <field name="price_subtotal" readonly="1" />
+                            <field name="lend" sum="Lend Total"/>
+                            <field name="price_all_fin201" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fw_pfb_fin_system_401_approver_tree_view">
+            <field name="name">fin.system.401.approver.tree.view</field>
+            <field name="model">fw_pfb_fin_system_401_approver</field>
+            <field name="arch" type="xml">
+                <tree create="0" delete="0">
+                    <field name="approve_active"/>
+                    <field name="position_index"/>
+                    <field name="approve_position" readonly="1" force_save="1"/>
+                    <field name="employee_id"/>
+                    <field name="fin_position" readonly="1" force_save="1"/>
+                    <field name="action_date"/>
+                    <field name="memo"/>
+                    <field name="show_fin" invisible="1"/>
+                    <field name="employee_user_id" invisible="1"/>
+                    <field name="state"/>
+                    <button name="%(wizard_approver_fin_401_action)d" type="action" string="Action" class="fa fa-tasks"
+                            attrs="{'invisible':['|',('show_fin','!=',True),('state','=','reject')]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fw_pfb_fin_system_401_approver_form_view">
+            <field name="name">fin.system.401.approver.form.view</field>
+            <field name="model">fw_pfb_fin_system_401_approver</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="approve_active"/>
+                            <field name="position_index"/>
+                            <field name="employee_id" invisible="1"/>
+                            <field name="fin_position" readonly="1" force_save="1"/>
+                            <field name="need_to_change_employee" />
+                            <field name="employee_line" attrs="{'invisible':[('need_to_change_employee','!=',True)]}">
+                                <tree editable="bottom">
+                                    <field name="data_activate" />
+                                    <field name="name" readonly="1"/>
+                                </tree>
+                            </field>
+                            <field name="employee_user_id" invisible="1"/>
+                            <field name="show_fin" invisible="1"/>
+                            <field name="state" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_all_fin_tree_view">
+            <field name="name">fin.system.401.all.fin.tree.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state == 'completed'" decoration-warning="state == 'cancelled'" decoration-danger="state == 'reject'" string="All FIN401" create="0" delete="0">
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="fin_ref"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name"/>
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_all_fin_form_view">
+            <field name="name">fin.system.401.all.fin.form.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <form create="0" edit="1" delete="0">
+                    <header>
+                        <field name="approver_rights" invisible="1"/>
+                        <field name="is_fin_lock" invisible="1"/>
+                        <field name="target_approver" invisible="1"/>
+                        <field name="is_requester" invisible="1"/>
+                        <field name="can_cancel" invisible="1"/>
+                        <field name="swap" invisible="1"/>
+                        <button string="Swap" name="swapFIN401" type="object" class="oe_highlight"
+                                group="fin_system.fw_pfb_fin_system_can_swap_data_FIN401"
+                                attrs="{'invisible':['|',('swap','=',True),('state','in',['draft', 'cancel'] )]}"/>
+
+                        <field name="state" widget="statusbar"/>
+                        
+                    </header>
+                    <sheet string="Request">
+                        <div class="oe_title">
+                            <label for="fin_no" string="FIN NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="fin_no"
+                                       placeholder="FIN NO."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='fin_type'
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='requester'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    context="{'default_groups_ref': ['fw_pfb_fin_system_user']}"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='department'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="fin_date"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="activity_end_date" 
+                                    attrs="{'readonly':['|', ('state', 'not in', ['draft']) , ('is_fin_lock','=',True)]}"/>
+                                <field name="loan_period" 
+                                    attrs="{'readonly':['|', ('state', 'not in', ['draft']) , ('is_fin_lock','=',True)]}"/>
+                                <field name="fin_end_date"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                
+                                <field name='fin_ref'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_objective'
+                                    widget="selection" 
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='objective'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='priority'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                
+                            </group>
+                            <group>
+                                <label for="amount_div" string="Participantas Quantity"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+                            
+                                <field name="place" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="operation_date" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="seminar_partcipants" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='other'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='estimate_output'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='please_consider' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <field name='fin_lines'
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}">
+                                </field>
+
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="price_total" string="Total"/>
+                                    </div>
+                                    <field name="price_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name='fin_remark'
+                                       attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"
+                                       class="oe_inline" paceholder="Remark..."/>
+                            </page>
+                            <page string='Other Informations'>
+                                <group>
+                                    <group string="FIN Information">
+                                        <field name="loan_residual_selection" widget="radio" attrs="{'readonly':['|', ('state', 'not in', ['draft']) , ('is_fin_lock','=',True)]}"/>
+                                        <field name="loan_residual_amount" attrs="{'readonly':['|', ('state', 'not in', ['draft']) , ('is_fin_lock','=',True)]}"/>
+                                        <field name="loan_residual_reason" attrs="{'readonly':['|', ('state', 'not in', ['draft']) , ('is_fin_lock','=',True)]}"/>
+
+                                        <label for="bank_transfer" string="Transfer To KTB"/>
+                                        <div name="bank_transfer">
+                                            <label for="bank_transfer_branch" string="Branch" />
+                                            <field class="oe_inline" name="bank_transfer_branch" attrs="{'readonly':['|', ('state', 'not in', ['draft']) , ('is_fin_lock','=',True)]}"/>
+                                            <label for="bank_transfer_account" string="Account ID" />
+                                            <field class="oe_inline" name="bank_transfer_account" attrs="{'readonly':['|', ('state', 'not in', ['draft']) , ('is_fin_lock','=',True)]}"/>
+                                        </div>
+                                    </group>
+                                    <group string="Financial Staff Verification" groups="fin_system.fw_pfb_fin_system_show_financial_staff">
+                                        <field name="canedit_financial" invisible="1" />
+                                        <field name="fin_staff_loan_residual_selection" widget="radio" attrs="{'readonly':[('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_loan_residual_amount" attrs="{'readonly':[('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_employee" attrs="{'readonly':[('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_verify_date" attrs="{'readonly':[('canedit_financial', '=', False)]}" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template" widget="selection"/>
+                                </group>
+                                <field name="approver"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </page>
+                            <page string="Attachments">
+                                <group>
+                                    <field name="attachment" widget="many2many_binary"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- FIN401 Director only view -->
+        <record model="ir.ui.view" id="fin_system_401_director_only_tree_view">
+            <field name="name">fin.system.401.director.only.tree.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state == 'completed'" decoration-warning="state == 'cancelled'" decoration-danger="state == 'reject'" string="Request">
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="priority"/>
+                    <field name="fin_type"/>
+                    <field name="fin_objective"/>
+                    <field name="fin_ref"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name"/>
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_director_only_form_view">
+            <field name="name">fin.system.401.director.only.form.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="approver_rights" invisible="1"/>
+                        <field name="is_fin_lock" invisible="1"/>
+                        <field name="target_approver" invisible="1"/>
+                        <field name="is_requester" invisible="1"/>
+                        <field name="is_director" invisible="1"/>
+                        <field name="can_cancel" invisible="1"/>
+                        <field name="swap" invisible="1"/>
+                        <button string="Sent to supervisor" name="fin_sent_to_supervisor" states="draft" type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|', '|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                        <button string="Set to draft" name="fin_set_to_draft" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True), ('state','not in',['cancelled','reject']) ]}"/>
+                        <button string="Complete" name="fin_complete"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|','|',('target_approver','!=','DirectorOfOffice'),('is_fin_lock','=',True)]}"
+                                groups="fin_system.fw_pfb_fin_system_approver"/>
+                        <button string="Lock" name="fin_lock" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True)]}"/>
+                        <button string="Unlock" name="fin_unlock" type="object"
+                                attrs="{'invisible':[('is_fin_lock','!=',True)]}"/>
+                        <button name="button_request_fin100"
+                                states="draft" string="Add FIN100 Request" type="object"/>
+                        <button string="Swap" name="swapFIN401" type="object" class="oe_highlight"
+                                group="fin_system.fw_pfb_fin_system_can_swap_data_FIN401"
+                                attrs="{'invisible':['|',('swap','=',True),('state','in',['draft', 'cancel'] )]}"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="Request">
+                        <div class="oe_title">
+                            <label for="fin_no" string="FIN NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="fin_no"
+                                       placeholder="FIN NO."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='fin_type'
+                                        readonly="1"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='requester'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    context="{'default_groups_ref': ['fw_pfb_fin_system_user']}"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+<!--                                <field name="emp_code" />-->
+                                <field name="position" />
+                                <field name='department'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="fin_date"/>
+                                <field name="activity_end_date"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="loan_period"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="fin_end_date"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_ref'
+                                    attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_objective'
+                                    widget="selection"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='objective'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='priority'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <label for="amount_div" string="Participantas Quantity"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+
+                                <field name="place" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="operation_date" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="seminar_partcipants" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='other'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='estimate_output'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='please_consider' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <field name='fin_lines'
+                                       attrs="{'readonly':['|', '|', ('state', 'not in', ['draft']),
+                                       ('is_fin_lock','=',True),
+                                       ('is_requester', '=', False),
+                                       ('is_director', '=', False)]}">
+                                </field>
+
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="price_total" string="Total"/>
+                                    </div>
+                                    <field name="price_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name='fin_remark'
+                                       attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False), ('is_director', '=', False)]}"
+                                       class="oe_inline" paceholder="Remark..."/>
+                            </page>
+                            <page string='Other Informations'>
+                                <group>
+                                    <group string="FIN Information">
+                                        <field name="loan_residual_selection" widget="radio" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_amount" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_reason" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+
+                                        <label for="bank_transfer" string="Transfer To KTB"/>
+                                        <div name="bank_transfer">
+                                            <label for="bank_transfer_branch" string="Branch" />
+                                            <field class="oe_inline" name="bank_transfer_branch" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                            <label for="bank_transfer_account" string="Account ID" />
+                                            <field class="oe_inline" name="bank_transfer_account" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        </div>
+                                    </group>
+                                    <group string="Financial Staff Verification" groups="fin_system.fw_pfb_fin_system_show_financial_staff">
+                                        <field name="canedit_financial" invisible="1" />
+                                        <field name="fin_staff_loan_residual_selection" widget="radio" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_loan_residual_amount" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_employee" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_verify_date" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template" widget="selection"/>
+                                </group>
+                                <field name="approver"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </page>
+                            <page string="Attachments">
+                                <group>
+                                    <field name="attachment" widget="many2many_binary"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="fin_system_401_director_only_search" model="ir.ui.view">
+            <field name="name">fin.system.401.director.only.search</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <search string="Search state">
+                    <!-- <field name="state"/> -->
+                    <field name="fin_no" />
+                    <field name="requester" />
+                    <field name="approver_name_list" />
+                    <field name="action_date_list" />
+                    <filter string="Draft" name="state_draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Cancel" name="state_cancel" domain="[('state', '=', 'cancelled')]"/>
+                    <filter string="Reject" name="state_reject" domain="[('state', '=', 'reject')]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- END FIN401 Director only view -->
+
+
+        <!-- FIN401 Request To Cancel -->
+
+
+
+        <!-- END FIN401 Request To Cancel -->
+
+        <record model="ir.ui.view" id="fin_system_401_request_to_cancel_tree_view">
+            <field name="name">fin.system.401.request.to.cancel.tree.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <tree create="0" edit="0" delete="0"
+                      decoration-success="state == 'completed'" decoration-warning="state == 'cancelled'" decoration-danger="state == 'reject'" string="Request">
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="priority"/>
+                    <field name="fin_type"/>
+                    <field name="fin_objective"/>
+                    <field name="fin_ref"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name"/>
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_request_to_cancel_form_view">
+            <field name="name">fin.system.401.request.to.cancel.form.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="approver_rights" invisible="1"/>
+                        <field name="is_fin_lock" invisible="1"/>
+                        <field name="target_approver" invisible="1"/>
+                        <field name="is_requester" invisible="1"/>
+                        <field name="is_director" invisible="1"/>
+                        <field name="can_cancel" invisible="1"/>
+                        <field name="swap" invisible="1"/>
+                        <field name="allowed_to_cancel" invisible="1"/>
+                        <field name="is_request_to_cancel" invisible="1"/>
+                        <field name="director_reject" invisible="1"/>
+                        <button string="Sent to supervisor" name="fin_sent_to_supervisor" states="draft" type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|', '|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                        <button string="Set to draft" name="fin_set_to_draft" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True), ('state','not in',['cancelled','reject']) ]}"/>
+                        <button string="Complete" name="fin_complete"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|','|',('target_approver','!=','DirectorOfOffice'),('is_fin_lock','=',True)]}"
+                                groups="fin_system.fw_pfb_fin_system_approver"/>
+                        <button string="Lock" name="fin_lock" type="object"
+                                attrs="{'invisible':['|',('is_fin_lock','=',True)]}"/>
+                        <button string="Unlock" name="fin_unlock" type="object"
+                                attrs="{'invisible':[('is_fin_lock','!=',True)]}"/>
+                        <button name="button_request_fin100"
+                                states="draft" string="Add FIN100 Request" type="object"/>
+                        <button string="Cancel" name="fin_cancel" type="object"
+                                attrs="{'invisible':['|','|','|',('allowed_to_cancel', '=', False),('state','in',['draft','cancelled']),('is_fin_lock','=',True),('can_cancel','=',False)]}"/>
+                        <button string="Request To Cancel" name="fin_request_to_cancel" type="object"
+                                attrs="{'invisible':['|','|','|','|','|',('state','in',['draft','cancelled']),('is_request_to_cancel', '=', True),('allowed_to_cancel', '=', True),('is_requester', '=', False),('is_fin_lock','=',True),('can_cancel','=',False)]}" />
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="Request">
+                        <div class="oe_title">
+                            <label for="fin_no" string="FIN NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="fin_no"
+                                       placeholder="FIN NO."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='fin_type'
+                                        readonly="1"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='requester'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    context="{'default_groups_ref': ['fw_pfb_fin_system_user']}"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+<!--                                <field name="emp_code" />-->
+                                <field name="position" />
+                                <field name='department'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="fin_date"/>
+                                <field name="activity_end_date"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="loan_period"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="fin_end_date"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_ref'
+                                    attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_objective'
+                                    widget="selection"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='objective'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='priority'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <label for="amount_div" string="Participantas Quantity"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+
+                                <field name="place" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="operation_date" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="seminar_partcipants" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='other'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='estimate_output'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='please_consider' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <field name='fin_lines'
+                                       attrs="{'readonly':['|', '|', ('state', 'not in', ['draft']),
+                                       ('is_fin_lock','=',True),
+                                       ('is_requester', '=', False),
+                                       ('is_director', '=', False)]}">
+                                </field>
+
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="price_total" string="Total"/>
+                                    </div>
+                                    <field name="price_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name='fin_remark'
+                                       attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False), ('is_director', '=', False)]}"
+                                       class="oe_inline" paceholder="Remark..."/>
+                            </page>
+                            <page string='Other Informations'>
+                                <group>
+                                    <group string="FIN Information">
+                                        <field name="loan_residual_selection" widget="radio" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_amount" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_reason" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+
+                                        <label for="bank_transfer" string="Transfer To KTB"/>
+                                        <div name="bank_transfer">
+                                            <label for="bank_transfer_branch" string="Branch" />
+                                            <field class="oe_inline" name="bank_transfer_branch" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                            <label for="bank_transfer_account" string="Account ID" />
+                                            <field class="oe_inline" name="bank_transfer_account" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        </div>
+                                    </group>
+                                    <group string="Financial Staff Verification" groups="fin_system.fw_pfb_fin_system_show_financial_staff">
+                                        <field name="canedit_financial" invisible="1" />
+                                        <field name="fin_staff_loan_residual_selection" widget="radio" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_loan_residual_amount" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_employee" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_verify_date" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template" widget="selection"/>
+                                </group>
+                                <field name="approver"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </page>
+                            <page string="Attachments">
+                                <group>
+                                    <field name="attachment" widget="many2many_binary"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- End FIN 401 system -->
+
+
+        <!-- FIN401 To Approve Request To Cancel -->
+
+        <record model="ir.ui.view" id="fin_system_401_to_approve_cancel_tree_view">
+            <field name="name">fin.system.401.to.approve.cancel.tree.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state == 'completed'" decoration-warning="state == 'cancelled'" decoration-danger="state == 'reject'" string="Request">
+                    <field name='fin_date'/>
+                    <field name="fin_no"/>
+                    <field name="priority"/>
+                    <field name="fin_type"/>
+                    <field name="fin_objective"/>
+                    <field name="fin_ref"/>
+                    <field name="fin_remark"/>
+                    <field name="price_total"/>
+                    <field name='state'/>
+                    <field name="requester"/>
+                    <field name="actual_department_name"/>
+                    <field name="is_fin_lock"/>
+                    <field name="show_fin" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fin_system_401_to_approve_cancel_form_view">
+            <field name="name">fin.system.401.to.approve.cancel.form.view</field>
+            <field name="model">fw_pfb_fin_system_401</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="approver_rights" invisible="1"/>
+                        <field name="is_fin_lock" invisible="1"/>
+                        <field name="target_approver" invisible="1"/>
+                        <field name="is_requester" invisible="1"/>
+                        <field name="is_director" invisible="1"/>
+                        <field name="can_cancel" invisible="1"/>
+                        <field name="swap" invisible="1"/>
+                        <field name="allowed_to_cancel" invisible="1"/>
+                        <field name="is_request_to_cancel" invisible="1"/>
+                        <field name="director_reject" invisible="1"/>
+                        <field name="can_approve_to_cancel" invisible="1" />
+                        <button name="%(wizard_approve_to_cancel_action_401)d" type="action" string="Approve To Cancel" class="fa fa-tasks"
+                            attrs="{'invisible':['|','|','|','|','|',('director_reject', '=', True), ('can_approve_to_cancel', '=', False),('allowed_to_cancel', '=', True),('is_request_to_cancel', '=', False),('is_fin_lock','=',True)]}"
+                        />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="Request">
+                        <div class="oe_title">
+                            <label for="fin_no" string="FIN NO." class="oe_edit_only"/>
+                            <h1>
+                                <field name="fin_no"
+                                       placeholder="FIN NO."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='fin_type'
+                                        readonly="1"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='requester'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    context="{'default_groups_ref': ['fw_pfb_fin_system_user']}"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+<!--                                <field name="emp_code" />-->
+                                <field name="position" />
+                                <field name='department'
+                                    options='{"create":False,"create_edit": False,"no_open": True}'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name="fin_date"/>
+                                <field name="activity_end_date"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="loan_period"
+                                    attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                <field name="fin_end_date"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_ref'
+                                    attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='fin_objective'
+                                    widget="selection"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='objective'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                <field name='priority'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <label for="amount_div" string="Participantas Quantity"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name='participantas_quantity'
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                    <label for="participantas_quantity" string="People"/>
+                                </div>
+
+                                <field name="place" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="operation_date" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name="seminar_partcipants" widget="many2many_binary"
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='other'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='estimate_output'
+                                    attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+
+                                <field name='please_consider' readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Request lines'>
+                                <field name='fin_lines'
+                                       attrs="{'readonly':['|', '|', ('state', 'not in', ['draft']),
+                                       ('is_fin_lock','=',True),
+                                       ('is_requester', '=', False),
+                                       ('is_director', '=', False)]}">
+                                </field>
+
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="price_total" string="Total"/>
+                                    </div>
+                                    <field name="price_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name='fin_remark'
+                                       attrs="{'readonly':['|', ('is_fin_lock','=',True), ('is_requester', '=', False), ('is_director', '=', False)]}"
+                                       class="oe_inline" paceholder="Remark..."/>
+                            </page>
+                            <page string='Other Informations'>
+                                <group>
+                                    <group string="FIN Information">
+                                        <field name="loan_residual_selection" widget="radio" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_amount" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        <field name="loan_residual_reason" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+
+                                        <label for="bank_transfer" string="Transfer To KTB"/>
+                                        <div name="bank_transfer">
+                                            <label for="bank_transfer_branch" string="Branch" />
+                                            <field class="oe_inline" name="bank_transfer_branch" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                            <label for="bank_transfer_account" string="Account ID" />
+                                            <field class="oe_inline" name="bank_transfer_account" attrs="{'readonly':[('state', 'not in', ['draft'])]}"/>
+                                        </div>
+                                    </group>
+                                    <group string="Financial Staff Verification" groups="fin_system.fw_pfb_fin_system_show_financial_staff">
+                                        <field name="canedit_financial" invisible="1" />
+                                        <field name="fin_staff_loan_residual_selection" widget="radio" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_loan_residual_amount" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_employee" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                        <field name="fin_staff_verify_date" attrs="{'readonly':['|', ('state', 'not in', ['draft']), ('canedit_financial', '=', False)]}" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Approver">
+                                <group>
+                                    <field name="flow_template" widget="selection"/>
+                                </group>
+                                <field name="approver"
+                                       attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                            </page>
+                            <page string="Attachments">
+                                <group>
+                                    <field name="attachment" widget="many2many_binary"
+                                        attrs="{'readonly':['|', '|',('state', 'not in', ['draft']), ('is_fin_lock','=',True), ('is_requester', '=', False)]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- END FIN401 To Approve Request To Cancel -->
+
+        <!-- Action request -->
+        <record model="ir.actions.act_window" id="fin_system_401_request_action">
+            <field name="name">Request</field>
+            <field name="res_model">fw_pfb_fin_system_401</field>
+            <field name="view_id" ref="fin_system_401_request_tree_view"/>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_state_draft':1, 'search_default_state_reject':1, 'search_default_state_cancel':1}</field>
+            <field name="domain">[('requester.user_id', '=', uid)]</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_request_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_401_request_tree_view"/>
+            <field name="act_window_id" ref="fin_system_401_request_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_request_form_view_action">
+            <field eval="100" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_401_request_form_view"/>
+            <field name="act_window_id" ref="fin_system_401_request_action"/>
+        </record>
+        <!-- End Action Request -->
+
+
+        <!-- Action Pending -->
+        <record model="ir.actions.act_window" id="fin_system_401_pending_action">
+            <field name="name">Pending FIN401</field>
+            <field name="res_model">fw_pfb_fin_system_401</field>
+            <field name="view_id" ref="fin_system_401_pending_tree_view"/>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '!=', 'draft'), ('show_fin', '=', True)]</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_pending_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_401_pending_tree_view"/>
+            <field name="act_window_id" ref="fin_system_401_pending_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_pending_form_view_action">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_401_pending_form_view"/>
+            <field name="act_window_id" ref="fin_system_401_pending_action"/>
+        </record>
+        <!-- End Action Pending -->
+
+        <!-- Action Completed  -->
+        <record model="ir.actions.act_window" id="fin_system_401_completed_action">
+            <field name="name">Completed</field>
+            <field name="res_model">fw_pfb_fin_system_401</field>
+            <field name="view_id" ref="fin_system_401_completed_tree_view"/>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'completed'), ('requester.user_id', '=', uid)]</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_completed_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_401_completed_tree_view"/>
+            <field name="act_window_id" ref="fin_system_401_completed_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_completed_form_view_action">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_401_completed_form_view"/>
+            <field name="act_window_id" ref="fin_system_401_completed_action"/>
+        </record>
+        <!-- End Action Completed -->
+
+        <!-- Action Director Only Completed  -->
+        <record model="ir.actions.act_window" id="fin_system_401_director_only_action">
+            <field name="name">Director Only</field>
+            <field name="res_model">fw_pfb_fin_system_401</field>
+            <field name="view_id" ref="fin_system_401_director_only_tree_view"/>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'DirectorOfOffice')]</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_director_only_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_401_director_only_tree_view"/>
+            <field name="act_window_id" ref="fin_system_401_director_only_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_director_only_form_view_action">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_401_director_only_form_view"/>
+            <field name="act_window_id" ref="fin_system_401_director_only_action"/>
+        </record>
+        <!-- End Action Completed -->
+
+        <!-- Action Request To Cancel  -->
+        <record model="ir.actions.act_window" id="fin_system_401_request_to_cancel_action">
+            <field name="name">Request To Cancel</field>
+            <field name="res_model">fw_pfb_fin_system_401</field>
+            <field name="view_id" ref="fin_system_401_request_to_cancel_tree_view"/>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_request_to_cancel', '=', True), ('requester.user_id', '=', uid)]</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_request_to_action_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_401_request_to_cancel_tree_view"/>
+            <field name="act_window_id" ref="fin_system_401_request_to_cancel_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_request_to_action_form_view_action">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_401_request_to_cancel_form_view"/>
+            <field name="act_window_id" ref="fin_system_401_request_to_cancel_action"/>
+        </record>
+        <!-- End Action Request To Cancel -->
+
+        <!-- Action To Approve Request To Cancel  -->
+        <record model="ir.actions.act_window" id="fin_system_401_to_approve_request_to_cancel_action">
+            <field name="name">To Approve Request To Cancel</field>
+            <field name="res_model">fw_pfb_fin_system_401</field>
+            <field name="view_id" ref="fin_system_401_to_approve_cancel_tree_view"/>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_request_to_cancel', '=', True), ('director_reject', '=', False)]</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_to_approve_request_to_action_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_401_to_approve_cancel_tree_view"/>
+            <field name="act_window_id" ref="fin_system_401_to_approve_request_to_cancel_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_to_approve_request_to_action_form_view_action">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_401_to_approve_cancel_form_view"/>
+            <field name="act_window_id" ref="fin_system_401_to_approve_request_to_cancel_action"/>
+        </record>
+        <!-- End Action Request To Cancel -->
+
+        <!-- Action All FIN401  -->
+        <record model="ir.actions.act_window" id="fin_system_401_all_fin_action">
+            <field name="name">All FIN401</field>
+            <field name="res_model">fw_pfb_fin_system_401</field>
+            <field name="view_id" ref="fin_system_401_all_fin_tree_view"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_all_fin_tree_view_action">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fin_system_401_all_fin_tree_view"/>
+            <field name="act_window_id" ref="fin_system_401_all_fin_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="fin_system_401_all_fin_form_view_action">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fin_system_401_all_fin_form_view"/>
+            <field name="act_window_id" ref="fin_system_401_all_fin_action"/>
+        </record>
+        <!-- End Action All FIN401 -->
+
+        <menuitem name="Request Loan" id="fin_system_401_request" parent="fin_system.fin_system_menu_main_401"
+                  action="fin_system_401_request_action" sequence="5"/>
+        <menuitem name="Pending FIN401" id="fin_system_401_pending" parent="fin_system.fin_system_menu_main_401"
+                  action="fin_system_401_pending_action" sequence="7" groups="fw_pfb_fin_system_approver"/>
+        <menuitem name="Request To Cancel" id="fin_system_401_request_to_cancel" parent="fin_system.fin_system_menu_main_401"
+                  action="fin_system_401_request_to_cancel_action" sequence="9" />
+        <menuitem name="To Approve Request To Cancel" id="fin_system_401_to_approve_request_to_cancel" parent="fin_system.fin_system_menu_main_401"
+                  action="fin_system_401_to_approve_request_to_cancel_action" sequence="10" groups="fw_pfb_fin_to_approve_to_cancel"/>
+        <menuitem name="Completed" id="fin_system_401_completed" parent="fin_system.fin_system_menu_main_401"
+                  action="fin_system_401_completed_action" sequence="9"/>
+        <menuitem name="Director Only" id="fin_system_401_director_only" parent="fin_system.fin_system_menu_main_401"
+                  action="fin_system_401_director_only_action" sequence="11" groups="fw_pfb_fin_system_director_of_office"/>
+        <menuitem name="All FIN401" id="fin_system_401_all_fin" parent="fin_system.fin_system_menu_main_401"
+                  action="fin_system_401_all_fin_action" sequence="13" groups="fw_pfb_fin_system_show_all_fin_401"/>
+
+    </data>
+</odoo>

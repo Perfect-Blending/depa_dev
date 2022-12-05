@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+	
+ 		<record id="sh_account_invoice_edit_sequence_form_inherit" model="ir.ui.view">
+			<field name="name">account.invoice.edit.sequence.form</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_form"/>
+			<field name="arch" type="xml">
+
+	 			<field name="number" position="replace">
+ 					<field name="account_edit_sequence" invisible="1" />
+ 					<field name="number" class="oe_inline" attrs="{'invisible': [('state','in',('draft',))], 'readonly': [('account_edit_sequence','=',False)] }"/>  			
+ 	 			</field>
+ 	 			
+			</field>
+		</record>
+
+ 		<record id="sh_account_invoice_supplier_edit_sequence_form_inherit" model="ir.ui.view">
+			<field name="name">account.invoice.edit.sequence.form</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_supplier_form"/>
+			<field name="arch" type="xml">
+			
+	 			<field name="number" position="replace">
+ 					<field name="account_edit_sequence" invisible="1" />
+ 					<field name="number" class="oe_inline" attrs="{'invisible': [('state', '=', 'draft')] , 'readonly': [('account_edit_sequence','=',False)] }"/>  			
+ 	 			</field>
+ 	 			
+			</field>
+		</record>
+
+	</data>	
+</odoo>

@@ -1,0 +1,9 @@
+<odoo>
+
+    <template id="without_form_assets_common" name="Without Form common assets" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link href="/l10n_th_withholding_tax_report/static/src/css/report.css" rel="stylesheet"/>
+        </xpath>
+    </template>
+
+</odoo>

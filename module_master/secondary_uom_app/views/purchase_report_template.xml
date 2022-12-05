@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- purchase  quatation-->
+        <template id="report_purchase_inherit" inherit_id="purchase.report_purchasequotation_document">
+            <xpath expr="//table[1]/thead/tr/th[3]" position="after">
+                <th class="text-right"><span>Secondary Qty</span></th>
+            </xpath>
+            
+            <xpath expr="//table[1]/tbody[1]//tr//td[3]" position="after">
+                <td class="text-right">
+                    <span t-field="order_line.secondary_quantity" groups="secondary_uom_app.group_secondary_uom"/>
+                    <span t-field="order_line.secondary_uom_id"  groups="secondary_uom_app.group_secondary_uom"/>
+                </td>
+            </xpath>
+        </template>
+
+        <!-- purchase order -->
+        <template id="report_purchase_order" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//table[1]/thead/tr/th[4]" position="after">
+                <th class="text-right"><span>Secondary Qty</span></th>
+            </xpath>
+            <xpath expr="//table[1]/tbody[1]//tr//td[4]" position="after">
+                <td class="text-right">
+                    <span t-field="line.secondary_quantity" groups="secondary_uom_app.group_secondary_uom"/>
+                    <span t-field="line.secondary_uom_id"  groups="secondary_uom_app.group_secondary_uom"/>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

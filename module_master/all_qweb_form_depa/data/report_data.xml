@@ -1,0 +1,148 @@
+<odoo>
+    <report
+        string="ใบเสร็จรับเงิน/ใบกำกับภาษี"
+        id="payment_receipt_pdf_report2"
+        model="bione.customer.receipts"
+        name="all_qweb_form_depa.payment_receipt_pdf_report_pdf2"
+        file="all_qweb_form_depa.payment_receipt_pdf_report_pdf2"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_all_form_qweb"
+    />
+
+    <report
+            string="ใบเสร็จรับเงิน/ใบกำกับภาษี"
+            id="payment_receipt_pdf_report3"
+            model="bione.customer.payment"
+            name="all_qweb_form_depa.payment_receipt_pdf_report_pdf3"
+            file="all_qweb_form_depa.payment_receipt_pdf_report_pdf3"
+            report_type="qweb-pdf"
+            print_report_name="'[%s]' % object.display_name"
+            paperformat="all_qweb_form_depa.paperformat_all_form_qweb"
+        />
+
+    <report
+            string="ใบเสร็จรับเงิน/ใบกำกับภาษี (แบบแบ่งจ่าย)"
+            id="payment_receipt_pdf_report4"
+            model="bione.customer.payment"
+            name="all_qweb_form_depa.payment_receipt_pdf_report_pdf4"
+            file="all_qweb_form_depa.payment_receipt_pdf_report_pdf4"
+            report_type="qweb-pdf"
+            print_report_name="'[%s]' % object.display_name"
+            paperformat="all_qweb_form_depa.paperformat_all_form_qweb"
+        />
+
+    <report
+        string="ใบรับเงิน"
+        id="cash_receipt_pdf_report"
+        model="bione.customer.receipts"
+        name="all_qweb_form_depa.cash_receipt_pdf_report_pdf"
+        file="all_qweb_form_depa.cash_receipt_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_all_form_qweb"
+    />
+
+    <report
+        string="ใบรับเงิน"
+        id="cash_payment_pdf_report2"
+        model="bione.supplier.payment"
+        name="all_qweb_form_depa.cash_payment_pdf_report_pdf"
+        file="all_qweb_form_depa.cash_payment_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_all_form_qweb"
+    />
+
+     <report
+        string="ใบรับเงิน"
+        id="account_advance_pdf_report"
+        model="account.advance.clear"
+        name="all_qweb_form_depa.account_advance_report_pdf"
+        file="all_qweb_form_depa.account_advance_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_all_form_qweb"
+    />
+
+    <report
+        string="ใบสำคัญซื้อ"
+        id="purchase_voucher_pdf_report"
+        model="account.move"
+        name="all_qweb_form_depa.purchase_voucher_pdf_report_pdf"
+        file="all_qweb_form_depa.purchase_voucher_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_voucher_form_qweb"
+    />
+
+    <report
+        string="ใบสำคัญจ่าย"
+        id="payment_voucher_pdf_report"
+        model="account.move"
+        name="all_qweb_form_depa.payment_voucher_pdf_report_pdf"
+        file="all_qweb_form_depa.payment_voucher_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_voucher_form_qweb"
+    />
+
+    <report
+        string="ใบสำคัญจ่ายเงินสดย่อย"
+        id="petty_payment_voucher_pdf_report"
+        model="account.move"
+        name="all_qweb_form_depa.petty_payment_report_pdf"
+        file="all_qweb_form_depa.petty_payment_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_voucher_form_qweb"
+    />
+
+    <report
+        string="ใบสำคัญจ่ายเงินยืมทดรอง"
+        id="petty_payment2_voucher_pdf_report"
+        model="account.move"
+        name="all_qweb_form_depa.petty_payment2_report_pdf"
+        file="all_qweb_form_depa.petty_payment2_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_voucher_form_qweb"
+    />
+
+    <report
+        string="ใบสำคัญรับ"
+        id="receipt_voucher_pdf_report"
+        model="account.move"
+        name="all_qweb_form_depa.receipt_voucher_pdf_report_pdf"
+        file="all_qweb_form_depa.receipt_voucher_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_voucher_form_qweb"
+    />
+
+    <report
+        string="ใบหักภาษี ณ ที่จ่าย"
+        id="wht_pdf_report"
+        model="bione.wht"
+        name="all_qweb_form_depa.wht_pdf_report_pdf"
+        file="all_qweb_form_depa.wht_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_all_form_qweb"
+    />
+
+    <report
+        string="ใบเสร็จรับเงิน/ใบกำกับภาษี(ไม่มีการตั้งหนี้)"
+        id="pfb_report_customer_receipts"
+        model="bione.customer.receipts"
+        name="all_qweb_form_depa.report_customer_receipts"
+        file="all_qweb_form_depa.report_customer_receipts"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="all_qweb_form_depa.paperformat_all_form_qweb"
+    />
+
+
+
+
+</odoo>

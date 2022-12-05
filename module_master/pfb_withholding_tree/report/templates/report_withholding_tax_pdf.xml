@@ -1,0 +1,1502 @@
+<odoo>
+    <!--                   Customs                     -->
+    <template id="report_withholding_tax_qweb">
+        <t t-call="web.html_container">
+                <t t-if="income_tax_form == 'pp4'">
+                    <t t-call="pfb_withholding_tree.pnd3_report_view2"/>
+                    <t t-call="pfb_withholding_tree.pnd3_report_view"/>
+                </t>
+                 <t t-if="income_tax_form == 'pp7'">
+                     <t t-call="pfb_withholding_tree.pnd53_report_view2"/>
+                     <t t-call="pfb_withholding_tree.pnd53_report_view"/>
+                 </t>
+                <t t-if="income_tax_form == 'pp1'">
+                     <t t-call="pfb_withholding_tree.pnd1_report_view2"/>
+                     <t t-call="pfb_withholding_tree.pnd1_report_view"/>
+                 </t>
+        </t>
+    </template>
+    <template id="report_withholding_tax_qweb2">
+        <t t-call="web.html_container">
+            <t t-if="income_tax_form == 'pp1'">
+                 <t t-call="pfb_withholding_tree.pnd1_report_view21"/>
+                 <t t-call="pfb_withholding_tree.pnd1_report_view11"/>
+             </t>
+        </t>
+    </template>
+
+    <template id="pnd3_report_view">
+         <t t-call="web.html_container">
+            <t t-set="count_for" t-value="0"/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="count_for" t-value="count_for+1"/>
+            </t>
+            <t t-set="i" t-value="0"/>
+            <t t-set="record_per_page" t-value="6"/>
+            <t t-set="page_amount" t-value="1"/>
+            <t t-if="count_for &gt; record_per_page">
+                <t t-set="page_amount" t-value="count_for / record_per_page"/>
+                <t t-if="page_amount &gt; int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1"/>
+                </t>
+            </t>
+            <t t-set="current_page" t-value="0"/>
+             <t t-set="count_number" t-value="0"/>
+            <t t-set="sum_base" t-value="0"/>
+            <t t-set="sum_amount" t-value="0"/>
+            <t t-set="sum_base2" t-value="0"/>
+            <t t-set="sum_amount2" t-value="0"/>
+             <t t-foreach="docs" t-as="co">
+                 <t t-set="sum_base2" t-value="sum_base2+co.base"/>
+                 <t t-set="sum_amount2" t-value="sum_amount2+co.amount"/>
+             </t>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1"/>
+                <div class="article">
+                    <div class="row">
+                        <div class="page_number" style="position: absolute; z-index: 120; right: 83px; top: 95px;">
+                            <t t-esc="current_page"/>
+                            <span style="padding-left: 70px;"/>
+                            <t t-esc="int(page_amount)"/>
+                        </div>
+                        <t t-set="j" t-value="i + record_per_page"/>
+                        <t t-set="item_count" t-value="0"/>
+
+                        <t t-foreach="docs[i:j]" t-as="cc">
+                            <div style="position:relative; z-index: 100;">
+                                <table t-attf-style="position:absolute; left: 65px; top: {{224 + (item_count*86)}}px; font-family: 'THSarabunNew'">
+                                    <tbody>
+                                        <tr>
+                                            <td style="position:absolute;  top: 20px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                <t t-set="count_number" t-value="count_number+1"/>
+                                                <span t-esc="count_number"/>
+                                                 <t t-set="item_count" t-value="item_count+1"/>
+                                            </td>
+                                            <td style="position:absolute;  left: 70px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                <t t-esc="cc.vat"/>
+                                            </td>
+                                            <td width="1000px" style="position:absolute;  left: 60px; top: 5px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                <br/>
+                                                 <t t-set="name" t-value="str(cc.supplier)"/>
+                                                <t t-esc="cc.to_fist_name(name)"/>
+                                                <span style="position:absolute;top: 22px; left: 280px;font-family: 'Kinnari' !important;font-size: 16px;"><t t-esc="cc.to_last_name(name)"/></span>
+                                                <br/>
+                                                <span t-field="cc.street"/>
+                                                <span t-field="cc.street2"/>
+                                                <span t-field="cc.city"/>
+                                                <span t-field="cc.zip"/>
+                                            </td>
+                                            <td style="position:absolute;  left: 420px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                <span t-field="cc.branch"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 20px; left: 580px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                <t t-set="year" t-value="(int((cc.date).strftime('%Y')))+543"/>
+                                                <t t-set="date_wt" t-value="'%s/%s' %((cc.date).strftime('%d/%m'),year)"/>
+                                                    <t t-esc="date_wt"/>
+                                            </td>
+                                            <td width="500px" style="position:absolute;  top: 20px; left: 680px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                 <t t-if="cc.wt_cert_income_desc == '6 อื่นๆ (ระบุ)'">
+                                                    <span t-field="cc.comment"/>
+                                                 </t>
+                                                <t t-else="">
+                                                    <span t-field="cc.wt_cert_income_desc"/>
+                                                </t>
+
+                                            </td>
+                                             <td style="position:absolute;  top: 20px; left: 865px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                <span t-field="cc.wt_percent"/><span>%</span>
+                                            </td>
+                                             <td style="position:absolute;  top: 20px; left: 940px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.base)"/>
+                                                 <t t-set="sum_base" t-value="sum_base+cc.base"/>
+                                            </td>
+                                             <td style="position:absolute;  top: 20px; left: 1090px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.amount)"/>
+                                                 <t t-set="sum_amount" t-value="sum_amount+cc.amount"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 20px; left: 1180px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                <p>1</p>
+<!--                                              <t t-if="cc.wt_cert_income_type">-->
+<!--                                                  <span t-esc="cc.wt_cert_income_type[:1]"/>-->
+<!--                                              </t>-->
+                                            </td>
+                                        </tr>
+                                        <t t-if="(item_count+1 &gt; 6) and len(docs[i:j]) == 6">
+                                            <tr>
+                                                <td style="position:absolute;  top: 93px; left: 945px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_base)"/>
+                                                </td>
+                                                <td style="position:absolute;  top: 93px; left: 1080px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                     <span t-esc="'{0:,.2f}'.format(sum_amount)"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if=" len(docs[i:j]) &lt; 6 and ((item_count) == len(docs[i:j]))">
+                                            <tr>
+                                                <td style="position:fixed;  top: 745px; left: 990px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                </td>
+                                                <td style="position:fixed;  top: 745px; left: 1150px;font-family: 'Kinnari' !important;font-size: 16px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                                                        <t t-set="sum_amount2" t-value="0"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <!-- END amount_total -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+
+                        <img src="/pfb_withholding_tree/static/img/pnd3.png" style="position:absolute; z-index: -9999; width: 100%;"/>
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page"/>
+            </t>
+        </t>
+    </template>
+    <template id="pnd3_report_view2">
+        <t t-call="web.html_container">
+            <div class="article" >
+                 <img src="/l10n_th_withholding_tax_report/static/img/pnd32.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    <div class="o_without_tax_from" style="position: absolute; z-index: 120; right: 90px; top: 90px;">
+                        <!--box 1-->
+                        <div class="address1_pnd3">
+                            <t t-esc="company"/>
+                        </div>
+                        <div class="address2_pnd3">
+                             ลาดพร้าวฮิลล์
+                         </div>
+                        <div class="address3_pnd3">
+                            <span>0</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                        </div>
+                        <div class="address4_pnd3">
+                            <span>1</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">9</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                        </div>
+                        <div class="address5_pnd3">
+                             <span>0</span>
+                             <span style="padding-left:15px;">9</span>
+                             <span style="padding-left:7px;">9</span>
+                             <span style="padding-left:6px;">4</span>
+                             <span style="padding-left:6px;">0</span>
+                             <span style="padding-left:12px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:6px;">8</span>
+                             <span style="padding-left:7px;">7</span>
+                             <span style="padding-left:12px;">5</span>
+                             <span style="padding-left:8px;">1</span>
+                             <span style="padding-left:15px;">9</span>
+                        </div>
+                        <div class="address6_pnd3">
+                            80
+                         </div>
+                        <div class="address7_pnd3">
+                            ลาดพร้าว4
+                         </div>
+                        <div class="address8_pnd3">
+                            ลาดพร้าว
+                         </div>
+                        <div class="address9_pnd3">
+                            จอมพล
+                         </div>
+                        <div class="address10_pnd3">
+                            จตุจักร
+                         </div>
+                        <div class="address11_pnd3">
+                            กรุงเทพมหานคร
+                         </div>
+                       <!-- end box 1-->
+                        <t t-set="count" t-value="0"/>
+                        <t t-set="mount" t-value=""/>
+                         <t t-foreach="docs" t-as="doc">
+                             <t t-set="count" t-value="count+1"/>
+                             <t t-set="mount" t-value="str(doc.date)"/>
+                        </t>
+                        <!--Box 3-->
+                        <div class="address13_pnd3">
+                            <t t-set="record_per_page" t-value="6" />
+                            <t t-set="page_amount" t-value="1" />
+                            <t t-if="count > record_per_page">
+                                <t t-set="page_amount" t-value="count / record_per_page" />
+                                <t t-if="page_amount > int(page_amount)">
+                                    <t t-set="page_amount" t-value="page_amount + 1" />
+                                </t>
+                            </t>
+                            <t t-esc="int(page_amount)"/>
+                         </div>
+                        <div class="address12_pnd3">
+                            <t t-set="count_partner" t-value="" />
+                            <t t-set="array" t-value="[]" />
+                             <t t-set="count_partner2" t-value="0" />
+                             <t t-foreach="docs" t-as="doc">
+<!--                                 <t t-if="doc.supplier not in array">-->
+                                     <t t-esc="array.append(doc.supplier)"/>
+<!--                                 </t>-->
+                             </t>
+                            <t t-esc="len(array)"/>
+                         </div>
+                        <!-- end box 3-->
+                        <!--Box 4-->
+                         <!-- end box 4-->
+                        <t t-set="sum_base2" t-value="0"/>
+                        <t t-set="sum_amount2" t-value="0"/>
+                         <t t-foreach="docs" t-as="doc">
+                             <t t-set="sum_base2" t-value="sum_base2+doc.base"/>
+                             <t t-set="sum_amount2" t-value="sum_amount2+doc.amount"/>
+                         </t>
+                        <div class="address14_pnd3">
+                            <t t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                        </div>
+                        <div class="address15_pnd3">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                        <div class="address16_pnd3"><span style="font-size: 30px">&#10004;</span></div>
+                        <div class="address161_pnd3"><span style="font-size: 30px">&#10004;</span></div>
+                        <div class="address17_pnd3">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                        <div class="mount0_pnd3">
+                            <t t-if="mount[0:4] == '2021'">
+                                2564
+                            </t>
+                            <t t-if="mount[0:4] == '2022'">
+                                2565
+                            </t>
+                            <t t-if="mount[0:4] == '2023'">
+                                2566
+                            </t>
+                            <t t-if="mount[0:4] == '2024'">
+                                2567
+                            </t>
+                        </div>
+
+                         <t t-if="mount[5:7] == '01'">
+                            <div class="mount1_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '02'">
+                             <div class="mount2_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '03'">
+                             <div class="mount3_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '04'">
+                             <div class="mount4_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                        <t t-if="mount[5:7] == '05'">
+                             <div class="mount5_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                        </t>
+                         <t t-if="mount[5:7] == '06'">
+                             <div class="mount6_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '07'">
+                             <div class="mount7_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '08'">
+                             <div class="mount8_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '09'">
+                             <div class="mount9_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '10'">
+                             <div class="mount10_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '11'">
+                             <div class="mount11_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '12'">
+                             <div class="mount12_pnd3">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+
+                    </div>
+             </div>
+        </t>
+    </template>
+
+    <template id="pnd53_report_view">
+        <t t-call="web.html_container">
+            <t t-set="count_for" t-value="0"/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="count_for" t-value="count_for+1"/>
+            </t>
+            <t t-set="i" t-value="0"/>
+            <t t-set="record_per_page" t-value="5"/>
+            <t t-set="page_amount" t-value="1"/>
+            <t t-if="count_for &gt; record_per_page">
+                <t t-set="page_amount" t-value="count_for / record_per_page"/>
+                <t t-if="page_amount &gt; int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1"/>
+                </t>
+            </t>
+            <t t-set="current_page" t-value="0"/>
+             <t t-set="count_number" t-value="0"/>
+            <t t-set="sum_base" t-value="0"/>
+            <t t-set="sum_amount" t-value="0"/>
+            <t t-set="sum_base2" t-value="0"/>
+            <t t-set="sum_amount2" t-value="0"/>
+             <t t-foreach="docs" t-as="co">
+                 <t t-set="sum_base2" t-value="sum_base2+co.base"/>
+                 <t t-set="sum_amount2" t-value="sum_amount2+co.amount"/>
+             </t>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1"/>
+                <div class="article" style="font-family: 'Kinnari';">
+                    <img src="/l10n_th_withholding_tax_report/static/img/PND53.png" style="position:absolute; z-index: -9999; width: 100%;"/>
+                    <div class="row">
+                        <div class="page_number" style="position: absolute; z-index: 120; right: 75px; top: 85px;">
+                            <t t-esc="current_page"/>
+                            <span style="padding-left: 65px;"/>
+                            <t t-esc="int(page_amount)"/>
+                        </div>
+                        <t t-set="j" t-value="i + record_per_page"/>
+                        <t t-set="item_count" t-value="0"/>
+
+                        <t t-foreach="docs[i:j]" t-as="cc">
+                            <div style="position:relative; z-index: 100;">
+                                <table t-attf-style="position:absolute; left: 65px; top: {{210 + (item_count*110)}}px; font-family: 'THSarabunNew'">
+                                    <tbody>
+                                        <tr>
+                                            <td style="position:absolute;  top: 40px; font-family: 'Kinnari' !important;font-size: 16px;">
+                                                <t t-set="count_number" t-value="count_number+1"/>
+                                                <span t-esc="count_number"/>
+                                                 <t t-set="item_count" t-value="item_count+1"/>
+                                            </td>
+                                            <td style="position:absolute;  left: 100px;font-family: 'Kinnari' !important;">
+                                                <t t-esc="cc.vat"/>
+                                            </td>
+                                            <td width="1000px" style="position:absolute;  left: 70px; top: 10px;font-family: 'Kinnari' !important;font-size: 14px;">
+                                                <br/>
+                                                <span t-field="cc.supplier"/><br/>
+                                                <span t-field="cc.street"/><br/>
+                                                <span t-field="cc.street2"/>
+                                                <span t-field="cc.city"/>
+                                                <span t-field="cc.zip"/><br/>
+                                            </td>
+                                            <td style="position:absolute;  left: 480px; font-family: 'Kinnari' !important;font-size: 14px;">
+                                                <span t-field="cc.branch"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 40px; left: 605px; font-family: 'Kinnari' !important;font-size: 14px;">
+                                                <t t-set="year" t-value="(int((cc.date).strftime('%Y')))+543"/>
+                                                <t t-set="date_wt" t-value="'%s/%s' %((cc.date).strftime('%d/%m'),year)"/>
+                                                    <t t-esc="date_wt"/>
+                                            </td>
+                                            <td width="500px" style="position:absolute;  top: 40px; left: 705px; font-family: 'Kinnari' !important;font-size: 14px;">
+                                                 <t t-if="cc.wt_cert_income_desc == '6 อื่นๆ (ระบุ)'">
+                                                    <span t-field="cc.comment"/>
+                                                 </t>
+                                                <t t-else="">
+                                                    <span t-field="cc.wt_cert_income_desc"/>
+                                                </t>
+                                            </td>
+                                             <td style="position:absolute;  top: 40px; left: 890px; font-family: 'Kinnari' !important;font-size: 14px;">
+                                                <span t-field="cc.wt_percent"/><span>%</span>
+                                            </td>
+                                             <td style="position:absolute;  top: 40px; left: 950px; font-family: 'Kinnari' !important;font-size: 14px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.base)"/>
+                                                 <t t-set="sum_base" t-value="sum_base+cc.base"/>
+                                            </td>
+                                             <td style="position:absolute;  top: 40px; left: 1100px; font-family: 'Kinnari' !important;font-size: 14px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.amount)"/>
+                                                 <t t-set="sum_amount" t-value="sum_amount+cc.amount"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 40px; left: 1210px; font-family: 'Kinnari' !important;font-size: 14px;">
+                                                <p>1</p>
+<!--                                              <t t-if="cc.wt_cert_income_type">-->
+<!--                                                  <span t-esc="cc.wt_cert_income_type[:1]"/>-->
+<!--                                              </t>-->
+                                            </td>
+                                        </tr>
+                                        <t t-if="(item_count+1 &gt; 5) and len(docs[i:j]) == 5">
+                                            <tr>
+                                                <td style="position:absolute;  top: 113px; left: 950px;font-family: 'Kinnari' !important;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_base)"/>
+                                                </td>
+                                                <td style="position:absolute;  top: 113px; left: 1090px;font-family: 'Kinnari' !important;">
+                                                     <span t-esc="'{0:,.2f}'.format(sum_amount)"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if=" len(docs[i:j]) &lt; 5 and ((item_count) == len(docs[i:j]))">
+                                            <tr>
+                                                <td style="position:fixed;  top: 750px; left: 990px;font-family: 'Kinnari' !important;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                </td>
+                                                <td style="position:fixed;  top: 750px; left: 1150px;font-family: 'Kinnari' !important;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                                                        <t t-set="sum_amount2" t-value="0"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <!-- END amount_total -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page"/>
+            </t>
+        </t>
+    </template>
+    <template id="pnd53_report_view2">
+        <t t-call="web.html_container">
+            <div class="article" style="font-family: 'Kinnari' !important;">
+                 <img src="/l10n_th_withholding_tax_report/static/img/PND532.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    <div class="o_without_tax_from" style="position: absolute; z-index: 120; right: 90px; top: 90px;">
+                        <!--box 1-->
+                        <div class="address1_pnd53">
+                            <t t-esc="company"/>
+                        </div>
+                        <div class="address2_pnd53">
+                             ลาดพร้าวฮิลล์
+                         </div>
+                        <div class="address3_pnd53">
+                            <span>0</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                        </div>
+                        <div class="address4_pnd53">
+                            <span>1</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">9</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                        </div>
+                        <div class="address5_pnd53">
+                             <span>0</span>
+                             <span style="padding-left:15px;">9</span>
+                             <span style="padding-left:7px;">9</span>
+                             <span style="padding-left:6px;">4</span>
+                             <span style="padding-left:6px;">0</span>
+                             <span style="padding-left:12px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:6px;">8</span>
+                             <span style="padding-left:7px;">7</span>
+                             <span style="padding-left:12px;">5</span>
+                             <span style="padding-left:8px;">1</span>
+                             <span style="padding-left:15px;">9</span>
+                        </div>
+                        <div class="address6_pnd53">
+                            80
+                         </div>
+                        <div class="address7_pnd53">
+                            ลาดพร้าว4
+                         </div>
+                        <div class="address8_pnd53">
+                            ลาดพร้าว
+                         </div>
+                        <div class="address9_pnd53">
+                            จอมพล
+                         </div>
+                        <div class="address10_pnd53">
+                            จตุจักร
+                         </div>
+                        <div class="address11_pnd53">
+                            กรุงเทพมหานคร
+                         </div>
+                       <!-- end box 1-->
+                        <t t-set="count" t-value="0"/>
+                        <t t-set="mount" t-value=""/>
+                         <t t-foreach="docs" t-as="doc">
+                             <t t-set="count" t-value="count+1"/>
+                             <t t-set="mount" t-value="str(doc.date)"/>
+                        </t>
+                        <!--Box 3-->
+                        <div class="address13_pnd53">
+                            <t t-set="record_per_page" t-value="5" />
+                            <t t-set="page_amount" t-value="1" />
+                            <t t-if="count > record_per_page">
+                                <t t-set="page_amount" t-value="count / record_per_page" />
+                                <t t-if="page_amount > int(page_amount)">
+                                    <t t-set="page_amount" t-value="page_amount + 1" />
+                                </t>
+                            </t>
+                            <t t-esc="int(page_amount)"/>
+                         </div>
+                        <div class="address12_pnd53">
+                            <t t-set="count_partner" t-value="" />
+                            <t t-set="array" t-value="[]" />
+                             <t t-set="count_partner2" t-value="0" />
+                             <t t-foreach="docs" t-as="doc">
+<!--                                 <t t-if="doc.supplier not in array">-->
+                                     <t t-esc="array.append(doc.supplier)"/>
+<!--                                 </t>-->
+                             </t>
+                            <t t-esc="len(array)"/>
+                         </div>
+                        <!-- end box 3-->
+                        <!--Box 4-->
+                         <!-- end box 4-->
+                        <t t-set="sum_base2" t-value="0"/>
+                        <t t-set="sum_amount2" t-value="0"/>
+                        <t t-set="year" t-value=""/>
+                         <t t-foreach="docs" t-as="doc">
+                             <t t-set="year" t-value="(int((doc.date).strftime('%Y')))+543"/>
+                             <t t-set="sum_base2" t-value="sum_base2+doc.base"/>
+                             <t t-set="sum_amount2" t-value="sum_amount2+doc.amount"/>
+                         </t>
+                        <div class="address14_pnd53">
+                            <t t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                        </div>
+                        <div class="address15_pnd53">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                        <div class="address16_pnd53"> <span style="font-size: 30px">&#10004;</span> </div>
+                        <div class="address161_pnd53"> <span style="font-size: 30px">&#10004;</span> </div>
+                        <div class="address17_pnd53">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+
+                        <div class="year_pnd53">
+                            <t t-esc="year"/>
+                        </div>
+
+                        <t t-if="mount[5:7] == '01'">
+                            <div class="mount1_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '02'">
+                             <div class="mount2_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '03'">
+                             <div class="mount3_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '04'">
+                             <div class="mount4_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                        <t t-if="mount[5:7] == '05'">
+                             <div class="mount5_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                        </t>
+                         <t t-if="mount[5:7] == '06'">
+                             <div class="mount6_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '07'">
+                             <div class="mount7_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '08'">
+                             <div class="mount8_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '09'">
+                             <div class="mount9_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '10'">
+                             <div class="mount10_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '11'">
+                             <div class="mount11_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '12'">
+                             <div class="mount12_pnd53">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                    </div>
+             </div>
+        </t>
+    </template>
+
+    <template id="pnd1_report_view">
+        <t t-call="web.html_container">
+            <t t-set="count_for" t-value="0"/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="count_for" t-value="count_for+1"/>
+            </t>
+            <t t-set="i" t-value="0"/>
+            <t t-set="record_per_page" t-value="8"/>
+            <t t-set="page_amount" t-value="1"/>
+            <t t-if="count_for &gt; record_per_page">
+                <t t-set="page_amount" t-value="count_for / record_per_page"/>
+                <t t-if="page_amount &gt; int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1"/>
+                </t>
+            </t>
+            <t t-set="current_page" t-value="0"/>
+             <t t-set="count_number" t-value="0"/>
+            <t t-set="sum_base" t-value="0"/>
+            <t t-set="sum_amount" t-value="0"/>
+            <t t-set="sum_base2" t-value="0"/>
+            <t t-set="sum_amount2" t-value="0"/>
+             <t t-foreach="docs" t-as="co">
+                 <t t-set="sum_base2" t-value="sum_base2+co.base"/>
+                 <t t-set="sum_amount2" t-value="sum_amount2+co.amount"/>
+             </t>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1"/>
+                <div class="article">
+                    <div class="row">
+                        <div style="position: absolute; z-index: 130; left: 690px; top: 35px;font-family: 'Kinnari' !important;font-size:15px;">
+                            <span>0</span>
+                             <span style="padding-left:13px;">9</span>
+                             <span style="padding-left:5px;">9</span>
+                             <span style="padding-left:5px;">4</span>
+                             <span style="padding-left:8px;">0</span>
+                             <span style="padding-left:8px;">0</span>
+                             <span style="padding-left:4px;">0</span>
+                             <span style="padding-left:5px;">0</span>
+                             <span style="padding-left:6px;">8</span>
+                             <span style="padding-left:6px;">7</span>
+                             <span style="padding-left:10px;">5</span>
+                             <span style="padding-left:8px;">1</span>
+                             <span style="padding-left:9px;">9</span>
+                        </div>
+                        <div class="page_number" style="position: absolute; z-index: 120; right: 80px; top: 75px;font-family: 'Kinnari' !important;font-size:15px;">
+                             <span>0</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                            <span style="padding-left:4px;">0</span>
+                            <span style="padding-left:4px;">0</span>
+
+                        </div>
+                        <div style="position: absolute; z-index: 120; right: 115px; top: 170px;font-family: 'Kinnari' !important;">
+                            <t t-esc="current_page"/>
+                            <span style="padding-left: 100px;"/>
+                            <t t-esc="int(page_amount)"/>
+                        </div>
+
+                        <t t-set="j" t-value="i + record_per_page"/>
+                        <t t-set="item_count" t-value="0"/>
+                        <t t-set="line_record" t-value="250"/>
+                        <t t-set="line_count" t-value="0"/>
+                        <t t-set="name" t-value=""/>
+                        <t t-foreach="docs[i:j]" t-as="cc">
+                            <div style="z-index: 100;">
+                                <table t-attf-style="position:absolute; left: 80px; top: {{line_record + (item_count*73)}}px; font-family: 'THSarabunNew';font-size:24px;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="position:absolute;top: 20px;  left: 40px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <t t-set="count_number" t-value="count_number+1"/>
+                                                <t t-esc="count_number"/>
+                                                 <t t-set="item_count" t-value="item_count+1"/>
+                                                 <t t-set="line_count" t-value="310 + (item_count*73)"/>
+                                                <t t-if="line_count == 383">
+                                                    <t t-set="line_record" t-value="236"/>
+                                                </t>
+                                                <t t-if="line_count == 456">
+                                                    <t t-set="line_record" t-value="221"/>
+                                                </t>
+                                                <t t-if="line_count == 529">
+                                                    <t t-set="line_record" t-value="208"/>
+                                                </t>
+                                                <t t-if="line_count == 602">
+                                                    <t t-set="line_record" t-value="193"/>
+                                                </t>
+                                                <t t-if="line_count == 675">
+                                                    <t t-set="line_record" t-value="175"/>
+                                                </t>
+                                                 <t t-if="line_count == 748">
+                                                    <t t-set="line_record" t-value="161"/>
+                                                </t>
+                                                <t t-if="line_count == 821">
+                                                    <t t-set="line_record" t-value="143"/>
+                                                </t>
+
+<!--                                                <t t-esc="line_count"/>-->
+
+                                            </td>
+                                            <td style="display: inline-block;width:320px;position:absolute;top: 10px;  left: 98px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <t t-if="cc.vat">
+                                                    <span><t t-esc="cc.vat[0]"/></span>
+                                                     <span style="padding-left:10px;"><t t-esc="cc.vat[1]"/></span>
+                                                     <span style="padding-left:6px;"><t t-esc="cc.vat[2]"/></span>
+                                                     <span style="padding-left:5px;"><t t-esc="cc.vat[3]"/></span>
+                                                     <span style="padding-left:5px;"><t t-esc="cc.vat[4]"/></span>
+                                                     <span style="padding-left:9px;"><t t-esc="cc.vat[5]"/></span>
+                                                     <span style="padding-left:5px;"><t t-esc="cc.vat[6]"/></span>
+                                                     <span style="padding-left:5px;"><t t-esc="cc.vat[7]"/></span>
+                                                     <span style="padding-left:5px;"><t t-esc="cc.vat[8]"/></span>
+                                                     <span style="padding-left:5px;"><t t-esc="cc.vat[9]"/></span>
+                                                     <span style="padding-left:9px;"><t t-esc="cc.vat[10]"/></span>
+                                                     <span style="padding-left:6px;"><t t-esc="cc.vat[11]"/></span>
+                                                     <span style="padding-left:13px;"><t t-esc="cc.vat[12]"/></span>
+                                                </t>
+
+                                            </td>
+                                            <td width="1100px" style="position:absolute;top: 38px; left: 120px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <t t-set="name" t-value="str(cc.supplier)"/>
+                                                <t t-esc="cc.to_fist_name(name)"/>
+                                            </td>
+                                            <td style="display: inline-block;width: 210px;text-align: left; position:absolute;top:35px; left: 400px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <t t-set="name2" t-value="str(cc.supplier)"/>
+                                                <span width="100%"><t t-esc="cc.to_last_name2(name2)"/></span>
+                                            </td>
+                                            <td style="display: inline-block;width: 179px;text-align: center; position:absolute;top:35px; left: 660px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                    <t t-set="year" t-value="(int((cc.date).strftime('%Y')))+543"/>
+                                                    <t t-set="date_wt" t-value="'%s/%s' %((cc.date).strftime('%d/%m'),year)"/>
+                                                    <t t-esc="date_wt"/>
+                                            </td>
+                                             <td style="display: inline-block;width: 180px;text-align: right; position:absolute;top: 35px; left: 790px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.base)"/>
+                                                 <t t-set="sum_base" t-value="sum_base+cc.base"/>
+                                            </td>
+                                             <td style="display: inline-block;width: 201px;text-align: right;position:absolute;top: 35px; left: 920px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.amount)"/>
+                                                 <t t-set="sum_amount" t-value="sum_amount+cc.amount"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 35px; left: 1140px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <p>1</p>
+                                            </td>
+                                        </tr>
+                                        <t t-if="(item_count+1 &gt; 8) and len(docs[i:j]) == 8">
+                                            <tr>
+                                                <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 65px; left: 790px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base)"/>
+
+                                                </td>
+                                                <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 65px; left: 937px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount)"/>
+
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if=" len(docs[i:j]) &lt; 8 and ((item_count) == len(docs[i:j]))">
+                                            <tr>
+                                                <t t-if="line_count == 383">
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 470px; left: 790px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                                                        <t t-set="sum_base2" t-value="0"/>
+
+                                                    </td>
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 470px; left: 938px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                                                        <t t-set="sum_amount2" t-value="0"/>
+
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 456">
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 411px; left: 790px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 411px; left: 938px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                                                        <t t-set="sum_amount2" t-value="0"/>
+
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 529">
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 350px; left: 790px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 350px; left: 938px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                                                        <t t-set="sum_amount2" t-value="0"/>
+
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 602">
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 300px; left: 790px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 300px; left: 938px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                                                        <t t-set="sum_amount2" t-value="0"/>
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 675">
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 236px; left: 790px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 236px; left: 938px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                                                        <t t-set="sum_amount2" t-value="0"/>
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 748">
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 185px; left: 790px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                                                         <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 185px; left: 938px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                                                        <t t-set="sum_amount2" t-value="0"/>
+                                                    </td>
+                                                </t>
+                                                <t t-if="line_count == 821">
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 120px; left: 790px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                                                         <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 179px;text-align: right; position:absolute;  top: 120px; left: 937px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                                                        <t t-set="sum_amount2" t-value="0"/>
+                                                    </td>
+                                                </t>
+
+                                            </tr>
+                                        </t>
+                                        <!-- END amount_total -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+
+                        <img src="/pfb_withholding_tree/static/img/pp1.png" style="position:absolute; z-index: -9999; width: 100%;"/>
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page"/>
+            </t>
+        </t>
+    </template>
+    <template id="pnd1_report_view2">
+        <t t-call="web.html_container">
+            <div class="article" >
+                 <img src="/pfb_withholding_tree/static/img/pnd1.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    <div class="o_without_tax_from" style="position: absolute; z-index: 120; right: 90px; top: 90px;">
+                        <!--box 1-->
+                        <div class="address1_pnd1">
+                            <t t-esc="company"/>
+                        </div>
+                        <div class="address2_pnd1">
+                             ลาดพร้าวฮิลล์
+                         </div>
+                        <div class="address3_pnd1">
+                            <span>0</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                        </div>
+                        <div class="address4_pnd1">
+                            <span>1</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">9</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                        </div>
+                        <div class="address5_pnd1">
+                             <span>0</span>
+                             <span style="padding-left:15px;">9</span>
+                             <span style="padding-left:7px;">9</span>
+                             <span style="padding-left:6px;">4</span>
+                             <span style="padding-left:6px;">0</span>
+                             <span style="padding-left:12px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:6px;">8</span>
+                             <span style="padding-left:7px;">7</span>
+                             <span style="padding-left:12px;">5</span>
+                             <span style="padding-left:8px;">1</span>
+                             <span style="padding-left:15px;">9</span>
+                        </div>
+                        <div class="address6_pnd1">
+                            80
+                         </div>
+                        <div class="address7_pnd1">
+                            ลาดพร้าว4
+                         </div>
+                        <div class="address8_pnd1">
+                            ลาดพร้าว
+                         </div>
+                        <div class="address9_pnd1">
+                            จอมพล
+                         </div>
+                        <div class="address10_pnd1">
+                            จตุจักร
+                         </div>
+                        <div class="address11_pnd1">
+                            กรุงเทพมหานคร
+                         </div>
+                       <!-- end box 1-->
+                         <t t-set="count" t-value="0"/>
+                        <t t-set="mount" t-value=""/>
+                         <t t-set="mount2" t-value=""/>
+                         <t t-foreach="docs" t-as="doc">
+                             <t t-set="count" t-value="count+1"/>
+                             <t t-set="mount" t-value="str(doc.date)"/>
+                             <t t-set="mount2" t-value="doc.date"/>
+                        </t>
+                        <!--Box 3-->
+                        <div class="address13_pnd1">
+                            <t t-set="record_per_page" t-value="8" />
+                            <t t-set="page_amount" t-value="1" />
+                            <t t-if="count > record_per_page">
+                                <t t-set="page_amount" t-value="count / record_per_page" />
+                                <t t-if="page_amount > int(page_amount)">
+                                    <t t-set="page_amount" t-value="page_amount + 1" />
+                                </t>
+                            </t>
+                            <t t-esc="int(page_amount)"/>
+                         </div>
+                        <div class="address12_pnd1">
+                            <t t-set="count_partner" t-value="" />
+                            <t t-set="array" t-value="[]" />
+                             <t t-set="count_partner2" t-value="0" />
+                             <t t-foreach="docs" t-as="doc">
+                                 <t t-esc="array.append(doc.supplier)"/>
+                             </t>
+                            <t t-esc="len(array)"/>
+                         </div>
+                        <div class="address12_pnd11">
+                            <t t-esc="len(array)"/>
+                         </div>
+                        <!-- end box 3-->
+                        <!--Box 4-->
+                         <!-- end box 4-->
+                        <t t-set="sum_base2" t-value="0"/>
+                        <t t-set="sum_amount2" t-value="0"/>
+                         <t t-foreach="docs" t-as="doc">
+                             <t t-set="sum_base2" t-value="sum_base2+doc.base"/>
+                             <t t-set="sum_amount2" t-value="sum_amount2+doc.amount"/>
+                         </t>
+                        <div class="address14_pnd1">
+                            <t t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                        </div>
+                        <div class="address15_pnd1">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                        <div class="address14_pnd11">
+                            <t t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                        </div>
+                        <div class="address15_pnd11">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                        <div class="address16_pnd1"><span style="font-size: 30px"><p>&#10004;</p></span></div>
+                        <div class="address17_pnd1">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                        <div class="mount0_pnd1">
+                            <t t-if="mount[0:4] == '2021'">
+                                2564
+                            </t>
+                            <t t-if="mount[0:4] == '2022'">
+                                2565
+                            </t>
+                            <t t-if="mount[0:4] == '2023'">
+                                2566
+                            </t>
+                            <t t-if="mount[0:4] == '2024'">
+                                2567
+                            </t>
+
+                        </div>
+
+                        <t t-if="mount[5:7] == '01'">
+                            <div class="mount1_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '02'">
+                             <div class="mount2_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '03'">
+                             <div class="mount3_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '04'">
+                             <div class="mount4_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                        <t t-if="mount[5:7] == '05'">
+                             <div class="mount5_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                        </t>
+                         <t t-if="mount[5:7] == '06'">
+                             <div class="mount6_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '07'">
+                             <div class="mount7_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '08'">
+                             <div class="mount8_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '09'">
+                             <div class="mount9_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '10'">
+                             <div class="mount10_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '11'">
+                             <div class="mount11_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                         <t t-if="mount[5:7] == '12'">
+                             <div class="mount12_pnd1">
+                                <p>&#10004;</p>
+                            </div>
+                         </t>
+                    </div>
+             </div>
+        </t>
+    </template>
+
+    <template id="pnd1_report_view11">
+        <t t-call="web.html_container">
+            <t t-set="count_for" t-value="0"/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="count_for" t-value="count_for+1"/>
+            </t>
+            <t t-set="i" t-value="0" />
+            <t t-set="record_per_page" t-value="7" />
+            <t t-set="page_amount" t-value="1" />
+            <t t-if="count_for > record_per_page">
+                <t t-set="page_amount" t-value="count_for / record_per_page" />
+                <t t-if="page_amount > int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1" />
+                </t>
+            </t>
+            <t t-set="current_page" t-value="0" />
+             <t t-set="count_number" t-value="0"/>
+            <t t-set="sum_base" t-value="0"/>
+            <t t-set="sum_amount" t-value="0"/>
+            <t t-set="sum_base2" t-value="0"/>
+            <t t-set="sum_amount2" t-value="0"/>
+             <t t-foreach="docs" t-as="co">
+                 <t t-set="sum_base2" t-value="sum_base2+co.base"/>
+                 <t t-set="sum_amount2" t-value="sum_amount2+co.amount"/>
+             </t>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1" />
+                <div class="article" >
+                    <div class="row">
+                        <div style="position: absolute; z-index: 120; right: 470px; top: 55px;font-family: 'Kinnari' !important;font-size:15px;">
+                            <span>0</span>
+                             <span style="padding-left:18px;">9</span>
+                             <span style="padding-left:9px;">9</span>
+                             <span style="padding-left:9px;">4</span>
+                             <span style="padding-left:9px;">0</span>
+                             <span style="padding-left:13px;">0</span>
+                             <span style="padding-left:9px;">0</span>
+                             <span style="padding-left:9px;">0</span>
+                             <span style="padding-left:12px;">8</span>
+                             <span style="padding-left:11px;">7</span>
+                             <span style="padding-left:16px;">5</span>
+                             <span style="padding-left:13px;">1</span>
+                             <span style="padding-left:20px;">9</span>
+                        </div>
+                        <div class="page_number" style="position: absolute; z-index: 120; right: 103px; top: 105px;font-family: 'Kinnari' !important;font-size:15px;">
+                             <span>0</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+
+                        </div>
+                        <div style="position: absolute; z-index: 120; right: 160px; top: 210px;font-family: 'Kinnari' !important;font-size:15px;">
+                            <t t-esc="current_page" />
+                            <span style="padding-left: 110px;" />
+                            <t t-esc="int(page_amount)" />
+                        </div>
+                        <div style="position: absolute; z-index: 120; left: 650px; top: 160px;font-size: 30px">
+                            <p>&#10004;</p>
+                        </div>
+                        <t t-set="j" t-value="i + record_per_page" />
+                        <t t-set="item_count" t-value="0" />
+                        <t t-set="line_record" t-value="307" />
+                        <t t-set="line_count" t-value="0" />
+
+                        <t t-foreach="docs[i:j]" t-as="cc">
+                            <div style="z-index: 100;">
+                                <table t-attf-style="position:absolute; left: 118px; top: {{line_record + (item_count*73)}}px; font-family: 'THSarabunNew';font-size:24px;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="position:absolute;top: 25px;  left: 30px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <t t-set="count_number" t-value="count_number+1" />
+                                                <t t-esc="count_number"/>
+                                                 <t t-set="item_count" t-value="item_count+1" />
+                                                 <t t-set="line_count" t-value="310 + (item_count*73)"/>
+                                                <t t-if="line_count == 529">
+                                                    <t t-set="line_record" t-value="301" />
+                                                </t>
+                                                <t t-if="line_count == 748">
+                                                    <t t-set="line_record" t-value="298" />
+                                                </t>
+<!--                                                <t t-esc="line_count"/>-->
+
+                                            </td>
+                                            <td style="display: inline-block;width:320px;position:absolute;top: 10px;  left: 100px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <t t-if="cc.vat">
+                                                    <span><t t-esc="cc.vat[0]"/></span>
+                                                     <span style="padding-left:16px;"><t t-esc="cc.vat[1]"/></span>
+                                                     <span style="padding-left:8px;"><t t-esc="cc.vat[2]"/></span>
+                                                     <span style="padding-left:8px;"><t t-esc="cc.vat[3]"/></span>
+                                                     <span style="padding-left:8px;"><t t-esc="cc.vat[4]"/></span>
+                                                     <span style="padding-left:12px;"><t t-esc="cc.vat[5]"/></span>
+                                                     <span style="padding-left:8px;"><t t-esc="cc.vat[6]"/></span>
+                                                     <span style="padding-left:8px;"><t t-esc="cc.vat[7]"/></span>
+                                                     <span style="padding-left:11px;"><t t-esc="cc.vat[8]"/></span>
+                                                     <span style="padding-left:10px;"><t t-esc="cc.vat[9]"/></span>
+                                                     <span style="padding-left:11px;"><t t-esc="cc.vat[10]"/></span>
+                                                     <span style="padding-left:8px;"><t t-esc="cc.vat[11]"/></span>
+                                                     <span style="padding-left:18px;"><t t-esc="cc.vat[12]"/></span>
+                                                </t>
+
+                                            </td>
+                                            <td width = '1000px' style="position:absolute;top: 13px; left: 443px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <t t-set="name" t-value="str(cc.supplier)"/>
+                                                <t t-esc="cc.to_fist_name(name)"/>
+                                                <span style="padding-left: 200px;"><t t-esc="cc.to_last_name2(name)"/></span>
+                                            </td>
+                                             <td width = '1000px' style="position:absolute;top: 43px; left: 460px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <span t-field="cc.street" />
+                                                <span t-field="cc.street2" />
+                                                <span t-field="cc.city" />
+                                                <span t-field="cc.zip" />
+                                            </td>
+
+                                             <td style="display: inline-block;width: 182px;text-align: right; position:absolute;top: 45px; left: 952px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.base)" />
+                                                 <t t-set="sum_base" t-value="sum_base+cc.base"/>
+                                            </td>
+                                             <td style="display: inline-block;width: 203px;text-align: right;position:absolute;top: 45px; left: 1113px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.amount)" />
+                                                 <t t-set="sum_amount" t-value="sum_amount+cc.amount"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 45px; left: 1350px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                <p>1</p>
+                                            </td>
+                                        </tr>
+                                        <t t-if="(item_count+1 > 7) and len(docs[i:j]) == 7">
+                                            <tr>
+                                                <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 91px; left: 952px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base)" />
+
+                                                </td>
+                                                <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 91px; left: 1133px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount)" />
+
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if=" len(docs[i:j]) &lt; 7 and ((item_count) == len(docs[i:j]))">
+                                            <tr>
+                                                <t t-if="line_count == 383">
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 526px; left: 952px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)" />
+
+                                                    </td>
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 526px; left: 1133px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                            <span t-esc="'{0:,.2f}'.format(sum_amount2)" />
+
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 456">
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 454px; left: 952px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)" />
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 454px; left: 1133px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                            <span t-esc="'{0:,.2f}'.format(sum_amount2)" />
+
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 529">
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 381px; left: 952px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)" />
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 381px; left: 1133px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                            <span t-esc="'{0:,.2f}'.format(sum_amount2)" />
+
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 602">
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 308px; left: 952px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)" />
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 308px; left: 1133px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                            <span t-esc="'{0:,.2f}'.format(sum_amount2)" />
+
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 675">
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 235px; left: 952px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)" />
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                    </td>
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 235px; left: 1133px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                            <span t-esc="'{0:,.2f}'.format(sum_amount2)" />
+
+                                                    </td>
+                                                </t>
+                                                 <t t-if="line_count == 748">
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 162px; left: 952px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)" />
+
+                                                    </td>
+                                                    <td style="display: inline-block;width: 182px;text-align: right; position:absolute;  top: 162px; left: 1133px;font-family: 'Kinnari' !important;font-size:15px;">
+                                                            <span t-esc="'{0:,.2f}'.format(sum_amount2)" />
+
+                                                    </td>
+                                                </t>
+
+                                            </tr>
+                                        </t>
+                                        <!-- END amount_total -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+
+                        <img src="/pfb_withholding_tree/static/img/pp1a.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page" />
+            </t>
+        </t>
+    </template>
+    <template id="pnd1_report_view21">
+        <t t-call="web.html_container">
+            <div class="article" >
+                 <img src="/pfb_withholding_tree/static/img/pp12a.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    <div class="o_without_tax_from" style="position: absolute; z-index: 120; right: 90px; top: 90px;">
+                        <!--box 1-->
+                        <div class="address1_pnd1a">
+                            <t t-esc="company"/>
+                        </div>
+                        <div class="address2_pnd1a">
+                             ลาดพร้าวฮิลล์
+                         </div>
+                        <div class="address3_pnd1a">
+                            <span>0</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                        </div>
+                        <div class="address4_pnd1a">
+                            <span>1</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">9</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                        </div>
+                        <div class="address5_pnd1a">
+                             <span>0</span>
+                             <span style="padding-left:15px;">9</span>
+                             <span style="padding-left:7px;">9</span>
+                             <span style="padding-left:6px;">4</span>
+                             <span style="padding-left:6px;">0</span>
+                             <span style="padding-left:12px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:6px;">8</span>
+                             <span style="padding-left:7px;">7</span>
+                             <span style="padding-left:16px;">5</span>
+                             <span style="padding-left:8px;">1</span>
+                             <span style="padding-left:15px;">9</span>
+                        </div>
+                        <div class="address6_pnd1a">
+                            80
+                         </div>
+                        <div class="address7_pnd1a">
+                            ลาดพร้าว4
+                         </div>
+                        <div class="address8_pnd1a">
+                            ลาดพร้าว
+                         </div>
+                        <div class="address9_pnd1a">
+                            จอมพล
+                         </div>
+                        <div class="address10_pnd1a">
+                            จตุจักร
+                         </div>
+                        <div class="address11_pnd1a">
+                            กรุงเทพมหานคร
+                         </div>
+                       <!-- end box 1-->
+                         <t t-set="count" t-value="0"/>
+                        <t t-set="mount" t-value=""/>
+                         <t t-foreach="docs" t-as="doc">
+                             <t t-set="count" t-value="count+1"/>
+                             <t t-set="mount" t-value="str(doc.date)"/>
+                        </t>
+                        <!--Box 3-->
+                        <div class="address13_pnd1a">
+                            <t t-set="record_per_page" t-value="7" />
+                            <t t-set="page_amount" t-value="1" />
+                            <t t-if="count > record_per_page">
+                                <t t-set="page_amount" t-value="count / record_per_page" />
+                                <t t-if="page_amount > int(page_amount)">
+                                    <t t-set="page_amount" t-value="page_amount + 1" />
+                                </t>
+                            </t>
+                            <t t-esc="int(page_amount)"/>
+                         </div>
+
+                        <div class="address12_pnd1a">
+                            <t t-set="count_partner" t-value="" />
+                            <t t-set="array" t-value="[]" />
+                             <t t-set="count_partner2" t-value="0" />
+                             <t t-foreach="docs" t-as="doc">
+                                 <t t-if="doc.supplier not in array">
+                                     <t t-esc="array.append(doc.supplier)"/>
+                                 </t>
+                             </t>
+                            <t t-esc="len(array)"/>
+                         </div>
+                        <div class="address12_pnd11a"><t t-esc="len(array)"/></div>
+                        <!-- end box 3-->
+                        <!--Box 4-->
+                         <!-- end box 4-->
+                        <t t-set="sum_base2" t-value="0"/>
+                        <t t-set="sum_amount2" t-value="0"/>
+                         <t t-foreach="docs" t-as="doc">
+                             <t t-set="sum_base2" t-value="sum_base2+doc.base"/>
+                             <t t-set="sum_amount2" t-value="sum_amount2+doc.amount"/>
+                         </t>
+                        <div class="address14_pnd1a">
+                            <t t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                        </div>
+                        <div class="address15_pnd1a">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                         <div class="address14_pnd11a">
+                            <t t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                        </div>
+                        <div class="address15_pnd11a">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                        <div class="address16_pnd1a"><span style="font-size: 30px"><p>&#10004;</p></span></div>
+<!--                        <div class="address17_pnd1a">-->
+<!--                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>-->
+<!--                        </div>-->
+                            <div class="mount1_pnd1a" >
+                                <t t-if="mount[0:4] == '2021'">
+                                2564
+                            </t>
+                            <t t-if="mount[0:4] == '2022'">
+                                2565
+                            </t>
+                            <t t-if="mount[0:4] == '2023'">
+                                2566
+                            </t>
+                            <t t-if="mount[0:4] == '2024'">
+                                2567
+                            </t>
+                            </div>
+                             <div class="mount2_pnd1a" style="font-size: 30px">
+                                <p>&#10004;</p>
+                            </div>
+<!--                         <t t-if="mount[5:7] == '03'">-->
+<!--                             <div class="mount3_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                         </t>-->
+<!--                         <t t-if="mount[5:7] == '04'">-->
+<!--                             <div class="mount4_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                         </t>-->
+<!--                        <t t-if="mount[5:7] == '05'">-->
+<!--                             <div class="mount5_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                         <t t-if="mount[5:7] == '06'">-->
+<!--                             <div class="mount6_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                         </t>-->
+<!--                         <t t-if="mount[5:7] == '07'">-->
+<!--                             <div class="mount7_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                         </t>-->
+<!--                         <t t-if="mount[5:7] == '08'">-->
+<!--                             <div class="mount8_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                         </t>-->
+<!--                         <t t-if="mount[5:7] == '09'">-->
+<!--                             <div class="mount9_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                         </t>-->
+<!--                         <t t-if="mount[5:7] == '10'">-->
+<!--                             <div class="mount10_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                         </t>-->
+<!--                         <t t-if="mount[5:7] == '11'">-->
+<!--                             <div class="mount11_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                         </t>-->
+<!--                         <t t-if="mount[5:7] == '12'">-->
+<!--                             <div class="mount12_pnd1a">-->
+<!--                                <p>&#10004;</p>-->
+<!--                            </div>-->
+<!--                         </t>-->
+                    </div>
+             </div>
+        </t>
+    </template>
+</odoo>

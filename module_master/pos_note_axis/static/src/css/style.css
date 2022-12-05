@@ -1,0 +1,31 @@
+span.control-button.note-button {
+    background: #734967;
+    color: #fff;
+}
+
+span.control-button.note-button:hover {
+    background: #734967;
+    color: #fff;
+}
+
+.bg {
+    color: #222;
+}
+
+.pos .popup .title {
+    background: rgba(88, 34, 34, 0.5);
+}
+
+.footer{
+     background: rgba(88, 34, 34, 0.5);
+}
+
+.button.confirm.apply {
+    background: #fff !important;
+}
+
+.button.cancel {
+    background: #fff !important;
+}
+
+

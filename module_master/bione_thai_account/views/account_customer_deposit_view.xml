@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Customer Deposit -->
+        <record id="view_bione_customer_deposit_form" model="ir.ui.view">
+            <field name="name">bione.customer.deposit.form</field>
+            <field name="model">bione.customer.deposit</field>
+            <field name="arch" type="xml">
+                <form string="Billing" version="12.0">
+                    <header>
+                        <button name="button_post" string="Post" type="object" states="draft"/>
+                        <button name="button_draft" string="To draft" type="object" states="cancel"/>
+                        <button name="button_cancel" string="Cancel" type="object" states="post,draft"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,post,cancel"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="customer_id" domain="[('customer','=',True)]"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}"/>
+                                <field name="journal_id" domain="[('type','=','receive')]"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}"/>
+                                <field name="move_id"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}" />
+                                <field name="change_number" groups="base.group_erp_manager" invisible="1"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}"/>
+                                <field name="amount_paid" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="name" attrs="{'readonly':[('change_number', '=', False)]}"/>
+                                <field name="date"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}"/>
+                                <field name="date_due"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="รายการ">
+                                <field name="line_ids" nolabel="1" colspan="4" attrs="{'readonly': [('state','in',('post','cancel'))]}">
+                                    <tree string="Detail" editable="top">
+                                        <field name="name" />
+                                        <field name="amount_receipt" sum="Balance"/>
+                                    </tree>
+                                </field>
+                                <group colspan="4" col="8">
+                                        <field name="amount_vat" attrs="{'readonly': [('state','in',('post','cancel'))]}" />
+                                        <field name="amount_other" attrs="{'readonly': [('state','in',('post','cancel'))]}" />
+                                        <field name="amount_cash"  attrs="{'readonly': [('state','in',('post','cancel'))]}"/>
+                                        <field name="amount_cheque" attrs="{'readonly': [('state','in',('post','cancel'))]}" />
+                                        <field name="amount_wht"  attrs="{'readonly': [('state','in',('post','cancel'))]}"/>
+                                        <field name="amount_discount" attrs="{'readonly': [('state','in',('post','cancel'))]}" />
+                                        <field name="amount_receipt" attrs="{'readonly': [('state','in',('post','cancel'))]}" />
+                                        <field name="amount_residual" attrs="{'readonly': [('state','in',('post','cancel'))]}"/>
+                                </group>
+                            </page>
+                            <page string="Journal Items" name="journal_item" groups="account.group_account_user" attrs="{'invisible':[('move_id','=',False)]}">
+                                <field name="move_line_ids"/>
+                            </page>
+                            <page string="เช็ครับ">
+                                <field name="cheque_ids" colspan="4" context="{'default_type': 'in','default_partner_id': customer_id}"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}">
+                                    <tree string="เช็ครับ">
+                                        <field name="name"/>
+                                        <!--<field name="move_id"/>-->
+                                        <field name="cheque_date"/>
+                                        <field name="cheque_date_reconcile" />
+                                        <field name="account_bank_id" />
+                                        <field name="bank"/>
+                                        <field name="partner_id"/>
+                                        <field name="amount" sum="Total"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="อื่นๆ">
+                                <field name="other_ids" colspan="4" attrs="{'readonly': [('state','in',('post','cancel'))]}">
+                                    <tree string="อื่นๆ ระบุ" editable="bottom">
+                                        <field name="name" />
+                                        <field name="amount" sum="Total"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="ภาษีมูลค่าเพิ่ม">
+                                <field name="vat_ids" colspan="4"
+                                       context="{'default_partner_id': customer_id,'default_name':name,'default_docdat':date,'default_vat_type':'sale'}"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}">
+                                    <tree string="ภาษีมูลค่าเพิ่ม" editable="top">
+                                        <field name="name"/>
+                                        <field name="docdat"/>
+                                        <field name="vatprd"/>
+                                        <field name="partner_id"/>
+                                        <field name="taxid"/>
+                                        <field name="depcod"/>
+                                        <field name="amount_untaxed" sum="Total"/>
+                                        <field name="amount_tax" sum="Tax Total"/>
+                                        <field name="amount_total" invisible="1"/>
+                                        <field name="remark"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="ภาษีหัก ณ ที่จ่าย">
+                                <field name="wht_ids" colspan="4"
+                                       context="{'default_wht_type':'sale','default_date_doc':date,'default_partner_id':customer_id}"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}">
+                                    <tree string="With holding tax">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="date_doc"/>
+                                        <field name="partner_id"/>
+                                        <field name="base_amount" sum="Total"/>
+                                        <field name="tax" sum="Tax"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Note">
+                                <field name="note" nolabel="1" colspan="4"
+                                       attrs="{'readonly': [('state','in',('post','cancel'))]}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_bione_customer_deposit_tree" model="ir.ui.view">
+            <field name="name">bione.customer.deposit.tree</field>
+            <field name="model">bione.customer.deposit</field>
+            <field name="arch" type="xml">
+                <tree string="Customer Deposit">
+                    <field name="name"/>
+                    <field name="journal_id"/>
+                    <field name="date"/>
+                    <field name="date_due"/>
+                    <field name="customer_id"/>
+                    <field name="amount_receipt"/>
+                    <field name="amount_residual" />
+                    <field name="line_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_bione_customer_deposit_search" model="ir.ui.view">
+            <field name="name">bione.customer.deposit.search</field>
+            <field name="model">bione.customer.deposit</field>
+            <field name="arch" type="xml">
+                <search string="Customer Deposit" >
+                    <field name="name"/>
+                    <field name="journal_id"/>
+                    <field name="date"/>
+                    <field name="date_due"/>
+                    <field name="customer_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_bione_customer_deposit" model="ir.actions.act_window">
+            <field name="name">รับมัดจำ</field>
+            <field name="res_model">bione.customer.deposit</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_bione_customer_deposit_tree"/>
+            <field name="context">{}</field>
+            <field name="domain"></field>
+            <field name="search_view_id" ref="view_bione_customer_deposit_search"/>
+        </record>
+
+        <menuitem action="action_bione_customer_deposit" id="menu_bione_customer_deposit"
+                  parent="account.menu_finance_receivables" sequence="102"/>
+
+    </data>
+</odoo>

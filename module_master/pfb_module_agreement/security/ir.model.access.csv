@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pfb_module_agreement_pfb_module_agreement,pfb_module_agreement.pfb_module_agreement,model_pfb_module_agreement_pfb_module_agreement,,1,0,0,0

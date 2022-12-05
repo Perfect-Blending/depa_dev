@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <record id="purchase_request_add_fin_approve" model="ir.ui.view">
+        <field name="name">purchase.request.inherit</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+             <field name="origin" position="replace">
+                <field name="fin_number"/>
+             </field>
+            <field name="fin_number" position="after">
+                <field name="date_approve"/>
+            </field>
+        </field>
+   </record>
+</odoo>

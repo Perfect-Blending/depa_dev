@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="make_favorite_wizard_view_form" model="ir.ui.view">
+        <field name="name">make.favorite.wizard.form</field>
+        <field name="model">make.favorite.wizard</field>
+        <field name="arch" type="xml">
+                <group col="4" colspan="4">
+                      <group col="2" colspan="4">
+                        <field name="group_name" />
+                      </group>
+                </group>
+        </field>
+    </record>
+
+</odoo>

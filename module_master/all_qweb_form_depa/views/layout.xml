@@ -1,0 +1,2106 @@
+<odoo>
+    <template id="cash_receipt_depa_common" name="Cash Receipt Depa" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/all_qweb_form_depa/static/css/cash_receipt.css"/>
+        </xpath>
+    </template>
+
+    <template id="payment_pdf_report_layout2">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p><!--.--></p>
+                <table width="100%" height="80%" style="font-family:'Kinnari';font-size: 14px;">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <tr style="height: 320px; vertical-align: top; font-size:14pt;">
+
+                            <td align="center">
+                                <t t-foreach="count2" t-as="line">
+                                    <t t-esc="line"/>
+                                    <br/>
+                                </t>
+                            </td>
+
+                            <td align="left">
+                                <t t-foreach="description" t-as="line">
+                                    <t t-esc="line"/>
+                                    <br/>
+                                </t>
+                            </td>
+
+                            <td align="right">
+                                <t t-foreach="unit_price" t-as="line">
+                                    <t t-esc="'{:,.2f}'.format(line)"/>
+                                    <br/>
+                                </t>
+                            </td>
+
+                            <td align="right" style="padding-right:15px;">
+                                <t t-foreach="qty" t-as="line">
+                                    <t t-esc="'{:,.2f}'.format(line)"/>
+                                    <br/>
+                                </t>
+                            </td>
+
+                            <td align="right">
+                                <t t-foreach="sub_total" t-as="line">
+                                    <t t-esc="'{:,.2f}'.format(line)"/>
+                                    <br/>
+                                </t>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                <t t-esc="'{:,.2f}'.format(sum_price)"/>
+            </div>
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+            </div>
+
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                <t t-set="sum_total" t-value="sum_price+o.amount_vat"/>
+                <t t-esc="'{:,.2f}'.format(sum_total)"/>
+            </div>
+            <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1135px;left: 50px;">x</p>
+                <!--                <t t-foreach="o.cheque_ids" t-as="cr[0]">-->
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].name"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                    <t t-set="year" t-value="(int((o.cheque_ids[0].cheque_date).strftime('%Y')))+543"/>
+                    <t t-set="cheque_date" t-value="'%s/%s' %((o.cheque_ids[0].cheque_date).strftime('%d/%m'),year)"/>
+                    <t t-esc="cheque_date"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].bank_customer"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                    <t t-esc="o.cheque_ids[0].bank_branch_customer"/>
+                </p>
+                <!--                </t>-->
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_copy_pdf_report_layout2">
+        <div class="article" style="font-family: 'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt_copy.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p><!--.--></p>
+                <table width="100%" height="80%">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <tr style="height: 320px; vertical-align: top; font-size:14pt;">
+
+                            <td align="center">
+                                <t t-foreach="count2" t-as="line">
+                                    <t t-esc="line"/>
+                                    <br/>
+                                </t>
+                            </td>
+
+                            <td align="left">
+                                <t t-foreach="description" t-as="line">
+                                    <t t-esc="line"/>
+                                    <br/>
+                                </t>
+                            </td>
+
+                            <td align="right">
+                                <t t-foreach="unit_price" t-as="line">
+                                    <t t-esc="'{:,.2f}'.format(line)"/>
+                                    <br/>
+                                </t>
+                            </td>
+
+                            <td align="right" style="padding-right:15px;">
+                                <t t-foreach="qty" t-as="line">
+                                    <t t-esc="'{:,.2f}'.format(line)"/>
+                                    <br/>
+                                </t>
+                            </td>
+
+                            <td align="right">
+                                <t t-foreach="sub_total" t-as="line">
+                                    <t t-esc="'{:,.2f}'.format(line)"/>
+                                    <br/>
+                                </t>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                <t t-esc="'{:,.2f}'.format(sum_price)"/>
+            </div>
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+            </div>
+
+            <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                <t t-set="sum_total" t-value="sum_price+o.amount_vat"/>
+                <t t-esc="'{:,.2f}'.format(sum_total)"/>
+            </div>
+            <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                (
+                <t t-esc="thaibahttext"/>
+                )
+            </div>
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1135px;left: 50px;">x</p>
+                <t t-foreach="o.cheque_ids" t-as="cr">
+                    <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                        <t t-esc="cr.name"/>
+                    </p>
+                    <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                        <t t-set="year" t-value="(int((cr.cheque_date).strftime('%Y')))+543"/>
+                        <t t-set="cheque_date" t-value="'%s/%s' %((cr.cheque_date).strftime('%d/%m'),year)"/>
+                        <t t-esc="cheque_date"/>
+                    </p>
+                    <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                        <t t-esc="o.cheque_ids[0].bank.name"/>
+                    </p>
+                    <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                        <t t-esc="o.cheque_ids[0].bank.branch_bank"/>
+                    </p>
+                </t>
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_receipt_pdf_report_pdf2">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="container">
+                    <t t-call="all_qweb_form_depa.payment_pdf_report_layout2"/>
+                    <t t-set="copy_count" t-value="3"/>
+                    <t t-foreach="range(copy_count)" t-as="cc">
+                        <t t-call="all_qweb_form_depa.payment_copy_pdf_report_layout2"/>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="payment_pdf_report_layout3">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <t t-set="loop_br" t-value="30"/>
+                <t t-foreach="range(loop_br)" t-as="cc">
+                    <br/>
+                </t>
+                <p><!--.--></p>
+                <table width="100%" height="80%" style="font-family:'Kinnari';font-size: 16px;">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+
+                        <t t-set="sum_unit" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+                        <t t-set="sum_total_line" t-value="0"/>
+                        <t t-set="sum_amount_total" t-value="0"/>
+                        <t t-set="amount_total" t-value="0"/>
+                        <t t-foreach="group_inv[0:10]" t-as="line_receipt">
+
+                            <t t-set="amount_total" t-value="line_receipt.amount_receipt - line_receipt.amount_tax"/>
+                            <t t-if="line_receipt.amount_total == line_receipt.amount_receipt">
+                                <t t-foreach="line_receipt.name" t-as="line_inv">
+                                    <t t-foreach="line_inv.invoice_line_ids" t-as="line_inv_ids">
+                                        <tr>
+                                            <td align="center">
+                                                <t t-set="count" t-value="count + 1"/>
+                                                <t t-esc="count"/>
+                                            </td>
+
+                                            <td align="left">
+                                                <t t-esc="line_inv_ids.name[0:300]"/>
+                                            </td>
+
+                                            <td align="right">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.price_unit)"/>
+                                            </td>
+
+                                            <td align="right" style="padding-right:15px;">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                            </td>
+
+                                            <td align="right">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.price_subtotal)"/>
+                                                <t t-set="sum_amount_total"
+                                                   t-value="sum_amount_total+ line_inv_ids.price_subtotal"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </t>
+                            <t t-if="line_receipt.amount_total != line_receipt.amount_receipt">
+                                <t t-if="line_receipt.amount_total &lt; line_receipt.amount_receipt">
+                                    <t t-foreach="line_receipt.name" t-as="line_inv">
+                                        <t t-foreach="line_inv.invoice_line_ids" t-as="line_inv_ids">
+                                            <tr>
+                                                <td align="center">
+                                                    <t t-set="count" t-value="count + 1"/>
+                                                    <t t-esc="count"/>
+                                                </td>
+
+                                                <td align="left">
+                                                    <t t-esc="line_inv_ids.name[0:300]"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.price_unit)"/>
+                                                </td>
+
+                                                <td align="right" style="padding-right:15px;">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.price_subtotal)"/>
+                                                    <t t-set="sum_amount_total"
+                                                       t-value="sum_amount_total+ line_inv_ids.price_subtotal"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="amount_vat" t-value="0"/>
+                                    <t t-set="amount_untaxed" t-value="0"/>
+                                    <t t-if="line_receipt.amount_tax == 0">
+                                        <t t-set="amount_vat" t-value="line_receipt.amount_receipt"/>
+                                        <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-set="amount_vat"
+                                           t-value="(line_receipt.amount_receipt - line_receipt.payment_id.amount_vat) * 100/107"/>
+                                        <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                                    </t>
+
+                                    <t t-foreach="line_receipt.name" t-as="line_inv2">
+                                        <t t-foreach="line_inv2.invoice_line_ids" t-as="line_inv_ids">
+                                            <tr>
+                                                <td align="center">
+                                                    <t t-set="count" t-value="count + 1"/>
+                                                    <t t-esc="count"/>
+                                                </td>
+
+                                                <td align="left">
+                                                    <t t-esc="line_inv_ids.name[0:300]"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-set="sum_unit"
+                                                       t-value="(line_inv_ids.price_subtotal *  amount_vat) / amount_untaxed"/>
+                                                    <t t-esc="'{:,.2f}'.format(sum_unit)"/>
+                                                </td>
+
+                                                <td align="right" style="padding-right:15px;">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-set="sum_total_line"
+                                                       t-value="sum_unit * line_inv_ids.quantity"/>
+                                                    <t t-set="sum_amount_total"
+                                                       t-value="sum_amount_total + sum_total_line"/>
+                                                    <t t-esc="'{:,.2f}'.format(sum_total_line)"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <t t-if="len(group_inv) &lt; 11">
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(sum_amount_total)"/>
+                </div>
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+                </div>
+
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                    <t t-set="sum_total" t-value="sum_amount_total+o.amount_vat"/>
+                    <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                </div>
+                <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                    (
+                    <t t-esc="o.bath_text(sum_total)"/>
+                    )
+                </div>
+            </t>
+
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1132px;left: 50px;">x</p>
+                <!--                <t t-foreach="o.cheque_ids[0]" t-as="cr">-->
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].name"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                    <t t-set="year" t-value="(int((o.cheque_ids[0].cheque_date).strftime('%Y')))+543"/>
+                    <t t-set="cheque_date" t-value="'%s/%s' %((o.cheque_ids[0].cheque_date).strftime('%d/%m'),year)"/>
+                    <t t-esc="cheque_date"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].bank_customer"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                    <t t-esc="o.cheque_ids[0].bank_branch_customer"/>
+                </p>
+                <!--                </t>-->
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_pdf_report_layout32">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <t t-set="loop_br" t-value="30"/>
+                <t t-foreach="range(loop_br)" t-as="cc">
+                    <br/>
+                </t>
+                <p><!--.--></p>
+                <table width="100%" height="80%" style="font-family:'Kinnari';font-size: 16px;">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+
+                        <t t-set="sum_unit" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+                        <t t-set="sum_total_line" t-value="0"/>
+                        <t t-set="sum_amount_total" t-value="0"/>
+                        <t t-set="amount_total" t-value="0"/>
+                        <t t-foreach="group_inv[0:10]" t-as="line_receipt">
+
+                            <t t-set="amount_total" t-value="line_receipt.amount_receipt - line_receipt.amount_tax"/>
+                            <t t-if="line_receipt.amount_total == line_receipt.amount_receipt">
+                                <t t-foreach="line_receipt.name" t-as="line_inv">
+                                    <t t-foreach="line_inv.invoice_line_ids" t-as="line_inv_ids">
+                                        <tr>
+                                            <td align="center">
+                                                <t t-set="count" t-value="count + 1"/>
+                                                <t t-esc="count"/>
+                                            </td>
+
+                                            <td align="left">
+                                                <t t-esc="line_inv_ids.name[0:300]"/>
+                                            </td>
+
+                                            <td align="right">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.price_unit)"/>
+                                            </td>
+
+                                            <td align="right" style="padding-right:15px;">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                            </td>
+
+                                            <td align="right">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.price_subtotal)"/>
+                                                <t t-set="sum_amount_total"
+                                                   t-value="sum_amount_total+ line_inv_ids.price_subtotal"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </t>
+                            <t t-eles="">
+                                <t t-if="line_receipt.amount_total &lt; line_receipt.amount_receipt">
+                                    <t t-foreach="line_receipt.name" t-as="line_inv">
+                                        <t t-foreach="line_inv.invoice_line_ids" t-as="line_inv_ids">
+                                            <tr>
+                                                <td align="center">
+                                                    <t t-set="count" t-value="count + 1"/>
+                                                    <t t-esc="count"/>
+                                                </td>
+
+                                                <td align="left">
+                                                    <t t-esc="line_inv_ids.name[0:300]"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.price_unit)"/>
+                                                </td>
+
+                                                <td align="right" style="padding-right:15px;">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.price_subtotal)"/>
+                                                    <t t-set="sum_amount_total"
+                                                       t-value="sum_amount_total+ line_inv_ids.price_subtotal"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="amount_vat" t-value="0"/>
+                                    <t t-set="amount_untaxed" t-value="0"/>
+                                    <t t-if="line_receipt.amount_tax == 0">
+                                        <t t-set="amount_vat" t-value="line_receipt.amount_receipt"/>
+                                        <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-set="amount_vat"
+                                           t-value="(line_receipt.amount_receipt - line_receipt.payment_id.amount_vat) * 100/107"/>
+                                        <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                                    </t>
+
+                                    <t t-foreach="line_receipt.name" t-as="line_inv2">
+                                        <t t-foreach="line_inv2.invoice_line_ids" t-as="line_inv_ids">
+                                            <tr>
+                                                <td align="center">
+                                                    <t t-set="count" t-value="count + 1"/>
+                                                    <t t-esc="count"/>
+                                                </td>
+
+                                                <td align="left">
+                                                    <t t-esc="line_inv_ids.name[0:300]"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-set="sum_unit"
+                                                       t-value="(line_inv_ids.price_subtotal *  amount_vat) / amount_untaxed"/>
+                                                    <t t-esc="'{:,.2f}'.format(sum_unit)"/>
+                                                </td>
+
+                                                <td align="right" style="padding-right:15px;">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-set="sum_total_line"
+                                                       t-value="sum_unit * line_inv_ids.quantity"/>
+                                                    <t t-set="sum_amount_total"
+                                                       t-value="sum_amount_total + sum_total_line"/>
+                                                    <t t-esc="'{:,.2f}'.format(sum_total_line)"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <t t-if="len(group_inv) &lt; 21">
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(sum_amount_total)"/>
+                </div>
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+                </div>
+
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                    <t t-set="sum_total" t-value="sum_amount_total+o.amount_vat"/>
+                    <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                </div>
+                <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                    (
+                    <t t-esc="o.bath_text(sum_total)"/>
+                    )
+                </div>
+            </t>
+
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1132px;left: 50px;">x</p>
+                <!--                <t t-foreach="o.cheque_ids[0]" t-as="cr">-->
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].name"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                    <t t-set="year" t-value="(int((o.cheque_ids[0].cheque_date).strftime('%Y')))+543"/>
+                    <t t-set="cheque_date" t-value="'%s/%s' %((o.cheque_ids[0].cheque_date).strftime('%d/%m'),year)"/>
+                    <t t-esc="cheque_date"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].bank_customer"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                    <t t-esc="o.cheque_ids[0].bank_branch_customer"/>
+                </p>
+                <!--                </t>-->
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_copy_pdf_report_layout3">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt_copy.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <t t-set="loop_br" t-value="30"/>
+                <t t-foreach="range(loop_br)" t-as="cc">
+                    <br/>
+                </t>
+                <p><!--.--></p>
+                <table width="100%" height="80%" style="font-family:'Kinnari';font-size: 16px;">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+
+                        <t t-set="sum_unit" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+                        <t t-set="sum_total_line" t-value="0"/>
+                        <t t-set="sum_amount_total" t-value="0"/>
+                        <t t-set="amount_total" t-value="0"/>
+                        <t t-foreach="group_inv[0:10]" t-as="line_receipt">
+
+                            <t t-set="amount_total" t-value="line_receipt.amount_receipt - line_receipt.amount_tax"/>
+                            <t t-if="line_receipt.amount_total == line_receipt.amount_receipt">
+                                <t t-foreach="line_receipt.name" t-as="line_inv">
+                                    <t t-foreach="line_inv.invoice_line_ids" t-as="line_inv_ids">
+                                        <tr>
+                                            <td align="center">
+                                                <t t-set="count" t-value="count + 1"/>
+                                                <t t-esc="count"/>
+                                            </td>
+
+                                            <td align="left">
+                                                <t t-esc="line_inv_ids.name[0:300]"/>
+                                            </td>
+
+                                            <td align="right">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.price_unit)"/>
+                                            </td>
+
+                                            <td align="right" style="padding-right:15px;">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                            </td>
+
+                                            <td align="right">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.price_subtotal)"/>
+                                                <t t-set="sum_amount_total"
+                                                   t-value="sum_amount_total+ line_inv_ids.price_subtotal"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </t>
+                            <t t-eles="">
+                                <t t-if="line_receipt.amount_total &lt; line_receipt.amount_receipt">
+                                    <t t-foreach="line_receipt.name" t-as="line_inv">
+                                        <t t-foreach="line_inv.invoice_line_ids" t-as="line_inv_ids">
+                                            <tr>
+                                                <td align="center">
+                                                    <t t-set="count" t-value="count + 1"/>
+                                                    <t t-esc="count"/>
+                                                </td>
+
+                                                <td align="left">
+                                                    <t t-esc="line_inv_ids.name[0:300]"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.price_unit)"/>
+                                                </td>
+
+                                                <td align="right" style="padding-right:15px;">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.price_subtotal)"/>
+                                                    <t t-set="sum_amount_total"
+                                                       t-value="sum_amount_total+ line_inv_ids.price_subtotal"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="amount_vat" t-value="0"/>
+                                    <t t-set="amount_untaxed" t-value="0"/>
+                                    <t t-if="line_receipt.amount_tax == 0">
+                                        <t t-set="amount_vat" t-value="line_receipt.amount_receipt"/>
+                                        <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-set="amount_vat"
+                                           t-value="(line_receipt.amount_receipt - line_receipt.payment_id.amount_vat) * 100/107"/>
+                                        <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                                    </t>
+
+                                    <t t-foreach="line_receipt.name" t-as="line_inv2">
+                                        <t t-foreach="line_inv2.invoice_line_ids" t-as="line_inv_ids">
+                                            <tr>
+                                                <td align="center">
+                                                    <t t-set="count" t-value="count + 1"/>
+                                                    <t t-esc="count"/>
+                                                </td>
+
+                                                <td align="left">
+                                                    <t t-esc="line_inv_ids.name[0:300]"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-set="sum_unit"
+                                                       t-value="(line_inv_ids.price_subtotal *  amount_vat) / amount_untaxed"/>
+                                                    <t t-esc="'{:,.2f}'.format(sum_unit)"/>
+                                                </td>
+
+                                                <td align="right" style="padding-right:15px;">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-set="sum_total_line"
+                                                       t-value="sum_unit * line_inv_ids.quantity"/>
+                                                    <t t-set="sum_amount_total"
+                                                       t-value="sum_amount_total + sum_total_line"/>
+                                                    <t t-esc="'{:,.2f}'.format(sum_total_line)"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <t t-if="len(group_inv) &lt; 11">
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(sum_amount_total)"/>
+                </div>
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+                </div>
+
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                    <t t-set="sum_total" t-value="sum_amount_total+o.amount_vat"/>
+                    <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                </div>
+                <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                    (
+                    <t t-esc="o.bath_text(sum_total)"/>
+                    )
+                </div>
+            </t>
+
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1132px;left: 50px;">x</p>
+                <!--                <t t-foreach="o.cheque_ids[0]" t-as="cr">-->
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].name"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                    <t t-set="year" t-value="(int((o.cheque_ids[0].cheque_date).strftime('%Y')))+543"/>
+                    <t t-set="cheque_date" t-value="'%s/%s' %((o.cheque_ids[0].cheque_date).strftime('%d/%m'),year)"/>
+                    <t t-esc="cheque_date"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].bank_customer"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                    <t t-esc="o.cheque_ids[0].bank_branch_customer"/>
+                </p>
+                <!--                </t>-->
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_copy_pdf_report_layout32">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt_copy.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <t t-set="loop_br" t-value="30"/>
+                <t t-foreach="range(loop_br)" t-as="cc">
+                    <br/>
+                </t>
+                <p><!--.--></p>
+                <table width="100%" height="80%" style="font-family:'Kinnari';font-size: 16px;">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+
+                        <t t-set="sum_unit" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+                        <t t-set="sum_total_line" t-value="0"/>
+                        <t t-set="sum_amount_total" t-value="0"/>
+                        <t t-set="amount_total" t-value="0"/>
+                        <t t-foreach="group_inv[0:10]" t-as="line_receipt">
+
+                            <t t-set="amount_total" t-value="line_receipt.amount_receipt - line_receipt.amount_tax"/>
+                            <t t-if="line_receipt.amount_total == line_receipt.amount_receipt">
+                                <t t-foreach="line_receipt.name" t-as="line_inv">
+                                    <t t-foreach="line_inv.invoice_line_ids" t-as="line_inv_ids">
+                                        <tr>
+                                            <td align="center">
+                                                <t t-set="count" t-value="count + 1"/>
+                                                <t t-esc="count"/>
+                                            </td>
+
+                                            <td align="left">
+                                                <t t-esc="line_inv_ids.name[0:300]"/>
+                                            </td>
+
+                                            <td align="right">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.price_unit)"/>
+                                            </td>
+
+                                            <td align="right" style="padding-right:15px;">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                            </td>
+
+                                            <td align="right">
+                                                <t t-esc="'{:,.2f}'.format(line_inv_ids.price_subtotal)"/>
+                                                <t t-set="sum_amount_total"
+                                                   t-value="sum_amount_total+ line_inv_ids.price_subtotal"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </t>
+                            <t t-eles="">
+                                <t t-if="line_receipt.amount_total &lt; line_receipt.amount_receipt">
+                                    <t t-foreach="line_receipt.name" t-as="line_inv">
+                                        <t t-foreach="line_inv.invoice_line_ids" t-as="line_inv_ids">
+                                            <tr>
+                                                <td align="center">
+                                                    <t t-set="count" t-value="count + 1"/>
+                                                    <t t-esc="count"/>
+                                                </td>
+
+                                                <td align="left">
+                                                    <t t-esc="line_inv_ids.name[0:300]"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.price_unit)"/>
+                                                </td>
+
+                                                <td align="right" style="padding-right:15px;">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.price_subtotal)"/>
+                                                    <t t-set="sum_amount_total"
+                                                       t-value="sum_amount_total+ line_inv_ids.price_subtotal"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="amount_vat" t-value="0"/>
+                                    <t t-set="amount_untaxed" t-value="0"/>
+                                    <t t-if="line_receipt.amount_tax == 0">
+                                        <t t-set="amount_vat" t-value="line_receipt.amount_receipt"/>
+                                        <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-set="amount_vat"
+                                           t-value="(line_receipt.amount_receipt - line_receipt.payment_id.amount_vat) * 100/107"/>
+                                        <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                                    </t>
+
+                                    <t t-foreach="line_receipt.name" t-as="line_inv2">
+                                        <t t-foreach="line_inv2.invoice_line_ids" t-as="line_inv_ids">
+                                            <tr>
+                                                <td align="center">
+                                                    <t t-set="count" t-value="count + 1"/>
+                                                    <t t-esc="count"/>
+                                                </td>
+
+                                                <td align="left">
+                                                    <t t-esc="line_inv_ids.name[0:300]"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-set="sum_unit"
+                                                       t-value="(line_inv_ids.price_subtotal *  amount_vat) / amount_untaxed"/>
+                                                    <t t-esc="'{:,.2f}'.format(sum_unit)"/>
+                                                </td>
+
+                                                <td align="right" style="padding-right:15px;">
+                                                    <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                                </td>
+
+                                                <td align="right">
+                                                    <t t-set="sum_total_line"
+                                                       t-value="sum_unit * line_inv_ids.quantity"/>
+                                                    <t t-set="sum_amount_total"
+                                                       t-value="sum_amount_total + sum_total_line"/>
+                                                    <t t-esc="'{:,.2f}'.format(sum_total_line)"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <t t-if="len(group_inv) &lt; 21">
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(sum_amount_total)"/>
+                </div>
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+                </div>
+
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                    <t t-set="sum_total" t-value="sum_amount_total+o.amount_vat"/>
+                    <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                </div>
+                <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                    (
+                    <t t-esc="o.bath_text(sum_total)"/>
+                    )
+                </div>
+            </t>
+
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1132px;left: 50px;">x</p>
+                <!--                <t t-foreach="o.cheque_ids[0]" t-as="cr">-->
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].name"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                    <t t-set="year" t-value="(int((o.cheque_ids[0].cheque_date).strftime('%Y')))+543"/>
+                    <t t-set="cheque_date" t-value="'%s/%s' %((o.cheque_ids[0].cheque_date).strftime('%d/%m'),year)"/>
+                    <t t-esc="cheque_date"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].bank_customer"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                    <t t-esc="o.cheque_ids[0].bank_branch_customer"/>
+                </p>
+                <!--                </t>-->
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_receipt_pdf_report_pdf3">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="container">
+                    <t t-call="all_qweb_form_depa.payment_pdf_report_layout3"/>
+                    <t t-if="len(group_inv) &gt; 10">
+                        <t t-call="all_qweb_form_depa.payment_pdf_report_layout32"/>
+                    </t>
+                    <t t-set="copy_count" t-value="3"/>
+                    <t t-foreach="range(copy_count)" t-as="cc">
+                        <t t-call="all_qweb_form_depa.payment_copy_pdf_report_layout3"/>
+                        <t t-if="len(group_inv) &gt; 10">
+                            <t t-call="all_qweb_form_depa.payment_copy_pdf_report_layout32"/>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="payment_pdf_report_layout4">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <t t-set="loop_br" t-value="30"/>
+                <t t-foreach="range(loop_br)" t-as="cc">
+                    <br/>
+                </t>
+                <p><!--.--></p>
+                <table width="100%" height="80%" style="font-family:'Kinnari';font-size: 16px;">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+                        <t t-set="sum_unit" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+                        <t t-set="sum_total_line" t-value="0"/>
+                        <t t-set="sum_amount_total" t-value="0"/>
+                        <t t-set="amount_total" t-value="0"/>
+                        <t t-foreach="group_inv[0:10]" t-as="line_receipt">
+                            <t t-set="amount_total" t-value="line_receipt.amount_receipt - line_receipt.amount_tax"/>
+                            <t t-set="amount_vat" t-value="0"/>
+                            <t t-set="amount_untaxed" t-value="0"/>
+                            <t t-if="line_receipt.amount_tax == 0">
+                                <t t-set="amount_vat" t-value="line_receipt.amount_receipt"/>
+                                <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                            </t>
+                            <t t-else="">
+                                <t t-set="amount_vat"
+                                   t-value="(line_receipt.amount_receipt - line_receipt.payment_id.amount_vat) * 100/107"/>
+                                <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                            </t>
+
+                            <t t-foreach="line_receipt.name" t-as="line_inv2">
+                                <t t-foreach="line_inv2.invoice_line_ids" t-as="line_inv_ids">
+                                    <tr>
+                                        <td align="center">
+                                            <t t-set="count" t-value="count + 1"/>
+                                            <t t-esc="count"/>
+                                        </td>
+
+                                        <td align="left">
+                                            <t t-esc="line_inv_ids.name[0:300]"/>
+                                        </td>
+
+                                        <td align="right">
+                                            <t t-set="sum_unit"
+                                               t-value="(line_inv_ids.price_subtotal *  amount_vat) / amount_untaxed"/>
+                                            <t t-esc="'{:,.2f}'.format(sum_unit)"/>
+                                        </td>
+
+                                        <td align="right" style="padding-right:15px;">
+                                            <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                        </td>
+
+                                        <td align="right">
+                                            <t t-set="sum_total_line"
+                                               t-value="sum_unit * line_inv_ids.quantity"/>
+                                            <t t-set="sum_amount_total"
+                                               t-value="sum_amount_total + sum_total_line"/>
+                                            <t t-esc="'{:,.2f}'.format(sum_total_line)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <t t-if="len(group_inv) &lt; 11">
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(sum_amount_total)"/>
+                </div>
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+                </div>
+
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                    <t t-set="sum_total" t-value="sum_amount_total+o.amount_vat"/>
+                    <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                </div>
+                <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                    (
+                    <t t-esc="o.bath_text(sum_total)"/>
+                    )
+                </div>
+            </t>
+
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1132px;left: 50px;">x</p>
+                <!--                <t t-foreach="o.cheque_ids[0]" t-as="cr">-->
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].name"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                    <t t-set="year" t-value="(int((o.cheque_ids[0].cheque_date).strftime('%Y')))+543"/>
+                    <t t-set="cheque_date" t-value="'%s/%s' %((o.cheque_ids[0].cheque_date).strftime('%d/%m'),year)"/>
+                    <t t-esc="cheque_date"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].bank_customer"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                    <t t-esc="o.cheque_ids[0].bank_branch_customer"/>
+                </p>
+                <!--                </t>-->
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_pdf_report_layout42">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <t t-set="loop_br" t-value="30"/>
+                <t t-foreach="range(loop_br)" t-as="cc">
+                    <br/>
+                </t>
+                <p><!--.--></p>
+                <table width="100%" height="80%" style="font-family:'Kinnari';font-size: 16px;">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+
+                        <t t-set="sum_unit" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+                        <t t-set="sum_total_line" t-value="0"/>
+                        <t t-set="sum_amount_total" t-value="0"/>
+                        <t t-set="amount_total" t-value="0"/>
+                        <t t-foreach="group_inv[11:20]" t-as="line_receipt">
+                            <t t-set="amount_total" t-value="line_receipt.amount_receipt - line_receipt.amount_tax"/>
+                            <t t-set="amount_vat" t-value="0"/>
+                            <t t-set="amount_untaxed" t-value="0"/>
+                            <t t-if="line_receipt.amount_tax == 0">
+                                <t t-set="amount_vat" t-value="line_receipt.amount_receipt"/>
+                                <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                            </t>
+                            <t t-else="">
+                                <t t-set="amount_vat"
+                                   t-value="(line_receipt.amount_receipt - line_receipt.payment_id.amount_vat) * 100/107"/>
+                                <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                            </t>
+
+                            <t t-foreach="line_receipt.name" t-as="line_inv2">
+                                <t t-foreach="line_inv2.invoice_line_ids" t-as="line_inv_ids">
+                                    <tr>
+                                        <td align="center">
+                                            <t t-set="count" t-value="count + 1"/>
+                                            <t t-esc="count"/>
+                                        </td>
+
+                                        <td align="left">
+                                            <t t-esc="line_inv_ids.name[0:300]"/>
+                                        </td>
+
+                                        <td align="right">
+                                            <t t-set="sum_unit"
+                                               t-value="(line_inv_ids.price_subtotal *  amount_vat) / amount_untaxed"/>
+                                            <t t-esc="'{:,.2f}'.format(sum_unit)"/>
+                                        </td>
+
+                                        <td align="right" style="padding-right:15px;">
+                                            <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                        </td>
+
+                                        <td align="right">
+                                            <t t-set="sum_total_line"
+                                               t-value="sum_unit * line_inv_ids.quantity"/>
+                                            <t t-set="sum_amount_total"
+                                               t-value="sum_amount_total + sum_total_line"/>
+                                            <t t-esc="'{:,.2f}'.format(sum_total_line)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <t t-if="len(group_inv) &lt; 21">
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(sum_amount_total)"/>
+                </div>
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+                </div>
+
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                    <t t-set="sum_total" t-value="sum_amount_total+o.amount_vat"/>
+                    <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                </div>
+                <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                    (
+                    <t t-esc="o.bath_text(sum_total)"/>
+                    )
+                </div>
+            </t>
+
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1132px;left: 50px;">x</p>
+                <!--                <t t-foreach="o.cheque_ids[0]" t-as="cr">-->
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].name"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                    <t t-set="year" t-value="(int((o.cheque_ids[0].cheque_date).strftime('%Y')))+543"/>
+                    <t t-set="cheque_date" t-value="'%s/%s' %((o.cheque_ids[0].cheque_date).strftime('%d/%m'),year)"/>
+                    <t t-esc="cheque_date"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].bank_customer"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                    <t t-esc="o.cheque_ids[0].bank_branch_customer"/>
+                </p>
+                <!--                </t>-->
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_copy_pdf_report_layout4">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt_copy.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <t t-set="loop_br" t-value="30"/>
+                <t t-foreach="range(loop_br)" t-as="cc">
+                    <br/>
+                </t>
+                <p><!--.--></p>
+                <table width="100%" height="80%" style="font-family:'Kinnari';font-size: 16px;">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+
+                        <t t-set="sum_unit" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+                        <t t-set="sum_total_line" t-value="0"/>
+                        <t t-set="sum_amount_total" t-value="0"/>
+                        <t t-set="amount_total" t-value="0"/>
+                       <t t-foreach="group_inv[0:10]" t-as="line_receipt">
+                            <t t-set="amount_total" t-value="line_receipt.amount_receipt - line_receipt.amount_tax"/>
+                            <t t-set="amount_vat" t-value="0"/>
+                            <t t-set="amount_untaxed" t-value="0"/>
+                            <t t-if="line_receipt.amount_tax == 0">
+                                <t t-set="amount_vat" t-value="line_receipt.amount_receipt"/>
+                                <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                            </t>
+                            <t t-else="">
+                                <t t-set="amount_vat"
+                                   t-value="(line_receipt.amount_receipt - line_receipt.payment_id.amount_vat) * 100/107"/>
+                                <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                            </t>
+
+                            <t t-foreach="line_receipt.name" t-as="line_inv2">
+                                <t t-foreach="line_inv2.invoice_line_ids" t-as="line_inv_ids">
+                                    <tr>
+                                        <td align="center">
+                                            <t t-set="count" t-value="count + 1"/>
+                                            <t t-esc="count"/>
+                                        </td>
+
+                                        <td align="left">
+                                            <t t-esc="line_inv_ids.name[0:300]"/>
+                                        </td>
+
+                                        <td align="right">
+                                            <t t-set="sum_unit"
+                                               t-value="(line_inv_ids.price_subtotal *  amount_vat) / amount_untaxed"/>
+                                            <t t-esc="'{:,.2f}'.format(sum_unit)"/>
+                                        </td>
+
+                                        <td align="right" style="padding-right:15px;">
+                                            <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                        </td>
+
+                                        <td align="right">
+                                            <t t-set="sum_total_line"
+                                               t-value="sum_unit * line_inv_ids.quantity"/>
+                                            <t t-set="sum_amount_total"
+                                               t-value="sum_amount_total + sum_total_line"/>
+                                            <t t-esc="'{:,.2f}'.format(sum_total_line)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <t t-if="len(group_inv) &lt; 11">
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(sum_amount_total)"/>
+                </div>
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+                </div>
+
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                    <t t-set="sum_total" t-value="sum_amount_total+o.amount_vat"/>
+                    <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                </div>
+                <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                    (
+                    <t t-esc="o.bath_text(sum_total)"/>
+                    )
+                </div>
+            </t>
+
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1132px;left: 50px;">x</p>
+                <!--                <t t-foreach="o.cheque_ids[0]" t-as="cr">-->
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].name"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                    <t t-set="year" t-value="(int((o.cheque_ids[0].cheque_date).strftime('%Y')))+543"/>
+                    <t t-set="cheque_date" t-value="'%s/%s' %((o.cheque_ids[0].cheque_date).strftime('%d/%m'),year)"/>
+                    <t t-esc="cheque_date"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].bank_customer"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                    <t t-esc="o.cheque_ids[0].bank_branch_customer"/>
+                </p>
+                <!--                </t>-->
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_copy_pdf_report_layout42">
+        <div class="article" style="font-family:'Kinnari';font-size: 18px;">
+            <img src="/all_qweb_form_depa/static/src/img/payment_receipt_copy.png"
+                 style="width:300mm; height:424mm; position:absolute; z-index: -999;"/>
+            <h4 style="font-size: 18px;position: fixed;top: 120px;left: 930px;">
+                <t t-if="o.vat_ids">
+                    <span t-field="o.vat_ids.name"/>
+                </t>
+            </h4>
+            <!--Box 1-->
+            <div style="font-size: 18px;position: fixed;top: 555px;left: 235px;">
+                <span t-field="o.customer_id.vat"/>
+                <t t-if="o.customer_id.branch">
+                    <t t-if="o.customer_id.branch == '00000'">
+                        สำนักงานใหญ่
+                    </t>
+                    <t t-if="o.customer_id.branch != '00000'">
+                        สาขา
+                        <t t-esc="o.customer_id.branch"/>
+                    </t>
+                </t>
+            </div>
+            <div style="width: 50%;font-size: 18px;position: fixed;top: 590px;left: 235px;">
+                <span t-field="o.customer_id.name"/>
+            </div>
+            <div style=" width: 100%;font-size: 18px;position: fixed;top: 621px;left: 235px;">
+                <span t-field="o.customer_id.street"/>
+            </div>
+            <div style="width: 100%;font-size: 18px;position: fixed;top: 655px;left: 235px;">
+                <span t-field="o.customer_id.street2"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 690px;left: 235px;">
+                <span t-field="o.customer_id.city"/>
+                <span t-field="o.customer_id.zip"/>
+            </div>
+            <!--End Box 1-->
+            <!--Box 2-->
+            <div style="font-size: 18px;position: fixed;top: 550px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date).strftime('%Y')))+543"/>
+                <t t-set="re_date" t-value="'%s/%s' %((o.date).strftime('%d/%m'),year)"/>
+                <t t-esc="re_date"/>
+            </div>
+            <div style="display: block;width: 200px;font-size: 18px;position: fixed;top: 586px;left: 950px;">
+                <span t-field="o.customer_id.property_payment_term_id.name"/>
+            </div>
+            <div style="font-size: 18px;position: fixed;top: 620px;right: 100px;">
+                <t t-set="year" t-value="(int((o.date_due).strftime('%Y')))+543"/>
+                <t t-set="re_due_date" t-value="'%s/%s' %((o.date_due).strftime('%d/%m'),year)"/>
+                <t t-esc="re_due_date"/>
+            </div>
+            <!--End Box 2-->
+            <!--Box 3 -->
+            <div class="container" style="z-index: 100;">
+                <t t-set="loop_br" t-value="30"/>
+                <t t-foreach="range(loop_br)" t-as="cc">
+                    <br/>
+                </t>
+                <p><!--.--></p>
+                <table width="100%" height="80%" style="font-family:'Kinnari';font-size: 16px;">
+                    <thead align="center">
+                        <tr>
+                            <td width="11%"/>
+                            <td width="49%"/>
+                            <td width="15%"/>
+                            <td width="11%"/>
+
+                        </tr>
+                    </thead>
+                    <tbody valign="top">
+                        <t t-set="count" t-value="0"/>
+
+                        <t t-set="sum_unit" t-value="0"/>
+                        <t t-set="sum_total" t-value="0"/>
+                        <t t-set="sum_total_line" t-value="0"/>
+                        <t t-set="sum_amount_total" t-value="0"/>
+                        <t t-set="amount_total" t-value="0"/>
+                        <t t-foreach="group_inv[11:20]" t-as="line_receipt">
+                            <t t-set="amount_total" t-value="line_receipt.amount_receipt - line_receipt.amount_tax"/>
+                            <t t-set="amount_vat" t-value="0"/>
+                            <t t-set="amount_untaxed" t-value="0"/>
+                            <t t-if="line_receipt.amount_tax == 0">
+                                <t t-set="amount_vat" t-value="line_receipt.amount_receipt"/>
+                                <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                            </t>
+                            <t t-else="">
+                                <t t-set="amount_vat"
+                                   t-value="(line_receipt.amount_receipt - line_receipt.payment_id.amount_vat) * 100/107"/>
+                                <t t-set="amount_untaxed" t-value="line_receipt.amount_untaxed"/>
+                            </t>
+
+                            <t t-foreach="line_receipt.name" t-as="line_inv2">
+                                <t t-foreach="line_inv2.invoice_line_ids" t-as="line_inv_ids">
+                                    <tr>
+                                        <td align="center">
+                                            <t t-set="count" t-value="count + 1"/>
+                                            <t t-esc="count"/>
+                                        </td>
+
+                                        <td align="left">
+                                            <t t-esc="line_inv_ids.name[0:300]"/>
+                                        </td>
+
+                                        <td align="right">
+                                            <t t-set="sum_unit"
+                                               t-value="(line_inv_ids.price_subtotal *  amount_vat) / amount_untaxed"/>
+                                            <t t-esc="'{:,.2f}'.format(sum_unit)"/>
+                                        </td>
+
+                                        <td align="right" style="padding-right:15px;">
+                                            <t t-esc="'{:,.2f}'.format(line_inv_ids.quantity)"/>
+                                        </td>
+
+                                        <td align="right">
+                                            <t t-set="sum_total_line"
+                                               t-value="sum_unit * line_inv_ids.quantity"/>
+                                            <t t-set="sum_amount_total"
+                                               t-value="sum_amount_total + sum_total_line"/>
+                                            <t t-esc="'{:,.2f}'.format(sum_total_line)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Box 3-->
+            <!--Box 4-->
+            <t t-if="len(group_inv) &lt; 21">
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1105px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(sum_amount_total)"/>
+                </div>
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1160px;right: 30px;">
+                    <t t-esc="'{:,.2f}'.format(o.amount_vat)"/>
+                </div>
+
+                <div style="font-size: 18px;font-weight: bold;position: fixed;top: 1210px;right: 30px;">
+                    <t t-set="sum_total" t-value="sum_amount_total+o.amount_vat"/>
+                    <t t-esc="'{:,.2f}'.format(sum_total)"/>
+                </div>
+                <div style="font-size: 20px;font-weight: bold;width: 100%;display: inline-block;text-align: center;position: fixed;top: 1310px;left: 120px;">
+                    (
+                    <t t-esc="o.bath_text(sum_total)"/>
+                    )
+                </div>
+            </t>
+
+            <!--End Box 4-->
+            <!--Box 5-->
+            <t t-if="check_if == 1">
+                <p style=" font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 50px;">x</p>
+            </t>
+            <t t-elif="check_if == 2">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1132px;left: 50px;">x</p>
+                <!--                <t t-foreach="o.cheque_ids[0]" t-as="cr">-->
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].name"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1140px;left: 430px;">
+                    <t t-set="year" t-value="(int((o.cheque_ids[0].cheque_date).strftime('%Y')))+543"/>
+                    <t t-set="cheque_date" t-value="'%s/%s' %((o.cheque_ids[0].cheque_date).strftime('%d/%m'),year)"/>
+                    <t t-esc="cheque_date"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 160px;">
+                    <t t-esc="o.cheque_ids[0].bank_customer"/>
+                </p>
+                <p style="font-size: 18px;position: fixed;top: 1180px;left: 430px;">
+                    <t t-esc="o.cheque_ids[0].bank_branch_customer"/>
+                </p>
+                <!--                </t>-->
+            </t>
+            <t t-else="check_if == 3">
+                <p style="font-size: 30px;font-weight: bold;position: fixed;top: 1096px;left: 335px;">x</p>
+            </t>
+            <!--End Box 5-->
+        </div>
+    </template>
+    <template id="payment_receipt_pdf_report_pdf4">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="container">
+                    <t t-call="all_qweb_form_depa.payment_pdf_report_layout4"/>
+                    <t t-if="len(group_inv) &gt; 10">
+                        <t t-call="all_qweb_form_depa.payment_pdf_report_layout42"/>
+                    </t>
+                    <t t-set="copy_count" t-value="3"/>
+                    <t t-foreach="range(copy_count)" t-as="cc">
+                        <t t-call="all_qweb_form_depa.payment_copy_pdf_report_layout4"/>
+                        <t t-if="len(group_inv) &gt; 10">
+                            <t t-call="all_qweb_form_depa.payment_copy_pdf_report_layout42"/>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

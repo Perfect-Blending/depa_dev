@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tools -->
+    <!--    <menuitem id="menu_account_other" name="Tools" parent="account.menu_finance" sequence="4"/>-->
+
+    <!--    &lt;!&ndash; Advance system &ndash;&gt;-->
+    <!--    <menuitem id="menu_advance_main" name="Advance System" parent="menu_account_other" sequence="3"/>-->
+    <!--        <menuitem id="menu_advance" parent="menu_advance_main" name ="Advances" sequence="10"-->
+    <!--        action="action_account_advance"/>-->
+    <!--        <menuitem id="menu_account_advance_request" parent="menu_advance_main" sequence="5"-->
+    <!--            action="action_account_advance_request_1"/>-->
+    <!--        <menuitem id="menu_account_advance_clear" parent="menu_advance_main" sequence="20"-->
+    <!--        action="action_account_advance_clear"/>-->
+
+    <!-- Petty Cash -->
+    <!--    <menuitem id="menu_petty_payments_main" name="Petty Cash" parent="account.menu_finance" sequence="3"/>-->
+    <!--        <menuitem id="menu_petty" name="Petty Cash" parent="menu_petty_payments_main" sequence="10"/>-->
+    <!--&lt;!&ndash;            <menuitem id="menu_petty_received" parent="menu_petty" sequence="5" action="action_account_petty_received"/>&ndash;&gt;-->
+    <!--            <menuitem id="menu_account_petty_fund" parent="menu_petty" sequence="100" action="action_account_petty_fund"/>-->
+    <!--&lt;!&ndash;            <menuitem id="menu_petty_payment" parent="menu_petty" sequence="10" action="action_account_petty_payment"/>&ndash;&gt;-->
+
+    <!-- Bank and Cash -->
+    <menuitem id="menu_finance_bank_and_cash"
+              name="Bank and Cash"
+              parent="account.menu_finance"
+              sequence="7"/>
+
+    <menuitem string="Bank Statements"
+              action="account.action_bank_statement_tree"
+              id="account_bank_statement_menu"
+              parent="menu_finance_bank_and_cash"
+              sequence="10"/>
+
+    <menuitem id="account_bank_menu"
+              action="base.action_res_bank_form"
+              sequence="10"
+              parent="account.account_account_menu"/>
+
+    <!--    &lt;!&ndash; Bank and Cash &ndash;&gt;-->
+    <!--    <menuitem id="menu_finance_bank_and_cash" name="Bank and Cash" parent="account.menu_finance" sequence="3"/>-->
+    <!--        &lt;!&ndash; Cheque Receipt &ndash;&gt;-->
+    <!--        <menuitem id="menu_chq_receipt_" parent="menu_finance_bank_and_cash" sequence="1"-->
+    <!--            name="Cheque Receipt"/>-->
+    <!--            <menuitem id="menu_chq_receipt" parent="menu_chq_receipt_" sequence="1"-->
+    <!--                action="act_chq_receipt"/>-->
+    <!--            <menuitem id="menu_chq_receipt_honor" parent="menu_chq_receipt_" sequence="2"-->
+    <!--                action="act_chq_receipt_honor"/>-->
+    <!--            <menuitem id="menu_chq_receipt_sale" parent="menu_chq_receipt_" sequence="3" action="act_chq_receipt_sale"/>-->
+
+
+    <!--        &lt;!&ndash; Cheque Payment &ndash;&gt;-->
+    <!--        <menuitem id="menu_chq_payment_" parent="menu_finance_bank_and_cash" sequence="0"-->
+    <!--            name="Cheque Payment"/>-->
+    <!--            <menuitem id="menu_chq_payment" parent="menu_chq_payment_" sequence="1"-->
+    <!--                action="act_chq_payment"/>-->
+    <!--            <menuitem id="menu_chq_payment_honor" parent="menu_chq_payment_" sequence="2"-->
+    <!--                action="act_chq_payment_honor"/>-->
+    <!--            <menuitem id="menu_chq_payment_type_out" parent="menu_chq_payment_" sequence="5" action="act_chq_type_out"/>-->
+
+    <!--        &lt;!&ndash; Credit Card Receipt &ndash;&gt;-->
+    <!--        <menuitem id="menu_credit_card_receipt_" parent="menu_finance_bank_and_cash"-->
+    <!--            sequence="2" name="Credit Card Receipt"/>-->
+    <!--            <menuitem id="menu_credit_card_receipt" parent="menu_credit_card_receipt_"-->
+    <!--                sequence="1" action="act_credit_card_receipt"/>-->
+    <!--            <menuitem id="menu_credit_card_receipt_honor" parent="menu_credit_card_receipt_" sequence="2" action="act_credit_card_receipt_honor"/>-->
+
+    <!--        &lt;!&ndash; credit card payment &ndash;&gt;-->
+    <!--        <menuitem id="menu_credit_card_payment_" parent="menu_finance_bank_and_cash" sequence="2" name="Credit Card Payment"/>-->
+    <!--            <menuitem id="menu_credit_card_payment" parent="menu_credit_card_payment_" sequence="1" action="act_credit_card_payment"/>-->
+    <!--            <menuitem id="menu_credit_card_payment_honor" parent="menu_credit_card_payment_" sequence="2" action="act_credit_card_payment_honor"/>-->
+
+    <!--        &lt;!&ndash; Cash  &ndash;&gt;-->
+    <!--        <menuitem id="menu_cash" name="Cash" parent="menu_finance_bank_and_cash" sequence="3"/>-->
+    <!--            <menuitem id="menu_bank_deposit" action="act_bank_deposit" parent="menu_cash"-->
+    <!--                sequence="1"/>-->
+    <!--            <menuitem id="menu_bank_withdraw" action="act_bank_withdraw" parent="menu_cash" sequence="2"/>-->
+
+    <!--        &lt;!&ndash; Bank &ndash;&gt;-->
+    <!--        <menuitem id="menu_bank" name="Bank" parent="menu_finance_bank_and_cash" sequence="4"/>-->
+    <!--            <menuitem id="menu_bank_transfer" action="act_bank_transfer" parent="menu_bank"-->
+    <!--                sequence="1"/>-->
+    <!--            <menuitem id="menu_bank_income" action="act_bank_income" parent="menu_bank"-->
+    <!--                sequence="2"/>-->
+    <!--            <menuitem id="menu_bank_charge" action="act_bank_charge" parent="menu_bank"-->
+    <!--                sequence="3"/>-->
+    <!--            <menuitem id="menu_bank_st" parent="menu_bank" action="action_bank_statement" sequence="4"-->
+    <!--                name="Bank Statement"/>-->
+
+    <!--        &lt;!&ndash; Cheque Transfer &ndash;&gt;-->
+    <!--        <menuitem id="menu_cheque_transfer" name="Cheque Transfer"-->
+    <!--            parent="menu_finance_bank_and_cash" sequence="5"/>-->
+    <!--            <menuitem id="menu_cheque_transfer_in" parent="menu_cheque_transfer"-->
+    <!--                action="act_cheque_transfer_in" sequence="1"/>-->
+
+    <!--    &lt;!&ndash; Reporting &ndash;&gt;-->
+
+    <!--    <menuitem id="account_reports_th_statements_menu" name="Thailand"-->
+    <!--        parent="account.menu_finance_reports" sequence="0" groups="account.group_account_user"/>-->
+
+
+    <!--        &lt;!&ndash; Taxes &ndash;&gt;-->
+    <!--        <menuitem id="menu_report_tax" name="Taxes"-->
+    <!--            parent="account.menu_finance_reports" sequence="8"/>-->
+    <!--            <menuitem id="menu_vat_line" parent="menu_report_tax" action="action_vat_line"-->
+    <!--                sequence="10" name="Vat Lines"/>-->
+    <!--            <menuitem id="menu_report_pnd2" parent="menu_report_tax"-->
+    <!--                action="actions_report_pnd2" sequence="2"/>-->
+    <!--            <menuitem id="menu_report_pnd3" parent="menu_report_tax"-->
+    <!--                action="actions_report_pnd3" sequence="3"/>-->
+    <!--            <menuitem id="menu_report_pnd53" parent="menu_report_tax"-->
+    <!--                action="actions_report_pnd53" sequence="4"/>-->
+    <!--            <menuitem id="menu_wizard_wht_statement" parent="menu_report_tax"-->
+    <!--                action="act_wizard_wht_statement" sequence="5"/>-->
+    <!--            <menuitem id="menu_wizard_wht_statement" parent="menu_report_tax"-->
+    <!--                action="act_wizard_wht_statement" sequence="5"/>-->
+    <!--            <menuitem id="menu_report_pp30" parent="menu_report_tax"-->
+    <!--                action="actions_report_pp30" sequence="11"/>-->
+    <!--            <menuitem id="menu_account_report" name="Tax Report" action="actions_report_tax"-->
+    <!--                parent="menu_report_tax"/>-->
+    <!--            <menuitem id="menu_wizard_vat" parent="menu_report_tax" action="act_wizard_vat"-->
+    <!--                sequence="15"/>-->
+    <!--            <menuitem id="menu_report_pt40" parent="menu_report_tax"-->
+    <!--                action="actions_report_pt40" sequence="16"/>-->
+    <!--            <menuitem id="menu_wht_line" parent="menu_report_tax" action="action_wht_line" sequence="1"     name="WHT Lines"/>-->
+
+    <!--        &lt;!&ndash; Partner Reports &ndash;&gt;-->
+    <!--        <menuitem id="menu_finance_legal_statement" name="Partner Reports"-->
+    <!--            parent="account.menu_finance_reports" sequence="7"/>-->
+    <!--            <menuitem id="menu_report_partner_aged" parent="menu_finance_legal_statement"-->
+    <!--                action="actions_report_partner_aged" sequence="18"/>-->
+    <!--            &lt;!&ndash; <menuitem id="menu_aged_trial_balance" name="Partner Aged Balance"-->
+    <!--                action="account.action_account_aged_balance_view" parent="menu_finance_legal_statement"-->
+    <!--                sequence="19"/> &ndash;&gt;-->
+    <!--            <menuitem id="menu_report_partner_balance" parent="menu_finance_legal_statement"-->
+    <!--                action="actions_report_partner_balance" sequence="20"/>-->
+    <!--            <menuitem id="menu_report_partner_card" parent="menu_finance_legal_statement"-->
+    <!--                action="actions_report_partner_card" sequence="21"/>-->
+
+
+    <!--        &lt;!&ndash; Fixed Assets Report &ndash;&gt;-->
+    <!--&lt;!&ndash;         <menuitem id="menu_finance_fixed_assets_report" name="Fixed Assets Report"-->
+    <!--            parent="account.menu_finance_reports" sequence="6"/>-->
+    <!--            <menuitem id="menu_report_fixed_assets" parent="menu_finance_fixed_assets_report"-->
+    <!--                action="actions_report_fixed_assets" sequence="15"/>-->
+    <!--            <menuitem id="menu_report_fixed_assets_purchase" parent="menu_finance_fixed_assets_report"-->
+    <!--                action="actions_report_fixed_assets_purchase" sequence="16"/>-->
+    <!--            <menuitem id="menu_report_fixed_assets_sales" parent="menu_finance_fixed_assets_report"-->
+    <!--                action="actions_report_fixed_assets_sales" sequence="17"/>-->
+    <!-- &ndash;&gt;-->
+    <!--        &lt;!&ndash; General Report &ndash;&gt;-->
+    <!--        <menuitem id="menu_finance_general_report" name="General Report"-->
+    <!--            parent="account.menu_finance_reports" sequence="5"/>-->
+    <!--            <menuitem id="menu_report_petty_cash" parent="menu_finance_general_report"-->
+    <!--                action="actions_report_petty_cash" sequence="1"/>-->
+    <!--            <menuitem id="menu_advance_report" parent="menu_finance_general_report"-->
+    <!--                action="act_advance_report" sequence="2"/>-->
+    <!--            <menuitem id="menu_report_cheque" parent="menu_finance_general_report"-->
+    <!--                action="actions_report_cheque" sequence="3"/>-->
+    <!--            <menuitem id="menu_report_move" parent="menu_finance_general_report"-->
+    <!--                action="actions_report_move" sequence="4"/>-->
+    <!--            <menuitem id="menu_report_journal" parent="menu_finance_general_report"-->
+    <!--                action="actions_report_journal" sequence="5"/>-->
+
+    <!--        &lt;!&ndash; Financial Report  &ndash;&gt;-->
+    <!--&lt;!&ndash;        <menuitem id="menu_account_finance_report" name="Financial Report" parent="account.menu_finance_reports" sequence="4"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <menuitem id="menu_general_ledger" name="General Ledger"&ndash;&gt;-->
+    <!--&lt;!&ndash;                parent="menu_account_finance_report" action="account.action_account_general_ledger_menu"&ndash;&gt;-->
+    <!--&lt;!&ndash;                sequence="1"/>&ndash;&gt;-->
+
+
+    <record id="account.action_vendor_bill_template" model="ir.actions.act_window">
+        <field name="domain">[('type','=','in_invoice'),('is_petty_cash', '=', False)]</field>
+    </record>
+
+</odoo>

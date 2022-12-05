@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <record id="view_partner_simple_form_fax" model="ir.ui.view">-->
+<!--        <field name="name">Add fax on partner</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_simple_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="function" position="after">-->
+<!--                <field name="fax" placeholder="Fax..."/>-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="view_partner_short_form_fax" model="ir.ui.view">-->
+<!--        <field name="name">Add fax on partner</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_short_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="function" position="after">-->
+<!--                <field name="fax" placeholder="Fax..." widget="phone"/>-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="view_pfb_purchase_agreement_form" model="ir.ui.view">
+        <field name="name">Add Filed Purchase Agreement</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+            <field name="vendor_id" position="after">
+                <field name="bg_amount"/>
+                <field name="bg_note"/>
+                <field name="project_code"/>
+                <field name="project_name"/>
+            </field>
+            <field name="schedule_date" position="after">
+                <field name="bg_date"/>
+            </field>
+<!--            <field name="pfb_method_recruitment.method_of_recruitment" position="after">-->
+<!--                <field name="currency_id"/>-->
+<!--            </field>-->
+        </field>
+    </record>
+
+</odoo>

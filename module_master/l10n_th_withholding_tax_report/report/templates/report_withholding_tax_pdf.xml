@@ -1,0 +1,619 @@
+<odoo>
+
+    <template id="report_withholding_tax_html">
+        <div class="o_withholding_tax_report_page">
+            <t t-call="l10n_th_withholding_tax_report.report_buttons"/>
+            <t t-call="l10n_th_withholding_tax_report.report_withholding_tax"/>
+            <t t-call="l10n_th_withholding_tax_report.footer_report_withholding_tax"/>
+        </div>
+    </template>
+    <template id="header_report_withholding_tax">
+        <div class="act_as_table data_table">
+            <div class="act_as_row labels">
+                <div class="act_as_cell">Date From</div>
+                <div class="act_as_cell">Date To</div>
+                <div class="act_as_cell">Income Tax Form</div>
+                <div class="act_as_cell">Tax ID</div>
+                <div class="act_as_cell">Branch ID</div>
+            </div>
+            <div class="act_as_row">
+                <div class="act_as_cell">
+                    <span t-field="o.date_from"/>
+                </div>
+                <div class="act_as_cell">
+                    <span t-field="o.date_to"/>
+                </div>
+                <div class="act_as_cell">
+                    <span t-field="o.income_tax_form"/>
+                </div>
+                <div class="act_as_cell">
+                    <t t-if="o.company_id.partner_id.vat">
+                        <span t-field="o.company_id.partner_id.vat"/>
+                    </t>
+                    <t t-else="">
+                        <span> - </span>
+                    </t>
+                </div>
+                <div class="act_as_cell">
+                    <t t-if="o.company_id.partner_id.branch">
+                        <span t-field="o.company_id.partner_id.branch"/>
+                    </t>
+                    <t t-else="">
+                        <span> - </span>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="footer_report_withholding_tax">
+        <div class="act_as_table data_table" style="width: 100%;">
+            <div class="act_as_row" style="width: 100%; font-weight: bold;">
+                <t t-set="final_base" t-value="sum(o.results.mapped('base'))"/>
+                <t t-set="final_amount" t-value="sum(o.results.mapped('amount'))"/>
+                <div class="act_as_cell" style="width: 64.55%;">Balance</div>
+                <div class="act_as_cell right" style="width: 9%;">
+                    <span t-esc="final_base" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                </div>
+                <div class="act_as_cell right" style="width: 7.05%;">
+                    <span t-esc="final_amount" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                </div>
+                <div class="act_as_cell" style="width: 19.40%;">
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="report_withholding_tax">
+        <t t-set="title">Withholding Tax Report</t>
+        <div class="page">
+            <div class="row">
+                <h4 class="mt0" t-esc="title or 'Odoo Report'" style="text-align: center;"/>
+            </div>
+            <!-- Display filters -->
+            <t t-call="l10n_th_withholding_tax_report.header_report_withholding_tax"/>
+            <div class="page_break"/>
+            <div class="act_as_table data_table" style="width: 100%;">
+                <!-- Display table headers for lines -->
+                <div class="act_as_thead">
+                    <div class="act_as_row labels">
+                        <!--## sequence-->
+                        <div class="act_as_cell" style="width: 4%;">No.</div>
+                        <!--## customer -->
+                        <div class="act_as_cell" style="width: 7%;">Tax Invoice</div>
+                        <!--## supplier_partner_id-->
+                        <div class="act_as_cell" style="width: 13%;">Cus./Sup.</div>
+                        <!--## adress (street)-->
+                        <div class="act_as_cell" style="width: 13%;">Address</div>
+                        <!--## date-->
+                        <div class="act_as_cell" style="width: 6%;">Date</div>
+                        <!--## wt_cert_income_type-->
+                        <div class="act_as_cell" style="width: 16%;">Tax Description</div>
+                        <!--## wt_percent-->
+                        <div class="act_as_cell" style="width: 5%;">Tax</div>
+                        <!--## base-->
+                        <div class="act_as_cell" style="width: 9%;">Base Amount</div>
+                        <!--## amount-->
+                        <div class="act_as_cell" style="width: 7%;">Tax Amount</div>
+                        <!--## tax_payer-->
+                        <div class="act_as_cell" style="width: 8%;">Tax Payer</div>
+                        <!--## payment_id-->
+                        <div class="act_as_cell" style="width: 11%;">Ref Doc.</div>
+                    </div>
+                </div>
+                <t t-set="i" t-value="1"/>
+                <t t-foreach="o.results" t-as="o">
+                    <div class="act_as_row lines">
+                        <div class="act_as_cell" style="width: 4%;">
+                            <span t-esc="i"/>
+                            <t t-set="i" t-value="i+1"/>
+                        </div>
+                        <div class="act_as_cell" style="width: 7%;">
+                            <span t-field="o.cert_id.supplier_partner_id.vat"/>
+                        </div>
+                        <div class="act_as_cell left" style="width: 13%;">
+                            <span t-field="o.cert_id.supplier_partner_id.display_name"/>
+                        </div>
+                        <div class="act_as_cell left" style="width: 13%;">
+                            <span t-field="o.cert_id.supplier_partner_id.street"/>
+                        </div>
+                        <div class="act_as_cell" style="width: 6%;">
+                            <span t-field="o.cert_id.date"/>
+                        </div>
+                        <div class="act_as_cell left" style="width: 16%;">
+                            <span t-field="o.wt_cert_income_desc"/>
+                        </div>
+                        <div class="act_as_cell right" style="width: 5%;">
+                            <span t-field="o.wt_percent"/><span>%</span>
+                        </div>
+                        <div class="act_as_cell amount" style="width: 9%;">
+                            <span t-field="o.base" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                        </div>
+                        <div class="act_as_cell amount" style="width: 7%;">
+                            <span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                        </div>
+                        <div class="act_as_cell" style="width: 8%;">
+                            <span t-field="o.cert_id.tax_payer"/>
+                        </div>
+                        <div class="act_as_cell left" style="width: 11%;">
+                            <span t-esc="o.cert_id.payment_id and o.cert_id.payment_id.name or o.cert_id.ref_move_id.name"/>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+    <!--                   END Master Default                 -->
+
+    <!--                   Customs                     -->
+    <template id="report_withholding_tax_qweb">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <p>77777777</p>
+                <t t-esc="doc"/>
+                <t t-if="doc.wht_kind == 'pp7'">
+<!--                    <t t-call="l10n_th_withholding_tax_report.pnd53_report_view2"/>-->
+<!--                    <t t-call="l10n_th_withholding_tax_report.pnd53_report_view"/>-->
+                </t>
+                <t t-if="doc.income_tax_form == 'pnd3'">
+                    <t t-call="l10n_th_withholding_tax_report.pnd32_report_view2"/>
+                    <t t-call="l10n_th_withholding_tax_report.pnd3_report_view"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="pnd53_report_view">
+        <t t-call="web.html_container">
+            <t t-set="i" t-value="0" />
+            <t t-set="record_per_page" t-value="5" />
+            <t t-set="page_amount" t-value="1" />
+            <t t-if="len(doc.results) > record_per_page">
+                <t t-set="page_amount" t-value="len(doc.results) / record_per_page" />
+                <t t-if="page_amount > int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1" />
+                </t>
+            </t>
+            <t t-set="current_page" t-value="0" />
+             <t t-set="count_number" t-value="0"/>
+            <t t-set="sum_base" t-value="0"/>
+            <t t-set="sum_amount" t-value="0"/>
+            <t t-set="sum_base2" t-value="0"/>
+            <t t-set="sum_amount2" t-value="0"/>
+             <t t-foreach="doc.results" t-as="co">
+                 <t t-set="sum_base2" t-value="sum_base2+co.base"/>
+                 <t t-set="sum_amount2" t-value="sum_amount2+co.amount"/>
+             </t>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1" />
+                <div class="article" >
+                    <div class="row">
+                        <div class="page_number" style="position: absolute; z-index: 120; right: 90px; top: 85px;">
+                            <t t-esc="current_page" />
+                            <span style="padding-left: 70px;" />
+                            <t t-esc="int(page_amount)" />
+                        </div>
+                        <t t-set="j" t-value="i + record_per_page" />
+                        <t t-set="item_count" t-value="0" />
+
+
+                        <t t-foreach="doc.results[i:j]" t-as="cc">
+                            <div style="position:relative; z-index: 100;">
+                                <table t-attf-style="position:absolute; left: 65px; top: {{208 + (item_count*108)}}px; font-family: 'THSarabunNew'">
+                                    <tbody>
+                                        <tr>
+                                            <td style="position:absolute;  top: 40px;">
+                                                <t t-set="count_number" t-value="count_number+1" />
+                                                <span t-esc="count_number"/>
+                                                 <t t-set="item_count" t-value="item_count+1" />
+                                            </td>
+                                            <td style="position:absolute;  left: 100px;">
+                                                <span t-field="cc.cert_id.supplier_partner_id.vat"/>
+                                            </td>
+                                            <td width = '1000px' style="position:absolute;  left: 70px; top: 7px;">
+                                                <br/>
+                                                <span t-field="cc.cert_id.supplier_partner_id.display_name"/><br/>
+                                                <span t-field="cc.cert_id.supplier_partner_id.street" /><br/>
+                                                <span t-field="cc.cert_id.supplier_partner_id.street2" /><br/>
+                                            </td>
+                                            <td style="position:absolute;  left: 470px;">
+                                                <span t-field="cc.cert_id.supplier_partner_id.branch"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 40px; left: 595px;">
+                                               <span t-field="cc.cert_id.date"/>
+                                            </td>
+                                            <td width = '500px' style="position:absolute;  top: 40px; left: 690px;">
+                                                 <span t-field="cc.wt_cert_income_desc"/>
+                                            </td>
+                                             <td style="position:absolute;  top: 40px; left: 870px;">
+                                                <span t-field="cc.wt_percent"/><span>%</span>
+                                            </td>
+                                             <td style="position:absolute;  top: 40px; left: 940px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.base)" />
+                                                 <t t-set="sum_base" t-value="sum_base+cc.base"/>
+                                            </td>
+                                             <td style="position:absolute;  top: 40px; left: 1090px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.amount)" />
+                                                 <t t-set="sum_amount" t-value="sum_amount+cc.amount"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 40px; left: 1180px;">
+                                                <p>1</p>
+<!--                                              <t t-if="cc.wt_cert_income_type">-->
+<!--                                                  <span t-esc="cc.wt_cert_income_type[:1]"/>-->
+<!--                                              </t>-->
+                                            </td>
+                                        </tr>
+                                        <t t-if="(item_count+1 > 5) and len(doc.results[i:j]) == 5">
+                                            <tr>
+                                                <td style="position:absolute;  top: 118px; left: 950px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_base)" />
+                                                </td>
+                                                <td style="position:absolute;  top: 118px; left: 1090px;">
+                                                     <span t-esc="'{0:,.2f}'.format(sum_amount)" />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if=" len(doc.results[i:j]) &lt; 5 and ((item_count) == len(doc.results[i:j]))">
+                                            <tr>
+                                                <td style="position:fixed;  top: 755px; left: 990px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)" />
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                </td>
+                                                <td style="position:fixed;  top: 755px; left: 1150px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)" />
+                                                        <t t-set="sum_amount2" t-value="0"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <!-- END amount_total -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+
+                        <img src="/l10n_th_withholding_tax_report/static/img/PND53.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page" />
+            </t>
+        </t>
+    </template>
+    <template id="pnd53_report_view2">
+        <t t-call="web.html_container">
+            <div class="article" >
+                 <img src="/l10n_th_withholding_tax_report/static/img/PND532.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    <div class="o_without_tax_from" style="position: absolute; z-index: 120; right: 90px; top: 90px;">
+                        <!--box 1-->
+                        <div class="address1_pnd53">
+                            <span t-field="doc.company_id"/>
+                        </div>
+                        <div class="address2_pnd53">
+                             ลาดพร้าวฮิลล์
+                         </div>
+                        <div class="address3_pnd53">
+                            <span>0</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                        </div>
+                        <div class="address4_pnd53">
+                            <span>1</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">9</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                        </div>
+                        <div class="address5_pnd53">
+                             <span>0</span>
+                             <span style="padding-left:15px;">9</span>
+                             <span style="padding-left:7px;">9</span>
+                             <span style="padding-left:6px;">4</span>
+                             <span style="padding-left:6px;">0</span>
+                             <span style="padding-left:12px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:6px;">8</span>
+                             <span style="padding-left:7px;">7</span>
+                             <span style="padding-left:12px;">5</span>
+                             <span style="padding-left:8px;">1</span>
+                             <span style="padding-left:15px;">9</span>
+                        </div>
+                        <div class="address6_pnd53">
+                            80
+                         </div>
+                        <div class="address7_pnd53">
+                            ลาดพร้าว4
+                         </div>
+                        <div class="address8_pnd53">
+                            ลาดพร้าว
+                         </div>
+                        <div class="address9_pnd53">
+                            จอมพล
+                         </div>
+                        <div class="address10_pnd53">
+                            จตุจักร
+                         </div>
+                        <div class="address11_pnd53">
+                            กรุงเทพมหานคร
+                         </div>
+                       <!-- end box 1-->
+                        <!--Box 3-->
+                        <div class="address13_pnd53">
+                            <t t-set="record_per_page" t-value="5" />
+                            <t t-set="page_amount" t-value="1" />
+                            <t t-if="len(doc.results) > record_per_page">
+                                <t t-set="page_amount" t-value="len(doc.results) / record_per_page" />
+                                <t t-if="page_amount > int(page_amount)">
+                                    <t t-set="page_amount" t-value="page_amount + 1" />
+                                </t>
+                            </t>
+                            <t t-esc="int(page_amount)"/>
+                         </div>
+                        <div class="address12_pnd53">
+                            <t t-set="count_partner" t-value="" />
+                            <t t-set="array" t-value="[]" />
+                             <t t-set="count_partner2" t-value="0" />
+                             <t t-foreach="doc.results" t-as="line_wt">
+                                 <t t-if="line_wt.wht_id.partner_id.name not in array">
+                                     <t t-esc="array.append(line_wt.wht_id.partner_id.name)"/>
+                                 </t>
+                             </t>
+                            <t t-esc="len(array)"/>
+                         </div>
+                        <!-- end box 3-->
+                        <!--Box 4-->
+                         <!-- end box 4-->
+                        <t t-set="sum_base2" t-value="0"/>
+                        <t t-set="sum_amount2" t-value="0"/>
+                         <t t-foreach="doc.results" t-as="co">
+                             <t t-set="sum_base2" t-value="sum_base2+co.base_amount"/>
+                             <t t-set="sum_amount2" t-value="sum_amount2+co.tax"/>
+                         </t>
+                        <div class="address14_pnd53">
+                            <t t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                        </div>
+                        <div class="address15_pnd53">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                        <div class="address16_pnd53"> <span style="font-size: 30px">/</span> </div>
+                        <div class="address17_pnd53">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                    </div>
+             </div>
+        </t>
+    </template>
+
+    <template id="pnd3_report_view">
+        <t t-call="web.html_container">
+            <!-- i ไว้ใช้วนลูป ไม่ต้องแก้ไขอะไร -->
+            <t t-set="i" t-value="0" />
+            <!-- record_per_page จำนวน record ในแต่ละหน้า ตาม form ให้เป็น 5 -->
+            <t t-set="record_per_page" t-value="5" />
+            <!-- page_amount จำนวนหน้าทั้งหมด ไว้สำหรับแสดงเลขหน้า -->
+            <t t-set="page_amount" t-value="1" />
+            <t t-if="len(doc.results) > record_per_page">
+                <t t-set="page_amount" t-value="len(doc.results) / record_per_page" />
+                <t t-if="page_amount > int(page_amount)">
+                    <t t-set="page_amount" t-value="page_amount + 1" />
+                </t>
+            </t>
+            <!-- current_page หน้าปัจจุบัน ไว้สำหรับแสดงเลขหน้า -->
+            <t t-set="current_page" t-value="0" />
+            <!-- ลูปใหญ่ วนตามจำนวนหน้าทั้งหมดที่จะถูกปริ้นออกมา -->
+             <t t-set="count_number" t-value="0"/>
+            <t t-set="sum_base" t-value="0"/>
+            <t t-set="sum_amount" t-value="0"/>
+            <t t-set="sum_base2" t-value="0"/>
+            <t t-set="sum_amount2" t-value="0"/>
+             <t t-foreach="doc.results" t-as="co">
+                 <t t-set="sum_base2" t-value="sum_base2+co.base"/>
+                 <t t-set="sum_amount2" t-value="sum_amount2+co.amount"/>
+             </t>
+            <t t-foreach="range(int(page_amount))" t-as="rpa">
+                <t t-set="current_page" t-value="current_page + 1" />
+                <div class="article" >
+                    <div class="row">
+                        <div class="page_number" style="position: absolute; z-index: 120; right: 83px; top: 95px;">
+                            <t t-esc="current_page" />
+                            <span style="padding-left: 76px;" />
+                            <t t-esc="int(page_amount)" />
+                        </div>
+                        <t t-set="j" t-value="i + record_per_page" />
+                        <t t-set="item_count" t-value="0" />
+
+                        <!-- ลูปย่อย ที่ไว้สำหรับใส่ข้อมูลของแต่ละหน้า -->
+                        <t t-foreach="doc.results[i:j]" t-as="cc">
+                            <div style="position:relative; z-index: 100;">
+                                <!-- ตำแหน่งเริ่มของ record แรกไล่ลงไปเรื่อยจนครบ 5 ข้อมูล -->
+                                <table t-attf-style="position:absolute; left: 65px; top: {{224 + (item_count*86)}}px; font-family: 'THSarabunNew'">
+                                    <tbody>
+                                        <!-- ใช้ tr td ในการจัดรูปแบบข้อมูลของแต่ละช่อง -->
+                                        <tr>
+                                            <td style="position:absolute;  top: 30px;">
+                                                <t t-set="count_number" t-value="count_number+1" />
+                                                <span t-esc="count_number"/>
+                                                 <t t-set="item_count" t-value="item_count+1" />
+                                            </td>
+                                            <td style="position:absolute;  left: 100px;">
+                                                    <span t-field="cc.cert_id.supplier_partner_id.vat"/>
+                                            </td>
+                                            <td width = '1000px' style="position:absolute;  left: 70px; top: 8px;">
+                                                <br/>
+                                                <t t-if="cc.cert_id.supplier_partner_id.company_type == 'company'">
+                                                    <span t-field="cc.cert_id.supplier_partner_id.display_name"/><br/>
+                                                </t>
+                                                <t t-if="cc.cert_id.supplier_partner_id.company_type == 'person'">
+                                                   <span t-field="cc.cert_id.supplier_partner_id.firstname"/><span t-field="cc.cert_id.supplier_partner_id.lastname" style="padding-left: 300px"/><br/>
+                                                </t>
+                                                    <span t-field="cc.cert_id.supplier_partner_id.street" />
+                                                    <span t-field="cc.cert_id.supplier_partner_id.street2" />
+                                                    <span t-field="cc.cert_id.supplier_partner_id.city"/>
+                                                    <span t-field="cc.cert_id.supplier_partner_id.zip"/>
+                                            </td>
+                                            <td style="position:absolute;  left: 425px;">
+                                                <span t-field="cc.cert_id.supplier_partner_id.branch"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 30px; left: 590px;">
+                                               <span t-field="cc.cert_id.date"/>
+                                            </td>
+                                            <td width = '500px' style="position:absolute;  top: 30px; left: 685px;">
+                                                 <span t-field="cc.wt_cert_income_desc"/>
+                                            </td>
+                                             <td style="position:absolute;  top: 30px; left: 870px;">
+                                                <span t-field="cc.wt_percent"/><span>%</span>
+                                            </td>
+                                             <td style="position:absolute;  top: 30px; left: 940px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.base)" />
+                                                 <t t-set="sum_base" t-value="sum_base+cc.base"/>
+                                            </td>
+                                             <td style="position:absolute;  top: 30px; left: 1090px;">
+                                                 <t t-esc="'{0:,.2f}'.format(cc.amount)" />
+                                                 <t t-set="sum_amount" t-value="sum_amount+cc.amount"/>
+                                            </td>
+                                            <td style="position:absolute;  top: 30px; left: 1180px;">
+                                              <t t-if="cc.wt_cert_income_type">
+                                                  <span t-esc="cc.wt_cert_income_type[:1]"/>
+                                              </t>
+                                            </td>
+                                        </tr>
+                                       <t t-if="(item_count+1 > 5) and len(doc.results[i:j]) == 5">
+                                            <tr>
+                                                <td style="position:absolute;  top: 180px; left: 945px;">
+                                                    <span t-esc="'{0:,.2f}'.format(sum_base)" />
+                                                </td>
+                                                <td style="position:absolute;  top: 180px; left: 1080px;">
+                                                     <span t-esc="'{0:,.2f}'.format(sum_amount)" />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if=" len(doc.results[i:j]) &lt; 5 and ((item_count) == len(doc.results[i:j]))">
+                                            <tr>
+                                                <td style="position:fixed;  top: 750px; left: 990px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_base2)" />
+                                                        <t t-set="sum_base2" t-value="0"/>
+                                                </td>
+                                                <td style="position:fixed;  top: 750px; left: 1150px;">
+                                                        <span t-esc="'{0:,.2f}'.format(sum_amount2)" />
+                                                        <t t-set="sum_amount2" t-value="0"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+                        <!-- จบลูปย่อย -->
+
+                        <img src="/l10n_th_withholding_tax_report/static/img/pnd3.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    </div>
+                </div>
+                <t t-set="i" t-value="i + record_per_page" />
+            </t>
+            <!-- จบลูปใหญ่ -->
+
+        </t>
+    </template>
+    <template id="pnd32_report_view2">
+        <t t-call="web.html_container">
+            <div class="article" >
+                  <img src="/l10n_th_withholding_tax_report/static/img/pnd32.png" style="position:absolute; z-index: -9999; width: 100%;" />
+                    <div class="o_without_tax_from" style="position: absolute; z-index: 120; right: 90px; top: 90px;">
+                        <!--box 1-->
+                        <div class="address1_pnd3">
+                            <span t-field="doc.company_id"/>
+                        </div>
+                        <div class="address2_pnd3">
+                             ลาดพร้าวฮิลล์
+                         </div>
+                        <div class="address3_pnd3">
+                            <span>0</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                            <span style="padding-left:5px;">0</span>
+                        </div>
+                        <div class="address4_pnd3">
+                            <span>1</span>
+                            <span style="padding-left:7px;">0</span>
+                            <span style="padding-left:6px;">9</span>
+                            <span style="padding-left:6px;">0</span>
+                            <span style="padding-left:6px;">0</span>
+                        </div>
+                        <div class="address5_pnd3">
+                             <span>0</span>
+                             <span style="padding-left:15px;">9</span>
+                             <span style="padding-left:7px;">9</span>
+                             <span style="padding-left:7px;">4</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:15px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:7px;">0</span>
+                             <span style="padding-left:6px;">8</span>
+                             <span style="padding-left:7px;">7</span>
+                             <span style="padding-left:14px;">5</span>
+                             <span style="padding-left:7px;">1</span>
+                             <span style="padding-left:14px;">9</span>
+                        </div>
+                        <div class="address6_pnd3">
+                            80
+                         </div>
+                        <div class="address7_pnd3">
+                            ลาดพร้าว4
+                         </div>
+                        <div class="address8_pnd3">
+                            ลาดพร้าว
+                         </div>
+                        <div class="address9_pnd3">
+                            จอมพล
+                         </div>
+                        <div class="address10_pnd3">
+                            จตุจักร
+                         </div>
+                        <div class="address11_pnd3">
+                            กรุงเทพมหานคร
+                         </div>
+                       <!-- end box 1-->
+                        <!--Box 3-->
+                        <div class="address13_pnd3">
+                            <t t-set="record_per_page" t-value="5" />
+                            <t t-set="page_amount" t-value="1" />
+                            <t t-if="len(doc.results) > record_per_page">
+                                <t t-set="page_amount" t-value="len(doc.results) / record_per_page" />
+                                <t t-if="page_amount > int(page_amount)">
+                                    <t t-set="page_amount" t-value="page_amount + 1" />
+                                </t>
+                            </t>
+                            <t t-esc="int(page_amount)"/>
+                         </div>
+                        <div class="address12_pnd3">
+                            <t t-set="count_partner" t-value="" />
+                            <t t-set="array" t-value="[]" />
+                             <t t-set="count_partner2" t-value="0" />
+                             <t t-foreach="doc.results" t-as="line_wt">
+                                 <t t-if="line_wt.cert_id.supplier_partner_id not in array">
+                                     <t t-esc="array.append(line_wt.cert_id.supplier_partner_id)"/>
+                                 </t>
+                             </t>
+                            <t t-esc="len(array)"/>
+                         </div>
+                        <!-- end box 3-->
+                        <!--Box 4-->
+                         <!-- end box 4-->
+                        <t t-set="sum_base2" t-value="0"/>
+                        <t t-set="sum_amount2" t-value="0"/>
+                        <t t-foreach="doc.results" t-as="co">
+                             <t t-set="sum_base2" t-value="sum_base2+co.base"/>
+                             <t t-set="sum_amount2" t-value="sum_amount2+co.amount"/>
+                         </t>
+                        <div class="address14_pnd3">
+                            <t t-esc="'{0:,.2f}'.format(sum_base2)"/>
+                        </div>
+                        <div class="address15_pnd3">
+                            <t t-esc="'{0:,.2f}'.format(sum_amount2)"/>
+                        </div>
+                    </div>
+             </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="chart" model="account.chart.template">
+        <field name="property_account_receivable_id" ref="1130-01"/>
+        <field name="property_account_payable_id" ref="2120-01"/>
+        <field name="property_account_expense_categ_id" ref="5110-01"/>
+        <field name="property_account_income_categ_id" ref="4100-01"/>
+        <field name="income_currency_exchange_account_id" ref="4200-04"/>
+        <field name="expense_currency_exchange_account_id" ref="5370-07"/>
+    </record>
+</odoo>

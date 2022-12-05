@@ -1,0 +1,15 @@
+<templates id="template" xml:space="preserve">
+
+	<t t-extend="portal.chatter_composer">
+		<t t-jquery="form" t-operation="attributes">
+			<attribute name="enctype">multipart/form-data</attribute>
+		</t>
+		<t t-jquery="button[type='submit']" t-operation="after">
+			<t t-if="widget.options['res_model'] == 'machine.repair' ">
+				<input type="file" name="attachment_ids"/>
+			</t>
+        </t>
+	</t>
+
+</templates>
+

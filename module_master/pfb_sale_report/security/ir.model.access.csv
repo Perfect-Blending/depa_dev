@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pfb_sale_order_tree,pfb_sale_order_tree,model_pfb_sale_order_tree,,1,0,0,0

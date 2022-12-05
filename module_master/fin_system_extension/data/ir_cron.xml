@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+    <record id="ir_cron_fin100_to_approve_email_queue_1000" model="ir.cron">
+        <field name="name">FIN100 To Approve Email Queue 10:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 03:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_100" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin100_to_approve_email_queue_1400" model="ir.cron">
+        <field name="name">FIN100 To Approve Email Queue 14:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_100" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin100_to_comment_email_queue_1000" model="ir.cron">
+        <field name="name">FIN100 To Comment Email Queue 10:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 03:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_100" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin100_to_comment_email_queue_1400" model="ir.cron">
+        <field name="name">FIN100 To Comment Email Queue 14:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_100" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+
+
+    <record id="ir_cron_fin401_to_approve_email_queue_1000" model="ir.cron">
+        <field name="name">FIN401 To Approve Email Queue 10:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 03:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_401" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin401_to_approve_email_queue_1400" model="ir.cron">
+        <field name="name">FIN401 To Approve Email Queue 14:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_401" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin401_to_comment_email_queue_1000" model="ir.cron">
+        <field name="name">FIN401 To Comment Email Queue 10:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 03:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_401" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin401_to_comment_email_queue_1400" model="ir.cron">
+        <field name="name">FIN401 To Comment Email Queue 14:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_401" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+
+
+    <record id="ir_cron_fin201_to_approve_email_queue_1000" model="ir.cron">
+        <field name="name">FIN201 To Approve Email Queue 10:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 03:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_201" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin201_to_approve_email_queue_1400" model="ir.cron">
+        <field name="name">FIN201 To Approve Email Queue 14:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_201" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin201_to_comment_email_queue_1000" model="ir.cron">
+        <field name="name">FIN201 To Comment Email Queue 10:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 03:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_201" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin201_to_comment_email_queue_1400" model="ir.cron">
+        <field name="name">FIN201 To Comment Email Queue 14:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_201" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+
+
+
+    <record id="ir_cron_fin_purchase_to_approve_email_queue_1000" model="ir.cron">
+        <field name="name">FIN-PURCHASE To Approve Email Queue 10:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 03:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_purchase" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin_purchase_to_approve_email_queue_1400" model="ir.cron">
+        <field name="name">FIN-PURCHASE To Approve Email Queue 14:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_purchase" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin_purchase_to_comment_email_queue_1000" model="ir.cron">
+        <field name="name">FIN-PURCHASE To Comment Email Queue 10:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 03:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_purchase" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+
+    <record id="ir_cron_fin_purchase_to_comment_email_queue_1400" model="ir.cron">
+        <field name="name">FIN-PURCHASE To Comment Email Queue 14:00</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')"/>
+        <field name="model_id" ref="model_fw_pfb_fin_system_purchase" />
+        <field name="state">code</field>
+        <field name="code">model.cron_action_generate_mail_to_approve()</field>
+    </record>
+</odoo>

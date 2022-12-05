@@ -1,0 +1,2408 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* fw_pfb_fin_system
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c-20180607\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-25 20:00+0000\n"
+"PO-Revision-Date: 2019-05-25 20:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/models.py:328
+#, python-format
+msgid "%s (copy)"
+msgstr "%s (copy)"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,comment:fw_pfb_fin_system.fw_pfb_fin_system_approver
+#: model:res.groups,comment:fw_pfb_fin_system.fw_pfb_fin_system_show_all_fin
+msgid "Able to approve FIN system"
+msgstr "สามารถอนุมัติระบบ FIN ได้"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Acknowledge"
+msgstr "Acknowledge"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fw_pfb_fin_system_100_approver_tree_view
+msgid "Action"
+msgstr "ปฏิบัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_action_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_action_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_action_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_action_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_action_date
+msgid "Action Date"
+msgstr "วันเวลา อนุมัติ/รับทราบ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_100_all_fin_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_100_all_fin
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_tree_view
+msgid "All FIN100"
+msgstr "แบบขออนุมัติค่าใช้จ่ายทั้งหมด"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,state:0
+#: selection:fw_pfb_fin_system_201_approver,state:0
+#: selection:fw_pfb_fin_system_401_approver,state:0
+#: selection:fw_pfb_fin_system_purchase_approver,state:0
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Approve"
+msgstr "เห็นชอบ/อนุมัติแล้ว"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_request_form_view
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_history_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+msgid "Approver"
+msgstr "ผู้อนุมัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.wizard_approver_action
+msgid "Approver Memo"
+msgstr "Approver Memo"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_rights
+msgid "Approver Rights"
+msgstr "Approver Rights"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,name:fw_pfb_fin_system.fw_pfb_fin_system_approver
+msgid "Authorization to approve FIN system"
+msgstr "Authorization to approve FIN system"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_history_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+msgid "Budget Details"
+msgstr "งบประมาณ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_code
+msgid "Budget code"
+msgstr "Budget code"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_department
+msgid "Budget department"
+msgstr "Budget department"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_request
+msgid "Budget request"
+msgstr "งบประมาณที่ขอใช้"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_source
+msgid "Budget source"
+msgstr "แหล่งงบประมาณ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_budget_system
+msgid "Budget system"
+msgstr "ระบบงบประมาณ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_product_template_fin_ok
+msgid "Can be use as office expenses"
+msgstr "Can be use as office expenses"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_can_cancel
+msgid "Can cancel"
+msgstr "Can cancel"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,comment:fw_pfb_fin_system.fw_pfb_fin_system_user
+msgid "Can see menu FIN system"
+msgstr "Can see menu FIN system"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+#: selection:fw_pfb_fin_system_100_history,state:0
+msgid "Cancelled"
+msgstr "ยกเลิก"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_check_reject
+msgid "Check Reject"
+msgstr "Check Reject"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Complete"
+msgstr "Complete"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_100_completed_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_100_completed
+msgid "Expenses Completed"
+msgstr "แบบขออนุมัติค่าใช้จ่ายเสร็จสมบูรณ์"
+
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+#: selection:fw_pfb_fin_system_100_history,state:0
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_401_completed_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_401_completed
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_201_completed_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_201_completed
+msgid "Completed"
+msgstr "เสร็จสมบูรณ์"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_create_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_create_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_create_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_create_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_create_uid
+msgid "Created by"
+msgstr "สร้างโดย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_create_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_create_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_create_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_create_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_create_date
+msgid "Created on"
+msgstr "สร้างเมื่อ"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_system_report.py:24
+#, python-format
+msgid "Date from must before date to"
+msgstr "Date from must before date to"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_department
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_department
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_department
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_department
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_department
+msgid "Department"
+msgstr "แผนก"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+#: selection:fw_pfb_fin_system_100_history,state:0
+msgid "Deputy Director"
+msgstr "ผู้ช่วยผู้อำนวยการ/รองผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+#: selection:fw_pfb_fin_system_100_history,state:0
+msgid "Director"
+msgstr "ผู้อำนวยการสำนักงาน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_display_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_display_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_display_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_display_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_display_name
+msgid "Display Name"
+msgstr "ชื่อที่ใช้แสดง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+#: selection:fw_pfb_fin_system_100_history,state:0
+msgid "Draft"
+msgstr "ฉบับร่าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_hr_employee
+msgid "Employee"
+msgstr "บุคลากร"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_employee_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_employee_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_employee_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_employee_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_employee_id
+msgid "Employee id"
+msgstr "พนักงาน"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/models.py:262
+#: code:addons/fw_pfb_fin_system/models/models.py:387
+#, python-format
+msgid "Error ! You cannot create recursive categories."
+msgstr "Error ! You cannot create recursive categories."
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_common_report.py:91
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+msgid "FIN NO."
+msgstr "เลขที่"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_fin_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_fin_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_fin_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_fin_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_fin_position
+msgid "FIN Position"
+msgstr "ตำแหน่ง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_position
+msgid "Position"
+msgstr "ตำแหน่ง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.module.category,name:fw_pfb_fin_system.fw_pfb_fin_system_setting
+msgid "FIN System"
+msgstr "FIN System"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_hr_employee_fin_can_approve
+msgid "FIN approver"
+msgstr "FIN approver"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.report.xml,name:fw_pfb_fin_system.action_report_fin_system
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_menu_root
+msgid "FIN system"
+msgstr "FIN system"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_fin_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_fin_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_fin_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_fin_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_fin_id
+msgid "Fin id"
+msgstr "Fin id"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_lines
+msgid "Fin lines"
+msgstr "Fin lines"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_projects
+msgid "Fin projects"
+msgstr "Fin projects"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fiscal_year
+msgid "Fiscal year"
+msgstr "ปีงบประมาณ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_id
+msgid "ID"
+msgstr "ID"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_is_requester
+msgid "Is requester"
+msgstr "Is requester"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100___last_update
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver___last_update
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line___last_update
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects___last_update
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver___last_update
+msgid "Last Modified on"
+msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_write_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_write_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_write_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_write_uid
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_write_uid
+msgid "Last Updated by"
+msgstr "อัพเดทครั้งสุดท้ายโดย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_write_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_write_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_write_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_write_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_write_date
+msgid "Last Updated on"
+msgstr "อัพเดทครั้งสุดท้ายเมื่อ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_is_fin_lock
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_is_fin_lock
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_is_fin_lock
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+msgid "Lock"
+msgstr "ล็อค"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_401_approver_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_201_approver_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_purchase_approver_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_memo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_wizard_fw_pfb_fin_system_100_approver_history_memo
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Memo"
+msgstr "บันทึกช่วยจำ"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_common_report.py:91
+#, python-format
+msgid "Not implemented."
+msgstr "Not implemented."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_objective
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_fin_objective
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_fin_objective
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_objective
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_objective
+msgid "Objective"
+msgstr "วัตถุประสงค์"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_objective
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_objective
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_objective
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_objective
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_objective
+msgid "Objective Extra"
+msgstr "วัตถุประสงค์(เพิ่มเติม)"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_history_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+msgid "Participant"
+msgstr "ผู้เดินทาง/เข้ารับการอบรม"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_participants
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_participants
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_participants
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_participants
+msgid "Participants"
+msgstr "พนักงาน"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,state:0
+#: selection:fw_pfb_fin_system_201_approver,state:0
+#: selection:fw_pfb_fin_system_401_approver,state:0
+#: selection:fw_pfb_fin_system_purchase_approver,state:0
+msgid "Pending"
+msgstr "รออนุมัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_100_pending_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_100_pending
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_pending_tree_view
+msgid "Pending Expenses"
+msgstr "รออนุมัติค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/account_voucher.py:61
+#, python-format
+msgid "Please activate the sequence of selected journal !"
+msgstr "Please activate the sequence of selected journal !"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/account_invoice.py:75
+#, python-format
+msgid "Please create some invoice lines."
+msgstr "Please create some invoice lines."
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/account_voucher.py:64
+#, python-format
+msgid "Please define a sequence on the journal."
+msgstr "Please define a sequence on the journal."
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/sale_order.py:54
+#, python-format
+msgid "Please define an accounting sale journal for this company."
+msgstr "Please define an accounting sale journal for this company."
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/account_invoice.py:73
+#, python-format
+msgid "Please define sequence on the journal related to this invoice."
+msgstr "Please define sequence on the journal related to this invoice."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_product_template
+msgid "Product Template"
+msgstr "รูปแบบสินค้า"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_product_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_product_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_product_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_line_product_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_history_product_id
+msgid "Product id"
+msgstr "ค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+#: selection:fw_pfb_fin_system_100_history,state:0
+msgid "Project head/Preliminary Supervisor"
+msgstr "ผู้บังคับบัญชาขั้นต้น/หัวหน้าโครงการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_line_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_projects_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_history_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_projects_and_plan
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_projects_projects_and_plan
+msgid "Projects and plan"
+msgstr "โครงการและแผนงาน"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_system_report.py:27
+#, python-format
+msgid "Purchase Analysis"
+msgstr "Purchase Analysis"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/report/budget_system_report.py:30
+#, python-format
+msgid "Purchase Analysis allows you to easily check and analyse your company purchase history and performance. From this menu you can track your negotiation performance, the delivery performance of your vendors, etc."
+msgstr "Purchase Analysis allows you to easily check and analyse your company purchase history and performance. From this menu you can track your negotiation performance, the delivery performance of your vendors, etc."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_product_uom_qty
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_product_uom_qty
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_product_uom_qty
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_line_product_uom_qty
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_history_product_uom_qty
+msgid "Quantity"
+msgstr "จำนวน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_ref
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_ref
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_ref
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_reference
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_fin_ref
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_fin_ref
+msgid "Reference"
+msgstr "อ้างอิงถึง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,state:0
+#: selection:fw_pfb_fin_system_201_approver,state:0
+#: selection:fw_pfb_fin_system_401_approver,state:0
+#: selection:fw_pfb_fin_system_purchase_approver,state:0
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "Reject"
+msgstr "ปฏิเสธ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+msgid "Related Group"
+msgstr "ฝ่ายที่เกี่ยวข้อง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,help:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_employee_user_id
+msgid "Related user name for the resource to manage its access."
+msgstr "Related user name for the resource to manage its access."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_remark
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_remark
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_remark
+msgid "Remark"
+msgstr "หมายเหตุ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_100_request_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_100_request
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_tree_view
+msgid "Request Expenses"
+msgstr "ขอนุมัติค่าใช้จ่าย"
+
+
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_history_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+msgid "Request lines"
+msgstr "รายการค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_history_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+msgid "Other Informations"
+msgstr "ข้อมูลอื่นๆ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_history_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+msgid "Attachments"
+msgstr "ไฟล์แนบ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_requester
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_requester
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_requester
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_requester
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_requester
+msgid "Requester"
+msgstr "ผู้ขออนุมัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_emp_code
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_emp_code
+msgid "Employee code"
+msgstr "รหัสพนักงาน"
+
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_projects_reserve
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_projects_projects_reserve
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_projects_projects_reserve
+msgid "Reserve"
+msgstr "Reserve"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_projects_residual
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_projects_projects_residual
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_projects_projects_residual
+msgid "Residual"
+msgstr "ยอดคงค้าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_projects_projects_residual_amount
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_projects_projects_residual_amount
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_projects_projects_residual_amount
+msgid "Residual amount"
+msgstr "Residual amount"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_sale_quote_template
+msgid "Sale Quotation Template"
+msgstr "Sale Quotation Template"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_search
+msgid "Search state"
+msgstr "Search state"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Sent"
+msgstr "ส่งแล้ว"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+msgid "Sent to supervisor"
+msgstr "ส่งไปยังผู้บังคับบัญชาขั้นต้น/หัวหน้าโครงการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+msgid "Add FIN100 Request"
+msgstr "ดึงจาก FIN100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Set to draft"
+msgstr "ปรับเป็นฉบับร่าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_is_not_related_department
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_is_related_department
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_show_fin
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_show_fin
+msgid "Show FIN"
+msgstr "Show FIN"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,name:fw_pfb_fin_system.fw_pfb_fin_system_user
+msgid "Show FIN system"
+msgstr "Show FIN system"
+
+#. module: fw_pfb_fin_system
+#: model:res.groups,name:fw_pfb_fin_system.fw_pfb_fin_system_show_all_fin
+msgid "Show all FIN"
+msgstr "Show all FIN"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_state
+msgid "State"
+msgstr "จังหวัด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_state
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_state
+msgid "State"
+msgstr "สถานะ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_state
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_state
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_state
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_state
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_state
+msgid "State approve"
+msgstr "สถานะการอนุมัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_subject
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_subject
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_subject
+msgid "Subject"
+msgstr "เรื่อง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_subject_to
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_subject_to
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_subject_to
+msgid "Subject To."
+msgstr "เรียน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_price_subtotal
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_price_subtotal
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_price_subtotal
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_line_price_subtotal
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_history_price_subtotal
+msgid "Subtotal"
+msgstr "รวม"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_template_id
+msgid "Template id"
+msgstr "รูปแบบค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+msgid "Total"
+msgstr "ทั้งหมด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_price_total
+msgid "Request Amount"
+msgstr "ยอดเงินขออนุมัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_price_unit
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_history_price_unit
+msgid "Unit Price"
+msgstr "หน่วยละ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_product_uom
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_product_uom
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_product_uom
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_line_product_uom
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_history_product_uom
+msgid "Unit of Measure"
+msgstr "หน่วยของการวัด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+msgid "Unlock"
+msgstr "ปลดล็อค"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_sale_quote_template_fin_ok
+msgid "Use in FIN 100"
+msgstr "Use in FIN 100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_employee_user_id
+msgid "User"
+msgstr "ผู้ใช้"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/fin_100.py:410
+#: code:addons/fw_pfb_fin_system/models/fin_100.py:451
+#, python-format
+msgid "You can not do Approve"
+msgstr "You can not do Approve"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/fin_100.py:485
+#, python-format
+msgid "You can not do Reject"
+msgstr "You can not do Reject"
+
+#. module: fw_pfb_fin_system
+#: code:addons/fw_pfb_fin_system/models/purchase.py:44
+#, python-format
+msgid "You must set a Vendor Location for this partner %s"
+msgstr "You must set a Vendor Location for this partner %s"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_description
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_description
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_description
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_line_description
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_history_description
+msgid "description"
+msgstr "รายละเอียด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_fin_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_fin_date
+msgid "fin Date"
+msgstr "วันที่"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_end_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_end_date
+msgid "fin End Date"
+msgstr "วันที่ครบกำหนด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_no
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_no
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_no
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_fin_no
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_fin_no
+msgid "fin NO."
+msgstr "เลขที่"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_fw_pfb_fin_system_100
+msgid "fw_pfb_fin_system_100"
+msgstr "fw_pfb_fin_system_100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_fw_pfb_fin_system_100_approver
+msgid "fw_pfb_fin_system_100_approver"
+msgstr "fw_pfb_fin_system_100_approver"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_fw_pfb_fin_system_100_line
+msgid "fw_pfb_fin_system_100_line"
+msgstr "fw_pfb_fin_system_100_line"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_fw_pfb_fin_system_100_projects
+msgid "fw_pfb_fin_system_100_projects"
+msgstr "fw_pfb_fin_system_100_projects"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.wizard_approver_view
+msgid "or"
+msgstr "หรือ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model,name:fw_pfb_fin_system.model_wizard_fw_pfb_fin_system_100_approver
+msgid "wizard.fw_pfb_fin_system_100_approver"
+msgstr "wizard.fw_pfb_fin_system_100_approver"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_purchase_request_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_purchase_request_wiz_item_date
+msgid "Date"
+msgstr "วันที่"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_purchase_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_fin100_number
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_fin100_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_fin100_number
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_fin100_number
+msgid "Fin100 number"
+msgstr "เลขที่ FIN100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_expense
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_expense
+msgid "Expense"
+msgstr "ค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_description
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_description
+msgid "Description"
+msgstr "รายละเอียด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_unit
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_unit
+msgid "Unit"
+msgstr "หน่วยที่ใช้"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_unit_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_unit_name
+msgid "Unit name"
+msgstr "ชื่อหน่วย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_purchase_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_price_unit
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_purchase_request_wiz_item_price_unit
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_401_request_wiz_item_price_unit
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_price_unit
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_wiz_item_price_unit
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_price_unit
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_price_unit
+msgid "Unit Price"
+msgstr "ราคาต่อหน่วย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_amount
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_amount
+msgid "Amount"
+msgstr "ยอดเงิน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_total
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_total
+msgid "Total"
+msgstr "ยอดเงินคงเหลือ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_item_status
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_status
+msgid "Status"
+msgstr "สถานะ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_100_request_wiz_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_201_request_101_wiz_form
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_form
+msgid "FIN100 request"
+msgstr "รายการค่าใช้จ่าย FIN100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_filter_product_can_be_expensed
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_filter_product_can_be_expensed
+msgid "Product Can be expensed"
+msgstr "หนึ่งค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_filter_product
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_filter_product
+msgid "Product"
+msgstr "ชื่อค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_filter_code
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_filter_code
+msgid "Code"
+msgstr "รหัสค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_filter_prall
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_filter_prall
+msgid "All FIN100"
+msgstr "เลือกทั้งใบ FIN100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_filter_fin100_number
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_filter_fin100_number
+msgid "FIN100 Number"
+msgstr "เลขที่ FIN100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_100_request_wiz_filter_action
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_filter_action
+msgid "Filter action"
+msgstr "คำสั่งตัวกรอง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_401_request_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_401_request
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_201_request_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_201_request
+msgid "Request Loan"
+msgstr "ขออนุมัติยืมเงิน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_401_pending_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_401_pending
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_201_pending_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_201_pending
+msgid "Pending Loan"
+msgstr "รออนุมัติยืมเงิน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_401_all_fin_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_401_all_fin
+msgid "All FIN401"
+msgstr "FIN401 ทั้งหมด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_201_all_fin_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_201_all_fin
+msgid "All FIN401"
+msgstr "FIN201 ทั้งหมด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_price_total
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+msgid "Total"
+msgstr "ทั้งหมด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_price_total
+msgid "Total"
+msgstr "ยอดเงินจ่ายทั้งหมด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+msgid "FIN Information"
+msgstr "ข้อมูลเงินยืม"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_activity_end_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_activity_end_date
+msgid "Activity End Date"
+msgstr "วันสิ้นสุดกิจกรรม"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_loan_period
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_loan_period
+msgid "Loan period"
+msgstr "นำคืนภายในกำหนด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_loan_residual_selection
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_loan_residual_selection
+msgid "Loan Residual Selection"
+msgstr "เงินยืมคงค้าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_loan_residual_amount
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_loan_residual_amount
+msgid "Residual amount"
+msgstr "ยอดเงินยืมคงค้าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_loan_residual_reason
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_loan_residual_reason
+msgid "Residual Reason"
+msgstr "เหตุผลคงค้างเงินยืม"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+msgid "Transfer To KTB"
+msgstr "โอนเงินเข้าบัญชี ธ.กรุงไทย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+msgid "Branch"
+msgstr "สาขา"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+msgid "Account ID"
+msgstr "เลขที่บัญชี"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+msgid "Financial Staff Verification"
+msgstr "ข้อมูลการเงินตรวจสอบ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_staff_loan_residual_selection
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_staff_loan_residual_selection
+msgid "Fin staff loan residual selection"
+msgstr "การเงินตรวจสอบเงินยืมคงค้าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_staff_loan_residual_amount
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_staff_loan_residual_amount
+msgid "Residual amount"
+msgstr "ยอดเงินยืมคงค้าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_staff_employee
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_staff_employee
+msgid "Financial Staff"
+msgstr "พนักงานที่ตรวจสอบ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_staff_verify_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_staff_verify_date
+msgid "Verify Date"
+msgstr "วันที่ตรวจสอบ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_attachment
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_attachment
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_attachment
+msgid "Attachment"
+msgstr "ไฟล์แนบ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_401,loan_residual_selection:0
+#: selection:fw_pfb_fin_system_401,fin_staff_loan_residual_selection:0
+#: selection:fw_pfb_fin_system_201,loan_residual_selection:0
+#: selection:fw_pfb_fin_system_201,fin_staff_loan_residual_selection:0
+msgid "No Residual"
+msgstr "ไม่มีเงินยืมคงค้าง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_401,loan_residual_selection:0
+#: selection:fw_pfb_fin_system_401,fin_staff_loan_residual_selection:0
+#: selection:fw_pfb_fin_system_201,loan_residual_selection:0
+#: selection:fw_pfb_fin_system_201,fin_staff_loan_residual_selection:0
+msgid "Residual"
+msgstr "มีเงินยืมคงค้าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_menu_settings
+msgid "Configurations"
+msgstr "การตั้งค่า"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_settings_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_settings
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_settings2_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_settings2
+msgid "Settings"
+msgstr "ตั้งค่า"
+
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Assistant Director Position"
+msgstr "ตำแหน่งผู้ช่วยผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Deputy Director Position"
+msgstr "ตำแหน่งรองผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Director Position"
+msgstr "ตำแหน่งผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Director"
+msgstr "ผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Director Secretary"
+msgstr "เลขาผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Deputy Director"
+msgstr "รองผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Deputy Secretary"
+msgstr "เลขารองผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Assistant Director"
+msgstr "ผู้ช่วยผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Assistant Secretary"
+msgstr "เลขาผู้ช่วยผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Apply"
+msgstr "นำไปใช้"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings_form
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings2_form
+msgid "Allow"
+msgstr "การอนุมัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approved_amount
+msgid "Approved amount"
+msgstr "จำนวนเงินที่อนุมัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_request_amount_total
+msgid "Request amount total"
+msgstr "รวมยอดเงินขอเบิก"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_load_amount_total
+msgid "Loan amount total"
+msgstr "รวมยอดเงินยืม"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_spent_amount_total
+msgid "Spent amount total"
+msgstr "รวมยอดเงินใช้ไป"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_remaining_total
+msgid "Remaining amount paid / withdrawn"
+msgstr "เงินเหลือจ่าย/เบิกเพิ่ม"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+msgid "In case of refunding the remaining amount, pay more than 20%. The reason is"
+msgstr "กรณีคืนเงินเหลือจ่ายเกิน 20% สาเหตุคือ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_loan_amount
+msgid "Loan amount"
+msgstr "ยอดเงินยืม"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_payment_amount
+msgid "Payment amount"
+msgstr "ยอดเงินจ่าย"
+
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings_director
+msgid "Director"
+msgstr "ผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings_director_secretary
+msgid "Secretary"
+msgstr "เลขาผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings_related_department
+msgid "Related Group"
+msgstr "ฝ่ายที่เกี่ยวข้อง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings_financial_department
+msgid "Financial Department"
+msgstr "การเงิน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings_document_inspection1
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings_document_inspection2
+msgid "Document Inspection"
+msgstr "ตรวจสอบเอกสาร"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_deputy_name
+msgid "Director"
+msgstr "รองผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_deputy_secretary
+msgid "Secretary"
+msgstr "เลขารองผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_assistant_name
+msgid "Director"
+msgstr "ผู้ช่วยผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_assistant_secretary
+msgid "Secretary"
+msgstr "เลขาผู้ช่วยผู้อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_director_secretary_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_department_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_financial_department_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_document_inspection1_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_document_inspection2_name
+msgid "Name"
+msgstr "ชื่อ-สกุล"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_price_all_fin401
+msgid "Price All Fin401"
+msgstr "ขอยืมเงิน/มาตรการ/พัสดุ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_line_pay_amount
+msgid "Pay"
+msgstr "ยอดเงินจ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_lend
+msgid "Lend Total"
+msgstr "ขอยืมเงิน/มาตรการ/พัสดุ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_line_price_all_fin201
+msgid "Price All Fin201"
+msgstr "เบิกจ่าย/คืนเงิน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_price_all_fin401
+msgid "Price All Fin401"
+msgstr "ขอยืมเงิน/มาตรการ/พัสดุ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_price_all_fin201
+msgid "Price All Fin201"
+msgstr "เบิกจ่าย/คืนเงิน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_wiz_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin401_item_wiz_id
+msgid "Wizard request"
+msgstr "รหัส"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_fin_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin401_item_fin_date
+msgid "Fin Date"
+msgstr "วันที่"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_fin201_id
+msgid "FIN201 Number"
+msgstr "หมายเลข FIN201"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_fin201_line_id
+msgid "FIN201 Line Number"
+msgstr "หมายเลขย่อย FIN201"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_fin401_id
+msgid "FIN401 Number"
+msgstr "หมายเลข FIN401"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_fin401_line_id
+msgid "FIN401 Line Number"
+msgstr "หมายเลขย่อย FIN401"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_product_id
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin401_item_product_id
+msgid "Product"
+msgstr "ค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_description
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin401_item_description
+msgid "Description"
+msgstr "รายละเอียด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin401_item_status
+msgid "FIN401 Status"
+msgstr "สถานะเอกสาร"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_status
+msgid "FIN201 Status"
+msgstr "สถานะเอกสาร"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin201_item_total
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin100_line_all_fin401_item_total
+msgid "Total"
+msgstr "จำนวน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings2_form
+msgid "Director of office and secretary"
+msgstr "ผสศด. และ เลขา"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings2_form
+msgid "Deputy Of Office"
+msgstr "รสศด. และ เลขา"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings2_form
+msgid "Senior Executive Vice President"
+msgstr "รสศด. และ เลขา"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings2_form
+msgid "Assistant Of Office"
+msgstr "ชสศด. และ เลขา"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings2_form
+msgid "Executive Vice President"
+msgstr "ชสศด. และ เลขา"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_directorOfOffice
+msgid "President/CEO"
+msgstr "ผสศด."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_directorOfOffice_secretary
+msgid "Secretary"
+msgstr "เลขา ผสศด."
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_assistantOfOfficeManagement
+msgid "Group Executive Vice President"
+msgstr "ชสศด. บริหารสำนักงาน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_directorOfDirector
+msgid "Vice President of Agency Administration Department"
+msgstr "ผอ.อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_directorOfFinance
+msgid "director Of Finance"
+msgstr "ผอ.บริหารการคลังและบริการกลาง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_directorOfFinance
+msgid "Division Manager of Finance, Accounting and Control Division"
+msgstr "ผอ.บริหารการคลังและบริการกลาง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_directorOfStrategy
+msgid "Vice President of Strategic Management Department"
+msgstr "ผอ. กลยุทธ์องค์กร"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_directorOfEEC
+msgid "director Of EEC"
+msgstr "ผอ. ส่งเสริมอุตสาหกรรมดิจิทอล"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_budgetOwner
+msgid "Budget Owner"
+msgstr "เจ้าของงบ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_ManagerOfStock
+msgid "Manager Of Stock"
+msgstr "ผู้จัดการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_ManagerOfStock
+msgid "Division Manager of General Affairs and Facilities Division"
+msgstr "ผู้จัดการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_director_of_department
+msgid "Vice President Director"
+msgstr "ผอ. ฝ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_settings2_director_of_department
+msgid "Vice President/Director"
+msgstr "ผอ. ฝ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_deputyofoffice_secretary
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_assistantofoffice_secretary
+msgid "Secretary"
+msgstr "เลขา"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_deputyofoffice_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_assistantofoffice_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_directorofoffice_secretary_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_assistantofofficemanagement_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_directorofdirector_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_directoroffinance_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_directorofstrategy_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_directorofeec_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_budgetowner_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_managerofstock_name
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_related_director_of_department_name
+msgid "Name"
+msgstr "ชื่อ-สกุล"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_settings2_form
+msgid "Director of office and secretary"
+msgstr "ผสศด. และ เลขา"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_flow_template_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fw_pfb_flow_template
+msgid "Flow Template"
+msgstr "Flow Template"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_name
+msgid "Name"
+msgstr "ชื่อ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_department
+msgid "Department"
+msgstr "แผนก"
+
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_type
+msgid "Fin Type"
+msgstr "ประเภท FIN"
+
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_data_activate
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_approve_active
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_approve_active
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_approve_active
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_approve_active
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_approve_active
+msgid "Active"
+msgstr "เปิดใช้งาน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_approve_position_index
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_position_index
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_position_index
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_position_index
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_position_index
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_position_index
+msgid "Approve Index"
+msgstr "ลำดับ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_approve_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_position
+msgid "Approve Position"
+msgstr "ลำดับ/ตำแหน่ง อนุมัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_approve_position
+msgid "Position"
+msgstr "ตำแหน่ง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_approver_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_approver_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_approver_approve_position
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_approver_history_approve_position
+msgid "Approve Position"
+msgstr "ลำดับ/ตำแหน่ง อนุมัติ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_approve_emp_name
+msgid "Employee Name"
+msgstr "ชื่อพนักงาน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_flow_template_approve_data_activate
+msgid "Active"
+msgstr "เปิดใช้งาน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_fw_pfb_objective_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_fw_pfb_objective
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_objective_name
+msgid "Objective"
+msgstr "วัตถุประสงค์"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_purchase_request_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_purchase_request
+msgid "Purchase Request"
+msgstr "ขออนุมัติจัดซื้อจัดจ้าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_purchase_pending_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_purchase_pending
+msgid "Pending"
+msgstr "รออนุมัติจัดซื้อจัดจ้าง"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_purchase_completed_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_purchase_completed
+msgid "Completed"
+msgstr "แบบขออนุมัติจัดซื้อจัดจ้างเสร็จสมบูรณ์"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_purchase_all_fin_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_purchase_all_fin
+msgid "All Purchase Request"
+msgstr "ขออนุมัติจัดซื้อจัดจ้างทั้งหมด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_fin_type
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_fin_type
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_fin_type
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_fin_type
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_fin_type
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fin_201_request_101_wiz_item_fin_type
+msgid "FIN Type"
+msgstr "ประเภท FIN"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_request_form_view
+msgid "Participantas Quantity"
+msgstr "จัดอบรม / สัมนา จำนวน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_201_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_401_all_fin_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_purchase_request_form_view
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+msgid "People"
+msgstr "คน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_place
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_place
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_place
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_place
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_place
+msgid "Place"
+msgstr "สถานที่"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_operation_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_operation_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_operation_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_operation_date
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_operation_date
+msgid "Operation Date"
+msgstr "ระยะเวลาดำเนินการ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_seminar_partcipants
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_seminar_partcipants
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_seminar_partcipants
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_partcipants
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_partcipants
+msgid "Seminar Partcipants"
+msgstr "รายชื่อแขกผู้มีเกียรติ(ตามเอกสารแนบ)"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_other
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_other
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_other
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_other
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_other
+msgid "Other"
+msgstr "อื่นๆ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_estimate_output
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_estimate_output
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_estimate_output
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_estimate_output
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_estimate_output
+msgid "Estimate"
+msgstr "ผลที่คาดว่าจะได้รับ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_please_consider
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_please_consider
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_please_consider
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_please_consider
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_please_consider
+msgid "Please Consider"
+msgstr "เรียนมาเพื่อโปรดพิจารณา"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_flow_template_eroe
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_flow_template_erob
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_flow_template_proo
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_flow_template
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_flow_template
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_flow_template
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_flow_template
+msgid "Flow Template"
+msgstr "Flow Template"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Vice President Director"
+msgstr "ผอ. ฝ่าย"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Vice President/Director"
+msgstr "ผอ. ฝ่าย"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Director Of Finance"
+msgstr "ผอ.บริหารการคลังและบริการกลาง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Division Manager of Finance, Accounting and Control Division"
+msgstr "ผอ.บริหารการคลังและบริการกลาง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Assistant Of Office"
+msgstr "ชสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Executive Vice President"
+msgstr "ชสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Deputy Of Office"
+msgstr "รสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Senior Executive Vice President"
+msgstr "รสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Small Note"
+msgstr "บันทึกเล็ก"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Manager Of Stock"
+msgstr "ผู้จัดการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Division Manager of General Affairs and Facilities Division"
+msgstr "ผู้จัดการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,state:0
+#: selection:fw_pfb_fin_system_401,state:0
+#: selection:fw_pfb_fin_system_201,state:0
+#: selection:fw_pfb_fin_system_purchase,state:0
+msgid "Reject"
+msgstr "ปฏิเสธ"
+
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_fin100_origin
+msgid "Origin FIN100"
+msgstr "ต้นฉบับ FIN100"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_name
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+msgid "History No."
+msgstr "เลขที่"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+msgid "People"
+msgstr "คน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.view,arch_db:fw_pfb_fin_system.fin_system_100_request_history_form_view
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_participantas_quantity
+msgid "Participantas Quantity"
+msgstr "จัดอบรม / สัมนา จำนวน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.actions.act_window,name:fw_pfb_fin_system.fin_system_100_request_history_action
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_100_request_history
+msgid "FIN100 HISTORY"
+msgstr "ประวัติ FIN100"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_flow_template,type:0
+#: selection:fw_pfb_fin_system_100,fin_type:0
+#: selection:fw_pfb_fin_system_201,fin_type:0
+#: selection:fw_pfb_fin_system_401,fin_type:0
+#: selection:fw_pfb_fin_system_purchase,fin_type:0
+#: selection:fw_pfb_fin_system_100_history,fin_type:0
+#: selection:fw_pfb_fin_system_100,please_consider:0
+#: selection:fw_pfb_fin_system_201,please_consider:0
+#: selection:fw_pfb_fin_system_401,please_consider:0
+#: selection:fw_pfb_fin_system_purchase,please_consider:0
+#: selection:fw_pfb_fin_system_100_history,please_consider:0
+#: selection:fin_201_request_101_wiz_item,fin_type:0
+#: selection:fin_201_request_101_wiz,filter_fin_type:0
+msgid "Expense request of express"
+msgstr "แบบขออนุมัติค่าใช้จ่ายตามภารกิจแร่งด่วน"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_flow_template,type:0
+#: selection:fw_pfb_fin_system_100,fin_type:0
+#: selection:fw_pfb_fin_system_201,fin_type:0
+#: selection:fw_pfb_fin_system_401,fin_type:0
+#: selection:fw_pfb_fin_system_purchase,fin_type:0
+#: selection:fw_pfb_fin_system_100_history,fin_type:0
+#: selection:fw_pfb_fin_system_100,please_consider:0
+#: selection:fw_pfb_fin_system_201,please_consider:0
+#: selection:fw_pfb_fin_system_401,please_consider:0
+#: selection:fw_pfb_fin_system_purchase,please_consider:0
+#: selection:fw_pfb_fin_system_100_history,please_consider:0
+#: selection:fin_201_request_101_wiz_item,fin_type:0
+#: selection:fin_201_request_101_wiz,filter_fin_type:0
+msgid "Expense request of budget"
+msgstr "แบบขออนุมัติค่าใช้จ่ายตามแผนประจำปี"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_flow_template,type:0
+#: selection:fw_pfb_fin_system_100,fin_type:0
+#: selection:fw_pfb_fin_system_201,fin_type:0
+#: selection:fw_pfb_fin_system_401,fin_type:0
+#: selection:fw_pfb_fin_system_purchase,fin_type:0
+#: selection:fw_pfb_fin_system_100_history,fin_type:0
+#: selection:fw_pfb_fin_system_100,please_consider:0
+#: selection:fw_pfb_fin_system_201,please_consider:0
+#: selection:fw_pfb_fin_system_401,please_consider:0
+#: selection:fw_pfb_fin_system_purchase,please_consider:0
+#: selection:fw_pfb_fin_system_100_history,please_consider:0
+#: selection:fin_201_request_101_wiz_item,fin_type:0
+#: selection:fin_201_request_101_wiz,filter_fin_type:0
+msgid "Purchase reguest of objective"
+msgstr "แบบขออนุมัติจัดซื้อจัดจ้าง-อนุมัติหลักการ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_flow_template,type:0
+#: selection:fw_pfb_fin_system_100,fin_type:0
+#: selection:fw_pfb_fin_system_201,fin_type:0
+#: selection:fw_pfb_fin_system_401,fin_type:0
+#: selection:fw_pfb_fin_system_purchase,fin_type:0
+#: selection:fw_pfb_fin_system_100_history,fin_type:0
+#: selection:fw_pfb_fin_system_100,please_consider:0
+#: selection:fw_pfb_fin_system_201,please_consider:0
+#: selection:fw_pfb_fin_system_401,please_consider:0
+#: selection:fw_pfb_fin_system_purchase,please_consider:0
+#: selection:fw_pfb_fin_system_100_history,please_consider:0
+#: selection:fin_201_request_101_wiz_item,fin_type:0
+#: selection:fin_201_request_101_wiz,filter_fin_type:0
+msgid "Purchase request of stock"
+msgstr "แบบขออนุมัติจัดซื้อจัดจ้าง-กระบวนการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_flow_template,type:0
+#: selection:fw_pfb_fin_system_100,fin_type:0
+#: selection:fw_pfb_fin_system_201,fin_type:0
+#: selection:fw_pfb_fin_system_401,fin_type:0
+#: selection:fw_pfb_fin_system_purchase,fin_type:0
+#: selection:fw_pfb_fin_system_100_history,fin_type:0
+#: selection:fw_pfb_fin_system_100,please_consider:0
+#: selection:fw_pfb_fin_system_201,please_consider:0
+#: selection:fw_pfb_fin_system_401,please_consider:0
+#: selection:fw_pfb_fin_system_purchase,please_consider:0
+#: selection:fw_pfb_fin_system_100_history,please_consider:0
+#: selection:fin_201_request_101_wiz_item,fin_type:0
+#: selection:fin_201_request_101_wiz,filter_fin_type:0
+msgid "Loan request"
+msgstr "แบบขออนุมัติขอยืมเงิน"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_flow_template,type:0
+#: selection:fw_pfb_fin_system_100,fin_type:0
+#: selection:fw_pfb_fin_system_201,fin_type:0
+#: selection:fw_pfb_fin_system_401,fin_type:0
+#: selection:fw_pfb_fin_system_purchase,fin_type:0
+#: selection:fw_pfb_fin_system_100_history,fin_type:0
+#: selection:fw_pfb_fin_system_100,please_consider:0
+#: selection:fw_pfb_fin_system_201,please_consider:0
+#: selection:fw_pfb_fin_system_401,please_consider:0
+#: selection:fw_pfb_fin_system_purchase,please_consider:0
+#: selection:fw_pfb_fin_system_100_history,please_consider:0
+#: selection:fin_201_request_101_wiz_item,fin_type:0
+#: selection:fin_201_request_101_wiz,filter_fin_type:0
+msgid "Payment and refund request"
+msgstr "แบบขออนุมัติเบิกจ่าย/คืนเงิน"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Vice President Director"
+msgstr "ผอ. ฝ่าย"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Vice President/Director"
+msgstr "ผอ. ฝ่าย"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Related Group"
+msgstr "ฝ่ายที่เกี่ยวข้อง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Director Of Finance"
+msgstr "ผอ.บริหารการคลังและบริการกลาง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Division Manager of Finance, Accounting and Control Division"
+msgstr "ผอ.บริหารการคลังและบริการกลาง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Manager Of Stock"
+msgstr "ผู้จัดการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Division Manager of General Affairs and Facilities Division"
+msgstr "ผู้จัดการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Assistant Of Office"
+msgstr "ชสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Executive Vice President"
+msgstr "ชสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Deputy Of Office"
+msgstr "รสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Senior Executive Vice President"
+msgstr "รสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "Small Note"
+msgstr "บันทึกเล็ก"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,approve_position:0
+#: selection:fw_pfb_fin_system_201_approver,approve_position:0
+#: selection:fw_pfb_fin_system_401_approver,approve_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,approve_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,approve_position:0
+#: selection:fw_pfb_flow_template_approve,approve_position:0
+msgid "President/CEO"
+msgstr "ผสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Vice President Director"
+msgstr "ผอ. ฝ่าย"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Vice President/Director"
+msgstr "ผอ. ฝ่าย"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Director Of EEC"
+msgstr "ผอ. ส่งเสริมอุตสาหกรรมดิจิทอล"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Vice President of Strategic Management Department"
+msgstr "ผอ. กลยุทธ์องค์กร"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Budget Owner"
+msgstr "เจ้าของงบ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Director Of Finance"
+msgstr "ผอ.บริหารการคลังและบริการกลาง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Vice President of Finance and General Affairs Department"
+msgstr "ผอ.บริหารการคลังและบริการกลาง"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Manager Of Stock"
+msgstr "ผู้จัดการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Division Manager of General Affairs and Facilities Division"
+msgstr "ผู้จัดการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Assistant Of Office"
+msgstr "ชสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Executive Vice President"
+msgstr "ชสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Assistant Team Leader"
+msgstr "เลขา ชสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Senior Executive Vice President"
+msgstr "รสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Senior Executive Vice President"
+msgstr "รสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "'Deputy Team Leader"
+msgstr "เลขา รสศด."
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Group Executive Vice President"
+msgstr "ชสศด. บริหารสำนักงาน"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Vice President of Agency Administration Department"
+msgstr "ผอ.อำนวยการ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "President/CEO"
+msgstr "ผสศด."
+
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100_approver,fin_position:0
+#: selection:fw_pfb_fin_system_201_approver,fin_position:0
+#: selection:fw_pfb_fin_system_401_approver,fin_position:0
+#: selection:fw_pfb_fin_system_purchase_approver,fin_position:0
+#: selection:fw_pfb_fin_system_100_approver_history,fin_position:0
+#: selection:fw_pfb_flow_template_approve,position:0
+msgid "Senior Team Leader"
+msgstr "เลขา ผสศด."
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_menu_main_100
+msgid "FIN 100"
+msgstr "แบบขออนุมัติค่าใช้จ่าย"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_menu_main_201
+msgid "FIN 201"
+msgstr "แบบขออนุมัติเบิกจ่าย/คืนเงิน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_menu_main_401
+msgid "FIN 401"
+msgstr "แบบขออนุมัติขอยืมเงิน"
+
+#. module: fw_pfb_fin_system
+#: model:ir.ui.menu,name:fw_pfb_fin_system.fin_system_menu_main_purchase
+msgid "FIN Purchase"
+msgstr "แบบขออนุมัติกระบวนการพัสดุ"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_line_projects_and_plan_year
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_line_projects_and_plan_year
+msgid "Fiscal year"
+msgstr "ปีงบประมาณ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,priority:0
+#: selection:fw_pfb_fin_system_201,priority:0
+#: selection:fw_pfb_fin_system_401,priority:0
+#: selection:fw_pfb_fin_system_purchase,priority:0
+#: selection:fw_pfb_fin_system_100_history,priority:0
+msgid "Normal"
+msgstr "ปกติ"
+
+#. module: fw_pfb_fin_system
+#: selection:fw_pfb_fin_system_100,priority:0
+#: selection:fw_pfb_fin_system_201,priority:0
+#: selection:fw_pfb_fin_system_401,priority:0
+#: selection:fw_pfb_fin_system_purchase,priority:0
+#: selection:fw_pfb_fin_system_100_history,priority:0
+msgid "Urgent"
+msgstr "ด่วนที่สุด"
+
+#. module: fw_pfb_fin_system
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_priority
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_201_priority
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_401_priority
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_purchase_priority
+#: model:ir.model.fields,field_description:fw_pfb_fin_system.field_fw_pfb_fin_system_100_history_priority
+msgid "Priority"
+msgstr "ลำดับความสำคัญ"

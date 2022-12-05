@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="pfb_saraban.receive_document_main_need_list_action">
+        <field name="domain">[('state', 'not in', ['draft', 'done']), ('show_receive_document', '=', True)]</field>
+    </record>
+
+
+</odoo>

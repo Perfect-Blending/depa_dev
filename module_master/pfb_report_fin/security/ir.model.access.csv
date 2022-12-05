@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pfb_report_fin,pfb_report_fin,model_pfb_report_fin,fin_system.fw_pfb_fin_system_user,1,1,1,1
+

@@ -1,0 +1,20 @@
+<odoo>
+
+        <record id="group_manager" model="res.groups">
+            <field name="name">document / Manager</field>
+        </record>
+
+        <!-- <record id="setting_can_modify" model="ir.rule">
+            <field name="name">any responsible can modify course</field>
+            <field name="model_id" ref="model_document_internal_setting"/>
+            <field name="groups" eval="[(4, ref('document.group_manager'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="domain_force">
+                ['|', ('responsible_id','=',False), ('responsible_id','=',user.id)]
+            </field>
+        </record> -->
+
+</odoo>

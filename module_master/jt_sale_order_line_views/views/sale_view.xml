@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- order line search view -->
+        <record id="view_sales_order_line_filter_inherited" model="ir.ui.view">
+            <field name="name">sale order line select</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='salesman_id']" position="after">
+                    <field name="invoice_status"/>
+                    <field name="company_id"/>
+                    <field name="state"/>
+                    <filter string="Status: New" name="status_fil_draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Status: Sent" name="status_fil_sent" domain="[('state', '=', 'sent')]"/>
+                    <filter string="Status: Sale" name="status_fil_sale" domain="[('state', '=', 'sale')]"/>
+                    <filter string="Status: Done" name="status_fil_done" domain="[('state', '=', 'done')]"/>
+                    <filter string="Status: Cancel" name="status_fil_cancel" domain="[('state', '=', 'cancel')]"/>
+                </xpath>
+                <xpath expr="//group" position="inside">
+                    <filter string="Status" name="status" context="{'group_by':'state'}"/>
+                    <filter string="Invoice Status" name="invoice_status" context="{'group_by':'invoice_status'}"/>
+                    <filter string="Company" name="company" context="{'group_by':'company_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- order line tree view -->
+        <record id="view_order_line_tree_inherit" model="ir.ui.view">
+            <field name="name">sale.order.line.tree</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="/tree" position="inside">
+                    <field name="state" string="Status"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- order line action -->
+        <record model="ir.actions.act_window" id="action_order_line">
+          <field name="name">Order Lines</field>
+          <field name="res_model">sale.order.line</field>
+          <field name="view_mode">tree,pivot,form</field>
+          <field name="view_type">form</field>
+        </record>
+
+        <!-- Order Line menu -->
+        <menuitem 
+            id="order_line_menu"
+            parent="sale.sale_order_menu"
+            action="action_order_line"
+            name="Sale Lines"
+            sequence="2"/>
+
+    </data>
+</odoo>

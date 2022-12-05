@@ -1,0 +1,13 @@
+<odoo>
+    <report
+        string="ใบลดหนี้ขาย "
+        id="debit_note_pdf_report"
+        model="account.invoice"
+        name="debit_note_qweb.debit_note_pdf_report_pdf"
+        file="debit_note_qweb.debit_note_pdf_report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="'[%s]' % object.display_name"
+        paperformat="debit_note_qweb.paperformat_debit_note"
+    />
+
+</odoo>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="receive_document_main_form_view_inherit">
+        <field name="name">receive.document.main.form.inherit</field>
+        <field name="model">receive.document.main</field>
+        <field name="inherit_id" ref="pfb_saraban.receive_document_main_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="replace">
+                <sheet>
+                    <h1>
+                        <field name="name" readonly='1'/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                        </group>
+                        <group>
+                            <field name="material" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('state', 'not in', ['draft', 'sent', '1'])]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name='infomation' string='ข้อมูล'>
+                            <group>
+                                <group>
+                                    <field name="check_group_user" invisible="1"/>
+                                    <field name="refer" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="date_document"/>
+                                    <field name="name_real" attrs="{'readonly': [('check_group_user', '!=', True)]}" />
+                                    <button name="real_name_gen" type="object" class="oe_highlight" string="run" attrs="{'readonly': [('check_group_user', '!=', True)],'invisible':[('state', '!=', 'draft')]}"/>
+                                    <field name="date_document_real" attrs="{'readonly': [('check_group_user', '!=', True)]}"/>
+                                    <field name="employee_id" invisible="1" />
+                                    <field name="department_id" invisible="1"/>
+                                    <field name="department_name" readonly='1' />
+                                    <field name="date_receive" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="speed" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="secret" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="subject" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="from_document" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                                <group>
+                                    <field name="attachment_ids" widget="many2many_binary" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="reference_internal" readonly='1' options="{'no_create': True, 'no_create_edit':True,'no_open':True}">
+                                        <tree>
+                                            <field name="date_document"/>
+                                            <field name="name" string='name'/>
+                                            <field name="name_real"/>
+                                            <field name="date_document_real"/>
+                                            <!-- <field name="document_type"/> -->
+                                            <field name="department_name"/>
+                                            <field name="subject"/>
+                                            <field name="state" invisible='1'/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="dear" widget="radio" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="job_name" widget="many2many_tags" attrs="{'invisible':[('dear', '==', 'empolyee_name')],'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="empolyee_name" widget="many2many_tags" attrs="{'invisible':[('dear', '==', 'job_name')],'readonly': [('state', '!=', 'draft')]}" />
+                                    </group>
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                    <field name="note" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name='infomation' string='ลำดับอุนมัต'>
+                            <group>
+                                <group>
+                                    <field name="routings_internal_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="approval_count" invisible="1"/>
+                                    <button class="btn btn-primary" name="action_make_approval_wizard" type="object" attrs="{'invisible': [('state', 'in', ['draft','done'])]}">
+                                        <span>Make Aceptual</span>
+                                    </button>
+                                    <button name="make_order_setting_line" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}">
+                                        <span>Order</span>
+                                    </button>
+                                </group>
+                            </group>
+                            <field name="setting_line_ids" attrs="{'readonly': [('state', '=', 'done')]}">
+                                <tree edit="true" editable='bottom' default_order="step,sequence">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="is_active"/>
+                                    <field name="step" />
+                                    <field name="status" />
+                                    <field name="document_id" invisible='1' />
+                                    <field name="job_id_name" required='1'  options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="employee_id" required='1'  options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                    <field name="approve_type" required='1' />
+                                    <field name="approve_time" readonly='1' />
+                                    <field name="comment" readonly='1'/>
+                                    <field name="status_approve" readonly='1'/>
+                                    <field name="maker_add" readonly='1' invisible='1'/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="pfb_saraban.receive_document_main_need_list_action">
+        <field name="domain">[('state', 'not in', ['draft', 'done']), ('show_receive_document', '=', True)]</field>
+    </record>
+
+</odoo>

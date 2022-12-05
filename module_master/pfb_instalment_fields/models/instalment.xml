@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <record id="instalment_inherit" model="ir.ui.view">
+        <field name="name">work_acceptance.inherit</field>
+        <field name="model">work.acceptance</field>
+        <field name="inherit_id" ref="purchase_work_acceptance.view_work_acceptance_form"/>
+        <field name="arch" type="xml">
+            <field name="invoice_ref" position="after">
+                <field name="instalment_wa"/>
+            </field>
+        </field>
+   </record>
+</odoo>

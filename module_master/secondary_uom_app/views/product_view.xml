@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- product template view -->
+        <record id="product_normal_form_view_inherit" model="ir.ui.view">
+                <field name="name">product.template.form</field>
+                <field name="model">product.template</field>
+                <field name="inherit_id" ref="product.product_template_form_view"/>
+                <field name="arch" type="xml">
+                    <field name="uom_po_id" position="after">
+                        <field name="is_secondary_uom" groups="secondary_uom_app.group_secondary_uom"/>
+                        <field name="secondary_uom_id" groups="secondary_uom_app.group_secondary_uom" options="{'no_create': True}" attrs="{'invisible':[('is_secondary_uom', '!=', True)],'required':[('is_secondary_uom','=',True)]}"/>
+                    </field>
+                </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="product_open_secondary_quants">
+            <field name="name">Stock On Hand Secondary Qty</field>
+            <field name="context">{'search_default_internal_loc': 1, 'search_default_locationgroup':1}</field>
+           <field name="domain">[('product_id.product_tmpl_id', '=', active_id)]</field>
+            <field name="res_model">stock.quant</field>
+        </record>
+
+        <record id="product_template_form_view_procurement_button_inherit" model="ir.ui.view">
+            <field name="name">product.template.button.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+            <field name="arch" type="xml">
+                <button name="action_open_quants" position="after">
+                    <button type="object"
+                        name="action_open_secondary_quants"
+                        attrs="{'invisible':['|',('type', '!=', 'product'),('is_secondary_uom', '!=',True)]}"
+                        class="oe_stat_button" icon="fa-building-o"
+                        groups="secondary_uom_app.group_secondary_uom">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value" widget="statinfo">
+                                <field name="secondary_qty" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="secondary_uom_name"/>
+                            </span>
+                            <span class="o_stat_text">Secondary</span>
+                        </div>
+                    </button>
+                </button>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_form_view_procurement_button_extended">
+            <field name="name">product.product.procurement</field>
+            <field name="model">product.product</field>
+            <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
+            <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+            <field name="arch" type="xml">
+                <button name="action_open_quants" position="after">
+                    <button type="object"
+                        name="action_open_secondary_quants"
+                        attrs="{'invisible':['|',('type', '!=', 'product'),('is_secondary_uom', '!=',True)]}"
+                        class="oe_stat_button" icon="fa-building-o"
+                        groups="secondary_uom_app.group_secondary_uom">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value" widget="statinfo">
+                                <field name="secondary_qty" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="secondary_uom_name"/>
+                            </span>
+                            <span class="o_stat_text">Secondary</span>
+                        </div>
+                    </button>
+                </button>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_template_tree_view_extended">
+            <field name="name">product.product.extended</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="uom_id" position="after">
+                    <field name="secondary_qty" attrs="{'invisible':[('type', '!=', 'product')]}" groups="secondary_uom_app.group_secondary_uom"/>
+                    <field name="secondary_uom_id" options="{'no_open': True, 'no_create': True}" groups="secondary_uom_app.group_secondary_uom"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_product_tree_view_extended">
+            <field name="name">product.product.extended</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="uom_id" position="after">
+                    <field name="secondary_qty" attrs="{'invisible':[('type', '!=', 'product')]}" groups="secondary_uom_app.group_secondary_uom"/>
+                    <field name="secondary_uom_id" options="{'no_open': True, 'no_create': True}" groups="secondary_uom_app.group_secondary_uom"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_template_kanban_stock_view_extended">
+            <field name="name">Product Template Kanban Stock</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="arch" type="xml">
+                <ul position="inside">
+                    <li t-if="record.type.raw_value == 'product'" groups="secondary_uom_app.group_secondary_uom">Secondary On hand: <field name="secondary_qty" groups="secondary_uom_app.group_secondary_uom"/> <field name="secondary_uom_id" groups="secondary_uom_app.group_secondary_uom"/></li>
+                </ul>
+            </field>
+        </record>
+
+    </data>
+</odoo>

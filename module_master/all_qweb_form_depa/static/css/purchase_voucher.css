@@ -1,0 +1,68 @@
+// Change Font
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('/all_qweb_form_depa/static/fonts/THSarabunNew.ttf') format('truetype');
+}
+
+    .o_purchase_voucher_from{
+        font-size: 20px;
+        font-family: 'THSarabunNew';
+    }
+
+    .o_purchase_voucher_from .date_print {
+        position: fixed;
+        top: 45px;
+        right: 105px;
+    }
+
+    .o_purchase_voucher_from .company_name {
+        width: 100%;
+        position: fixed;
+        top: 124px;
+        left: 80px;
+    }
+
+    .o_purchase_voucher_from .note_name {
+        width: 58%;
+        line-height: 0.9;
+        position: fixed;
+        top: 155px;
+        left: 100px;
+    }
+
+    .o_purchase_voucher_from .inv_number {
+        width: 50%;
+        position: fixed;
+        top: 194px;
+        left: 100px;
+    }
+
+    .o_purchase_voucher_from .purchase_number_h1 {
+        position: fixed;
+        top: 125px;
+        left: 745px;
+    }
+
+    .o_purchase_voucher_from .purchase_date {
+        position: fixed;
+        top: 155px;
+        left: 745px;
+    }
+
+    .o_purchase_voucher_from .purchase_number {
+        position: fixed;
+        top: 184px;
+        left: 745px;
+    }
+
+     .o_purchase_voucher_from .purchase_note {
+        width: 100%;
+        position: fixed;
+        top: 1350px;
+        left: 130px;
+    }
+
+
+
+
+}

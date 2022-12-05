@@ -1,0 +1,1541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_move_form" model="ir.ui.view">
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//notebook/page[@name='journal_entries']" position="after">-->
+                <xpath expr="//notebook" position="inside">
+                    <page string="ภาษีมูลค่าเพิ่ม">
+                                <field name="vat_ids" colspan="4" attrs="{'readonly': [('state','in',('post','cancel'))]}"
+                                       context="{'default_vat_type':'purchase'}">
+                                    <tree string="ภาษีมูลค่าเพิ่ม" editable="top">
+                                        <field name="name"/>
+                                        <field name="docdat"/>
+                                        <field name="vatprd"/>
+                                        <field name="vat_period"/>
+                                        <field name="partner_id"/>
+                                        <field name="taxid"/>
+                                        <field name="depcod"/>
+                                        <field name="amount_untaxed" sum="Total"/>
+                                        <field name="amount_tax" sum="Tax Total"/>
+                                        <field name="amount_total" invisible="1"/>
+                                        <field name="remark"/>
+                                    </tree>
+                                </field>
+                    </page>
+                    <page string="ภาษีหัก ณ ที่จ่าย">
+                                <field name="wht_ids" colspan="4" attrs="{'readonly': [('state','in',('post','cancel'))]}"
+                                       context="{'default_wht_type':'purchase','default_date_doc':date}">
+                                    <tree string="With holding tax">
+                                        <field name="sequence" widget="handle"/>
+                                           <field name="wht_kind"/>
+                                        <field name="name"/>
+                                        <field name="date_doc"/>
+                                        <field name="partner_id"/>
+                                        <field name="base_amount" sum="Total"/>
+                                        <field name="tax" sum="Tax"/>
+                                    </tree>
+                                </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+<!--        <menuitem name="ระบบบัญชี" parent="account.menu_finance"-->
+<!--                  id="menu_bione_account_main" sequence="5"/>-->
+
+        <menuitem name="ลงบัญชีรายวัน" parent="account.menu_finance_entries"
+                  id="menu_bione_account_entry" sequence="10"/>
+
+        <!-- Entries -->
+        <record id="view_bione_account_move_tree" model="ir.ui.view">
+            <field name="name">bione.account.move.tree</field>
+            <field name="model">account.move</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';black:state == 'posted'" string="Account Entries">
+                    <field name="name"/>
+                    <field name="ref"/>
+                    <field name="date"/>
+                    <!--<field name="period_id"/>-->
+                    <field name="journal_id"/>
+                    <field name="partner_id"/>
+                    <field name="amount" sum="Total Amount"/>
+                    <!--<field name="to_check"/>-->
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_bione_account_move_kanban" model="ir.ui.view">
+            <field name="name">bione.account.move.kanban</field>
+            <field name="model">account.move</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="journal_id"/>
+                    <field name="name" />
+                    <field name="ref"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="row mb4">
+                                    <div class="col-xs-6">
+                                        <strong>
+                                            <span>
+                                                <field name="name"/>
+                                            </span>
+                                        </strong>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <strong>
+                                            <i class="fa fa-clock-o"/>
+                                            <t t-esc="record.date.value"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <span>
+                                            <field name="ref"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <span>
+                                            <field name="amount" widget='monetary'/>
+                                        </span>
+                                        <span>
+                                            <field name="currency_id" invisible="1"/>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <span class="pull-right">
+                                            <field name="state" widget="kanban_label_selection"
+                                                   options="{'classes': {'draft': 'default', 'posted': 'success'}}"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- สมุดรายวันทั่วไป -->
+        <record id="view_bione_account_move_form" model="ir.ui.view">
+            <field name="name">bione.account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="arch" type="xml">
+                <form string="Account Entry">
+                    <header>
+                        <button name="post" states="draft" string="Post" type="object" class="oe_highlight"
+                                groups="account.group_account_invoice"/>
+                        <button name="%(account.action_view_account_move_reversal)d" states="posted"
+                                string="Reverse Entry"
+                                type="action" groups="account.group_account_invoice"/>
+                        <button name="button_cancel" states="posted" string="Cancel Entry" type="object"
+                                groups="account.group_account_invoice"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <!--
+                        <div class="oe_button_box">
+                            <button name="open_reconcile_view"
+                                    class="oe_stat_button"
+                                    icon="fa-bars"
+                                    type="object"
+                                    string="Reconciled entries">
+                            </button>
+                        </div>-->
+                        <h1>
+                            <field name="name" readonly="True" attrs="{'invisible':[('name','=','/')]}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="ref" attrs="{'required': [('id', '==', False)]}"/>
+
+                            </group>
+                            <group>
+                                <field name="journal_id" options="{'no_open': True, 'no_create': True}"
+                                       domain="[('type','not in', ['sale','purchase','receive','pay'])]"/>
+<!--                                 <field name="voucher_asset_generate"/>-->
+                                <field name="company_id" required="1" groups="base.group_multi_company"/>
+                                <field name="amount" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Journal Items">
+                                <field name="line_ids" widget="one2many_list"
+                                       context="{'line_ids': line_ids, 'journal_id': journal_id, 'default_date_maturity': context_today().strftime('%Y-%m-%d')}">
+                                    <tree string="Journal Items">
+                                        <field name="account_id"
+                                               domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False)]"/>
+                                        <field name="partner_id"
+                                               domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                        <field name="name"/>
+                                        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                        <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                                        <field name="amount_currency" groups="base.group_multi_currency"/>
+                                        <field name="company_currency_id" invisible="1"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" options="{'no_create': True}"
+                                               groups="base.group_multi_currency"/>
+                                        <field name="debit" sum="Total Debit"/>
+                                        <field name="credit" sum="Total Credit"/>
+                                        <field name="date_maturity" required="0"
+                                               invisible="context.get('view_no_maturity', False)"/>
+                                        <field name="wht_ids"/>
+                                        <field name="vat_ids"/>
+                                        <field name="cheque_ids"/>
+                                    </tree>
+                                    <form string="Journal Item">
+                                        <sheet>
+                                            <field name="company_id" invisible="1"/>
+                                            <field name="parent_state" invisible="1"/>
+                                            <group>
+                                                <group>
+                                                    <field name="name" required="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="partner_id"
+                                                           attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"
+                                                           domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                                </group>
+                                            </group>
+                                            <notebook colspan="4">
+                                                <page string="Information">
+                                                    <group>
+                                                        <group string="Amount">
+                                                            <!--domain="[('company_id', '=', company_id)]"-->
+                                                            <field name="account_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="debit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="credit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="quantity"/>
+                                                        </group>
+                                                        <!--<group string="Accounting Documents">
+                                                            <field name="move_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="statement_id" readonly="True"
+                                                                   attrs="{'invisible': [('statement_id','=',False)]}"/>
+                                                            <field name="invoice_id"
+                                                                   attrs="{'invisible': [('invoice_id','=',False)]}"/>
+                                                        </group>-->
+                                                        <group string="Dates">
+                                                            <field name="date_maturity"
+                                                                   attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"/>
+                                                        </group>
+
+                                                        <group string="Taxes"
+                                                               attrs="{'invisible': [('tax_line_id','=',False), ('tax_ids','=',[])]}">
+                                                            <field name="tax_line_id" readonly="1"
+                                                                   attrs="{'invisible': [('tax_line_id','=',False)]}"/>
+                                                            <field name="tax_ids" widget="many2many_tags" readonly="1"
+                                                                   attrs="{'invisible': [('tax_ids','=',[])]}"/>
+                                                            <field name="tax_ok" invisible="1"/>
+                                                            <field name="wht_ok" invisible="1"/>
+                                                            <field name="wht_sale_ok" invisible="1"/>
+                                                            <field name="wht_purchase_ok" invisible="1"/>
+                                                            <field name="receivable_ok" invisible="1"/>
+                                                            <field name="payable_ok" invisible="1"/>
+                                                            <field name="cheque_ok" invisible="1"/>
+                                                        </group>
+                                                        <group string="Matching"
+                                                               attrs="{'invisible':[('full_reconcile_id','=',False)]}">
+                                                            <label for="full_reconcile_id"/>
+                                                            <div>
+                                                                <field name="full_reconcile_id"/>
+                                                                <field name="matched_debit_ids" invisible="1"/>
+                                                                <field name="matched_credit_ids" invisible="1"/>
+                                                                <button name="open_reconcile_view"
+                                                                        class="oe_link"
+                                                                        type="object"
+                                                                        string="-> View partially reconciled entries"
+                                                                        attrs="{'invisible': ['|', ('full_reconcile_id', '!=', False), '&amp;', ('matched_debit_ids', '=', []),('matched_credit_ids', '=', [])]}">
+                                                                </button>
+                                                            </div>
+                                                        </group>
+                                                        <group string="Currency" groups="base.group_multi_currency">
+                                                            <field name="currency_id" invisible="1"/>
+                                                            <field name="amount_currency"/>
+                                                        </group>
+                                                        <group string="States">
+                                                            <field name="blocked"/>
+                                                        </group>
+                                                        <group groups="analytic.group_analytic_accounting"
+                                                               string="Analytic">
+                                                            <field name="analytic_account_id"/>
+                                                            <field name="analytic_tag_ids" widget="many2many_tags"/>
+                                                        </group>
+                                                    </group>
+                                                    <field name="narration" colspan="4" nolabel="1"
+                                                           placeholder="Add an internal note..."/>
+                                                </page>
+                                                <page string="Analytic Lines"
+                                                      groups="analytic.group_analytic_accounting">
+                                                    <field name="date" invisible="1"/>
+                                                    <field name="analytic_line_ids"
+                                                           context="{'default_general_account_id':account_id, 'default_name': name, 'default_date':date, 'amount': (debit or 0.0)-(credit or 0.0)}"/>
+                                                </page>
+                                                <page string="VAT" attrs="{'invisible': [('tax_ok','=',False)]}">
+                                                    <field name="vat_ids">
+                                                        <tree string="ภาษีมูลค่าเพิ่ม" editable="top">
+                                                            <field name="name"/>
+                                                            <field name="docdat"/>
+                                                            <field name="vatprd"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="taxid"/>
+                                                            <field name="depcod"/>
+                                                            <field name="amount_untaxed" sum="Total"/>
+                                                            <field name="amount_tax" sum="Tax Total"/>
+                                                            <field name="amount_total" invisible="1"/>
+                                                            <field name="remark"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Purchase"
+                                                      attrs="{'invisible': [('wht_purchase_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'purchase','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_purchase_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Sale"
+                                                      attrs="{'invisible': [('wht_sale_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'sale','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="เช็ค" attrs="{'invisible': [('cheque_ok','=',False)]}">
+                                                    <field name="cheque_ids"
+                                                           context="{'default_partner_id': partner_id or False}">
+                                                        <tree string="Cheque">
+                                                            <field name="name"/>
+                                                            <field name="cheque_date"/>
+                                                            <field name="cheque_date_reconcile"/>
+                                                            <field name="bank"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="amount"/>
+                                                            <field name="state"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                                <field name="narration" colspan="4" placeholder="Add an internal note..." nolabel="1"
+                                       height="50"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_bione_account_move" model="ir.actions.act_window">
+            <field name="name">สมุดรายวันทั่วไป</field>
+            <field name="res_model">account.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+            <field name="domain">[('journal_id.type','not in', ['sale','purchase','receive','pay'])]</field>
+            <!--<field name="search_view_id" ref="view_bione_account_move_search"/>-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a journal entry.
+                </p>
+                <p>
+                    A journal entry consists of several journal items, each of
+                    which is either a debit or a credit transaction.
+                </p>
+                <p>
+                    Odoo automatically creates one journal entry per accounting
+                    document: invoice, refund, supplier payment, bank statements,
+                    etc. So, you should record journal entries manually only/mainly
+                    for miscellaneous operations.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_kanban">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="view_bione_account_move_kanban"/>
+            <field name="act_window_id" ref="action_bione_account_move"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_tree">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+            <field name="act_window_id" ref="action_bione_account_move"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_form">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_bione_account_move_form"/>
+            <field name="act_window_id" ref="action_bione_account_move"/>
+        </record>
+
+        <menuitem name="สมุดรายวันทั่วไป" parent="menu_bione_account_entry"
+                  id="menu_bione_journal_entry"
+                  action="action_bione_account_move"
+                  sequence="10"/>
+
+
+        <!-- สมุดรายวันซื้อ -->
+        <record id="view_bione_account_move_purchase_form" model="ir.ui.view">
+            <field name="name">bione.account.move.purchase.form</field>
+            <field name="model">account.move</field>
+            <field name="arch" type="xml">
+                <form string="Account Entry">
+                    <header>
+                        <button name="post" states="draft" string="Post" type="object" class="oe_highlight"
+                                groups="account.group_account_invoice"/>
+                        <button name="%(account.action_view_account_move_reversal)d" states="posted"
+                                string="Reverse Entry"
+                                type="action" groups="account.group_account_invoice"/>
+                        <button name="button_cancel" states="posted" string="Cancel Entry" type="object"
+                                groups="account.group_account_invoice"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <!--
+                        <div class="oe_button_box">
+                            <button name="open_reconcile_view"
+                                    class="oe_stat_button"
+                                    icon="fa-bars"
+                                    type="object"
+                                    string="Reconciled entries">
+                            </button>
+                        </div>-->
+                        <h1>
+                            <field name="name" readonly="True" attrs="{'invisible':[('name','=','/')]}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="ref" attrs="{'required': [('id', '==', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="journal_id" options="{'no_open': True, 'no_create': True}"
+                                       domain="[('type','=', 'purchase')]"/>
+                                <field name="company_id" required="1" groups="base.group_multi_company"/>
+                                <field name="amount" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Journal Items">
+                                <field name="line_ids" widget="one2many_list"
+                                       context="{'line_ids': line_ids, 'journal_id': journal_id, 'default_date_maturity': context_today().strftime('%Y-%m-%d')}">
+                                    <tree string="Journal Items">
+                                        <field name="account_id"
+                                               domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False)]"/>
+                                        <field name="partner_id"
+                                               domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                        <field name="name"/>
+                                        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                        <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                                        <field name="amount_currency" groups="base.group_multi_currency"/>
+                                        <field name="company_currency_id" invisible="1"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" options="{'no_create': True}"
+                                               groups="base.group_multi_currency"/>
+                                        <field name="debit" sum="Total Debit"/>
+                                        <field name="credit" sum="Total Credit"/>
+                                        <field name="date_maturity" required="0"
+                                               invisible="context.get('view_no_maturity', False)"/>
+                                        <field name="wht_ids"/>
+                                        <field name="vat_ids"/>
+                                        <field name="cheque_ids"/>
+                                    </tree>
+                                    <form string="Journal Item">
+                                        <sheet>
+                                            <field name="company_id" invisible="1"/>
+                                            <field name="parent_state" invisible="1"/>
+                                            <group>
+                                                <group>
+                                                    <field name="name" required="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="partner_id"
+                                                           attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"
+                                                           domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                                </group>
+                                            </group>
+                                            <notebook colspan="4">
+                                                <page string="Information">
+                                                    <group>
+                                                        <group string="Amount">
+                                                            <!--domain="[('company_id', '=', company_id)]"-->
+                                                            <field name="account_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="debit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="credit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="quantity"/>
+                                                        </group>
+                                                        <!--<group string="Accounting Documents">
+                                                            <field name="move_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="statement_id" readonly="True"
+                                                                   attrs="{'invisible': [('statement_id','=',False)]}"/>
+                                                            <field name="invoice_id"
+                                                                   attrs="{'invisible': [('invoice_id','=',False)]}"/>
+                                                        </group>-->
+                                                        <group string="Dates">
+                                                            <field name="date_maturity"
+                                                                   attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"/>
+                                                        </group>
+
+                                                        <group string="Taxes"
+                                                               attrs="{'invisible': [('tax_line_id','=',False), ('tax_ids','=',[])]}">
+                                                            <field name="tax_line_id" readonly="1"
+                                                                   attrs="{'invisible': [('tax_line_id','=',False)]}"/>
+                                                            <field name="tax_ids" widget="many2many_tags" readonly="1"
+                                                                   attrs="{'invisible': [('tax_ids','=',[])]}"/>
+                                                            <field name="tax_ok" invisible="1"/>
+                                                            <field name="wht_ok" invisible="1"/>
+                                                            <field name="wht_sale_ok" invisible="1"/>
+                                                            <field name="wht_purchase_ok" invisible="1"/>
+                                                            <field name="receivable_ok" invisible="1"/>
+                                                            <field name="payable_ok" invisible="1"/>
+                                                            <field name="cheque_ok" invisible="1"/>
+                                                        </group>
+                                                        <group string="Matching"
+                                                               attrs="{'invisible':[('full_reconcile_id','=',False)]}">
+                                                            <label for="full_reconcile_id"/>
+                                                            <div>
+                                                                <field name="full_reconcile_id"/>
+                                                                <field name="matched_debit_ids" invisible="1"/>
+                                                                <field name="matched_credit_ids" invisible="1"/>
+                                                                <button name="open_reconcile_view"
+                                                                        class="oe_link"
+                                                                        type="object"
+                                                                        string="-> View partially reconciled entries"
+                                                                        attrs="{'invisible': ['|', ('full_reconcile_id', '!=', False), '&amp;', ('matched_debit_ids', '=', []),('matched_credit_ids', '=', [])]}">
+                                                                </button>
+                                                            </div>
+                                                        </group>
+                                                        <group string="Currency" groups="base.group_multi_currency">
+                                                            <field name="currency_id" invisible="1"/>
+                                                            <field name="amount_currency"/>
+                                                        </group>
+                                                        <group string="States">
+                                                            <field name="blocked"/>
+                                                        </group>
+                                                        <group groups="analytic.group_analytic_accounting"
+                                                               string="Analytic">
+                                                            <field name="analytic_account_id"/>
+                                                            <field name="analytic_tag_ids" widget="many2many_tags"/>
+                                                        </group>
+                                                    </group>
+                                                    <field name="narration" colspan="4" nolabel="1"
+                                                           placeholder="Add an internal note..."/>
+                                                </page>
+                                                <page string="Analytic Lines"
+                                                      groups="analytic.group_analytic_accounting">
+                                                    <field name="date" invisible="1"/>
+                                                    <field name="analytic_line_ids"
+                                                           context="{'default_general_account_id':account_id, 'default_name': name, 'default_date':date, 'amount': (debit or 0.0)-(credit or 0.0)}"/>
+                                                </page>
+                                                <page string="VAT" attrs="{'invisible': [('tax_ok','=',False)]}">
+                                                    <field name="vat_ids">
+                                                        <tree string="ภาษีมูลค่าเพิ่ม" editable="top">
+                                                            <field name="name"/>
+                                                            <field name="docdat"/>
+                                                            <field name="vatprd"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="taxid"/>
+                                                            <field name="depcod"/>
+                                                            <field name="amount_untaxed" sum="Total"/>
+                                                            <field name="amount_tax" sum="Tax Total"/>
+                                                            <field name="amount_total" invisible="1"/>
+                                                            <field name="remark"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Purchase"
+                                                      attrs="{'invisible': [('wht_purchase_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'purchase','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_purchase_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Sale"
+                                                      attrs="{'invisible': [('wht_sale_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'sale','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="เช็ค" attrs="{'invisible': [('cheque_ok','=',False)]}">
+                                                    <field name="cheque_ids"
+                                                           context="{'default_partner_id': partner_id or False}">
+                                                        <tree string="Cheque">
+                                                            <field name="name"/>
+                                                            <field name="cheque_date"/>
+                                                            <field name="cheque_date_reconcile"/>
+                                                            <field name="bank"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="amount"/>
+                                                            <field name="state"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                                <field name="narration" colspan="4" placeholder="Add an internal note..." nolabel="1"
+                                       height="50"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_bione_account_move_purchase" model="ir.actions.act_window">
+            <field name="name">สมุดรายวันซื้อ</field>
+            <field name="res_model">account.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+             <field name="domain">[('journal_id.type','=', 'purchase')]</field>
+            <!--<field name="search_view_id" ref="view_bione_account_move_search"/>-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a journal entry.
+                </p>
+                <p>
+                    A journal entry consists of several journal items, each of
+                    which is either a debit or a credit transaction.
+                </p>
+                <p>
+                    Odoo automatically creates one journal entry per accounting
+                    document: invoice, refund, supplier payment, bank statements,
+                    etc. So, you should record journal entries manually only/mainly
+                    for miscellaneous operations.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_purchase_kanban">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="view_bione_account_move_kanban"/>
+            <field name="act_window_id" ref="action_bione_account_move_purchase"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_purchase_tree">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+            <field name="act_window_id" ref="action_bione_account_move_purchase"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_purchase_form">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_bione_account_move_purchase_form"/>
+            <field name="act_window_id" ref="action_bione_account_move_purchase"/>
+        </record>
+
+
+        <menuitem name="สมุดรายวันซื้อ" parent="menu_bione_account_entry"
+                  id="menu_bione_journal_purchase_entry"
+                  action="action_bione_account_move_purchase"
+                  sequence="20"/>
+
+        <!-- สมุดรายวันขาย -->
+        <record id="view_bione_account_move_sale_form" model="ir.ui.view">
+            <field name="name">bione.account.move.sale.form</field>
+            <field name="model">account.move</field>
+            <field name="arch" type="xml">
+                <form string="Account Entry">
+                    <header>
+                        <button name="post" states="draft" string="Post" type="object" class="oe_highlight"
+                                groups="account.group_account_invoice"/>
+                        <button name="%(account.action_view_account_move_reversal)d" states="posted"
+                                string="Reverse Entry"
+                                type="action" groups="account.group_account_invoice"/>
+                        <button name="button_cancel" states="posted" string="Cancel Entry" type="object"
+                                groups="account.group_account_invoice"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <!--
+                        <div class="oe_button_box">
+                            <button name="open_reconcile_view"
+                                    class="oe_stat_button"
+                                    icon="fa-bars"
+                                    type="object"
+                                    string="Reconciled entries">
+                            </button>
+                        </div>-->
+                        <h1>
+                            <field name="name" readonly="True" attrs="{'invisible':[('name','=','/')]}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="ref" attrs="{'required': [('id', '==', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="journal_id" options="{'no_open': True, 'no_create': True}"
+                                       domain="[('type','=', 'sale')]"/>
+                                <field name="company_id" required="1" groups="base.group_multi_company"/>
+                                <field name="amount" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Journal Items">
+                                <field name="line_ids" widget="one2many_list"
+                                       context="{'line_ids': line_ids, 'journal_id': journal_id, 'default_date_maturity': context_today().strftime('%Y-%m-%d')}">
+                                    <tree string="Journal Items">
+                                        <field name="account_id"
+                                               domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False)]"/>
+                                        <field name="partner_id"
+                                               domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                        <field name="name"/>
+                                        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                        <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                                        <field name="amount_currency" groups="base.group_multi_currency"/>
+                                        <field name="company_currency_id" invisible="1"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" options="{'no_create': True}"
+                                               groups="base.group_multi_currency"/>
+                                        <field name="debit" sum="Total Debit"/>
+                                        <field name="credit" sum="Total Credit"/>
+                                        <field name="date_maturity" required="0"
+                                               invisible="context.get('view_no_maturity', False)"/>
+                                        <field name="wht_ids"/>
+                                        <field name="vat_ids"/>
+                                        <field name="cheque_ids"/>
+                                    </tree>
+                                    <form string="Journal Item">
+                                        <sheet>
+                                            <field name="company_id" invisible="1"/>
+                                            <field name="parent_state" invisible="1"/>
+                                            <group>
+                                                <group>
+                                                    <field name="name" required="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="partner_id"
+                                                           attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"
+                                                           domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                                </group>
+                                            </group>
+                                            <notebook colspan="4">
+                                                <page string="Information">
+                                                    <group>
+                                                        <group string="Amount">
+                                                            <!--domain="[('company_id', '=', company_id)]"-->
+                                                            <field name="account_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="debit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="credit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="quantity"/>
+                                                        </group>
+                                                        <!--<group string="Accounting Documents">
+                                                            <field name="move_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="statement_id" readonly="True"
+                                                                   attrs="{'invisible': [('statement_id','=',False)]}"/>
+                                                            <field name="invoice_id"
+                                                                   attrs="{'invisible': [('invoice_id','=',False)]}"/>
+                                                        </group>-->
+                                                        <group string="Dates">
+                                                            <field name="date_maturity"
+                                                                   attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"/>
+                                                        </group>
+
+                                                        <group string="Taxes"
+                                                               attrs="{'invisible': [('tax_line_id','=',False), ('tax_ids','=',[])]}">
+                                                            <field name="tax_line_id" readonly="1"
+                                                                   attrs="{'invisible': [('tax_line_id','=',False)]}"/>
+                                                            <field name="tax_ids" widget="many2many_tags" readonly="1"
+                                                                   attrs="{'invisible': [('tax_ids','=',[])]}"/>
+                                                            <field name="tax_ok" invisible="1"/>
+                                                            <field name="wht_ok" invisible="1"/>
+                                                            <field name="wht_sale_ok" invisible="1"/>
+                                                            <field name="wht_purchase_ok" invisible="1"/>
+                                                            <field name="receivable_ok" invisible="1"/>
+                                                            <field name="payable_ok" invisible="1"/>
+                                                            <field name="cheque_ok" invisible="1"/>
+                                                        </group>
+                                                        <group string="Matching"
+                                                               attrs="{'invisible':[('full_reconcile_id','=',False)]}">
+                                                            <label for="full_reconcile_id"/>
+                                                            <div>
+                                                                <field name="full_reconcile_id"/>
+                                                                <field name="matched_debit_ids" invisible="1"/>
+                                                                <field name="matched_credit_ids" invisible="1"/>
+                                                                <button name="open_reconcile_view"
+                                                                        class="oe_link"
+                                                                        type="object"
+                                                                        string="-> View partially reconciled entries"
+                                                                        attrs="{'invisible': ['|', ('full_reconcile_id', '!=', False), '&amp;', ('matched_debit_ids', '=', []),('matched_credit_ids', '=', [])]}">
+                                                                </button>
+                                                            </div>
+                                                        </group>
+                                                        <group string="Currency" groups="base.group_multi_currency">
+                                                            <field name="currency_id" invisible="1"/>
+                                                            <field name="amount_currency"/>
+                                                        </group>
+                                                        <group string="States">
+                                                            <field name="blocked"/>
+                                                        </group>
+                                                        <group groups="analytic.group_analytic_accounting"
+                                                               string="Analytic">
+                                                            <field name="analytic_account_id"/>
+                                                            <field name="analytic_tag_ids" widget="many2many_tags"/>
+                                                        </group>
+                                                    </group>
+                                                    <field name="narration" colspan="4" nolabel="1"
+                                                           placeholder="Add an internal note..."/>
+                                                </page>
+                                                <page string="Analytic Lines"
+                                                      groups="analytic.group_analytic_accounting">
+                                                    <field name="date" invisible="1"/>
+                                                    <field name="analytic_line_ids"
+                                                           context="{'default_general_account_id':account_id, 'default_name': name, 'default_date':date, 'amount': (debit or 0.0)-(credit or 0.0)}"/>
+                                                </page>
+                                                <page string="VAT" attrs="{'invisible': [('tax_ok','=',False)]}">
+                                                    <field name="vat_ids">
+                                                        <tree string="ภาษีมูลค่าเพิ่ม" editable="top">
+                                                            <field name="name"/>
+                                                            <field name="docdat"/>
+                                                            <field name="vatprd"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="taxid"/>
+                                                            <field name="depcod"/>
+                                                            <field name="amount_untaxed" sum="Total"/>
+                                                            <field name="amount_tax" sum="Tax Total"/>
+                                                            <field name="amount_total" invisible="1"/>
+                                                            <field name="remark"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Purchase"
+                                                      attrs="{'invisible': [('wht_purchase_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'purchase','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_purchase_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Sale"
+                                                      attrs="{'invisible': [('wht_sale_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'sale','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="เช็ค" attrs="{'invisible': [('cheque_ok','=',False)]}">
+                                                    <field name="cheque_ids"
+                                                           context="{'default_partner_id': partner_id or False}">
+                                                        <tree string="Cheque">
+                                                            <field name="name"/>
+                                                            <field name="cheque_date"/>
+                                                            <field name="cheque_date_reconcile"/>
+                                                            <field name="bank"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="amount"/>
+                                                            <field name="state"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                                <field name="narration" colspan="4" placeholder="Add an internal note..." nolabel="1"
+                                       height="50"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_bione_account_move_sale" model="ir.actions.act_window">
+            <field name="name">สมุดรายวันขาย</field>
+            <field name="res_model">account.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+             <field name="domain">[('journal_id.type','=', 'sale')]</field>
+            <!--<field name="search_view_id" ref="view_bione_account_move_search"/>-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a journal entry.
+                </p>
+                <p>
+                    A journal entry consists of several journal items, each of
+                    which is either a debit or a credit transaction.
+                </p>
+                <p>
+                    Odoo automatically creates one journal entry per accounting
+                    document: invoice, refund, supplier payment, bank statements,
+                    etc. So, you should record journal entries manually only/mainly
+                    for miscellaneous operations.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_sale_kanban">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="view_bione_account_move_kanban"/>
+            <field name="act_window_id" ref="action_bione_account_move_sale"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_sale_tree">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+            <field name="act_window_id" ref="action_bione_account_move_sale"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_sale_form">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_bione_account_move_sale_form"/>
+            <field name="act_window_id" ref="action_bione_account_move_sale"/>
+        </record>
+
+        <menuitem name="สมุดรายวันขาย" parent="menu_bione_account_entry"
+                  id="menu_bione_journal_sale_entry"
+                  action="action_bione_account_move_sale"
+                  sequence="30"/>
+
+        <!-- สมุดรายวันรับ -->
+        <record id="view_bione_account_move_receive_form" model="ir.ui.view">
+            <field name="name">bione.account.move.receive.form</field>
+            <field name="model">account.move</field>
+            <field name="arch" type="xml">
+                <form string="Account Entry">
+                    <header>
+                        <button name="post" states="draft" string="Post" type="object" class="oe_highlight"
+                                groups="account.group_account_invoice"/>
+                        <button name="%(account.action_view_account_move_reversal)d" states="posted"
+                                string="Reverse Entry"
+                                type="action" groups="account.group_account_invoice"/>
+                        <button name="button_cancel" states="posted" string="Cancel Entry" type="object"
+                                groups="account.group_account_invoice"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <!--
+                        <div class="oe_button_box">
+                            <button name="open_reconcile_view"
+                                    class="oe_stat_button"
+                                    icon="fa-bars"
+                                    type="object"
+                                    string="Reconciled entries">
+                            </button>
+                        </div>-->
+                        <h1>
+                            <field name="name" readonly="True" attrs="{'invisible':[('name','=','/')]}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="ref" attrs="{'required': [('id', '==', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="journal_id" options="{'no_open': True, 'no_create': True}"
+                                       domain="[('type','=', 'receive')]"/>
+                                <field name="company_id" required="1" groups="base.group_multi_company"/>
+                                <field name="amount" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Journal Items">
+                                <field name="line_ids" widget="one2many_list"
+                                       context="{'line_ids': line_ids, 'journal_id': journal_id, 'default_date_maturity': context_today().strftime('%Y-%m-%d')}">
+                                    <tree string="Journal Items">
+                                        <field name="account_id"
+                                               domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False)]"/>
+                                        <field name="partner_id"
+                                               domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                        <field name="name"/>
+                                        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                        <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                                        <field name="amount_currency" groups="base.group_multi_currency"/>
+                                        <field name="company_currency_id" invisible="1"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" options="{'no_create': True}"
+                                               groups="base.group_multi_currency"/>
+                                        <field name="debit" sum="Total Debit"/>
+                                        <field name="credit" sum="Total Credit"/>
+                                        <field name="date_maturity" required="0"
+                                               invisible="context.get('view_no_maturity', False)"/>
+                                        <field name="wht_ids"/>
+                                        <field name="vat_ids"/>
+                                        <field name="cheque_ids"/>
+                                    </tree>
+                                    <form string="Journal Item">
+                                        <sheet>
+                                            <field name="company_id" invisible="1"/>
+                                            <field name="parent_state" invisible="1"/>
+                                            <group>
+                                                <group>
+                                                    <field name="name" required="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="partner_id"
+                                                           attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"
+                                                           domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                                </group>
+                                            </group>
+                                            <notebook colspan="4">
+                                                <page string="Information">
+                                                    <group>
+                                                        <group string="Amount">
+                                                            <!--domain="[('company_id', '=', company_id)]"-->
+                                                            <field name="account_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="debit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="credit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="quantity"/>
+                                                        </group>
+                                                        <!--<group string="Accounting Documents">
+                                                            <field name="move_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="statement_id" readonly="True"
+                                                                   attrs="{'invisible': [('statement_id','=',False)]}"/>
+                                                            <field name="invoice_id"
+                                                                   attrs="{'invisible': [('invoice_id','=',False)]}"/>
+                                                        </group>-->
+                                                        <group string="Dates">
+                                                            <field name="date_maturity"
+                                                                   attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"/>
+                                                        </group>
+
+                                                        <group string="Taxes"
+                                                               attrs="{'invisible': [('tax_line_id','=',False), ('tax_ids','=',[])]}">
+                                                            <field name="tax_line_id" readonly="1"
+                                                                   attrs="{'invisible': [('tax_line_id','=',False)]}"/>
+                                                            <field name="tax_ids" widget="many2many_tags" readonly="1"
+                                                                   attrs="{'invisible': [('tax_ids','=',[])]}"/>
+                                                            <field name="tax_ok" invisible="1"/>
+                                                            <field name="wht_ok" invisible="1"/>
+                                                            <field name="wht_sale_ok" invisible="1"/>
+                                                            <field name="wht_purchase_ok" invisible="1"/>
+                                                            <field name="receivable_ok" invisible="1"/>
+                                                            <field name="payable_ok" invisible="1"/>
+                                                            <field name="cheque_ok" invisible="1"/>
+                                                        </group>
+                                                        <group string="Matching"
+                                                               attrs="{'invisible':[('full_reconcile_id','=',False)]}">
+                                                            <label for="full_reconcile_id"/>
+                                                            <div>
+                                                                <field name="full_reconcile_id"/>
+                                                                <field name="matched_debit_ids" invisible="1"/>
+                                                                <field name="matched_credit_ids" invisible="1"/>
+                                                                <button name="open_reconcile_view"
+                                                                        class="oe_link"
+                                                                        type="object"
+                                                                        string="-> View partially reconciled entries"
+                                                                        attrs="{'invisible': ['|', ('full_reconcile_id', '!=', False), '&amp;', ('matched_debit_ids', '=', []),('matched_credit_ids', '=', [])]}">
+                                                                </button>
+                                                            </div>
+                                                        </group>
+                                                        <group string="Currency" groups="base.group_multi_currency">
+                                                            <field name="currency_id" invisible="1"/>
+                                                            <field name="amount_currency"/>
+                                                        </group>
+                                                        <group string="States">
+                                                            <field name="blocked"/>
+                                                        </group>
+                                                        <group groups="analytic.group_analytic_accounting"
+                                                               string="Analytic">
+                                                            <field name="analytic_account_id"/>
+                                                            <field name="analytic_tag_ids" widget="many2many_tags"/>
+                                                        </group>
+                                                    </group>
+                                                    <field name="narration" colspan="4" nolabel="1"
+                                                           placeholder="Add an internal note..."/>
+                                                </page>
+                                                <page string="Analytic Lines"
+                                                      groups="analytic.group_analytic_accounting">
+                                                    <field name="date" invisible="1"/>
+                                                    <field name="analytic_line_ids"
+                                                           context="{'default_general_account_id':account_id, 'default_name': name, 'default_date':date, 'amount': (debit or 0.0)-(credit or 0.0)}"/>
+                                                </page>
+                                                <page string="VAT" attrs="{'invisible': [('tax_ok','=',False)]}">
+                                                    <field name="vat_ids">
+                                                        <tree string="ภาษีมูลค่าเพิ่ม" editable="top">
+                                                            <field name="name"/>
+                                                            <field name="docdat"/>
+                                                            <field name="vatprd"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="taxid"/>
+                                                            <field name="depcod"/>
+                                                            <field name="amount_untaxed" sum="Total"/>
+                                                            <field name="amount_tax" sum="Tax Total"/>
+                                                            <field name="amount_total" invisible="1"/>
+                                                            <field name="remark"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Purchase"
+                                                      attrs="{'invisible': [('wht_purchase_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'purchase','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_purchase_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Sale"
+                                                      attrs="{'invisible': [('wht_sale_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'sale','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="เช็ค" attrs="{'invisible': [('cheque_ok','=',False)]}">
+                                                    <field name="cheque_ids"
+                                                           context="{'default_partner_id': partner_id or False}">
+                                                        <tree string="Cheque">
+                                                            <field name="name"/>
+                                                            <field name="cheque_date"/>
+                                                            <field name="cheque_date_reconcile"/>
+                                                            <field name="bank"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="amount"/>
+                                                            <field name="state"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                                <field name="narration" colspan="4" placeholder="Add an internal note..." nolabel="1"
+                                       height="50"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_bione_account_move_receive" model="ir.actions.act_window">
+            <field name="name">สมุดรายวันรับ</field>
+            <field name="res_model">account.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+             <field name="domain">[('journal_id.type','=', 'receive')]</field>
+            <!--<field name="search_view_id" ref="view_bione_account_move_search"/>-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a journal entry.
+                </p>
+                <p>
+                    A journal entry consists of several journal items, each of
+                    which is either a debit or a credit transaction.
+                </p>
+                <p>
+                    Odoo automatically creates one journal entry per accounting
+                    document: invoice, refund, supplier payment, bank statements,
+                    etc. So, you should record journal entries manually only/mainly
+                    for miscellaneous operations.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_receive_kanban">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="view_bione_account_move_kanban"/>
+            <field name="act_window_id" ref="action_bione_account_move_receive"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_receive_tree">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+            <field name="act_window_id" ref="action_bione_account_move_receive"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_receive_form">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_bione_account_move_receive_form"/>
+            <field name="act_window_id" ref="action_bione_account_move_receive"/>
+        </record>
+
+        <menuitem name="สมุดรายวันรับ" parent="menu_bione_account_entry"
+                  id="menu_bione_journal_receive_entry"
+                  action="action_bione_account_move_receive"
+                  sequence="40"/>
+
+        <!-- สมุดรายวันจ่าย -->
+        <record id="view_bione_account_move_pay_form" model="ir.ui.view">
+            <field name="name">bione.account.move.pay.form</field>
+            <field name="model">account.move</field>
+            <field name="arch" type="xml">
+                <form string="Account Entry">
+                    <header>
+                        <button name="post" states="draft" string="Post" type="object" class="oe_highlight"
+                                groups="account.group_account_invoice"/>
+                        <button name="%(account.action_view_account_move_reversal)d" states="posted"
+                                string="Reverse Entry"
+                                type="action" groups="account.group_account_invoice"/>
+                        <button name="button_cancel" states="posted" string="Cancel Entry" type="object"
+                                groups="account.group_account_invoice"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <!--
+                        <div class="oe_button_box">
+                            <button name="open_reconcile_view"
+                                    class="oe_stat_button"
+                                    icon="fa-bars"
+                                    type="object"
+                                    string="Reconciled entries">
+                            </button>
+                        </div>-->
+                        <h1>
+                            <field name="name" readonly="True" attrs="{'invisible':[('name','=','/')]}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="ref" attrs="{'required': [('id', '==', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="journal_id" options="{'no_open': True, 'no_create': True}"
+                                       domain="[('type','=', 'pay')]"/>
+                                <field name="company_id" required="1" groups="base.group_multi_company"/>
+                                <field name="amount" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Journal Items">
+                                <field name="line_ids" widget="one2many_list"
+                                       context="{'line_ids': line_ids, 'journal_id': journal_id, 'default_date_maturity': context_today().strftime('%Y-%m-%d')}">
+                                    <tree string="Journal Items">
+                                        <field name="account_id"
+                                               domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False)]"/>
+                                        <field name="partner_id"
+                                               domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                        <field name="name"/>
+                                        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                        <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                                        <field name="amount_currency" groups="base.group_multi_currency"/>
+                                        <field name="company_currency_id" invisible="1"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" options="{'no_create': True}"
+                                               groups="base.group_multi_currency"/>
+                                        <field name="debit" sum="Total Debit"/>
+                                        <field name="credit" sum="Total Credit"/>
+                                        <field name="date_maturity" required="0"
+                                               invisible="context.get('view_no_maturity', False)"/>
+                                        <field name="wht_ids"/>
+                                        <field name="vat_ids"/>
+                                        <field name="cheque_ids"/>
+                                    </tree>
+                                    <form string="Journal Item">
+                                        <sheet>
+                                            <field name="company_id" invisible="1"/>
+                                            <field name="parent_state" invisible="1"/>
+                                            <group>
+                                                <group>
+                                                    <field name="name" required="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="partner_id"
+                                                           attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"
+                                                           domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                                </group>
+                                            </group>
+                                            <notebook colspan="4">
+                                                <page string="Information">
+                                                    <group>
+                                                        <group string="Amount">
+                                                            <!--domain="[('company_id', '=', company_id)]"-->
+                                                            <field name="account_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="debit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="credit"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="quantity"/>
+                                                        </group>
+                                                        <!--<group string="Accounting Documents">
+                                                            <field name="move_id"
+                                                                   attrs="{'readonly':[('parent_state','=','posted')]}"/>
+                                                            <field name="statement_id" readonly="True"
+                                                                   attrs="{'invisible': [('statement_id','=',False)]}"/>
+                                                            <field name="invoice_id"
+                                                                   attrs="{'invisible': [('invoice_id','=',False)]}"/>
+                                                        </group>-->
+                                                        <group string="Dates">
+                                                            <field name="date_maturity"
+                                                                   attrs="{'required': ['|',('receivable_ok','=',True),('payable_ok','=',True)]}"/>
+                                                        </group>
+
+                                                        <group string="Taxes"
+                                                               attrs="{'invisible': [('tax_line_id','=',False), ('tax_ids','=',[])]}">
+                                                            <field name="tax_line_id" readonly="1"
+                                                                   attrs="{'invisible': [('tax_line_id','=',False)]}"/>
+                                                            <field name="tax_ids" widget="many2many_tags" readonly="1"
+                                                                   attrs="{'invisible': [('tax_ids','=',[])]}"/>
+                                                            <field name="tax_ok" invisible="1"/>
+                                                            <field name="wht_ok" invisible="1"/>
+                                                            <field name="wht_sale_ok" invisible="1"/>
+                                                            <field name="wht_purchase_ok" invisible="1"/>
+                                                            <field name="receivable_ok" invisible="1"/>
+                                                            <field name="payable_ok" invisible="1"/>
+                                                            <field name="cheque_ok" invisible="1"/>
+                                                        </group>
+                                                        <group string="Matching"
+                                                               attrs="{'invisible':[('full_reconcile_id','=',False)]}">
+                                                            <label for="full_reconcile_id"/>
+                                                            <div>
+                                                                <field name="full_reconcile_id"/>
+                                                                <field name="matched_debit_ids" invisible="1"/>
+                                                                <field name="matched_credit_ids" invisible="1"/>
+                                                                <button name="open_reconcile_view"
+                                                                        class="oe_link"
+                                                                        type="object"
+                                                                        string="-> View partially reconciled entries"
+                                                                        attrs="{'invisible': ['|', ('full_reconcile_id', '!=', False), '&amp;', ('matched_debit_ids', '=', []),('matched_credit_ids', '=', [])]}">
+                                                                </button>
+                                                            </div>
+                                                        </group>
+                                                        <group string="Currency" groups="base.group_multi_currency">
+                                                            <field name="currency_id" invisible="1"/>
+                                                            <field name="amount_currency"/>
+                                                        </group>
+                                                        <group string="States">
+                                                            <field name="blocked"/>
+                                                        </group>
+                                                        <group groups="analytic.group_analytic_accounting"
+                                                               string="Analytic">
+                                                            <field name="analytic_account_id"/>
+                                                            <field name="analytic_tag_ids" widget="many2many_tags"/>
+                                                        </group>
+                                                    </group>
+                                                    <field name="narration" colspan="4" nolabel="1"
+                                                           placeholder="Add an internal note..."/>
+                                                </page>
+                                                <page string="Analytic Lines"
+                                                      groups="analytic.group_analytic_accounting">
+                                                    <field name="date" invisible="1"/>
+                                                    <field name="analytic_line_ids"
+                                                           context="{'default_general_account_id':account_id, 'default_name': name, 'default_date':date, 'amount': (debit or 0.0)-(credit or 0.0)}"/>
+                                                </page>
+                                                <page string="VAT" attrs="{'invisible': [('tax_ok','=',False)]}">
+                                                    <field name="vat_ids">
+                                                        <tree string="ภาษีมูลค่าเพิ่ม" editable="top">
+                                                            <field name="name"/>
+                                                            <field name="docdat"/>
+                                                            <field name="vatprd"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="taxid"/>
+                                                            <field name="depcod"/>
+                                                            <field name="amount_untaxed" sum="Total"/>
+                                                            <field name="amount_tax" sum="Tax Total"/>
+                                                            <field name="amount_total" invisible="1"/>
+                                                            <field name="remark"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Purchase"
+                                                      attrs="{'invisible': [('wht_purchase_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'purchase','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_purchase_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="With Holding Tax - Sale"
+                                                      attrs="{'invisible': [('wht_sale_ok','=',False)]}">
+                                                    <field name="wht_ids"
+                                                           context="{'default_partner_id': partner_id or False, 'default_wht_type':'sale','default_date_doc': date, 'default_view_id': 'bione_thai_account.bione_wht_form'}">
+                                                        <tree string="With holding tax">
+                                                            <field name="sequence" widget="handle"/>
+                                                            <field name="name"/>
+                                                            <field name="date_doc"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="base_amount" sum="Total"/>
+                                                            <field name="tax" sum="Tax"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page string="เช็ค" attrs="{'invisible': [('cheque_ok','=',False)]}">
+                                                    <field name="cheque_ids"
+                                                           context="{'default_partner_id': partner_id or False}">
+                                                        <tree string="Cheque">
+                                                            <field name="name"/>
+                                                            <field name="cheque_date"/>
+                                                            <field name="cheque_date_reconcile"/>
+                                                            <field name="bank"/>
+                                                            <field name="partner_id"/>
+                                                            <field name="amount"/>
+                                                            <field name="state"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                                <field name="narration" colspan="4" placeholder="Add an internal note..." nolabel="1"
+                                       height="50"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_bione_account_move_pay" model="ir.actions.act_window">
+            <field name="name">สมุดรายวันจ่าย</field>
+            <field name="res_model">account.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+             <field name="domain">[('journal_id.type','=', 'pay')]</field>
+            <!--<field name="search_view_id" ref="view_bione_account_move_search"/>-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a journal entry.
+                </p>
+                <p>
+                    A journal entry consists of several journal items, each of
+                    which is either a debit or a credit transaction.
+                </p>
+                <p>
+                    Odoo automatically creates one journal entry per accounting
+                    document: invoice, refund, supplier payment, bank statements,
+                    etc. So, you should record journal entries manually only/mainly
+                    for miscellaneous operations.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_pay_kanban">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="view_bione_account_move_kanban"/>
+            <field name="act_window_id" ref="action_bione_account_move_pay"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_pay_tree">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_bione_account_move_tree"/>
+            <field name="act_window_id" ref="action_bione_account_move_pay"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_bione_account_move_pay_form">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_bione_account_move_pay_form"/>
+            <field name="act_window_id" ref="action_bione_account_move_pay"/>
+        </record>
+
+        <menuitem name="สมุดรายวันจ่าย" parent="menu_bione_account_entry"
+                  id="menu_bione_journal_pay_entry"
+                  action="action_bione_account_move_pay"
+                  sequence="35"/>
+
+
+    </data>
+</odoo>

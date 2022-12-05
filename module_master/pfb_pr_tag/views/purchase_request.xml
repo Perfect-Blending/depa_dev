@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- tag -->
+    <record model="ir.ui.view" id="purchase_request_setting_tag_form_view">
+        <field name="name">purchase.request.setting.tag.form</field>
+        <field name="model">purchase.request.setting.tag</field>
+        <field name="arch" type="xml">
+            <form string="ป้ายกำกับจัดซื้อจัดจ้าง">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="color"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="purchase_request_setting_tag_tree_view">
+        <field name="name">purchase.request.setting.tag.tree</field>
+        <field name="model">purchase.request.setting.tag</field>
+        <field name="arch" type="xml">
+            <tree string="document Tree">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="purchase_request_setting_tag_action">
+        <field name="name">ป้ายกำกับจัดซื้อจัดจ้าง</field>
+        <field name="res_model">purchase.request.setting.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_purchase_request_config"
+        name="การกำหนดค่า"
+        sequence="34"
+        parent="purchase_request.parent_menu_purchase_request"
+        groups="purchase_request.group_purchase_request_user,purchase_request.group_purchase_request_manager"
+    />
+    <menuitem id="purchase_request_setting_tag_menu"
+              name="ป้ายกำกับจัดซื้อจัดจ้าง"
+              sequence="33"
+              parent="menu_purchase_request_config"
+              action="purchase_request_setting_tag_action"/>
+<!--    purchase_request-->
+    <record id="purchase_request_add_tag_form" model="ir.ui.view">
+        <field name="name">purchase.request.inherit</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+             <field name="group_id" position="after">
+               <field name="tag_ids" string="ป้ายกำกับ" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                <field name="number_pr"/>
+             </field>
+        </field>
+   </record>
+    <record id="purchase_request_add_tag_tree" model="ir.ui.view">
+        <field name="name">purchase.request.inherit</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_tree"/>
+        <field name="arch" type="xml">
+             <field name="state" position="after">
+              <field name="tag_ids" string="ป้ายกำกับ" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </field>
+        </field>
+   </record>
+
+<!--&lt;!&ndash;    Reporting&ndash;&gt;-->
+<!--    <record id="view_pr_calendar" model="ir.ui.view">-->
+<!--            <field name="name">purchase.request.calendar</field>-->
+<!--            <field name="model">purchase.request.line</field>-->
+<!--            <field eval="2" name="priority"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <calendar date_start="date_required"   string="Tasks" mode="month"  event_limit="5" hide_time="true">-->
+<!--                    <field name="origin"/>-->
+<!--                </calendar>-->
+<!--            </field>-->
+<!--     </record>-->
+<!--    <record id="purchase_request_reporting_form_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Purchase Request Reporting</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">purchase.request.line</field>-->
+<!--        <field name="view_mode">tree,kanban,form,pivot,graph,calendar,activity</field>-->
+<!--        <field name="search_view_id" ref="purchase_request.purchase_request_line_search" />-->
+<!--    </record>-->
+<!--    <menuitem-->
+<!--        name="Reporting"-->
+<!--        action="purchase_request_reporting_form_action"-->
+<!--        id="menu_purchase_request_reporting"-->
+<!--        parent="purchase_request.parent_menu_purchase_request"-->
+<!--    />-->
+
+</odoo>

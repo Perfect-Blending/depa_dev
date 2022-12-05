@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <record id="menu_machine_repair" model="website.menu">
+            <field name="name">Machine Repair</field>
+            <field name="url">/machine_repair</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">45</field>
+        </record>
+
+        <!-- <record id="menu_create_machine_repair" model="website.menu">
+            <field name="name">Create Machine Repair Request</field>
+            <field name="url">/create_machine_repair</field>
+            <field name="parent_id" ref="bi_machine_repair_management.menu_machine_repair"/>
+            <field name="sequence" type="int">1</field>
+        </record> -->
+
+    </data>
+</odoo>

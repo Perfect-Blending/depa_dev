@@ -1,0 +1,467 @@
+<odoo>
+
+    <template id="assets_backend"
+              name="budget_usage_report assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href="/pfb_fin_report/static/src/css/report2.css" rel="stylesheet"/>
+            <script type="text/javascript"
+                    src="/pfb_fin_report/static/src/js/budget_usage_report_backend.js"/>
+        </xpath>
+    </template>
+
+    <template id="pfb_fin_report.internal_layout">
+        <div class="article">
+            <link href="/pfb_fin_report/static/src/css/report2.css" rel="stylesheet"/>
+            <t t-raw="0"/>
+        </div>
+        <div class="footer">
+            <div class="row">
+                <div class="col-6 custom_footer">
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                </div>
+                <div class="col-6 text-right custom_footer">
+                    <span class="page"/>/
+                    <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_budget_usage_buttons">
+        <div class="button_row">
+            <!--            <button class="o_detailed_budget_reports_print btn btn-sm oe_button"><span class="fa fa-print"/>Print-->
+            <!--            </button>-->
+            <button class="o_budget_usage_reports_export btn btn-sm oe_button"><span class="fa fa-download"/>Export
+            </button>
+        </div>
+    </template>
+
+    <template id="report_budget_usage_report_html">
+        <div class="o_detailed_budget_reports_page">
+            <t t-call="pfb_fin_report.report_budget_usage_buttons"/>
+            <t t-call="pfb_fin_report.report_budget_usage_report_base"/>
+        </div>
+    </template>
+
+
+    <template id="pfb_fin_report.report_budget_usage_lines_header">
+        <div class="act_as_thead">
+            <div class="act_as_row labels">
+                <div class="act_as_cell">No</div>
+                <div class="act_as_cell">FIN type</div>
+                <div class="act_as_cell">สินค้า</div>
+                <div class="act_as_cell">งบประมาณ</div>
+                <div class="act_as_cell">Unit price</div>
+                <div class="act_as_cell">Quantity</div>
+                <div class="act_as_cell">Subtotal</div>
+                <div class="act_as_cell">Fin100 line residual</div>
+
+                <div class="act_as_cell">FIN401 current amount</div>
+                <div class="act_as_cell">Lend total</div>
+                <div class="act_as_cell">Fin100 line residual</div>
+                <div class="act_as_cell">State</div>
+
+                <div class="act_as_cell">FIN201 current amount</div>
+                <div class="act_as_cell">Payment amount</div>
+                <div class="act_as_cell">Fin100 line residual</div>
+                <div class="act_as_cell">State</div>
+
+            </div>
+        </div>
+    </template>
+
+    <template id="pfb_fin_report.report_budget_usage_report_base">
+        <div class="container">
+            <div class="act_as_table data_table mt4" style="width: 200%; !important;">
+                <!-- Display header line-->
+                <t t-call="pfb_fin_report.report_budget_usage_lines_header"/>
+                <!-- Display initial lines -->
+
+                <t t-foreach="o.results" t-as="fin_line">
+                    <t t-set="fin_no" t-value=""/>
+                    <t t-foreach="fin_line.fin_lines_to_edit" t-as="line">
+                        <t t-if="len(line.fin201_line_ids) &gt; 0 and len(line.fin401_line_ids) == 0 ">
+                            <!--                            <p>มีแต่ 201</p>-->
+                            <t t-set="line_num" t-value="0"/>
+                            <t t-set="group_201" t-value="[]"/>
+                            <t t-foreach="line.fin201_line_ids" t-as="line_201">
+                                <t t-esc="group_201.append(line_201)"/>
+                            </t>
+                            <t t-foreach="len(group_201)" t-as="cc">
+                                <div class="act_as_row lines">
+                                <div class="act_as_cell left">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="line.fin_id.fin_no"/>
+                                    </t>
+
+                                </div>
+                                <div class="act_as_cell left">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <span t-field="line.fin_id.fin_type"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell left">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <span t-field="line.product_id"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell left">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <span t-field="line.projects_and_plan"/>
+                                    </t>
+                                </div>
+
+                                <div class="act_as_cell right">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="'{0:,.2f}'.format(line.price_unit)"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="'{0:,.2f}'.format(line.product_uom_qty)"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="'{0:,.2f}'.format(line.balance)"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <t t-foreach="group_201[line_num]" t-as="line_201">
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(line_201.fin201_current_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(line_201.payment_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(line_201.fin100_line_residual_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="line_201.fin201_state"/>
+                                    </div>
+                                </t>
+                                <t t-set="line_num" t-value="line_num + 1"/>
+                                <t t-set="fin_no" t-value="line.fin_id.fin_no"/>
+                            </div>
+                            </t>
+                        </t>
+                        <t t-if="len(line.fin401_line_ids) &gt; 0 and len(line.fin201_line_ids) == 0 ">
+                            <!--                            <p>มีแต่ 401</p>-->
+                            <t t-foreach="line.fin401_line_ids" t-as="line_401">
+                                <div class="act_as_row lines">
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="line.fin_id.fin_no"/>
+                                        </t>
+
+                                    </div>
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <span t-field="line.fin_id.fin_type"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <span t-field="line.product_id"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <span t-field="line.projects_and_plan"/>
+                                        </t>
+                                    </div>
+
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.price_unit)"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.product_uom_qty)"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.balance)"/>
+                                        </t>
+                                    </div>
+
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(line_401.fin401_current_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(line_401.lend)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(line_401.fin100_line_residual_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="line_401.fin401_state"/>
+                                    </div>
+                                    <div class="act_as_cell right"></div>
+                                    <div class="act_as_cell right"></div>
+                                    <div class="act_as_cell right"></div>
+                                    <div class="act_as_cell right"></div>
+                                    <t t-set="fin_no" t-value="line.fin_id.fin_no"/>
+                                </div>
+                            </t>
+                            <t t-set="fin_no" t-value="line.fin_id.fin_no"/>
+                        </t>
+                        <t t-if="len(line.fin401_line_ids) &gt; 0 and len(line.fin201_line_ids) &gt; 0">
+                            <t t-set="line_num" t-value="0"/>
+                            <t t-set="count_fin201" t-value="0"/>
+                            <t t-set="group_201" t-value="[]"/>
+                            <t t-foreach="line.fin201_line_ids" t-as="line_201">
+                                <t t-esc="group_201.append(line_201)"/>
+                            </t>
+                            <t t-foreach="line.fin401_line_ids" t-as="line_401">
+                                <div class="act_as_row lines">
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="line.fin_id.fin_no"/>
+                                        </t>
+
+                                    </div>
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <span t-field="line.fin_id.fin_type"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <span t-field="line.product_id"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <span t-field="line.projects_and_plan"/>
+                                        </t>
+                                    </div>
+
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.price_unit)"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.product_uom_qty)"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.balance)"/>
+                                        </t>
+                                    </div>
+
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(line_401.fin401_current_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(line_401.lend)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="'{0:,.2f}'.format(line_401.fin100_line_residual_amount)"/>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-esc="line_401.fin401_state"/>
+                                    </div>
+
+                                    <t t-foreach="group_201[line_num]" t-as="line_201">
+                                        <div class="act_as_cell right">
+                                            <t t-esc="'{0:,.2f}'.format(line_201.fin201_current_amount)"/>
+                                        </div>
+                                        <div class="act_as_cell right">
+                                            <t t-esc="'{0:,.2f}'.format(line_201.payment_amount)"/>
+                                        </div>
+                                        <div class="act_as_cell right">
+                                            <t t-esc="'{0:,.2f}'.format(line_201.fin100_line_residual_amount)"/>
+                                        </div>
+                                        <div class="act_as_cell right">
+                                            <t t-esc="line_201.fin201_state"/>
+                                        </div>
+                                    </t>
+
+                                    <t t-set="line_num" t-value="line_num + 1"/>
+                                    <t t-set="fin_no" t-value="line.fin_id.fin_no"/>
+                                </div>
+                            </t>
+                            <t t-set="count_fin201" t-value="len(group_201) - line_num "/>
+                            <t t-if="count_fin201 != 0">
+                                <t t-foreach="count_fin201" t-as="cc">
+                                     <div class="act_as_row lines">
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="line.fin_id.fin_no"/>
+                                        </t>
+
+                                    </div>
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <span t-field="line.fin_id.fin_type"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <span t-field="line.product_id"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell left">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <span t-field="line.projects_and_plan"/>
+                                        </t>
+                                    </div>
+
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.price_unit)"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.product_uom_qty)"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                                        </t>
+                                    </div>
+                                    <div class="act_as_cell right">
+                                        <t t-if="fin_no != line.fin_id.fin_no">
+                                            <t t-esc="'{0:,.2f}'.format(line.balance)"/>
+                                        </t>
+                                    </div>
+
+                                    <div class="act_as_cell right">
+                                    </div>
+                                    <div class="act_as_cell right">
+                                    </div>
+                                    <div class="act_as_cell right">
+                                    </div>
+                                    <div class="act_as_cell right">
+                                    </div>
+
+                                    <t t-foreach="group_201[line_num]" t-as="line_201">
+                                        <div class="act_as_cell right">
+                                            <t t-esc="'{0:,.2f}'.format(line_201.fin201_current_amount)"/>
+                                        </div>
+                                        <div class="act_as_cell right">
+                                            <t t-esc="'{0:,.2f}'.format(line_201.payment_amount)"/>
+                                        </div>
+                                        <div class="act_as_cell right">
+                                            <t t-esc="'{0:,.2f}'.format(line_201.fin100_line_residual_amount)"/>
+                                        </div>
+                                        <div class="act_as_cell right">
+                                            <t t-esc="line_201.fin201_state"/>
+                                        </div>
+                                    </t>
+
+                                    <t t-set="line_num" t-value="line_num + 1"/>
+                                    <t t-set="fin_no" t-value="line.fin_id.fin_no"/>
+                                </div>
+                                </t>
+                            </t>
+
+                        </t>
+                        <t t-if="len(line.fin401_line_ids) == 0 and len(line.fin201_line_ids) == 0">
+                            <!--                            <p>ไม่มี</p>-->
+                            <t t-set="line_num" t-value="0"/>
+                            <t t-set="group_201" t-value="[]"/>
+
+                            <div class="act_as_row lines">
+                                <div class="act_as_cell left">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="line.fin_id.fin_no"/>
+                                    </t>
+
+                                </div>
+                                <div class="act_as_cell left">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <span t-field="line.fin_id.fin_type"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell left">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <span t-field="line.product_id"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell left">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <span t-field="line.projects_and_plan"/>
+                                    </t>
+                                </div>
+
+                                <div class="act_as_cell right">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="'{0:,.2f}'.format(line.price_unit)"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="'{0:,.2f}'.format(line.product_uom_qty)"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                                    </t>
+                                </div>
+                                <div class="act_as_cell right">
+                                    <t t-if="fin_no != line.fin_id.fin_no">
+                                        <t t-esc="'{0:,.2f}'.format(line.balance)"/>
+                                    </t>
+                                </div>
+
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <div class="act_as_cell right">
+                                </div>
+                                <t t-set="fin_no" t-value="line.fin_id.fin_no"/>
+                            </div>
+                        </t>
+
+                    </t>
+                </t>
+            </div>
+        </div>
+    </template>
+
+
+</odoo>

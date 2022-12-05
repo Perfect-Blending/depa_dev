@@ -1,0 +1,13 @@
+<odoo>
+    <report
+        string="รายงานภาษีขาย"
+        id="sale_report_qweb_pfd"
+        model="pfb.sale.order.tree"
+        name="pfb_sale_report_qweb.sale_report_pdf"
+        file="pfb_sale_report_qweb.sale_report_pdf"
+        report_type="qweb-pdf"
+        paperformat="pfb_sale_report_qweb.paperformat_sale_report_qweb"
+    />
+
+
+</odoo>

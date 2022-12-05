@@ -1,0 +1,2189 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* cheque_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20190907\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-29 14:35+0000\n"
+"PO-Revision-Date: 2020-05-29 14:35+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+msgid "<span>Approved By : </span>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "<span>Checked By : </span>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "<span>Prepared By : </span>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "<span>Received By : </span>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "<strong>DATE : </strong>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "<strong>Description : </strong>\n"
+"                                        <br/>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+msgid "<strong>Description : </strong>\n"
+"                                    <br/>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+msgid "<strong>PAY TO : </strong>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+msgid "<strong>RECEIVED BY : </strong>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "<strong>RECEIVED FROM : </strong>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+msgid "<strong>RECEIVER DESIGNATION : </strong>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+msgid "<strong>RECEIVER MOBILE NUMBER : </strong>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "<strong>THE SUM OF :</strong>"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "<strong>Voucher No : </strong>"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_website_version
+msgid "A/B Testing"
+msgstr "การทดสอบ A/B"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__unsplash_access_key
+msgid "Access Key"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__account_id
+msgid "Account"
+msgstr "บัญชี"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__account_no
+msgid "Account Number"
+msgstr "หมายเลขบัญชี"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_taxcloud
+msgid "Account TaxCloud"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_accountant
+msgid "Accounting"
+msgstr "การบัญชี"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__issue_journal_entry
+msgid "Accounting Entry"
+msgstr "รายการรายวัน"
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.view_cheque_configuration
+msgid "Accounts"
+msgstr "บัญชี"
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__group_stock_adv_location
+msgid "Add and customize route operations to process product moves in your warehouse(s): e.g. unload > quality control > stock for incoming products, pick > pack > ship for outgoing products. \n"
+" You can also set putaway strategies on warehouse locations in order to send incoming products into specific child locations straight away (e.g. specific bins, racks)."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.act_window,name:cheque_management.action_cheque_configuration2
+#: model:ir.ui.menu,name:cheque_management.menu_cheque_settings2
+msgid "Additional Info"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__alias_domain
+msgid "Alias Domain"
+msgstr "ชื่อโดเมน"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_product_margin
+msgid "Allow Product Margin"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_check_printing
+msgid "Allow check printing and deposits"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_google_calendar
+msgid "Allow the users to synchronize their calendar  with Google Calendar"
+msgstr "อนุญาตให้ผู้ใช้เชื่อมโยงปฏิทินด้วย Google Calendar"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_base_import
+msgid "Allow users to import data from CSV/XLS/XLSX/ODS files"
+msgstr "อนุญาตให้ผู้ใช้นำเข้าข้อมูลจากไฟล์ CSV/XLS/XLSX/ODS"
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__group_sale_pricelist
+msgid "Allows to manage different prices based on rules per category of customers.\n"
+"                Example: 10% for retailers, promotion of 5 EUR on this product, etc."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__group_multi_currency
+msgid "Allows to work in a multi currency environment"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__amount
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__amount
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__amount
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__amount
+msgid "Amount"
+msgstr "จำนวน"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_analytic_accounting
+msgid "Analytic Accounting"
+msgstr "การบัญชีวิเคราะห์"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_analytic_tags
+msgid "Analytic Tags"
+msgstr "ป้ายกำกับการวิเคราะห์"
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.view_cheque_configuration
+msgid "Apply"
+msgstr "นำไปใช้"
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__specific_user_account
+msgid "Are newly created user accounts website specific"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_asset
+msgid "Assets Management"
+msgstr "การจัดการสินทรัพย์"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_asset_management
+msgid "Assets management (OCA)"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_voip
+msgid "Asterisk (VoIP)"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_google_drive
+msgid "Attach Google documents to any record"
+msgstr "แนบเอกสาร Google กับรายการใดๆ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_partner_autocomplete
+msgid "Auto-populate company data"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_invoice_extract
+msgid "Automate Bill Processing"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_currency_rate_live
+msgid "Automatic Currency Rates"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.bank_form
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "Bank"
+msgstr "ธนาคาร"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__amount
+msgid "Bank Charges"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__charges_account_id
+msgid "Bank Charges Account"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_yodlee
+msgid "Bank Interface - Sync your bank feeds automatically"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__name
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__bank_name
+#: model:ir.model.fields,field_description:cheque_management.field_customer_bank__name
+#: model:ir.model.fields,field_description:cheque_management.field_deposit_cheque__bank_id
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque__bank_name
+msgid "Bank Name"
+msgstr "ชื่อธนาคาร"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__account_bank_reconciliation_start
+msgid "Bank Reconciliation Threshold"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.act_window,name:cheque_management.action_bank
+#: model:ir.ui.menu,name:cheque_management.menu_banks
+#: model_terms:ir.ui.view,arch_db:cheque_management.bank_search
+#: model_terms:ir.ui.view,arch_db:cheque_management.bank_tree
+msgid "Banks"
+msgstr "ธนาคาร"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_stock_barcode
+msgid "Barcode Scanner"
+msgstr "เครื่องสแกนบาร์โค้ด"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_stock_picking_batch
+msgid "Batch Pickings"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_budget
+msgid "Budget Management"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_mrp_byproduct
+msgid "By-Products"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__cdn_url
+msgid "CDN Base URL"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__cdn_filters
+msgid "CDN Filters"
+msgstr "CDN ตัวกรอง"
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+msgid "CHEQUE PAYMENT VOUCHER"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "CHEQUE RECEIPT VOUCHER"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_form
+#: model_terms:ir.ui.view,arch_db:cheque_management.view_cheque_configuration
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_cancel_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque2
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque3
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque4
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_deposit_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_dishhonour_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_form_view_pdf
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_issue_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_lost_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_clear_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_clear_cheque2
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_return_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_view_pdf
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_return_cheque
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cancel_cheque__date_cancel
+msgid "Cancel Date"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__cancel_date
+msgid "Cancelled Date"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__tax_exigibility
+msgid "Cash Basis"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_cash_rounding
+msgid "Cash Rounding"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.act_window,name:cheque_management.action_immediate_clear2
+#: model:ir.actions.act_window,name:cheque_management.action_immediate_clear3
+msgid "Check Clearance"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.server,name:cheque_management.action_server_module_immediate_pending
+msgid "Check Pending"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.server,name:cheque_management.ir_cron_inbound_cron_ir_actions_server
+#: model:ir.cron,cron_name:cheque_management.ir_cron_inbound_cron
+#: model:ir.cron,name:cheque_management.ir_cron_inbound_cron
+msgid "Check Pending Inbound Cheques"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.server,name:cheque_management.ir_cron_library_reminder_ir_actions_server
+#: model:ir.cron,cron_name:cheque_management.ir_cron_library_reminder
+#: model:ir.cron,name:cheque_management.ir_cron_library_reminder
+msgid "Check Pending Outbound Cheques"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.server,name:cheque_management.action_server_receive_immediate_pending
+msgid "Check Pending for Deposit"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_form
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_form
+msgid "Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:res.groups,name:cheque_management.group_cheque_admin
+msgid "Cheque Administrator"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_master_graph
+#: model_terms:ir.ui.view,arch_db:cheque_management.view_cheque_master_graph
+msgid "Cheque Analysis"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_form
+msgid "Cheque Clearance"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__cheque_date
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__cheque_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__cheque_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__cheque_date
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "Cheque Date"
+msgstr "วันที่เช็ค"
+
+#. module: cheque_management
+#: selection:receive.cheque.master,state:0
+msgid "Cheque Dishonoured"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__cheque_date_issue
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__date_issue
+msgid "Cheque Issue Date"
+msgstr "วันที่จ่ายเช็ค"
+
+#. module: cheque_management
+#: model:ir.module.category,name:cheque_management.module_category_cheque
+#: model:ir.ui.menu,name:cheque_management.menu_cheque_management
+msgid "Cheque Management"
+msgstr "ระบบบริหารเช็ค"
+
+#. module: cheque_management
+#: model:ir.actions.act_window,name:cheque_management.action_cheque_master
+#: model:ir.actions.act_window,name:cheque_management.action_receive_cheque_master
+#: model:ir.model,name:cheque_management.model_cheque_master
+#: model:ir.ui.menu,name:cheque_management.menu_master
+msgid "Cheque Master Book"
+msgstr "สมุดเช็ค"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__cheque_no
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__name
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__name
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "Cheque No."
+msgstr "เลขที่เช็ค"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__cheque_id
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_form_view_pdf
+msgid "Cheque Number"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__cheque_journal_p_id
+msgid "Cheque Payment Journal"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.report,name:cheque_management.report_cheque_payment
+msgid "Cheque Payment Voucher"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque__present_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__present_date
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__date_present
+msgid "Cheque Present Date"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.report,name:cheque_management.report_cheque_receipt
+msgid "Cheque Receipt Voucher"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__cheque_journal_r_id
+msgid "Cheque Receive Journal"
+msgstr ""
+
+#. module: cheque_management
+#: selection:receive.cheque.master,state:0
+msgid "Cheque Received"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__name
+msgid "Cheque Ref"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_form
+msgid "Cheque Return"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque__date_return
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__date_return
+#: model:ir.model.fields,field_description:cheque_management.field_receive_return_cheque__date_return
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__date_return
+msgid "Cheque Return Date"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.reason_form
+msgid "Cheque Return Reason"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.act_window,name:cheque_management.action_reason
+#: model:ir.ui.menu,name:cheque_management.menu_reasons
+#: model_terms:ir.ui.view,arch_db:cheque_management.reason_search
+#: model_terms:ir.ui.view,arch_db:cheque_management.reason_tree
+msgid "Cheque Return Reasons"
+msgstr ""
+
+#. module: cheque_management
+#: selection:receive.cheque.master,state:0
+msgid "Cheque Return to Customer"
+msgstr ""
+
+#. module: cheque_management
+#: code:addons/cheque_management/models/issue_cheque.py:49
+#: code:addons/cheque_management/models/receive_a_cheque.py:30
+#, python-format
+msgid "Cheque amount must be greater than zero !!!"
+msgstr ""
+
+#. module: cheque_management
+#: code:addons/cheque_management/models/receive_cheque.py:32
+#, python-format
+msgid "Cheque with given details already exists. Reset Cheque Number properly."
+msgstr ""
+
+#. module: cheque_management
+#: code:addons/cheque_management/models/receive_a_cheque.py:36
+#, python-format
+msgid "Cheque with same details already Received. Please check given details !!!"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_search
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_tree
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_master_calendar
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_search
+#: model_terms:ir.ui.view,arch_db:cheque_management.view_cheque_master_calendar
+#: model_terms:ir.ui.view,arch_db:cheque_management.view_cheque_master_pivot
+msgid "Cheques"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_form_view_pdf
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_view_pdf
+msgid "Clear"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_form
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_cancel_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque2
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_lost_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_clear_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_clear_cheque2
+msgid "Clear Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque2
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_clear_cheque2
+msgid "Clear Cheques"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_clear_cheque__date_clear
+#: model:ir.model.fields,field_description:cheque_management.field_receive_clear_cheque__date_clear
+msgid "Clear Date"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+#: selection:receive.cheque.master,state:0
+msgid "Cleared"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__clear_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__clear_date
+msgid "Cleared Date"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_pad
+msgid "Collaborative Pads"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cancel_cheque__comment
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__comment
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__comment
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__comment
+msgid "Comment"
+msgstr "ความคิดเห็น"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__comment_required
+#: model:ir.model.fields,field_description:cheque_management.field_return_reason__comment_required
+msgid "Comment Required ?"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_form
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_form
+msgid "Comments"
+msgstr "ความคิดเห็น"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__invoice_reference_type
+msgid "Communication"
+msgstr "การติดต่อสื่อสาร"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__company_id
+msgid "Company"
+msgstr "บริษัท"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__resource_calendar_id
+msgid "Company Working Hours"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__has_chart_of_accounts
+msgid "Company has a chart of accounts"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.ui.menu,name:cheque_management.menu_configuration
+msgid "Configuration"
+msgstr "การกำหนดค่า"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__has_social_network
+msgid "Configure Social Network"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_stock_tracking_owner
+msgid "Consignment"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__cdn_activated
+msgid "Content Delivery Network (CDN)"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__website_country_group_ids
+msgid "Country Groups"
+msgstr "กลุ่มประเทศ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_crm_reveal
+msgid "Create Leads/Opportunities from your website's traffic"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_cancel_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_clear_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_customer_bank__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_deposit_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_lost_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_clear_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_return_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__create_uid
+#: model:ir.model.fields,field_description:cheque_management.field_return_reason__create_uid
+msgid "Created by"
+msgstr "สร้างโดย"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_cancel_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_clear_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_customer_bank__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_deposit_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_lost_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_clear_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_return_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__create_date
+#: model:ir.model.fields,field_description:cheque_management.field_return_reason__create_date
+msgid "Created on"
+msgstr "สร้างเมื่อ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__currency_id
+msgid "Currency"
+msgstr "สกุลเงิน"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__report_footer
+msgid "Custom Report Footer"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__auth_signup_uninvited
+msgid "Customer Account"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__bank_name
+#: model_terms:ir.ui.view,arch_db:cheque_management.customer_bank_form
+msgid "Customer Bank"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__bank_name
+msgid "Customer Bank Name"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.act_window,name:cheque_management.action_customer_bank
+#: model:ir.ui.menu,name:cheque_management.menu_customer_banks
+#: model_terms:ir.ui.view,arch_db:cheque_management.customer_bank_search
+#: model_terms:ir.ui.view,arch_db:cheque_management.customer_bank_tree
+msgid "Customer Banks"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__interim_account_id
+msgid "Customer Cheque Interim Account"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_delivery_dhl
+msgid "DHL Connector"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_deposit_cheque__deposit_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__deposit_date
+msgid "Date of Deposit"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__user_default_rights
+msgid "Default Access Rights"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__crm_alias_prefix
+msgid "Default Alias Name for Leads"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__use_manufacturing_lead
+msgid "Default Manufacturing Lead Time"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__purchase_tax_id
+msgid "Default Purchase Tax"
+msgstr "ภาษีซื้อเริ่มต้น"
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__invoice_reference_type
+msgid "Default Reference Type on Invoices."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__sale_tax_id
+msgid "Default Sale Tax"
+msgstr "ภาษีขายเริ่มต้น"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__social_default_image
+msgid "Default Social Share Image"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__website_default_lang_id
+msgid "Default language"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__website_default_lang_code
+msgid "Default language code"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_stock_tracking_lot
+msgid "Delivery Packages"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_deposit_cheque
+msgid "Deposit"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_deposit_cheque
+msgid "Deposit Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_form
+msgid "Deposit to Bank"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__bank_id
+msgid "Deposited To"
+msgstr ""
+
+#. module: cheque_management
+#: selection:receive.cheque.master,state:0
+msgid "Deposited to Bank"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__dest_account_id
+msgid "Destination Account"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__digest_id
+msgid "Digest Email"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__digest_emails
+msgid "Digest Emails"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__group_products_in_bills
+msgid "Disable this option to use a simplified versions of vendor bills, where products are hidden."
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_form
+msgid "Dishonour Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_lot_on_delivery_slip
+msgid "Display Lots & Serial Numbers"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_cancel_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_clear_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_customer_bank__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_deposit_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_lost_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_receive_clear_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_receive_return_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__display_name
+#: model:ir.model.fields,field_description:cheque_management.field_return_reason__display_name
+msgid "Display Name"
+msgstr "ชื่อที่ใช้แสดง"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__qr_code
+msgid "Display SEPA QR code"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__external_report_layout_id
+msgid "Document Template"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_reports
+msgid "Dynamic Reports"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_l10n_eu_service
+msgid "EU Digital Goods VAT"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_delivery_easypost
+msgid "Easypost Connector"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__email
+msgid "Email"
+msgstr "อีเมล"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__auth_signup_reset_password
+msgid "Enable password reset from Login page"
+msgstr "อนุญาตให้รีเซ็ตรหัสผ่านจากหน้าล๊อกอิน"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__currency_exchange_journal_id
+msgid "Exchange Gain or Loss Journal"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_product_expiry
+msgid "Expiration Dates"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__external_email_server_default
+msgid "External Email Servers"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__social_facebook
+msgid "Facebook Account"
+msgstr "บัญชีเฟสบุ๊ค"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__fail_counter
+msgid "Fail Mail"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__favicon
+msgid "Favicon"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_delivery_fedex
+msgid "FedEx Connector"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_fiscal_year
+msgid "Fiscal Years"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_reports_followup
+msgid "Follow-up Levels"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__report_footer
+msgid "Footer text displayed at the bottom of all reports."
+msgstr "ข้อความท้ายกระดาษปรากฏอยู่ด้านล่างของรายงานทั้งหมด"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__alert_inbound
+msgid "For Inbound Cheques"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__alert_outbound
+msgid "For Outbound Cheques"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque__cheque_from
+msgid "From"
+msgstr "จาก"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__social_github
+msgid "GitHub Account"
+msgstr "บัญชี GitHub"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__has_google_analytics
+msgid "Google Analytics"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__has_google_analytics_dashboard
+msgid "Google Analytics Dashboard"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__google_analytics_key
+msgid "Google Analytics Key"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__google_management_client_id
+msgid "Google Client ID"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__google_management_client_secret
+msgid "Google Client Secret"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__has_google_maps
+msgid "Google Maps"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__google_maps_api_key
+msgid "Google Maps API Key"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_google_spreadsheet
+msgid "Google Spreadsheet"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__social_googleplus
+msgid "Google+ Account"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__has_accounting_entries
+msgid "Has Accounting Entries"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_form
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_form
+msgid "Hold"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque3
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque4
+msgid "Hold Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__hold_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__hold_date
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque3
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque4
+msgid "Hold Date"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__id
+#: model:ir.model.fields,field_description:cheque_management.field_cancel_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__id
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__id
+#: model:ir.model.fields,field_description:cheque_management.field_clear_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_customer_bank__id
+#: model:ir.model.fields,field_description:cheque_management.field_deposit_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__id
+#: model:ir.model.fields,field_description:cheque_management.field_lost_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__id
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__id
+#: model:ir.model.fields,field_description:cheque_management.field_receive_clear_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_receive_return_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__id
+#: model:ir.model.fields,field_description:cheque_management.field_return_reason__id
+msgid "ID"
+msgstr "รหัส"
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__social_default_image
+msgid "If set, replaces the company logo as the default social share image."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__alias_domain
+msgid "If you have setup a catch-all email domain redirected to the Odoo server, enter the domain name here."
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.config.settings,module_procurement_jit:0
+msgid "Immediately after sales order confirmation"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_bank_statement_import_qif
+msgid "Import .qif files"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_bank_statement_import_csv
+msgid "Import in .csv format"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_bank_statement_import_ofx
+msgid "Import in .ofx format"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_bank_statement_import_camt
+msgid "Import in CAMT.053 format"
+msgstr ""
+
+#. module: cheque_management
+#: model:res.groups,name:cheque_management.group_inbound
+msgid "Inbound Cheque User"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.ui.menu,name:cheque_management.menu_receive_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_master_pivot
+msgid "Inbound Cheques"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__social_instagram
+msgid "Instagram Account"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__partner_autocomplete_insufficient_credit
+msgid "Insufficient credit"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_intrastat
+msgid "Intrastat"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_payment
+msgid "Invoice Online Payment"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_form
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_issue_cheque
+msgid "Issue"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_issue_cheque
+msgid "Issue Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__partner_id
+msgid "Issue To"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+msgid "Issued"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__partner_id
+msgid "Issued To"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.view_cheque_configuration
+msgid "Journal"
+msgstr "สมุดบัญชี"
+
+#. module: cheque_management
+#: selection:cheque.config.settings,product_weight_in_lbs:0
+msgid "Kilogram"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_auth_ldap
+msgid "LDAP Authentication"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__language_ids
+msgid "Languages"
+msgstr "ภาษา"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_cancel_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_clear_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_customer_bank____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_deposit_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_lost_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_receive_clear_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_receive_return_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque____last_update
+#: model:ir.model.fields,field_description:cheque_management.field_return_reason____last_update
+msgid "Last Modified on"
+msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_cancel_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_clear_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_customer_bank__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_deposit_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_lost_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_clear_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_receive_return_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__write_uid
+#: model:ir.model.fields,field_description:cheque_management.field_return_reason__write_uid
+msgid "Last Updated by"
+msgstr "อัพเดทครั้งสุดท้ายโดย"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_cancel_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_clear_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_customer_bank__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_deposit_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_lost_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_clear_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_receive_return_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__write_date
+#: model:ir.model.fields,field_description:cheque_management.field_return_reason__write_date
+msgid "Last Updated on"
+msgstr "อัพเดทครั้งสุดท้ายเมื่อ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_use_lead
+msgid "Leads"
+msgstr "เป้าหมาย"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__show_line_subtotals_tax_selection
+msgid "Line Subtotals Tax Display"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_website_links
+msgid "Link Trackers"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__social_linkedin
+msgid "LinkedIn Account"
+msgstr "บัญชี LinkedIn"
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_form
+msgid "Lost"
+msgstr "ไม่สำเร็จ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__lost_date
+#: model:ir.model.fields,field_description:cheque_management.field_lost_cheque__date_lost
+msgid "Lost Date"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_stock_production_lot
+msgid "Lots & Serial Numbers"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_mrp_routings
+msgid "MRP Work Orders"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__currency_id
+msgid "Main currency of the company."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_inter_company_rules
+msgid "Manage Inter Company"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_multi_company
+msgid "Manage multiple companies"
+msgstr "จักการหลายบริษัท"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__generate_lead_from_alias
+msgid "Manual Assignation of Emails"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.config.settings,module_procurement_jit:0
+msgid "Manually or based on automatic scheduler"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__manufacturing_lead
+msgid "Manufacturing Lead Time"
+msgstr "เวลานำการผลิต"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_mrp_mps
+msgid "Master Production Schedule"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__propagation_minimum_delta
+msgid "Minimum Delta for Propagation"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_multi_currency
+msgid "Multi-Currencies"
+msgstr "หลายสกุลเงิน"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_stock_adv_location
+msgid "Multi-Step Routes"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_stock_multi_warehouses
+msgid "Multi-Warehouses"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_multi_website
+msgid "Multi-website"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__name_in_cheque
+msgid "Name in Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+#: selection:issue.cheque,state:0
+msgid "New"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__use_propagation_minimum_delta
+msgid "No Rescheduling Propagation"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__language_count
+msgid "Number of languages"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+#: selection:receive.cheque.master,state:0
+msgid "On Hold"
+msgstr ""
+
+#. module: cheque_management
+#: model:res.groups,name:cheque_management.group_outbound
+msgid "Outbound Cheque User"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.ui.menu,name:cheque_management.menu_cheque
+msgid "Outbound Cheques"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__pdc_account_id
+msgid "PDC Interim Account"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.external_layout_footer
+msgid "Page:"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__paperformat_id
+msgid "Paper format"
+msgstr "รูปแบบกระดาษ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__partner_account_id
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__partner_account_id
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__partner_account_id
+msgid "Partner Account"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "Payment Amount"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+msgid "Pending"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.view_cheque_configuration
+msgid "Pending cheques alert"
+msgstr ""
+
+#. module: cheque_management
+#: selection:receive.cheque.master,state:0
+msgid "Pending for Deposit"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_crm_phone_validation
+msgid "Phone Formatting"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.external_layout_header
+msgid "Phone:"
+msgstr "โทรศัพท์:"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_plaid
+msgid "Plaid Connector"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.issue_cheque_form
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_cancel_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_dishhonour_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_lost_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_return_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_return_cheque
+msgid "Post"
+msgstr "ลงบัญชี"
+
+#. module: cheque_management
+#: selection:cheque.config.settings,product_weight_in_lbs:0
+msgid "Pound"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__invoice_is_print
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_form
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_form
+msgid "Print"
+msgstr "พิมพ์"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__snailmail_duplex
+msgid "Print Both sides"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.act_window,name:cheque_management.action_issue_cheque
+#: model:ir.ui.menu,name:cheque_management.menu_issue
+#: model_terms:ir.ui.view,arch_db:cheque_management.issue_cheque_form
+msgid "Print Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.issue_cheque_search
+#: model_terms:ir.ui.view,arch_db:cheque_management.issue_cheque_tree
+msgid "Print Cheques"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__date_issue
+msgid "Print Date"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__snailmail_color
+msgid "Print In Color"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+#: selection:issue.cheque,state:0
+msgid "Printed"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "Printed By :"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__date_issue
+msgid "Printed On"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_mrp_plm
+msgid "Product Lifecycle Management (PLM)"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_stock_packaging
+msgid "Product Packagings"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_quality_control
+msgid "Quality"
+msgstr "คุณภาพ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_return_cheque__reason_id
+#: model:ir.model.fields,field_description:cheque_management.field_return_reason__name
+msgid "Reason"
+msgstr "เหตุผล"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_return_cheque__comment
+msgid "Reason Of Return"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.act_window,name:cheque_management.launch_receive_cheque2
+#: model:ir.actions.act_window,name:cheque_management.launch_receive_wizard
+#: model:ir.ui.menu,name:cheque_management.menu_receive_cheq
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_view_pdf
+msgid "Receive A Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_view_pdf
+msgid "Receive Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.act_window,name:cheque_management.launch_receive_cheque
+#: model:ir.ui.menu,name:cheque_management.menu_receive
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_form_view_pdf
+msgid "Receive Cheque Book"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.ui.menu,name:cheque_management.menu_receive_master
+msgid "Receive Cheque Master Book"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_tree
+msgid "Receive Cheque Masters"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__received_date
+msgid "Received Date"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__partner_id
+msgid "Received From"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__phone
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__phone
+msgid "Receiver Contact No."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__designation
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__designation
+msgid "Receiver Designation"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__receiver_name
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque_wizard__receiver_name
+msgid "Receiver Name"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__received_date
+msgid "Receiving Date"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque2__partner_id
+msgid "Receiving From"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__account_move_ids
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__account_move_ids
+msgid "Related Accounting Entries"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__use_propagation_minimum_delta
+msgid "Rescheduling applies to any chain of operations (e.g. Make To Order, Pick Pack Ship). In the case of MTO sales, a vendor delay (updated incoming date) impacts the expected delivery date to the customer. \n"
+" This option allows to not propagate the rescheduling if the change is not critical."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_procurement_jit
+msgid "Reservation"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__module_procurement_jit
+msgid "Reserving products manually in delivery orders or by running the scheduler is advised to better manage priorities in case of long customer lead times or/and frequent stock-outs."
+msgstr ""
+
+#. module: cheque_management
+#: code:addons/cheque_management/models/receive_cheque.py:23
+#, python-format
+msgid "Reset Cheque Number From and To properly."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_account_bank__return_account_id
+msgid "Return Charges Account"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_dishhonour_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_return_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_return_cheque
+msgid "Return Cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.receive_cheque_form
+msgid "Return to Customer"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+msgid "Returned"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__return_date
+msgid "Returned Date"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__return_to_customer_date
+msgid "Returned to Customer on"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_deferred_revenue
+msgid "Revenue Recognition"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_sepa
+msgid "SEPA Credit Transfer (SCT)"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__manufacturing_lead
+msgid "Security days for each manufacturing operation."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__invoice_is_email
+msgid "Send Email"
+msgstr "ส่งอีเมล"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_dishonour_cheque__charge
+msgid "Service Charges if any"
+msgstr ""
+
+#. module: cheque_management
+#: code:addons/cheque_management/models/cancel_cheque.py:22
+#: code:addons/cheque_management/models/clear_cheque.py:20
+#: code:addons/cheque_management/models/clear_cheque.py:67
+#: code:addons/cheque_management/models/issue_cheque.py:63
+#: code:addons/cheque_management/models/lost_cheque.py:21
+#: code:addons/cheque_management/models/return_cheque.py:27
+#, python-format
+msgid "Set Cheque Payment Journal under Settings !!!"
+msgstr ""
+
+#. module: cheque_management
+#: code:addons/cheque_management/models/dishonour_cheque.py:19
+#: code:addons/cheque_management/models/receive_a_cheque.py:39
+#: code:addons/cheque_management/models/receive_clear_cheque.py:21
+#: code:addons/cheque_management/models/receive_clear_cheque.py:51
+#: code:addons/cheque_management/models/receive_return_cheque.py:18
+#, python-format
+msgid "Set Cheque Receipt Journal under Settings !!!"
+msgstr ""
+
+#. module: cheque_management
+#: code:addons/cheque_management/models/receive_a_cheque.py:43
+#: code:addons/cheque_management/models/receive_clear_cheque.py:25
+#: code:addons/cheque_management/models/receive_clear_cheque.py:55
+#, python-format
+msgid "Set Customer Cheque Interim Account under Settings !!!"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.ui.menu,name:cheque_management.menu_settings
+msgid "Settings"
+msgstr "ตั้งค่า"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__company_share_partner
+msgid "Share partners to all companies"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__company_share_product
+msgid "Share product to all companies"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__company_share_partner
+msgid "Share your partners to all companies defined in your instance.\n"
+" * Checked : Partners are visible for every companies, even if a company is defined on the partner.\n"
+" * Unchecked : Each company can see only its partner (partners where company is defined). Partners not related to a company are visible for all companies."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__company_share_product
+msgid "Share your product to all companies defined in your instance.\n"
+" * Checked : Product are visible for every company, even if a company is defined on the partner.\n"
+" * Unchecked : Each company can see only its product (product where company is defined). Product not related to a company are visible for all companies."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__show_effect
+msgid "Show Effect"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_hr_org_chart
+msgid "Show Organizational Chart"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_show_line_subtotals_tax_included
+msgid "Show line subtotals with taxes (B2C)"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_show_line_subtotals_tax_excluded
+msgid "Show line subtotals without taxes (B2B)"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_product_pricelist
+msgid "Show pricelists On Products"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_pricelist_item
+msgid "Show pricelists to customers"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__specific_user_account
+msgid "Specific User Account"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_master__state
+#: model:ir.model.fields,field_description:cheque_management.field_issue_cheque__state
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque_master__state
+msgid "Status"
+msgstr "สถานะ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_stock_multi_locations
+msgid "Storage Locations"
+msgstr "ตำแหน่งที่เก็บของ"
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__group_stock_multi_locations
+msgid "Store products in specific locations of your warehouse (e.g. bins, racks) and to track inventory accordingly."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__tax_cash_basis_journal_id
+msgid "Tax Cash Basis Journal"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__tax_calculation_rounding_method
+msgid "Tax calculation rounding method"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.config.settings,show_line_subtotals_tax_selection:0
+msgid "Tax-Excluded"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.config.settings,show_line_subtotals_tax_selection:0
+msgid "Tax-Included"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__chart_template_id
+msgid "Template"
+msgstr "แม่แบบ"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__auth_signup_template_user_id
+msgid "Template user for new users created through signup"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__currency_exchange_journal_id
+msgid "The accounting journal where automatic exchange differences will be registered"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__account_bank_reconciliation_start
+msgid "The bank reconciliation widget won't ask to reconcile payments older than this date.\n"
+"               This is useful if you install accounting after having used invoicing for some time and\n"
+"               don't want to reconcile all the past payments with bank statements."
+msgstr ""
+
+#. module: cheque_management
+#: sql_constraint:account.bank:0
+#: sql_constraint:customer.bank:0
+msgid "The name of the bank must be unique !"
+msgstr ""
+
+#. module: cheque_management
+#: sql_constraint:return.reason:0
+msgid "The reason must be unique !"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__module_account_batch_payment
+msgid "This allows you grouping payments into a single batch and eases the reconciliation process.\n"
+"-This installs the account_batch_payment module."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__module_account_asset_management
+msgid "This allows you to manage the assets owned by a company\n"
+"                or a person. It keeps track of the depreciation occurred\n"
+"                on those assets, and creates account move for those\n"
+"                depreciation lines.\n"
+"                This installs the module account_asset_management."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__favicon
+msgid "This field holds the image used to display a favicon on the website."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__website_default_lang_code
+msgid "This field is used to set/get locales for user"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_payment_report
+#: model_terms:ir.ui.view,arch_db:cheque_management.cheque_receipt_report
+msgid "Time :"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_receive_cheque__cheque_to
+msgid "To"
+msgstr "ถึง"
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__module_product_expiry
+msgid "Track following dates on lots & serial numbers: best before, removal, end of life, alert. \n"
+" Such dates are set automatically at lot/serial number creation based on values set on the product (in days)."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_base_gengo
+msgid "Translate Your Website with Gengo"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__social_twitter
+msgid "Twitter Account"
+msgstr "บัญชี Twitter"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_delivery_ups
+msgid "UPS Connector"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__cdn_filters
+msgid "URL matching those filters will be rewritten using the CDN Base URL"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_delivery_usps
+msgid "USPS Connector"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_uom
+msgid "Units of Measure"
+msgstr "หน่วยวัด"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_web_unsplash
+msgid "Unsplash Image Library"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_sepa_direct_debit
+msgid "Use SEPA Direct Debit"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_account_batch_payment
+msgid "Use batch payments"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_auth_oauth
+msgid "Use external authentication providers (OAuth)"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_sale_pricelist
+msgid "Use pricelists to adapt your price per customers"
+msgstr "ใช้รายการราคาเพื่อปรับเปลี่ยนราคาของคุณตามลูกค้า"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_products_in_bills
+msgid "Use products in vendor bills"
+msgstr ""
+
+#. module: cheque_management
+#: selection:cheque.master,state:0
+#: selection:issue.cheque,state:0
+msgid "Used"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,help:cheque_management.field_cheque_config_settings__website_country_group_ids
+msgid "Used when multiple websites have the same domain."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_product_variant
+msgid "Variants and Options"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_warning_stock
+msgid "Warnings for Stock"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__group_warning_account
+msgid "Warnings in Invoices"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__website_company_id
+msgid "Website Company"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__website_domain
+msgid "Website Domain"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__website_name
+msgid "Website Name"
+msgstr "ชื่อเว็บไซต์"
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__product_weight_in_lbs
+msgid "Weight unit of measure"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_mrp_workorder
+msgid "Work Orders"
+msgstr ""
+
+#. module: cheque_management
+#: code:addons/cheque_management/models/issue_cheque.py:27
+#, python-format
+msgid "You cannot duplicate this record."
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__social_youtube
+msgid "Youtube Account"
+msgstr "บัญชี Youtube"
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_account_bank
+msgid "account.bank"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__module_delivery_bpost
+msgid "bpost Connector"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_cancel_cheque
+msgid "cancel.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_cheque_config_settings
+msgid "cheque.config.settings"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_clear_cheque
+msgid "clear.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_customer_bank
+msgid "customer.bank"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.view_cheque_configuration
+msgid "days before"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_deposit_cheque
+msgid "deposit.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_dishonour_cheque
+msgid "dishonour.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.server,name:cheque_management.action_immediate_clear
+#: model:ir.actions.server,name:cheque_management.action_module_immediate_clear
+msgid "immediate clear"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.actions.server,name:cheque_management.action_module_immediate_pending
+#: model:ir.actions.server,name:cheque_management.action_receive_immediate_pending
+msgid "immediate pending"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_issue_cheque
+msgid "issue.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_issue_cheque_wizard
+msgid "issue.cheque.wizard"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_lost_cheque
+msgid "lost.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_cancel_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque2
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque3
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_clear_cheque4
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_deposit_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_dishhonour_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_form_view_pdf
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_issue_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_lost_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_clear_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_clear_cheque2
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_return_cheque
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_receive_view_pdf
+#: model_terms:ir.ui.view,arch_db:cheque_management.wizard_return_cheque
+msgid "or"
+msgstr "หรือ"
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_receive_cheque
+msgid "receive.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_receive_cheque_master
+msgid "receive.cheque.master"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_receive_cheque2
+msgid "receive.cheque2"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_receive_clear_cheque
+msgid "receive.clear.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_receive_return_cheque
+msgid "receive.return.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_return_cheque
+msgid "return.cheque"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model,name:cheque_management.model_return_reason
+msgid "return.reason"
+msgstr ""
+
+#. module: cheque_management
+#: model:ir.model.fields,field_description:cheque_management.field_cheque_config_settings__website_id
+msgid "website"
+msgstr "เว็บไซต์"
+
