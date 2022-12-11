@@ -51,6 +51,11 @@ class depa_welfare_lines(models.Model):
         string="จำนวนเงินที่เบิก",
         required=True
     )
+    actual_amount_hidden = fields.Float(
+        default=1,
+        string="จำนวนเงินที่เบิก hidden",
+        required=True
+    )
     receipt_amount = fields.Float(
         string="Receipt Amount"
     )
@@ -132,8 +137,11 @@ class depa_welfare_lines(models.Model):
             if line.actual_amount > 0 :
                 if line.welfare_types_id.is_half_full:
                     line.point_amount = (float(line.actual_amount) / line.welfare_types_id.full_multiply) / 105
+                    line.actual_amount_hidden = (float(line.actual_amount) / line.welfare_types_id.full_multiply)
                 else:
                     line.point_amount = float(line.actual_amount) / 105
+                    line.actual_amount_hidden = float(line.actual_amount)
+
                 # if line.full_half_selection :
                 #     if line.full_half_selection == "full" :
                 #         line.point_amount = (float(line.actual_amount) / line.welfare_types_id.full_multiply) / 105
@@ -263,8 +271,10 @@ class depa_welfare_lines(models.Model):
 
         if self.welfare_types_id.is_half_full:
             self.point_amount = (float(self.actual_amount) / self.welfare_types_id.full_multiply) / 105
+            self.actual_amount_hidden = (float(self.actual_amount) / self.welfare_types_id.full_multiply)
         else:
-            self.point_amount = float(self.actual_amount) /  105
+            self.point_amount = float(self.actual_amount) / 105
+            self.actual_amount_hidden = float(self.actual_amount)
 
         # Point Limit
         if self.welfare_types_id.limit_point > 0:

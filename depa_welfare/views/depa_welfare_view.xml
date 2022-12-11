@@ -90,6 +90,7 @@
                 </group>
                 <group>
                   <field name="welfare_document_date" attrs="{'readonly': True}" force_save="1" />
+                  <field name="fund" invisible="1" />
                 </group>
                 <group>
                   <field name="fin_no" attrs="{'readonly': True}" force_save="1" />
@@ -108,6 +109,7 @@
                     <field name="receipt_date"/>
   <!--                  <field name="receipt_amount"/>-->
                     <field name="actual_amount" attrs="{'required': True}"/>
+                    <field name="actual_amount_hidden" invisible="1"/>
   <!--                  <field name="full_half_selection"/>-->
                     <field name="point_amount"/>
                     <field name="memo_for_adjustment" attrs="{'column_invisible': [('parent.state', 'in', ['draft'])]}"/>
@@ -129,7 +131,8 @@
                       </group>
                       <group>
                         <field name="actual_amount" attrs="{'readonly': [('is_hr_reject','!=', True), ('current_state', 'not in', ['draft'])]}"/>
-  <!--                      <field name="full_half_selection" widget="radio" attrs="{'invisible': [('is_full_half','!=', True)], 'required': [('is_full_half','=', True)]}"/>-->
+                        <field name="actual_amount_hidden" invisible="1"/>
+  <!--                      <field name="full_half_selection" widget="radio" />-->
                         <field name="point_amount"/>
 <!--                        <field name="family_relation" attrs="{'invisible': [('is_family','!=', True)], 'required': [('is_family','=', True)], 'readonly': [('is_hr_reject','!=', True), ('current_state', 'not in', ['draft'])]}"/>-->
                         <!--                    <field name="receipt_amount"/>-->
@@ -153,6 +156,10 @@
                   </div>
                 </group>
                 <group class="oe_subtotal_footer oe_right">
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_total_fund" string="จำนวนเงินที่ใช้รวม(กองทุน)" attrs="{'invisible': [('fund', '!=', True)]}"/>
+                  </div>
+                  <field name="amount_total_fund" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary" attrs="{'invisible': [('fund', '!=', True)]}"/>
                   <div class="oe_subtotal_footer_separator oe_inline">
                     <label for="amount_total" string="จำนวนเงินขอเบิกรวม"/>
                   </div>

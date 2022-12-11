@@ -128,7 +128,7 @@ class depa_welfare(models.Model):
     )
     expense_for_self = fields.Boolean()
     expense_for_family = fields.Boolean()
-    family_name =  fields.Char()
+    family_name = fields.Char()
     family_relation = fields.Selection(
         FAMILY_RELATIONS,
         'Family Relation'
@@ -152,6 +152,15 @@ class depa_welfare(models.Model):
         compute="_amount_total",
         store=True,
         readonly=True,
+    )
+    amount_total_fund = fields.Float(
+        string='จำนวนเงินที่ใช้รวม(กองทุน)',
+        compute="_amount_total",
+        store=True,
+        readonly=True,
+    )
+    fund = fields.Boolean(
+        default=False
     )
     point_total = fields.Float(
         string='คะแนนที่ใช้',
@@ -441,13 +450,21 @@ class depa_welfare(models.Model):
                     line.welfare_round_start = welfare_round_line_obj.welfare_start
                     line.welfare_round_end = welfare_round_line_obj.welfare_end
 
-    @api.depends('depa_welfare_lines_ids.actual_amount')
+    @api.depends('depa_welfare_lines_ids.actual_amount', 'depa_welfare_lines_ids.actual_amount_hidden', 'depa_welfare_lines_ids.is_full_half')
     def _amount_total(self):
         for welfare in self:
             amount_sum = 0
+            amount_sum_fund = 0
+            fund = False
             for line in welfare.depa_welfare_lines_ids:
-                amount_sum += line.actual_amount
+                amount_sum += line.actual_amount_hidden
+                amount_sum_fund += line.actual_amount
+                if line.is_full_half:
+                    fund = line.is_full_half
+            welfare.fund = fund
             welfare.amount_total = round(amount_sum, 2)
+            welfare.amount_total_fund = round(amount_sum_fund, 2)
+
 
     @api.depends('depa_welfare_lines_ids.point_amount')
     def _point_total(self):

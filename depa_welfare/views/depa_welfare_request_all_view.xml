@@ -88,6 +88,7 @@
               </group>
               <group>
                 <field name="welfare_document_date" attrs="{'readonly': True}" force_save="1" />
+                <field name="fund" invisible="1" />
               </group>
               <group>
                 <field name="fin_no" attrs="{'readonly': True}" force_save="1" />
@@ -145,6 +146,10 @@
                   </form>
                 </field>
                 <group class="oe_subtotal_footer oe_right">
+                  <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_total_fund" string="จำนวนเงินที่ใช้รวม(กองทุน)" attrs="{'invisible': [('fund', '!=', True)]}"/>
+                  </div>
+                  <field name="amount_total_fund" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary" attrs="{'invisible': [('fund', '!=', True)]}"/>
                   <div class="oe_subtotal_footer_separator oe_inline">
                     <label for="amount_total" string="จำนวนเงินขอเบิกรวม"/>
                   </div>
