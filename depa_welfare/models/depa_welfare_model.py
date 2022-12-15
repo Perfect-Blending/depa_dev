@@ -148,13 +148,13 @@ class depa_welfare(models.Model):
         copy=True
     )
     amount_total = fields.Float(
-        string='จำนวนเงินที่ใช้',
+        string='จำนวนเงินที่เบิกตามสิทธิ์',
         compute="_amount_total",
         store=True,
         readonly=True,
     )
     amount_total_fund = fields.Float(
-        string='จำนวนเงินที่ใช้รวม(กองทุน)',
+        string='จำนวนเงินที่จ่ายพนักงาน',
         compute="_amount_total",
         store=True,
         readonly=True,
