@@ -162,6 +162,8 @@ class internalDocumentInherit(models.Model):
         res = super(internalDocumentInherit, self).action_sent_to_supervisor()
         if len(self.invitation_lines_ids) > 0 and not self.circular_letter_check:
             raise ValidationError("ในกรณีที่มีรายชื่อแจ้งท้ายตั้งแต่ 1 รายชื่อขึ้นไป\nกรุณาเลือก หนังสือเวียน ก่อนส่งหนังสือ")
+        if self.circular_letter_check and len(self.invitation_lines_ids) == 0:
+            raise ValidationError("ในกรณีที่เลือกหนังสือเวียน\nกรุณาใส่รายชื่อแนบท้าย")
         return res
 
     @api.multi
@@ -169,6 +171,12 @@ class internalDocumentInherit(models.Model):
         if not self.env.user.has_group('depa_signature.group_user_digital_signature_setting'):
             raise ValidationError("ไม่สามารถลบบันทึกข้อความ/หนังสือลงนามนี้ได้")
         return models.Model.unlink(self)
+
+    def buttonClearNameReal(self):
+        if self.name_real != "":
+            self.update({
+                'name_real': False,
+            })
 
 class DownloadDocumentSignedLogging(models.Model):
     _name = 'download_document_signed_logging'

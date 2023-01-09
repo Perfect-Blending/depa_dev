@@ -34,9 +34,10 @@
                                 <field name="employee_id" invisible="1"/>
                                 <field name="department_name" invisible="1"/>
                                 <field name="kpi_round_setting_id" string="ปีงบประมาณ"/>
-                                <field name="kpi_round_setting_lines_id" string="รอบการจัดกลุ่ม"/>
+                                <!-- <field name="kpi_round_setting_lines_id" string="รอบการจัดกลุ่ม"/> -->
                                 <field name="group_name" string="กลุ่ม" />
                                 <field name="remark" string="หมายเหตุ"/>
+                                <field name="group_date" string="วันที่จัดกลุ่ม"/>
                             </tree>
                         </field>
                     </page>

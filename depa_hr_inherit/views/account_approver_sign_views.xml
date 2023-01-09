@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="account_approver_sign_list">
+            <field name="name">Account Approver Sign List</field>
+            <field name="model">account_approver_sign</field>
+            <field name="arch" type="xml">
+                <tree string="Account Approver Sign" editable="bottom">
+                    <field name="position"/>
+                    <field name="employee_id"/>
+                    <field name="is_used"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="account_approver_sign_action_window">
+            <field name="name">Account Approver Sign Window</field>
+            <field name="res_model">account_approver_sign</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem name="ผู้ลงลายเซ็นใบสำคัญซื้อ" id="menu_account_approver_sign" parent="hr.menu_human_resources_configuration"
+            action="account_approver_sign_action_window" />
+    </data>
+</odoo>

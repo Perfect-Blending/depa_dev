@@ -51,6 +51,9 @@
                 <xpath expr="//field[@name='department_id']" position="after">
                     <field name="department_en"/>
                 </xpath>
+                <xpath expr="//field[@name='additional_note']" position="after">
+                    <field name="token_line"/>
+                </xpath>
                 <xpath expr="//notebook" position="inside">
                     <page string="ประวัติการฉีดวัคซีน">
                         <field name="employee_vaccine_ids">
@@ -66,12 +69,13 @@
 
                 <xpath expr="//notebook" position="inside">
                     <page string="ถือครองสินทรัพย์">
-                        <field name="employee_hold_ids">
+                        <field name="employee_hold_ids" domain="[('active', '=', True)]">
                             <tree string="ถือครองสินทรัพย์" editable="bottom">
-                                <field name="assets_name"/>
-                                <field name="product_code"/>
-                                <field name="date_start"/>
-                                <field name="date_end"/>
+                                <field name="assets_name" readonly="1"/>
+                                <field name="product_code" readonly="1"/>
+                                <field name="date_start" readonly="1"/>
+                                <field name="date_end" readonly="1"/>
+                                <field name="active" readonly="1"/>
                             </tree>
                         </field>
                         <group colspan="4" col="12">

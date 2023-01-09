@@ -4,3 +4,4 @@ access_hr_employee_certificate,hr_employee_certificate,model_hr_employee_certifi
 access_hr_employee_signature_setting,hr_employee_signature_setting,model_hr_employee_signature_setting,,1,1,1,1
 access_vaccine_setting,vaccine_setting,model_vaccine_setting,,1,1,1,1
 access_hr_employee_vaccine,hr_employee_vaccine,model_hr_employee_vaccine,,1,1,1,1
+access_account_approver_sign,account_approver_sign,model_account_approver_sign,,1,1,1,1

@@ -16,7 +16,6 @@
           <field name="emp_name"/>
           <field name="welfare_year"/>
           <field name="welfare_round"/>
-          <field name="point_total"/>
           <field name="amount_total"/>
           <field name="state" />
         </tree>
@@ -51,25 +50,26 @@
             </div>
             <group>
               <group colspan="4" col="12">
-                <group colspan="3">
+                <group colspan="6">
                   <field name="emp_code" attrs="{'readonly': True}"/>
                 </group>
-                <group colspan="5">
+                <group colspan="6">
                   <field name="emp_name" attrs="{'readonly': True}"/>
                 </group>
-                <group colspan="4">
-                  <field name="emp_dept_name" attrs="{'readonly': True}"/>
-                </group>
+
               </group>
               <group colspan="4" col="12">
 <!--                <group colspan="3">-->
 <!--                  <field name="expense_for" widget="radio" attrs="{'readonly': [('state','!=', 'draft')]}"/>-->
 <!--                </group>-->
                 <group colspan="6">
-                  <field name="point_balance" attrs="{'readonly': True}"/>
+                  <field name="emp_dept_name" attrs="{'readonly': True}"/>
                 </group>
                 <group colspan="6">
-                  <field name="amount_balance" attrs="{'readonly': True}"/>
+                  <field name="amount_balance" attrs="{'readonly': True}" />
+                </group>
+                <group colspan="6">
+                  <field name="point_balance" attrs="{'readonly': True}" invisible="1"/>
                 </group>
               </group>
 <!--              <group colspan="4" col="12" attrs="{'invisible': [('expense_for','!=', 'family')]}">-->
@@ -88,6 +88,7 @@
               </group>
               <group>
                 <field name="welfare_document_date" attrs="{'readonly': True}" force_save="1" />
+                  <field name="fund" invisible="1" />
               </group>
               <group>
                 <field name="fin_no" attrs="{'readonly': True}" force_save="1" />
@@ -107,7 +108,7 @@
   <!--                  <field name="receipt_amount"/>-->
                     <field name="actual_amount" attrs="{'required': True}"/>
   <!--                  <field name="full_half_selection"/>-->
-                    <field name="point_amount"/>
+                    <field name="point_amount" invisible="1"/>
                     <field name="memo_for_adjustment" />
                     <field name="is_hr_reject" style="text-align: center"/>
                     <button name="action_make_adjustment_wizard" type="object" string="Adjust" class="oe_highlight btn-sm pull-right" attrs="{'invisible': ['|', ('show_approve_button', '!=', True), ('current_state','!=', 'DocumentInspector')]}"/>
@@ -128,12 +129,10 @@
                       <group>
                         <field name="actual_amount" attrs="{'readonly': ['|', ('is_hr_reject','!=', True), ('current_state', '!=', 'adjust')]}"/>
   <!--                    <field name="full_half_selection" widget="radio" attrs="{'invisible': [('is_full_half','!=', True)], 'required': [('is_full_half','=', True)]}"/>-->
-                        <field name="point_amount" readonly="1"/>
+                        <field name="point_amount" readonly="1" invisible="1"/>
+                        <field name="depa_welfare_type_lines_ids" attrs="{'readonly': ['|', ('is_hr_reject','!=', True), ('current_state', '!=', 'adjust')]}" domain="[('depa_welfare_type_lines_id','=', welfare_types_id)]" widget="many2many_tags" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
 <!--                        <field name="family_relation" attrs="{'invisible': [('is_family','!=', True)], 'required': [('is_family','=', True)], 'readonly': ['|', ('is_hr_reject','!=', True), ('current_state', '!=', 'adjust')]}"/>-->
   <!--                    <field name="receipt_amount"/>-->
-                      </group>
-                      <group>
-                        <field name="depa_welfare_type_lines_ids" attrs="{'readonly': ['|', ('is_hr_reject','!=', True), ('current_state', '!=', 'adjust')]}" domain="[('depa_welfare_type_lines_id','=', welfare_types_id)]" widget="many2many_tags" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open': True}"/>
                       </group>
                       <group>
                         <field name="receipt_attachment_ids" attrs="{'readonly': ['|', ('is_hr_reject','!=', True), ('current_state', '!=', 'adjust')]}" widget="many2many_binary"/>
@@ -145,8 +144,12 @@
                   </form>
                 </field>
                 <group class="oe_subtotal_footer oe_right">
+                    <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_total_fund" string="จำนวนเงินที่จ่ายพนักงาน" attrs="{'invisible': [('fund', '!=', True)]}"/>
+                  </div>
+                  <field name="amount_total_fund" nolabel="1" class="oe_subtotal_footer_separator" style="color:#f00 ! important;" widget="monetary" attrs="{'invisible': [('fund', '!=', True)]}"/>
                   <div class="oe_subtotal_footer_separator oe_inline">
-                    <label for="amount_total" string="จำนวนเงินขอเบิกรวม"/>
+                    <label for="amount_total" string="จำนวนเงินที่เบิกตามสิทธิ์"/>
                   </div>
                   <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" style="color:#5f5e97 ! important;"/>
 <!--                  <div class="oe_subtotal_footer_separator oe_inline">-->
@@ -158,7 +161,7 @@
 <!--                  </div>-->
 <!--                  <field name="point_remain" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>-->
                   <div class="oe_subtotal_footer_separator oe_inline">
-                    <label for="amount_remain" string="จำนวนเงิน"/>
+                    <label for="amount_remain" string="จำนวนเงินคงเหลือ"/>
                   </div>
                   <field name="amount_remain" nolabel="1" class="oe_subtotal_footer_separator" style="color:#5f5e97 ! important;" widget="monetary"/>
                 </group>

@@ -36,6 +36,7 @@
         'views/hr_job_inherit_views.xml',
         'views/vaccine_setting_views.xml',
         'views/work_acceptance_inherit_views.xml',
+        'views/account_approver_sign_views.xml',
         # 'security/ir.model.access.csv',
         # 'views/templates.xml',
     ],

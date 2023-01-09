@@ -139,6 +139,9 @@ class hr_employee_inherit(models.Model):
     entrance_qr_code = fields.Binary(
         string="QR Code"
     )
+    token_line = fields.Text(
+        string="Token Line Notify"
+    )
 
 
     @api.depends("job_id")
@@ -222,6 +225,9 @@ class hr_employee_hold(models.Model):
     )
     date_end = fields.Date(
         string="วันที่สิ้นสุด"
+    )
+    active = fields.Boolean(
+        string="เปิดใช้งาน"
     )
 
 class hr_employee_certificate(models.Model):

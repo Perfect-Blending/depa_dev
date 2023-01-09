@@ -79,6 +79,7 @@
                 </group>
                 <group>
                   <field name="welfare_document_date" attrs="{'readonly': True}" force_save="1" />
+                  <field name="fund" invisible="1" />
                 </group>
                 <group>
                   <field name="fin_no" attrs="{'readonly': True}" force_save="1" />
