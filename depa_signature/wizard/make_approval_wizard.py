@@ -54,6 +54,8 @@ import qrcode
 
 import logging
 
+from pythainlp.util import thai_strftime
+
 _logger = logging.getLogger(__name__)
 
 SIGN_CH = (
@@ -1326,6 +1328,7 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                 cad_pass = hasSettingsLines.cad_password
                 # print("CAD: ", cad_pass)
 
+                send_success = False
                 # ! กรณีเลือกหนังสือเวียน
                 if setting_id.circular_letter_check and setting_id.document_type == 'หนังสือภายนอก+หนังสือรับรอง':
                     lists = setting_id.invitation_lines_ids
@@ -1357,6 +1360,7 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                             'doc_pdf_signed': [(6, 0, doc_ids)],
                             'head_officer_digital_signed': True
                         })
+                        send_success = True
                     self.set_default_email(int(setting_id.id))
                 
                 # ! กรณีเป็นคำสั่งประกาศ จะต้องมีการเซ็น 2 ครั้ง
@@ -1412,6 +1416,7 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                                 'doc_pdf_signed': [(6, 0, [doc_id.id])],
                                 'head_officer_digital_signed': True
                             })
+                            send_success = True
 
                         # set draft email
                         # self.set_draft_email(int(setting_id.id), doc_id.datas)
@@ -1424,3 +1429,30 @@ class MakeApprovalSignatureWizardInherit(models.TransientModel):
                         # }
 
                     # End Sign Document
+
+                # เมื่อเซ็นหนังสือเสร็จสมบูรณ์ได้แล้ว จะให้ทำการส่ง LINE เพื่อแจ้งเตือนไปยังผู้สร้าง
+                if send_success:
+                    token_line = self.env['hr.employee'].search([('user_id', "=", setting_id.create_uid.id)], limit=1).token_line
+
+                    if token_line:
+                        base_url = request.httprequest.url_root
+                        url = f"{base_url}web#id={setting_id.id}&model=document.internal.main&view_type=form"
+
+                        string = f"\nแจ้งเตือนหนังสือเสร็จสมบูรณ์\n" \
+                        f"เลขหนังสือ: {setting_id.name}\n" \
+                        f"เรื่อง: {setting_id.subject}\n" \
+                        f"ถึง: {setting_id.create_uid.name}\n" \
+                        f"URL: {url}\n" \
+
+                        payload = {
+                            "message": string
+                        }
+
+                        try:
+                            r = requests.post(
+                                "https://notify-api.line.me/api/notify",
+                                headers={"Authorization": "Bearer {}".format(token_line)},
+                                params = payload
+                            )
+                        except Exception as e:
+                            raise ValueError(e)
