@@ -7,12 +7,11 @@
         <field name="inherit_id" ref="fin_system.fw_pfb_fin_system_fiscal_year_form_view" />
         <field name="arch" type="xml">
             <field name="fiscal_year" position="after">
-                <field name="date_start" />
-                <field name="date_end" />
+                <field name="date_start" string="วันที่เริ่มต้น"/>
+                <field name="date_end" string="วันที่สิ้นสุด"/>
             </field>
         </field>
     </record>
 
 
 </odoo>
-
